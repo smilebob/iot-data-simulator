@@ -17,6 +17,39 @@ class ThingsBoardHttpClient:
     def __init__(self, timeout: float = 5.0):
         self.timeout = timeout
 
+    @staticmethod
+    def build_url(host: str, port: int, endpoint: str, use_tls: bool) -> Tuple[str, bool]:
+        """
+        Assainit l'hôte, déduit le schéma TLS et construit l'URL absolue sans duplication.
+        Tolère les préfixes 'http://', 'https://' ou les suffixes de chemin saisis par l'utilisateur.
+        """
+        h = (host or "localhost").strip()
+        actual_tls = use_tls
+        if h.lower().startswith("https://"):
+            h = h[8:]
+            actual_tls = True
+        elif h.lower().startswith("http://"):
+            h = h[7:]
+            actual_tls = False
+
+        # Supprimer tout port ou chemin résiduel dans le champ host
+        h = h.split("/")[0].strip()
+        if ":" in h:
+            parts = h.split(":")
+            h = parts[0].strip()
+            try:
+                port = int(parts[1])
+            except ValueError:
+                pass
+
+        protocol = "https" if actual_tls else "http"
+        ep = "/" + endpoint.lstrip("/")
+        if (actual_tls and port == 443) or (not actual_tls and port == 80):
+            url = f"{protocol}://{h}{ep}"
+        else:
+            url = f"{protocol}://{h}:{port}{ep}"
+        return url, actual_tls
+
     async def post_payload(
         self,
         host: str,
@@ -29,12 +62,7 @@ class ThingsBoardHttpClient:
         Transmet un payload JSON vers l'endpoint ThingsBoard spécifié.
         Retourne (success, message_ou_erreur).
         """
-        protocol = "https" if use_tls else "http"
-        # Omission du port si standard
-        if (use_tls and port == 443) or (not use_tls and port == 80):
-            url = f"{protocol}://{host}{endpoint}"
-        else:
-            url = f"{protocol}://{host}:{port}{endpoint}"
+        url, use_tls = self.build_url(host, port, endpoint, use_tls)
 
         try:
             # Essai avec httpx si disponible
@@ -97,12 +125,8 @@ class ThingsBoardHttpClient:
         Interroge ThingsBoard en Long-Polling HTTP pour recevoir les commandes RPC descendantes.
         GET /api/v1/{token}/rpc?timeout={timeout_ms}
         """
-        protocol = "https" if use_tls else "http"
         endpoint = f"/api/v1/{token}/rpc?timeout={int(timeout_sec * 1000)}"
-        if (use_tls and port == 443) or (not use_tls and port == 80):
-            url = f"{protocol}://{host}{endpoint}"
-        else:
-            url = f"{protocol}://{host}:{port}{endpoint}"
+        url, use_tls = self.build_url(host, port, endpoint, use_tls)
 
         try:
             try:
@@ -180,6 +204,9 @@ class ThingsBoardHttpClient:
         )
         latency_ms = round((time.perf_counter() - t0) * 1000, 1)
 
+        token_valid = success
+        server_reachable = success or ("401" in message)
+
         recommendations = []
         if success:
             recommendations.append("La passerelle HTTP ThingsBoard est joignable et le Token a été validé avec succès (HTTP 200 OK).")
@@ -195,14 +222,14 @@ class ThingsBoardHttpClient:
 
         return {
             "protocol": "http",
-            "success": success or ("401" in message),  # Le serveur répond si 401
+            "success": server_reachable,
             "status_code": message,
             "latency_ms": latency_ms,
             "host": host,
             "port": port,
             "endpoint": endpoint,
             "use_tls": use_tls,
-            "token_valid": success,
+            "token_valid": token_valid,
             "message": "Connexion ThingsBoard HTTP validée" if success else message,
             "recommendations": recommendations,
         }

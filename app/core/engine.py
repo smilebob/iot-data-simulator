@@ -100,13 +100,22 @@ class SimulationEngine:
 
         global_broker = self.repo.get_broker()
         host = (device.custom_host or global_broker.host or "localhost").strip()
-        use_tls = device.use_tls if device.use_tls is not None else True
+        if device.use_tls is not None:
+            use_tls = device.use_tls
+        elif device.custom_port == 443:
+            use_tls = True
+        elif device.custom_port == 80:
+            use_tls = False
+        else:
+            is_local = host.lower().replace("http://", "").replace("https://", "").split(":")[0] in ("localhost", "127.0.0.1", "mosquitto", "thingsboard")
+            use_tls = False if is_local else True
         port = device.custom_port or (443 if use_tls else 80)
 
         logger.info(f"✓ Listener RPC HTTP activé pour '{device.id}' ({host}:{port}, token: {token[:4]}***)")
 
         while self.is_running and device.enabled:
             try:
+                t0 = time.time()
                 rpc_data = await self.transports.http.poll_rpc(
                     host=host,
                     port=port,
@@ -145,6 +154,10 @@ class SimulationEngine:
                             payload=attr_payload,
                             use_tls=use_tls,
                         )
+                else:
+                    # Protection anti-boucle rapide en cas d'erreur réseau immédiate (< 1s)
+                    if (time.time() - t0) < 1.0:
+                        await asyncio.sleep(1.0)
             except asyncio.CancelledError:
                 break
             except Exception as e:
@@ -506,7 +519,7 @@ class SimulationEngine:
                 resp = json.dumps({"value": cur_val, "status": "SUCCESS"})
                 self.mqtt.publish_device_message(device_id, f"v1/devices/me/rpc/response/{req_id}", resp)
                 logger.info(f"✓ Réponse RPC GET émise pour '{device_id}' (req #{req_id}) : {resp}")
-                return
+                return cur_val
 
             if target_var:
                 if norm_method.startswith("toggle"):
