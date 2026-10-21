@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Station Qualité d'Air (QAI)' (ID: bldg_qai). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "d803eee7-b200-4891-a8f1-bb3015f6d788": {
-        "id": "d803eee7-b200-4891-a8f1-bb3015f6d788",
+      "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9": {
+        "id": "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9",
         "alias": "Station Qualité d'Air (QAI)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "de0735d5-0d89-4aa5-9a8a-2be1d181d691": {
+      "6bf5f24f-f949-458e-af73-1c91328df3b0": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "de0735d5-0d89-4aa5-9a8a-2be1d181d691"
+        "id": "6bf5f24f-f949-458e-af73-1c91328df3b0"
       },
-      "09dff8f2-d8da-46e7-9dc5-49f74ad042da": {
+      "b1959d97-3d0f-4641-8334-3ad9a432f4e2": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,41 +59,51 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d803eee7-b200-4891-a8f1-bb3015f6d788",
+              "entityAliasId": "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9",
               "dataKeys": [
                 {
                   "name": "taux_co2",
                   "type": "timeseries",
-                  "label": "Concentration CO₂",
+                  "label": "taux_co2",
                   "color": "#E2001A",
+                  "units": "ppm",
+                  "decimals": 0,
                   "settings": {}
                 },
                 {
                   "name": "particules_pm25",
                   "type": "timeseries",
-                  "label": "Particules Fines PM2.5",
+                  "label": "particules_pm25",
                   "color": "#3B82F6",
+                  "units": "µg/m³",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "cov_totaux",
                   "type": "timeseries",
-                  "label": "Composés Organiques Volatils (COV)",
+                  "label": "cov_totaux",
                   "color": "#10B981",
+                  "units": "ppb",
+                  "decimals": 0,
                   "settings": {}
                 },
                 {
                   "name": "temp_ambiante",
                   "type": "timeseries",
-                  "label": "Température Ambiante",
+                  "label": "temp_ambiante",
                   "color": "#F59E0B",
+                  "units": "°C",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "humidite_ambiante",
                   "type": "timeseries",
-                  "label": "Humidité Relative",
+                  "label": "humidite_ambiante",
                   "color": "#8B5CF6",
+                  "units": "%",
+                  "decimals": 2,
                   "settings": {}
                 }
               ]
@@ -102,11 +112,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique QAI Bâtiment SCADA : Station Qualité d'Air (QAI)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Boîtier Station QAI -->\n    <rect x=\"70\" y=\"40\" width=\"550\" height=\"180\" rx=\"16\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"100\" y=\"65\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">SONDE QUALITÉ D'AIR INTÉRIEUR (QAI / NORME BÂTIMENT VERT BREEAM-WELL)</text>\n\n    <!-- Capteur NDIR CO2 -->\n    <g transform=\"translate(130, 95)\">\n      <rect width=\"110\" height=\"85\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <circle cx=\"55\" cy=\"35\" r=\"18\" fill=\"#E0F2FE\" stroke=\"#0284C7\"/>\n      <text x=\"55\" y=\"39\" fill=\"#0284C7\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CO₂</text>\n      <text x=\"55\" y=\"70\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\">NDIR INFRAROUGE</text>\n    </g>\n\n    <!-- Capteur PM2.5 / PM10 (Laser) -->\n    <g transform=\"translate(285, 95)\">\n      <rect width=\"110\" height=\"85\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n      <circle cx=\"55\" cy=\"35\" r=\"18\" fill=\"#FEE2E2\" stroke=\"#DC2626\"/>\n      <text x=\"55\" y=\"39\" fill=\"#DC2626\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">PM</text>\n      <text x=\"55\" y=\"70\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\">DIFFUSION LASER</text>\n    </g>\n\n    <!-- Capteur COV Totaux (MOx) -->\n    <g transform=\"translate(440, 95)\">\n      <rect width=\"110\" height=\"85\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <circle cx=\"55\" cy=\"35\" r=\"18\" fill=\"#FEF3C7\" stroke=\"#D97706\"/>\n      <text x=\"55\" y=\"39\" fill=\"#D97706\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">VOC</text>\n      <text x=\"55\" y=\"70\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\">SEMI-COND MOX</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CONCENTRATION CO2</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_co2:0} ppm</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PARTICULES PM2.5</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${particules_pm25:1} µg/m³</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COV TOTAUX</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${cov_totaux:0} ppb</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. AMBIANTE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_ambiante:1} °C</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique QAI Bâtiment SCADA : Station Qualité d'Air (QAI)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Boîtier Station QAI -->\n    <rect x=\"70\" y=\"40\" width=\"550\" height=\"180\" rx=\"16\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"100\" y=\"65\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">SONDE QUALITÉ D'AIR INTÉRIEUR (QAI / NORME BÂTIMENT VERT BREEAM-WELL)</text>\n\n    <!-- Capteur NDIR CO2 -->\n    <g transform=\"translate(130, 95)\">\n      <rect width=\"110\" height=\"85\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <circle cx=\"55\" cy=\"35\" r=\"18\" fill=\"#E0F2FE\" stroke=\"#0284C7\"/>\n      <text x=\"55\" y=\"39\" fill=\"#0284C7\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CO₂</text>\n      <text x=\"55\" y=\"70\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\">NDIR INFRAROUGE</text>\n    </g>\n\n    <!-- Capteur PM2.5 / PM10 (Laser) -->\n    <g transform=\"translate(285, 95)\">\n      <rect width=\"110\" height=\"85\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n      <circle cx=\"55\" cy=\"35\" r=\"18\" fill=\"#FEE2E2\" stroke=\"#DC2626\"/>\n      <text x=\"55\" y=\"39\" fill=\"#DC2626\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">PM</text>\n      <text x=\"55\" y=\"70\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\">DIFFUSION LASER</text>\n    </g>\n\n    <!-- Capteur COV Totaux (MOx) -->\n    <g transform=\"translate(440, 95)\">\n      <rect width=\"110\" height=\"85\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <circle cx=\"55\" cy=\"35\" r=\"18\" fill=\"#FEF3C7\" stroke=\"#D97706\"/>\n      <text x=\"55\" y=\"39\" fill=\"#D97706\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">VOC</text>\n      <text x=\"55\" y=\"70\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\">SEMI-COND MOX</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CONCENTRATION CO2</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_co2:0} ppm</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PARTICULES PM2.5</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${particules_pm25:1} µg/m³</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COV TOTAUX</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${cov_totaux:0} ppb</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. AMBIANTE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_ambiante:1} °C</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -115,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "09dff8f2-d8da-46e7-9dc5-49f74ad042da"
+        "id": "b1959d97-3d0f-4641-8334-3ad9a432f4e2"
       },
-      "51d1b592-7ce9-4dd4-9ba2-c21b824eb97a": {
+      "0beae46b-5a3a-4ba2-a32d-5d0be9571db5": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d803eee7-b200-4891-a8f1-bb3015f6d788",
+              "entityAliasId": "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9",
               "dataKeys": [
                 {
                   "name": "taux_co2",
@@ -175,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "51d1b592-7ce9-4dd4-9ba2-c21b824eb97a"
+        "id": "0beae46b-5a3a-4ba2-a32d-5d0be9571db5"
       },
-      "5a904875-4172-47f6-b841-bd0d904466a7": {
+      "dc70a204-2a6d-402d-9103-53f96b53c08e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -190,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d803eee7-b200-4891-a8f1-bb3015f6d788",
+              "entityAliasId": "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9",
               "dataKeys": [
                 {
                   "name": "particules_pm25",
@@ -235,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "5a904875-4172-47f6-b841-bd0d904466a7"
+        "id": "dc70a204-2a6d-402d-9103-53f96b53c08e"
       },
-      "5a793b5b-b56d-4dc0-ac2e-efc1b88f024c": {
+      "9a18b587-2f8c-4ba4-a2d3-f151d3948471": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -250,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d803eee7-b200-4891-a8f1-bb3015f6d788",
+              "entityAliasId": "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9",
               "dataKeys": [
                 {
                   "name": "cov_totaux",
@@ -295,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "5a793b5b-b56d-4dc0-ac2e-efc1b88f024c"
+        "id": "9a18b587-2f8c-4ba4-a2d3-f151d3948471"
       },
-      "aefaa572-eb0d-4d95-a468-921d6e92f85b": {
+      "98a4c675-7b92-40e5-9ab5-e4de9f7333a1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -310,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d803eee7-b200-4891-a8f1-bb3015f6d788",
+              "entityAliasId": "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9",
               "dataKeys": [
                 {
                   "name": "temp_ambiante",
@@ -355,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "aefaa572-eb0d-4d95-a468-921d6e92f85b"
+        "id": "98a4c675-7b92-40e5-9ab5-e4de9f7333a1"
       },
-      "8eeb7c29-0ab3-42e0-b884-8db7fbbedcc0": {
+      "7fb92fbd-6bc2-41d8-84f7-c7279ac8f379": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -370,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d803eee7-b200-4891-a8f1-bb3015f6d788",
+              "entityAliasId": "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9",
               "dataKeys": [
                 {
                   "name": "humidite_ambiante",
@@ -415,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8eeb7c29-0ab3-42e0-b884-8db7fbbedcc0"
+        "id": "7fb92fbd-6bc2-41d8-84f7-c7279ac8f379"
       },
-      "319f1806-a987-4475-a49b-8da8405fd1bb": {
+      "be0cec2f-a653-4220-8b07-d10feacec014": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -430,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d803eee7-b200-4891-a8f1-bb3015f6d788",
+              "entityAliasId": "c9a0c9f4-3c7a-4199-8467-38d6d9b6e1b9",
               "dataKeys": [
                 {
                   "name": "taux_co2",
@@ -556,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "319f1806-a987-4475-a49b-8da8405fd1bb"
+        "id": "be0cec2f-a653-4220-8b07-d10feacec014"
       }
     },
     "states": {
@@ -566,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "de0735d5-0d89-4aa5-9a8a-2be1d181d691": {
+              "6bf5f24f-f949-458e-af73-1c91328df3b0": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "09dff8f2-d8da-46e7-9dc5-49f74ad042da": {
+              "b1959d97-3d0f-4641-8334-3ad9a432f4e2": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "51d1b592-7ce9-4dd4-9ba2-c21b824eb97a": {
+              "0beae46b-5a3a-4ba2-a32d-5d0be9571db5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "5a904875-4172-47f6-b841-bd0d904466a7": {
+              "dc70a204-2a6d-402d-9103-53f96b53c08e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "5a793b5b-b56d-4dc0-ac2e-efc1b88f024c": {
+              "9a18b587-2f8c-4ba4-a2d3-f151d3948471": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "aefaa572-eb0d-4d95-a468-921d6e92f85b": {
+              "98a4c675-7b92-40e5-9ab5-e4de9f7333a1": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "8eeb7c29-0ab3-42e0-b884-8db7fbbedcc0": {
+              "7fb92fbd-6bc2-41d8-84f7-c7279ac8f379": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "319f1806-a987-4475-a49b-8da8405fd1bb": {
+              "be0cec2f-a653-4220-8b07-d10feacec014": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

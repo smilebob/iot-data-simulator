@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Poste de Relevage Assainissement' (ID: infra_water_pump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "70a70d32-87ae-42c1-a82a-89c7448b6eef": {
-        "id": "70a70d32-87ae-42c1-a82a-89c7448b6eef",
+      "4b200c98-06bb-445d-aba3-980fd171e5b0": {
+        "id": "4b200c98-06bb-445d-aba3-980fd171e5b0",
         "alias": "Poste de Relevage Assainissement",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "59a6916d-3496-49d0-b47d-7ed27f0c715c": {
+      "7cc6d3f9-bab2-4c29-aedc-36195e3fb14b": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "59a6916d-3496-49d0-b47d-7ed27f0c715c"
+        "id": "7cc6d3f9-bab2-4c29-aedc-36195e3fb14b"
       },
-      "ffd95597-2dce-4f55-aa39-8c0ea5e1ffee": {
+      "dc99d3f4-e0ee-4cf9-83fd-c795572c8c4c": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,34 +59,42 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70a70d32-87ae-42c1-a82a-89c7448b6eef",
+              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
                   "type": "timeseries",
-                  "label": "Niveau d'Eau en Bâche",
+                  "label": "niveau_bache_m",
                   "color": "#E2001A",
+                  "units": "m",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "debit_refoulement",
                   "type": "timeseries",
-                  "label": "Débit Pompe de Refoulement",
+                  "label": "debit_refoulement",
                   "color": "#3B82F6",
+                  "units": "m³/h",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "conso_pompe_kw",
                   "type": "timeseries",
-                  "label": "Puissance Électrique Pompe",
+                  "label": "conso_pompe_kw",
                   "color": "#10B981",
+                  "units": "kW",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "alarme_debordement",
                   "type": "attribute",
-                  "label": "Alerte Trop-Plein / Débordement",
+                  "label": "alarme_debordement",
                   "color": "#F59E0B",
+                  "units": "",
+                  "decimals": 0,
                   "settings": {}
                 }
               ]
@@ -95,11 +103,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Poste de Relevage Assainissement SCADA : Poste de Relevage Assainissement\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Fosse Humide Béton -->\n    <rect x=\"80\" y=\"40\" width=\"350\" height=\"180\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"3\"/>\n    <text x=\"255\" y=\"70\" fill=\"#1E293B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">FOSSE DE RELEVAGE BÉTON (EAUX USÉES)</text>\n\n    <!-- Effluent / Niveau liquide -->\n    <rect x=\"85\" y=\"110\" width=\"340\" height=\"105\" rx=\"6\" fill=\"#A7F3D0\" opacity=\"0.6\"/>\n    <!-- Sonde Ultrason Niveau -->\n    <g transform=\"translate(200, 40)\">\n      <rect x=\"-15\" y=\"0\" width=\"30\" height=\"20\" fill=\"#D97706\"/>\n      <path d=\"M 0 20 L -15 50 M 0 20 L 15 50\" stroke=\"#D97706\" stroke-width=\"1.5\" stroke-dasharray=\"3,3\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE ULTRASON</text>\n    </g>\n\n    <!-- Pompes Submersibles P1 et P2 -->\n    <g transform=\"translate(160, 165)\">\n      <rect x=\"-20\" y=\"-30\" width=\"40\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE 1</text>\n    </g>\n    <g transform=\"translate(320, 165)\">\n      <rect x=\"-20\" y=\"-30\" width=\"40\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#64748B\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#475569\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE 2 (SECOURS)</text>\n    </g>\n\n    <!-- Conduite de Refoulement PEHD vers STEP -->\n    <path d=\"M 160 135 L 160 90 L 520 90\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <text x=\"560\" y=\"95\" fill=\"#059669\" font-size=\"10\" font-weight=\"bold\">REFOULEMENT STEP</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU BÂCHE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_bache_m:2} m</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT REFOULEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_refoulement:1} m³/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CONSO POMPE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${conso_pompe_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ALARME DÉBORDEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${alarme_debordement}</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Poste de Relevage Assainissement SCADA : Poste de Relevage Assainissement\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Fosse Humide Béton -->\n    <rect x=\"80\" y=\"40\" width=\"350\" height=\"180\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"3\"/>\n    <text x=\"255\" y=\"70\" fill=\"#1E293B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">FOSSE DE RELEVAGE BÉTON (EAUX USÉES)</text>\n\n    <!-- Effluent / Niveau liquide -->\n    <rect x=\"85\" y=\"110\" width=\"340\" height=\"105\" rx=\"6\" fill=\"#A7F3D0\" opacity=\"0.6\"/>\n    <!-- Sonde Ultrason Niveau -->\n    <g transform=\"translate(200, 40)\">\n      <rect x=\"-15\" y=\"0\" width=\"30\" height=\"20\" fill=\"#D97706\"/>\n      <path d=\"M 0 20 L -15 50 M 0 20 L 15 50\" stroke=\"#D97706\" stroke-width=\"1.5\" stroke-dasharray=\"3,3\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE ULTRASON</text>\n    </g>\n\n    <!-- Pompes Submersibles P1 et P2 -->\n    <g transform=\"translate(160, 165)\">\n      <rect x=\"-20\" y=\"-30\" width=\"40\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE 1</text>\n    </g>\n    <g transform=\"translate(320, 165)\">\n      <rect x=\"-20\" y=\"-30\" width=\"40\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#64748B\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#475569\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE 2 (SECOURS)</text>\n    </g>\n\n    <!-- Conduite de Refoulement PEHD vers STEP -->\n    <path d=\"M 160 135 L 160 90 L 520 90\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <text x=\"560\" y=\"95\" fill=\"#059669\" font-size=\"10\" font-weight=\"bold\">REFOULEMENT STEP</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU BÂCHE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_bache_m:2} m</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT REFOULEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_refoulement:1} m³/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CONSO POMPE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${conso_pompe_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ALARME DÉBORDEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${alarme_debordement}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -108,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "ffd95597-2dce-4f55-aa39-8c0ea5e1ffee"
+        "id": "dc99d3f4-e0ee-4cf9-83fd-c795572c8c4c"
       },
-      "5cccf678-f3d8-480f-9bec-3e46978af6bd": {
+      "3e83dbb9-98bc-4943-aa3e-9ff1e9d9c200": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -123,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70a70d32-87ae-42c1-a82a-89c7448b6eef",
+              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -168,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "5cccf678-f3d8-480f-9bec-3e46978af6bd"
+        "id": "3e83dbb9-98bc-4943-aa3e-9ff1e9d9c200"
       },
-      "3e48bc6d-6b95-4f5d-a7c9-840c370b8bf7": {
+      "9735c5db-b38e-413d-bcce-aaaf7eb66158": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -183,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70a70d32-87ae-42c1-a82a-89c7448b6eef",
+              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
               "dataKeys": [
                 {
                   "name": "debit_refoulement",
@@ -228,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "3e48bc6d-6b95-4f5d-a7c9-840c370b8bf7"
+        "id": "9735c5db-b38e-413d-bcce-aaaf7eb66158"
       },
-      "b7dcc55d-1c46-45dc-b978-d7ea3eb1c104": {
+      "35b599ca-423d-4861-bfb0-025621b06d34": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -243,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70a70d32-87ae-42c1-a82a-89c7448b6eef",
+              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
               "dataKeys": [
                 {
                   "name": "conso_pompe_kw",
@@ -288,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "b7dcc55d-1c46-45dc-b978-d7ea3eb1c104"
+        "id": "35b599ca-423d-4861-bfb0-025621b06d34"
       },
-      "8121ff18-a35a-4822-b717-4b68a7309683": {
+      "8827457e-dffd-4acd-9f9f-bc1f93aec35a": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -303,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70a70d32-87ae-42c1-a82a-89c7448b6eef",
+              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -401,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8121ff18-a35a-4822-b717-4b68a7309683"
+        "id": "8827457e-dffd-4acd-9f9f-bc1f93aec35a"
       },
-      "4ff44a00-7f20-4b94-96e8-3a5185807d2c": {
+      "34120d5c-c24b-41fb-9d8b-ce2f3127a515": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -416,7 +428,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70a70d32-87ae-42c1-a82a-89c7448b6eef",
+              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
               "dataKeys": [
                 {
                   "name": "alarme_debordement",
@@ -448,7 +460,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "4ff44a00-7f20-4b94-96e8-3a5185807d2c"
+        "id": "34120d5c-c24b-41fb-9d8b-ce2f3127a515"
       }
     },
     "states": {
@@ -458,43 +470,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "59a6916d-3496-49d0-b47d-7ed27f0c715c": {
+              "7cc6d3f9-bab2-4c29-aedc-36195e3fb14b": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "ffd95597-2dce-4f55-aa39-8c0ea5e1ffee": {
+              "dc99d3f4-e0ee-4cf9-83fd-c795572c8c4c": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "5cccf678-f3d8-480f-9bec-3e46978af6bd": {
+              "3e83dbb9-98bc-4943-aa3e-9ff1e9d9c200": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3e48bc6d-6b95-4f5d-a7c9-840c370b8bf7": {
+              "9735c5db-b38e-413d-bcce-aaaf7eb66158": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "b7dcc55d-1c46-45dc-b978-d7ea3eb1c104": {
+              "35b599ca-423d-4861-bfb0-025621b06d34": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "8121ff18-a35a-4822-b717-4b68a7309683": {
+              "8827457e-dffd-4acd-9f9f-bc1f93aec35a": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "4ff44a00-7f20-4b94-96e8-3a5185807d2c": {
+              "34120d5c-c24b-41fb-9d8b-ce2f3127a515": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

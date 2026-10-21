@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Borne de Recharge IRVE' (ID: infra_irve_charger). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "b616e366-67a2-41be-aa40-eff7637a0d86": {
-        "id": "b616e366-67a2-41be-aa40-eff7637a0d86",
+      "23384f89-d26d-440b-bba1-2922bbd742d3": {
+        "id": "23384f89-d26d-440b-bba1-2922bbd742d3",
         "alias": "Borne de Recharge IRVE",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "ba8c7880-bdfa-4253-962e-9cd650914864": {
+      "79699f8a-4d99-4bd4-9a9c-b9cae3087be1": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "ba8c7880-bdfa-4253-962e-9cd650914864"
+        "id": "79699f8a-4d99-4bd4-9a9c-b9cae3087be1"
       },
-      "29d1ebc2-45f2-4953-8662-7be671efd509": {
+      "d38e34f7-3dde-4817-a8b9-164c76a5a35c": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,34 +59,42 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b616e366-67a2-41be-aa40-eff7637a0d86",
+              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
                   "type": "timeseries",
-                  "label": "Puissance de Charge Délivrée",
+                  "label": "puissance_charge_kw",
                   "color": "#E2001A",
+                  "units": "kW",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "energie_session_kwh",
                   "type": "timeseries",
-                  "label": "Énergie Consommée Session",
+                  "label": "energie_session_kwh",
                   "color": "#3B82F6",
+                  "units": "kWh",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "courant_charge_a",
                   "type": "timeseries",
-                  "label": "Courant Délivré Prise",
+                  "label": "courant_charge_a",
                   "color": "#10B981",
+                  "units": "A",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "statut_connecteur",
                   "type": "attribute",
-                  "label": "Statut Prise Type 2",
+                  "label": "statut_connecteur",
                   "color": "#F59E0B",
+                  "units": "",
+                  "decimals": 0,
                   "settings": {}
                 }
               ]
@@ -95,11 +103,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Borne IRVE SCADA : Borne de Recharge IRVE\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Borne DC Ultra-Fast Charge -->\n    <rect x=\"100\" y=\"40\" width=\"220\" height=\"180\" rx=\"14\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"210\" y=\"70\" fill=\"#065F46\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">BORNE IRVE ULTRA-RAPIDE 150kW</text>\n\n    <!-- Écran Tactile & Lecteur RFID -->\n    <rect x=\"150\" y=\"85\" width=\"120\" height=\"50\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <text x=\"210\" y=\"115\" fill=\"#0284C7\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CHARGING IN PROGRESS</text>\n\n    <!-- Câble de Recharge Combo CCS2 Refroidi Liquide -->\n    <path d=\"M 320 140 Q 420 190 480 130\" fill=\"none\" stroke=\"#059669\" stroke-width=\"8\"/>\n    <g transform=\"translate(480, 130)\">\n      <rect x=\"0\" y=\"-15\" width=\"45\" height=\"30\" rx=\"6\" fill=\"#1E293B\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"22\" y=\"4\" fill=\"#FFFFFF\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CCS2</text>\n    </g>\n\n    <!-- Véhicule Électrique (Silhouette) -->\n    <path d=\"M 520 150 L 550 120 L 620 120 L 640 150 Z\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <circle cx=\"545\" cy=\"155\" r=\"12\" fill=\"#334155\"/>\n    <circle cx=\"615\" cy=\"155\" r=\"12\" fill=\"#334155\"/>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE DE CHARGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_charge_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉNERGIE SESSION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${energie_session_kwh:1} kWh</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT DE CHARGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_charge_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">STATUT CONNECTEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${statut_connecteur}</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Borne IRVE SCADA : Borne de Recharge IRVE\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Borne DC Ultra-Fast Charge -->\n    <rect x=\"100\" y=\"40\" width=\"220\" height=\"180\" rx=\"14\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"210\" y=\"70\" fill=\"#065F46\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">BORNE IRVE ULTRA-RAPIDE 150kW</text>\n\n    <!-- Écran Tactile & Lecteur RFID -->\n    <rect x=\"150\" y=\"85\" width=\"120\" height=\"50\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <text x=\"210\" y=\"115\" fill=\"#0284C7\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CHARGING IN PROGRESS</text>\n\n    <!-- Câble de Recharge Combo CCS2 Refroidi Liquide -->\n    <path d=\"M 320 140 Q 420 190 480 130\" fill=\"none\" stroke=\"#059669\" stroke-width=\"8\"/>\n    <g transform=\"translate(480, 130)\">\n      <rect x=\"0\" y=\"-15\" width=\"45\" height=\"30\" rx=\"6\" fill=\"#1E293B\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"22\" y=\"4\" fill=\"#FFFFFF\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CCS2</text>\n    </g>\n\n    <!-- Véhicule Électrique (Silhouette) -->\n    <path d=\"M 520 150 L 550 120 L 620 120 L 640 150 Z\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <circle cx=\"545\" cy=\"155\" r=\"12\" fill=\"#334155\"/>\n    <circle cx=\"615\" cy=\"155\" r=\"12\" fill=\"#334155\"/>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE DE CHARGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_charge_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉNERGIE SESSION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${energie_session_kwh:1} kWh</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT DE CHARGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_charge_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">STATUT CONNECTEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${statut_connecteur}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -108,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "29d1ebc2-45f2-4953-8662-7be671efd509"
+        "id": "d38e34f7-3dde-4817-a8b9-164c76a5a35c"
       },
-      "6f36f469-5160-4d89-8716-0c0e276ebe31": {
+      "739f963e-00cb-46d4-97da-97489c390f78": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -123,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b616e366-67a2-41be-aa40-eff7637a0d86",
+              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -168,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "6f36f469-5160-4d89-8716-0c0e276ebe31"
+        "id": "739f963e-00cb-46d4-97da-97489c390f78"
       },
-      "f609564f-b376-43c9-b9ed-c8d09da05ccc": {
+      "49a73074-b16d-4792-a6a8-b2a7955f395e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -183,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b616e366-67a2-41be-aa40-eff7637a0d86",
+              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
               "dataKeys": [
                 {
                   "name": "energie_session_kwh",
@@ -228,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "f609564f-b376-43c9-b9ed-c8d09da05ccc"
+        "id": "49a73074-b16d-4792-a6a8-b2a7955f395e"
       },
-      "166a2f55-307d-4b16-9092-ff82f21f9a36": {
+      "a86fa883-fa42-4c70-9319-71bcee20246c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -243,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b616e366-67a2-41be-aa40-eff7637a0d86",
+              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
               "dataKeys": [
                 {
                   "name": "courant_charge_a",
@@ -288,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "166a2f55-307d-4b16-9092-ff82f21f9a36"
+        "id": "a86fa883-fa42-4c70-9319-71bcee20246c"
       },
-      "23723dd8-5a0f-4648-b616-382523835358": {
+      "e0d9b613-bf5a-4732-bdc3-3422ab7a8bd8": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -303,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b616e366-67a2-41be-aa40-eff7637a0d86",
+              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -401,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "23723dd8-5a0f-4648-b616-382523835358"
+        "id": "e0d9b613-bf5a-4732-bdc3-3422ab7a8bd8"
       },
-      "7df51306-fafd-47e3-ad85-12435bda0930": {
+      "4d739949-34eb-427a-adeb-781d32b4749f": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -416,7 +428,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b616e366-67a2-41be-aa40-eff7637a0d86",
+              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
               "dataKeys": [
                 {
                   "name": "statut_connecteur",
@@ -448,7 +460,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "7df51306-fafd-47e3-ad85-12435bda0930"
+        "id": "4d739949-34eb-427a-adeb-781d32b4749f"
       }
     },
     "states": {
@@ -458,43 +470,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "ba8c7880-bdfa-4253-962e-9cd650914864": {
+              "79699f8a-4d99-4bd4-9a9c-b9cae3087be1": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "29d1ebc2-45f2-4953-8662-7be671efd509": {
+              "d38e34f7-3dde-4817-a8b9-164c76a5a35c": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "6f36f469-5160-4d89-8716-0c0e276ebe31": {
+              "739f963e-00cb-46d4-97da-97489c390f78": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "f609564f-b376-43c9-b9ed-c8d09da05ccc": {
+              "49a73074-b16d-4792-a6a8-b2a7955f395e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "166a2f55-307d-4b16-9092-ff82f21f9a36": {
+              "a86fa883-fa42-4c70-9319-71bcee20246c": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "23723dd8-5a0f-4648-b616-382523835358": {
+              "e0d9b613-bf5a-4732-bdc3-3422ab7a8bd8": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "7df51306-fafd-47e3-ad85-12435bda0930": {
+              "4d739949-34eb-427a-adeb-781d32b4749f": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Conteneur Déchets & PAV Connecté' (ID: city_waste_bin). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "a63bd2c5-fc2f-40fe-8c2e-c7c82e695fa1": {
-        "id": "a63bd2c5-fc2f-40fe-8c2e-c7c82e695fa1",
+      "6c539f13-ea9b-4162-9a53-ecaede873a97": {
+        "id": "6c539f13-ea9b-4162-9a53-ecaede873a97",
         "alias": "Conteneur Déchets & PAV Connecté",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "52a9ab01-285b-440d-8dd1-7ab2a5df4aaa": {
+      "19597bb9-692b-442b-8353-33fdae96224b": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "52a9ab01-285b-440d-8dd1-7ab2a5df4aaa"
+        "id": "19597bb9-692b-442b-8353-33fdae96224b"
       },
-      "0aaaf45c-70bb-43d1-b66e-95b2bfdf84be": {
+      "78f99a5b-ea3e-4f67-b81c-fb7ae03bb7d0": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,41 +59,51 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a63bd2c5-fc2f-40fe-8c2e-c7c82e695fa1",
+              "entityAliasId": "6c539f13-ea9b-4162-9a53-ecaede873a97",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
                   "type": "timeseries",
-                  "label": "Taux Remplissage Cuve",
+                  "label": "taux_remplissage_pct",
                   "color": "#E2001A",
+                  "units": "%",
+                  "decimals": 0,
                   "settings": {}
                 },
                 {
                   "name": "temp_interne_cuve",
                   "type": "timeseries",
-                  "label": "Température Interne Cuve",
+                  "label": "temp_interne_cuve",
                   "color": "#3B82F6",
+                  "units": "°C",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "batterie_autonomie_pct",
                   "type": "timeseries",
-                  "label": "Niveau Batterie Capteur",
+                  "label": "batterie_autonomie_pct",
                   "color": "#10B981",
+                  "units": "%",
+                  "decimals": 0,
                   "settings": {}
                 },
                 {
                   "name": "alerte_incendie",
                   "type": "attribute",
-                  "label": "Détection Fumée / Feu Bac",
+                  "label": "alerte_incendie",
                   "color": "#F59E0B",
+                  "units": "",
+                  "decimals": 0,
                   "settings": {}
                 },
                 {
                   "name": "alerte_basculement",
                   "type": "attribute",
-                  "label": "Capteur Choc / Basculement",
+                  "label": "alerte_basculement",
                   "color": "#8B5CF6",
+                  "units": "",
+                  "decimals": 0,
                   "settings": {}
                 }
               ]
@@ -102,11 +112,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Gestion Déchets SCADA : Conteneur Déchets & PAV Connecté\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Sol / Voirie -->\n    <line x1=\"60\" y1=\"100\" x2=\"600\" y2=\"100\" stroke=\"#334155\" stroke-width=\"4\"/>\n    <text x=\"80\" y=\"90\" fill=\"#475569\" font-size=\"9\" font-weight=\"bold\">NIVEAU CHAUSSÉE</text>\n\n    <!-- Borne d'Apport Supérieure -->\n    <rect x=\"230\" y=\"45\" width=\"120\" height=\"55\" rx=\"8\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"290\" y=\"75\" fill=\"#065F46\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">TRÉMIE DÉCHETS</text>\n\n    <!-- Cuve Enterrée 4m³ -->\n    <rect x=\"200\" y=\"100\" width=\"180\" height=\"120\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2.5\"/>\n    <text x=\"290\" y=\"125\" fill=\"#475569\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CUVE ENTERRÉE 4m³</text>\n    \n    <!-- Niveau de Remplissage (Effet liquide/solide) -->\n    <rect x=\"205\" y=\"150\" width=\"170\" height=\"65\" rx=\"4\" fill=\"#FED7AA\" stroke=\"#EA580C\" stroke-width=\"1.5\"/>\n\n    <!-- Sonde Ultrason Niveau + Température -->\n    <g transform=\"translate(290, 100)\">\n      <circle cx=\"0\" cy=\"5\" r=\"8\" fill=\"#D97706\"/>\n      <line x1=\"0\" y1=\"13\" x2=\"0\" y2=\"45\" stroke=\"#D97706\" stroke-width=\"2\" stroke-dasharray=\"3,2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">ULTRASON</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#EA580C\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX REMPLISSAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_remplissage_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. INTERNE CUVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_interne_cuve:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">BATTERIE CAPTEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${batterie_autonomie_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ALARME INCENDIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${alerte_incendie}</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Gestion Déchets SCADA : Conteneur Déchets & PAV Connecté\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Sol / Voirie -->\n    <line x1=\"60\" y1=\"100\" x2=\"600\" y2=\"100\" stroke=\"#334155\" stroke-width=\"4\"/>\n    <text x=\"80\" y=\"90\" fill=\"#475569\" font-size=\"9\" font-weight=\"bold\">NIVEAU CHAUSSÉE</text>\n\n    <!-- Borne d'Apport Supérieure -->\n    <rect x=\"230\" y=\"45\" width=\"120\" height=\"55\" rx=\"8\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"290\" y=\"75\" fill=\"#065F46\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">TRÉMIE DÉCHETS</text>\n\n    <!-- Cuve Enterrée 4m³ -->\n    <rect x=\"200\" y=\"100\" width=\"180\" height=\"120\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2.5\"/>\n    <text x=\"290\" y=\"125\" fill=\"#475569\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CUVE ENTERRÉE 4m³</text>\n    \n    <!-- Niveau de Remplissage (Effet liquide/solide) -->\n    <rect x=\"205\" y=\"150\" width=\"170\" height=\"65\" rx=\"4\" fill=\"#FED7AA\" stroke=\"#EA580C\" stroke-width=\"1.5\"/>\n\n    <!-- Sonde Ultrason Niveau + Température -->\n    <g transform=\"translate(290, 100)\">\n      <circle cx=\"0\" cy=\"5\" r=\"8\" fill=\"#D97706\"/>\n      <line x1=\"0\" y1=\"13\" x2=\"0\" y2=\"45\" stroke=\"#D97706\" stroke-width=\"2\" stroke-dasharray=\"3,2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">ULTRASON</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#EA580C\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX REMPLISSAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_remplissage_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. INTERNE CUVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_interne_cuve:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">BATTERIE CAPTEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${batterie_autonomie_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ALARME INCENDIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${alerte_incendie}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -115,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "0aaaf45c-70bb-43d1-b66e-95b2bfdf84be"
+        "id": "78f99a5b-ea3e-4f67-b81c-fb7ae03bb7d0"
       },
-      "2bad7bed-7874-4aaf-84bc-cf0a8ab69847": {
+      "135fb597-d03a-48a4-b933-9cbf725739fc": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a63bd2c5-fc2f-40fe-8c2e-c7c82e695fa1",
+              "entityAliasId": "6c539f13-ea9b-4162-9a53-ecaede873a97",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -175,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "2bad7bed-7874-4aaf-84bc-cf0a8ab69847"
+        "id": "135fb597-d03a-48a4-b933-9cbf725739fc"
       },
-      "decb6f9b-c759-4ee0-b459-9f3372da3443": {
+      "96db539b-66ba-4c1e-8dfe-885465a44485": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -190,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a63bd2c5-fc2f-40fe-8c2e-c7c82e695fa1",
+              "entityAliasId": "6c539f13-ea9b-4162-9a53-ecaede873a97",
               "dataKeys": [
                 {
                   "name": "temp_interne_cuve",
@@ -235,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "decb6f9b-c759-4ee0-b459-9f3372da3443"
+        "id": "96db539b-66ba-4c1e-8dfe-885465a44485"
       },
-      "b3d1f951-5232-494d-afec-c2f17aea8b36": {
+      "42b31fba-65b0-4b9a-8d13-63713302e42a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -250,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a63bd2c5-fc2f-40fe-8c2e-c7c82e695fa1",
+              "entityAliasId": "6c539f13-ea9b-4162-9a53-ecaede873a97",
               "dataKeys": [
                 {
                   "name": "batterie_autonomie_pct",
@@ -295,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "b3d1f951-5232-494d-afec-c2f17aea8b36"
+        "id": "42b31fba-65b0-4b9a-8d13-63713302e42a"
       },
-      "046da5d9-7150-4ab9-ad1f-bdf3fc331d71": {
+      "834e68cf-aea8-48db-b792-ed6a9f41ab1c": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -310,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a63bd2c5-fc2f-40fe-8c2e-c7c82e695fa1",
+              "entityAliasId": "6c539f13-ea9b-4162-9a53-ecaede873a97",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -408,9 +422,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "046da5d9-7150-4ab9-ad1f-bdf3fc331d71"
+        "id": "834e68cf-aea8-48db-b792-ed6a9f41ab1c"
       },
-      "59afe12b-bdfd-423a-b95e-a8a724c1d8ec": {
+      "22cdd6c1-468d-4870-9396-cde5e9aa7dfa": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -423,7 +437,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a63bd2c5-fc2f-40fe-8c2e-c7c82e695fa1",
+              "entityAliasId": "6c539f13-ea9b-4162-9a53-ecaede873a97",
               "dataKeys": [
                 {
                   "name": "alerte_incendie",
@@ -462,7 +476,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "59afe12b-bdfd-423a-b95e-a8a724c1d8ec"
+        "id": "22cdd6c1-468d-4870-9396-cde5e9aa7dfa"
       }
     },
     "states": {
@@ -472,43 +486,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "52a9ab01-285b-440d-8dd1-7ab2a5df4aaa": {
+              "19597bb9-692b-442b-8353-33fdae96224b": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "0aaaf45c-70bb-43d1-b66e-95b2bfdf84be": {
+              "78f99a5b-ea3e-4f67-b81c-fb7ae03bb7d0": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "2bad7bed-7874-4aaf-84bc-cf0a8ab69847": {
+              "135fb597-d03a-48a4-b933-9cbf725739fc": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "decb6f9b-c759-4ee0-b459-9f3372da3443": {
+              "96db539b-66ba-4c1e-8dfe-885465a44485": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "b3d1f951-5232-494d-afec-c2f17aea8b36": {
+              "42b31fba-65b0-4b9a-8d13-63713302e42a": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "046da5d9-7150-4ab9-ad1f-bdf3fc331d71": {
+              "834e68cf-aea8-48db-b792-ed6a9f41ab1c": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "59afe12b-bdfd-423a-b95e-a8a724c1d8ec": {
+              "22cdd6c1-468d-4870-9396-cde5e9aa7dfa": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

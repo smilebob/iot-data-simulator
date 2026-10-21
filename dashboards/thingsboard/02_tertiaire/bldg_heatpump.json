@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Pompe à Chaleur Réversible (PAC)' (ID: bldg_heatpump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "d8544d5b-ea34-4e5f-ba08-6a0a1f2507a8": {
-        "id": "d8544d5b-ea34-4e5f-ba08-6a0a1f2507a8",
+      "a0951095-6e0b-4c94-b8e5-da6f4f087163": {
+        "id": "a0951095-6e0b-4c94-b8e5-da6f4f087163",
         "alias": "Pompe à Chaleur Réversible (PAC)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "c91839e7-0495-4ff3-88d8-5924e9baa9fa": {
+      "07a8c5ec-785f-4315-8b5d-eed2585064a3": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "c91839e7-0495-4ff3-88d8-5924e9baa9fa"
+        "id": "07a8c5ec-785f-4315-8b5d-eed2585064a3"
       },
-      "2b362809-ffd8-4690-bf14-5efe5273252a": {
+      "61c0dcfd-c802-4762-a7ca-80559cfd3b23": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,34 +59,42 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8544d5b-ea34-4e5f-ba08-6a0a1f2507a8",
+              "entityAliasId": "a0951095-6e0b-4c94-b8e5-da6f4f087163",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
                   "type": "timeseries",
-                  "label": "Température Eau Départ PAC",
+                  "label": "temp_depart_eau",
                   "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "puissance_thermique_kw",
                   "type": "timeseries",
-                  "label": "Puissance Thermique Fournie",
+                  "label": "puissance_thermique_kw",
                   "color": "#3B82F6",
+                  "units": "kW",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "pression_circuit",
                   "type": "timeseries",
-                  "label": "Pression Circuit Primaire",
+                  "label": "pression_circuit",
                   "color": "#10B981",
+                  "units": "bar",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "mode_chaud",
                   "type": "attribute",
-                  "label": "Mode Fonctionnement Chaud",
+                  "label": "mode_chaud",
                   "color": "#F59E0B",
+                  "units": "",
+                  "decimals": 0,
                   "settings": {}
                 }
               ]
@@ -95,11 +103,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Pompe à Chaleur SCADA : Pompe à Chaleur Réversible (PAC)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Unité Extérieure PAC -->\n    <rect x=\"50\" y=\"40\" width=\"320\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"70\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">GROUPE EXTÉRIEUR THERMODYNAMIQUE (R32)</text>\n\n    <!-- Ventilateur Axial Hélicoïde -->\n    <g transform=\"translate(130, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"38\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <g class=\"scada-rotor\">\n        <path d=\"M -24 -6 C -12 -20 12 -20 24 -6 C 12 20 -12 20 -24 -6 Z\" fill=\"#0284C7\"/>\n      </g>\n      <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#0F172A\"/>\n      <text x=\"0\" y=\"55\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">VENTILATEUR AXIAL</text>\n    </g>\n\n    <!-- Batterie Ailetée / Évaporateur Air -->\n    <rect x=\"190\" y=\"85\" width=\"25\" height=\"90\" rx=\"3\" fill=\"#BAE6FD\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"190\" y1=\"105\" x2=\"215\" y2=\"105\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"190\" y1=\"125\" x2=\"215\" y2=\"125\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"190\" y1=\"145\" x2=\"215\" y2=\"145\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n\n    <!-- Compresseur Inverter Scroll -->\n    <g transform=\"translate(290, 130)\">\n      <rect x=\"-30\" y=\"-45\" width=\"60\" height=\"90\" rx=\"14\" fill=\"#FFFFFF\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n      <path d=\"M -15 -10 C -5 -25 5 -25 15 -10 C 5 5 -5 5 -15 -10 Z\" fill=\"#DC2626\"/>\n      <text x=\"0\" y=\"25\" fill=\"#DC2626\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SCROLL</text>\n      <text x=\"0\" y=\"38\" fill=\"#475569\" font-size=\"7\" text-anchor=\"middle\">INVERTER</text>\n    </g>\n\n    <!-- Vanne 4 Voies d'Inversion de Cycle -->\n    <g transform=\"translate(420, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"22\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <path d=\"M -12 -12 L 12 12 M -12 12 L 12 -12\" stroke=\"#D97706\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"-28\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">VANNE 4 VOIES</text>\n      <text x=\"0\" y=\"36\" fill=\"#B45309\" font-size=\"7\" text-anchor=\"middle\">INVERSION CYCLE</text>\n    </g>\n\n    <!-- Échangeur à Plaques Condenseur / Hydro (Module Intérieur) -->\n    <rect x=\"490\" y=\"65\" width=\"130\" height=\"130\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <text x=\"555\" y=\"90\" fill=\"#0F172A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR PLAQUES</text>\n    <path d=\"M 510 110 L 600 110\" stroke=\"#DC2626\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <text x=\"555\" y=\"125\" fill=\"#DC2626\" font-size=\"8\" text-anchor=\"middle\">DÉPART CHAUD</text>\n    <path d=\"M 600 160 L 510 160\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow-fast\"/>\n    <text x=\"555\" y=\"175\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\">RETOUR CHAUFFAGE</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(670, 25)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DÉPART EAU</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_depart_eau:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(670, 75)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE THERMIQUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_thermique_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(670, 125)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION CIRCUIT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_circuit:1} bar</text>\n    </g>\n    \n    <g transform=\"translate(670, 175)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">MODE FONCTIONNEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${mode_chaud}</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Pompe à Chaleur SCADA : Pompe à Chaleur Réversible (PAC)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Unité Extérieure PAC -->\n    <rect x=\"50\" y=\"40\" width=\"320\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"70\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">GROUPE EXTÉRIEUR THERMODYNAMIQUE (R32)</text>\n\n    <!-- Ventilateur Axial Hélicoïde -->\n    <g transform=\"translate(130, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"38\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <g class=\"scada-rotor\">\n        <path d=\"M -24 -6 C -12 -20 12 -20 24 -6 C 12 20 -12 20 -24 -6 Z\" fill=\"#0284C7\"/>\n      </g>\n      <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#0F172A\"/>\n      <text x=\"0\" y=\"55\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">VENTILATEUR AXIAL</text>\n    </g>\n\n    <!-- Batterie Ailetée / Évaporateur Air -->\n    <rect x=\"190\" y=\"85\" width=\"25\" height=\"90\" rx=\"3\" fill=\"#BAE6FD\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"190\" y1=\"105\" x2=\"215\" y2=\"105\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"190\" y1=\"125\" x2=\"215\" y2=\"125\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"190\" y1=\"145\" x2=\"215\" y2=\"145\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n\n    <!-- Compresseur Inverter Scroll -->\n    <g transform=\"translate(290, 130)\">\n      <rect x=\"-30\" y=\"-45\" width=\"60\" height=\"90\" rx=\"14\" fill=\"#FFFFFF\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n      <path d=\"M -15 -10 C -5 -25 5 -25 15 -10 C 5 5 -5 5 -15 -10 Z\" fill=\"#DC2626\"/>\n      <text x=\"0\" y=\"25\" fill=\"#DC2626\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SCROLL</text>\n      <text x=\"0\" y=\"38\" fill=\"#475569\" font-size=\"7\" text-anchor=\"middle\">INVERTER</text>\n    </g>\n\n    <!-- Vanne 4 Voies d'Inversion de Cycle -->\n    <g transform=\"translate(420, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"22\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <path d=\"M -12 -12 L 12 12 M -12 12 L 12 -12\" stroke=\"#D97706\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"-28\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">VANNE 4 VOIES</text>\n      <text x=\"0\" y=\"36\" fill=\"#B45309\" font-size=\"7\" text-anchor=\"middle\">INVERSION CYCLE</text>\n    </g>\n\n    <!-- Échangeur à Plaques Condenseur / Hydro (Module Intérieur) -->\n    <rect x=\"490\" y=\"65\" width=\"130\" height=\"130\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <text x=\"555\" y=\"90\" fill=\"#0F172A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR PLAQUES</text>\n    <path d=\"M 510 110 L 600 110\" stroke=\"#DC2626\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <text x=\"555\" y=\"125\" fill=\"#DC2626\" font-size=\"8\" text-anchor=\"middle\">DÉPART CHAUD</text>\n    <path d=\"M 600 160 L 510 160\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow-fast\"/>\n    <text x=\"555\" y=\"175\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\">RETOUR CHAUFFAGE</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(670, 25)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DÉPART EAU</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_depart_eau:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(670, 75)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE THERMIQUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_thermique_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(670, 125)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION CIRCUIT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_circuit:1} bar</text>\n    </g>\n    \n    <g transform=\"translate(670, 175)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">MODE FONCTIONNEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${mode_chaud}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -108,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "2b362809-ffd8-4690-bf14-5efe5273252a"
+        "id": "61c0dcfd-c802-4762-a7ca-80559cfd3b23"
       },
-      "258ccb3e-c6b9-40c8-aa8f-83c58caeac04": {
+      "504e65c5-cea5-4355-975f-19bfc23e50cc": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -123,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8544d5b-ea34-4e5f-ba08-6a0a1f2507a8",
+              "entityAliasId": "a0951095-6e0b-4c94-b8e5-da6f4f087163",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -168,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "258ccb3e-c6b9-40c8-aa8f-83c58caeac04"
+        "id": "504e65c5-cea5-4355-975f-19bfc23e50cc"
       },
-      "99bf2936-d86f-492b-8eaa-d94a87558771": {
+      "a9bced34-40e5-4ad3-ad97-b7bac3d57a77": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -183,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8544d5b-ea34-4e5f-ba08-6a0a1f2507a8",
+              "entityAliasId": "a0951095-6e0b-4c94-b8e5-da6f4f087163",
               "dataKeys": [
                 {
                   "name": "puissance_thermique_kw",
@@ -228,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "99bf2936-d86f-492b-8eaa-d94a87558771"
+        "id": "a9bced34-40e5-4ad3-ad97-b7bac3d57a77"
       },
-      "abd59a89-b7d2-4761-ab0e-f9e98226ce5d": {
+      "7197f3f8-cf6f-4286-bc58-e6ee08c31a61": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -243,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8544d5b-ea34-4e5f-ba08-6a0a1f2507a8",
+              "entityAliasId": "a0951095-6e0b-4c94-b8e5-da6f4f087163",
               "dataKeys": [
                 {
                   "name": "pression_circuit",
@@ -288,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "abd59a89-b7d2-4761-ab0e-f9e98226ce5d"
+        "id": "7197f3f8-cf6f-4286-bc58-e6ee08c31a61"
       },
-      "b9f86238-9f5c-4a0f-83b8-62fadd99b2d5": {
+      "fe22bb0e-7e3c-4269-b9c9-a6822c8b6c33": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -303,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8544d5b-ea34-4e5f-ba08-6a0a1f2507a8",
+              "entityAliasId": "a0951095-6e0b-4c94-b8e5-da6f4f087163",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -401,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "b9f86238-9f5c-4a0f-83b8-62fadd99b2d5"
+        "id": "fe22bb0e-7e3c-4269-b9c9-a6822c8b6c33"
       },
-      "5327cf1d-6409-42ce-9b47-8836ba1cbb56": {
+      "aee2f733-6358-4ff0-af7d-8a1d37866eea": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -416,7 +428,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8544d5b-ea34-4e5f-ba08-6a0a1f2507a8",
+              "entityAliasId": "a0951095-6e0b-4c94-b8e5-da6f4f087163",
               "dataKeys": [
                 {
                   "name": "mode_chaud",
@@ -448,7 +460,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "5327cf1d-6409-42ce-9b47-8836ba1cbb56"
+        "id": "aee2f733-6358-4ff0-af7d-8a1d37866eea"
       }
     },
     "states": {
@@ -458,43 +470,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "c91839e7-0495-4ff3-88d8-5924e9baa9fa": {
+              "07a8c5ec-785f-4315-8b5d-eed2585064a3": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "2b362809-ffd8-4690-bf14-5efe5273252a": {
+              "61c0dcfd-c802-4762-a7ca-80559cfd3b23": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "258ccb3e-c6b9-40c8-aa8f-83c58caeac04": {
+              "504e65c5-cea5-4355-975f-19bfc23e50cc": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "99bf2936-d86f-492b-8eaa-d94a87558771": {
+              "a9bced34-40e5-4ad3-ad97-b7bac3d57a77": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "abd59a89-b7d2-4761-ab0e-f9e98226ce5d": {
+              "7197f3f8-cf6f-4286-bc58-e6ee08c31a61": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "b9f86238-9f5c-4a0f-83b8-62fadd99b2d5": {
+              "fe22bb0e-7e3c-4269-b9c9-a6822c8b6c33": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "5327cf1d-6409-42ce-9b47-8836ba1cbb56": {
+              "aee2f733-6358-4ff0-af7d-8a1d37866eea": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

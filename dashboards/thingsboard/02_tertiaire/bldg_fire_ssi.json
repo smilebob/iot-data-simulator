@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale Sécurité Incendie (SSI)' (ID: bldg_fire_ssi). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "ba040490-ee22-48b5-a105-65c527553120": {
-        "id": "ba040490-ee22-48b5-a105-65c527553120",
+      "d871eb78-351a-40b7-b1e1-823cbf38fc7b": {
+        "id": "d871eb78-351a-40b7-b1e1-823cbf38fc7b",
         "alias": "Centrale Sécurité Incendie (SSI)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "3575ce63-33e6-4f31-8583-ca860db7c8ae": {
+      "6f33b8fc-d18d-45be-a97f-ff260817f5c7": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "3575ce63-33e6-4f31-8583-ca860db7c8ae"
+        "id": "6f33b8fc-d18d-45be-a97f-ff260817f5c7"
       },
-      "1e66453a-baa7-46c0-b4fd-9fa0d1728a41": {
+      "40466df4-0df5-42c4-b8b2-fe0c4048fdf5": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,41 +59,51 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba040490-ee22-48b5-a105-65c527553120",
+              "entityAliasId": "d871eb78-351a-40b7-b1e1-823cbf38fc7b",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
                   "type": "timeseries",
-                  "label": "Opacité Détection Fumée",
+                  "label": "opacite_fumee_obsm",
                   "color": "#E2001A",
+                  "units": "obs/m",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "debit_desenfumage_m3h",
                   "type": "timeseries",
-                  "label": "Débit Extracteur Désenfumage",
+                  "label": "debit_desenfumage_m3h",
                   "color": "#3B82F6",
+                  "units": "m³/h",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "tension_alim_secours",
                   "type": "timeseries",
-                  "label": "Tension Alimentation Secourue (AES)",
+                  "label": "tension_alim_secours",
                   "color": "#10B981",
+                  "units": "V",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "declencheur_manuel",
                   "type": "attribute",
-                  "label": "Déclencheur Manuel Enclenché",
+                  "label": "declencheur_manuel",
                   "color": "#F59E0B",
+                  "units": "",
+                  "decimals": 0,
                   "settings": {}
                 },
                 {
                   "name": "statut_clapets_coupe_feu",
                   "type": "attribute",
-                  "label": "Statut Clapets Coupe-Feu",
+                  "label": "statut_clapets_coupe_feu",
                   "color": "#8B5CF6",
+                  "units": "",
+                  "decimals": 0,
                   "settings": {}
                 }
               ]
@@ -102,11 +112,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Sécurité Incendie SCADA : Centrale Sécurité Incendie (SSI)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Centrale ECS / CMSI -->\n    <rect x=\"60\" y=\"40\" width=\"560\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"65\" fill=\"#B91C1C\" font-size=\"11\" font-weight=\"bold\">CENTRALE SÉCURITÉ INCENDIE (ECS / CMSI CONFORME NF S 61-931)</text>\n\n    <!-- Boucle de Détection Optique de Fumée -->\n    <g transform=\"translate(130, 110)\">\n      <circle cx=\"0\" cy=\"0\" r=\"26\" fill=\"#FFFFFF\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"10\" fill=\"#FEE2E2\" stroke=\"#DC2626\"/>\n      <text x=\"0\" y=\"42\" fill=\"#DC2626\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DÉTECTEUR FUMÉE</text>\n    </g>\n\n    <!-- Clapets Coupe-Feu Motorisés -->\n    <g transform=\"translate(280, 110)\">\n      <rect x=\"-25\" y=\"-25\" width=\"50\" height=\"50\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#D97706\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"42\" fill=\"#D97706\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">CLAPET COUPE-FEU</text>\n    </g>\n\n    <!-- Ventilateur Tourelle de Désenfumage 400°C/2h -->\n    <g transform=\"translate(440, 110)\">\n      <rect x=\"-30\" y=\"-30\" width=\"60\" height=\"60\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <g class=\"scada-rotor-fast\">\n        <path d=\"M -15 -4 C -8 -12 8 -12 15 -4 C 8 12 -8 12 -15 -4 Z\" fill=\"#059669\"/>\n      </g>\n      <text x=\"0\" y=\"45\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DÉSENFUMAGE 400°/2h</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">OPACITÉ FUMÉE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${opacite_fumee_obsm:2} Obs/m</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT DÉSENFUMAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_desenfumage_m3h:0} m³/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ALIM SECOURS (AES)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_alim_secours:1} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">STATUT CLAPETS</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${statut_clapets_coupe_feu}</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Sécurité Incendie SCADA : Centrale Sécurité Incendie (SSI)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Centrale ECS / CMSI -->\n    <rect x=\"60\" y=\"40\" width=\"560\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"65\" fill=\"#B91C1C\" font-size=\"11\" font-weight=\"bold\">CENTRALE SÉCURITÉ INCENDIE (ECS / CMSI CONFORME NF S 61-931)</text>\n\n    <!-- Boucle de Détection Optique de Fumée -->\n    <g transform=\"translate(130, 110)\">\n      <circle cx=\"0\" cy=\"0\" r=\"26\" fill=\"#FFFFFF\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"10\" fill=\"#FEE2E2\" stroke=\"#DC2626\"/>\n      <text x=\"0\" y=\"42\" fill=\"#DC2626\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DÉTECTEUR FUMÉE</text>\n    </g>\n\n    <!-- Clapets Coupe-Feu Motorisés -->\n    <g transform=\"translate(280, 110)\">\n      <rect x=\"-25\" y=\"-25\" width=\"50\" height=\"50\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#D97706\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"42\" fill=\"#D97706\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">CLAPET COUPE-FEU</text>\n    </g>\n\n    <!-- Ventilateur Tourelle de Désenfumage 400°C/2h -->\n    <g transform=\"translate(440, 110)\">\n      <rect x=\"-30\" y=\"-30\" width=\"60\" height=\"60\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <g class=\"scada-rotor-fast\">\n        <path d=\"M -15 -4 C -8 -12 8 -12 15 -4 C 8 12 -8 12 -15 -4 Z\" fill=\"#059669\"/>\n      </g>\n      <text x=\"0\" y=\"45\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DÉSENFUMAGE 400°/2h</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">OPACITÉ FUMÉE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${opacite_fumee_obsm:2} Obs/m</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT DÉSENFUMAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_desenfumage_m3h:0} m³/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ALIM SECOURS (AES)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_alim_secours:1} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">STATUT CLAPETS</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${statut_clapets_coupe_feu}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -115,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "1e66453a-baa7-46c0-b4fd-9fa0d1728a41"
+        "id": "40466df4-0df5-42c4-b8b2-fe0c4048fdf5"
       },
-      "e05e7dbf-5e05-4ddb-8981-c05799abb218": {
+      "04fad253-bb78-4e24-9e95-3a4d568c3d14": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba040490-ee22-48b5-a105-65c527553120",
+              "entityAliasId": "d871eb78-351a-40b7-b1e1-823cbf38fc7b",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -175,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "e05e7dbf-5e05-4ddb-8981-c05799abb218"
+        "id": "04fad253-bb78-4e24-9e95-3a4d568c3d14"
       },
-      "8d8c3b0b-469b-42f2-ba97-46aa001c49fc": {
+      "cded4f70-4b30-4bc2-b734-0485a0d8e0bc": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -190,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba040490-ee22-48b5-a105-65c527553120",
+              "entityAliasId": "d871eb78-351a-40b7-b1e1-823cbf38fc7b",
               "dataKeys": [
                 {
                   "name": "debit_desenfumage_m3h",
@@ -235,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "8d8c3b0b-469b-42f2-ba97-46aa001c49fc"
+        "id": "cded4f70-4b30-4bc2-b734-0485a0d8e0bc"
       },
-      "bbc1dc65-086c-45e0-8fd1-94689992ef73": {
+      "13ec88c2-1db4-4825-89bf-6426feb91f3b": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -250,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba040490-ee22-48b5-a105-65c527553120",
+              "entityAliasId": "d871eb78-351a-40b7-b1e1-823cbf38fc7b",
               "dataKeys": [
                 {
                   "name": "tension_alim_secours",
@@ -295,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "bbc1dc65-086c-45e0-8fd1-94689992ef73"
+        "id": "13ec88c2-1db4-4825-89bf-6426feb91f3b"
       },
-      "cfe06744-e0f4-4e00-983f-da749eb7b234": {
+      "e3624361-8fb4-4675-b76a-ec1eb81500f8": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -310,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba040490-ee22-48b5-a105-65c527553120",
+              "entityAliasId": "d871eb78-351a-40b7-b1e1-823cbf38fc7b",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -408,9 +422,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "cfe06744-e0f4-4e00-983f-da749eb7b234"
+        "id": "e3624361-8fb4-4675-b76a-ec1eb81500f8"
       },
-      "24c32f85-f379-4866-bea3-2744b51c47af": {
+      "a6fffa0c-898b-4f20-b8e2-a8cfba0eb61c": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -423,7 +437,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba040490-ee22-48b5-a105-65c527553120",
+              "entityAliasId": "d871eb78-351a-40b7-b1e1-823cbf38fc7b",
               "dataKeys": [
                 {
                   "name": "declencheur_manuel",
@@ -462,7 +476,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "24c32f85-f379-4866-bea3-2744b51c47af"
+        "id": "a6fffa0c-898b-4f20-b8e2-a8cfba0eb61c"
       }
     },
     "states": {
@@ -472,43 +486,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "3575ce63-33e6-4f31-8583-ca860db7c8ae": {
+              "6f33b8fc-d18d-45be-a97f-ff260817f5c7": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "1e66453a-baa7-46c0-b4fd-9fa0d1728a41": {
+              "40466df4-0df5-42c4-b8b2-fe0c4048fdf5": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "e05e7dbf-5e05-4ddb-8981-c05799abb218": {
+              "04fad253-bb78-4e24-9e95-3a4d568c3d14": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "8d8c3b0b-469b-42f2-ba97-46aa001c49fc": {
+              "cded4f70-4b30-4bc2-b734-0485a0d8e0bc": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "bbc1dc65-086c-45e0-8fd1-94689992ef73": {
+              "13ec88c2-1db4-4825-89bf-6426feb91f3b": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "cfe06744-e0f4-4e00-983f-da749eb7b234": {
+              "e3624361-8fb4-4675-b76a-ec1eb81500f8": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "24c32f85-f379-4866-bea3-2744b51c47af": {
+              "a6fffa0c-898b-4f20-b8e2-a8cfba0eb61c": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

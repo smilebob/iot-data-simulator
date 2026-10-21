@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aérogénérateur / Éolienne MW' (ID: infra_wind_turbine). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "70b67532-f37d-4b51-a002-ebd9756876d0": {
-        "id": "70b67532-f37d-4b51-a002-ebd9756876d0",
+      "d4385b0d-0445-42f4-bbc7-c6c22679a685": {
+        "id": "d4385b0d-0445-42f4-bbc7-c6c22679a685",
         "alias": "Aérogénérateur / Éolienne MW",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "ee558161-5bd8-479d-81ba-754a2f959a63": {
+      "3347bb7f-e878-4332-901b-5d3fb44c8d40": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "ee558161-5bd8-479d-81ba-754a2f959a63"
+        "id": "3347bb7f-e878-4332-901b-5d3fb44c8d40"
       },
-      "b09620e4-cb9c-4cab-aeb6-cb8be5d49614": {
+      "ded9beb2-6068-4264-8f87-d7db7134ff51": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,41 +59,51 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70b67532-f37d-4b51-a002-ebd9756876d0",
+              "entityAliasId": "d4385b0d-0445-42f4-bbc7-c6c22679a685",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
                   "type": "timeseries",
-                  "label": "Vitesse Vent Anémomètre",
+                  "label": "vitesse_vent_ms",
                   "color": "#E2001A",
+                  "units": "m/s",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "vitesse_rotor_rpm",
                   "type": "timeseries",
-                  "label": "Vitesse de Rotation Rotor",
+                  "label": "vitesse_rotor_rpm",
                   "color": "#3B82F6",
+                  "units": "rpm",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "puissance_active_mw",
                   "type": "timeseries",
-                  "label": "Puissance Électrique Active",
+                  "label": "puissance_active_mw",
                   "color": "#10B981",
+                  "units": "MW",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "angle_nacelle_yaw_deg",
                   "type": "timeseries",
-                  "label": "Orientation Nacelle (Yaw)",
+                  "label": "angle_nacelle_yaw_deg",
                   "color": "#F59E0B",
+                  "units": "°",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "temp_generatrice",
                   "type": "timeseries",
-                  "label": "Température Génératrice",
+                  "label": "temp_generatrice",
                   "color": "#8B5CF6",
+                  "units": "°C",
+                  "decimals": 2,
                   "settings": {}
                 }
               ]
@@ -102,11 +112,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Éolienne SCADA : Aérogénérateur / Éolienne MW\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Mât Béton / Acier Tubulaire -->\n    <path d=\"M 230 230 L 245 80 L 255 80 L 270 230 Z\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    \n    <!-- Nacelle Supérieure -->\n    <rect x=\"220\" y=\"65\" width=\"75\" height=\"30\" rx=\"8\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"257\" y=\"84\" fill=\"#0369A1\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">NACELLE 3MW</text>\n\n    <!-- Rotor Éolien Tri-pales -->\n    <g transform=\"translate(220, 80)\">\n      <circle cx=\"0\" cy=\"0\" r=\"10\" fill=\"#0284C7\"/>\n      <g class=\"scada-rotor\">\n        <path d=\"M 0 0 L -60 -20 Q -80 0 -60 20 Z\" fill=\"#0284C7\" opacity=\"0.8\"/>\n        <path d=\"M 0 0 L 40 -60 Q 60 -70 50 -40 Z\" fill=\"#0284C7\" opacity=\"0.8\"/>\n        <path d=\"M 0 0 L 40 60 Q 60 70 50 40 Z\" fill=\"#0284C7\" opacity=\"0.8\"/>\n      </g>\n    </g>\n\n    <!-- Anémomètre de Nacelle -->\n    <g transform=\"translate(290, 50)\">\n      <line x1=\"0\" y1=\"15\" x2=\"0\" y2=\"0\" stroke=\"#475569\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\">ANÉMOMÈTRE</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE VENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_vent_ms:1} m/s</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE ROTOR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_rotor_rpm:1} RPM</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ACTIVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_active_mw:2} MW</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ORIENTATION (YAW)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${angle_nacelle_yaw_deg:0} °</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Éolienne SCADA : Aérogénérateur / Éolienne MW\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Mât Béton / Acier Tubulaire -->\n    <path d=\"M 230 230 L 245 80 L 255 80 L 270 230 Z\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    \n    <!-- Nacelle Supérieure -->\n    <rect x=\"220\" y=\"65\" width=\"75\" height=\"30\" rx=\"8\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"257\" y=\"84\" fill=\"#0369A1\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">NACELLE 3MW</text>\n\n    <!-- Rotor Éolien Tri-pales -->\n    <g transform=\"translate(220, 80)\">\n      <circle cx=\"0\" cy=\"0\" r=\"10\" fill=\"#0284C7\"/>\n      <g class=\"scada-rotor\">\n        <path d=\"M 0 0 L -60 -20 Q -80 0 -60 20 Z\" fill=\"#0284C7\" opacity=\"0.8\"/>\n        <path d=\"M 0 0 L 40 -60 Q 60 -70 50 -40 Z\" fill=\"#0284C7\" opacity=\"0.8\"/>\n        <path d=\"M 0 0 L 40 60 Q 60 70 50 40 Z\" fill=\"#0284C7\" opacity=\"0.8\"/>\n      </g>\n    </g>\n\n    <!-- Anémomètre de Nacelle -->\n    <g transform=\"translate(290, 50)\">\n      <line x1=\"0\" y1=\"15\" x2=\"0\" y2=\"0\" stroke=\"#475569\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\">ANÉMOMÈTRE</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE VENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_vent_ms:1} m/s</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE ROTOR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_rotor_rpm:1} RPM</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ACTIVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_active_mw:2} MW</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ORIENTATION (YAW)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${angle_nacelle_yaw_deg:0} °</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -115,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "b09620e4-cb9c-4cab-aeb6-cb8be5d49614"
+        "id": "ded9beb2-6068-4264-8f87-d7db7134ff51"
       },
-      "55f284fd-e955-4ecb-9d64-de7c58a916a2": {
+      "7f49ea97-cbf4-4d0d-aa4e-d5c9a48f1cb1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70b67532-f37d-4b51-a002-ebd9756876d0",
+              "entityAliasId": "d4385b0d-0445-42f4-bbc7-c6c22679a685",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -175,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "55f284fd-e955-4ecb-9d64-de7c58a916a2"
+        "id": "7f49ea97-cbf4-4d0d-aa4e-d5c9a48f1cb1"
       },
-      "aa955ef9-e638-4710-9516-0e016f85a3b6": {
+      "f095bba7-75ea-4e00-a8b8-d29ebb739df5": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -190,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70b67532-f37d-4b51-a002-ebd9756876d0",
+              "entityAliasId": "d4385b0d-0445-42f4-bbc7-c6c22679a685",
               "dataKeys": [
                 {
                   "name": "vitesse_rotor_rpm",
@@ -235,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "aa955ef9-e638-4710-9516-0e016f85a3b6"
+        "id": "f095bba7-75ea-4e00-a8b8-d29ebb739df5"
       },
-      "157c3306-c4e2-4216-83d9-efc51093b59c": {
+      "815a26a8-d6f2-48e9-a3b7-14c31744f7db": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -250,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70b67532-f37d-4b51-a002-ebd9756876d0",
+              "entityAliasId": "d4385b0d-0445-42f4-bbc7-c6c22679a685",
               "dataKeys": [
                 {
                   "name": "puissance_active_mw",
@@ -295,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "157c3306-c4e2-4216-83d9-efc51093b59c"
+        "id": "815a26a8-d6f2-48e9-a3b7-14c31744f7db"
       },
-      "77eac126-5486-49f6-be09-6e4f3cf60da9": {
+      "4ea5eb8f-2340-477d-a80a-304af679a78f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -310,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70b67532-f37d-4b51-a002-ebd9756876d0",
+              "entityAliasId": "d4385b0d-0445-42f4-bbc7-c6c22679a685",
               "dataKeys": [
                 {
                   "name": "angle_nacelle_yaw_deg",
@@ -355,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "77eac126-5486-49f6-be09-6e4f3cf60da9"
+        "id": "4ea5eb8f-2340-477d-a80a-304af679a78f"
       },
-      "f4ec09e5-acf0-48b4-8cc8-4ee49acef9a1": {
+      "12adefa1-80fa-41b4-b62f-cb7a448e586c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -370,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70b67532-f37d-4b51-a002-ebd9756876d0",
+              "entityAliasId": "d4385b0d-0445-42f4-bbc7-c6c22679a685",
               "dataKeys": [
                 {
                   "name": "temp_generatrice",
@@ -415,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "f4ec09e5-acf0-48b4-8cc8-4ee49acef9a1"
+        "id": "12adefa1-80fa-41b4-b62f-cb7a448e586c"
       },
-      "a4e279b5-b019-4a96-bba1-c6b4f94a975f": {
+      "cfb04e24-4edc-4cd8-8674-114b5b42d3ee": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -430,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "70b67532-f37d-4b51-a002-ebd9756876d0",
+              "entityAliasId": "d4385b0d-0445-42f4-bbc7-c6c22679a685",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -556,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "a4e279b5-b019-4a96-bba1-c6b4f94a975f"
+        "id": "cfb04e24-4edc-4cd8-8674-114b5b42d3ee"
       }
     },
     "states": {
@@ -566,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "ee558161-5bd8-479d-81ba-754a2f959a63": {
+              "3347bb7f-e878-4332-901b-5d3fb44c8d40": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "b09620e4-cb9c-4cab-aeb6-cb8be5d49614": {
+              "ded9beb2-6068-4264-8f87-d7db7134ff51": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "55f284fd-e955-4ecb-9d64-de7c58a916a2": {
+              "7f49ea97-cbf4-4d0d-aa4e-d5c9a48f1cb1": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "aa955ef9-e638-4710-9516-0e016f85a3b6": {
+              "f095bba7-75ea-4e00-a8b8-d29ebb739df5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "157c3306-c4e2-4216-83d9-efc51093b59c": {
+              "815a26a8-d6f2-48e9-a3b7-14c31744f7db": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "77eac126-5486-49f6-be09-6e4f3cf60da9": {
+              "4ea5eb8f-2340-477d-a80a-304af679a78f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "f4ec09e5-acf0-48b4-8cc8-4ee49acef9a1": {
+              "12adefa1-80fa-41b4-b62f-cb7a448e586c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "a4e279b5-b019-4a96-bba1-c6b4f94a975f": {
+              "cfb04e24-4edc-4cd8-8674-114b5b42d3ee": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

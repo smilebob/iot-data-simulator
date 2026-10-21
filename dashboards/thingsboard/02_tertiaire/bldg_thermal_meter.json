@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Compteur d'Énergie Thermique (Calories)' (ID: bldg_thermal_meter). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "3508fa79-4ebc-402d-84d0-cef5865d08bb": {
-        "id": "3508fa79-4ebc-402d-84d0-cef5865d08bb",
+      "32efb736-0b82-4349-ba8d-eee8fbce5831": {
+        "id": "32efb736-0b82-4349-ba8d-eee8fbce5831",
         "alias": "Compteur d'Énergie Thermique (Calories)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "26e130f3-4127-4423-95ca-a97a3ca9c8a5": {
+      "3e2fcc9a-0dff-430c-aaac-cc01ca97d1bd": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "26e130f3-4127-4423-95ca-a97a3ca9c8a5"
+        "id": "3e2fcc9a-0dff-430c-aaac-cc01ca97d1bd"
       },
-      "1fdd6513-1020-41d9-a94c-e4481606e310": {
+      "b39c327e-9e02-47a5-854b-a7b22a4bb1e2": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,41 +59,51 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3508fa79-4ebc-402d-84d0-cef5865d08bb",
+              "entityAliasId": "32efb736-0b82-4349-ba8d-eee8fbce5831",
               "dataKeys": [
                 {
                   "name": "debit_volumique_m3h",
                   "type": "timeseries",
-                  "label": "Débit Volumique Fluide",
+                  "label": "debit_volumique_m3h",
                   "color": "#E2001A",
+                  "units": "m³/h",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "delta_t_deg",
                   "type": "timeseries",
-                  "label": "Écart Température Aller/Retour",
+                  "label": "delta_t_deg",
                   "color": "#3B82F6",
+                  "units": "°C",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "puissance_thermique_kw",
                   "type": "timeseries",
-                  "label": "Puissance Thermique Instantanée",
+                  "label": "puissance_thermique_kw",
                   "color": "#10B981",
+                  "units": "kW",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "energie_cumulee_mwh",
                   "type": "timeseries",
-                  "label": "Énergie Calorifique Cumulée",
+                  "label": "energie_cumulee_mwh",
                   "color": "#F59E0B",
+                  "units": "MWh",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "temp_depart_eau",
                   "type": "timeseries",
-                  "label": "Température Départ Eau Chaude",
+                  "label": "temp_depart_eau",
                   "color": "#8B5CF6",
+                  "units": "°C",
+                  "decimals": 2,
                   "settings": {}
                 }
               ]
@@ -102,11 +112,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Compteur Thermique SCADA : Compteur d'Énergie Thermique (Calories)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Conduite Départ Chaud -->\n    <path d=\"M 60 70 L 600 70\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"8\" class=\"pipe-flow\"/>\n    <text x=\"70\" y=\"55\" fill=\"#DC2626\" font-size=\"10\" font-weight=\"bold\">DÉPART EAU CHAUDE (ALLER)</text>\n    <!-- Sonde Température Aller PT100 -->\n    <g transform=\"translate(180, 70)\">\n      <rect x=\"-8\" y=\"-30\" width=\"16\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-36\" fill=\"#DC2626\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE ALLER</text>\n    </g>\n\n    <!-- Débitmètre Ultrasonique sur Retour -->\n    <path d=\"M 600 180 L 60 180\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"8\" class=\"pipe-flow-fast\"/>\n    <text x=\"70\" y=\"205\" fill=\"#0284C7\" font-size=\"10\" font-weight=\"bold\">RETOUR EAU REFROIDIE</text>\n    <g transform=\"translate(320, 180)\">\n      <rect x=\"-35\" y=\"-20\" width=\"70\" height=\"40\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n      <text x=\"0\" y=\"5\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DÉBITMÈTRE US</text>\n    </g>\n    <!-- Sonde Température Retour PT100 -->\n    <g transform=\"translate(480, 180)\">\n      <rect x=\"-8\" y=\"5\" width=\"16\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"42\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE RETOUR</text>\n    </g>\n\n    <!-- Intégrateur / Calculateur Calorimétrique -->\n    <g transform=\"translate(320, 105)\">\n      <rect x=\"-65\" y=\"-25\" width=\"130\" height=\"50\" rx=\"8\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-3\" fill=\"#0F172A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">INTÉGRATEUR EN 1434</text>\n      <text x=\"0\" y=\"14\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">Q = m · Cp · ΔT</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT VOLUMIQUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_volumique_m3h:2} m³/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCART DE TEMP. (ΔT)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${delta_t_deg:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE THERMIQUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_thermique_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉNERGIE CUMULÉE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${energie_cumulee_mwh:2} MWh</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Compteur Thermique SCADA : Compteur d'Énergie Thermique (Calories)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Conduite Départ Chaud -->\n    <path d=\"M 60 70 L 600 70\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"8\" class=\"pipe-flow\"/>\n    <text x=\"70\" y=\"55\" fill=\"#DC2626\" font-size=\"10\" font-weight=\"bold\">DÉPART EAU CHAUDE (ALLER)</text>\n    <!-- Sonde Température Aller PT100 -->\n    <g transform=\"translate(180, 70)\">\n      <rect x=\"-8\" y=\"-30\" width=\"16\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-36\" fill=\"#DC2626\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE ALLER</text>\n    </g>\n\n    <!-- Débitmètre Ultrasonique sur Retour -->\n    <path d=\"M 600 180 L 60 180\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"8\" class=\"pipe-flow-fast\"/>\n    <text x=\"70\" y=\"205\" fill=\"#0284C7\" font-size=\"10\" font-weight=\"bold\">RETOUR EAU REFROIDIE</text>\n    <g transform=\"translate(320, 180)\">\n      <rect x=\"-35\" y=\"-20\" width=\"70\" height=\"40\" rx=\"8\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n      <text x=\"0\" y=\"5\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DÉBITMÈTRE US</text>\n    </g>\n    <!-- Sonde Température Retour PT100 -->\n    <g transform=\"translate(480, 180)\">\n      <rect x=\"-8\" y=\"5\" width=\"16\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"42\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE RETOUR</text>\n    </g>\n\n    <!-- Intégrateur / Calculateur Calorimétrique -->\n    <g transform=\"translate(320, 105)\">\n      <rect x=\"-65\" y=\"-25\" width=\"130\" height=\"50\" rx=\"8\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-3\" fill=\"#0F172A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">INTÉGRATEUR EN 1434</text>\n      <text x=\"0\" y=\"14\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">Q = m · Cp · ΔT</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT VOLUMIQUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_volumique_m3h:2} m³/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCART DE TEMP. (ΔT)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${delta_t_deg:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE THERMIQUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_thermique_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉNERGIE CUMULÉE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${energie_cumulee_mwh:2} MWh</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -115,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "1fdd6513-1020-41d9-a94c-e4481606e310"
+        "id": "b39c327e-9e02-47a5-854b-a7b22a4bb1e2"
       },
-      "0c75a028-17e3-4db6-90d1-e187a146db1e": {
+      "3eb3d697-8e8c-4e08-9545-85b03088ddcb": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3508fa79-4ebc-402d-84d0-cef5865d08bb",
+              "entityAliasId": "32efb736-0b82-4349-ba8d-eee8fbce5831",
               "dataKeys": [
                 {
                   "name": "debit_volumique_m3h",
@@ -175,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "0c75a028-17e3-4db6-90d1-e187a146db1e"
+        "id": "3eb3d697-8e8c-4e08-9545-85b03088ddcb"
       },
-      "db747572-afce-4e03-9709-4935b410892c": {
+      "28362afb-e79c-44b0-9268-8d4620c80758": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -190,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3508fa79-4ebc-402d-84d0-cef5865d08bb",
+              "entityAliasId": "32efb736-0b82-4349-ba8d-eee8fbce5831",
               "dataKeys": [
                 {
                   "name": "delta_t_deg",
@@ -235,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "db747572-afce-4e03-9709-4935b410892c"
+        "id": "28362afb-e79c-44b0-9268-8d4620c80758"
       },
-      "26d424db-da1d-4751-9430-9ded977a8281": {
+      "50c2fedd-5b92-4684-b0db-92336589b368": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -250,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3508fa79-4ebc-402d-84d0-cef5865d08bb",
+              "entityAliasId": "32efb736-0b82-4349-ba8d-eee8fbce5831",
               "dataKeys": [
                 {
                   "name": "puissance_thermique_kw",
@@ -295,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "26d424db-da1d-4751-9430-9ded977a8281"
+        "id": "50c2fedd-5b92-4684-b0db-92336589b368"
       },
-      "5f32619b-a684-4892-aa04-1cdb3ff8d0e5": {
+      "46cff404-8b48-4251-91e5-3d79971007a9": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -310,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3508fa79-4ebc-402d-84d0-cef5865d08bb",
+              "entityAliasId": "32efb736-0b82-4349-ba8d-eee8fbce5831",
               "dataKeys": [
                 {
                   "name": "energie_cumulee_mwh",
@@ -355,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "5f32619b-a684-4892-aa04-1cdb3ff8d0e5"
+        "id": "46cff404-8b48-4251-91e5-3d79971007a9"
       },
-      "53ca1e0d-9a15-4c13-934b-d21f0330129b": {
+      "8851f009-6b45-49e7-bc70-42573b471bff": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -370,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3508fa79-4ebc-402d-84d0-cef5865d08bb",
+              "entityAliasId": "32efb736-0b82-4349-ba8d-eee8fbce5831",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -415,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "53ca1e0d-9a15-4c13-934b-d21f0330129b"
+        "id": "8851f009-6b45-49e7-bc70-42573b471bff"
       },
-      "7ec6f97d-d0e8-4821-857d-18229d511941": {
+      "6ae65470-e8fe-43f2-90ef-4cabd97646d8": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -430,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3508fa79-4ebc-402d-84d0-cef5865d08bb",
+              "entityAliasId": "32efb736-0b82-4349-ba8d-eee8fbce5831",
               "dataKeys": [
                 {
                   "name": "debit_volumique_m3h",
@@ -556,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "7ec6f97d-d0e8-4821-857d-18229d511941"
+        "id": "6ae65470-e8fe-43f2-90ef-4cabd97646d8"
       }
     },
     "states": {
@@ -566,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "26e130f3-4127-4423-95ca-a97a3ca9c8a5": {
+              "3e2fcc9a-0dff-430c-aaac-cc01ca97d1bd": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "1fdd6513-1020-41d9-a94c-e4481606e310": {
+              "b39c327e-9e02-47a5-854b-a7b22a4bb1e2": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "0c75a028-17e3-4db6-90d1-e187a146db1e": {
+              "3eb3d697-8e8c-4e08-9545-85b03088ddcb": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "db747572-afce-4e03-9709-4935b410892c": {
+              "28362afb-e79c-44b0-9268-8d4620c80758": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "26d424db-da1d-4751-9430-9ded977a8281": {
+              "50c2fedd-5b92-4684-b0db-92336589b368": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "5f32619b-a684-4892-aa04-1cdb3ff8d0e5": {
+              "46cff404-8b48-4251-91e5-3d79971007a9": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "53ca1e0d-9a15-4c13-934b-d21f0330129b": {
+              "8851f009-6b45-49e7-bc70-42573b471bff": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "7ec6f97d-d0e8-4821-857d-18229d511941": {
+              "6ae65470-e8fe-43f2-90ef-4cabd97646d8": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

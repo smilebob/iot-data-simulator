@@ -116,9 +116,15 @@ def test_thingsboard_dashboard_generation():
     assert len(synoptic_w["config"]["datasources"][0]["dataKeys"]) >= 2
     assert "<svg" in synoptic_w["config"]["settings"]["cardHtml"]
     assert synoptic_w["config"]["settings"]["cardHtml"] == synoptic_w["config"]["settings"]["html"]
+    assert synoptic_w["config"]["settings"]["cardCss"] == synoptic_w["config"]["settings"]["css"]
+    assert synoptic_w["config"].get("useDashboardTimewindow") is True
     assert "pipe-flow" in synoptic_w["config"]["settings"]["cardHtml"]
     assert "${" in synoptic_w["config"]["settings"]["cardHtml"]
     assert "TB_TOKEN_SECRET_9876" not in synoptic_w["config"]["settings"]["cardHtml"]
+
+    # Compatibilité ThingsBoard 4.3 : Vérification que les labels correspondent exactement aux names (identifiants techniques)
+    for dk in synoptic_w["config"]["datasources"][0]["dataKeys"]:
+        assert dk["label"] == dk["name"], f"DataKey label '{dk['label']}' doit être égal à name '{dk['name']}' pour ThingsBoard 4.3"
 
     # Vérification du widget d'en-tête (HTML) sécurisé (Token masqué / protégé)
     header_w = next(w for w in widgets.values() if w.get("typeAlias") == "html_card" and "Informations" in w.get("title", ""))

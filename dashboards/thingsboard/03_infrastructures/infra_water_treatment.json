@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Bassin d'Aération & Traitement STEP' (ID: infra_water_treatment). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "b816e34f-a6bf-4dd9-b2f0-029c91dab447": {
-        "id": "b816e34f-a6bf-4dd9-b2f0-029c91dab447",
+      "fedefac5-8cff-4288-9bd1-c13af14301cf": {
+        "id": "fedefac5-8cff-4288-9bd1-c13af14301cf",
         "alias": "Bassin d'Aération & Traitement STEP",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "ce50eba1-1176-4b3a-8f0d-e54018354c94": {
+      "bb6b666f-2695-4f60-8c07-1d8867a9b427": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "ce50eba1-1176-4b3a-8f0d-e54018354c94"
+        "id": "bb6b666f-2695-4f60-8c07-1d8867a9b427"
       },
-      "7bbadd60-6aff-4106-93cb-b51f545929c4": {
+      "31b530d5-91f5-4911-97b4-7c007573144a": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,41 +59,51 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b816e34f-a6bf-4dd9-b2f0-029c91dab447",
+              "entityAliasId": "fedefac5-8cff-4288-9bd1-c13af14301cf",
               "dataKeys": [
                 {
                   "name": "oxygene_dissous_mgl",
                   "type": "timeseries",
-                  "label": "Taux Oxygène Dissous (O₂)",
+                  "label": "oxygene_dissous_mgl",
                   "color": "#E2001A",
+                  "units": "mg/l",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "potentiel_redox_mv",
                   "type": "timeseries",
-                  "label": "Potentiel d'Oxydoréduction (Redox)",
+                  "label": "potentiel_redox_mv",
                   "color": "#3B82F6",
+                  "units": "mV",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "ph_eau",
                   "type": "timeseries",
-                  "label": "Acidité / Basicité pH",
+                  "label": "ph_eau",
                   "color": "#10B981",
+                  "units": "pH",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "turbidite_ntu",
                   "type": "timeseries",
-                  "label": "Indice Turbidité Eau",
+                  "label": "turbidite_ntu",
                   "color": "#F59E0B",
+                  "units": "NTU",
+                  "decimals": 2,
                   "settings": {}
                 },
                 {
                   "name": "debit_insufflation_nm3h",
                   "type": "timeseries",
-                  "label": "Débit Air Surpresseurs",
+                  "label": "debit_insufflation_nm3h",
                   "color": "#8B5CF6",
+                  "units": "Nm³/h",
+                  "decimals": 2,
                   "settings": {}
                 }
               ]
@@ -102,11 +112,15 @@
           "settings": {
             "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Traitement Eau STEP SCADA : Bassin d'Aération & Traitement STEP\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bassin d'Aération Biologique -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">BASSIN D'AÉRATION BIOLOGIQUE STEP (ÉLIMINATION CARBONE & AZOTE)</text>\n\n    <!-- Liquide Biologique & Bulles d'Aération -->\n    <rect x=\"70\" y=\"90\" width=\"540\" height=\"115\" rx=\"6\" fill=\"#BAE6FD\" opacity=\"0.5\"/>\n    <line x1=\"100\" y1=\"190\" x2=\"580\" y2=\"190\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n    <circle cx=\"160\" cy=\"160\" r=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"280\" cy=\"140\" r=\"8\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"400\" cy=\"150\" r=\"7\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"500\" cy=\"130\" r=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n\n    <!-- Sonde d'Oxygène Dissous Optique (LDO) -->\n    <g transform=\"translate(240, 60)\">\n      <rect x=\"-12\" y=\"0\" width=\"24\" height=\"60\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE O2 (LDO)</text>\n    </g>\n\n    <!-- Sonde pH / Redox -->\n    <g transform=\"translate(440, 60)\">\n      <rect x=\"-12\" y=\"0\" width=\"24\" height=\"60\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">REDOX / pH</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">OXYGÈNE DISSOUS</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${oxygene_dissous_mgl:2} mg/L</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">POTENTIEL REDOX</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${potentiel_redox_mv:0} mV</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ACIDITÉ / pH</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ph_eau:2} pH</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TURBIDITÉ</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${turbidite_ntu:1} NTU</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Traitement Eau STEP SCADA : Bassin d'Aération & Traitement STEP\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bassin d'Aération Biologique -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">BASSIN D'AÉRATION BIOLOGIQUE STEP (ÉLIMINATION CARBONE & AZOTE)</text>\n\n    <!-- Liquide Biologique & Bulles d'Aération -->\n    <rect x=\"70\" y=\"90\" width=\"540\" height=\"115\" rx=\"6\" fill=\"#BAE6FD\" opacity=\"0.5\"/>\n    <line x1=\"100\" y1=\"190\" x2=\"580\" y2=\"190\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n    <circle cx=\"160\" cy=\"160\" r=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"280\" cy=\"140\" r=\"8\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"400\" cy=\"150\" r=\"7\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"500\" cy=\"130\" r=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n\n    <!-- Sonde d'Oxygène Dissous Optique (LDO) -->\n    <g transform=\"translate(240, 60)\">\n      <rect x=\"-12\" y=\"0\" width=\"24\" height=\"60\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE O2 (LDO)</text>\n    </g>\n\n    <!-- Sonde pH / Redox -->\n    <g transform=\"translate(440, 60)\">\n      <rect x=\"-12\" y=\"0\" width=\"24\" height=\"60\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">REDOX / pH</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">OXYGÈNE DISSOUS</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${oxygene_dissous_mgl:2} mg/L</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">POTENTIEL REDOX</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${potentiel_redox_mv:0} mV</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ACIDITÉ / pH</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ph_eau:2} pH</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TURBIDITÉ</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${turbidite_ntu:1} NTU</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
           "backgroundColor": "#FFFFFF",
           "color": "#0F172A",
           "widgetStyle": {
@@ -115,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "7bbadd60-6aff-4106-93cb-b51f545929c4"
+        "id": "31b530d5-91f5-4911-97b4-7c007573144a"
       },
-      "b69a1f32-74d1-43c0-b63a-d4d238a7d897": {
+      "5d151f11-547c-4180-96d5-2e33ae650f79": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b816e34f-a6bf-4dd9-b2f0-029c91dab447",
+              "entityAliasId": "fedefac5-8cff-4288-9bd1-c13af14301cf",
               "dataKeys": [
                 {
                   "name": "oxygene_dissous_mgl",
@@ -175,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "b69a1f32-74d1-43c0-b63a-d4d238a7d897"
+        "id": "5d151f11-547c-4180-96d5-2e33ae650f79"
       },
-      "2cac1030-91e1-4073-94f6-5805da96251c": {
+      "223d93b4-58e6-45e7-b83a-4f9c32f974ee": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -190,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b816e34f-a6bf-4dd9-b2f0-029c91dab447",
+              "entityAliasId": "fedefac5-8cff-4288-9bd1-c13af14301cf",
               "dataKeys": [
                 {
                   "name": "potentiel_redox_mv",
@@ -235,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "2cac1030-91e1-4073-94f6-5805da96251c"
+        "id": "223d93b4-58e6-45e7-b83a-4f9c32f974ee"
       },
-      "ee4bbfb8-8130-4907-ade0-aa5fac7d43ad": {
+      "5ed50056-1ca9-4df6-b83e-9b0b7d2213c1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -250,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b816e34f-a6bf-4dd9-b2f0-029c91dab447",
+              "entityAliasId": "fedefac5-8cff-4288-9bd1-c13af14301cf",
               "dataKeys": [
                 {
                   "name": "ph_eau",
@@ -295,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "ee4bbfb8-8130-4907-ade0-aa5fac7d43ad"
+        "id": "5ed50056-1ca9-4df6-b83e-9b0b7d2213c1"
       },
-      "61fa6ee6-f980-4df1-897f-a299cd3c7096": {
+      "2c41f9f3-127c-4b3c-8ee0-9dd63b518e95": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -310,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b816e34f-a6bf-4dd9-b2f0-029c91dab447",
+              "entityAliasId": "fedefac5-8cff-4288-9bd1-c13af14301cf",
               "dataKeys": [
                 {
                   "name": "turbidite_ntu",
@@ -355,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "61fa6ee6-f980-4df1-897f-a299cd3c7096"
+        "id": "2c41f9f3-127c-4b3c-8ee0-9dd63b518e95"
       },
-      "2e525fa5-074e-4e08-a71d-6740868dda13": {
+      "01aa97e8-01ad-4c14-8bb5-e39cd98563a5": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -370,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b816e34f-a6bf-4dd9-b2f0-029c91dab447",
+              "entityAliasId": "fedefac5-8cff-4288-9bd1-c13af14301cf",
               "dataKeys": [
                 {
                   "name": "debit_insufflation_nm3h",
@@ -415,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "2e525fa5-074e-4e08-a71d-6740868dda13"
+        "id": "01aa97e8-01ad-4c14-8bb5-e39cd98563a5"
       },
-      "d05a6134-d2a1-4172-8bc8-8a3fe5e31156": {
+      "0ad97161-611c-4ae7-bc58-fa2d3b2502f4": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -430,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b816e34f-a6bf-4dd9-b2f0-029c91dab447",
+              "entityAliasId": "fedefac5-8cff-4288-9bd1-c13af14301cf",
               "dataKeys": [
                 {
                   "name": "oxygene_dissous_mgl",
@@ -556,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "d05a6134-d2a1-4172-8bc8-8a3fe5e31156"
+        "id": "0ad97161-611c-4ae7-bc58-fa2d3b2502f4"
       }
     },
     "states": {
@@ -566,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "ce50eba1-1176-4b3a-8f0d-e54018354c94": {
+              "bb6b666f-2695-4f60-8c07-1d8867a9b427": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "7bbadd60-6aff-4106-93cb-b51f545929c4": {
+              "31b530d5-91f5-4911-97b4-7c007573144a": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "b69a1f32-74d1-43c0-b63a-d4d238a7d897": {
+              "5d151f11-547c-4180-96d5-2e33ae650f79": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "2cac1030-91e1-4073-94f6-5805da96251c": {
+              "223d93b4-58e6-45e7-b83a-4f9c32f974ee": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "ee4bbfb8-8130-4907-ade0-aa5fac7d43ad": {
+              "5ed50056-1ca9-4df6-b83e-9b0b7d2213c1": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "61fa6ee6-f980-4df1-897f-a299cd3c7096": {
+              "2c41f9f3-127c-4b3c-8ee0-9dd63b518e95": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "2e525fa5-074e-4e08-a71d-6740868dda13": {
+              "01aa97e8-01ad-4c14-8bb5-e39cd98563a5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "d05a6134-d2a1-4172-8bc8-8a3fe5e31156": {
+              "0ad97161-611c-4ae7-bc58-fa2d3b2502f4": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

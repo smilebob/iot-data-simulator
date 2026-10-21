@@ -130,13 +130,18 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
     synoptic_html = get_scada_synoptic_html(device, variables)
 
     # Alimentation des dataKeys de télémétrie pour injection dynamique ${key} dans le SVG
+    # Important ThingsBoard : le moteur de template html_value_card résout les variables ${cle:format}
+    # strictement par correspondance avec le champ `label` du dataKey.
     synoptic_datakeys = []
     for i, v in enumerate(telemetry_vars + attribute_vars):
+        clean_key = get_clean_var_key(v)
         synoptic_datakeys.append({
-            "name": get_clean_var_key(v),
+            "name": clean_key,
             "type": "timeseries" if v.var_type == VariableType.TELEMETRY else "attribute",
-            "label": v.name,
+            "label": clean_key,
             "color": PALETTE_COLORS[i % len(PALETTE_COLORS)],
+            "units": v.unit or "",
+            "decimals": 2 if v.data_type == DataType.FLOAT else 0,
             "settings": {}
         })
 
@@ -160,11 +165,15 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
             "settings": {
                 "cardHtml": synoptic_html,
                 "html": synoptic_html,
-                "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+                "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+                "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
             },
             "showTitle": False,
             "dropShadow": True,
             "enableFullscreen": True,
+            "useDashboardTimewindow": True,
+            "displayTimewindow": False,
+            "showLegend": False,
             "backgroundColor": "#FFFFFF",
             "color": "#0F172A",
             "widgetStyle": {
