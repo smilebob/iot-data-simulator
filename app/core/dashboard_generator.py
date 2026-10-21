@@ -97,12 +97,15 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
         "config": {
             "datasources": [],
             "settings": {
-                "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
-                "html": header_html
+                "cardHtml": header_html,
+                "html": header_html,
+                "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
             },
             "showTitle": False,
             "dropShadow": True,
             "enableFullscreen": False,
+            "backgroundColor": "transparent",
+            "color": "#F1F5F9",
             "widgetStyle": {
                 "background": "transparent"
             }
@@ -137,12 +140,15 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
         "config": {
             "datasources": [],
             "settings": {
-                "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
-                "html": synoptic_html
+                "cardHtml": synoptic_html,
+                "html": synoptic_html,
+                "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
             },
             "showTitle": False,
             "dropShadow": True,
             "enableFullscreen": True,
+            "backgroundColor": "transparent",
+            "color": "#F1F5F9",
             "widgetStyle": {
                 "background": "transparent"
             }

@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aérogénérateur / Éolienne MW' (ID: infra_wind_turbine). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_WIND_TURBINE. Protocole: MQTT.",
     "entityAliases": {
-      "8c1275dc-7306-42e7-88f7-b22f2e15547d": {
-        "id": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
+      "c945d4a8-5f9a-4dc7-8b55-4b61cd50b77f": {
+        "id": "c945d4a8-5f9a-4dc7-8b55-4b61cd50b77f",
         "alias": "Aérogénérateur / Éolienne MW",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "b495b2ae-8b36-43db-9d6f-31fbc39754c6": {
+      "26a8862e-9447-4497-954f-e1edf1bb854c": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -29,21 +29,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
-            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Aérogénérateur / Éolienne MW</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_wind_turbine</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_WIND_TURBINE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Aérogénérateur / Éolienne MW</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_wind_turbine</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_WIND_TURBINE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Aérogénérateur / Éolienne MW</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_wind_turbine</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_WIND_TURBINE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": false,
+          "backgroundColor": "transparent",
+          "color": "#F1F5F9",
           "widgetStyle": {
             "background": "transparent"
           }
         },
         "row": 0,
         "col": 0,
-        "id": "b495b2ae-8b36-43db-9d6f-31fbc39754c6"
+        "id": "26a8862e-9447-4497-954f-e1edf1bb854c"
       },
-      "4caea310-9fe4-4e34-a098-f2a3c6a5cbf1": {
+      "45eb67c9-bdf4-40ef-a1b7-3013b7829ff1": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -55,21 +58,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Solaire SCADA : Aérogénérateur / Éolienne MW\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_WIND_TURBINE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <g transform=\"translate(80, 45)\">\n      <circle cx=\"0\" cy=\"0\" r=\"20\" fill=\"#F59E0B\" opacity=\"0.9\"/>\n      <text x=\"0\" y=\"38\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\">PYRANOMÈTRE</text>\n    </g>\n\n    <g transform=\"translate(170, 60)\">\n      <polygon points=\"0,60 25,10 115,10 90,60\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n      <polygon points=\"105,60 130,10 220,10 195,60\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n      <text x=\"110\" y=\"85\" fill=\"#94A3B8\" font-size=\"10\" text-anchor=\"middle\">CHAMP SOLAIRE 500kWc</text>\n    </g>\n\n    <path d=\"M 380 95 L 480 95\" fill=\"none\" stroke=\"#F59E0B\" stroke-width=\"5\" stroke-dasharray=\"6,3\"/>\n    <text x=\"430\" y=\"85\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\">DC 820V</text>\n\n    <!-- Onduleur Central -->\n    <g transform=\"translate(540, 95)\">\n      <rect x=\"-45\" y=\"-50\" width=\"90\" height=\"100\" rx=\"8\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2.5\"/>\n      <text x=\"-20\" y=\"-12\" fill=\"#F59E0B\" font-size=\"12\" font-weight=\"bold\">DC</text>\n      <text x=\"12\" y=\"22\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\">AC</text>\n      <text x=\"0\" y=\"65\" fill=\"#10B981\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">ONDULEUR MPPT</text>\n    </g>\n\n    <path d=\"M 585 95 L 750 95\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <text x=\"810\" y=\"100\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">INJECTION RÉSEAU</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 180)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PUISSANCE INJECTÉE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">412 kW</text>\n    </g>\n    <g transform=\"translate(680, 180)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">CUMUL PRODUCTION</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">2 450 kWh</text>\n    </g>\n  </svg>\n    \n</div>\n"
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Solaire SCADA : Aérogénérateur / Éolienne MW\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_WIND_TURBINE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <g transform=\"translate(80, 45)\">\n      <circle cx=\"0\" cy=\"0\" r=\"20\" fill=\"#F59E0B\" opacity=\"0.9\"/>\n      <text x=\"0\" y=\"38\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\">PYRANOMÈTRE</text>\n    </g>\n\n    <g transform=\"translate(170, 60)\">\n      <polygon points=\"0,60 25,10 115,10 90,60\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n      <polygon points=\"105,60 130,10 220,10 195,60\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n      <text x=\"110\" y=\"85\" fill=\"#94A3B8\" font-size=\"10\" text-anchor=\"middle\">CHAMP SOLAIRE 500kWc</text>\n    </g>\n\n    <path d=\"M 380 95 L 480 95\" fill=\"none\" stroke=\"#F59E0B\" stroke-width=\"5\" stroke-dasharray=\"6,3\"/>\n    <text x=\"430\" y=\"85\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\">DC 820V</text>\n\n    <!-- Onduleur Central -->\n    <g transform=\"translate(540, 95)\">\n      <rect x=\"-45\" y=\"-50\" width=\"90\" height=\"100\" rx=\"8\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2.5\"/>\n      <text x=\"-20\" y=\"-12\" fill=\"#F59E0B\" font-size=\"12\" font-weight=\"bold\">DC</text>\n      <text x=\"12\" y=\"22\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\">AC</text>\n      <text x=\"0\" y=\"65\" fill=\"#10B981\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">ONDULEUR MPPT</text>\n    </g>\n\n    <path d=\"M 585 95 L 750 95\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <text x=\"810\" y=\"100\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">INJECTION RÉSEAU</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 180)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PUISSANCE INJECTÉE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">412 kW</text>\n    </g>\n    <g transform=\"translate(680, 180)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">CUMUL PRODUCTION</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">2 450 kWh</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Solaire SCADA : Aérogénérateur / Éolienne MW\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_WIND_TURBINE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <g transform=\"translate(80, 45)\">\n      <circle cx=\"0\" cy=\"0\" r=\"20\" fill=\"#F59E0B\" opacity=\"0.9\"/>\n      <text x=\"0\" y=\"38\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\">PYRANOMÈTRE</text>\n    </g>\n\n    <g transform=\"translate(170, 60)\">\n      <polygon points=\"0,60 25,10 115,10 90,60\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n      <polygon points=\"105,60 130,10 220,10 195,60\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n      <text x=\"110\" y=\"85\" fill=\"#94A3B8\" font-size=\"10\" text-anchor=\"middle\">CHAMP SOLAIRE 500kWc</text>\n    </g>\n\n    <path d=\"M 380 95 L 480 95\" fill=\"none\" stroke=\"#F59E0B\" stroke-width=\"5\" stroke-dasharray=\"6,3\"/>\n    <text x=\"430\" y=\"85\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\">DC 820V</text>\n\n    <!-- Onduleur Central -->\n    <g transform=\"translate(540, 95)\">\n      <rect x=\"-45\" y=\"-50\" width=\"90\" height=\"100\" rx=\"8\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2.5\"/>\n      <text x=\"-20\" y=\"-12\" fill=\"#F59E0B\" font-size=\"12\" font-weight=\"bold\">DC</text>\n      <text x=\"12\" y=\"22\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\">AC</text>\n      <text x=\"0\" y=\"65\" fill=\"#10B981\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">ONDULEUR MPPT</text>\n    </g>\n\n    <path d=\"M 585 95 L 750 95\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <text x=\"810\" y=\"100\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">INJECTION RÉSEAU</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 180)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PUISSANCE INJECTÉE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">412 kW</text>\n    </g>\n    <g transform=\"translate(680, 180)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">CUMUL PRODUCTION</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">2 450 kWh</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "backgroundColor": "transparent",
+          "color": "#F1F5F9",
           "widgetStyle": {
             "background": "transparent"
           }
         },
         "row": 3,
         "col": 0,
-        "id": "4caea310-9fe4-4e34-a098-f2a3c6a5cbf1"
+        "id": "45eb67c9-bdf4-40ef-a1b7-3013b7829ff1"
       },
-      "c3423d4f-1d79-416d-9323-b79c2f62011a": {
+      "bc5ca26a-cef8-480d-bf01-26a9fa4a9dab": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -82,7 +88,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
+              "entityAliasId": "c945d4a8-5f9a-4dc7-8b55-4b61cd50b77f",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -125,9 +131,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "c3423d4f-1d79-416d-9323-b79c2f62011a"
+        "id": "bc5ca26a-cef8-480d-bf01-26a9fa4a9dab"
       },
-      "c244956e-a34f-4219-9d17-5bae0594dc4f": {
+      "2c1a8a26-56bf-4bd3-b8b6-fd5c9d435f57": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -140,7 +146,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
+              "entityAliasId": "c945d4a8-5f9a-4dc7-8b55-4b61cd50b77f",
               "dataKeys": [
                 {
                   "name": "vitesse_rotor_rpm",
@@ -183,9 +189,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "c244956e-a34f-4219-9d17-5bae0594dc4f"
+        "id": "2c1a8a26-56bf-4bd3-b8b6-fd5c9d435f57"
       },
-      "7d0e88c5-290b-4b93-a801-fbe10010b2b5": {
+      "7a90b0f1-c83d-4722-8637-72e88c60a1a1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -198,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
+              "entityAliasId": "c945d4a8-5f9a-4dc7-8b55-4b61cd50b77f",
               "dataKeys": [
                 {
                   "name": "puissance_active_mw",
@@ -241,9 +247,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "7d0e88c5-290b-4b93-a801-fbe10010b2b5"
+        "id": "7a90b0f1-c83d-4722-8637-72e88c60a1a1"
       },
-      "93f82bcb-7c38-4eda-82d6-b8ca40c26270": {
+      "6b98455b-144b-4bcc-85f4-cfde9e200644": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -256,7 +262,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
+              "entityAliasId": "c945d4a8-5f9a-4dc7-8b55-4b61cd50b77f",
               "dataKeys": [
                 {
                   "name": "angle_nacelle_yaw_deg",
@@ -299,9 +305,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "93f82bcb-7c38-4eda-82d6-b8ca40c26270"
+        "id": "6b98455b-144b-4bcc-85f4-cfde9e200644"
       },
-      "a7310c76-1082-4afa-82ed-4ad86633b14d": {
+      "f64e7352-fdce-451c-a148-329fce6b017e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -314,7 +320,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
+              "entityAliasId": "c945d4a8-5f9a-4dc7-8b55-4b61cd50b77f",
               "dataKeys": [
                 {
                   "name": "temp_generatrice",
@@ -357,9 +363,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "a7310c76-1082-4afa-82ed-4ad86633b14d"
+        "id": "f64e7352-fdce-451c-a148-329fce6b017e"
       },
-      "61c471f2-539b-4c43-bde8-36058689b5f5": {
+      "84b5c84c-2e6c-4d52-9477-4c2a769f08b0": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -372,7 +378,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
+              "entityAliasId": "c945d4a8-5f9a-4dc7-8b55-4b61cd50b77f",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -496,7 +502,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "61c471f2-539b-4c43-bde8-36058689b5f5"
+        "id": "84b5c84c-2e6c-4d52-9477-4c2a769f08b0"
       }
     },
     "states": {
@@ -506,49 +512,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "b495b2ae-8b36-43db-9d6f-31fbc39754c6": {
+              "26a8862e-9447-4497-954f-e1edf1bb854c": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "4caea310-9fe4-4e34-a098-f2a3c6a5cbf1": {
+              "45eb67c9-bdf4-40ef-a1b7-3013b7829ff1": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "c3423d4f-1d79-416d-9323-b79c2f62011a": {
+              "bc5ca26a-cef8-480d-bf01-26a9fa4a9dab": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "c244956e-a34f-4219-9d17-5bae0594dc4f": {
+              "2c1a8a26-56bf-4bd3-b8b6-fd5c9d435f57": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "7d0e88c5-290b-4b93-a801-fbe10010b2b5": {
+              "7a90b0f1-c83d-4722-8637-72e88c60a1a1": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "93f82bcb-7c38-4eda-82d6-b8ca40c26270": {
+              "6b98455b-144b-4bcc-85f4-cfde9e200644": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "a7310c76-1082-4afa-82ed-4ad86633b14d": {
+              "f64e7352-fdce-451c-a148-329fce6b017e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "61c471f2-539b-4c43-bde8-36058689b5f5": {
+              "84b5c84c-2e6c-4d52-9477-4c2a769f08b0": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

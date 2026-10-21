@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Comptage Trafic & Mobilités' (ID: city_traffic). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_CITY_TRAFFIC. Protocole: HTTP.",
     "entityAliases": {
-      "ed75175d-c4a4-47a9-881f-e8397e032d4d": {
-        "id": "ed75175d-c4a4-47a9-881f-e8397e032d4d",
+      "d2baaada-ae99-4f5a-ac7a-79fa61458cc9": {
+        "id": "d2baaada-ae99-4f5a-ac7a-79fa61458cc9",
         "alias": "Comptage Trafic & Mobilités",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "7a7c5d8c-7b81-4332-8757-73fa19cba27c": {
+      "d9ce0f18-5e2e-4a2a-9295-5e69bac1b617": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -29,21 +29,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
-            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Comptage Trafic & Mobilités</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: city_traffic</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_TRAFFIC</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Comptage Trafic & Mobilités</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: city_traffic</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_TRAFFIC</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Comptage Trafic & Mobilités</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: city_traffic</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_TRAFFIC</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": false,
+          "backgroundColor": "transparent",
+          "color": "#F1F5F9",
           "widgetStyle": {
             "background": "transparent"
           }
         },
         "row": 0,
         "col": 0,
-        "id": "7a7c5d8c-7b81-4332-8757-73fa19cba27c"
+        "id": "d9ce0f18-5e2e-4a2a-9295-5e69bac1b617"
       },
-      "92a00af8-124d-4af6-aebc-e9efa4046ed5": {
+      "79b79115-cf66-4f57-907e-cdc8af17501a": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -55,21 +58,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Trafic & Mobilités SCADA : Comptage Trafic & Mobilités\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_CITY_TRAFFIC</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Voie Routière Principale (Asphalte sombre) -->\n    <rect x=\"50\" y=\"70\" width=\"600\" height=\"150\" rx=\"8\" fill=\"#141A23\" stroke=\"#2B3342\" stroke-width=\"2\"/>\n\n    <!-- Voie Cyclable & Mobilités Douces (Bande verte normée) -->\n    <rect x=\"50\" y=\"70\" width=\"600\" height=\"35\" rx=\"4\" fill=\"#064E3B\" opacity=\"0.45\" stroke=\"#10B981\" stroke-width=\"1\"/>\n    <text x=\"70\" y=\"92\" fill=\"#34D399\" font-size=\"10\" font-weight=\"bold\">VOIE CYCLABLE & TROTTINETTES (BIKE LANE)</text>\n    <line x1=\"50\" y1=\"105\" x2=\"650\" y2=\"105\" stroke=\"#10B981\" stroke-width=\"2\"/>\n\n    <!-- Ligne médiane blanche discontinue animée pour flux VL -->\n    <line x1=\"50\" y1=\"160\" x2=\"650\" y2=\"160\" stroke=\"#F8FAFC\" stroke-width=\"3\" stroke-dasharray=\"14,10\" class=\"pipe-flow\"/>\n    <text x=\"70\" y=\"140\" fill=\"#94A3B8\" font-size=\"10\">VOIE VL 1 (AMONT)</text>\n    <text x=\"70\" y=\"195\" fill=\"#94A3B8\" font-size=\"10\">VOIE VL 2 (AVAL / BUS)</text>\n\n    <!-- Boucles à Induction Magnétiques au sol -->\n    <rect x=\"220\" y=\"115\" width=\"45\" height=\"35\" rx=\"3\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\" stroke-dasharray=\"3,2\"/>\n    <rect x=\"220\" y=\"170\" width=\"45\" height=\"35\" rx=\"3\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\" stroke-dasharray=\"3,2\"/>\n    <text x=\"242\" y=\"136\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">BOUCLE 1</text>\n    <text x=\"242\" y=\"191\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">BOUCLE 2</text>\n\n    <!-- Portique Radar Doppler & Caméra IA -->\n    <line x1=\"380\" y1=\"50\" x2=\"380\" y2=\"230\" stroke=\"#64748B\" stroke-width=\"4\"/>\n    <line x1=\"375\" y1=\"50\" x2=\"480\" y2=\"50\" stroke=\"#64748B\" stroke-width=\"4\"/>\n    <rect x=\"420\" y=\"40\" width=\"45\" height=\"20\" rx=\"4\" fill=\"#E2001A\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"/>\n    <text x=\"442\" y=\"54\" fill=\"#FFFFFF\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RADAR</text>\n    <polygon points=\"430,62 455,62 490,135 395,135\" fill=\"#38BDF8\" opacity=\"0.15\"/>\n\n    <!-- Feu Tricolore de Régulation Urbaine -->\n    <g transform=\"translate(560, 40)\">\n      <rect width=\"26\" height=\"65\" rx=\"6\" fill=\"#0B0F17\" stroke=\"#475569\" stroke-width=\"2\"/>\n      <circle cx=\"13\" cy=\"14\" r=\"6\" fill=\"#EF4444\" opacity=\"0.3\"/>\n      <circle cx=\"13\" cy=\"32\" r=\"6\" fill=\"#F59E0B\" opacity=\"0.3\"/>\n      <circle cx=\"13\" cy=\"50\" r=\"6\" fill=\"#10B981\" opacity=\"1\" class=\"scada-live-indicator\"/>\n    </g>\n\n    <!-- Armoire Régulateur de Carrefour (Contrôleur) -->\n    <rect x=\"580\" y=\"170\" width=\"55\" height=\"45\" rx=\"4\" fill=\"#1E293B\" stroke=\"#FBBF24\" stroke-width=\"1.5\"/>\n    <text x=\"607\" y=\"195\" fill=\"#FBBF24\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉGULATEUR</text>\n    <text x=\"607\" y=\"206\" fill=\"#94A3B8\" font-size=\"7\" text-anchor=\"middle\">PRIORITÉ BUS</text>\n\n    <!-- Callouts SCADA Temps Réel -->\n    <g transform=\"translate(680, 45)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">COMPTAGE VÉHICULES LÉGERS</text>\n      <text x=\"12\" y=\"34\" fill=\"#38BDF8\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">DÉBIT : 450 véh/h</text>\n    </g>\n\n    <g transform=\"translate(680, 97)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">PASSAGES VÉLOS & MOBILITÉS</text>\n      <text x=\"12\" y=\"34\" fill=\"#10B981\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">FLUX : 68 vélos/h</text>\n    </g>\n\n    <g transform=\"translate(680, 149)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">VITESSE MOYENNE DOPPLER</text>\n      <text x=\"12\" y=\"34\" fill=\"#F59E0B\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">RADAR : 41.8 km/h</text>\n    </g>\n\n    <g transform=\"translate(680, 201)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">ÉTAT DE CONGESTION & TRAFIC</text>\n      <text x=\"12\" y=\"34\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">TRAFIC FLUIDE &bull; NORMAL</text>\n    </g>\n  </svg>\n    \n</div>\n"
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Trafic & Mobilités SCADA : Comptage Trafic & Mobilités\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_CITY_TRAFFIC</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Voie Routière Principale (Asphalte sombre) -->\n    <rect x=\"50\" y=\"70\" width=\"600\" height=\"150\" rx=\"8\" fill=\"#141A23\" stroke=\"#2B3342\" stroke-width=\"2\"/>\n\n    <!-- Voie Cyclable & Mobilités Douces (Bande verte normée) -->\n    <rect x=\"50\" y=\"70\" width=\"600\" height=\"35\" rx=\"4\" fill=\"#064E3B\" opacity=\"0.45\" stroke=\"#10B981\" stroke-width=\"1\"/>\n    <text x=\"70\" y=\"92\" fill=\"#34D399\" font-size=\"10\" font-weight=\"bold\">VOIE CYCLABLE & TROTTINETTES (BIKE LANE)</text>\n    <line x1=\"50\" y1=\"105\" x2=\"650\" y2=\"105\" stroke=\"#10B981\" stroke-width=\"2\"/>\n\n    <!-- Ligne médiane blanche discontinue animée pour flux VL -->\n    <line x1=\"50\" y1=\"160\" x2=\"650\" y2=\"160\" stroke=\"#F8FAFC\" stroke-width=\"3\" stroke-dasharray=\"14,10\" class=\"pipe-flow\"/>\n    <text x=\"70\" y=\"140\" fill=\"#94A3B8\" font-size=\"10\">VOIE VL 1 (AMONT)</text>\n    <text x=\"70\" y=\"195\" fill=\"#94A3B8\" font-size=\"10\">VOIE VL 2 (AVAL / BUS)</text>\n\n    <!-- Boucles à Induction Magnétiques au sol -->\n    <rect x=\"220\" y=\"115\" width=\"45\" height=\"35\" rx=\"3\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\" stroke-dasharray=\"3,2\"/>\n    <rect x=\"220\" y=\"170\" width=\"45\" height=\"35\" rx=\"3\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\" stroke-dasharray=\"3,2\"/>\n    <text x=\"242\" y=\"136\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">BOUCLE 1</text>\n    <text x=\"242\" y=\"191\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">BOUCLE 2</text>\n\n    <!-- Portique Radar Doppler & Caméra IA -->\n    <line x1=\"380\" y1=\"50\" x2=\"380\" y2=\"230\" stroke=\"#64748B\" stroke-width=\"4\"/>\n    <line x1=\"375\" y1=\"50\" x2=\"480\" y2=\"50\" stroke=\"#64748B\" stroke-width=\"4\"/>\n    <rect x=\"420\" y=\"40\" width=\"45\" height=\"20\" rx=\"4\" fill=\"#E2001A\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"/>\n    <text x=\"442\" y=\"54\" fill=\"#FFFFFF\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RADAR</text>\n    <polygon points=\"430,62 455,62 490,135 395,135\" fill=\"#38BDF8\" opacity=\"0.15\"/>\n\n    <!-- Feu Tricolore de Régulation Urbaine -->\n    <g transform=\"translate(560, 40)\">\n      <rect width=\"26\" height=\"65\" rx=\"6\" fill=\"#0B0F17\" stroke=\"#475569\" stroke-width=\"2\"/>\n      <circle cx=\"13\" cy=\"14\" r=\"6\" fill=\"#EF4444\" opacity=\"0.3\"/>\n      <circle cx=\"13\" cy=\"32\" r=\"6\" fill=\"#F59E0B\" opacity=\"0.3\"/>\n      <circle cx=\"13\" cy=\"50\" r=\"6\" fill=\"#10B981\" opacity=\"1\" class=\"scada-live-indicator\"/>\n    </g>\n\n    <!-- Armoire Régulateur de Carrefour (Contrôleur) -->\n    <rect x=\"580\" y=\"170\" width=\"55\" height=\"45\" rx=\"4\" fill=\"#1E293B\" stroke=\"#FBBF24\" stroke-width=\"1.5\"/>\n    <text x=\"607\" y=\"195\" fill=\"#FBBF24\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉGULATEUR</text>\n    <text x=\"607\" y=\"206\" fill=\"#94A3B8\" font-size=\"7\" text-anchor=\"middle\">PRIORITÉ BUS</text>\n\n    <!-- Callouts SCADA Temps Réel -->\n    <g transform=\"translate(680, 45)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">COMPTAGE VÉHICULES LÉGERS</text>\n      <text x=\"12\" y=\"34\" fill=\"#38BDF8\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">DÉBIT : 450 véh/h</text>\n    </g>\n\n    <g transform=\"translate(680, 97)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">PASSAGES VÉLOS & MOBILITÉS</text>\n      <text x=\"12\" y=\"34\" fill=\"#10B981\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">FLUX : 68 vélos/h</text>\n    </g>\n\n    <g transform=\"translate(680, 149)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">VITESSE MOYENNE DOPPLER</text>\n      <text x=\"12\" y=\"34\" fill=\"#F59E0B\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">RADAR : 41.8 km/h</text>\n    </g>\n\n    <g transform=\"translate(680, 201)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">ÉTAT DE CONGESTION & TRAFIC</text>\n      <text x=\"12\" y=\"34\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">TRAFIC FLUIDE &bull; NORMAL</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Trafic & Mobilités SCADA : Comptage Trafic & Mobilités\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_CITY_TRAFFIC</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Voie Routière Principale (Asphalte sombre) -->\n    <rect x=\"50\" y=\"70\" width=\"600\" height=\"150\" rx=\"8\" fill=\"#141A23\" stroke=\"#2B3342\" stroke-width=\"2\"/>\n\n    <!-- Voie Cyclable & Mobilités Douces (Bande verte normée) -->\n    <rect x=\"50\" y=\"70\" width=\"600\" height=\"35\" rx=\"4\" fill=\"#064E3B\" opacity=\"0.45\" stroke=\"#10B981\" stroke-width=\"1\"/>\n    <text x=\"70\" y=\"92\" fill=\"#34D399\" font-size=\"10\" font-weight=\"bold\">VOIE CYCLABLE & TROTTINETTES (BIKE LANE)</text>\n    <line x1=\"50\" y1=\"105\" x2=\"650\" y2=\"105\" stroke=\"#10B981\" stroke-width=\"2\"/>\n\n    <!-- Ligne médiane blanche discontinue animée pour flux VL -->\n    <line x1=\"50\" y1=\"160\" x2=\"650\" y2=\"160\" stroke=\"#F8FAFC\" stroke-width=\"3\" stroke-dasharray=\"14,10\" class=\"pipe-flow\"/>\n    <text x=\"70\" y=\"140\" fill=\"#94A3B8\" font-size=\"10\">VOIE VL 1 (AMONT)</text>\n    <text x=\"70\" y=\"195\" fill=\"#94A3B8\" font-size=\"10\">VOIE VL 2 (AVAL / BUS)</text>\n\n    <!-- Boucles à Induction Magnétiques au sol -->\n    <rect x=\"220\" y=\"115\" width=\"45\" height=\"35\" rx=\"3\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\" stroke-dasharray=\"3,2\"/>\n    <rect x=\"220\" y=\"170\" width=\"45\" height=\"35\" rx=\"3\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\" stroke-dasharray=\"3,2\"/>\n    <text x=\"242\" y=\"136\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">BOUCLE 1</text>\n    <text x=\"242\" y=\"191\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">BOUCLE 2</text>\n\n    <!-- Portique Radar Doppler & Caméra IA -->\n    <line x1=\"380\" y1=\"50\" x2=\"380\" y2=\"230\" stroke=\"#64748B\" stroke-width=\"4\"/>\n    <line x1=\"375\" y1=\"50\" x2=\"480\" y2=\"50\" stroke=\"#64748B\" stroke-width=\"4\"/>\n    <rect x=\"420\" y=\"40\" width=\"45\" height=\"20\" rx=\"4\" fill=\"#E2001A\" stroke=\"#FFFFFF\" stroke-width=\"1.5\"/>\n    <text x=\"442\" y=\"54\" fill=\"#FFFFFF\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RADAR</text>\n    <polygon points=\"430,62 455,62 490,135 395,135\" fill=\"#38BDF8\" opacity=\"0.15\"/>\n\n    <!-- Feu Tricolore de Régulation Urbaine -->\n    <g transform=\"translate(560, 40)\">\n      <rect width=\"26\" height=\"65\" rx=\"6\" fill=\"#0B0F17\" stroke=\"#475569\" stroke-width=\"2\"/>\n      <circle cx=\"13\" cy=\"14\" r=\"6\" fill=\"#EF4444\" opacity=\"0.3\"/>\n      <circle cx=\"13\" cy=\"32\" r=\"6\" fill=\"#F59E0B\" opacity=\"0.3\"/>\n      <circle cx=\"13\" cy=\"50\" r=\"6\" fill=\"#10B981\" opacity=\"1\" class=\"scada-live-indicator\"/>\n    </g>\n\n    <!-- Armoire Régulateur de Carrefour (Contrôleur) -->\n    <rect x=\"580\" y=\"170\" width=\"55\" height=\"45\" rx=\"4\" fill=\"#1E293B\" stroke=\"#FBBF24\" stroke-width=\"1.5\"/>\n    <text x=\"607\" y=\"195\" fill=\"#FBBF24\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉGULATEUR</text>\n    <text x=\"607\" y=\"206\" fill=\"#94A3B8\" font-size=\"7\" text-anchor=\"middle\">PRIORITÉ BUS</text>\n\n    <!-- Callouts SCADA Temps Réel -->\n    <g transform=\"translate(680, 45)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">COMPTAGE VÉHICULES LÉGERS</text>\n      <text x=\"12\" y=\"34\" fill=\"#38BDF8\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">DÉBIT : 450 véh/h</text>\n    </g>\n\n    <g transform=\"translate(680, 97)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">PASSAGES VÉLOS & MOBILITÉS</text>\n      <text x=\"12\" y=\"34\" fill=\"#10B981\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">FLUX : 68 vélos/h</text>\n    </g>\n\n    <g transform=\"translate(680, 149)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">VITESSE MOYENNE DOPPLER</text>\n      <text x=\"12\" y=\"34\" fill=\"#F59E0B\" font-size=\"14\" font-weight=\"bold\" font-family=\"monospace\">RADAR : 41.8 km/h</text>\n    </g>\n\n    <g transform=\"translate(680, 201)\">\n      <rect width=\"230\" height=\"42\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"12\" y=\"18\" fill=\"#94A3B8\" font-size=\"9\">ÉTAT DE CONGESTION & TRAFIC</text>\n      <text x=\"12\" y=\"34\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">TRAFIC FLUIDE &bull; NORMAL</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "backgroundColor": "transparent",
+          "color": "#F1F5F9",
           "widgetStyle": {
             "background": "transparent"
           }
         },
         "row": 3,
         "col": 0,
-        "id": "92a00af8-124d-4af6-aebc-e9efa4046ed5"
+        "id": "79b79115-cf66-4f57-907e-cdc8af17501a"
       },
-      "6adc1a29-1276-4bda-b895-f1826f0da1ae": {
+      "31d38798-c65a-4aca-88de-ab99fa4e6dfc": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -82,7 +88,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed75175d-c4a4-47a9-881f-e8397e032d4d",
+              "entityAliasId": "d2baaada-ae99-4f5a-ac7a-79fa61458cc9",
               "dataKeys": [
                 {
                   "name": "debit_vehicules",
@@ -125,9 +131,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "6adc1a29-1276-4bda-b895-f1826f0da1ae"
+        "id": "31d38798-c65a-4aca-88de-ab99fa4e6dfc"
       },
-      "53418802-d5e6-47a8-a02e-fc57ae3797be": {
+      "fa0bb22d-d9b4-40c3-a336-c38bbd4a7236": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -140,7 +146,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed75175d-c4a4-47a9-881f-e8397e032d4d",
+              "entityAliasId": "d2baaada-ae99-4f5a-ac7a-79fa61458cc9",
               "dataKeys": [
                 {
                   "name": "debit_cyclistes",
@@ -183,9 +189,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "53418802-d5e6-47a8-a02e-fc57ae3797be"
+        "id": "fa0bb22d-d9b4-40c3-a336-c38bbd4a7236"
       },
-      "d4d0bad5-2b5b-4125-a49a-ac6418a707e8": {
+      "1f1014a4-8baa-4470-b071-3db314e04dce": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -198,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed75175d-c4a4-47a9-881f-e8397e032d4d",
+              "entityAliasId": "d2baaada-ae99-4f5a-ac7a-79fa61458cc9",
               "dataKeys": [
                 {
                   "name": "vitesse_moyenne_kmh",
@@ -241,9 +247,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "d4d0bad5-2b5b-4125-a49a-ac6418a707e8"
+        "id": "1f1014a4-8baa-4470-b071-3db314e04dce"
       },
-      "f7542b30-372f-422e-b79b-4851f8081aaa": {
+      "ea9e8f9b-fe5b-475e-be83-48288eabf8b7": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -256,7 +262,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed75175d-c4a4-47a9-881f-e8397e032d4d",
+              "entityAliasId": "d2baaada-ae99-4f5a-ac7a-79fa61458cc9",
               "dataKeys": [
                 {
                   "name": "debit_vehicules",
@@ -352,9 +358,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "f7542b30-372f-422e-b79b-4851f8081aaa"
+        "id": "ea9e8f9b-fe5b-475e-be83-48288eabf8b7"
       },
-      "e693da2d-c6d6-4358-b524-109444080b14": {
+      "d8224d93-fd95-4ee8-84cc-abe868d96ae8": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -367,7 +373,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed75175d-c4a4-47a9-881f-e8397e032d4d",
+              "entityAliasId": "d2baaada-ae99-4f5a-ac7a-79fa61458cc9",
               "dataKeys": [
                 {
                   "name": "alerte_congestion",
@@ -397,7 +403,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "e693da2d-c6d6-4358-b524-109444080b14"
+        "id": "d8224d93-fd95-4ee8-84cc-abe868d96ae8"
       }
     },
     "states": {
@@ -407,43 +413,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "7a7c5d8c-7b81-4332-8757-73fa19cba27c": {
+              "d9ce0f18-5e2e-4a2a-9295-5e69bac1b617": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "92a00af8-124d-4af6-aebc-e9efa4046ed5": {
+              "79b79115-cf66-4f57-907e-cdc8af17501a": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "6adc1a29-1276-4bda-b895-f1826f0da1ae": {
+              "31d38798-c65a-4aca-88de-ab99fa4e6dfc": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "53418802-d5e6-47a8-a02e-fc57ae3797be": {
+              "fa0bb22d-d9b4-40c3-a336-c38bbd4a7236": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "d4d0bad5-2b5b-4125-a49a-ac6418a707e8": {
+              "1f1014a4-8baa-4470-b071-3db314e04dce": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "f7542b30-372f-422e-b79b-4851f8081aaa": {
+              "ea9e8f9b-fe5b-475e-be83-48288eabf8b7": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "e693da2d-c6d6-4358-b524-109444080b14": {
+              "d8224d93-fd95-4ee8-84cc-abe868d96ae8": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

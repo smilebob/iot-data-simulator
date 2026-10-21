@@ -110,15 +110,17 @@ def test_thingsboard_dashboard_generation():
     # Vérification du synoptique SCADA
     synoptic_w = next(w for w in widgets.values() if "Synoptique SCADA" in w.get("title", ""))
     assert synoptic_w.get("typeFullFqn") == "system.cards.html_card"
-    assert "<svg" in synoptic_w["config"]["settings"]["html"]
-    assert "pipe-flow" in synoptic_w["config"]["settings"]["html"]
+    assert "<svg" in synoptic_w["config"]["settings"]["cardHtml"]
+    assert synoptic_w["config"]["settings"]["cardHtml"] == synoptic_w["config"]["settings"]["html"]
+    assert "pipe-flow" in synoptic_w["config"]["settings"]["cardHtml"]
 
     # Vérification du widget d'en-tête (HTML) avec le token
     header_w = next(w for w in widgets.values() if w.get("typeAlias") == "html_card" and "Informations" in w.get("title", ""))
     assert header_w.get("typeFullFqn") == "system.cards.html_card"
-    assert "TB_TOKEN_SECRET_9876" in header_w["config"]["settings"]["html"]
-    assert "Chaudière Test #1" in header_w["config"]["settings"]["html"]
-    assert "MQTT" in header_w["config"]["settings"]["html"]
+    assert "TB_TOKEN_SECRET_9876" in header_w["config"]["settings"]["cardHtml"]
+    assert header_w["config"]["settings"]["cardHtml"] == header_w["config"]["settings"]["html"]
+    assert "Chaudière Test #1" in header_w["config"]["settings"]["cardHtml"]
+    assert "MQTT" in header_w["config"]["settings"]["cardHtml"]
 
     # Vérification des jauges JustGage FQN
     gauge_w = next(w for w in widgets.values() if w.get("typeAlias") == "simple_gauge_justgage")

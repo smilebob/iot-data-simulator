@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale Traitement d'Air (CTA)' (ID: bldg_cta). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_CTA. Protocole: HTTP.",
     "entityAliases": {
-      "ccbdc840-448b-45c3-acb8-b70f46456de1": {
-        "id": "ccbdc840-448b-45c3-acb8-b70f46456de1",
+      "916ba35e-aa9f-4dbf-96a1-e5cb5aa4145d": {
+        "id": "916ba35e-aa9f-4dbf-96a1-e5cb5aa4145d",
         "alias": "Centrale Traitement d'Air (CTA)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "a6d41527-d490-4747-9655-d44d72a059dd": {
+      "b63d246b-22c6-4520-99ec-fbaa51cd48ce": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -29,21 +29,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
-            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Centrale Traitement d'Air (CTA)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: bldg_cta</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_CTA</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Centrale Traitement d'Air (CTA)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: bldg_cta</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_CTA</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Centrale Traitement d'Air (CTA)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: bldg_cta</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_CTA</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": false,
+          "backgroundColor": "transparent",
+          "color": "#F1F5F9",
           "widgetStyle": {
             "background": "transparent"
           }
         },
         "row": 0,
         "col": 0,
-        "id": "a6d41527-d490-4747-9655-d44d72a059dd"
+        "id": "b63d246b-22c6-4520-99ec-fbaa51cd48ce"
       },
-      "c9ea1151-9c97-4ccb-b309-aa9a0c5d40cc": {
+      "f32034e3-2a26-442d-b1f8-b0680b76de9b": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -55,21 +58,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Aéraulique GTB : Centrale Traitement d'Air (CTA)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_BLDG_CTA</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <rect x=\"60\" y=\"35\" width=\"830\" height=\"190\" rx=\"12\" fill=\"#131A26\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <line x1=\"60\" y1=\"130\" x2=\"890\" y2=\"130\" stroke=\"#1E293B\" stroke-width=\"2\" stroke-dasharray=\"4,4\"/>\n\n    <!-- Voie Soufflage -->\n    <text x=\"80\" y=\"60\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">VOIE SOUFFLAGE AIR NEUF</text>\n    <rect x=\"110\" y=\"70\" width=\"30\" height=\"45\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"125\" y=\"97\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">REG.</text>\n\n    <rect x=\"180\" y=\"65\" width=\"25\" height=\"55\" fill=\"#334155\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <text x=\"192\" y=\"97\" fill=\"#CBD5E1\" font-size=\"8\" text-anchor=\"middle\">F7</text>\n\n    <rect x=\"250\" y=\"65\" width=\"40\" height=\"55\" rx=\"4\" fill=\"#0C4A6E\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <text x=\"270\" y=\"97\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">FROID</text>\n\n    <rect x=\"330\" y=\"65\" width=\"40\" height=\"55\" rx=\"4\" fill=\"#7F1D1D\" stroke=\"#DC2626\" stroke-width=\"1.5\"/>\n    <text x=\"350\" y=\"97\" fill=\"#F87171\" font-size=\"8\" text-anchor=\"middle\">CHAUD</text>\n\n    <!-- Ventilateur EC -->\n    <g transform=\"translate(460, 92)\">\n      <circle cx=\"0\" cy=\"0\" r=\"28\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2\"/>\n      <g class=\"scada-rotor\">\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#10B981\"/>\n      </g>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#F8FAFC\"/>\n      <text x=\"0\" y=\"40\" fill=\"#10B981\" font-size=\"8\" text-anchor=\"middle\">PLUG-FAN EC</text>\n    </g>\n\n    <!-- Soufflage vers bâtiment -->\n    <path d=\"M 495 92 L 780 92\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"7\" class=\"pipe-flow\"/>\n    <text x=\"825\" y=\"96\" fill=\"#38BDF8\" font-size=\"10\" font-weight=\"bold\">BÂTIMENT</text>\n\n    <!-- Voie Reprise -->\n    <text x=\"80\" y=\"155\" fill=\"#94A3B8\" font-size=\"11\" font-weight=\"bold\">VOIE REPRISE EXTRACTION</text>\n    <path d=\"M 780 180 L 495 180\" fill=\"none\" stroke=\"#94A3B8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 40)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. SOUFFLAGE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">21.2 °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">DÉBIT SOUFFLAGE</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">1 850 m³/h</text>\n    </g>\n  </svg>\n    \n</div>\n"
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Aéraulique GTB : Centrale Traitement d'Air (CTA)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_BLDG_CTA</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <rect x=\"60\" y=\"35\" width=\"830\" height=\"190\" rx=\"12\" fill=\"#131A26\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <line x1=\"60\" y1=\"130\" x2=\"890\" y2=\"130\" stroke=\"#1E293B\" stroke-width=\"2\" stroke-dasharray=\"4,4\"/>\n\n    <!-- Voie Soufflage -->\n    <text x=\"80\" y=\"60\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">VOIE SOUFFLAGE AIR NEUF</text>\n    <rect x=\"110\" y=\"70\" width=\"30\" height=\"45\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"125\" y=\"97\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">REG.</text>\n\n    <rect x=\"180\" y=\"65\" width=\"25\" height=\"55\" fill=\"#334155\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <text x=\"192\" y=\"97\" fill=\"#CBD5E1\" font-size=\"8\" text-anchor=\"middle\">F7</text>\n\n    <rect x=\"250\" y=\"65\" width=\"40\" height=\"55\" rx=\"4\" fill=\"#0C4A6E\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <text x=\"270\" y=\"97\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">FROID</text>\n\n    <rect x=\"330\" y=\"65\" width=\"40\" height=\"55\" rx=\"4\" fill=\"#7F1D1D\" stroke=\"#DC2626\" stroke-width=\"1.5\"/>\n    <text x=\"350\" y=\"97\" fill=\"#F87171\" font-size=\"8\" text-anchor=\"middle\">CHAUD</text>\n\n    <!-- Ventilateur EC -->\n    <g transform=\"translate(460, 92)\">\n      <circle cx=\"0\" cy=\"0\" r=\"28\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2\"/>\n      <g class=\"scada-rotor\">\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#10B981\"/>\n      </g>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#F8FAFC\"/>\n      <text x=\"0\" y=\"40\" fill=\"#10B981\" font-size=\"8\" text-anchor=\"middle\">PLUG-FAN EC</text>\n    </g>\n\n    <!-- Soufflage vers bâtiment -->\n    <path d=\"M 495 92 L 780 92\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"7\" class=\"pipe-flow\"/>\n    <text x=\"825\" y=\"96\" fill=\"#38BDF8\" font-size=\"10\" font-weight=\"bold\">BÂTIMENT</text>\n\n    <!-- Voie Reprise -->\n    <text x=\"80\" y=\"155\" fill=\"#94A3B8\" font-size=\"11\" font-weight=\"bold\">VOIE REPRISE EXTRACTION</text>\n    <path d=\"M 780 180 L 495 180\" fill=\"none\" stroke=\"#94A3B8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 40)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. SOUFFLAGE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">21.2 °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">DÉBIT SOUFFLAGE</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">1 850 m³/h</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Aéraulique GTB : Centrale Traitement d'Air (CTA)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_BLDG_CTA</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <rect x=\"60\" y=\"35\" width=\"830\" height=\"190\" rx=\"12\" fill=\"#131A26\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <line x1=\"60\" y1=\"130\" x2=\"890\" y2=\"130\" stroke=\"#1E293B\" stroke-width=\"2\" stroke-dasharray=\"4,4\"/>\n\n    <!-- Voie Soufflage -->\n    <text x=\"80\" y=\"60\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">VOIE SOUFFLAGE AIR NEUF</text>\n    <rect x=\"110\" y=\"70\" width=\"30\" height=\"45\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"125\" y=\"97\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">REG.</text>\n\n    <rect x=\"180\" y=\"65\" width=\"25\" height=\"55\" fill=\"#334155\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <text x=\"192\" y=\"97\" fill=\"#CBD5E1\" font-size=\"8\" text-anchor=\"middle\">F7</text>\n\n    <rect x=\"250\" y=\"65\" width=\"40\" height=\"55\" rx=\"4\" fill=\"#0C4A6E\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <text x=\"270\" y=\"97\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">FROID</text>\n\n    <rect x=\"330\" y=\"65\" width=\"40\" height=\"55\" rx=\"4\" fill=\"#7F1D1D\" stroke=\"#DC2626\" stroke-width=\"1.5\"/>\n    <text x=\"350\" y=\"97\" fill=\"#F87171\" font-size=\"8\" text-anchor=\"middle\">CHAUD</text>\n\n    <!-- Ventilateur EC -->\n    <g transform=\"translate(460, 92)\">\n      <circle cx=\"0\" cy=\"0\" r=\"28\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2\"/>\n      <g class=\"scada-rotor\">\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#10B981\"/>\n      </g>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#F8FAFC\"/>\n      <text x=\"0\" y=\"40\" fill=\"#10B981\" font-size=\"8\" text-anchor=\"middle\">PLUG-FAN EC</text>\n    </g>\n\n    <!-- Soufflage vers bâtiment -->\n    <path d=\"M 495 92 L 780 92\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"7\" class=\"pipe-flow\"/>\n    <text x=\"825\" y=\"96\" fill=\"#38BDF8\" font-size=\"10\" font-weight=\"bold\">BÂTIMENT</text>\n\n    <!-- Voie Reprise -->\n    <text x=\"80\" y=\"155\" fill=\"#94A3B8\" font-size=\"11\" font-weight=\"bold\">VOIE REPRISE EXTRACTION</text>\n    <path d=\"M 780 180 L 495 180\" fill=\"none\" stroke=\"#94A3B8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 40)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. SOUFFLAGE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">21.2 °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">DÉBIT SOUFFLAGE</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">1 850 m³/h</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
+          "backgroundColor": "transparent",
+          "color": "#F1F5F9",
           "widgetStyle": {
             "background": "transparent"
           }
         },
         "row": 3,
         "col": 0,
-        "id": "c9ea1151-9c97-4ccb-b309-aa9a0c5d40cc"
+        "id": "f32034e3-2a26-442d-b1f8-b0680b76de9b"
       },
-      "c3f035d9-5ab4-4e5f-8fb5-0a4068f6dd25": {
+      "d4fa70ab-d335-418c-9b3b-f0e02f77dfda": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -82,7 +88,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
+              "entityAliasId": "916ba35e-aa9f-4dbf-96a1-e5cb5aa4145d",
               "dataKeys": [
                 {
                   "name": "temp_soufflage",
@@ -125,9 +131,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "c3f035d9-5ab4-4e5f-8fb5-0a4068f6dd25"
+        "id": "d4fa70ab-d335-418c-9b3b-f0e02f77dfda"
       },
-      "915a1b3c-eb23-4633-b027-a14a1e240413": {
+      "7d1881aa-83f5-41e3-ad9b-be126b9c410a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -140,7 +146,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
+              "entityAliasId": "916ba35e-aa9f-4dbf-96a1-e5cb5aa4145d",
               "dataKeys": [
                 {
                   "name": "temp_reprise",
@@ -183,9 +189,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "915a1b3c-eb23-4633-b027-a14a1e240413"
+        "id": "7d1881aa-83f5-41e3-ad9b-be126b9c410a"
       },
-      "c4a31ed1-db78-4900-a3bb-6a6e769aaa7d": {
+      "2f6a2831-31d7-4c94-92ee-42d4f82036c5": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -198,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
+              "entityAliasId": "916ba35e-aa9f-4dbf-96a1-e5cb5aa4145d",
               "dataKeys": [
                 {
                   "name": "debit_soufflage",
@@ -241,9 +247,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "c4a31ed1-db78-4900-a3bb-6a6e769aaa7d"
+        "id": "2f6a2831-31d7-4c94-92ee-42d4f82036c5"
       },
-      "990c0d8d-60bb-4ebd-8edd-c7a6116fb8ed": {
+      "6a2b8e9d-fb67-41db-906e-49338369f303": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -256,7 +262,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
+              "entityAliasId": "916ba35e-aa9f-4dbf-96a1-e5cb5aa4145d",
               "dataKeys": [
                 {
                   "name": "pression_filtre",
@@ -299,9 +305,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "990c0d8d-60bb-4ebd-8edd-c7a6116fb8ed"
+        "id": "6a2b8e9d-fb67-41db-906e-49338369f303"
       },
-      "49adf405-8fab-46c8-8f0c-7b550b9fa336": {
+      "ff1e38e8-f689-4882-b92f-e91e0e00dfb2": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -314,7 +320,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
+              "entityAliasId": "916ba35e-aa9f-4dbf-96a1-e5cb5aa4145d",
               "dataKeys": [
                 {
                   "name": "temp_soufflage",
@@ -424,9 +430,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "49adf405-8fab-46c8-8f0c-7b550b9fa336"
+        "id": "ff1e38e8-f689-4882-b92f-e91e0e00dfb2"
       },
-      "adb75d3d-f1e5-409c-a03b-e0cb05583d9a": {
+      "fbfc46fc-34cc-4e96-a204-e819af7c9f9f": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -439,7 +445,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
+              "entityAliasId": "916ba35e-aa9f-4dbf-96a1-e5cb5aa4145d",
               "dataKeys": [
                 {
                   "name": "registre_air_neuf",
@@ -469,7 +475,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "adb75d3d-f1e5-409c-a03b-e0cb05583d9a"
+        "id": "fbfc46fc-34cc-4e96-a204-e819af7c9f9f"
       }
     },
     "states": {
@@ -479,49 +485,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "a6d41527-d490-4747-9655-d44d72a059dd": {
+              "b63d246b-22c6-4520-99ec-fbaa51cd48ce": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "c9ea1151-9c97-4ccb-b309-aa9a0c5d40cc": {
+              "f32034e3-2a26-442d-b1f8-b0680b76de9b": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "c3f035d9-5ab4-4e5f-8fb5-0a4068f6dd25": {
+              "d4fa70ab-d335-418c-9b3b-f0e02f77dfda": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "915a1b3c-eb23-4633-b027-a14a1e240413": {
+              "7d1881aa-83f5-41e3-ad9b-be126b9c410a": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "c4a31ed1-db78-4900-a3bb-6a6e769aaa7d": {
+              "2f6a2831-31d7-4c94-92ee-42d4f82036c5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "990c0d8d-60bb-4ebd-8edd-c7a6116fb8ed": {
+              "6a2b8e9d-fb67-41db-906e-49338369f303": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "49adf405-8fab-46c8-8f0c-7b550b9fa336": {
+              "ff1e38e8-f689-4882-b92f-e91e0e00dfb2": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "adb75d3d-f1e5-409c-a03b-e0cb05583d9a": {
+              "fbfc46fc-34cc-4e96-a204-e819af7c9f9f": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,
