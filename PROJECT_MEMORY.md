@@ -43,6 +43,9 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 
 ## 📌 État Actuel & Feuille de Route
 ### ✅ Implémenté & Validé
+- [x] Charte Graphique Groupe Eiffage intégrée (Rouge Eiffage `#E2001A`, thème sombre industriel épuré)
+- [x] Regroupement clair et structuré des variables par équipement (sections dédiées)
+- [x] Fonctions complètes d'édition et de suppression d'équipements avec nettoyage en cascade
 - [x] Architecture modulaire par Adapters (`BasePlatformAdapter`)
 - [x] Support ThingsBoard natif : télémétrie horodatée milliseconde, attributs, tokens par équipement
 - [x] Moteur mathématique déterministe (Sinus, Cosinus, Triangle, Carré, Dent de scie, Rampe, Random walk, Gaussien, Constante) sans `eval()`
@@ -51,7 +54,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Dockerfile multi-stage durci conforme CIS Benchmark (non-root `UID 10001`, `no-new-privileges`, `cap_drop: [ALL]`, `apt-get upgrade` de sécurité)
 - [x] Dépendances durcies contre les CVE récentes (Jinja2 >= 3.1.5, python-multipart >= 0.0.31, FastAPI >= 0.115.6)
 - [x] Broker Mosquitto local (image `eclipse-mosquitto:2`) + UI Web d'inspection MQTTX Web
-- [x] Web GUI responsive avec sparklines temps réel Chart.js et WebSockets
+- [x] Licence Apache 2.0 (fichier LICENSE et notices légales)
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

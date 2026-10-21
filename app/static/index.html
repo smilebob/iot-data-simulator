@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IoT Data Simulator - ThingsBoard & Multi-Plateforme</title>
+  <title>EIFFAGE - IoT Data Simulator</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js CDN (version patchée 4.4.7) -->
@@ -12,36 +12,39 @@
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="/static/styles.css">
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+<body class="bg-[#0F1218] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-[#E2001A] selection:text-white">
 
-  <!-- En-tête / Barre de navigation supérieure -->
-  <header class="bg-slate-900 border-b border-slate-800 px-6 py-3.5 sticky top-0 z-40 shadow-lg">
+  <!-- En-tête / Barre supérieure - Charte Graphique EIFFAGE -->
+  <header class="bg-[#181D26] border-b border-[#2B3342] px-6 py-3 sticky top-0 z-40 shadow-xl">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Logo et Identité Eiffage -->
       <div class="flex items-center space-x-3">
-        <div class="p-2 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg shadow-md shadow-cyan-500/20">
-          <i data-lucide="activity" class="w-6 h-6 text-white"></i>
+        <div class="px-3 py-1 bg-[#E2001A] rounded font-black tracking-widest text-sm text-white shadow-md shadow-red-900/50 flex items-center gap-1.5">
+          <span>EIFFAGE</span>
         </div>
+        <div class="h-6 w-[1px] bg-[#2B3342] hidden sm:block"></div>
         <div>
-          <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+          <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-2">
             IoT Data Simulator
-            <span class="text-xs font-semibold px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800/60">v1.0 CIS</span>
+            <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-red-950/80 text-red-300 border border-red-800/60">ThingsBoard & Multi-Plateforme</span>
           </h1>
-          <p class="text-xs text-slate-400">Générateur de données télémétriques pour ThingsBoard, HA & Datacake</p>
+          <p class="text-[11px] text-slate-400">Générateur et simulateur de flux télémétriques industriels</p>
         </div>
       </div>
 
       <!-- Statuts & Actions rapides -->
       <div class="flex items-center flex-wrap gap-3">
         <!-- Badge Broker MQTT -->
-        <div id="broker-status-pill" class="flex items-center gap-2 bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer hover:border-slate-600 transition" onclick="openBrokerModal()">
+        <div id="broker-status-pill" class="flex items-center gap-2 bg-[#12151B] border border-[#2B3342] px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer hover:border-slate-500 transition" onclick="openBrokerModal()">
           <span id="broker-status-dot" class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
           <span id="broker-status-text">Broker: Déconnecté</span>
         </div>
 
         <!-- Compteur Télémétrie -->
-        <div class="bg-slate-800/80 border border-slate-700/80 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-300 flex items-center gap-2">
-          <i data-lucide="send" class="w-3.5 h-3.5 text-cyan-400"></i>
-          <span>Publiés: <strong id="published-counter" class="text-cyan-400">0</strong></span>
+        <div class="bg-[#12151B] border border-[#2B3342] px-3 py-1.5 rounded-lg text-xs font-mono text-slate-300 flex items-center gap-2">
+          <i data-lucide="send" class="w-3.5 h-3.5 text-[#E2001A]"></i>
+          <span>Publiés: <strong id="published-counter" class="text-white">0</strong></span>
         </div>
 
         <!-- Interrupteur Simulation -->
@@ -51,14 +54,14 @@
         </button>
 
         <!-- Menu Réglages / Export -->
-        <div class="flex items-center gap-1.5 border-l border-slate-800 pl-3">
-          <button onclick="openBrokerModal()" title="Paramètres Broker MQTT" class="p-2 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition border border-slate-700">
+        <div class="flex items-center gap-1.5 border-l border-[#2B3342] pl-3">
+          <button onclick="openBrokerModal()" title="Paramètres Broker MQTT" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
             <i data-lucide="settings" class="w-4 h-4"></i>
           </button>
-          <button onclick="exportScenario()" title="Exporter le Scénario (JSON)" class="p-2 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition border border-slate-700">
+          <button onclick="exportScenario()" title="Exporter le Scénario (JSON)" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
             <i data-lucide="download" class="w-4 h-4"></i>
           </button>
-          <label title="Importer un Scénario (JSON)" class="p-2 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition border border-slate-700 cursor-pointer">
+          <label title="Importer un Scénario (JSON)" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342] cursor-pointer">
             <i data-lucide="upload" class="w-4 h-4"></i>
             <input type="file" id="import-scenario-file" accept=".json" class="hidden" onchange="importScenario(event)">
           </label>
@@ -69,54 +72,51 @@
 
   <!-- Contenu Principal -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
-    <!-- Barre de filtres & Création -->
-    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+
+    <!-- Barre d'outils supérieure : Filtre et Création d'équipements -->
+    <div class="flex flex-wrap items-center justify-between gap-4 bg-[#181D26] p-4 rounded-xl border border-[#2B3342]">
       <!-- Filtres par équipement -->
       <div class="flex items-center gap-2 flex-wrap" id="devices-filter-bar">
         <span class="text-xs uppercase font-semibold text-slate-400 mr-2 flex items-center gap-1">
-          <i data-lucide="cpu" class="w-3.5 h-3.5 text-slate-400"></i> Équipements :
+          <i data-lucide="cpu" class="w-3.5 h-3.5 text-[#E2001A]"></i> Vue :
         </span>
         <button onclick="selectDeviceFilter('all')" id="filter-dev-all" class="filter-tab active-filter-tab px-3 py-1.5 rounded-lg text-xs font-medium transition">
-          Tous (<span id="total-vars-count">0</span>)
+          Tous les équipements (<span id="total-vars-count">0</span>)
         </button>
         <!-- Les boutons d'équipements sont insérés dynamiquement par JS -->
       </div>
 
-      <!-- Boutons d'ajout -->
+      <!-- Actions globales -->
       <div class="flex items-center gap-2">
-        <button onclick="openDeviceModal()" class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium px-3.5 py-2 rounded-lg border border-slate-700 transition">
-          <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <button onclick="openDeviceModal()" class="flex items-center gap-1.5 btn-eiffage text-xs font-semibold px-4 py-2 rounded-lg transition shadow-md shadow-red-900/30">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span>Nouvel Équipement</span>
-        </button>
-        <button onclick="openVariableModal()" class="flex items-center gap-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-medium px-3.5 py-2 rounded-lg transition shadow-md shadow-cyan-900/30">
-          <i data-lucide="plus" class="w-4 h-4"></i>
-          <span>Ajouter une Variable</span>
         </button>
       </div>
     </div>
 
-    <!-- Grille des Variables -->
-    <div id="variables-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Cartes de variables injectées dynamiquement -->
+    <!-- Conteneur Principal : Regroupement CLAIR des variables par Équipement -->
+    <div id="equipment-groups-container" class="space-y-8">
+      <!-- Les sections d'équipements sont insérées dynamiquement par app.js -->
     </div>
 
-    <!-- Message si aucune variable -->
-    <div id="empty-state" class="hidden text-center py-16 bg-slate-900/40 rounded-2xl border border-dashed border-slate-800 p-8">
+    <!-- Message si aucun équipement -->
+    <div id="empty-state" class="hidden text-center py-16 bg-[#181D26]/60 rounded-2xl border border-dashed border-[#2B3342] p-8">
       <i data-lucide="inbox" class="w-12 h-12 text-slate-600 mx-auto mb-3"></i>
-      <h3 class="text-base font-semibold text-slate-300">Aucune variable configurée</h3>
-      <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-4">Créez votre première variable de télémétrie ou de contrôle pour commencer la simulation.</p>
-      <button onclick="openVariableModal()" class="inline-flex items-center gap-1.5 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-medium px-4 py-2 rounded-lg transition">
-        <i data-lucide="plus" class="w-4 h-4"></i> Ajouter une variable
+      <h3 class="text-base font-semibold text-slate-300">Aucun équipement configuré</h3>
+      <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-4">Créez votre premier équipement virtuel ThingsBoard ou industriel pour commencer à générer de la donnée.</p>
+      <button onclick="openDeviceModal()" class="inline-flex items-center gap-1.5 btn-eiffage text-xs font-semibold px-4 py-2 rounded-lg transition">
+        <i data-lucide="plus" class="w-4 h-4"></i> Créer un Équipement
       </button>
     </div>
   </main>
 
   <!-- Modal Variable (Création & Édition) -->
-  <div id="modal-variable" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm hidden p-4 overflow-y-auto">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 my-8">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+  <div id="modal-variable" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4 overflow-y-auto">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 my-8">
+      <div class="flex items-center justify-between border-b border-[#2B3342] pb-4">
         <h3 id="modal-variable-title" class="text-base font-bold text-white flex items-center gap-2">
-          <i data-lucide="sliders" class="w-5 h-5 text-cyan-400"></i> Configurer la Variable
+          <i data-lucide="sliders" class="w-5 h-5 text-[#E2001A]"></i> Configurer la Variable
         </h3>
         <button onclick="closeModal('modal-variable')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
@@ -126,23 +126,23 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block font-medium text-slate-300 mb-1">Identifiant Unique (Clé ThingsBoard)</label>
-            <input type="text" id="var-id" required placeholder="ex: temperature, rpm, valve_state" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+            <label class="block font-medium text-slate-300 mb-1">Identifiant Unique (Clé de télémétrie ThingsBoard)</label>
+            <input type="text" id="var-id" required placeholder="ex: temperature, rpm, vibration_x" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
           <div>
             <label class="block font-medium text-slate-300 mb-1">Nom Lisible</label>
-            <input type="text" id="var-name" required placeholder="ex: Température Cuve Principale" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+            <input type="text" id="var-name" required placeholder="ex: Température Palier Moteur" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label class="block font-medium text-slate-300 mb-1">Équipement Associé</label>
-            <select id="var-device-id" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500"></select>
+            <select id="var-device-id" required class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]"></select>
           </div>
           <div>
             <label class="block font-medium text-slate-300 mb-1">Type de Donnée</label>
-            <select id="var-data-type" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+            <select id="var-data-type" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
               <option value="float">Nombre Flottant (Float)</option>
               <option value="integer">Entier (Integer)</option>
               <option value="boolean">Booléen (Vrai/Faux)</option>
@@ -151,7 +151,7 @@
           </div>
           <div>
             <label class="block font-medium text-slate-300 mb-1">Type IoT</label>
-            <select id="var-type" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+            <select id="var-type" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
               <option value="telemetry">Télémétrie (Mesure)</option>
               <option value="attribute">Attribut (État / Contrôle)</option>
             </select>
@@ -161,22 +161,22 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label class="block font-medium text-slate-300 mb-1">Unité</label>
-            <input type="text" id="var-unit" placeholder="ex: °C, %, bar, kW, rpm" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+            <input type="text" id="var-unit" placeholder="ex: °C, %, bar, kW, rpm" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
           <div>
             <label class="block font-medium text-slate-300 mb-1">Intervalle d'Envoi (sec)</label>
-            <input type="number" id="var-interval" min="0.1" step="0.1" value="3.0" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+            <input type="number" id="var-interval" min="0.1" step="0.1" value="3.0" required class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
           <div>
             <label class="block font-medium text-slate-300 mb-1">Topic MQTT Cible</label>
-            <input type="text" id="var-topic" placeholder="Défaut auto (ThingsBoard: v1/...)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+            <input type="text" id="var-topic" placeholder="Défaut auto (ThingsBoard: v1/...)" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
         </div>
 
         <!-- Sélection du Mode de Simulation -->
-        <div class="border-t border-slate-800 pt-3">
+        <div class="border-t border-[#2B3342] pt-3">
           <label class="block font-medium text-slate-200 mb-1.5 text-sm">Mode de Génération de la Valeur</label>
-          <select id="var-sim-mode" onchange="toggleSimModeSections()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-cyan-500">
+          <select id="var-sim-mode" onchange="toggleSimModeSections()" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
             <option value="sine">Fonction Sinusoïdale (Sinus)</option>
             <option value="cosine">Fonction Cosinusoïdale (Cosinus)</option>
             <option value="triangle">Signal Triangulaire</option>
@@ -191,63 +191,63 @@
         </div>
 
         <!-- Section Paramètres Mathématiques Classiques -->
-        <div id="section-math-params" class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80 space-y-3">
+        <div id="section-math-params" class="bg-[#0F1218] p-4 rounded-xl border border-[#2B3342] space-y-3">
           <h4 class="font-semibold text-slate-300 text-xs uppercase tracking-wider">Paramètres Mathématiques</h4>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
               <label class="block text-slate-400 mb-1">Min (Borne basse)</label>
-              <input type="number" id="math-min" step="any" value="10.0" class="w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100">
+              <input type="number" id="math-min" step="any" value="10.0" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100">
             </div>
             <div>
               <label class="block text-slate-400 mb-1">Max (Borne haute)</label>
-              <input type="number" id="math-max" step="any" value="90.0" class="w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100">
+              <input type="number" id="math-max" step="any" value="90.0" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100">
             </div>
             <div>
               <label class="block text-slate-400 mb-1">Période du Cycle (s)</label>
-              <input type="number" id="math-period" min="0.5" step="any" value="60.0" class="w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100">
+              <input type="number" id="math-period" min="0.5" step="any" value="60.0" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100">
             </div>
             <div>
               <label class="block text-slate-400 mb-1">Bruit aléatoire (%)</label>
-              <input type="number" id="math-noise" min="0" max="100" step="any" value="1.0" class="w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100">
+              <input type="number" id="math-noise" min="0" max="100" step="any" value="1.0" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100">
             </div>
           </div>
           <div id="constant-val-wrapper" class="hidden">
             <label class="block text-slate-400 mb-1">Valeur Constante</label>
-            <input type="text" id="math-constant" placeholder="Valeur fixe" class="w-full bg-slate-900 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100">
+            <input type="text" id="math-constant" placeholder="Valeur fixe" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100">
           </div>
         </div>
 
         <!-- Section Tableau de Points Horodatés -->
-        <div id="section-points-params" class="bg-slate-950/60 p-4 rounded-xl border border-slate-800/80 space-y-3 hidden">
+        <div id="section-points-params" class="bg-[#0F1218] p-4 rounded-xl border border-[#2B3342] space-y-3 hidden">
           <div class="flex items-center justify-between">
             <h4 class="font-semibold text-slate-300 text-xs uppercase tracking-wider">Points Horodatés</h4>
             <div class="flex items-center gap-3">
               <label class="flex items-center gap-1.5 text-slate-300">
-                <input type="checkbox" id="points-loop" checked class="rounded border-slate-700 text-cyan-600">
+                <input type="checkbox" id="points-loop" checked class="rounded border-[#2B3342] text-[#E2001A]">
                 <span>Répéter en boucle</span>
               </label>
               <label class="flex items-center gap-1.5 text-slate-300">
-                <input type="checkbox" id="points-interpolate" checked class="rounded border-slate-700 text-cyan-600">
+                <input type="checkbox" id="points-interpolate" checked class="rounded border-[#2B3342] text-[#E2001A]">
                 <span>Interpolation linéaire</span>
               </label>
             </div>
           </div>
 
-          <div class="max-h-40 overflow-y-auto border border-slate-800 rounded-lg">
+          <div class="max-h-40 overflow-y-auto border border-[#2B3342] rounded-lg">
             <table class="w-full text-left border-collapse text-xs">
-              <thead class="bg-slate-900 text-slate-400 sticky top-0">
+              <thead class="bg-[#181D26] text-slate-400 sticky top-0">
                 <tr>
                   <th class="p-2">Offset (secondes)</th>
                   <th class="p-2">Valeur</th>
                   <th class="p-2 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody id="points-table-body" class="divide-y divide-slate-800"></tbody>
+              <tbody id="points-table-body" class="divide-y divide-[#2B3342]"></tbody>
             </table>
           </div>
 
           <div class="flex items-center justify-between gap-3 pt-2">
-            <button type="button" onclick="addPointRow(0, 0)" class="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-400 px-3 py-1.5 rounded-lg border border-slate-700 transition">
+            <button type="button" onclick="addPointRow(0, 0)" class="text-xs bg-[#202531] hover:bg-[#2B3342] text-red-400 px-3 py-1.5 rounded-lg border border-[#2B3342] transition">
               + Ajouter un point
             </button>
             <label class="text-xs text-slate-400 hover:text-slate-200 cursor-pointer flex items-center gap-1">
@@ -257,36 +257,38 @@
           </div>
         </div>
 
-        <div class="flex justify-end gap-3 pt-4 border-t border-slate-800">
-          <button type="button" onclick="closeModal('modal-variable')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
-          <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white px-5 py-2 rounded-lg font-medium shadow-md shadow-cyan-900/40">Enregistrer la variable</button>
+        <div class="flex justify-end gap-3 pt-4 border-t border-[#2B3342]">
+          <button type="button" onclick="closeModal('modal-variable')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
+          <button type="submit" class="btn-eiffage px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Enregistrer la variable</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Modal Équipement (Device) -->
-  <div id="modal-device" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm hidden p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <h3 class="text-base font-bold text-white flex items-center gap-2">
-          <i data-lucide="cpu" class="w-5 h-5 text-cyan-400"></i> Équipement Virtuel
+  <!-- Modal Équipement (Création & Édition) -->
+  <div id="modal-device" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
+        <h3 id="modal-device-title" class="text-base font-bold text-white flex items-center gap-2">
+          <i data-lucide="cpu" class="w-5 h-5 text-[#E2001A]"></i> Équipement Virtuel
         </h3>
         <button onclick="closeModal('modal-device')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <form id="form-device" onsubmit="saveDeviceForm(event)" class="space-y-4 text-xs">
+        <input type="hidden" id="dev-is-edit" value="false">
+
         <div>
           <label class="block font-medium text-slate-300 mb-1">Identifiant Unique</label>
-          <input type="text" id="dev-id" required placeholder="ex: compresseur_01, weather_station" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100">
+          <input type="text" id="dev-id" required placeholder="ex: compresseur_01, weather_station" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
         </div>
         <div>
           <label class="block font-medium text-slate-300 mb-1">Nom d'affichage</label>
-          <input type="text" id="dev-name" required placeholder="ex: Station Météo Extérieure" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100">
+          <input type="text" id="dev-name" required placeholder="ex: Compresseur Atelier 01" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
         </div>
         <div>
           <label class="block font-medium text-slate-300 mb-1">Plateforme Cible</label>
-          <select id="dev-platform" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100">
+          <select id="dev-platform" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
             <option value="thingsboard">ThingsBoard (Format natif / Telemetry / RPC)</option>
             <option value="homeassistant">Home Assistant (MQTT Auto-Discovery)</option>
             <option value="datacake">Datacake (Télémétrie horodatée)</option>
@@ -294,25 +296,30 @@
           </select>
         </div>
         <div>
-          <label class="block font-medium text-slate-300 mb-1">Access Token (ThingsBoard / Datacake)</label>
-          <input type="text" id="dev-token" placeholder="Token d'authentification de l'équipement" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100">
-          <p class="text-[11px] text-slate-500 mt-1">Si renseigné, cet équipement utilisera ce token pour s'authentifier auprès de ThingsBoard.</p>
+          <label class="block font-medium text-slate-300 mb-1">Access Token ThingsBoard / Datacake</label>
+          <input type="text" id="dev-token" placeholder="Token d'authentification de l'équipement" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+          <p class="text-[11px] text-slate-500 mt-1">Collez ici l'Access Token généré par ThingsBoard lors de la création de l'équipement.</p>
         </div>
 
-        <div class="flex justify-end gap-3 pt-3 border-t border-slate-800">
-          <button type="button" onclick="closeModal('modal-device')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
-          <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white px-5 py-2 rounded-lg font-medium shadow-md shadow-cyan-900/40">Enregistrer</button>
+        <div class="flex items-center gap-2 pt-1">
+          <input type="checkbox" id="dev-enabled" checked class="rounded border-[#2B3342] text-[#E2001A]">
+          <label for="dev-enabled" class="text-slate-300 font-medium cursor-pointer">Équipement actif dans la simulation</label>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
+          <button type="button" onclick="closeModal('modal-device')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
+          <button type="submit" class="btn-eiffage px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Enregistrer</button>
         </div>
       </form>
     </div>
   </div>
 
   <!-- Modal Configuration Broker MQTT -->
-  <div id="modal-broker" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm hidden p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+  <div id="modal-broker" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-base font-bold text-white flex items-center gap-2">
-          <i data-lucide="server" class="w-5 h-5 text-cyan-400"></i> Paramètres du Broker MQTT
+          <i data-lucide="server" class="w-5 h-5 text-[#E2001A]"></i> Paramètres du Broker MQTT
         </h3>
         <button onclick="closeModal('modal-broker')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
@@ -321,40 +328,43 @@
         <div class="grid grid-cols-3 gap-3">
           <div class="col-span-2">
             <label class="block font-medium text-slate-300 mb-1">Hôte (Host / IP)</label>
-            <input type="text" id="broker-host" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100">
+            <input type="text" id="broker-host" required class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
           <div>
             <label class="block font-medium text-slate-300 mb-1">Port</label>
-            <input type="number" id="broker-port" required value="1883" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100">
+            <input type="number" id="broker-port" required value="1883" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
         </div>
 
-        <div class="flex items-center gap-2 p-2.5 bg-slate-950 border border-slate-800 rounded-lg">
-          <input type="checkbox" id="broker-tls" class="rounded border-slate-700 text-cyan-600">
+        <div class="flex items-center gap-2 p-2.5 bg-[#0F1218] border border-[#2B3342] rounded-lg">
+          <input type="checkbox" id="broker-tls" class="rounded border-[#2B3342] text-[#E2001A]">
           <label for="broker-tls" class="font-medium text-slate-300 cursor-pointer">Activer le chiffrement TLS / MQTTS (Port 8883 / Certificat CA)</label>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-medium text-slate-300 mb-1">Nom d'utilisateur</label>
-            <input type="text" id="broker-user" placeholder="Optionnel" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100">
+            <input type="text" id="broker-user" placeholder="Optionnel" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
           <div>
             <label class="block font-medium text-slate-300 mb-1">Mot de passe</label>
-            <input type="password" id="broker-pass" placeholder="Optionnel" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-slate-100">
+            <input type="password" id="broker-pass" placeholder="Optionnel" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
         </div>
 
-        <div class="flex justify-end gap-3 pt-3 border-t border-slate-800">
-          <button type="button" onclick="closeModal('modal-broker')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg font-medium">Fermer</button>
-          <button type="submit" class="bg-cyan-600 hover:bg-cyan-500 text-white px-5 py-2 rounded-lg font-medium shadow-md shadow-cyan-900/40">Appliquer & Reconnecter</button>
+        <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
+          <button type="button" onclick="closeModal('modal-broker')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Fermer</button>
+          <button type="submit" class="btn-eiffage px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Appliquer & Reconnecter</button>
         </div>
       </form>
     </div>
   </div>
 
-  <footer class="bg-slate-900/50 border-t border-slate-800 py-3 text-center text-xs text-slate-500">
-    IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Compatible ThingsBoard, Home Assistant & Datacake
+  <footer class="bg-[#181D26] border-t border-[#2B3342] py-3.5 text-center text-xs text-slate-400">
+    <div class="flex items-center justify-center gap-2">
+      <span class="px-2 py-0.5 bg-[#E2001A] text-white rounded font-bold text-[10px]">EIFFAGE</span>
+      <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
+    </div>
   </footer>
 
   <script src="/static/app.js"></script>

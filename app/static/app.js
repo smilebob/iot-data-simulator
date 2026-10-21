@@ -1,4 +1,4 @@
-// Application Web Frontend - IoT Data Simulator
+// Application Web Frontend - IoT Data Simulator (Charte Graphique EIFFAGE)
 
 let state = {
   devices: [],
@@ -9,6 +9,7 @@ let state = {
   charts: {},
   chartData: {},
   editingVarId: null,
+  editingDevId: null,
 };
 
 let ws = null;
@@ -39,7 +40,7 @@ async function loadAllData() {
 
     updateStatusUI();
     renderDeviceFilters();
-    renderVariablesGrid();
+    renderEquipmentGroups();
   } catch (err) {
     console.error("Erreur chargement données:", err);
   }
@@ -67,7 +68,7 @@ function updateStatusUI() {
     dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50";
     text.textContent = `MQTT: Connecté (${state.broker.host}:${state.broker.port})`;
   } else {
-    dot.className = "w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse";
+    dot.className = "w-2.5 h-2.5 rounded-full bg-[#E2001A] animate-pulse";
     text.textContent = state.status.mqtt_error ? `MQTT Erreur: ${state.status.mqtt_error}` : `MQTT Déconnecté`;
   }
 
@@ -77,7 +78,7 @@ function updateStatusUI() {
     btnEngine.className = "flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs px-4 py-2 rounded-lg transition shadow-md shadow-emerald-900/30";
     textEngine.textContent = "Simulation Active";
   } else {
-    btnEngine.className = "flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs px-4 py-2 rounded-lg transition border border-slate-700";
+    btnEngine.className = "flex items-center gap-2 bg-[#202531] hover:bg-[#2B3342] text-slate-300 font-medium text-xs px-4 py-2 rounded-lg transition border border-[#2B3342]";
     textEngine.textContent = "Simulation Arrêtée";
   }
 }
@@ -113,7 +114,6 @@ function setupWebSocket() {
 function handleLiveTelemetry(data) {
   const { variable_id, value, timestamp, published, topic, anomaly } = data;
   
-  // Incrémenter compteur visuel si publié
   if (published) {
     const counter = document.getElementById("published-counter");
     if (counter) {
@@ -121,7 +121,6 @@ function handleLiveTelemetry(data) {
     }
   }
 
-  // Mettre à jour la valeur sur la carte
   const valEl = document.getElementById(`val-${variable_id}`);
   if (valEl) {
     valEl.textContent = value;
@@ -135,7 +134,6 @@ function handleLiveTelemetry(data) {
     topicEl.textContent = topic;
   }
 
-  // Mettre à jour l'indicateur d'anomalie
   const anomBadge = document.getElementById(`anomaly-badge-${variable_id}`);
   if (anomBadge) {
     if (anomaly && anomaly !== "none") {
@@ -167,7 +165,6 @@ function renderDeviceFilters() {
   const countSpan = document.getElementById("total-vars-count");
   countSpan.textContent = state.variables.length;
 
-  // Supprimer les anciens boutons d'équipements
   const oldBtns = filterBar.querySelectorAll(".dev-filter-btn");
   oldBtns.forEach(b => b.remove());
 
@@ -185,118 +182,123 @@ function selectDeviceFilter(filter) {
   state.activeFilter = filter;
   document.getElementById("filter-dev-all").className = `filter-tab px-3 py-1.5 rounded-lg text-xs font-medium transition ${filter === 'all' ? 'active-filter-tab' : ''}`;
   renderDeviceFilters();
-  renderVariablesGrid();
+  renderEquipmentGroups();
 }
 
-// Rendu de la grille des variables
-function renderVariablesGrid() {
-  const grid = document.getElementById("variables-grid");
+// Rendu STRUCTURÉ : Regroupement CLAIR des variables par Équipement
+function renderEquipmentGroups() {
+  const container = document.getElementById("equipment-groups-container");
   const emptyState = document.getElementById("empty-state");
-  grid.innerHTML = "";
+  container.innerHTML = "";
 
-  const filtered = state.variables.filter(v => state.activeFilter === "all" || v.device_id === state.activeFilter);
+  const visibleDevices = state.devices.filter(d => state.activeFilter === "all" || d.id === state.activeFilter);
 
-  if (filtered.length === 0) {
+  if (visibleDevices.length === 0) {
     emptyState.classList.remove("hidden");
     return;
   }
   emptyState.classList.add("hidden");
 
-  filtered.forEach(variable => {
-    const dev = state.devices.find(d => d.id === variable.device_id) || { name: variable.device_id, platform: "generic" };
-    const card = document.createElement("div");
-    card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col justify-between hover:border-slate-700 transition space-y-4";
-    card.id = `card-${variable.id}`;
+  visibleDevices.forEach(device => {
+    const devVars = state.variables.filter(v => v.device_id === device.id);
+    
+    // Détermination du badge plateforme
+    let platformBadgeHtml = "";
+    if (device.platform === "thingsboard") {
+      platformBadgeHtml = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-red-950/80 text-red-300 border border-red-800/80 flex items-center gap-1">
+        <i data-lucide="cloud" class="w-3 h-3 text-[#E2001A]"></i> ThingsBoard
+      </span>`;
+    } else if (device.platform === "homeassistant") {
+      platformBadgeHtml = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-950/80 text-blue-300 border border-blue-800/80 flex items-center gap-1">
+        <i data-lucide="home" class="w-3 h-3 text-blue-400"></i> Home Assistant
+      </span>`;
+    } else if (device.platform === "datacake") {
+      platformBadgeHtml = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-950/80 text-amber-300 border border-amber-800/80 flex items-center gap-1">
+        <i data-lucide="database" class="w-3 h-3 text-amber-400"></i> Datacake
+      </span>`;
+    } else {
+      platformBadgeHtml = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1">
+        <i data-lucide="radio" class="w-3 h-3 text-slate-400"></i> MQTT Générique
+      </span>`;
+    }
 
-    const initialVal = variable.current_value !== null && variable.current_value !== undefined ? variable.current_value : "--";
+    // Bloc de Section d'Équipement
+    const section = document.createElement("section");
+    section.className = "device-group-card shadow-2xl overflow-hidden";
+    section.id = `device-section-${device.id}`;
 
-    card.innerHTML = `
-      <div>
-        <!-- En-tête de la carte -->
-        <div class="flex items-start justify-between gap-2">
+    section.innerHTML = `
+      <!-- Barre d'accent rouge Eiffage -->
+      <div class="eiffage-accent-line"></div>
+
+      <!-- En-tête de l'Équipement -->
+      <div class="bg-[#181D26] px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-[#2B3342]">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 bg-[#202531] border border-[#2B3342] rounded-xl text-white">
+            <i data-lucide="cpu" class="w-5 h-5 text-[#E2001A]"></i>
+          </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="text-xs font-bold text-slate-100">${escapeHtml(variable.name)}</span>
-              <span class="text-[10px] font-mono text-slate-400">(${escapeHtml(variable.id)})</span>
+              <h2 class="text-base font-bold text-white tracking-tight">${escapeHtml(device.name)}</h2>
+              <span class="text-xs font-mono text-slate-400">(${escapeHtml(device.id)})</span>
             </div>
-            <div class="flex items-center gap-1.5 mt-1">
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
-                ${escapeHtml(dev.name)}
+            <div class="flex items-center gap-2 mt-1">
+              ${platformBadgeHtml}
+              ${device.token ? `
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#12151B] text-slate-400 border border-[#2B3342] flex items-center gap-1" title="Token: ${escapeHtml(device.token)}">
+                  <i data-lucide="key" class="w-3 h-3 text-amber-400"></i> Token: &bull;&bull;&bull;&bull;&bull;&bull;
+                </span>
+              ` : ''}
+              <span class="text-[11px] px-2 py-0.5 rounded bg-[#12151B] text-slate-300 border border-[#2B3342]">
+                ${devVars.length} variable(s)
               </span>
-              <span class="text-[10px] px-2 py-0.5 rounded-full ${variable.var_type === 'telemetry' ? 'bg-cyan-950 text-cyan-400 border border-cyan-800/60' : 'bg-purple-950 text-purple-400 border border-purple-800/60'}">
-                ${variable.var_type === 'telemetry' ? 'Télémétrie' : 'Attribut/Contrôle'}
-              </span>
-              <span id="anomaly-badge-${variable.id}" class="hidden"></span>
             </div>
           </div>
-          <div class="flex items-center gap-1">
-            <button onclick="editVariable('${variable.id}')" title="Modifier" class="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition">
-              <i data-lucide="edit-2" class="w-4 h-4"></i>
-            </button>
-            <button onclick="deleteVariable('${variable.id}')" title="Supprimer" class="p-1.5 text-slate-400 hover:text-red-400 hover:bg-slate-800 rounded-lg transition">
-              <i data-lucide="trash-2" class="w-4 h-4"></i>
-            </button>
-          </div>
         </div>
 
-        <!-- Valeur courante & Unité -->
-        <div class="mt-4 flex items-baseline justify-between">
-          <div class="flex items-baseline gap-2">
-            <span id="val-${variable.id}" class="text-3xl font-extrabold tracking-tight font-mono text-white">
-              ${initialVal}
-            </span>
-            <span class="text-sm font-semibold text-cyan-400">${escapeHtml(variable.unit || '')}</span>
-          </div>
-          <span class="text-[10px] text-slate-500 font-mono">
-            ${variable.sim_mode.toUpperCase()} &bull; ${variable.publish_interval}s
-          </span>
+        <!-- Actions sur l'Équipement (Ajout Variable, Édition, Suppression) -->
+        <div class="flex items-center gap-2">
+          <button onclick="openVariableModalForDevice('${device.id}')" class="flex items-center gap-1.5 btn-eiffage text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Ajouter une Variable</span>
+          </button>
+          <button onclick="editDevice('${device.id}')" title="Modifier cet équipement" class="p-2 text-slate-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span>Éditer</span>
+          </button>
+          <button onclick="deleteDevice('${device.id}')" title="Supprimer cet équipement" class="p-2 text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>Supprimer</span>
+          </button>
         </div>
-
-        <!-- Topic MQTT actif -->
-        <div class="mt-2 text-[11px] font-mono text-slate-400 bg-slate-950/70 px-2.5 py-1.5 rounded-lg border border-slate-800 flex items-center justify-between">
-          <span class="truncate flex items-center gap-1.5" title="${escapeHtml(variable.topic)}">
-            <i data-lucide="corner-down-right" class="w-3.5 h-3.5 text-slate-500"></i>
-            <span id="topic-${variable.id}">${escapeHtml(variable.topic || 'v1/devices/me/telemetry')}</span>
-          </span>
-        </div>
-
-        <!-- Sparkline Canvas si numérique -->
-        ${variable.data_type === 'float' || variable.data_type === 'integer' ? `
-          <div class="mt-3 h-14 w-full">
-            <canvas id="chart-${variable.id}"></canvas>
-          </div>
-        ` : ''}
       </div>
 
-      <!-- Actions de démo ThingsBoard (Anomalies & Forçage) -->
-      <div class="pt-3 border-t border-slate-800 space-y-2">
-        <div class="flex items-center justify-between text-[11px] text-slate-400">
-          <span>Injecteur d'Anomalie :</span>
-          <div class="flex items-center gap-1">
-            <button onclick="injectAnomaly('${variable.id}', 'spike')" title="Pic anormal (+50)" class="px-2 py-0.5 rounded bg-amber-950/80 hover:bg-amber-900 text-amber-300 border border-amber-800/60 font-medium">💥 Pic</button>
-            <button onclick="injectAnomaly('${variable.id}', 'drift')" title="Dérive progressive" class="px-2 py-0.5 rounded bg-orange-950/80 hover:bg-orange-900 text-orange-300 border border-orange-800/60 font-medium">📈 Dérive</button>
-            <button onclick="injectAnomaly('${variable.id}', 'freeze')" title="Geler la valeur" class="px-2 py-0.5 rounded bg-blue-950/80 hover:bg-blue-900 text-blue-300 border border-blue-800/60 font-medium">❄️ Gel</button>
-            <button onclick="injectAnomaly('${variable.id}', 'timeout')" title="Coupure de com (Timeout ThingsBoard)" class="px-2 py-0.5 rounded bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800/60 font-medium">🔇 Timeout</button>
-            <button onclick="injectAnomaly('${variable.id}', 'none')" title="Rétablir signal normal" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium">🔄</button>
-          </div>
-        </div>
-
-        <!-- Forçage Manuel -->
-        <div class="flex items-center gap-2 pt-1">
-          <label class="flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer">
-            <input type="checkbox" onchange="toggleManualOverride('${variable.id}', this.checked)" ${variable.manual_override ? 'checked' : ''} class="rounded border-slate-700 text-cyan-500 text-xs">
-            <span>Forcer :</span>
-          </label>
-          <input type="text" id="manual-input-${variable.id}" value="${variable.manual_value || ''}" placeholder="valeur..." onchange="updateManualValue('${variable.id}', this.value)" class="flex-1 bg-slate-950 border border-slate-700 rounded px-2 py-0.5 text-xs text-white">
-        </div>
+      <!-- Grille interne des variables de cet équipement -->
+      <div class="p-6 bg-[#12151B]">
+        <div id="vars-grid-${device.id}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
       </div>
     `;
 
-    grid.appendChild(card);
+    container.appendChild(section);
 
-    // Initialisation du mini graphique Chart.js
-    if (variable.data_type === 'float' || variable.data_type === 'integer') {
-      initSparkline(variable.id);
+    const varsGrid = section.querySelector(`#vars-grid-${device.id}`);
+
+    if (devVars.length === 0) {
+      varsGrid.className = "text-center py-8 border border-dashed border-[#2B3342] rounded-xl p-4";
+      varsGrid.innerHTML = `
+        <p class="text-xs text-slate-400 mb-2">Aucune variable de télémétrie configurée pour cet équipement.</p>
+        <button onclick="openVariableModalForDevice('${device.id}')" class="inline-flex items-center gap-1.5 btn-eiffage text-xs font-semibold px-3 py-1.5 rounded-lg transition">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i> Ajouter une première variable
+        </button>
+      `;
+    } else {
+      devVars.forEach(variable => {
+        const card = createVariableCard(variable, device);
+        varsGrid.appendChild(card);
+        if (variable.data_type === 'float' || variable.data_type === 'integer') {
+          initSparkline(variable.id);
+        }
+      });
     }
   });
 
@@ -305,6 +307,97 @@ function renderVariablesGrid() {
   }
 }
 
+// Création d'une carte de variable
+function createVariableCard(variable, device) {
+  const card = document.createElement("div");
+  card.className = "bg-[#181D26] border border-[#2B3342] rounded-xl p-5 shadow-lg flex flex-col justify-between hover:border-slate-600 transition space-y-4";
+  card.id = `card-${variable.id}`;
+
+  const initialVal = variable.current_value !== null && variable.current_value !== undefined ? variable.current_value : "--";
+
+  card.innerHTML = `
+    <div>
+      <!-- En-tête de la carte -->
+      <div class="flex items-start justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-white">${escapeHtml(variable.name)}</span>
+            <span class="text-[10px] font-mono text-slate-400">(${escapeHtml(variable.id)})</span>
+          </div>
+          <div class="flex items-center gap-1.5 mt-1">
+            <span class="text-[10px] px-2 py-0.5 rounded-full ${variable.var_type === 'telemetry' ? 'bg-red-950/70 text-red-300 border border-red-800/60' : 'bg-purple-950/70 text-purple-300 border border-purple-800/60'}">
+              ${variable.var_type === 'telemetry' ? 'Télémétrie' : 'Attribut / Contrôle'}
+            </span>
+            <span id="anomaly-badge-${variable.id}" class="hidden"></span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <button onclick="editVariable('${variable.id}')" title="Modifier la variable" class="p-1.5 text-slate-400 hover:text-white hover:bg-[#202531] rounded-lg transition">
+            <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+          </button>
+          <button onclick="deleteVariable('${variable.id}')" title="Supprimer la variable" class="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-[#202531] rounded-lg transition">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Valeur courante & Unité -->
+      <div class="mt-4 flex items-baseline justify-between">
+        <div class="flex items-baseline gap-2">
+          <span id="val-${variable.id}" class="text-3xl font-extrabold tracking-tight font-mono text-white">
+            ${initialVal}
+          </span>
+          <span class="text-sm font-bold text-[#FF4D61]">${escapeHtml(variable.unit || '')}</span>
+        </div>
+        <span class="text-[10px] text-slate-400 font-mono">
+          ${variable.sim_mode.toUpperCase()} &bull; ${variable.publish_interval}s
+        </span>
+      </div>
+
+      <!-- Topic MQTT actif -->
+      <div class="mt-2 text-[11px] font-mono text-slate-400 bg-[#0F1218] px-2.5 py-1.5 rounded-lg border border-[#2B3342] flex items-center justify-between">
+        <span class="truncate flex items-center gap-1.5" title="${escapeHtml(variable.topic)}">
+          <i data-lucide="corner-down-right" class="w-3.5 h-3.5 text-[#E2001A]"></i>
+          <span id="topic-${variable.id}">${escapeHtml(variable.topic || 'v1/devices/me/telemetry')}</span>
+        </span>
+      </div>
+
+      <!-- Sparkline Canvas -->
+      ${variable.data_type === 'float' || variable.data_type === 'integer' ? `
+        <div class="mt-3 h-14 w-full">
+          <canvas id="chart-${variable.id}"></canvas>
+        </div>
+      ` : ''}
+    </div>
+
+    <!-- Actions de démo ThingsBoard (Anomalies & Forçage) -->
+    <div class="pt-3 border-t border-[#2B3342] space-y-2">
+      <div class="flex items-center justify-between text-[11px] text-slate-400">
+        <span class="font-medium text-slate-300">Chaos Button :</span>
+        <div class="flex items-center gap-1">
+          <button onclick="injectAnomaly('${variable.id}', 'spike')" title="Pic anormal (+50)" class="px-2 py-0.5 rounded bg-amber-950/80 hover:bg-amber-900 text-amber-300 border border-amber-800/60 font-semibold">💥 Pic</button>
+          <button onclick="injectAnomaly('${variable.id}', 'drift')" title="Dérive progressive" class="px-2 py-0.5 rounded bg-orange-950/80 hover:bg-orange-900 text-orange-300 border border-orange-800/60 font-semibold">📈 Dérive</button>
+          <button onclick="injectAnomaly('${variable.id}', 'freeze')" title="Geler la valeur" class="px-2 py-0.5 rounded bg-blue-950/80 hover:bg-blue-900 text-blue-300 border border-blue-800/60 font-semibold">❄️ Gel</button>
+          <button onclick="injectAnomaly('${variable.id}', 'timeout')" title="Coupure réseau" class="px-2 py-0.5 rounded bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800/60 font-semibold">🔇 Timeout</button>
+          <button onclick="injectAnomaly('${variable.id}', 'none')" title="Rétablir signal normal" class="px-2 py-0.5 rounded bg-[#202531] hover:bg-[#2B3342] text-slate-300 font-semibold">🔄</button>
+        </div>
+      </div>
+
+      <!-- Forçage Manuel -->
+      <div class="flex items-center gap-2 pt-1">
+        <label class="flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer">
+          <input type="checkbox" onchange="toggleManualOverride('${variable.id}', this.checked)" ${variable.manual_override ? 'checked' : ''} class="rounded border-[#2B3342] text-[#E2001A]">
+          <span>Forcer :</span>
+        </label>
+        <input type="text" id="manual-input-${variable.id}" value="${variable.manual_value || ''}" placeholder="valeur..." onchange="updateManualValue('${variable.id}', this.value)" class="flex-1 bg-[#0F1218] border border-[#2B3342] rounded px-2 py-0.5 text-xs text-white">
+      </div>
+    </div>
+  `;
+
+  return card;
+}
+
+// Initialisation sparkline Chart.js aux couleurs Eiffage Red
 function initSparkline(varId) {
   const ctx = document.getElementById(`chart-${varId}`);
   if (!ctx) return;
@@ -317,12 +410,12 @@ function initSparkline(varId) {
       labels: state.chartData[varId].map((_, i) => i),
       datasets: [{
         data: state.chartData[varId],
-        borderColor: "#06b6d4",
+        borderColor: "#E2001A",
         borderWidth: 2,
         tension: 0.35,
         pointRadius: 0,
         fill: true,
-        backgroundColor: "rgba(6, 182, 212, 0.08)",
+        backgroundColor: "rgba(226, 0, 26, 0.12)",
       }]
     },
     options: {
@@ -379,15 +472,95 @@ async function updateManualValue(varId, val) {
   }
 }
 
-// Gestion des Modales & Formulaires
-function openVariableModal(varToEdit = null) {
+// ==========================================
+// GESTION DES ÉQUIPEMENTS (Création, Édition, Suppression)
+// ==========================================
+
+function openDeviceModal(devToEdit = null) {
+  state.editingDevId = devToEdit ? devToEdit.id : null;
+  document.getElementById("dev-is-edit").value = devToEdit ? "true" : "false";
+  
+  const titleEl = document.getElementById("modal-device-title");
+  titleEl.innerHTML = devToEdit ?
+    `<i data-lucide="edit-3" class="w-5 h-5 text-[#E2001A]"></i> Modifier l'Équipement` :
+    `<i data-lucide="cpu" class="w-5 h-5 text-[#E2001A]"></i> Nouvel Équipement`;
+
+  if (devToEdit) {
+    document.getElementById("dev-id").value = devToEdit.id;
+    document.getElementById("dev-id").disabled = true;
+    document.getElementById("dev-name").value = devToEdit.name;
+    document.getElementById("dev-platform").value = devToEdit.platform;
+    document.getElementById("dev-token").value = devToEdit.token || "";
+    document.getElementById("dev-enabled").checked = devToEdit.enabled !== false;
+  } else {
+    document.getElementById("dev-id").value = "";
+    document.getElementById("dev-id").disabled = false;
+    document.getElementById("dev-name").value = "";
+    document.getElementById("dev-platform").value = "thingsboard";
+    document.getElementById("dev-token").value = "";
+    document.getElementById("dev-enabled").checked = true;
+  }
+
+  openModal("modal-device");
+}
+
+function editDevice(devId) {
+  const dev = state.devices.find(d => d.id === devId);
+  if (dev) {
+    openDeviceModal(dev);
+  }
+}
+
+async function deleteDevice(devId) {
+  const dev = state.devices.find(d => d.id === devId);
+  const name = dev ? dev.name : devId;
+  const count = state.variables.filter(v => v.device_id === devId).length;
+
+  const msg = `⚠️ Confirmez-vous la suppression de l'équipement "${name}" ?\n\nAttention : les ${count} variable(s) associées seront également supprimées.`;
+  if (confirm(msg)) {
+    await fetch(`/api/devices/${devId}`, { method: "DELETE" });
+    if (state.activeFilter === devId) {
+      state.activeFilter = "all";
+    }
+    await loadAllData();
+  }
+}
+
+async function saveDeviceForm(e) {
+  e.preventDefault();
+  const devPayload = {
+    id: document.getElementById("dev-id").value.trim(),
+    name: document.getElementById("dev-name").value.trim(),
+    platform: document.getElementById("dev-platform").value,
+    token: document.getElementById("dev-token").value.trim() || null,
+    enabled: document.getElementById("dev-enabled").checked,
+  };
+
+  await fetch("/api/devices", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(devPayload)
+  });
+
+  closeModal("modal-device");
+  await loadAllData();
+}
+
+// ==========================================
+// GESTION DES VARIABLES
+// ==========================================
+
+function openVariableModalForDevice(deviceId) {
+  openVariableModal(null, deviceId);
+}
+
+function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
   state.editingVarId = varToEdit ? varToEdit.id : null;
   document.getElementById("var-is-edit").value = varToEdit ? "true" : "false";
   document.getElementById("modal-variable-title").innerHTML = varToEdit ?
-    `<i data-lucide="edit-2" class="w-5 h-5 text-cyan-400"></i> Modifier la Variable` :
-    `<i data-lucide="sliders" class="w-5 h-5 text-cyan-400"></i> Nouvelle Variable`;
+    `<i data-lucide="edit-2" class="w-5 h-5 text-[#E2001A]"></i> Modifier la Variable` :
+    `<i data-lucide="sliders" class="w-5 h-5 text-[#E2001A]"></i> Nouvelle Variable`;
 
-  // Remplir le select d'équipements
   const devSelect = document.getElementById("var-device-id");
   devSelect.innerHTML = "";
   state.devices.forEach(d => {
@@ -409,19 +582,20 @@ function openVariableModal(varToEdit = null) {
     document.getElementById("var-topic").value = varToEdit.topic || "";
     document.getElementById("var-sim-mode").value = varToEdit.sim_mode;
 
-    // Paramètres math
     document.getElementById("math-min").value = varToEdit.math_config.min_val;
     document.getElementById("math-max").value = varToEdit.math_config.max_val;
     document.getElementById("math-period").value = varToEdit.math_config.period;
     document.getElementById("math-noise").value = varToEdit.math_config.noise_percent;
     document.getElementById("math-constant").value = varToEdit.math_config.constant_val;
 
-    // Tableau de points
     renderPointsTable(varToEdit.points_config ? varToEdit.points_config.points : []);
   } else {
     document.getElementById("var-id").value = "";
     document.getElementById("var-id").disabled = false;
     document.getElementById("var-name").value = "";
+    if (preselectedDeviceId) {
+      document.getElementById("var-device-id").value = preselectedDeviceId;
+    }
     document.getElementById("var-unit").value = "";
     document.getElementById("var-topic").value = "";
     document.getElementById("var-interval").value = "3.0";
@@ -466,10 +640,10 @@ function renderPointsTable(points) {
 function addPointRow(offset = 0, val = 0) {
   const tbody = document.getElementById("points-table-body");
   const tr = document.createElement("tr");
-  tr.className = "hover:bg-slate-900/60";
+  tr.className = "hover:bg-[#181D26]";
   tr.innerHTML = `
-    <td class="p-2"><input type="number" step="any" value="${offset}" class="point-offset w-24 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-slate-100"></td>
-    <td class="p-2"><input type="text" value="${val}" class="point-value w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-slate-100"></td>
+    <td class="p-2"><input type="number" step="any" value="${offset}" class="point-offset w-24 bg-[#181D26] border border-[#2B3342] rounded px-2 py-1 text-slate-100"></td>
+    <td class="p-2"><input type="text" value="${val}" class="point-value w-full bg-[#181D26] border border-[#2B3342] rounded px-2 py-1 text-slate-100"></td>
     <td class="p-2 text-right"><button type="button" onclick="this.closest('tr').remove()" class="text-rose-400 hover:text-rose-300"><i data-lucide="trash" class="w-4 h-4"></i></button></td>
   `;
   tbody.appendChild(tr);
@@ -478,10 +652,8 @@ function addPointRow(offset = 0, val = 0) {
 
 async function saveVariableForm(e) {
   e.preventDefault();
-  const isEdit = document.getElementById("var-is-edit").value === "true";
   const simMode = document.getElementById("var-sim-mode").value;
 
-  // Récupérer les points du tableau si actif
   const points = [];
   document.querySelectorAll("#points-table-body tr").forEach(tr => {
     const off = parseFloat(tr.querySelector(".point-offset")?.value || 0);
@@ -537,34 +709,6 @@ async function deleteVariable(varId) {
   }
 }
 
-// Modal Équipement (Device)
-function openDeviceModal() {
-  document.getElementById("dev-id").value = "";
-  document.getElementById("dev-name").value = "";
-  document.getElementById("dev-token").value = "";
-  openModal("modal-device");
-}
-
-async function saveDeviceForm(e) {
-  e.preventDefault();
-  const devPayload = {
-    id: document.getElementById("dev-id").value.trim(),
-    name: document.getElementById("dev-name").value.trim(),
-    platform: document.getElementById("dev-platform").value,
-    token: document.getElementById("dev-token").value.trim() || null,
-    enabled: true,
-  };
-
-  await fetch("/api/devices", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(devPayload)
-  });
-
-  closeModal("modal-device");
-  await loadAllData();
-}
-
 // Modal Broker MQTT
 function openBrokerModal() {
   document.getElementById("broker-host").value = state.broker.host || "mosquitto";
@@ -595,7 +739,6 @@ async function saveBrokerForm(e) {
   await refreshStatus();
 }
 
-// Helpers Modales
 function openModal(id) {
   document.getElementById(id).classList.remove("hidden");
   if (window.lucide) lucide.createIcons();
@@ -613,7 +756,7 @@ async function exportScenario() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `iot_scenario_${new Date().toISOString().slice(0, 10)}.json`;
+  a.download = `iot_scenario_eiffage_${new Date().toISOString().slice(0, 10)}.json`;
   a.click();
 }
 

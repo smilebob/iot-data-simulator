@@ -16,38 +16,45 @@ Ouvrez ensuite votre navigateur préféré à l'adresse : **[http://localhost:80
 
 ---
 
-## 2. Découverte de l'Interface Graphique
+## 2. Découverte de l'Interface Graphique (Charte Graphique EIFFAGE)
+
+L'interface adopte la **charte graphique du Groupe Eiffage** (Rouge Eiffage `#E2001A`, fonds anthracites épurés, typographie industrielle soignée).
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│ [⚡ IoT Data Simulator]  [● Broker: Connecté] [Publiés: 142] [Simulation Active] │
+│ [EIFFAGE]  IoT Data Simulator      [● Broker: Connecté] [Simulation]   │
 ├────────────────────────────────────────────────────────────────────────┤
-│ Équipements : [Tous] [Station Météo (3)] [Compresseur Atelier (2)]  [+ Nouveau] │
+│ Vue : [Tous les équipements] [Station Météo] ...   [+ Nouvel Équipement]│
 ├────────────────────────────────────────────────────────────────────────┤
-│ ┌───────────────────────────┐    ┌───────────────────────────┐         │
-│ │ Température Ambiante      │    │ Vitesse de Rotation       │         │
-│ │ 24.3 °C                   │    │ 2800 rpm                  │         │
-│ │ ~~~~~/\~~~~~ (Sparkline)  │    │ ~~~~~/\~~~~~ (Sparkline)  │         │
-│ │ [💥 Pic] [📈 Dérive] [❄️]  │    │ [💥 Pic] [📈 Dérive] [❄️]  │         │
-│ └───────────────────────────┘    └───────────────────────────┘         │
+│ ┌─ [Station Météo Solaire] (ThingsBoard) ──── [+ Var] [Éditer] [Suppr]┐│
+│ │                                                                     ││
+│ │  ┌───────────────────────────┐    ┌───────────────────────────┐     ││
+│ │  │ Température Ambiante      │    │ Humidité Relative         │     ││
+│ │  │ 24.3 °C                   │    │ 55.2 %                    │     ││
+│ │  │ ~~~~~/\~~~~~ (Sparkline)  │    │ ~~~~~/\~~~~~ (Sparkline)  │     ││
+│ │  │ [💥 Pic] [📈 Dérive] [❄️]  │    │ [💥 Pic] [📈 Dérive] [❄️]  │     ││
+│ │  └───────────────────────────┘    └───────────────────────────┘     ││
+│ └─────────────────────────────────────────────────────────────────────┘│
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-1. **La barre supérieure** :
-   * **Badge Broker** : vous informe en temps réel de l'état de la liaison MQTT (vert = connecté, rouge = erreur). Cliquez dessus pour changer d'adresse de broker à tout moment.
-   * **Compteur Publiés** : s'incrémente en direct à chaque trame MQTT transmise avec succès.
+1. **La barre supérieure EIFFAGE** :
+   * **Logo & Marque EIFFAGE** : avec indicateur de connexion broker MQTT et compteur de publications en direct.
    * **Bouton Simulation Active** : permet de mettre en pause ou de relancer l'ensemble de la simulation en 1 clic.
-2. **La barre de filtrage** :
-   * Permet d'isoler un équipement virtuel spécifique ou de voir toutes les variables.
-   * Boutons **`Nouvel Équipement`** et **`Ajouter une Variable`**.
-3. **Les cartes de variables** :
-   * Chaque carte affiche le nom lisible, l'ID technique, la valeur courante qui clignote à chaque mise à jour, l'unité, le mini-graphique animé (sparkline) et les boutons d'action rapide.
+2. **Sections d'Équipements (Regroupement clair)** :
+   * Chaque équipement possède sa propre **carte conteneur dédiée** délimitée par un filet rouge Eiffage.
+   * Dans l'en-tête de chaque équipement :
+     * **`+ Ajouter une Variable`** : crée une variable pré-associée à cet équipement.
+     * **`Éditer`** : modifie le nom, le token ThingsBoard ou la plateforme.
+     * **`Supprimer`** : supprime l'équipement et nettoie ses variables associées.
+3. **Les cartes de variables (internes à chaque équipement)** :
+   * Chaque variable affiche sa valeur en direct, son sparkline animé rouge Eiffage, son topic MQTT actif et les boutons d'anomalies (Chaos Button).
 
 ---
 
 ## 3. Tester le Forçage Manuel et l'Injection d'Anomalie
 
-1. Repérez la carte **`Température Ambiante`**.
+1. Repérez la carte **`Température Ambiante`** dans la section de votre équipement.
 2. Cliquez sur le bouton **`💥 Pic`** :
    * Vous verrez la valeur bondir instantanément de +50°C pendant quelques secondes avant de reprendre sa course sinusoïdale normale.
 3. Cochez la case **`Forcer :`** et tapez `45.0` :

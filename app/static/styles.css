@@ -1,32 +1,84 @@
-/* Styles complémentaires et animations temps réel */
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.02); }
+/* Charte Graphique Groupe Eiffage & Styles Dynamiques */
+:root {
+  --eiffage-red: #E2001A;
+  --eiffage-red-hover: #C50017;
+  --eiffage-red-dark: #990012;
+  --eiffage-red-light: #FF334B;
+  --eiffage-bg: #0F1218;
+  --eiffage-card: #181D26;
+  --eiffage-card-hover: #212733;
+  --eiffage-border: #2B3342;
+  --eiffage-text: #F8FAFC;
+  --eiffage-text-muted: #94A3B8;
 }
 
+body {
+  background-color: var(--eiffage-bg);
+  color: var(--eiffage-text);
+}
+
+/* Animations temps réel */
 .flash-update {
-  animation: flash-highlight 0.4s ease-out;
+  animation: flash-highlight 0.45s ease-out;
 }
 
 @keyframes flash-highlight {
-  0% { color: #38bdf8; transform: scale(1.04); }
+  0% { color: #FF334B; transform: scale(1.05); }
   100% { color: inherit; transform: scale(1); }
 }
 
+/* Boutons & Badges aux couleurs Eiffage */
+.btn-eiffage {
+  background-color: var(--eiffage-red);
+  color: #ffffff;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(226, 0, 26, 0.28);
+}
+.btn-eiffage:hover {
+  background-color: var(--eiffage-red-hover);
+  box-shadow: 0 6px 18px rgba(226, 0, 26, 0.42);
+  transform: translateY(-1px);
+}
+
+.badge-eiffage-red {
+  background-color: rgba(226, 0, 26, 0.15);
+  color: #FF4D61;
+  border: 1px solid rgba(226, 0, 26, 0.4);
+}
+
 .active-filter-tab {
-  background-color: #0284c7 !important;
+  background-color: var(--eiffage-red) !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+  box-shadow: 0 4px 14px rgba(226, 0, 26, 0.4) !important;
 }
 
 .filter-tab {
-  background-color: #1e293b;
-  color: #94a3b8;
+  background-color: #1F2531;
+  color: #94A3B8;
+  border: 1px solid #2B3342;
 }
 
 .filter-tab:hover {
-  background-color: #334155;
-  color: #f1f5f9;
+  background-color: #2A3242;
+  color: #F8FAFC;
+}
+
+/* Cartes d'équipements structurées */
+.device-group-card {
+  background-color: var(--eiffage-card);
+  border: 1px solid var(--eiffage-border);
+  border-radius: 1rem;
+  transition: border-color 0.2s ease;
+}
+.device-group-card:hover {
+  border-color: #3B4559;
+}
+
+/* Barre d'accent rouge Eiffage */
+.eiffage-accent-line {
+  height: 3px;
+  background: linear-gradient(90deg, #E2001A 0%, #FF4D61 50%, transparent 100%);
+  border-radius: 2px 2px 0 0;
 }
 
 /* Custom scrollbars */
@@ -35,12 +87,12 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #0B0E14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #2B3342;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #3B4559;
 }
