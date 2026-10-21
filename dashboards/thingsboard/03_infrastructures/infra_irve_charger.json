@@ -1,0 +1,449 @@
+{
+  "title": "Supervision - Borne de Recharge IRVE",
+  "name": "Supervision - Borne de Recharge IRVE",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Borne de Recharge IRVE' (ID: infra_irve_charger). Token: TOKEN_INFRA_IRVE_CHARGER. Protocole: HTTP.",
+    "entityAliases": {
+      "f40f6ef5-535f-4b70-b5d2-b63dbe06f209": {
+        "id": "f40f6ef5-535f-4b70-b5d2-b63dbe06f209",
+        "alias": "Borne de Recharge IRVE",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Borne de Recharge IRVE"
+        }
+      }
+    },
+    "widgets": {
+      "3c4302d4-dc86-460a-8686-471b0c8ba229": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Borne de Recharge IRVE",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Borne de Recharge IRVE</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_irve_charger</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_IRVE_CHARGER</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "3c4302d4-dc86-460a-8686-471b0c8ba229"
+      },
+      "6a637cc2-a9a9-4670-83fd-2776c6ba4688": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Puissance de Charge Délivrée",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "f40f6ef5-535f-4b70-b5d2-b63dbe06f209",
+              "dataKeys": [
+                {
+                  "name": "puissance_charge_kw",
+                  "type": "timeseries",
+                  "label": "Puissance de Charge Délivrée",
+                  "color": "#E2001A",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Puissance de Charge Délivrée",
+            "unitTitle": "kW",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Puissance de Charge Délivrée",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "6a637cc2-a9a9-4670-83fd-2776c6ba4688"
+      },
+      "5b1d086c-47a9-42d4-ba89-0333d7e2cbf3": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Énergie Consommée Session",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "f40f6ef5-535f-4b70-b5d2-b63dbe06f209",
+              "dataKeys": [
+                {
+                  "name": "energie_session_kwh",
+                  "type": "timeseries",
+                  "label": "Énergie Consommée Session",
+                  "color": "#3B82F6",
+                  "units": "kWh",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Énergie Consommée Session",
+            "unitTitle": "kWh",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Énergie Consommée Session",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 8,
+        "id": "5b1d086c-47a9-42d4-ba89-0333d7e2cbf3"
+      },
+      "cc64a4fe-45de-48c2-99e4-241c10f0e835": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Courant Délivré Prise",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "f40f6ef5-535f-4b70-b5d2-b63dbe06f209",
+              "dataKeys": [
+                {
+                  "name": "courant_charge_a",
+                  "type": "timeseries",
+                  "label": "Courant Délivré Prise",
+                  "color": "#10B981",
+                  "units": "A",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Courant Délivré Prise",
+            "unitTitle": "A",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Courant Délivré Prise",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 16,
+        "id": "cc64a4fe-45de-48c2-99e4-241c10f0e835"
+      },
+      "e2ba3aac-5cd3-4b10-a762-077fbb032fe7": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Borne de Recharge IRVE",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "f40f6ef5-535f-4b70-b5d2-b63dbe06f209",
+              "dataKeys": [
+                {
+                  "name": "puissance_charge_kw",
+                  "type": "timeseries",
+                  "label": "Puissance de Charge Délivrée (kW)",
+                  "color": "#E2001A",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "energie_session_kwh",
+                  "type": "timeseries",
+                  "label": "Énergie Consommée Session (kWh)",
+                  "color": "#3B82F6",
+                  "units": "kWh",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "courant_charge_a",
+                  "type": "timeseries",
+                  "label": "Courant Délivré Prise (A)",
+                  "color": "#10B981",
+                  "units": "A",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (3 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "e2ba3aac-5cd3-4b10-a762-077fbb032fe7"
+      },
+      "7742fb48-13ed-4074-b7b4-1a712563fe13": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "latest_values",
+        "type": "latest",
+        "title": "Attributs & États Opérationnels",
+        "sizeX": 8,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "f40f6ef5-535f-4b70-b5d2-b63dbe06f209",
+              "dataKeys": [
+                {
+                  "name": "statut_connecteur",
+                  "type": "attribute",
+                  "label": "Statut Prise Type 2",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "showTitle": true,
+            "displayDetails": true
+          },
+          "showTitle": true,
+          "title": "Attributs & États Opérationnels",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 16,
+        "id": "7742fb48-13ed-4074-b7b4-1a712563fe13"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "3c4302d4-dc86-460a-8686-471b0c8ba229": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "6a637cc2-a9a9-4670-83fd-2776c6ba4688": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "5b1d086c-47a9-42d4-ba89-0333d7e2cbf3": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 8
+              },
+              "cc64a4fe-45de-48c2-99e4-241c10f0e835": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 16
+              },
+              "e2ba3aac-5cd3-4b10-a762-077fbb032fe7": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              },
+              "7742fb48-13ed-4074-b7b4-1a712563fe13": {
+                "sizeX": 8,
+                "sizeY": 8,
+                "row": 8,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

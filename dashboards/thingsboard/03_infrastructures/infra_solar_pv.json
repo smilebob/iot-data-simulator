@@ -1,0 +1,478 @@
+{
+  "title": "Supervision - Onduleur Solaire Photovoltaïque",
+  "name": "Supervision - Onduleur Solaire Photovoltaïque",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Onduleur Solaire Photovoltaïque' (ID: infra_solar_pv). Token: TOKEN_INFRA_SOLAR_PV. Protocole: HTTP.",
+    "entityAliases": {
+      "40fe773e-327b-4dc6-af65-5d1906fba8cb": {
+        "id": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+        "alias": "Onduleur Solaire Photovoltaïque",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Onduleur Solaire Photovoltaïque"
+        }
+      }
+    },
+    "widgets": {
+      "49d3363b-f180-4822-976f-ad4b9eb401d9": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Onduleur Solaire Photovoltaïque",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Onduleur Solaire Photovoltaïque</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_solar_pv</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_SOLAR_PV</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "49d3363b-f180-4822-976f-ad4b9eb401d9"
+      },
+      "484c9944-976a-4268-94e3-aa89e523d02c": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Irradiation Pyranomètre",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "dataKeys": [
+                {
+                  "name": "ensoleillement",
+                  "type": "timeseries",
+                  "label": "Irradiation Pyranomètre",
+                  "color": "#E2001A",
+                  "units": "W/m²",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -43.0,
+            "maxValue": 1073.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Irradiation Pyranomètre",
+            "unitTitle": "W/m²",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Irradiation Pyranomètre",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "484c9944-976a-4268-94e3-aa89e523d02c"
+      },
+      "8e8ee752-e5e8-49d4-843e-bd8a5f0777a7": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Rendement de Conversion",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "dataKeys": [
+                {
+                  "name": "rendement_onduleur",
+                  "type": "timeseries",
+                  "label": "Rendement de Conversion",
+                  "color": "#3B82F6",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 96.3,
+            "maxValue": 99.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Rendement de Conversion",
+            "unitTitle": "%",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Rendement de Conversion",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "8e8ee752-e5e8-49d4-843e-bd8a5f0777a7"
+      },
+      "afea5110-a0cf-4926-a75d-a98bd6df6005": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Puissance AC Injectée",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "dataKeys": [
+                {
+                  "name": "puissance_injection_kw",
+                  "type": "timeseries",
+                  "label": "Puissance AC Injectée",
+                  "color": "#10B981",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Puissance AC Injectée",
+            "unitTitle": "kW",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Puissance AC Injectée",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "afea5110-a0cf-4926-a75d-a98bd6df6005"
+      },
+      "ca1ced19-7bec-4dd3-90ce-99b2cbb4b4a6": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Tension DC Chaîne PV",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "dataKeys": [
+                {
+                  "name": "tension_dc_string",
+                  "type": "timeseries",
+                  "label": "Tension DC Chaîne PV",
+                  "color": "#F59E0B",
+                  "units": "V",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Tension DC Chaîne PV",
+            "unitTitle": "V",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Tension DC Chaîne PV",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "ca1ced19-7bec-4dd3-90ce-99b2cbb4b4a6"
+      },
+      "581b8749-55b5-4c5c-8a03-52fe1cb6ebe9": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Onduleur Solaire Photovoltaïque",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "dataKeys": [
+                {
+                  "name": "ensoleillement",
+                  "type": "timeseries",
+                  "label": "Irradiation Pyranomètre (W/m²)",
+                  "color": "#E2001A",
+                  "units": "W/m²",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "rendement_onduleur",
+                  "type": "timeseries",
+                  "label": "Rendement de Conversion (%)",
+                  "color": "#3B82F6",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "puissance_injection_kw",
+                  "type": "timeseries",
+                  "label": "Puissance AC Injectée (kW)",
+                  "color": "#10B981",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "tension_dc_string",
+                  "type": "timeseries",
+                  "label": "Tension DC Chaîne PV (V)",
+                  "color": "#F59E0B",
+                  "units": "V",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (4 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "581b8749-55b5-4c5c-8a03-52fe1cb6ebe9"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "49d3363b-f180-4822-976f-ad4b9eb401d9": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "484c9944-976a-4268-94e3-aa89e523d02c": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "8e8ee752-e5e8-49d4-843e-bd8a5f0777a7": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "afea5110-a0cf-4926-a75d-a98bd6df6005": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "ca1ced19-7bec-4dd3-90ce-99b2cbb4b4a6": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "581b8749-55b5-4c5c-8a03-52fe1cb6ebe9": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

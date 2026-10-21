@@ -1,0 +1,555 @@
+{
+  "title": "Supervision - Aérogénérateur / Éolienne MW",
+  "name": "Supervision - Aérogénérateur / Éolienne MW",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Aérogénérateur / Éolienne MW' (ID: infra_wind_turbine). Token: TOKEN_INFRA_WIND_TURBINE. Protocole: MQTT.",
+    "entityAliases": {
+      "2dbfaca6-1d5a-40cf-8ac0-c418f205b4ee": {
+        "id": "2dbfaca6-1d5a-40cf-8ac0-c418f205b4ee",
+        "alias": "Aérogénérateur / Éolienne MW",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Aérogénérateur / Éolienne MW"
+        }
+      }
+    },
+    "widgets": {
+      "39852b75-02c7-45d4-a7d0-a29d4c78c426": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Aérogénérateur / Éolienne MW",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Aérogénérateur / Éolienne MW</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_wind_turbine</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_WIND_TURBINE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "39852b75-02c7-45d4-a7d0-a29d4c78c426"
+      },
+      "e034d07b-470a-4a24-b65b-260054b8e32c": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Vitesse Vent Anémomètre",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2dbfaca6-1d5a-40cf-8ac0-c418f205b4ee",
+              "dataKeys": [
+                {
+                  "name": "vitesse_vent_ms",
+                  "type": "timeseries",
+                  "label": "Vitesse Vent Anémomètre",
+                  "color": "#E2001A",
+                  "units": "m/s",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 3.1,
+            "maxValue": 19.9,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Vitesse Vent Anémomètre",
+            "unitTitle": "m/s",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Vitesse Vent Anémomètre",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "e034d07b-470a-4a24-b65b-260054b8e32c"
+      },
+      "c4354cd9-3893-47a6-8b26-b60d1ee26b06": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Vitesse de Rotation Rotor",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2dbfaca6-1d5a-40cf-8ac0-c418f205b4ee",
+              "dataKeys": [
+                {
+                  "name": "vitesse_rotor_rpm",
+                  "type": "timeseries",
+                  "label": "Vitesse de Rotation Rotor",
+                  "color": "#3B82F6",
+                  "units": "rpm",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Vitesse de Rotation Rotor",
+            "unitTitle": "rpm",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Vitesse de Rotation Rotor",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "c4354cd9-3893-47a6-8b26-b60d1ee26b06"
+      },
+      "bdc631fc-e4dc-4d01-8414-9f56219b60c1": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Puissance Électrique Active",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2dbfaca6-1d5a-40cf-8ac0-c418f205b4ee",
+              "dataKeys": [
+                {
+                  "name": "puissance_active_mw",
+                  "type": "timeseries",
+                  "label": "Puissance Électrique Active",
+                  "color": "#10B981",
+                  "units": "MW",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Puissance Électrique Active",
+            "unitTitle": "MW",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Puissance Électrique Active",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "bdc631fc-e4dc-4d01-8414-9f56219b60c1"
+      },
+      "774dd36e-2db7-4911-96c2-c4ecd2144aa7": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Orientation Nacelle (Yaw)",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2dbfaca6-1d5a-40cf-8ac0-c418f205b4ee",
+              "dataKeys": [
+                {
+                  "name": "angle_nacelle_yaw_deg",
+                  "type": "timeseries",
+                  "label": "Orientation Nacelle (Yaw)",
+                  "color": "#F59E0B",
+                  "units": "°",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 18.0,
+            "maxValue": 342.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Orientation Nacelle (Yaw)",
+            "unitTitle": "°",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Orientation Nacelle (Yaw)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "774dd36e-2db7-4911-96c2-c4ecd2144aa7"
+      },
+      "606f836c-e95c-44ca-98fd-1012c5addaba": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Génératrice",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2dbfaca6-1d5a-40cf-8ac0-c418f205b4ee",
+              "dataKeys": [
+                {
+                  "name": "temp_generatrice",
+                  "type": "timeseries",
+                  "label": "Température Génératrice",
+                  "color": "#8B5CF6",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 52.3,
+            "maxValue": 84.7,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Génératrice",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#8B5CF6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#8B5CF6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Génératrice",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "606f836c-e95c-44ca-98fd-1012c5addaba"
+      },
+      "26545650-4057-4eb2-abe7-2f6417ba94a7": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Aérogénérateur / Éolienne MW",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "2dbfaca6-1d5a-40cf-8ac0-c418f205b4ee",
+              "dataKeys": [
+                {
+                  "name": "vitesse_vent_ms",
+                  "type": "timeseries",
+                  "label": "Vitesse Vent Anémomètre (m/s)",
+                  "color": "#E2001A",
+                  "units": "m/s",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "vitesse_rotor_rpm",
+                  "type": "timeseries",
+                  "label": "Vitesse de Rotation Rotor (rpm)",
+                  "color": "#3B82F6",
+                  "units": "rpm",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "puissance_active_mw",
+                  "type": "timeseries",
+                  "label": "Puissance Électrique Active (MW)",
+                  "color": "#10B981",
+                  "units": "MW",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "angle_nacelle_yaw_deg",
+                  "type": "timeseries",
+                  "label": "Orientation Nacelle (Yaw) (°)",
+                  "color": "#F59E0B",
+                  "units": "°",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temp_generatrice",
+                  "type": "timeseries",
+                  "label": "Température Génératrice (°C)",
+                  "color": "#8B5CF6",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (5 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 13,
+        "col": 0,
+        "id": "26545650-4057-4eb2-abe7-2f6417ba94a7"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "39852b75-02c7-45d4-a7d0-a29d4c78c426": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "e034d07b-470a-4a24-b65b-260054b8e32c": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "c4354cd9-3893-47a6-8b26-b60d1ee26b06": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "bdc631fc-e4dc-4d01-8414-9f56219b60c1": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "774dd36e-2db7-4911-96c2-c4ecd2144aa7": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "606f836c-e95c-44ca-98fd-1012c5addaba": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 8,
+                "col": 0
+              },
+              "26545650-4057-4eb2-abe7-2f6417ba94a7": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 13,
+                "col": 0
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

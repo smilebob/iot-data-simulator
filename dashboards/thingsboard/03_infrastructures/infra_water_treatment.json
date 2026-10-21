@@ -1,0 +1,555 @@
+{
+  "title": "Supervision - Bassin d'Aération & Traitement STEP",
+  "name": "Supervision - Bassin d'Aération & Traitement STEP",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Bassin d'Aération & Traitement STEP' (ID: infra_water_treatment). Token: TOKEN_INFRA_WATER_TREATMENT. Protocole: COAP.",
+    "entityAliases": {
+      "de623833-d814-43c1-a9d9-9a4da2e767d0": {
+        "id": "de623833-d814-43c1-a9d9-9a4da2e767d0",
+        "alias": "Bassin d'Aération & Traitement STEP",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Bassin d'Aération & Traitement STEP"
+        }
+      }
+    },
+    "widgets": {
+      "13689c28-0483-4f2c-b264-71868df654e5": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Bassin d'Aération & Traitement STEP",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Bassin d'Aération & Traitement STEP</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_water_treatment</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">COAP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_WATER_TREATMENT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "13689c28-0483-4f2c-b264-71868df654e5"
+      },
+      "f44f2d49-a1bf-4629-ab9c-cc7d0c69b08b": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Taux Oxygène Dissous (O₂)",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "de623833-d814-43c1-a9d9-9a4da2e767d0",
+              "dataKeys": [
+                {
+                  "name": "oxygene_dissous_mgl",
+                  "type": "timeseries",
+                  "label": "Taux Oxygène Dissous (O₂)",
+                  "color": "#E2001A",
+                  "units": "mg/l",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 1.2,
+            "maxValue": 3.4,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Taux Oxygène Dissous (O₂)",
+            "unitTitle": "mg/l",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Taux Oxygène Dissous (O₂)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "f44f2d49-a1bf-4629-ab9c-cc7d0c69b08b"
+      },
+      "89280cb6-8f9e-4100-8bcb-ad419299ad3e": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Potentiel d'Oxydoréduction (Redox)",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "de623833-d814-43c1-a9d9-9a4da2e767d0",
+              "dataKeys": [
+                {
+                  "name": "potentiel_redox_mv",
+                  "type": "timeseries",
+                  "label": "Potentiel d'Oxydoréduction (Redox)",
+                  "color": "#3B82F6",
+                  "units": "mV",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -150.0,
+            "maxValue": 210.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Potentiel d'Oxydoréduction (Redox)",
+            "unitTitle": "mV",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Potentiel d'Oxydoréduction (Redox)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "89280cb6-8f9e-4100-8bcb-ad419299ad3e"
+      },
+      "f5d1c65f-7d8f-4356-946f-1163f30b4c20": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Acidité / Basicité pH",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "de623833-d814-43c1-a9d9-9a4da2e767d0",
+              "dataKeys": [
+                {
+                  "name": "ph_eau",
+                  "type": "timeseries",
+                  "label": "Acidité / Basicité pH",
+                  "color": "#10B981",
+                  "units": "pH",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 6.7,
+            "maxValue": 7.7,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Acidité / Basicité pH",
+            "unitTitle": "pH",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Acidité / Basicité pH",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "f5d1c65f-7d8f-4356-946f-1163f30b4c20"
+      },
+      "5775304b-1da2-489d-b78b-c97ae5294a4c": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Indice Turbidité Eau",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "de623833-d814-43c1-a9d9-9a4da2e767d0",
+              "dataKeys": [
+                {
+                  "name": "turbidite_ntu",
+                  "type": "timeseries",
+                  "label": "Indice Turbidité Eau",
+                  "color": "#F59E0B",
+                  "units": "NTU",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 4.6,
+            "maxValue": 45.4,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Indice Turbidité Eau",
+            "unitTitle": "NTU",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Indice Turbidité Eau",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "5775304b-1da2-489d-b78b-c97ae5294a4c"
+      },
+      "e0efbf46-38a3-4f34-91c7-29edef759769": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Débit Air Surpresseurs",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "de623833-d814-43c1-a9d9-9a4da2e767d0",
+              "dataKeys": [
+                {
+                  "name": "debit_insufflation_nm3h",
+                  "type": "timeseries",
+                  "label": "Débit Air Surpresseurs",
+                  "color": "#8B5CF6",
+                  "units": "Nm³/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 320.0,
+            "maxValue": 1280.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Débit Air Surpresseurs",
+            "unitTitle": "Nm³/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#8B5CF6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#8B5CF6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Débit Air Surpresseurs",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "e0efbf46-38a3-4f34-91c7-29edef759769"
+      },
+      "5e9a9cb4-be7d-40fc-a78d-60aa7a65e319": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Bassin d'Aération & Traitement STEP",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "de623833-d814-43c1-a9d9-9a4da2e767d0",
+              "dataKeys": [
+                {
+                  "name": "oxygene_dissous_mgl",
+                  "type": "timeseries",
+                  "label": "Taux Oxygène Dissous (O₂) (mg/l)",
+                  "color": "#E2001A",
+                  "units": "mg/l",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "potentiel_redox_mv",
+                  "type": "timeseries",
+                  "label": "Potentiel d'Oxydoréduction (Redox) (mV)",
+                  "color": "#3B82F6",
+                  "units": "mV",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "ph_eau",
+                  "type": "timeseries",
+                  "label": "Acidité / Basicité pH (pH)",
+                  "color": "#10B981",
+                  "units": "pH",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "turbidite_ntu",
+                  "type": "timeseries",
+                  "label": "Indice Turbidité Eau (NTU)",
+                  "color": "#F59E0B",
+                  "units": "NTU",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "debit_insufflation_nm3h",
+                  "type": "timeseries",
+                  "label": "Débit Air Surpresseurs (Nm³/h)",
+                  "color": "#8B5CF6",
+                  "units": "Nm³/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (5 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 13,
+        "col": 0,
+        "id": "5e9a9cb4-be7d-40fc-a78d-60aa7a65e319"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "13689c28-0483-4f2c-b264-71868df654e5": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "f44f2d49-a1bf-4629-ab9c-cc7d0c69b08b": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "89280cb6-8f9e-4100-8bcb-ad419299ad3e": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "f5d1c65f-7d8f-4356-946f-1163f30b4c20": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "5775304b-1da2-489d-b78b-c97ae5294a4c": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "e0efbf46-38a3-4f34-91c7-29edef759769": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 8,
+                "col": 0
+              },
+              "5e9a9cb4-be7d-40fc-a78d-60aa7a65e319": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 13,
+                "col": 0
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

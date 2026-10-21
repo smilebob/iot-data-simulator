@@ -1,0 +1,478 @@
+{
+  "title": "Supervision - Station Météo & Climat Urbain",
+  "name": "Supervision - Station Météo & Climat Urbain",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Station Météo & Climat Urbain' (ID: city_weather). Token: TOKEN_CITY_WEATHER. Protocole: HTTP.",
+    "entityAliases": {
+      "72137118-3df0-4e09-a11f-b53378f74eac": {
+        "id": "72137118-3df0-4e09-a11f-b53378f74eac",
+        "alias": "Station Météo & Climat Urbain",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Station Météo & Climat Urbain"
+        }
+      }
+    },
+    "widgets": {
+      "c947245b-aded-4401-a56f-039f918cec76": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Station Météo & Climat Urbain",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Station Météo & Climat Urbain</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: city_weather</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_WEATHER</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "c947245b-aded-4401-a56f-039f918cec76"
+      },
+      "889c57ca-a0ea-446c-9be2-763f010addcd": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température sous Abri",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "72137118-3df0-4e09-a11f-b53378f74eac",
+              "dataKeys": [
+                {
+                  "name": "temp_ext",
+                  "type": "timeseries",
+                  "label": "Température sous Abri",
+                  "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 12.5,
+            "maxValue": 30.5,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température sous Abri",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température sous Abri",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "889c57ca-a0ea-446c-9be2-763f010addcd"
+      },
+      "c3e709e4-f463-46ff-9665-c981a37c3f71": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Vitesse du Vent",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "72137118-3df0-4e09-a11f-b53378f74eac",
+              "dataKeys": [
+                {
+                  "name": "vitesse_vent_kmh",
+                  "type": "timeseries",
+                  "label": "Vitesse du Vent",
+                  "color": "#3B82F6",
+                  "units": "km/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 1.0,
+            "maxValue": 49.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Vitesse du Vent",
+            "unitTitle": "km/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Vitesse du Vent",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "c3e709e4-f463-46ff-9665-c981a37c3f71"
+      },
+      "7b1697ca-fe27-4846-b920-3762cceca8f6": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Hygrométrie Extérieure",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "72137118-3df0-4e09-a11f-b53378f74eac",
+              "dataKeys": [
+                {
+                  "name": "humidite_ext",
+                  "type": "timeseries",
+                  "label": "Hygrométrie Extérieure",
+                  "color": "#10B981",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 30.5,
+            "maxValue": 84.5,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Hygrométrie Extérieure",
+            "unitTitle": "%",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Hygrométrie Extérieure",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "7b1697ca-fe27-4846-b920-3762cceca8f6"
+      },
+      "9760853d-79d2-4e46-8f24-1ee9096109ee": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Indice Rayonnement UV",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "72137118-3df0-4e09-a11f-b53378f74eac",
+              "dataKeys": [
+                {
+                  "name": "indice_uv",
+                  "type": "timeseries",
+                  "label": "Indice Rayonnement UV",
+                  "color": "#F59E0B",
+                  "units": "",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -0.9,
+            "maxValue": 9.3,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Indice Rayonnement UV",
+            "unitTitle": "",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Indice Rayonnement UV",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "9760853d-79d2-4e46-8f24-1ee9096109ee"
+      },
+      "16e5fa7a-e86d-45dc-8205-3f54ec86126c": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Station Météo & Climat Urbain",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "72137118-3df0-4e09-a11f-b53378f74eac",
+              "dataKeys": [
+                {
+                  "name": "temp_ext",
+                  "type": "timeseries",
+                  "label": "Température sous Abri (°C)",
+                  "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "vitesse_vent_kmh",
+                  "type": "timeseries",
+                  "label": "Vitesse du Vent (km/h)",
+                  "color": "#3B82F6",
+                  "units": "km/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "humidite_ext",
+                  "type": "timeseries",
+                  "label": "Hygrométrie Extérieure (%)",
+                  "color": "#10B981",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "indice_uv",
+                  "type": "timeseries",
+                  "label": "Indice Rayonnement UV",
+                  "color": "#F59E0B",
+                  "units": "",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (4 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "16e5fa7a-e86d-45dc-8205-3f54ec86126c"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "c947245b-aded-4401-a56f-039f918cec76": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "889c57ca-a0ea-446c-9be2-763f010addcd": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "c3e709e4-f463-46ff-9665-c981a37c3f71": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "7b1697ca-fe27-4846-b920-3762cceca8f6": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "9760853d-79d2-4e46-8f24-1ee9096109ee": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "16e5fa7a-e86d-45dc-8205-3f54ec86126c": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

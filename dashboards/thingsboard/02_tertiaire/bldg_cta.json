@@ -1,0 +1,526 @@
+{
+  "title": "Supervision - Centrale Traitement d'Air (CTA)",
+  "name": "Supervision - Centrale Traitement d'Air (CTA)",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Centrale Traitement d'Air (CTA)' (ID: bldg_cta). Token: TOKEN_BLDG_CTA. Protocole: HTTP.",
+    "entityAliases": {
+      "9006bbf3-1afa-4e5c-806b-c47553f9299a": {
+        "id": "9006bbf3-1afa-4e5c-806b-c47553f9299a",
+        "alias": "Centrale Traitement d'Air (CTA)",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Centrale Traitement d'Air (CTA)"
+        }
+      }
+    },
+    "widgets": {
+      "fc27e079-26e7-4df5-b6d7-a767208eb8f4": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Centrale Traitement d'Air (CTA)",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Centrale Traitement d'Air (CTA)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: bldg_cta</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_CTA</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "fc27e079-26e7-4df5-b6d7-a767208eb8f4"
+      },
+      "9938fdc7-9d12-4038-aaf3-81e5d5090050": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Soufflage",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "9006bbf3-1afa-4e5c-806b-c47553f9299a",
+              "dataKeys": [
+                {
+                  "name": "temp_soufflage",
+                  "type": "timeseries",
+                  "label": "Température Soufflage",
+                  "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 19.2,
+            "maxValue": 22.8,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Soufflage",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Soufflage",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "9938fdc7-9d12-4038-aaf3-81e5d5090050"
+      },
+      "5b7efdfe-8d4e-49f5-b2e0-104e0a83554f": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Reprise",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "9006bbf3-1afa-4e5c-806b-c47553f9299a",
+              "dataKeys": [
+                {
+                  "name": "temp_reprise",
+                  "type": "timeseries",
+                  "label": "Température Reprise",
+                  "color": "#3B82F6",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 20.7,
+            "maxValue": 24.3,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Reprise",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Reprise",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "5b7efdfe-8d4e-49f5-b2e0-104e0a83554f"
+      },
+      "b5c70fce-650f-49f8-b19c-d1d4646b0a7a": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Débit d'Air Soufflé",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "9006bbf3-1afa-4e5c-806b-c47553f9299a",
+              "dataKeys": [
+                {
+                  "name": "debit_soufflage",
+                  "type": "timeseries",
+                  "label": "Débit d'Air Soufflé",
+                  "color": "#10B981",
+                  "units": "m³/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 1230.0,
+            "maxValue": 4470.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Débit d'Air Soufflé",
+            "unitTitle": "m³/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Débit d'Air Soufflé",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "b5c70fce-650f-49f8-b19c-d1d4646b0a7a"
+      },
+      "122d2771-3bcc-42e7-a33d-e900c3222419": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Delta Pression Filtre",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "9006bbf3-1afa-4e5c-806b-c47553f9299a",
+              "dataKeys": [
+                {
+                  "name": "pression_filtre",
+                  "type": "timeseries",
+                  "label": "Delta Pression Filtre",
+                  "color": "#F59E0B",
+                  "units": "Pa",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 104.0,
+            "maxValue": 296.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Delta Pression Filtre",
+            "unitTitle": "Pa",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Delta Pression Filtre",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "122d2771-3bcc-42e7-a33d-e900c3222419"
+      },
+      "6393b925-7665-4313-8f18-99fecc4d71c7": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Centrale Traitement d'Air (CTA)",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "9006bbf3-1afa-4e5c-806b-c47553f9299a",
+              "dataKeys": [
+                {
+                  "name": "temp_soufflage",
+                  "type": "timeseries",
+                  "label": "Température Soufflage (°C)",
+                  "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temp_reprise",
+                  "type": "timeseries",
+                  "label": "Température Reprise (°C)",
+                  "color": "#3B82F6",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "debit_soufflage",
+                  "type": "timeseries",
+                  "label": "Débit d'Air Soufflé (m³/h)",
+                  "color": "#10B981",
+                  "units": "m³/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "pression_filtre",
+                  "type": "timeseries",
+                  "label": "Delta Pression Filtre (Pa)",
+                  "color": "#F59E0B",
+                  "units": "Pa",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (4 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "6393b925-7665-4313-8f18-99fecc4d71c7"
+      },
+      "73b2d655-2223-4ba5-b68b-726fbfb31575": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "latest_values",
+        "type": "latest",
+        "title": "Attributs & États Opérationnels",
+        "sizeX": 8,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "9006bbf3-1afa-4e5c-806b-c47553f9299a",
+              "dataKeys": [
+                {
+                  "name": "registre_air_neuf",
+                  "type": "attribute",
+                  "label": "Ouverture Registre Air Neuf",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "showTitle": true,
+            "displayDetails": true
+          },
+          "showTitle": true,
+          "title": "Attributs & États Opérationnels",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 16,
+        "id": "73b2d655-2223-4ba5-b68b-726fbfb31575"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "fc27e079-26e7-4df5-b6d7-a767208eb8f4": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "9938fdc7-9d12-4038-aaf3-81e5d5090050": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "5b7efdfe-8d4e-49f5-b2e0-104e0a83554f": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "b5c70fce-650f-49f8-b19c-d1d4646b0a7a": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "122d2771-3bcc-42e7-a33d-e900c3222419": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "6393b925-7665-4313-8f18-99fecc4d71c7": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              },
+              "73b2d655-2223-4ba5-b68b-726fbfb31575": {
+                "sizeX": 8,
+                "sizeY": 8,
+                "row": 8,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

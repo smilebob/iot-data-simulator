@@ -1,0 +1,456 @@
+{
+  "title": "Supervision - Aiguillage & Signalisation Ferroviaire",
+  "name": "Supervision - Aiguillage & Signalisation Ferroviaire",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Token: TOKEN_INFRA_RAIL_SWITCH. Protocole: HTTP.",
+    "entityAliases": {
+      "710d61ec-fc61-4646-8bac-f6c550b56cf5": {
+        "id": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+        "alias": "Aiguillage & Signalisation Ferroviaire",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Aiguillage & Signalisation Ferroviaire"
+        }
+      }
+    },
+    "widgets": {
+      "6ed36851-1253-465f-ada8-601bc5e99d85": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Aiguillage & Signalisation Ferroviaire",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Aiguillage & Signalisation Ferroviaire</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_rail_switch</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_RAIL_SWITCH</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "6ed36851-1253-465f-ada8-601bc5e99d85"
+      },
+      "fff65678-3467-4ea4-b791-c982aa32c7b6": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Courant d'Effort Manœuvre",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "dataKeys": [
+                {
+                  "name": "courant_moteur_aiguille_a",
+                  "type": "timeseries",
+                  "label": "Courant d'Effort Manœuvre",
+                  "color": "#E2001A",
+                  "units": "A",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -0.8,
+            "maxValue": 9.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Courant d'Effort Manœuvre",
+            "unitTitle": "A",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Courant d'Effort Manœuvre",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "fff65678-3467-4ea4-b791-c982aa32c7b6"
+      },
+      "aa2de9c5-db41-44eb-80c0-2627161a9f0c": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Durée de Manœuvre Moteur",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "dataKeys": [
+                {
+                  "name": "temps_manoeuvre_ms",
+                  "type": "timeseries",
+                  "label": "Durée de Manœuvre Moteur",
+                  "color": "#3B82F6",
+                  "units": "ms",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 2740.0,
+            "maxValue": 3460.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Durée de Manœuvre Moteur",
+            "unitTitle": "ms",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Durée de Manœuvre Moteur",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 8,
+        "id": "aa2de9c5-db41-44eb-80c0-2627161a9f0c"
+      },
+      "47d0aed0-5772-48e0-82d2-a061bc5111a5": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Rail Détectée",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "dataKeys": [
+                {
+                  "name": "temp_rail_rechauffage",
+                  "type": "timeseries",
+                  "label": "Température Rail Détectée",
+                  "color": "#10B981",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 0.8,
+            "maxValue": 15.2,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Rail Détectée",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Rail Détectée",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 16,
+        "id": "47d0aed0-5772-48e0-82d2-a061bc5111a5"
+      },
+      "3408851b-dab7-4480-b0b3-66ee4d42439b": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Aiguillage & Signalisation Ferroviaire",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "dataKeys": [
+                {
+                  "name": "courant_moteur_aiguille_a",
+                  "type": "timeseries",
+                  "label": "Courant d'Effort Manœuvre (A)",
+                  "color": "#E2001A",
+                  "units": "A",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temps_manoeuvre_ms",
+                  "type": "timeseries",
+                  "label": "Durée de Manœuvre Moteur (ms)",
+                  "color": "#3B82F6",
+                  "units": "ms",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temp_rail_rechauffage",
+                  "type": "timeseries",
+                  "label": "Température Rail Détectée (°C)",
+                  "color": "#10B981",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (3 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "3408851b-dab7-4480-b0b3-66ee4d42439b"
+      },
+      "c69c247c-857a-45c0-8755-d088c916aadf": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "latest_values",
+        "type": "latest",
+        "title": "Attributs & États Opérationnels",
+        "sizeX": 8,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "dataKeys": [
+                {
+                  "name": "presence_essieu",
+                  "type": "attribute",
+                  "label": "Pédale Détection Essieu",
+                  "color": "#38BDF8",
+                  "settings": {}
+                },
+                {
+                  "name": "position_aiguille",
+                  "type": "attribute",
+                  "label": "Contrôle Position Verrouillée",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "showTitle": true,
+            "displayDetails": true
+          },
+          "showTitle": true,
+          "title": "Attributs & États Opérationnels",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 16,
+        "id": "c69c247c-857a-45c0-8755-d088c916aadf"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "6ed36851-1253-465f-ada8-601bc5e99d85": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "fff65678-3467-4ea4-b791-c982aa32c7b6": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "aa2de9c5-db41-44eb-80c0-2627161a9f0c": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 8
+              },
+              "47d0aed0-5772-48e0-82d2-a061bc5111a5": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 16
+              },
+              "3408851b-dab7-4480-b0b3-66ee4d42439b": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              },
+              "c69c247c-857a-45c0-8755-d088c916aadf": {
+                "sizeX": 8,
+                "sizeY": 8,
+                "row": 8,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

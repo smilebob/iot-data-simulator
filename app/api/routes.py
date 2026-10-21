@@ -1,5 +1,7 @@
+import json
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from fastapi.responses import Response
 from pydantic import BaseModel
 from app.models.broker import BrokerConfig
 from app.models.device import DeviceConfig
@@ -13,6 +15,7 @@ from app.core.logger import log_handler
 from app.mqtt.diagnostics import test_broker_connectivity
 from app.api.auth import require_role
 from app.models.user import UserRole
+from app.core.dashboard_generator import generate_thingsboard_dashboard
 from app.core.equipment_catalog import (
     get_equipment_catalog,
     EquipmentPreset,
@@ -89,6 +92,28 @@ async def test_device_communication_by_id(
     if not device:
         raise HTTPException(status_code=404, detail="Équipement non trouvé")
     return await transports.test_device_communication(device)
+
+@router.get("/devices/{device_id}/thingsboard-dashboard", dependencies=[Depends(require_role(ROLE_ANY))])
+def download_device_thingsboard_dashboard(
+    device_id: str,
+    repo: StorageRepository = Depends(get_repo),
+):
+    """Génère et télécharge le tableau de bord ThingsBoard préconfiguré pour cet équipement avec son token."""
+    device = repo.get_device(device_id)
+    if not device:
+        raise HTTPException(status_code=404, detail=f"Équipement '{device_id}' introuvable.")
+    variables = repo.get_variables(device_id)
+    dashboard_data = generate_thingsboard_dashboard(device, variables)
+
+    filename = f"dashboard_tb_{device.id}.json"
+    content = json.dumps(dashboard_data, indent=2, ensure_ascii=False)
+    return Response(
+        content=content,
+        media_type="application/json",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+    )
 
 # --- Variables ---
 @router.get("/variables", response_model=List[VariableConfig], dependencies=[Depends(require_role(ROLE_ANY))])
@@ -274,4 +299,39 @@ def instantiate_equipment_preset(
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur lors de la création du modèle : {e}")
+
+@router.get("/presets/{preset_id}/thingsboard-dashboard", dependencies=[Depends(require_role(ROLE_ANY))])
+def download_preset_thingsboard_dashboard(
+    preset_id: str,
+):
+    """Génère et télécharge le tableau de bord ThingsBoard préconfiguré pour un modèle métier du catalogue."""
+    catalog = get_equipment_catalog()
+    preset = next((p for p in catalog if p.id == preset_id), None)
+    if not preset:
+        raise HTTPException(status_code=404, detail=f"Modèle '{preset_id}' introuvable dans le catalogue.")
+
+    mock_device = DeviceConfig(
+        id=preset.id,
+        name=preset.name,
+        platform=preset.default_platform,
+        protocol=preset.default_protocol,
+        token="A_RENSEIGNER_DANS_THINGSBOARD",
+        enabled=True
+    )
+    mock_vars = []
+    for orig in preset.variables:
+        v = orig.model_copy(deep=True)
+        v.device_id = mock_device.id
+        mock_vars.append(v)
+
+    dashboard_data = generate_thingsboard_dashboard(mock_device, mock_vars)
+    filename = f"dashboard_tb_{preset.id}.json"
+    content = json.dumps(dashboard_data, indent=2, ensure_ascii=False)
+    return Response(
+        content=content,
+        media_type="application/json",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+    )
 

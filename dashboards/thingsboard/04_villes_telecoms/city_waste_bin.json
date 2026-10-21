@@ -1,0 +1,456 @@
+{
+  "title": "Supervision - Conteneur Déchets & PAV Connecté",
+  "name": "Supervision - Conteneur Déchets & PAV Connecté",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Conteneur Déchets & PAV Connecté' (ID: city_waste_bin). Token: TOKEN_CITY_WASTE_BIN. Protocole: COAP.",
+    "entityAliases": {
+      "4703792b-fd7b-4643-887a-3b4120d1592f": {
+        "id": "4703792b-fd7b-4643-887a-3b4120d1592f",
+        "alias": "Conteneur Déchets & PAV Connecté",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Conteneur Déchets & PAV Connecté"
+        }
+      }
+    },
+    "widgets": {
+      "96996b76-5c40-4eda-8fd0-96060b4635bb": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Conteneur Déchets & PAV Connecté",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Conteneur Déchets & PAV Connecté</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: city_waste_bin</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">COAP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_WASTE_BIN</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "96996b76-5c40-4eda-8fd0-96060b4635bb"
+      },
+      "fc102112-4412-4fd3-86fd-55c0925e73b5": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Taux Remplissage Cuve",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "4703792b-fd7b-4643-887a-3b4120d1592f",
+              "dataKeys": [
+                {
+                  "name": "taux_remplissage_pct",
+                  "type": "timeseries",
+                  "label": "Taux Remplissage Cuve",
+                  "color": "#E2001A",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 6.7,
+            "maxValue": 106.3,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Taux Remplissage Cuve",
+            "unitTitle": "%",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Taux Remplissage Cuve",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "fc102112-4412-4fd3-86fd-55c0925e73b5"
+      },
+      "41028503-29d9-4e52-91e5-84e2bc74bd00": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Interne Cuve",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "4703792b-fd7b-4643-887a-3b4120d1592f",
+              "dataKeys": [
+                {
+                  "name": "temp_interne_cuve",
+                  "type": "timeseries",
+                  "label": "Température Interne Cuve",
+                  "color": "#3B82F6",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 10.4,
+            "maxValue": 29.6,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Interne Cuve",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Interne Cuve",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 8,
+        "id": "41028503-29d9-4e52-91e5-84e2bc74bd00"
+      },
+      "d37e8dd1-ac9c-4fd3-81e5-711264aff154": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Niveau Batterie Capteur",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "4703792b-fd7b-4643-887a-3b4120d1592f",
+              "dataKeys": [
+                {
+                  "name": "batterie_autonomie_pct",
+                  "type": "timeseries",
+                  "label": "Niveau Batterie Capteur",
+                  "color": "#10B981",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 67.1,
+            "maxValue": 101.9,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Niveau Batterie Capteur",
+            "unitTitle": "%",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Niveau Batterie Capteur",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 16,
+        "id": "d37e8dd1-ac9c-4fd3-81e5-711264aff154"
+      },
+      "345cff2e-3356-4e9a-8f43-ba67a69bea62": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Conteneur Déchets & PAV Connecté",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "4703792b-fd7b-4643-887a-3b4120d1592f",
+              "dataKeys": [
+                {
+                  "name": "taux_remplissage_pct",
+                  "type": "timeseries",
+                  "label": "Taux Remplissage Cuve (%)",
+                  "color": "#E2001A",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temp_interne_cuve",
+                  "type": "timeseries",
+                  "label": "Température Interne Cuve (°C)",
+                  "color": "#3B82F6",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "batterie_autonomie_pct",
+                  "type": "timeseries",
+                  "label": "Niveau Batterie Capteur (%)",
+                  "color": "#10B981",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (3 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "345cff2e-3356-4e9a-8f43-ba67a69bea62"
+      },
+      "d9ebe99c-5c80-45d5-9217-764f2d4ec927": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "latest_values",
+        "type": "latest",
+        "title": "Attributs & États Opérationnels",
+        "sizeX": 8,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "4703792b-fd7b-4643-887a-3b4120d1592f",
+              "dataKeys": [
+                {
+                  "name": "alerte_incendie",
+                  "type": "attribute",
+                  "label": "Détection Fumée / Feu Bac",
+                  "color": "#38BDF8",
+                  "settings": {}
+                },
+                {
+                  "name": "alerte_basculement",
+                  "type": "attribute",
+                  "label": "Capteur Choc / Basculement",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "showTitle": true,
+            "displayDetails": true
+          },
+          "showTitle": true,
+          "title": "Attributs & États Opérationnels",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 16,
+        "id": "d9ebe99c-5c80-45d5-9217-764f2d4ec927"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "96996b76-5c40-4eda-8fd0-96060b4635bb": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "fc102112-4412-4fd3-86fd-55c0925e73b5": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "41028503-29d9-4e52-91e5-84e2bc74bd00": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 8
+              },
+              "d37e8dd1-ac9c-4fd3-81e5-711264aff154": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 16
+              },
+              "345cff2e-3356-4e9a-8f43-ba67a69bea62": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              },
+              "d9ebe99c-5c80-45d5-9217-764f2d4ec927": {
+                "sizeX": 8,
+                "sizeY": 8,
+                "row": 8,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

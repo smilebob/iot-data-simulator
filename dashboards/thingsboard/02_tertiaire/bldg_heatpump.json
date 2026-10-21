@@ -1,0 +1,449 @@
+{
+  "title": "Supervision - Pompe à Chaleur Réversible (PAC)",
+  "name": "Supervision - Pompe à Chaleur Réversible (PAC)",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Pompe à Chaleur Réversible (PAC)' (ID: bldg_heatpump). Token: TOKEN_BLDG_HEATPUMP. Protocole: HTTP.",
+    "entityAliases": {
+      "35ab36dc-6e0b-4421-97e6-2d2ca538c5de": {
+        "id": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+        "alias": "Pompe à Chaleur Réversible (PAC)",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Pompe à Chaleur Réversible (PAC)"
+        }
+      }
+    },
+    "widgets": {
+      "1fef67fe-a316-4243-90cb-e4819aa4735e": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Pompe à Chaleur Réversible (PAC)",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Pompe à Chaleur Réversible (PAC)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: bldg_heatpump</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_HEATPUMP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "1fef67fe-a316-4243-90cb-e4819aa4735e"
+      },
+      "92f1e20d-2dda-4a9e-9407-764887d06d64": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Eau Départ PAC",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "dataKeys": [
+                {
+                  "name": "temp_depart_eau",
+                  "type": "timeseries",
+                  "label": "Température Eau Départ PAC",
+                  "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 41.4,
+            "maxValue": 48.6,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Eau Départ PAC",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Eau Départ PAC",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "92f1e20d-2dda-4a9e-9407-764887d06d64"
+      },
+      "0b37f731-8bf3-4592-a3ca-726146c1fefb": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Puissance Thermique Fournie",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "dataKeys": [
+                {
+                  "name": "puissance_thermique_kw",
+                  "type": "timeseries",
+                  "label": "Puissance Thermique Fournie",
+                  "color": "#3B82F6",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 11.0,
+            "maxValue": 59.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Puissance Thermique Fournie",
+            "unitTitle": "kW",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Puissance Thermique Fournie",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 8,
+        "id": "0b37f731-8bf3-4592-a3ca-726146c1fefb"
+      },
+      "7a80fdc0-e5ae-4422-a3dd-8a132d6fe2d8": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Pression Circuit Primaire",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "dataKeys": [
+                {
+                  "name": "pression_circuit",
+                  "type": "timeseries",
+                  "label": "Pression Circuit Primaire",
+                  "color": "#10B981",
+                  "units": "bar",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 1.7,
+            "maxValue": 2.4,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Pression Circuit Primaire",
+            "unitTitle": "bar",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Pression Circuit Primaire",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 16,
+        "id": "7a80fdc0-e5ae-4422-a3dd-8a132d6fe2d8"
+      },
+      "5be0a677-78ec-4d02-88ea-3ff3a793b79b": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Pompe à Chaleur Réversible (PAC)",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "dataKeys": [
+                {
+                  "name": "temp_depart_eau",
+                  "type": "timeseries",
+                  "label": "Température Eau Départ PAC (°C)",
+                  "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "puissance_thermique_kw",
+                  "type": "timeseries",
+                  "label": "Puissance Thermique Fournie (kW)",
+                  "color": "#3B82F6",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "pression_circuit",
+                  "type": "timeseries",
+                  "label": "Pression Circuit Primaire (bar)",
+                  "color": "#10B981",
+                  "units": "bar",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (3 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "5be0a677-78ec-4d02-88ea-3ff3a793b79b"
+      },
+      "ef7f1aea-9254-4b58-a102-29ff341fc8eb": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "latest_values",
+        "type": "latest",
+        "title": "Attributs & États Opérationnels",
+        "sizeX": 8,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "dataKeys": [
+                {
+                  "name": "mode_chaud",
+                  "type": "attribute",
+                  "label": "Mode Fonctionnement Chaud",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "showTitle": true,
+            "displayDetails": true
+          },
+          "showTitle": true,
+          "title": "Attributs & États Opérationnels",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 16,
+        "id": "ef7f1aea-9254-4b58-a102-29ff341fc8eb"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "1fef67fe-a316-4243-90cb-e4819aa4735e": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "92f1e20d-2dda-4a9e-9407-764887d06d64": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "0b37f731-8bf3-4592-a3ca-726146c1fefb": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 8
+              },
+              "7a80fdc0-e5ae-4422-a3dd-8a132d6fe2d8": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 16
+              },
+              "5be0a677-78ec-4d02-88ea-3ff3a793b79b": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              },
+              "ef7f1aea-9254-4b58-a102-29ff341fc8eb": {
+                "sizeX": 8,
+                "sizeY": 8,
+                "row": 8,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

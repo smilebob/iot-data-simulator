@@ -1,0 +1,449 @@
+{
+  "title": "Supervision - Armoire d'Éclairage Public",
+  "name": "Supervision - Armoire d'Éclairage Public",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Armoire d'Éclairage Public' (ID: city_lighting). Token: TOKEN_CITY_LIGHTING. Protocole: COAP.",
+    "entityAliases": {
+      "e1d90123-ed1e-4ac6-8811-b173546e5a16": {
+        "id": "e1d90123-ed1e-4ac6-8811-b173546e5a16",
+        "alias": "Armoire d'Éclairage Public",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Armoire d'Éclairage Public"
+        }
+      }
+    },
+    "widgets": {
+      "8d5bf35d-e41a-41c1-86e5-6ac883ca4f6f": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Armoire d'Éclairage Public",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Armoire d'Éclairage Public</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: city_lighting</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">COAP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_LIGHTING</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "8d5bf35d-e41a-41c1-86e5-6ac883ca4f6f"
+      },
+      "9fc1b938-a556-475d-ad0c-7a43a924b5de": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Puissance Circuit Éclairage",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "e1d90123-ed1e-4ac6-8811-b173546e5a16",
+              "dataKeys": [
+                {
+                  "name": "puissance_eclairage_kw",
+                  "type": "timeseries",
+                  "label": "Puissance Circuit Éclairage",
+                  "color": "#E2001A",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 1.3,
+            "maxValue": 15.2,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Puissance Circuit Éclairage",
+            "unitTitle": "kW",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Puissance Circuit Éclairage",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "9fc1b938-a556-475d-ad0c-7a43a924b5de"
+      },
+      "26ee33dc-b6fc-4c65-a7ed-cee83c94d152": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Niveau Gradation (Abaissement)",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "e1d90123-ed1e-4ac6-8811-b173546e5a16",
+              "dataKeys": [
+                {
+                  "name": "niveau_gradation_pct",
+                  "type": "timeseries",
+                  "label": "Niveau Gradation (Abaissement)",
+                  "color": "#3B82F6",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 23.0,
+            "maxValue": 107.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Niveau Gradation (Abaissement)",
+            "unitTitle": "%",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Niveau Gradation (Abaissement)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 8,
+        "id": "26ee33dc-b6fc-4c65-a7ed-cee83c94d152"
+      },
+      "1f2ce337-106d-4b3a-a8a2-00d01343809f": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Courant de Fuite Différentiel",
+        "sizeX": 8,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "e1d90123-ed1e-4ac6-8811-b173546e5a16",
+              "dataKeys": [
+                {
+                  "name": "courant_fuite_ma",
+                  "type": "timeseries",
+                  "label": "Courant de Fuite Différentiel",
+                  "color": "#10B981",
+                  "units": "mA",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 8.4,
+            "maxValue": 51.6,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Courant de Fuite Différentiel",
+            "unitTitle": "mA",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Courant de Fuite Différentiel",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 16,
+        "id": "1f2ce337-106d-4b3a-a8a2-00d01343809f"
+      },
+      "cc33b20d-8033-4337-9736-5b14e5c183cb": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Armoire d'Éclairage Public",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "e1d90123-ed1e-4ac6-8811-b173546e5a16",
+              "dataKeys": [
+                {
+                  "name": "puissance_eclairage_kw",
+                  "type": "timeseries",
+                  "label": "Puissance Circuit Éclairage (kW)",
+                  "color": "#E2001A",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "niveau_gradation_pct",
+                  "type": "timeseries",
+                  "label": "Niveau Gradation (Abaissement) (%)",
+                  "color": "#3B82F6",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "courant_fuite_ma",
+                  "type": "timeseries",
+                  "label": "Courant de Fuite Différentiel (mA)",
+                  "color": "#10B981",
+                  "units": "mA",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (3 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "cc33b20d-8033-4337-9736-5b14e5c183cb"
+      },
+      "0819deb6-9930-4b61-98d9-ab8ba7b7706c": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "latest_values",
+        "type": "latest",
+        "title": "Attributs & États Opérationnels",
+        "sizeX": 8,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "e1d90123-ed1e-4ac6-8811-b173546e5a16",
+              "dataKeys": [
+                {
+                  "name": "alerte_porte_ouverte",
+                  "type": "attribute",
+                  "label": "Contact d'Ouverture Porte",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "showTitle": true,
+            "displayDetails": true
+          },
+          "showTitle": true,
+          "title": "Attributs & États Opérationnels",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 16,
+        "id": "0819deb6-9930-4b61-98d9-ab8ba7b7706c"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "8d5bf35d-e41a-41c1-86e5-6ac883ca4f6f": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "9fc1b938-a556-475d-ad0c-7a43a924b5de": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "26ee33dc-b6fc-4c65-a7ed-cee83c94d152": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 8
+              },
+              "1f2ce337-106d-4b3a-a8a2-00d01343809f": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 3,
+                "col": 16
+              },
+              "cc33b20d-8033-4337-9736-5b14e5c183cb": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              },
+              "0819deb6-9930-4b61-98d9-ab8ba7b7706c": {
+                "sizeX": 8,
+                "sizeY": 8,
+                "row": 8,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

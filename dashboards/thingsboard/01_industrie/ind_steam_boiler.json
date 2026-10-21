@@ -1,0 +1,555 @@
+{
+  "title": "Supervision - Chaudière Industrielle Vapeur",
+  "name": "Supervision - Chaudière Industrielle Vapeur",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Chaudière Industrielle Vapeur' (ID: ind_steam_boiler). Token: TOKEN_IND_STEAM_BOILER. Protocole: HTTP.",
+    "entityAliases": {
+      "8462f8fb-8de4-4500-bc55-3c2753a6ef8c": {
+        "id": "8462f8fb-8de4-4500-bc55-3c2753a6ef8c",
+        "alias": "Chaudière Industrielle Vapeur",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Chaudière Industrielle Vapeur"
+        }
+      }
+    },
+    "widgets": {
+      "cafef17f-f0f1-4c46-b3e1-10f5a1db95f9": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Chaudière Industrielle Vapeur",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Chaudière Industrielle Vapeur</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: ind_steam_boiler</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_IND_STEAM_BOILER</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "cafef17f-f0f1-4c46-b3e1-10f5a1db95f9"
+      },
+      "ad328153-503d-4885-8243-001f65405aa5": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Pression Vapeur Vive",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "8462f8fb-8de4-4500-bc55-3c2753a6ef8c",
+              "dataKeys": [
+                {
+                  "name": "pression_vapeur_bar",
+                  "type": "timeseries",
+                  "label": "Pression Vapeur Vive",
+                  "color": "#E2001A",
+                  "units": "bar",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 12.1,
+            "maxValue": 17.2,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Pression Vapeur Vive",
+            "unitTitle": "bar",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Pression Vapeur Vive",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "ad328153-503d-4885-8243-001f65405aa5"
+      },
+      "013b6570-a294-4524-a005-0c885bda6263": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Débit Massique Vapeur",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "8462f8fb-8de4-4500-bc55-3c2753a6ef8c",
+              "dataKeys": [
+                {
+                  "name": "debit_vapeur_th",
+                  "type": "timeseries",
+                  "label": "Débit Massique Vapeur",
+                  "color": "#3B82F6",
+                  "units": "t/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 3.5,
+            "maxValue": 14.9,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Débit Massique Vapeur",
+            "unitTitle": "t/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Débit Massique Vapeur",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "013b6570-a294-4524-a005-0c885bda6263"
+      },
+      "299d4d73-5e57-41ca-bb93-e768888002b4": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température des Fumées",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "8462f8fb-8de4-4500-bc55-3c2753a6ef8c",
+              "dataKeys": [
+                {
+                  "name": "temp_fumees",
+                  "type": "timeseries",
+                  "label": "Température des Fumées",
+                  "color": "#10B981",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 141.0,
+            "maxValue": 189.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température des Fumées",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température des Fumées",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "299d4d73-5e57-41ca-bb93-e768888002b4"
+      },
+      "96049e5b-e337-472a-abfd-2fd288979557": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Rendement de Combustion",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "8462f8fb-8de4-4500-bc55-3c2753a6ef8c",
+              "dataKeys": [
+                {
+                  "name": "rendement_combustion_pct",
+                  "type": "timeseries",
+                  "label": "Rendement de Combustion",
+                  "color": "#F59E0B",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 88.5,
+            "maxValue": 95.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Rendement de Combustion",
+            "unitTitle": "%",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Rendement de Combustion",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "96049e5b-e337-472a-abfd-2fd288979557"
+      },
+      "5141ccac-d2ac-4570-907b-53e24e5e2505": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Teneur O₂ Résiduel",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "8462f8fb-8de4-4500-bc55-3c2753a6ef8c",
+              "dataKeys": [
+                {
+                  "name": "taux_o2_residuel",
+                  "type": "timeseries",
+                  "label": "Teneur O₂ Résiduel",
+                  "color": "#8B5CF6",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 2.6,
+            "maxValue": 4.7,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Teneur O₂ Résiduel",
+            "unitTitle": "%",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#8B5CF6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#8B5CF6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Teneur O₂ Résiduel",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "5141ccac-d2ac-4570-907b-53e24e5e2505"
+      },
+      "6d5ea024-4142-455b-a640-1174e52ef95c": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Chaudière Industrielle Vapeur",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "8462f8fb-8de4-4500-bc55-3c2753a6ef8c",
+              "dataKeys": [
+                {
+                  "name": "pression_vapeur_bar",
+                  "type": "timeseries",
+                  "label": "Pression Vapeur Vive (bar)",
+                  "color": "#E2001A",
+                  "units": "bar",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "debit_vapeur_th",
+                  "type": "timeseries",
+                  "label": "Débit Massique Vapeur (t/h)",
+                  "color": "#3B82F6",
+                  "units": "t/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temp_fumees",
+                  "type": "timeseries",
+                  "label": "Température des Fumées (°C)",
+                  "color": "#10B981",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "rendement_combustion_pct",
+                  "type": "timeseries",
+                  "label": "Rendement de Combustion (%)",
+                  "color": "#F59E0B",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "taux_o2_residuel",
+                  "type": "timeseries",
+                  "label": "Teneur O₂ Résiduel (%)",
+                  "color": "#8B5CF6",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (5 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 13,
+        "col": 0,
+        "id": "6d5ea024-4142-455b-a640-1174e52ef95c"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "cafef17f-f0f1-4c46-b3e1-10f5a1db95f9": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "ad328153-503d-4885-8243-001f65405aa5": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "013b6570-a294-4524-a005-0c885bda6263": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "299d4d73-5e57-41ca-bb93-e768888002b4": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "96049e5b-e337-472a-abfd-2fd288979557": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "5141ccac-d2ac-4570-907b-53e24e5e2505": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 8,
+                "col": 0
+              },
+              "6d5ea024-4142-455b-a640-1174e52ef95c": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 13,
+                "col": 0
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

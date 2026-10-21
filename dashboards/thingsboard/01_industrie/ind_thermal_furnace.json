@@ -1,0 +1,555 @@
+{
+  "title": "Supervision - Four de Traitement Thermique",
+  "name": "Supervision - Four de Traitement Thermique",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Four de Traitement Thermique' (ID: ind_thermal_furnace). Token: TOKEN_IND_THERMAL_FURNACE. Protocole: MQTT.",
+    "entityAliases": {
+      "b56c04e4-bbd0-46bb-9825-237e22ba8f2a": {
+        "id": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+        "alias": "Four de Traitement Thermique",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Four de Traitement Thermique"
+        }
+      }
+    },
+    "widgets": {
+      "27843155-0bf6-428f-a7e7-6ec7b914ae4e": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Four de Traitement Thermique",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Four de Traitement Thermique</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: ind_thermal_furnace</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_IND_THERMAL_FURNACE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "27843155-0bf6-428f-a7e7-6ec7b914ae4e"
+      },
+      "be51ed9d-8f15-4ea5-b7d4-4ac78ada20fa": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Zone 1 (Préchauffe)",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "dataKeys": [
+                {
+                  "name": "temp_zone_1",
+                  "type": "timeseries",
+                  "label": "Température Zone 1 (Préchauffe)",
+                  "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 773.0,
+            "maxValue": 857.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Zone 1 (Préchauffe)",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Zone 1 (Préchauffe)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "be51ed9d-8f15-4ea5-b7d4-4ac78ada20fa"
+      },
+      "e9a4b6a3-d56d-4998-b29a-f48e77cc8429": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Zone 2 (Maintien)",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "dataKeys": [
+                {
+                  "name": "temp_zone_2",
+                  "type": "timeseries",
+                  "label": "Température Zone 2 (Maintien)",
+                  "color": "#3B82F6",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 813.0,
+            "maxValue": 897.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Zone 2 (Maintien)",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Zone 2 (Maintien)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "e9a4b6a3-d56d-4998-b29a-f48e77cc8429"
+      },
+      "192b1040-d6a6-4a2e-9f9b-a4f58eaf754f": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Température Zone 3 (Homogénéisation)",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "dataKeys": [
+                {
+                  "name": "temp_zone_3",
+                  "type": "timeseries",
+                  "label": "Température Zone 3 (Homogénéisation)",
+                  "color": "#10B981",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 843.0,
+            "maxValue": 927.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Zone 3 (Homogénéisation)",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Zone 3 (Homogénéisation)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "192b1040-d6a6-4a2e-9f9b-a4f58eaf754f"
+      },
+      "39b4a80e-e0e5-40ff-8803-751be8822b53": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Débit Gaz Combustible",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "dataKeys": [
+                {
+                  "name": "debit_gaz_combustible",
+                  "type": "timeseries",
+                  "label": "Débit Gaz Combustible",
+                  "color": "#F59E0B",
+                  "units": "Nm³/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 20.0,
+            "maxValue": 80.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Débit Gaz Combustible",
+            "unitTitle": "Nm³/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Débit Gaz Combustible",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "39b4a80e-e0e5-40ff-8803-751be8822b53"
+      },
+      "5c3e4dce-d6a3-4d66-ada5-7674b19a739f": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Modulation Puissance Brûleurs",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "dataKeys": [
+                {
+                  "name": "puissance_bruleurs_pct",
+                  "type": "timeseries",
+                  "label": "Modulation Puissance Brûleurs",
+                  "color": "#8B5CF6",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 34.5,
+            "maxValue": 100.5,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Modulation Puissance Brûleurs",
+            "unitTitle": "%",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#8B5CF6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#8B5CF6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Modulation Puissance Brûleurs",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "5c3e4dce-d6a3-4d66-ada5-7674b19a739f"
+      },
+      "fe89112b-baa9-4daf-850b-b4dcab2986d3": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Four de Traitement Thermique",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "dataKeys": [
+                {
+                  "name": "temp_zone_1",
+                  "type": "timeseries",
+                  "label": "Température Zone 1 (Préchauffe) (°C)",
+                  "color": "#E2001A",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temp_zone_2",
+                  "type": "timeseries",
+                  "label": "Température Zone 2 (Maintien) (°C)",
+                  "color": "#3B82F6",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temp_zone_3",
+                  "type": "timeseries",
+                  "label": "Température Zone 3 (Homogénéisation) (°C)",
+                  "color": "#10B981",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "debit_gaz_combustible",
+                  "type": "timeseries",
+                  "label": "Débit Gaz Combustible (Nm³/h)",
+                  "color": "#F59E0B",
+                  "units": "Nm³/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "puissance_bruleurs_pct",
+                  "type": "timeseries",
+                  "label": "Modulation Puissance Brûleurs (%)",
+                  "color": "#8B5CF6",
+                  "units": "%",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (5 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 13,
+        "col": 0,
+        "id": "fe89112b-baa9-4daf-850b-b4dcab2986d3"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "27843155-0bf6-428f-a7e7-6ec7b914ae4e": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "be51ed9d-8f15-4ea5-b7d4-4ac78ada20fa": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "e9a4b6a3-d56d-4998-b29a-f48e77cc8429": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "192b1040-d6a6-4a2e-9f9b-a4f58eaf754f": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "39b4a80e-e0e5-40ff-8803-751be8822b53": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "5c3e4dce-d6a3-4d66-ada5-7674b19a739f": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 8,
+                "col": 0
+              },
+              "fe89112b-baa9-4daf-850b-b4dcab2986d3": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 13,
+                "col": 0
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

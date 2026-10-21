@@ -330,6 +330,10 @@ function renderEquipmentGroups() {
     if (canOperate) {
       devActionsHtml = `
         <div class="flex items-center gap-2">
+          <button onclick="downloadDeviceDashboard('${device.id}')" title="Télécharger le tableau de bord ThingsBoard JSON préconfiguré pour cet équipement (avec token et grandeurs)" class="p-2 text-sky-400 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1.5 text-xs font-medium">
+            <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span>Dashboard TB</span>
+          </button>
           <button onclick="openVariableModalForDevice('${device.id}')" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
             <i data-lucide="plus" class="w-3.5 h-3.5"></i>
             <span>Ajouter une Variable</span>
@@ -351,6 +355,10 @@ function renderEquipmentGroups() {
     } else {
       devActionsHtml = `
         <div class="flex items-center gap-2">
+          <button onclick="downloadDeviceDashboard('${device.id}')" title="Télécharger le tableau de bord ThingsBoard JSON préconfiguré pour cet équipement" class="p-2 text-sky-400 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1.5 text-xs font-medium">
+            <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span>Dashboard TB</span>
+          </button>
           <span class="text-[10px] text-slate-500 italic bg-[#12151B] px-2.5 py-1 rounded border border-[#2B3342] flex items-center gap-1">
             <i data-lucide="eye" class="w-3 h-3 text-slate-500"></i> Observateur (Lecture Seule)
           </span>
@@ -846,6 +854,14 @@ async function deleteDevice(devId) {
     }
     await loadAllData();
   }
+}
+
+function downloadDeviceDashboard(deviceId) {
+  window.location.href = `/api/devices/${encodeURIComponent(deviceId)}/thingsboard-dashboard`;
+}
+
+function downloadPresetDashboard(presetId) {
+  window.location.href = `/api/presets/${encodeURIComponent(presetId)}/thingsboard-dashboard`;
 }
 
 async function saveDeviceForm(e) {
@@ -2052,8 +2068,11 @@ function renderCatalogCards() {
         </div>
 
         <!-- Bouton d'action -->
-        <div class="pt-3.5 mt-3 border-t border-[#202531]">
-          <button onclick="prepareInstantiatePreset('${p.id}')" class="w-full flex items-center justify-center gap-1.5 bg-[#1F2532] hover:bg-[#E2001A] text-slate-200 hover:text-white border border-[#2B3342] hover:border-red-600 text-xs font-semibold py-1.5 px-3 rounded-lg transition shadow-sm">
+        <div class="pt-3.5 mt-3 border-t border-[#202531] flex items-center gap-2">
+          <button onclick="downloadPresetDashboard('${p.id}')" title="Télécharger le modèle de Dashboard ThingsBoard (.json)" class="p-2 bg-[#181D26] hover:bg-[#202531] text-sky-400 hover:text-white border border-[#2B3342] rounded-lg transition text-xs flex items-center gap-1 shrink-0">
+            <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>
+          </button>
+          <button onclick="prepareInstantiatePreset('${p.id}')" class="flex-1 flex items-center justify-center gap-1.5 bg-[#1F2532] hover:bg-[#E2001A] text-slate-200 hover:text-white border border-[#2B3342] hover:border-red-600 text-xs font-semibold py-1.5 px-3 rounded-lg transition shadow-sm">
             <i data-lucide="plus" class="w-3.5 h-3.5"></i>
             <span>Utiliser ce modèle</span>
           </button>
@@ -2137,7 +2156,7 @@ async function submitInstantiatePreset(e) {
 
     closeModal("modal-instantiate-preset");
     await loadAllData();
-    alert(`✅ L'équipement '${data.device.name}' et ses ${data.variables_count} variables ont été ajoutés avec succès !`);
+    alert(`✅ L'équipement '${data.device.name}' et ses ${data.variables_count} variables ont été créés avec succès !\n\n💡 Astuce : Cliquez sur le bouton "Dashboard TB" de cet équipement pour télécharger son tableau de bord ThingsBoard préconfiguré (intégrant son Token et toutes ses grandeurs).`);
   } catch (err) {
     if (errBox) {
       errBox.textContent = `Erreur : ${err.message}`;

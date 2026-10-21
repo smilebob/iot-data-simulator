@@ -1,0 +1,526 @@
+{
+  "title": "Supervision - Contrôle d'Accès & Flux Bâtiment",
+  "name": "Supervision - Contrôle d'Accès & Flux Bâtiment",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Contrôle d'Accès & Flux Bâtiment' (ID: bldg_access_flow). Token: TOKEN_BLDG_ACCESS_FLOW. Protocole: HTTP.",
+    "entityAliases": {
+      "847e88c2-2b38-433c-9d9d-3e9bc3891ab1": {
+        "id": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+        "alias": "Contrôle d'Accès & Flux Bâtiment",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Contrôle d'Accès & Flux Bâtiment"
+        }
+      }
+    },
+    "widgets": {
+      "05d994e4-8f50-4a1e-9681-2504d7549e32": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Contrôle d'Accès & Flux Bâtiment",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Contrôle d'Accès & Flux Bâtiment</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: bldg_access_flow</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_ACCESS_FLOW</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "05d994e4-8f50-4a1e-9681-2504d7549e32"
+      },
+      "9dcaff72-58af-45ea-bf3a-ed5bc4e37438": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Cadence Entrées Visiteurs/Employés",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "dataKeys": [
+                {
+                  "name": "flux_entrees_min",
+                  "type": "timeseries",
+                  "label": "Cadence Entrées Visiteurs/Employés",
+                  "color": "#E2001A",
+                  "units": "pers/min",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -1.3,
+            "maxValue": 38.3,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Cadence Entrées Visiteurs/Employés",
+            "unitTitle": "pers/min",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Cadence Entrées Visiteurs/Employés",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "9dcaff72-58af-45ea-bf3a-ed5bc4e37438"
+      },
+      "348002c7-aafa-4f35-9f50-686fe26f80e9": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Cadence Sorties Tourniquets",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "dataKeys": [
+                {
+                  "name": "flux_sorties_min",
+                  "type": "timeseries",
+                  "label": "Cadence Sorties Tourniquets",
+                  "color": "#3B82F6",
+                  "units": "pers/min",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -1.7,
+            "maxValue": 30.7,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Cadence Sorties Tourniquets",
+            "unitTitle": "pers/min",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Cadence Sorties Tourniquets",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "348002c7-aafa-4f35-9f50-686fe26f80e9"
+      },
+      "71d92a93-74ee-4a92-ac5d-108321f123d4": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Jauge d'Occupation Globale Site",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "dataKeys": [
+                {
+                  "name": "jauge_occupation_pct",
+                  "type": "timeseries",
+                  "label": "Jauge d'Occupation Globale Site",
+                  "color": "#10B981",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 18.7,
+            "maxValue": 94.3,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Jauge d'Occupation Globale Site",
+            "unitTitle": "%",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Jauge d'Occupation Globale Site",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "71d92a93-74ee-4a92-ac5d-108321f123d4"
+      },
+      "51810572-56ff-4621-967a-c46704828f0d": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Tentatives Accès Refusées",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "dataKeys": [
+                {
+                  "name": "tentatives_refusees_h",
+                  "type": "timeseries",
+                  "label": "Tentatives Accès Refusées",
+                  "color": "#F59E0B",
+                  "units": "rejets/h",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -0.6,
+            "maxValue": 6.6,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Tentatives Accès Refusées",
+            "unitTitle": "rejets/h",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Tentatives Accès Refusées",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "51810572-56ff-4621-967a-c46704828f0d"
+      },
+      "94062aab-5ad1-4ad4-be4d-d0c97002ec95": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Contrôle d'Accès & Flux Bâtiment",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "dataKeys": [
+                {
+                  "name": "flux_entrees_min",
+                  "type": "timeseries",
+                  "label": "Cadence Entrées Visiteurs/Employés (pers/min)",
+                  "color": "#E2001A",
+                  "units": "pers/min",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "flux_sorties_min",
+                  "type": "timeseries",
+                  "label": "Cadence Sorties Tourniquets (pers/min)",
+                  "color": "#3B82F6",
+                  "units": "pers/min",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "jauge_occupation_pct",
+                  "type": "timeseries",
+                  "label": "Jauge d'Occupation Globale Site (%)",
+                  "color": "#10B981",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "tentatives_refusees_h",
+                  "type": "timeseries",
+                  "label": "Tentatives Accès Refusées (rejets/h)",
+                  "color": "#F59E0B",
+                  "units": "rejets/h",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (4 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "94062aab-5ad1-4ad4-be4d-d0c97002ec95"
+      },
+      "94da3645-a482-4a33-b6b1-7d85b1473c9b": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "latest_values",
+        "type": "latest",
+        "title": "Attributs & États Opérationnels",
+        "sizeX": 8,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "dataKeys": [
+                {
+                  "name": "issues_secours_verrouillees",
+                  "type": "attribute",
+                  "label": "Issues de Secours Sous Contrôle",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "showTitle": true,
+            "displayDetails": true
+          },
+          "showTitle": true,
+          "title": "Attributs & États Opérationnels",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 16,
+        "id": "94da3645-a482-4a33-b6b1-7d85b1473c9b"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "05d994e4-8f50-4a1e-9681-2504d7549e32": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "9dcaff72-58af-45ea-bf3a-ed5bc4e37438": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "348002c7-aafa-4f35-9f50-686fe26f80e9": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "71d92a93-74ee-4a92-ac5d-108321f123d4": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "51810572-56ff-4621-967a-c46704828f0d": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "94062aab-5ad1-4ad4-be4d-d0c97002ec95": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 8,
+                "col": 0
+              },
+              "94da3645-a482-4a33-b6b1-7d85b1473c9b": {
+                "sizeX": 8,
+                "sizeY": 8,
+                "row": 8,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

@@ -1,0 +1,555 @@
+{
+  "title": "Supervision - Gestion d'Éclairage DALI & Présence",
+  "name": "Supervision - Gestion d'Éclairage DALI & Présence",
+  "configuration": {
+    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Gestion d'Éclairage DALI & Présence' (ID: bldg_dali_lighting). Token: TOKEN_BLDG_DALI_LIGHTING. Protocole: HTTP.",
+    "entityAliases": {
+      "71b3c728-5c9a-4d1a-9988-9cac7bf38973": {
+        "id": "71b3c728-5c9a-4d1a-9988-9cac7bf38973",
+        "alias": "Gestion d'Éclairage DALI & Présence",
+        "filter": {
+          "type": "entityName",
+          "entityType": "DEVICE",
+          "entityNameFilter": "Gestion d'Éclairage DALI & Présence"
+        }
+      }
+    },
+    "widgets": {
+      "3d5985f9-e286-4df3-8d5a-8124e49830ad": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Gestion d'Éclairage DALI & Présence",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Gestion d'Éclairage DALI & Présence</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: bldg_dali_lighting</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">HTTP</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_DALI_LIGHTING</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    "
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "3d5985f9-e286-4df3-8d5a-8124e49830ad"
+      },
+      "2c9b0c21-44f1-4798-bd42-1dd98ede55f9": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Éclairement Mesuré Plan Travail",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "71b3c728-5c9a-4d1a-9988-9cac7bf38973",
+              "dataKeys": [
+                {
+                  "name": "eclairement_lux",
+                  "type": "timeseries",
+                  "label": "Éclairement Mesuré Plan Travail",
+                  "color": "#E2001A",
+                  "units": "lux",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 184.0,
+            "maxValue": 616.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Éclairement Mesuré Plan Travail",
+            "unitTitle": "lux",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#E2001A",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#E2001A"
+            ]
+          },
+          "showTitle": true,
+          "title": "Éclairement Mesuré Plan Travail",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "2c9b0c21-44f1-4798-bd42-1dd98ede55f9"
+      },
+      "67c42e4f-2b18-49a6-802c-0278e4fb3c47": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Taux d'Occupation de Zone",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "71b3c728-5c9a-4d1a-9988-9cac7bf38973",
+              "dataKeys": [
+                {
+                  "name": "taux_presence_zone_pct",
+                  "type": "timeseries",
+                  "label": "Taux d'Occupation de Zone",
+                  "color": "#3B82F6",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Taux d'Occupation de Zone",
+            "unitTitle": "%",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#3B82F6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#3B82F6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Taux d'Occupation de Zone",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 6,
+        "id": "67c42e4f-2b18-49a6-802c-0278e4fb3c47"
+      },
+      "be2d666d-1871-4ce9-a18e-56cd37b3d046": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Gradation Sortie Ballast DALI",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "71b3c728-5c9a-4d1a-9988-9cac7bf38973",
+              "dataKeys": [
+                {
+                  "name": "gradation_dali_pct",
+                  "type": "timeseries",
+                  "label": "Gradation Sortie Ballast DALI",
+                  "color": "#10B981",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 8.0,
+            "maxValue": 92.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Gradation Sortie Ballast DALI",
+            "unitTitle": "%",
+            "decimals": 0,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#10B981",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#10B981"
+            ]
+          },
+          "showTitle": true,
+          "title": "Gradation Sortie Ballast DALI",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 12,
+        "id": "be2d666d-1871-4ce9-a18e-56cd37b3d046"
+      },
+      "5a850dce-7421-4187-9f89-673639f2c9c7": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Puissance Électrique Circuit",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "71b3c728-5c9a-4d1a-9988-9cac7bf38973",
+              "dataKeys": [
+                {
+                  "name": "puissance_eclairage_w",
+                  "type": "timeseries",
+                  "label": "Puissance Électrique Circuit",
+                  "color": "#F59E0B",
+                  "units": "W",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 64.0,
+            "maxValue": 736.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Puissance Électrique Circuit",
+            "unitTitle": "W",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#F59E0B",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#F59E0B"
+            ]
+          },
+          "showTitle": true,
+          "title": "Puissance Électrique Circuit",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 3,
+        "col": 18,
+        "id": "5a850dce-7421-4187-9f89-673639f2c9c7"
+      },
+      "f1f267a4-0f24-47f7-a279-ed04d877e02a": {
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "digital_gauge",
+        "type": "latest",
+        "title": "Heures d'Allumage Cumulées",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "71b3c728-5c9a-4d1a-9988-9cac7bf38973",
+              "dataKeys": [
+                {
+                  "name": "heures_fonctionnement_h",
+                  "type": "timeseries",
+                  "label": "Heures d'Allumage Cumulées",
+                  "color": "#8B5CF6",
+                  "units": "h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 1195.0,
+            "maxValue": 1255.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Heures d'Allumage Cumulées",
+            "unitTitle": "h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#202531",
+            "colorCounter": "#8B5CF6",
+            "levelColors": [
+              "#10B981",
+              "#F59E0B",
+              "#8B5CF6"
+            ]
+          },
+          "showTitle": true,
+          "title": "Heures d'Allumage Cumulées",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 8,
+        "col": 0,
+        "id": "f1f267a4-0f24-47f7-a279-ed04d877e02a"
+      },
+      "1f25ac22-9d6c-4d1b-ab53-6bfd99d8cecb": {
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "timeseries",
+        "type": "timeseries",
+        "title": "Télémétries en Temps Réel - Gestion d'Éclairage DALI & Présence",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "71b3c728-5c9a-4d1a-9988-9cac7bf38973",
+              "dataKeys": [
+                {
+                  "name": "eclairement_lux",
+                  "type": "timeseries",
+                  "label": "Éclairement Mesuré Plan Travail (lux)",
+                  "color": "#E2001A",
+                  "units": "lux",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "taux_presence_zone_pct",
+                  "type": "timeseries",
+                  "label": "Taux d'Occupation de Zone (%)",
+                  "color": "#3B82F6",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "gradation_dali_pct",
+                  "type": "timeseries",
+                  "label": "Gradation Sortie Ballast DALI (%)",
+                  "color": "#10B981",
+                  "units": "%",
+                  "decimals": 0,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "puissance_eclairage_w",
+                  "type": "timeseries",
+                  "label": "Puissance Électrique Circuit (W)",
+                  "color": "#F59E0B",
+                  "units": "W",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "heures_fonctionnement_h",
+                  "type": "timeseries",
+                  "label": "Heures d'Allumage Cumulées (h)",
+                  "color": "#8B5CF6",
+                  "units": "h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#2B3342",
+              "tickColor": "#2B3342",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#94A3B8"
+            }
+          },
+          "showTitle": true,
+          "title": "Évolution Télémétrique (5 grandeurs)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "backgroundColor": "#181D26",
+            "borderRadius": "12px",
+            "border": "1px solid #2B3342"
+          }
+        },
+        "row": 13,
+        "col": 0,
+        "id": "1f25ac22-9d6c-4d1b-ab53-6bfd99d8cecb"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "3d5985f9-e286-4df3-8d5a-8124e49830ad": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "2c9b0c21-44f1-4798-bd42-1dd98ede55f9": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 0
+              },
+              "67c42e4f-2b18-49a6-802c-0278e4fb3c47": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 6
+              },
+              "be2d666d-1871-4ce9-a18e-56cd37b3d046": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 12
+              },
+              "5a850dce-7421-4187-9f89-673639f2c9c7": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 3,
+                "col": 18
+              },
+              "f1f267a4-0f24-47f7-a279-ed04d877e02a": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 8,
+                "col": 0
+              },
+              "1f25ac22-9d6c-4d1b-ab53-6bfd99d8cecb": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 13,
+                "col": 0
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#0F1218",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}
