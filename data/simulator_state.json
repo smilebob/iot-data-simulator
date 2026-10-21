@@ -82,27 +82,27 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 27.027,
-      "last_published": 1792588951.9476247
+      "current_value": 26.436,
+      "last_published": 1792589193.5732663
     },
     {
       "id": "humidity",
       "name": "Humidité Relative",
-      "device_id": "tb_station_01",
+      "device_id": "qualite_air",
       "var_type": "telemetry",
       "data_type": "float",
       "unit": "%",
       "topic": "v1/devices/me/telemetry",
       "publish_interval": 60.0,
-      "sim_mode": "cosine",
+      "sim_mode": "sine",
       "math_config": {
-        "min_val": 35.0,
-        "max_val": 75.0,
-        "period": 60.0,
+        "min_val": 60.0,
+        "max_val": 90.0,
+        "period": 6000.0,
         "offset": 0.0,
-        "noise_percent": 1.0,
+        "noise_percent": 2.0,
         "step": 1.0,
-        "constant_val": "0"
+        "constant_val": ""
       },
       "points_config": {
         "points": [
@@ -120,8 +120,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 64.989,
-      "last_published": 1792588951.9476247
+      "current_value": 86.083,
+      "last_published": 1792589190.3922148
     },
     {
       "id": "powerMode",
@@ -159,7 +159,7 @@
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
       "current_value": "SOLAR_OPTIMIZED",
-      "last_published": 1792588951.9476247
+      "last_published": 1792589193.5732663
     },
     {
       "id": "vitesse_rpm",
@@ -216,8 +216,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 1004,
-      "last_published": 1792588973.5939376
+      "current_value": 2829,
+      "last_published": 1792589220.0945067
     },
     {
       "id": "pression_bar",
@@ -254,8 +254,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 6.964,
-      "last_published": 1792588973.5939376
+      "current_value": 4.974,
+      "last_published": 1792589220.0945067
     },
     {
       "id": "co2",
@@ -292,8 +292,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": null,
-      "last_published": null
+      "current_value": 79.72,
+      "last_published": 1792589200.899419
     },
     {
       "id": "temperature_00",
@@ -330,8 +330,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 23.906,
-      "last_published": 1792588982.3800433
+      "current_value": null,
+      "last_published": null
     }
   ]
 }

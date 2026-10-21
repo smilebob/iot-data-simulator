@@ -1813,6 +1813,19 @@ async function openCatalogModal() {
     const res = await fetch("/api/presets/catalog");
     if (!res.ok) throw new Error("Impossible de charger le catalogue.");
     catalogPresets = await res.json();
+    
+    // Mise à jour des compteurs de catégories
+    const elAll = document.getElementById("cat-count-all");
+    const elInd = document.getElementById("cat-count-industry");
+    const elBldg = document.getElementById("cat-count-building");
+    const elInfra = document.getElementById("cat-count-infrastructure");
+    const elCity = document.getElementById("cat-count-smart_city");
+    if (elAll) elAll.textContent = catalogPresets.length;
+    if (elInd) elInd.textContent = catalogPresets.filter(p => p.category === 'industry').length;
+    if (elBldg) elBldg.textContent = catalogPresets.filter(p => p.category === 'building').length;
+    if (elInfra) elInfra.textContent = catalogPresets.filter(p => p.category === 'infrastructure').length;
+    if (elCity) elCity.textContent = catalogPresets.filter(p => p.category === 'smart_city').length;
+
     renderCatalogCards();
     openModal("modal-catalog");
     if (window.lucide) lucide.createIcons();
