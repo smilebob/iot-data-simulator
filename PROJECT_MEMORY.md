@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.4 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.5 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
@@ -89,6 +89,10 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Moteur de rendu ThingsBoard 4.3** : Résolution des balises `${cle:format}` dans les widgets HTML Value Card (`system.cards.html_value_card`) par correspondance stricte avec le champ `label` des `dataKeys` (et non `name`).
   - **Alignement `label = clean_key`** : Définition de `label: clean_key` pour toutes les grandeurs des synoptiques SCADA, tout en maintenant les libellés complets en français sur les jauges numériques JustGage, graphiques temporels et tables d'attributs.
   - **Propriétés de synchronisation TB 4.3** : Ajout de `useDashboardTimewindow: True`, `cardCss`/`css` et `cardHtml`/`html` simultanés sur les widgets de cartes.
+- [x] Pilotage Bidirectionnel & Commandes Interactives ThingsBoard 4.3 (v1.9.5) :
+  - **Génération de Widgets de Contrôle Interactifs** : Ajout automatique d'interrupteurs rotatifs (`system.control_widgets.round_switch`) et formulaires de saisie (`system.input_widgets.update_multiple_attributes`) sur les 32 tableaux de bord pour piloter les 22 attributs et modes d'exploitation (ex: `mode_chaud` PAC, `etat_marche` compresseur, `registre_air_neuf` CTA, `vanne_secteur_ouverte` arrosage).
+  - **Souscription Bidirectionnelle MQTT** : Écoute active de `v1/devices/me/rpc/request/+` (RPC direct) et `v1/devices/me/attributes` (Shared Attributes) dans `app/mqtt/client.py`.
+  - **Traitement & Acquittement dans l'Engine** : Résolution des commandes RPC (`setValue`, `set_<key>`, `getValue`), mise à jour instantanée de la simulation, acquittement sur `v1/devices/me/rpc/response/{id}`, rétro-publication d'attribut et notification WebSocket en direct.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles

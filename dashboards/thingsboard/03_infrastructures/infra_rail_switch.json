@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "1fceeb73-bba3-4347-b2d8-f85f188396ff": {
-        "id": "1fceeb73-bba3-4347-b2d8-f85f188396ff",
+      "18757a36-668a-42b1-8fba-44e66a57018a": {
+        "id": "18757a36-668a-42b1-8fba-44e66a57018a",
         "alias": "Aiguillage & Signalisation Ferroviaire",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "e12a6f8e-e7c5-45b1-960a-c1d5d65f6ed6": {
+      "ac1646ef-4011-4cdc-aa31-bbd60e5dbb58": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "e12a6f8e-e7c5-45b1-960a-c1d5d65f6ed6"
+        "id": "ac1646ef-4011-4cdc-aa31-bbd60e5dbb58"
       },
-      "6e7ab698-0372-4efe-ab8a-bd7f758ffd00": {
+      "5bfa2215-139f-4b30-b232-3cc18555dbf0": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1fceeb73-bba3-4347-b2d8-f85f188396ff",
+              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "6e7ab698-0372-4efe-ab8a-bd7f758ffd00"
+        "id": "5bfa2215-139f-4b30-b232-3cc18555dbf0"
       },
-      "0a3710b2-45fc-4662-abad-ab2050bc2750": {
+      "191d592a-60ed-4df9-974d-04b3f8c0d57a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1fceeb73-bba3-4347-b2d8-f85f188396ff",
+              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "0a3710b2-45fc-4662-abad-ab2050bc2750"
+        "id": "191d592a-60ed-4df9-974d-04b3f8c0d57a"
       },
-      "15f64986-27f8-46ae-a169-19b341a6ea2c": {
+      "83da7a6d-f71d-4f75-b47b-7911e34af070": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1fceeb73-bba3-4347-b2d8-f85f188396ff",
+              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
               "dataKeys": [
                 {
                   "name": "temps_manoeuvre_ms",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "15f64986-27f8-46ae-a169-19b341a6ea2c"
+        "id": "83da7a6d-f71d-4f75-b47b-7911e34af070"
       },
-      "de64cfe9-8021-4164-a1bb-4644a10b58cb": {
+      "54d443d7-c50d-4157-802a-647204f6a1c6": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1fceeb73-bba3-4347-b2d8-f85f188396ff",
+              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
               "dataKeys": [
                 {
                   "name": "temp_rail_rechauffage",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "de64cfe9-8021-4164-a1bb-4644a10b58cb"
+        "id": "54d443d7-c50d-4157-802a-647204f6a1c6"
       },
-      "63a798cf-c9ea-4f76-b47c-d781153f3808": {
+      "6b49331c-9f2b-4632-a431-be1dae39ed3f": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1fceeb73-bba3-4347-b2d8-f85f188396ff",
+              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -422,9 +422,112 @@
         },
         "row": 16,
         "col": 0,
-        "id": "63a798cf-c9ea-4f76-b47c-d781153f3808"
+        "id": "6b49331c-9f2b-4632-a431-be1dae39ed3f"
       },
-      "ba92ecd0-b118-4bc5-a13b-917a7bcb77a7": {
+      "5f6da704-b98c-4353-9910-95194e37ee2c": {
+        "typeFullFqn": "system.control_widgets.round_switch",
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "round_switch",
+        "type": "rpc",
+        "title": "Pilotage - Pédale Détection Essieu",
+        "sizeX": 4,
+        "sizeY": 4,
+        "config": {
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a"
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "dataKeys": [
+                {
+                  "name": "presence_essieu",
+                  "type": "attribute",
+                  "label": "presence_essieu",
+                  "color": "#10B981",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "showTitle": true,
+          "title": "Pilotage - Pédale Détection Essieu",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "settings": {
+            "title": "Pilotage - Pédale Détection Essieu",
+            "initialValue": false,
+            "retrieveValueMethod": "attribute",
+            "valueAttribute": "presence_essieu",
+            "attributeScope": "SHARED_SCOPE",
+            "setValueMethod": "set_presence_essieu",
+            "getValueMethod": "get_presence_essieu",
+            "parseValueFunction": "return data ? true : false;",
+            "convertValueFunction": "return value;"
+          },
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 16,
+        "id": "5f6da704-b98c-4353-9910-95194e37ee2c"
+      },
+      "01fdf63e-61e4-4509-9278-8d41ee6a8b3e": {
+        "typeFullFqn": "system.input_widgets.update_multiple_attributes",
+        "isSystemType": true,
+        "bundleAlias": "input_widgets",
+        "typeAlias": "update_multiple_attributes",
+        "type": "latest",
+        "title": "Consigne - Contrôle Position Verrouillée",
+        "sizeX": 4,
+        "sizeY": 4,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "dataKeys": [
+                {
+                  "name": "position_aiguille",
+                  "type": "attribute",
+                  "label": "Contrôle Position Verrouillée",
+                  "color": "#F59E0B",
+                  "settings": {
+                    "dataKeyType": "shared"
+                  }
+                }
+              ]
+            }
+          ],
+          "showTitle": true,
+          "title": "Consigne - Contrôle Position Verrouillée",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "settings": {
+            "widgetTitle": "Consigne - Contrôle Position Verrouillée",
+            "showTitle": true,
+            "saveButtonLabel": "Valider",
+            "resetButtonLabel": "Annuler"
+          },
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 20,
+        "id": "01fdf63e-61e4-4509-9278-8d41ee6a8b3e"
+      },
+      "b06dbd83-8a21-416c-8bd3-77f271677eca": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -432,12 +535,12 @@
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
-        "sizeY": 8,
+        "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1fceeb73-bba3-4347-b2d8-f85f188396ff",
+              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -474,9 +577,9 @@
             "color": "#0F172A"
           }
         },
-        "row": 16,
+        "row": 20,
         "col": 16,
-        "id": "ba92ecd0-b118-4bc5-a13b-917a7bcb77a7"
+        "id": "b06dbd83-8a21-416c-8bd3-77f271677eca"
       }
     },
     "states": {
@@ -486,43 +589,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "e12a6f8e-e7c5-45b1-960a-c1d5d65f6ed6": {
+              "ac1646ef-4011-4cdc-aa31-bbd60e5dbb58": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "6e7ab698-0372-4efe-ab8a-bd7f758ffd00": {
+              "5bfa2215-139f-4b30-b232-3cc18555dbf0": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "0a3710b2-45fc-4662-abad-ab2050bc2750": {
+              "191d592a-60ed-4df9-974d-04b3f8c0d57a": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "15f64986-27f8-46ae-a169-19b341a6ea2c": {
+              "83da7a6d-f71d-4f75-b47b-7911e34af070": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "de64cfe9-8021-4164-a1bb-4644a10b58cb": {
+              "54d443d7-c50d-4157-802a-647204f6a1c6": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "63a798cf-c9ea-4f76-b47c-d781153f3808": {
+              "6b49331c-9f2b-4632-a431-be1dae39ed3f": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "ba92ecd0-b118-4bc5-a13b-917a7bcb77a7": {
+              "5f6da704-b98c-4353-9910-95194e37ee2c": {
+                "sizeX": 4,
+                "sizeY": 4,
+                "row": 16,
+                "col": 16
+              },
+              "01fdf63e-61e4-4509-9278-8d41ee6a8b3e": {
+                "sizeX": 4,
+                "sizeY": 4,
+                "row": 16,
+                "col": 20
+              },
+              "b06dbd83-8a21-416c-8bd3-77f271677eca": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

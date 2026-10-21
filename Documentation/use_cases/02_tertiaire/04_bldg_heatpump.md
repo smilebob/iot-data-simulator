@@ -91,10 +91,11 @@ Le moteur du simulateur permet d'injecter des défaillances en direct (*Chaos Te
 
 ---
 
-## 6. Recommandations de Visualisation & Tableaux de Bord
+## 6. Pilotage Interactif & Tableaux de Bord ThingsBoard 4.3
 
-Pour restituer la valeur métier de cet équipement sur ThingsBoard, les widgets suivants sont conseillés :
+Le tableau de bord officiel préconfiguré [`dashboards/thingsboard/02_tertiaire/bldg_heatpump.json`](file:///home/pierre/Projets/iot-data-simulator/dashboards/thingsboard/02_tertiaire/bldg_heatpump.json) intègre :
 
-- Thermostat digital avec consigne modulable
-- Graphique puissance calorifique vs température extérieure
-- Alerte pression basse < 1.5 bar
+- **Synoptique SCADA Vectoriel P&ID** : Circuit frigorifique R32 avec compresseur Scroll inverter, vanne 4 voies d'inversion, échangeur à plaques hydro et ventilateur hélicoïde animé.
+- **Interrupteur de Pilotage Interactif (*Round Switch*)** : Widget dédié permettant à l'opérateur de basculer en direct le `mode_chaud` (Chaud = ON / Froid = OFF) depuis ThingsBoard 4.3, avec prise en compte instantanée par le simulateur (RPC bidirectionnel).
+- **Jauges JustGage** : Température de départ eau (42-48°C), puissance thermique (15-55 kW) et pression circuit primaire (1.8-2.3 bar).
+- **Courbes Temps Réel & Table d'Attributs** : Historique glissant et état opérationnel de la PAC.

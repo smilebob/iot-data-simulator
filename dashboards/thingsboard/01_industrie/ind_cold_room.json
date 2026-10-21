@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Chambre Froide Négative' (ID: ind_cold_room). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "c029ed39-f652-43a2-836e-1360c096ad15": {
-        "id": "c029ed39-f652-43a2-836e-1360c096ad15",
+      "0688ff49-aad2-422c-a737-bc5aef78d87e": {
+        "id": "0688ff49-aad2-422c-a737-bc5aef78d87e",
         "alias": "Chambre Froide Négative",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "3f850dc5-5f4b-40c8-8d26-df149bb7cde3": {
+      "c950b054-5a83-48a0-aa08-57d3e7c0908a": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "3f850dc5-5f4b-40c8-8d26-df149bb7cde3"
+        "id": "c950b054-5a83-48a0-aa08-57d3e7c0908a"
       },
-      "862b0e18-2ebd-44be-a7aa-191f04aa8633": {
+      "4f6af4d8-22c3-42af-a3a9-9034529b79ed": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c029ed39-f652-43a2-836e-1360c096ad15",
+              "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "862b0e18-2ebd-44be-a7aa-191f04aa8633"
+        "id": "4f6af4d8-22c3-42af-a3a9-9034529b79ed"
       },
-      "d4e92ff6-b7cb-452d-9ee8-ec13dabbf0ef": {
+      "e071e8fb-77b0-4ef6-9c74-178bf04cfce6": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c029ed39-f652-43a2-836e-1360c096ad15",
+              "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "d4e92ff6-b7cb-452d-9ee8-ec13dabbf0ef"
+        "id": "e071e8fb-77b0-4ef6-9c74-178bf04cfce6"
       },
-      "1ed787c3-7af0-4123-b6b3-8b2ea2616cd3": {
+      "f2c8e63d-fac6-4bcc-9f47-1fd840cfd688": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c029ed39-f652-43a2-836e-1360c096ad15",
+              "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e",
               "dataKeys": [
                 {
                   "name": "temp_evaporateur",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "1ed787c3-7af0-4123-b6b3-8b2ea2616cd3"
+        "id": "f2c8e63d-fac6-4bcc-9f47-1fd840cfd688"
       },
-      "b4399036-1094-41e5-93ba-227c442618bb": {
+      "83d6716f-1c12-41f9-aa0a-93536f6b8b6e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c029ed39-f652-43a2-836e-1360c096ad15",
+              "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e",
               "dataKeys": [
                 {
                   "name": "puissance_groupe_kw",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "b4399036-1094-41e5-93ba-227c442618bb"
+        "id": "83d6716f-1c12-41f9-aa0a-93536f6b8b6e"
       },
-      "71984740-397a-4910-a982-32e23fe73ce8": {
+      "c910cfd5-7764-4371-8224-f675af7b9ce5": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c029ed39-f652-43a2-836e-1360c096ad15",
+              "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -422,9 +422,119 @@
         },
         "row": 16,
         "col": 0,
-        "id": "71984740-397a-4910-a982-32e23fe73ce8"
+        "id": "c910cfd5-7764-4371-8224-f675af7b9ce5"
       },
-      "38b65971-f9ed-4d23-b4c5-be5af89a45d9": {
+      "b0b751bc-8b79-4c87-973f-322e22799f63": {
+        "typeFullFqn": "system.control_widgets.round_switch",
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "round_switch",
+        "type": "rpc",
+        "title": "Pilotage - Alerte Porte Ouverte",
+        "sizeX": 4,
+        "sizeY": 4,
+        "config": {
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e"
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e",
+              "dataKeys": [
+                {
+                  "name": "porte_ouverte",
+                  "type": "attribute",
+                  "label": "porte_ouverte",
+                  "color": "#10B981",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "showTitle": true,
+          "title": "Pilotage - Alerte Porte Ouverte",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "settings": {
+            "title": "Pilotage - Alerte Porte Ouverte",
+            "initialValue": false,
+            "retrieveValueMethod": "attribute",
+            "valueAttribute": "porte_ouverte",
+            "attributeScope": "SHARED_SCOPE",
+            "setValueMethod": "set_porte_ouverte",
+            "getValueMethod": "get_porte_ouverte",
+            "parseValueFunction": "return data ? true : false;",
+            "convertValueFunction": "return value;"
+          },
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 16,
+        "id": "b0b751bc-8b79-4c87-973f-322e22799f63"
+      },
+      "a3f7a748-73c1-4622-97bf-1f01f428d928": {
+        "typeFullFqn": "system.control_widgets.round_switch",
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "round_switch",
+        "type": "rpc",
+        "title": "Pilotage - Cycle Dégivrage Actif",
+        "sizeX": 4,
+        "sizeY": 4,
+        "config": {
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e"
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e",
+              "dataKeys": [
+                {
+                  "name": "statut_degivrage",
+                  "type": "attribute",
+                  "label": "statut_degivrage",
+                  "color": "#F59E0B",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "showTitle": true,
+          "title": "Pilotage - Cycle Dégivrage Actif",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "settings": {
+            "title": "Pilotage - Cycle Dégivrage Actif",
+            "initialValue": false,
+            "retrieveValueMethod": "attribute",
+            "valueAttribute": "statut_degivrage",
+            "attributeScope": "SHARED_SCOPE",
+            "setValueMethod": "set_statut_degivrage",
+            "getValueMethod": "get_statut_degivrage",
+            "parseValueFunction": "return data ? true : false;",
+            "convertValueFunction": "return value;"
+          },
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 20,
+        "id": "a3f7a748-73c1-4622-97bf-1f01f428d928"
+      },
+      "7f847df5-ef97-46e2-8e41-8ee3099d7c99": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -432,12 +542,12 @@
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
-        "sizeY": 8,
+        "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c029ed39-f652-43a2-836e-1360c096ad15",
+              "entityAliasId": "0688ff49-aad2-422c-a737-bc5aef78d87e",
               "dataKeys": [
                 {
                   "name": "porte_ouverte",
@@ -474,9 +584,9 @@
             "color": "#0F172A"
           }
         },
-        "row": 16,
+        "row": 20,
         "col": 16,
-        "id": "38b65971-f9ed-4d23-b4c5-be5af89a45d9"
+        "id": "7f847df5-ef97-46e2-8e41-8ee3099d7c99"
       }
     },
     "states": {
@@ -486,43 +596,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "3f850dc5-5f4b-40c8-8d26-df149bb7cde3": {
+              "c950b054-5a83-48a0-aa08-57d3e7c0908a": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "862b0e18-2ebd-44be-a7aa-191f04aa8633": {
+              "4f6af4d8-22c3-42af-a3a9-9034529b79ed": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "d4e92ff6-b7cb-452d-9ee8-ec13dabbf0ef": {
+              "e071e8fb-77b0-4ef6-9c74-178bf04cfce6": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "1ed787c3-7af0-4123-b6b3-8b2ea2616cd3": {
+              "f2c8e63d-fac6-4bcc-9f47-1fd840cfd688": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "b4399036-1094-41e5-93ba-227c442618bb": {
+              "83d6716f-1c12-41f9-aa0a-93536f6b8b6e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "71984740-397a-4910-a982-32e23fe73ce8": {
+              "c910cfd5-7764-4371-8224-f675af7b9ce5": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "38b65971-f9ed-4d23-b4c5-be5af89a45d9": {
+              "b0b751bc-8b79-4c87-973f-322e22799f63": {
+                "sizeX": 4,
+                "sizeY": 4,
+                "row": 16,
+                "col": 16
+              },
+              "a3f7a748-73c1-4622-97bf-1f01f428d928": {
+                "sizeX": 4,
+                "sizeY": 4,
+                "row": 16,
+                "col": 20
+              },
+              "7f847df5-ef97-46e2-8e41-8ee3099d7c99": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

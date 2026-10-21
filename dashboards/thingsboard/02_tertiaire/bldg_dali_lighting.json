@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Gestion d'Éclairage DALI & Présence' (ID: bldg_dali_lighting). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "07bde62c-f0de-41a8-ad08-00b61a64813e": {
-        "id": "07bde62c-f0de-41a8-ad08-00b61a64813e",
+      "a322be9c-e594-473e-9686-a88fd52f1951": {
+        "id": "a322be9c-e594-473e-9686-a88fd52f1951",
         "alias": "Gestion d'Éclairage DALI & Présence",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "beee5cdc-3b3c-4dfe-a778-944841f64c34": {
+      "d5ef3790-88bb-42fa-a5e3-79bcd3b1e1d6": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "beee5cdc-3b3c-4dfe-a778-944841f64c34"
+        "id": "d5ef3790-88bb-42fa-a5e3-79bcd3b1e1d6"
       },
-      "d097f005-0849-467f-9f25-dad13a49125a": {
+      "2f115095-c3a6-436d-b3bb-d483a4ad6608": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "07bde62c-f0de-41a8-ad08-00b61a64813e",
+              "entityAliasId": "a322be9c-e594-473e-9686-a88fd52f1951",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "d097f005-0849-467f-9f25-dad13a49125a"
+        "id": "2f115095-c3a6-436d-b3bb-d483a4ad6608"
       },
-      "7418b45d-ed3d-4b48-bfff-34b1f5b98ce9": {
+      "ab6cb674-6810-4d0f-ac6c-20b0512fa331": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "07bde62c-f0de-41a8-ad08-00b61a64813e",
+              "entityAliasId": "a322be9c-e594-473e-9686-a88fd52f1951",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "7418b45d-ed3d-4b48-bfff-34b1f5b98ce9"
+        "id": "ab6cb674-6810-4d0f-ac6c-20b0512fa331"
       },
-      "35846e87-49d5-4e8c-ac67-f27d7e2ed04b": {
+      "bcc3c2c5-a1ca-4efc-8a66-7890c6706d4a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "07bde62c-f0de-41a8-ad08-00b61a64813e",
+              "entityAliasId": "a322be9c-e594-473e-9686-a88fd52f1951",
               "dataKeys": [
                 {
                   "name": "taux_presence_zone_pct",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "35846e87-49d5-4e8c-ac67-f27d7e2ed04b"
+        "id": "bcc3c2c5-a1ca-4efc-8a66-7890c6706d4a"
       },
-      "5a49a54f-2d25-4f07-946b-f638d3284531": {
+      "f151f8fa-2c95-4ebe-8c43-b6ecf288e100": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "07bde62c-f0de-41a8-ad08-00b61a64813e",
+              "entityAliasId": "a322be9c-e594-473e-9686-a88fd52f1951",
               "dataKeys": [
                 {
                   "name": "gradation_dali_pct",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "5a49a54f-2d25-4f07-946b-f638d3284531"
+        "id": "f151f8fa-2c95-4ebe-8c43-b6ecf288e100"
       },
-      "0ed2783a-9d4c-4b9f-9d14-f4be7a7ea278": {
+      "a8f5da6b-0dec-4876-a4cf-48c616a89608": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "07bde62c-f0de-41a8-ad08-00b61a64813e",
+              "entityAliasId": "a322be9c-e594-473e-9686-a88fd52f1951",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_w",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "0ed2783a-9d4c-4b9f-9d14-f4be7a7ea278"
+        "id": "a8f5da6b-0dec-4876-a4cf-48c616a89608"
       },
-      "7382bce3-8a6b-433d-a085-f84afdea28d9": {
+      "12a4517b-4da4-4cee-abc3-1ff1b786b828": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "07bde62c-f0de-41a8-ad08-00b61a64813e",
+              "entityAliasId": "a322be9c-e594-473e-9686-a88fd52f1951",
               "dataKeys": [
                 {
                   "name": "heures_fonctionnement_h",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "7382bce3-8a6b-433d-a085-f84afdea28d9"
+        "id": "12a4517b-4da4-4cee-abc3-1ff1b786b828"
       },
-      "a4925dd6-9aef-48f9-bb09-a6d4d849d53f": {
+      "5de5236a-8337-43b8-ba50-37a3c5020ec7": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "07bde62c-f0de-41a8-ad08-00b61a64813e",
+              "entityAliasId": "a322be9c-e594-473e-9686-a88fd52f1951",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "a4925dd6-9aef-48f9-bb09-a6d4d849d53f"
+        "id": "5de5236a-8337-43b8-ba50-37a3c5020ec7"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "beee5cdc-3b3c-4dfe-a778-944841f64c34": {
+              "d5ef3790-88bb-42fa-a5e3-79bcd3b1e1d6": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "d097f005-0849-467f-9f25-dad13a49125a": {
+              "2f115095-c3a6-436d-b3bb-d483a4ad6608": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "7418b45d-ed3d-4b48-bfff-34b1f5b98ce9": {
+              "ab6cb674-6810-4d0f-ac6c-20b0512fa331": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "35846e87-49d5-4e8c-ac67-f27d7e2ed04b": {
+              "bcc3c2c5-a1ca-4efc-8a66-7890c6706d4a": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "5a49a54f-2d25-4f07-946b-f638d3284531": {
+              "f151f8fa-2c95-4ebe-8c43-b6ecf288e100": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "0ed2783a-9d4c-4b9f-9d14-f4be7a7ea278": {
+              "a8f5da6b-0dec-4876-a4cf-48c616a89608": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "7382bce3-8a6b-433d-a085-f84afdea28d9": {
+              "12a4517b-4da4-4cee-abc3-1ff1b786b828": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "a4925dd6-9aef-48f9-bb09-a6d4d849d53f": {
+              "5de5236a-8337-43b8-ba50-37a3c5020ec7": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

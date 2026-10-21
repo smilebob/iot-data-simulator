@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Borne de Recharge IRVE' (ID: infra_irve_charger). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "23384f89-d26d-440b-bba1-2922bbd742d3": {
-        "id": "23384f89-d26d-440b-bba1-2922bbd742d3",
+      "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11": {
+        "id": "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11",
         "alias": "Borne de Recharge IRVE",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "79699f8a-4d99-4bd4-9a9c-b9cae3087be1": {
+      "9fed908f-5e3c-4d68-8897-b412ce278610": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "79699f8a-4d99-4bd4-9a9c-b9cae3087be1"
+        "id": "9fed908f-5e3c-4d68-8897-b412ce278610"
       },
-      "d38e34f7-3dde-4817-a8b9-164c76a5a35c": {
+      "aebe8f56-4af5-41eb-a372-f81c6d9e4e93": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
+              "entityAliasId": "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "d38e34f7-3dde-4817-a8b9-164c76a5a35c"
+        "id": "aebe8f56-4af5-41eb-a372-f81c6d9e4e93"
       },
-      "739f963e-00cb-46d4-97da-97489c390f78": {
+      "d77edd26-4b9d-4e2f-be77-8a85a1856515": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
+              "entityAliasId": "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "739f963e-00cb-46d4-97da-97489c390f78"
+        "id": "d77edd26-4b9d-4e2f-be77-8a85a1856515"
       },
-      "49a73074-b16d-4792-a6a8-b2a7955f395e": {
+      "ea03e9f2-edfb-459b-9bde-bff41316f139": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
+              "entityAliasId": "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11",
               "dataKeys": [
                 {
                   "name": "energie_session_kwh",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "49a73074-b16d-4792-a6a8-b2a7955f395e"
+        "id": "ea03e9f2-edfb-459b-9bde-bff41316f139"
       },
-      "a86fa883-fa42-4c70-9319-71bcee20246c": {
+      "5f0e9d05-bfdd-4188-8496-d8dbb811432f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
+              "entityAliasId": "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11",
               "dataKeys": [
                 {
                   "name": "courant_charge_a",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "a86fa883-fa42-4c70-9319-71bcee20246c"
+        "id": "5f0e9d05-bfdd-4188-8496-d8dbb811432f"
       },
-      "e0d9b613-bf5a-4732-bdc3-3422ab7a8bd8": {
+      "76eecf3c-f3b8-4d02-bfc2-2fd3fa182ffc": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
+              "entityAliasId": "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -413,9 +413,57 @@
         },
         "row": 16,
         "col": 0,
-        "id": "e0d9b613-bf5a-4732-bdc3-3422ab7a8bd8"
+        "id": "76eecf3c-f3b8-4d02-bfc2-2fd3fa182ffc"
       },
-      "4d739949-34eb-427a-adeb-781d32b4749f": {
+      "2998744f-3b9b-424f-9f66-aa65e740b01f": {
+        "typeFullFqn": "system.input_widgets.update_multiple_attributes",
+        "isSystemType": true,
+        "bundleAlias": "input_widgets",
+        "typeAlias": "update_multiple_attributes",
+        "type": "latest",
+        "title": "Consigne - Statut Prise Type 2",
+        "sizeX": 8,
+        "sizeY": 4,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11",
+              "dataKeys": [
+                {
+                  "name": "statut_connecteur",
+                  "type": "attribute",
+                  "label": "Statut Prise Type 2",
+                  "color": "#10B981",
+                  "settings": {
+                    "dataKeyType": "shared"
+                  }
+                }
+              ]
+            }
+          ],
+          "showTitle": true,
+          "title": "Consigne - Statut Prise Type 2",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "settings": {
+            "widgetTitle": "Consigne - Statut Prise Type 2",
+            "showTitle": true,
+            "saveButtonLabel": "Valider",
+            "resetButtonLabel": "Annuler"
+          },
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 16,
+        "id": "2998744f-3b9b-424f-9f66-aa65e740b01f"
+      },
+      "d505e3de-a728-4fdd-b423-b9549dca37d7": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -423,12 +471,12 @@
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
-        "sizeY": 8,
+        "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "23384f89-d26d-440b-bba1-2922bbd742d3",
+              "entityAliasId": "895d2008-2b4e-47a0-b07f-ed5d3b8c1f11",
               "dataKeys": [
                 {
                   "name": "statut_connecteur",
@@ -458,9 +506,9 @@
             "color": "#0F172A"
           }
         },
-        "row": 16,
+        "row": 20,
         "col": 16,
-        "id": "4d739949-34eb-427a-adeb-781d32b4749f"
+        "id": "d505e3de-a728-4fdd-b423-b9549dca37d7"
       }
     },
     "states": {
@@ -470,43 +518,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "79699f8a-4d99-4bd4-9a9c-b9cae3087be1": {
+              "9fed908f-5e3c-4d68-8897-b412ce278610": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "d38e34f7-3dde-4817-a8b9-164c76a5a35c": {
+              "aebe8f56-4af5-41eb-a372-f81c6d9e4e93": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "739f963e-00cb-46d4-97da-97489c390f78": {
+              "d77edd26-4b9d-4e2f-be77-8a85a1856515": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "49a73074-b16d-4792-a6a8-b2a7955f395e": {
+              "ea03e9f2-edfb-459b-9bde-bff41316f139": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "a86fa883-fa42-4c70-9319-71bcee20246c": {
+              "5f0e9d05-bfdd-4188-8496-d8dbb811432f": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "e0d9b613-bf5a-4732-bdc3-3422ab7a8bd8": {
+              "76eecf3c-f3b8-4d02-bfc2-2fd3fa182ffc": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "4d739949-34eb-427a-adeb-781d32b4749f": {
+              "2998744f-3b9b-424f-9f66-aa65e740b01f": {
+                "sizeX": 8,
+                "sizeY": 4,
+                "row": 16,
+                "col": 16
+              },
+              "d505e3de-a728-4fdd-b423-b9549dca37d7": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

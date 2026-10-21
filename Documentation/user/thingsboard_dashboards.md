@@ -1,14 +1,14 @@
 # Guide d'Utilisation : Tableaux de Bord SCADA ThingsBoard Préconfigurés
 
-> **Compatibilité** : ThingsBoard Community Edition (CE) et Professional Edition (PE) versions 3.x à 3.8+  
+> **Compatibilité** : ThingsBoard 4.3 (version de référence), ThingsBoard CE/PE v3.x à v4.x+  
 > **Type de Tableau de Bord** : SCADA / HMI Haute Performance (Normes ISA-101, ISO 10628, IEC 60617)  
-> **Format** : Fichiers JSON officiels ThingsBoard Dashboard
+> **Format** : Fichiers JSON officiels ThingsBoard Dashboard avec Pilotage Bidirectionnel (RPC & Shared Attributes)
 
 ---
 
 ## 1. Présentation Générale & Philosophie SCADA
 
-Pour répondre aux exigences des environnements industriels, tertiaires et d'infrastructures, chaque équipement et cas d'usage dispose d'un **tableau de bord ThingsBoard de type SCADA (Supervisory Control And Data Acquisition)** complet et préconfiguré.
+Pour répondre aux exigences des environnements industriels, tertiaires et d'infrastructures, chaque équipement et cas d'usage dispose d'un **tableau de bord ThingsBoard de type SCADA (Supervisory Control And Data Acquisition)** complet, préconfiguré et **entièrement pilotable de manière bidirectionnelle**.
 
 Chaque tableau de bord respecte les règles métier et conventions graphiques de la profession :
 - **Synoptique SCADA Vectoriel Dédié (Mimic Display)** :
@@ -19,6 +19,9 @@ Chaque tableau de bord respecte les règles métier et conventions graphiques de
 - **Tags d'Instrumentation en Temps Réel** : Les valeurs physiques critiques sont repérées directement sur les organes du schéma (sur le tuyau d'air, au niveau de la vanne, sur la génératrice, à l'entrée du disjoncteur) avec valeur numérique, unité et couleur d'état.
 - **Pupitre d'Instrumentation & Jauges** : Jauges de processus industrielles avec zones de consigne (*Setpoint*) et seuils opérationnels.
 - **Enregistreur de Tendance (*SCADA Historian & Trend Viewer*)** : Fenêtre glissante de 2 minutes en temps réel avec statistiques (min, max, moyenne, valeur courante).
+- **Pupitre de Pilotage & Commandes Opérateur (Contrôle Interactif)** :
+  - Interrupteurs rotatifs et boutons bascules (**Round Switch Controls**) pour les variables d'état (Marche/Arrêt, Mode Chaud/Froid, Forçage Dégivrage, Vannes ON/OFF, Déclencheurs de test).
+  - Formulaires interactifs de saisie de consignes (**Update Attributes Form**) pour régler les ouvertures de registres (0-100%), pourcentages de modulation ou modes de fonctionnement.
 - **Registre des Attributs & Paramètres Automate** : Synthèse des attributs de contrôle, modes (Auto / Manuel / Local / Distant) et grandeurs d'état.
 - **Bannière d'Identification Sécurisée** : En-tête épuré intégrant le nom de l'équipement, l'identifiant technique, le protocole actif et un badge d'authentification sécurisée. Par mesure de cybersécurité (conforme CIS & OWASP), **l'Access Token n'est jamais divulgué ni affiché en clair sur l'écran**, protégeant vos identifiants lors de partages d'écrans ou de projections en salle de contrôle.
 - **Thème Graphique Light & Haute Lisibilité (WCAG AA)** :
@@ -137,7 +140,33 @@ ThingsBoard analyse le fichier et ouvre la boîte de dialogue **« Résolution d
 
 ---
 
-## 5. Dépannage & Bonnes Pratiques
+## 5. Pilotage Bidirectionnel & Commandes Opérateur (ThingsBoard 4.3)
+
+Chaque tableau de bord intègre désormais des composants de **pilotage interactif bidirectionnel** permettant à l'opérateur de modifier le comportement des équipements simulés directement depuis l'écran de supervision ThingsBoard :
+
+```
++-----------------------------------------------------------------------------------+
+| Télémétries en Temps Réel (Chart 16x8)   | [O] Pilotage - Mode Chaud (Switch 8x4)  |
+|                                          +----------------------------------------+
+|                                          | Attributs & États (Table 8x4)          |
++-----------------------------------------------------------------------------------+
+```
+
+### 5.1 Interrupteurs de Commande (*Round Switch Controls*)
+- **Fonctionnement** : Pour chaque variable booléenne d'état ou de consigne (ex: *Mode Chaud* pour la pompe à chaleur, *État de Marche* pour le compresseur, *Ouverture Électrovanne* pour l'arrosage, *Contact Porte* pour la chambre froide), un interrupteur circulaire à LED d'état est positionné sur le tableau de bord.
+- **Action Opérateur** : Un simple clic sur l'interrupteur bascule l'état (ON ↔ OFF).
+- **Boucle de rétroaction en direct** :
+  1. ThingsBoard émet une commande RPC vers le broker (`v1/devices/me/rpc/request/{id}`).
+  2. Le simulateur IoT intercepte l'ordre, met à jour la variable locale, acquitte la commande auprès de ThingsBoard (`v1/devices/me/rpc/response/{id}`) et synchronise l'attribut partagé.
+  3. L'interrupteur reste stabilisé sur sa nouvelle position, le synoptique SCADA vectoriel s'actualise, et l'interface web locale du simulateur reflète instantanément le changement sans rechargement de page.
+
+### 5.2 Formulaires de Consignes & Paramètres (*Input Widgets*)
+- Pour les grandeurs continues ou énumérées (ex: *Ouverture Registre Air Neuf %* sur la CTA, *Position Aiguillage* ferroviaire, *Statut Prise IRVE*), un widget de saisie permet de modifier la consigne et de l'appliquer via le bouton **`Valider`**.
+- La nouvelle consigne est immédiatement transmise au simulateur qui adapte ses calculs mathématiques et ses dépendances physiques.
+
+---
+
+## 6. Dépannage & Bonnes Pratiques
 
 - **Les widgets affichent `No data`** :
   - Vérifiez que la simulation est bien active dans le simulateur (indicateur vert *Simulation en cours*).

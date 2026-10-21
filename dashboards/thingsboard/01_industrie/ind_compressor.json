@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale d'Air Comprimé' (ID: ind_compressor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "7b04c5dc-84b4-48c2-81c6-a9a628254c11": {
-        "id": "7b04c5dc-84b4-48c2-81c6-a9a628254c11",
+      "9fa9118e-d61a-4978-b253-35fde562109f": {
+        "id": "9fa9118e-d61a-4978-b253-35fde562109f",
         "alias": "Centrale d'Air Comprimé",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "941a9fd6-caca-4702-8a67-5facb3dd9193": {
+      "485f8ac4-02fc-4ad9-b817-1fd2f1e5015f": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "941a9fd6-caca-4702-8a67-5facb3dd9193"
+        "id": "485f8ac4-02fc-4ad9-b817-1fd2f1e5015f"
       },
-      "c9a7f81e-8536-4ff1-a88a-caa0469ed755": {
+      "da1e5b96-c8b4-4c27-8d4d-ffc5b082b26a": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7b04c5dc-84b4-48c2-81c6-a9a628254c11",
+              "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "c9a7f81e-8536-4ff1-a88a-caa0469ed755"
+        "id": "da1e5b96-c8b4-4c27-8d4d-ffc5b082b26a"
       },
-      "05bb8847-7c86-4d4d-9354-69ae5cb105bf": {
+      "e97e6785-d82a-45cf-b713-83822e819435": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7b04c5dc-84b4-48c2-81c6-a9a628254c11",
+              "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "05bb8847-7c86-4d4d-9354-69ae5cb105bf"
+        "id": "e97e6785-d82a-45cf-b713-83822e819435"
       },
-      "508a73f5-5ed7-4f9a-b1d6-ed86b5ab7d2f": {
+      "68b1565e-7530-4a26-865e-53596d25722a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7b04c5dc-84b4-48c2-81c6-a9a628254c11",
+              "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f",
               "dataKeys": [
                 {
                   "name": "temp_vis_huile",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "508a73f5-5ed7-4f9a-b1d6-ed86b5ab7d2f"
+        "id": "68b1565e-7530-4a26-865e-53596d25722a"
       },
-      "c2864055-da57-475b-a4f6-f2caa306ff9d": {
+      "d85cd55b-03e5-4c2a-b216-46f89ac54c4f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7b04c5dc-84b4-48c2-81c6-a9a628254c11",
+              "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f",
               "dataKeys": [
                 {
                   "name": "debit_air",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "c2864055-da57-475b-a4f6-f2caa306ff9d"
+        "id": "d85cd55b-03e5-4c2a-b216-46f89ac54c4f"
       },
-      "2298f0c5-591e-4e70-af95-125dfaf3a63b": {
+      "d2e25373-3ca0-42bb-a3ce-643a3ce400cf": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7b04c5dc-84b4-48c2-81c6-a9a628254c11",
+              "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f",
               "dataKeys": [
                 {
                   "name": "puissance_active",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "2298f0c5-591e-4e70-af95-125dfaf3a63b"
+        "id": "d2e25373-3ca0-42bb-a3ce-643a3ce400cf"
       },
-      "8958cef4-62ce-4ca6-888d-f753c0f9dc9d": {
+      "564454f4-6b2c-4371-9dd6-d805b0872597": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7b04c5dc-84b4-48c2-81c6-a9a628254c11",
+              "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -496,9 +496,64 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8958cef4-62ce-4ca6-888d-f753c0f9dc9d"
+        "id": "564454f4-6b2c-4371-9dd6-d805b0872597"
       },
-      "e030e799-533e-4211-96f9-656a560b49be": {
+      "566316e8-f8f5-4f68-bf2d-b388f1821baf": {
+        "typeFullFqn": "system.control_widgets.round_switch",
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "round_switch",
+        "type": "rpc",
+        "title": "Pilotage - État de Fonctionnement",
+        "sizeX": 8,
+        "sizeY": 4,
+        "config": {
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f"
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f",
+              "dataKeys": [
+                {
+                  "name": "etat_marche",
+                  "type": "attribute",
+                  "label": "etat_marche",
+                  "color": "#10B981",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "showTitle": true,
+          "title": "Pilotage - État de Fonctionnement",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "settings": {
+            "title": "Pilotage - État de Fonctionnement",
+            "initialValue": true,
+            "retrieveValueMethod": "attribute",
+            "valueAttribute": "etat_marche",
+            "attributeScope": "SHARED_SCOPE",
+            "setValueMethod": "set_etat_marche",
+            "getValueMethod": "get_etat_marche",
+            "parseValueFunction": "return data ? true : false;",
+            "convertValueFunction": "return value;"
+          },
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 16,
+        "id": "566316e8-f8f5-4f68-bf2d-b388f1821baf"
+      },
+      "29a449c4-a3c3-44b6-a42b-5a30652e00bd": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -506,12 +561,12 @@
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
-        "sizeY": 8,
+        "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7b04c5dc-84b4-48c2-81c6-a9a628254c11",
+              "entityAliasId": "9fa9118e-d61a-4978-b253-35fde562109f",
               "dataKeys": [
                 {
                   "name": "etat_marche",
@@ -541,9 +596,9 @@
             "color": "#0F172A"
           }
         },
-        "row": 16,
+        "row": 20,
         "col": 16,
-        "id": "e030e799-533e-4211-96f9-656a560b49be"
+        "id": "29a449c4-a3c3-44b6-a42b-5a30652e00bd"
       }
     },
     "states": {
@@ -553,49 +608,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "941a9fd6-caca-4702-8a67-5facb3dd9193": {
+              "485f8ac4-02fc-4ad9-b817-1fd2f1e5015f": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "c9a7f81e-8536-4ff1-a88a-caa0469ed755": {
+              "da1e5b96-c8b4-4c27-8d4d-ffc5b082b26a": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "05bb8847-7c86-4d4d-9354-69ae5cb105bf": {
+              "e97e6785-d82a-45cf-b713-83822e819435": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "508a73f5-5ed7-4f9a-b1d6-ed86b5ab7d2f": {
+              "68b1565e-7530-4a26-865e-53596d25722a": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "c2864055-da57-475b-a4f6-f2caa306ff9d": {
+              "d85cd55b-03e5-4c2a-b216-46f89ac54c4f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "2298f0c5-591e-4e70-af95-125dfaf3a63b": {
+              "d2e25373-3ca0-42bb-a3ce-643a3ce400cf": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "8958cef4-62ce-4ca6-888d-f753c0f9dc9d": {
+              "564454f4-6b2c-4371-9dd6-d805b0872597": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "e030e799-533e-4211-96f9-656a560b49be": {
+              "566316e8-f8f5-4f68-bf2d-b388f1821baf": {
+                "sizeX": 8,
+                "sizeY": 4,
+                "row": 16,
+                "col": 16
+              },
+              "29a449c4-a3c3-44b6-a42b-5a30652e00bd": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

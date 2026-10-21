@@ -86,6 +86,17 @@ def test_thingsboard_dashboard_generation():
             publish_interval=10.0,
             sim_mode=SimMode.CONSTANT,
             math_config=MathConfig(constant_val="ACTIVE_HIGH")
+        ),
+        VariableConfig(
+            id="v_pump_enable",
+            name="Pompe d'Alimentation Active",
+            device_id="test_boiler_01",
+            var_type=VariableType.ATTRIBUTE,
+            data_type=DataType.BOOLEAN,
+            unit="",
+            publish_interval=10.0,
+            sim_mode=SimMode.CONSTANT,
+            math_config=MathConfig(constant_val=True)
         )
     ]
 
@@ -149,6 +160,19 @@ def test_thingsboard_dashboard_generation():
     assert "v_steam_press" in datakeys
     assert "v_flame_temp" in datakeys
 
+    # Vérification des widgets de contrôle interactifs ThingsBoard 4.3 (Switch & Input Form)
+    switch_w = next(w for w in widgets.values() if w.get("typeAlias") == "round_switch")
+    assert switch_w.get("typeFullFqn") == "system.control_widgets.round_switch"
+    assert switch_w.get("bundleAlias") == "control_widgets"
+    assert "Pilotage - Pompe d'Alimentation Active" in switch_w.get("title", "")
+    assert switch_w["config"]["settings"]["setValueMethod"] == "set_v_pump_enable"
+    assert switch_w["config"]["settings"]["attributeScope"] == "SHARED_SCOPE"
+
+    input_form_w = next(w for w in widgets.values() if w.get("typeAlias") == "update_multiple_attributes")
+    assert input_form_w.get("typeFullFqn") == "system.input_widgets.update_multiple_attributes"
+    assert input_form_w.get("bundleAlias") == "input_widgets"
+    assert "Consigne - État Brûleur" in input_form_w.get("title", "")
+
     # Vérification de la carte d'attributs (entities_table)
     attr_w = next(w for w in widgets.values() if w.get("typeAlias") == "entities_table")
     assert attr_w.get("typeFullFqn") == "system.cards.entities_table"
@@ -156,6 +180,7 @@ def test_thingsboard_dashboard_generation():
     attr_ds = attr_w["config"]["datasources"][0]
     attr_keys = [dk["name"] for dk in attr_ds["dataKeys"]]
     assert "v_burner_status" in attr_keys
+    assert "v_pump_enable" in attr_keys
 
     # Vérification de la sérialisation JSON valide
     serialized = json.dumps(dashboard)

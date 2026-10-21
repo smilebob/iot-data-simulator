@@ -90,7 +90,12 @@ class MqttConnection:
             self.is_connected = True
             self.last_error = None
             logger.info(f"✓ Connecté avec succès au broker MQTT {self.config.host}:{self.config.port} ({self.config.transport})")
-            self.client.subscribe("v1/devices/me/rpc/request/+")
+            # Souscription bidirectionnelle ThingsBoard : RPC et Attributs partagés (Shared Attributes)
+            self.client.subscribe([
+                ("v1/devices/me/rpc/request/+", 1),
+                ("v1/devices/me/attributes", 1),
+                ("v1/devices/me/attributes/response/+", 1),
+            ])
         else:
             self.is_connected = False
             reasons = {
@@ -226,6 +231,13 @@ class MqttManager:
     def _handle_device_message(self, device_id: str, topic: str, payload: str):
         if self.on_rpc_callback:
             self.on_rpc_callback(device_id, topic, payload)
+
+    def publish_device_message(self, device_id: str, topic: str, payload: str, qos: int = 1) -> bool:
+        """Publie un message (ex: acquittement RPC ou synchronisation d'attribut) sur le client MQTT de l'équipement."""
+        client = self.device_clients.get(device_id) or self.default_client
+        if client:
+            return client.publish(topic, payload, qos=qos)
+        return False
 
     def stop_all(self):
         if self.default_client:

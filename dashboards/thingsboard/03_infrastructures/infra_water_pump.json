@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Poste de Relevage Assainissement' (ID: infra_water_pump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "4b200c98-06bb-445d-aba3-980fd171e5b0": {
-        "id": "4b200c98-06bb-445d-aba3-980fd171e5b0",
+      "ca69cd10-3471-4a9b-afed-c2faf7b45c15": {
+        "id": "ca69cd10-3471-4a9b-afed-c2faf7b45c15",
         "alias": "Poste de Relevage Assainissement",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "7cc6d3f9-bab2-4c29-aedc-36195e3fb14b": {
+      "a480b6f0-9187-4c8a-b10c-f37112c164ba": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "7cc6d3f9-bab2-4c29-aedc-36195e3fb14b"
+        "id": "a480b6f0-9187-4c8a-b10c-f37112c164ba"
       },
-      "dc99d3f4-e0ee-4cf9-83fd-c795572c8c4c": {
+      "7c2821ca-956b-49cf-a8a5-369ca6d4596c": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
+              "entityAliasId": "ca69cd10-3471-4a9b-afed-c2faf7b45c15",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "dc99d3f4-e0ee-4cf9-83fd-c795572c8c4c"
+        "id": "7c2821ca-956b-49cf-a8a5-369ca6d4596c"
       },
-      "3e83dbb9-98bc-4943-aa3e-9ff1e9d9c200": {
+      "da8413a6-ee6f-413f-9f83-1de1608b145e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
+              "entityAliasId": "ca69cd10-3471-4a9b-afed-c2faf7b45c15",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "3e83dbb9-98bc-4943-aa3e-9ff1e9d9c200"
+        "id": "da8413a6-ee6f-413f-9f83-1de1608b145e"
       },
-      "9735c5db-b38e-413d-bcce-aaaf7eb66158": {
+      "e73d0a27-518c-4093-aef5-dd0787ee6707": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
+              "entityAliasId": "ca69cd10-3471-4a9b-afed-c2faf7b45c15",
               "dataKeys": [
                 {
                   "name": "debit_refoulement",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "9735c5db-b38e-413d-bcce-aaaf7eb66158"
+        "id": "e73d0a27-518c-4093-aef5-dd0787ee6707"
       },
-      "35b599ca-423d-4861-bfb0-025621b06d34": {
+      "fb3e23e0-83c5-4a40-a8ab-79d6b026754e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
+              "entityAliasId": "ca69cd10-3471-4a9b-afed-c2faf7b45c15",
               "dataKeys": [
                 {
                   "name": "conso_pompe_kw",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "35b599ca-423d-4861-bfb0-025621b06d34"
+        "id": "fb3e23e0-83c5-4a40-a8ab-79d6b026754e"
       },
-      "8827457e-dffd-4acd-9f9f-bc1f93aec35a": {
+      "b14fb40f-acac-4de9-869b-97d621d52aa1": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
+              "entityAliasId": "ca69cd10-3471-4a9b-afed-c2faf7b45c15",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -413,9 +413,64 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8827457e-dffd-4acd-9f9f-bc1f93aec35a"
+        "id": "b14fb40f-acac-4de9-869b-97d621d52aa1"
       },
-      "34120d5c-c24b-41fb-9d8b-ce2f3127a515": {
+      "84b529bc-3508-4497-ab37-4631334fc901": {
+        "typeFullFqn": "system.control_widgets.round_switch",
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "round_switch",
+        "type": "rpc",
+        "title": "Pilotage - Alerte Trop-Plein / Débordement",
+        "sizeX": 8,
+        "sizeY": 4,
+        "config": {
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "ca69cd10-3471-4a9b-afed-c2faf7b45c15"
+          },
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "ca69cd10-3471-4a9b-afed-c2faf7b45c15",
+              "dataKeys": [
+                {
+                  "name": "alarme_debordement",
+                  "type": "attribute",
+                  "label": "alarme_debordement",
+                  "color": "#10B981",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "showTitle": true,
+          "title": "Pilotage - Alerte Trop-Plein / Débordement",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "settings": {
+            "title": "Pilotage - Alerte Trop-Plein / Débordement",
+            "initialValue": false,
+            "retrieveValueMethod": "attribute",
+            "valueAttribute": "alarme_debordement",
+            "attributeScope": "SHARED_SCOPE",
+            "setValueMethod": "set_alarme_debordement",
+            "getValueMethod": "get_alarme_debordement",
+            "parseValueFunction": "return data ? true : false;",
+            "convertValueFunction": "return value;"
+          },
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 16,
+        "id": "84b529bc-3508-4497-ab37-4631334fc901"
+      },
+      "a4181350-ff2a-49c6-8a99-e871452fa5b4": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -423,12 +478,12 @@
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
-        "sizeY": 8,
+        "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b200c98-06bb-445d-aba3-980fd171e5b0",
+              "entityAliasId": "ca69cd10-3471-4a9b-afed-c2faf7b45c15",
               "dataKeys": [
                 {
                   "name": "alarme_debordement",
@@ -458,9 +513,9 @@
             "color": "#0F172A"
           }
         },
-        "row": 16,
+        "row": 20,
         "col": 16,
-        "id": "34120d5c-c24b-41fb-9d8b-ce2f3127a515"
+        "id": "a4181350-ff2a-49c6-8a99-e871452fa5b4"
       }
     },
     "states": {
@@ -470,43 +525,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "7cc6d3f9-bab2-4c29-aedc-36195e3fb14b": {
+              "a480b6f0-9187-4c8a-b10c-f37112c164ba": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "dc99d3f4-e0ee-4cf9-83fd-c795572c8c4c": {
+              "7c2821ca-956b-49cf-a8a5-369ca6d4596c": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "3e83dbb9-98bc-4943-aa3e-9ff1e9d9c200": {
+              "da8413a6-ee6f-413f-9f83-1de1608b145e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "9735c5db-b38e-413d-bcce-aaaf7eb66158": {
+              "e73d0a27-518c-4093-aef5-dd0787ee6707": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "35b599ca-423d-4861-bfb0-025621b06d34": {
+              "fb3e23e0-83c5-4a40-a8ab-79d6b026754e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "8827457e-dffd-4acd-9f9f-bc1f93aec35a": {
+              "b14fb40f-acac-4de9-869b-97d621d52aa1": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "34120d5c-c24b-41fb-9d8b-ce2f3127a515": {
+              "84b529bc-3508-4497-ab37-4631334fc901": {
+                "sizeX": 8,
+                "sizeY": 4,
+                "row": 16,
+                "col": 16
+              },
+              "a4181350-ff2a-49c6-8a99-e871452fa5b4": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

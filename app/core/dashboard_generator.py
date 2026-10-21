@@ -394,7 +394,150 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
         }
 
         # -------------------------------------------------------------
-        # 4. Carte des Attributs & États (Latest Values Table)
+        # 4. Commandes & Pilotage Interactif (Control Widgets)
+        #    Permet de piloter les attributs/modes depuis ThingsBoard 4.3
+        # -------------------------------------------------------------
+        attr_table_height = chart_height
+        attr_table_row = current_row
+
+        if attribute_vars:
+            # S'il y a des attributs pilotables, on réserve le haut de la colonne droite (hauteur 4)
+            # pour les widgets de contrôle interactifs (Switches / Formulaires)
+            ctrl_height = 4
+            attr_table_height = chart_height - ctrl_height  # 4
+            attr_table_row = current_row + ctrl_height
+
+            ctrl_count = len(attribute_vars)
+            ctrl_width = 8 if ctrl_count == 1 else (4 if ctrl_count == 2 else 4)
+
+            for idx, var in enumerate(attribute_vars[:2]):  # Jusqu'à 2 contrôleurs directs en haut
+                ctrl_id = str(uuid.uuid4())
+                clean_key = get_clean_var_key(var)
+                col_offset = chart_width + (idx * ctrl_width)
+                color = PALETTE_COLORS[(idx + 2) % len(PALETTE_COLORS)]
+
+                if var.data_type == DataType.BOOLEAN:
+                    initial_val = bool(var.math_config.constant_val if var.math_config and var.math_config.constant_val is not None else False)
+                    widgets[ctrl_id] = {
+                        "typeFullFqn": "system.control_widgets.round_switch",
+                        "isSystemType": True,
+                        "bundleAlias": "control_widgets",
+                        "typeAlias": "round_switch",
+                        "type": "rpc",
+                        "title": f"Pilotage - {var.name}",
+                        "sizeX": ctrl_width,
+                        "sizeY": ctrl_height,
+                        "config": {
+                            "targetDevice": {
+                                "type": "entity",
+                                "entityAliasId": alias_id
+                            },
+                            "datasources": [
+                                {
+                                    "type": "entity",
+                                    "entityAliasId": alias_id,
+                                    "dataKeys": [
+                                        {
+                                            "name": clean_key,
+                                            "type": "attribute",
+                                            "label": clean_key,
+                                            "color": color,
+                                            "settings": {}
+                                        }
+                                    ]
+                                }
+                            ],
+                            "showTitle": True,
+                            "title": f"Pilotage - {var.name}",
+                            "dropShadow": True,
+                            "enableFullscreen": False,
+                            "settings": {
+                                "title": f"Pilotage - {var.name}",
+                                "initialValue": initial_val,
+                                "retrieveValueMethod": "attribute",
+                                "valueAttribute": clean_key,
+                                "attributeScope": "SHARED_SCOPE",
+                                "setValueMethod": f"set_{clean_key}",
+                                "getValueMethod": f"get_{clean_key}",
+                                "parseValueFunction": "return data ? true : false;",
+                                "convertValueFunction": "return value;"
+                            },
+                            "widgetStyle": {
+                                "backgroundColor": "#FFFFFF",
+                                "borderRadius": "12px",
+                                "border": "1px solid #CBD5E1",
+                                "color": "#0F172A"
+                            }
+                        },
+                        "row": current_row,
+                        "col": col_offset,
+                        "id": ctrl_id
+                    }
+                    layout_widgets[ctrl_id] = {
+                        "sizeX": ctrl_width,
+                        "sizeY": ctrl_height,
+                        "row": current_row,
+                        "col": col_offset
+                    }
+                else:
+                    # Attribut non booléen (numérique, texte, mode) : widget de saisie
+                    widgets[ctrl_id] = {
+                        "typeFullFqn": "system.input_widgets.update_multiple_attributes",
+                        "isSystemType": True,
+                        "bundleAlias": "input_widgets",
+                        "typeAlias": "update_multiple_attributes",
+                        "type": "latest",
+                        "title": f"Consigne - {var.name}",
+                        "sizeX": ctrl_width,
+                        "sizeY": ctrl_height,
+                        "config": {
+                            "datasources": [
+                                {
+                                    "type": "entity",
+                                    "entityAliasId": alias_id,
+                                    "dataKeys": [
+                                        {
+                                            "name": clean_key,
+                                            "type": "attribute",
+                                            "label": var.name,
+                                            "color": color,
+                                            "settings": {
+                                                "dataKeyType": "shared"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                            "showTitle": True,
+                            "title": f"Consigne - {var.name}",
+                            "dropShadow": True,
+                            "enableFullscreen": False,
+                            "settings": {
+                                "widgetTitle": f"Consigne - {var.name}",
+                                "showTitle": True,
+                                "saveButtonLabel": "Valider",
+                                "resetButtonLabel": "Annuler"
+                            },
+                            "widgetStyle": {
+                                "backgroundColor": "#FFFFFF",
+                                "borderRadius": "12px",
+                                "border": "1px solid #CBD5E1",
+                                "color": "#0F172A"
+                            }
+                        },
+                        "row": current_row,
+                        "col": col_offset,
+                        "id": ctrl_id
+                    }
+                    layout_widgets[ctrl_id] = {
+                        "sizeX": ctrl_width,
+                        "sizeY": ctrl_height,
+                        "row": current_row,
+                        "col": col_offset
+                    }
+
+        # -------------------------------------------------------------
+        # 5. Carte des Attributs & États (Latest Values Table)
         # -------------------------------------------------------------
         if attribute_vars or other_telemetry_vars:
             attr_table_id = str(uuid.uuid4())
@@ -424,7 +567,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                 "type": "latest",
                 "title": "Attributs & États Opérationnels",
                 "sizeX": 8,
-                "sizeY": chart_height,
+                "sizeY": attr_table_height,
                 "config": {
                     "datasources": [
                         {
@@ -451,7 +594,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                         "color": "#0F172A"
                     }
                 },
-                "row": current_row,
+                "row": attr_table_row,
                 "col": chart_width,
                 "id": attr_table_id
             }

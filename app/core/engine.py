@@ -1,4 +1,5 @@
 import asyncio
+import json
 import logging
 import time
 from typing import Any, Callable, Dict, List, Optional
@@ -306,9 +307,144 @@ class SimulationEngine:
             logger.info(f"Anomalie '{anomaly.value}' appliquée sur la variable {var_id}")
 
     def _handle_rpc(self, device_id: str, topic: str, payload: str):
-        """Gestion des requêtes de contrôle ThingsBoard / MQTT entrantes."""
-        logger.info(f"RPC reçu pour {device_id} sur {topic}: {payload}")
-        for var in self.repo.get_variables():
-            if var.device_id == device_id or device_id == "global":
-                # Si le nom de la variable correspond à la méthode ou paramètre
-                pass
+        """Gestion bidirectionnelle des requêtes ThingsBoard / MQTT entrantes (RPC et Shared Attributes)."""
+        logger.info(f"Message de contrôle reçu pour '{device_id}' sur {topic}: {payload}")
+        try:
+            data = json.loads(payload) if payload else {}
+        except Exception as e:
+            logger.warning(f"Payload de contrôle non JSON reçu sur {topic}: {payload} ({e})")
+            return
+
+        variables = self.repo.get_variables()
+        dev_vars = [v for v in variables if v.device_id == device_id or device_id == "global"]
+
+        def get_clean_key(v: VariableConfig) -> str:
+            if v.device_id and v.id.startswith(f"{v.device_id}_"):
+                return v.id[len(v.device_id) + 1:]
+            return v.id
+
+        # CAS 1 : Mise à jour d'Attributs Partagés (Shared Attributes)
+        # ThingsBoard publie directement les modifications sur 'v1/devices/me/attributes'
+        if topic == "v1/devices/me/attributes" or "attributes" in topic:
+            if isinstance(data, dict):
+                modified = False
+                for key, val in data.items():
+                    for var in dev_vars:
+                        ck = get_clean_key(var)
+                        if ck == key or var.id == key or var.name.lower() == key.lower():
+                            cast_val = MathSignalGenerator._cast_type(val, var.data_type)
+                            var.current_value = cast_val
+                            var.manual_override = True
+                            var.manual_value = cast_val
+                            if var.math_config and var.sim_mode == SimMode.CONSTANT:
+                                var.math_config.constant_val = cast_val
+                            modified = True
+                            logger.info(f"✓ Attribut partagé ThingsBoard appliqué pour '{device_id}' : {ck} = {cast_val}")
+                if modified:
+                    self.repo.save_variables(variables)
+                    if self._ws_broadcast_callback:
+                        for var in dev_vars:
+                            self._ws_broadcast_callback({
+                                "variable_id": var.id,
+                                "device_id": var.device_id,
+                                "value": var.current_value,
+                                "timestamp": time.time(),
+                                "anomaly": var.anomaly.value,
+                            })
+            return
+
+        # CAS 2 : Requête RPC ThingsBoard (Boutons, Switches, Sliders)
+        # Topic format : v1/devices/me/rpc/request/{request_id}
+        if "rpc/request/" in topic:
+            req_id = topic.split("/")[-1]
+            method = data.get("method", "")
+            params = data.get("params")
+
+            target_var: Optional[VariableConfig] = None
+            new_val: Any = None
+
+            # Normalisation de la méthode RPC
+            norm_method = method.lower().replace("-", "_").replace(" ", "_")
+
+            # 1. Recherche par correspondance de nom de variable dans la méthode
+            for var in dev_vars:
+                ck = get_clean_key(var).lower()
+                if norm_method in (f"set_{ck}", f"set{ck}", ck, f"toggle_{ck}", f"toggle{ck}"):
+                    target_var = var
+                    break
+
+            # 2. Si la méthode est générique (ex: 'setValue', 'set', 'toggle', 'write')
+            if not target_var and norm_method in ("setvalue", "set", "toggle", "write"):
+                if isinstance(params, dict):
+                    # params contient un dictionnaire clé/valeur ex: {"mode_chaud": false}
+                    for k, v in params.items():
+                        for var in dev_vars:
+                            if get_clean_key(var).lower() == k.lower():
+                                target_var = var
+                                params = v
+                                break
+                        if target_var:
+                            break
+                elif len(dev_vars) == 1:
+                    target_var = dev_vars[0]
+                else:
+                    # Préférer la première variable de type ATTRIBUTE de l'équipement
+                    attr_vars = [v for v in dev_vars if v.var_type.value == "attribute"]
+                    if attr_vars:
+                        target_var = attr_vars[0]
+
+            # 3. Si la méthode est une lecture d'état ('getValue', 'get_<key>')
+            if norm_method.startswith("get"):
+                read_var = target_var
+                if not read_var:
+                    for var in dev_vars:
+                        ck = get_clean_key(var).lower()
+                        if norm_method in (f"get_{ck}", f"get{ck}", "getvalue"):
+                            read_var = var
+                            break
+                cur_val = read_var.current_value if read_var else True
+                resp = json.dumps({"value": cur_val, "status": "SUCCESS"})
+                self.mqtt.publish_device_message(device_id, f"v1/devices/me/rpc/response/{req_id}", resp)
+                logger.info(f"✓ Réponse RPC GET émise pour '{device_id}' (req #{req_id}) : {resp}")
+                return
+
+            if target_var:
+                if norm_method.startswith("toggle"):
+                    # Bascule booléenne
+                    cur = bool(target_var.current_value)
+                    new_val = not cur
+                elif params is not None:
+                    new_val = MathSignalGenerator._cast_type(params, target_var.data_type)
+                else:
+                    new_val = True
+
+                target_var.current_value = new_val
+                target_var.manual_override = True
+                target_var.manual_value = new_val
+                if target_var.math_config and target_var.sim_mode == SimMode.CONSTANT:
+                    target_var.math_config.constant_val = new_val
+
+                self.repo.save_variables(variables)
+                logger.info(f"✓ Commande RPC exécutée avec succès pour '{device_id}' : {get_clean_key(target_var)} = {new_val}")
+
+                # Réponse RPC obligatoire pour valider la bascule du switch ThingsBoard
+                resp_payload = json.dumps({"status": "SUCCESS", "value": new_val})
+                self.mqtt.publish_device_message(device_id, f"v1/devices/me/rpc/response/{req_id}", resp_payload)
+
+                # Synchronisation d'attribut retour pour acquitter ThingsBoard
+                clean_name = get_clean_key(target_var)
+                self.mqtt.publish_device_message(device_id, "v1/devices/me/attributes", json.dumps({clean_name: new_val}))
+
+                # Actualisation immédiate du dashboard web local du simulateur
+                if self._ws_broadcast_callback:
+                    self._ws_broadcast_callback({
+                        "variable_id": target_var.id,
+                        "device_id": target_var.device_id,
+                        "value": target_var.current_value,
+                        "timestamp": time.time(),
+                        "anomaly": target_var.anomaly.value,
+                    })
+            else:
+                # Répondre tout de même pour éviter le timeout de ThingsBoard
+                self.mqtt.publish_device_message(device_id, f"v1/devices/me/rpc/response/{req_id}", json.dumps({"status": "NOT_FOUND"}))
+                logger.warning(f"Commande RPC ignorée : aucune variable correspondante pour {method} sur '{device_id}'")

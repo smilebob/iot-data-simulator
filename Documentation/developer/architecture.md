@@ -86,3 +86,13 @@ Cette abstraction permet d'ajouter n'importe quelle plateforme cible sans jamais
 
 ### 8. `app/auth/` (Contrôle d'Accès RBAC & Sécurité CIS)
 * `service.py` & `models.py` : Gestion des rôles `ADMIN`, `OPERATOR`, `VIEWER`, hachage cryptographique Scrypt RFC 7914, sessions par cookies signés JWT HttpOnly et ségrégation stricte des secrets dans `data/users.json` (droits `0600`).
+
+### 9. Pilotage Bidirectionnel & Commandes (RPC & Shared Attributes)
+* **Souscriptions MQTT amont** : Tout client dédié souscrit automatiquement à :
+  - `v1/devices/me/rpc/request/+` (ordres RPC issus d'interrupteurs ou boutons de commande)
+  - `v1/devices/me/attributes` (mises à jour de Shared Attributes issues de formulaires ou d'automates)
+* **Traitement & Résolution dans l'Engine** :
+  - Extraction de `request_id`, normalisation de la méthode (`set_<key>`, `setValue`, `toggle`, `getValue`).
+  - Application immédiate sur la variable (`current_value`, `manual_override = True`, `manual_value`).
+  - Acquittement RPC instantané sur `v1/devices/me/rpc/response/{request_id}` pour stabiliser le switch ThingsBoard sans timeout.
+  - Rétro-publication sur `v1/devices/me/attributes` pour synchronisation complète et notification temps réel via WebSocket.

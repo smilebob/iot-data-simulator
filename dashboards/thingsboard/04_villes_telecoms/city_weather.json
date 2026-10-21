@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Station Météo & Climat Urbain' (ID: city_weather). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "257d0801-4b20-45b7-85ed-bbd3d7ef5448": {
-        "id": "257d0801-4b20-45b7-85ed-bbd3d7ef5448",
+      "7e95e942-55f6-4c97-94af-2c5edda9f9ce": {
+        "id": "7e95e942-55f6-4c97-94af-2c5edda9f9ce",
         "alias": "Station Météo & Climat Urbain",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "0bf69c16-9b16-463a-ba1a-8a3bd18fb789": {
+      "2e184f32-a2e1-411f-b2ec-677e97bf4f67": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "0bf69c16-9b16-463a-ba1a-8a3bd18fb789"
+        "id": "2e184f32-a2e1-411f-b2ec-677e97bf4f67"
       },
-      "49ff46c5-76fe-43c0-b31f-a0dfd803d29f": {
+      "d385d8ff-1837-4790-b552-bb07021b6215": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "257d0801-4b20-45b7-85ed-bbd3d7ef5448",
+              "entityAliasId": "7e95e942-55f6-4c97-94af-2c5edda9f9ce",
               "dataKeys": [
                 {
                   "name": "temp_ext",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "49ff46c5-76fe-43c0-b31f-a0dfd803d29f"
+        "id": "d385d8ff-1837-4790-b552-bb07021b6215"
       },
-      "64e19c26-a5ee-475c-abd0-d975ce8e2622": {
+      "23dc1005-9bab-482f-8f7d-966d48df8059": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "257d0801-4b20-45b7-85ed-bbd3d7ef5448",
+              "entityAliasId": "7e95e942-55f6-4c97-94af-2c5edda9f9ce",
               "dataKeys": [
                 {
                   "name": "temp_ext",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "64e19c26-a5ee-475c-abd0-d975ce8e2622"
+        "id": "23dc1005-9bab-482f-8f7d-966d48df8059"
       },
-      "004744e5-9782-4250-9a42-769d677beb44": {
+      "9aebcc43-06fa-44c8-a3a9-500192918640": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "257d0801-4b20-45b7-85ed-bbd3d7ef5448",
+              "entityAliasId": "7e95e942-55f6-4c97-94af-2c5edda9f9ce",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_kmh",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "004744e5-9782-4250-9a42-769d677beb44"
+        "id": "9aebcc43-06fa-44c8-a3a9-500192918640"
       },
-      "a4c62ca7-d6f4-4af3-8e45-384b0c8460dc": {
+      "ab5d4b6c-0b44-44cd-bfa9-6b02393905bf": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "257d0801-4b20-45b7-85ed-bbd3d7ef5448",
+              "entityAliasId": "7e95e942-55f6-4c97-94af-2c5edda9f9ce",
               "dataKeys": [
                 {
                   "name": "humidite_ext",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "a4c62ca7-d6f4-4af3-8e45-384b0c8460dc"
+        "id": "ab5d4b6c-0b44-44cd-bfa9-6b02393905bf"
       },
-      "c6631472-9288-4511-9c4c-4ba81355401d": {
+      "b039edca-b926-4737-87bb-6f87d708ff13": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "257d0801-4b20-45b7-85ed-bbd3d7ef5448",
+              "entityAliasId": "7e95e942-55f6-4c97-94af-2c5edda9f9ce",
               "dataKeys": [
                 {
                   "name": "indice_uv",
@@ -360,9 +360,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "c6631472-9288-4511-9c4c-4ba81355401d"
+        "id": "b039edca-b926-4737-87bb-6f87d708ff13"
       },
-      "2ce92d48-e774-4d0c-80d0-6fbff5ba5df8": {
+      "d2983f41-3580-4a52-9f7b-8c75d95a45be": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -375,7 +375,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "257d0801-4b20-45b7-85ed-bbd3d7ef5448",
+              "entityAliasId": "7e95e942-55f6-4c97-94af-2c5edda9f9ce",
               "dataKeys": [
                 {
                   "name": "temp_ext",
@@ -487,7 +487,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "2ce92d48-e774-4d0c-80d0-6fbff5ba5df8"
+        "id": "d2983f41-3580-4a52-9f7b-8c75d95a45be"
       }
     },
     "states": {
@@ -497,43 +497,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "0bf69c16-9b16-463a-ba1a-8a3bd18fb789": {
+              "2e184f32-a2e1-411f-b2ec-677e97bf4f67": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "49ff46c5-76fe-43c0-b31f-a0dfd803d29f": {
+              "d385d8ff-1837-4790-b552-bb07021b6215": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "64e19c26-a5ee-475c-abd0-d975ce8e2622": {
+              "23dc1005-9bab-482f-8f7d-966d48df8059": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "004744e5-9782-4250-9a42-769d677beb44": {
+              "9aebcc43-06fa-44c8-a3a9-500192918640": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "a4c62ca7-d6f4-4af3-8e45-384b0c8460dc": {
+              "ab5d4b6c-0b44-44cd-bfa9-6b02393905bf": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "c6631472-9288-4511-9c4c-4ba81355401d": {
+              "b039edca-b926-4737-87bb-6f87d708ff13": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "2ce92d48-e774-4d0c-80d0-6fbff5ba5df8": {
+              "d2983f41-3580-4a52-9f7b-8c75d95a45be": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,
