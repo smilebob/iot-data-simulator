@@ -1,11 +1,11 @@
 {
-  "title": "Supervision - Aiguillage & Signalisation Ferroviaire",
-  "name": "Supervision - Aiguillage & Signalisation Ferroviaire",
+  "title": "Supervision SCADA - Aiguillage & Signalisation Ferroviaire",
+  "name": "Supervision SCADA - Aiguillage & Signalisation Ferroviaire",
   "configuration": {
-    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Token: TOKEN_INFRA_RAIL_SWITCH. Protocole: HTTP.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_RAIL_SWITCH. Protocole: HTTP.",
     "entityAliases": {
-      "710d61ec-fc61-4646-8bac-f6c550b56cf5": {
-        "id": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+      "57614a0d-07c0-4760-bc3e-b6048572836c": {
+        "id": "57614a0d-07c0-4760-bc3e-b6048572836c",
         "alias": "Aiguillage & Signalisation Ferroviaire",
         "filter": {
           "type": "entityName",
@@ -15,7 +15,7 @@
       }
     },
     "widgets": {
-      "6ed36851-1253-465f-ada8-601bc5e99d85": {
+      "84e2c9bd-5257-43d9-9694-1e96fcc68fd4": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +38,34 @@
         },
         "row": 0,
         "col": 0,
-        "id": "6ed36851-1253-465f-ada8-601bc5e99d85"
+        "id": "84e2c9bd-5257-43d9-9694-1e96fcc68fd4"
       },
-      "fff65678-3467-4ea4-b791-c982aa32c7b6": {
+      "81d17bc7-5eee-4f03-94b1-c7526075bd17": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Synoptique SCADA Process - Aiguillage & Signalisation Ferroviaire",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Aiguillage & Signalisation Ferroviaire\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_RAIL_SWITCH</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Réacteur Process -->\n    <rect x=\"100\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#161F2E\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"190\" y=\"70\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"105\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#0284C7\" opacity=\"0.35\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 100 100\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"50\" y=\"90\" fill=\"#10B981\" font-size=\"9\">ALIMENTATION</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 280 150 L 400 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"430\" cy=\"150\" r=\"28\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(430, 150)\" class=\"scada-rotor-fast\">\n      <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"430\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 460 150 L 620 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"620\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#1A2234\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"680\" y=\"125\" fill=\"#F59E0B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"680\" y=\"145\" fill=\"#94A3B8\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 740 150 L 880 150\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"880,145 895,150 880,155\" fill=\"#10B981\"/>\n    <text x=\"830\" y=\"140\" fill=\"#10B981\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 45)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PROCESS | RÉGULATION</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">AUTOMATIQUE</text>\n    </g>\n    <g transform=\"translate(740, 45)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">BOUCLE | SÉCURITÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">VERROUILLÉE</text>\n    </g>\n  </svg>\n    \n</div>\n"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "81d17bc7-5eee-4f03-94b1-c7526075bd17"
+      },
+      "62a68da4-e3a1-4a28-b4fc-ab37e91db528": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -52,7 +77,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -93,11 +118,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 0,
-        "id": "fff65678-3467-4ea4-b791-c982aa32c7b6"
+        "id": "62a68da4-e3a1-4a28-b4fc-ab37e91db528"
       },
-      "aa2de9c5-db41-44eb-80c0-2627161a9f0c": {
+      "28723ee1-6384-437c-960d-063ee507d870": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -109,7 +134,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
               "dataKeys": [
                 {
                   "name": "temps_manoeuvre_ms",
@@ -150,11 +175,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 8,
-        "id": "aa2de9c5-db41-44eb-80c0-2627161a9f0c"
+        "id": "28723ee1-6384-437c-960d-063ee507d870"
       },
-      "47d0aed0-5772-48e0-82d2-a061bc5111a5": {
+      "59564e6d-9233-4d97-be75-f28c014b4b8f": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -166,7 +191,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
               "dataKeys": [
                 {
                   "name": "temp_rail_rechauffage",
@@ -207,11 +232,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 16,
-        "id": "47d0aed0-5772-48e0-82d2-a061bc5111a5"
+        "id": "59564e6d-9233-4d97-be75-f28c014b4b8f"
       },
-      "3408851b-dab7-4480-b0b3-66ee4d42439b": {
+      "247b0200-a45f-4182-b885-2b05152049c2": {
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "timeseries",
@@ -223,7 +248,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -317,11 +342,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 0,
-        "id": "3408851b-dab7-4480-b0b3-66ee4d42439b"
+        "id": "247b0200-a45f-4182-b885-2b05152049c2"
       },
-      "c69c247c-857a-45c0-8755-d088c916aadf": {
+      "0b6c3a3e-3d78-40df-8dcd-8d50a4f44ddd": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "latest_values",
@@ -333,7 +358,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "710d61ec-fc61-4646-8bac-f6c550b56cf5",
+              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -366,9 +391,9 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 16,
-        "id": "c69c247c-857a-45c0-8755-d088c916aadf"
+        "id": "0b6c3a3e-3d78-40df-8dcd-8d50a4f44ddd"
       }
     },
     "states": {
@@ -378,40 +403,46 @@
         "layouts": {
           "main": {
             "widgets": {
-              "6ed36851-1253-465f-ada8-601bc5e99d85": {
+              "84e2c9bd-5257-43d9-9694-1e96fcc68fd4": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "fff65678-3467-4ea4-b791-c982aa32c7b6": {
-                "sizeX": 8,
-                "sizeY": 5,
+              "81d17bc7-5eee-4f03-94b1-c7526075bd17": {
+                "sizeX": 24,
+                "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "aa2de9c5-db41-44eb-80c0-2627161a9f0c": {
+              "62a68da4-e3a1-4a28-b4fc-ab37e91db528": {
                 "sizeX": 8,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
+                "col": 0
+              },
+              "28723ee1-6384-437c-960d-063ee507d870": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 11,
                 "col": 8
               },
-              "47d0aed0-5772-48e0-82d2-a061bc5111a5": {
+              "59564e6d-9233-4d97-be75-f28c014b4b8f": {
                 "sizeX": 8,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 16
               },
-              "3408851b-dab7-4480-b0b3-66ee4d42439b": {
+              "247b0200-a45f-4182-b885-2b05152049c2": {
                 "sizeX": 16,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 0
               },
-              "c69c247c-857a-45c0-8755-d088c916aadf": {
+              "0b6c3a3e-3d78-40df-8dcd-8d50a4f44ddd": {
                 "sizeX": 8,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 16
               }
             },

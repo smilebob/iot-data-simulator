@@ -71,8 +71,8 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Moteur de Dépendance Physique & Variables Dérivées (`SimMode.DERIVED`, `SimMode.INTEGRATOR`) : évaluation causale en 3 passes, analyseur AST sécurisé sans `eval()`, intégrateurs d'énergie continus (kWh, MWh, m³) et rétro-application aux 32 presets métiers
 - [x] Guide d'architecture du moteur physique : `Documentation/developer/physics_and_dependencies.md`
 - [x] Configuration de l'intervalle d'envoi (`publish_interval`) au niveau équipement avec écrasement en cascade sur toutes les grandeurs associées, tout en préservant la possibilité de régler des cadences individuelles par variable (v1.8.0)
-- [x] Générateur et Bibliothèque de 32 Tableaux de Bord ThingsBoard (JSON export/import) préconfigurés avec jauges analogiques, courbes temps réel multi-grandeurs, tableau d'attributs et téléchargement direct en 1 clic depuis l'équipement instancié intégrant le Token ThingsBoard (v1.9.0)
-- [x] Guide utilisateur d'importation ThingsBoard : `Documentation/user/thingsboard_dashboards.md`
+- [x] Tableaux de Bord SCADA ThingsBoard (v1.9.0) : Intégration de schémas synoptiques professionnels conformes aux règles métiers (P&ID tuyauterie/instrumentation ISO 10628, schémas unifilaires électriques SLD IEC 60617, synoptiques aérauliques GTB/CVC DIN 1946) avec animations de fluides, rotors en mouvement, tags de mesure en temps réel, jauges de process et téléchargement direct en 1 clic avec Token ThingsBoard préconfiguré pour chaque équipement et cas d'usage.
+- [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

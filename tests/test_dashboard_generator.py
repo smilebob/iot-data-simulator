@@ -57,7 +57,7 @@ def test_thingsboard_dashboard_generation():
     # Génération du dashboard ThingsBoard
     dashboard = generate_thingsboard_dashboard(dev, vars_list)
 
-    assert dashboard["title"] == "Supervision - Chaudière Test #1"
+    assert dashboard["title"] == "Supervision SCADA - Chaudière Test #1"
     assert "TB_TOKEN_SECRET_9876" in dashboard["configuration"]["description"]
 
     # Vérification de l'alias d'entité
@@ -70,7 +70,12 @@ def test_thingsboard_dashboard_generation():
 
     # Vérification des widgets
     widgets = dashboard["configuration"]["widgets"]
-    assert len(widgets) >= 3  # Header + Jauges + Graphique + Carte Attributs
+    assert len(widgets) >= 4  # Header + Synoptique SCADA + Jauges + Graphique + Carte Attributs
+
+    # Vérification du synoptique SCADA
+    synoptic_w = next(w for w in widgets.values() if "Synoptique SCADA" in w.get("title", ""))
+    assert "<svg" in synoptic_w["config"]["settings"]["html"]
+    assert "pipe-flow" in synoptic_w["config"]["settings"]["html"]
 
     # Vérification du widget d'en-tête (HTML) avec le token
     header_w = next(w for w in widgets.values() if w.get("typeAlias") == "html_card")

@@ -1,11 +1,11 @@
 {
-  "title": "Supervision - Onduleur Solaire Photovoltaïque",
-  "name": "Supervision - Onduleur Solaire Photovoltaïque",
+  "title": "Supervision SCADA - Onduleur Solaire Photovoltaïque",
+  "name": "Supervision SCADA - Onduleur Solaire Photovoltaïque",
   "configuration": {
-    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Onduleur Solaire Photovoltaïque' (ID: infra_solar_pv). Token: TOKEN_INFRA_SOLAR_PV. Protocole: HTTP.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Onduleur Solaire Photovoltaïque' (ID: infra_solar_pv). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_SOLAR_PV. Protocole: HTTP.",
     "entityAliases": {
-      "40fe773e-327b-4dc6-af65-5d1906fba8cb": {
-        "id": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+      "40236047-aecb-435b-9208-8bf3ca80f167": {
+        "id": "40236047-aecb-435b-9208-8bf3ca80f167",
         "alias": "Onduleur Solaire Photovoltaïque",
         "filter": {
           "type": "entityName",
@@ -15,7 +15,7 @@
       }
     },
     "widgets": {
-      "49d3363b-f180-4822-976f-ad4b9eb401d9": {
+      "72664c02-0a99-4177-9527-2638b6620bb2": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +38,34 @@
         },
         "row": 0,
         "col": 0,
-        "id": "49d3363b-f180-4822-976f-ad4b9eb401d9"
+        "id": "72664c02-0a99-4177-9527-2638b6620bb2"
       },
-      "484c9944-976a-4268-94e3-aa89e523d02c": {
+      "72aea93b-c673-46bf-9229-67b9baf9821f": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Synoptique SCADA Process - Onduleur Solaire Photovoltaïque",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Solaire SCADA : Onduleur Solaire Photovoltaïque\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_SOLAR_PV</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <g transform=\"translate(80, 45)\">\n      <circle cx=\"0\" cy=\"0\" r=\"20\" fill=\"#F59E0B\" opacity=\"0.9\"/>\n      <text x=\"0\" y=\"38\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\">PYRANOMÈTRE</text>\n    </g>\n\n    <g transform=\"translate(170, 60)\">\n      <polygon points=\"0,60 25,10 115,10 90,60\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n      <polygon points=\"105,60 130,10 220,10 195,60\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n      <text x=\"110\" y=\"85\" fill=\"#94A3B8\" font-size=\"10\" text-anchor=\"middle\">CHAMP SOLAIRE 500kWc</text>\n    </g>\n\n    <path d=\"M 380 95 L 480 95\" fill=\"none\" stroke=\"#F59E0B\" stroke-width=\"5\" stroke-dasharray=\"6,3\"/>\n    <text x=\"430\" y=\"85\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\">DC 820V</text>\n\n    <!-- Onduleur Central -->\n    <g transform=\"translate(540, 95)\">\n      <rect x=\"-45\" y=\"-50\" width=\"90\" height=\"100\" rx=\"8\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2.5\"/>\n      <text x=\"-20\" y=\"-12\" fill=\"#F59E0B\" font-size=\"12\" font-weight=\"bold\">DC</text>\n      <text x=\"12\" y=\"22\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\">AC</text>\n      <text x=\"0\" y=\"65\" fill=\"#10B981\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">ONDULEUR MPPT</text>\n    </g>\n\n    <path d=\"M 585 95 L 750 95\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <text x=\"810\" y=\"100\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">INJECTION RÉSEAU</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 180)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PUISSANCE INJECTÉE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">412 kW</text>\n    </g>\n    <g transform=\"translate(680, 180)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">CUMUL PRODUCTION</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">2 450 kWh</text>\n    </g>\n  </svg>\n    \n</div>\n"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "72aea93b-c673-46bf-9229-67b9baf9821f"
+      },
+      "6bd49a95-a8c5-4af0-b8cf-9dfa1bfb26b7": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -52,7 +77,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
               "dataKeys": [
                 {
                   "name": "ensoleillement",
@@ -93,11 +118,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 0,
-        "id": "484c9944-976a-4268-94e3-aa89e523d02c"
+        "id": "6bd49a95-a8c5-4af0-b8cf-9dfa1bfb26b7"
       },
-      "8e8ee752-e5e8-49d4-843e-bd8a5f0777a7": {
+      "87b536d4-95c5-43bb-9c7a-1217ade553e1": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -109,7 +134,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
               "dataKeys": [
                 {
                   "name": "rendement_onduleur",
@@ -150,11 +175,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 6,
-        "id": "8e8ee752-e5e8-49d4-843e-bd8a5f0777a7"
+        "id": "87b536d4-95c5-43bb-9c7a-1217ade553e1"
       },
-      "afea5110-a0cf-4926-a75d-a98bd6df6005": {
+      "926a5842-b1f1-46a2-b2d6-87f21029e97e": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -166,7 +191,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
               "dataKeys": [
                 {
                   "name": "puissance_injection_kw",
@@ -207,11 +232,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 12,
-        "id": "afea5110-a0cf-4926-a75d-a98bd6df6005"
+        "id": "926a5842-b1f1-46a2-b2d6-87f21029e97e"
       },
-      "ca1ced19-7bec-4dd3-90ce-99b2cbb4b4a6": {
+      "d4bd25a9-fd7b-4e2d-b86c-e8cbe492bc3b": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -223,7 +248,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
               "dataKeys": [
                 {
                   "name": "tension_dc_string",
@@ -264,11 +289,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 18,
-        "id": "ca1ced19-7bec-4dd3-90ce-99b2cbb4b4a6"
+        "id": "d4bd25a9-fd7b-4e2d-b86c-e8cbe492bc3b"
       },
-      "581b8749-55b5-4c5c-8a03-52fe1cb6ebe9": {
+      "ae3108ba-3645-4e89-ab78-b13011e3f409": {
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "timeseries",
@@ -280,7 +305,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40fe773e-327b-4dc6-af65-5d1906fba8cb",
+              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
               "dataKeys": [
                 {
                   "name": "ensoleillement",
@@ -388,9 +413,9 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 0,
-        "id": "581b8749-55b5-4c5c-8a03-52fe1cb6ebe9"
+        "id": "ae3108ba-3645-4e89-ab78-b13011e3f409"
       }
     },
     "states": {
@@ -400,40 +425,46 @@
         "layouts": {
           "main": {
             "widgets": {
-              "49d3363b-f180-4822-976f-ad4b9eb401d9": {
+              "72664c02-0a99-4177-9527-2638b6620bb2": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "484c9944-976a-4268-94e3-aa89e523d02c": {
-                "sizeX": 6,
-                "sizeY": 5,
+              "72aea93b-c673-46bf-9229-67b9baf9821f": {
+                "sizeX": 24,
+                "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "8e8ee752-e5e8-49d4-843e-bd8a5f0777a7": {
+              "6bd49a95-a8c5-4af0-b8cf-9dfa1bfb26b7": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
+                "col": 0
+              },
+              "87b536d4-95c5-43bb-9c7a-1217ade553e1": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
                 "col": 6
               },
-              "afea5110-a0cf-4926-a75d-a98bd6df6005": {
+              "926a5842-b1f1-46a2-b2d6-87f21029e97e": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 12
               },
-              "ca1ced19-7bec-4dd3-90ce-99b2cbb4b4a6": {
+              "d4bd25a9-fd7b-4e2d-b86c-e8cbe492bc3b": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 18
               },
-              "581b8749-55b5-4c5c-8a03-52fe1cb6ebe9": {
+              "ae3108ba-3645-4e89-ab78-b13011e3f409": {
                 "sizeX": 24,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 0
               }
             },

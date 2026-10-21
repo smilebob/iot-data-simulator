@@ -1,19 +1,26 @@
-# Guide d'Utilisation : Tableaux de Bord ThingsBoard Préconfigurés
+# Guide d'Utilisation : Tableaux de Bord SCADA ThingsBoard Préconfigurés
 
 > **Compatibilité** : ThingsBoard Community Edition (CE) et Professional Edition (PE) versions 3.x à 3.8+  
+> **Type de Tableau de Bord** : SCADA / HMI Haute Performance (Normes ISA-101, ISO 10628, IEC 60617)  
 > **Format** : Fichiers JSON officiels ThingsBoard Dashboard
 
 ---
 
-## 1. Présentation Générale
+## 1. Présentation Générale & Philosophie SCADA
 
-Pour accélérer la mise en service et faciliter la supervision des flux IoT générés par le simulateur, chaque équipement et chaque cas d'usage dispose d'un **tableau de bord ThingsBoard complet et préconfiguré**.
+Pour répondre aux exigences des environnements industriels, tertiaires et d'infrastructures, chaque équipement et cas d'usage dispose d'un **tableau de bord ThingsBoard de type SCADA (Supervisory Control And Data Acquisition)** complet et préconfiguré.
 
-Ce tableau de bord s'adapte automatiquement aux grandeurs physiques de l'équipement :
-- **En-tête & Informations Connexion** : Affiche le nom de l'équipement, son identifiant technique, le protocole (`MQTT`, `HTTP`, `CoAP`), la cadence d'envoi et **l'Access Token ThingsBoard** configuré.
-- **Jauges Numériques Instantanées** : Visualisation en temps réel des grandeurs physiques analogiques avec échelles et seuils adaptés (`°C`, `bar`, `kW`, `m³/h`, etc.).
-- **Graphique Temporel Multi-Courbes (*Timeseries Chart*)** : Fenêtre glissante de 2 minutes en temps réel avec statistiques (min, max, moyenne, valeur courante).
-- **Tableau des Attributs & États** : Synthèse des attributs de contrôle et grandeurs d'état.
+Chaque tableau de bord respecte les règles métier et conventions graphiques de la profession :
+- **Synoptique SCADA Vectoriel Dédié (Mimic Display)** :
+  - **Industrie & Thermique** : Schémas P&ID tuyauterie & instrumentation (ISO 10628) avec sens d'écoulement animé des fluides, rotors en mouvement (compresseurs, pompes, ventilateurs), cuves avec niveaux visuels et barillets de vapeur/air.
+  - **Électricité & Réseaux** : Schémas unifilaires (SLD selon IEC 60617) représentant les arrivées HTA/BT, disjoncteurs ouverts/fermés, transformateurs et jeux de barres cuivre.
+  - **Bâtiment & GTB** : Synoptiques aérauliques double flux avec registres de dosage, batteries chaudes/froides, filtres différentiels et caissons de mélange.
+  - **Smart City & IoT** : Vues d'infrastructures réelles (mâts météo, candélabres avec gradation, fosses de relevage assainissement, baies télécoms N+1).
+- **Tags d'Instrumentation en Temps Réel** : Les valeurs physiques critiques sont repérées directement sur les organes du schéma (sur le tuyau d'air, au niveau de la vanne, sur la génératrice, à l'entrée du disjoncteur) avec valeur numérique, unité et couleur d'état.
+- **Pupitre d'Instrumentation & Jauges** : Jauges de processus industrielles avec zones de consigne (*Setpoint*) et seuils opérationnels.
+- **Enregistreur de Tendance (*SCADA Historian & Trend Viewer*)** : Fenêtre glissante de 2 minutes en temps réel avec statistiques (min, max, moyenne, valeur courante).
+- **Registre des Attributs & Paramètres Automate** : Synthèse des attributs de contrôle, modes (Auto / Manuel / Local / Distant) et grandeurs d'état.
+- **Bannière d'Identification & Token ThingsBoard** : En-tête sécurisé intégrant le nom de l'équipement, l'identifiant technique, le protocole et **votre vrai Access Token ThingsBoard**.
 
 ---
 

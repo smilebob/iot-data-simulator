@@ -1,11 +1,11 @@
 {
-  "title": "Supervision - Four de Traitement Thermique",
-  "name": "Supervision - Four de Traitement Thermique",
+  "title": "Supervision SCADA - Four de Traitement Thermique",
+  "name": "Supervision SCADA - Four de Traitement Thermique",
   "configuration": {
-    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Four de Traitement Thermique' (ID: ind_thermal_furnace). Token: TOKEN_IND_THERMAL_FURNACE. Protocole: MQTT.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Four de Traitement Thermique' (ID: ind_thermal_furnace). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_THERMAL_FURNACE. Protocole: MQTT.",
     "entityAliases": {
-      "b56c04e4-bbd0-46bb-9825-237e22ba8f2a": {
-        "id": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+      "bc17de0d-321d-4b4b-8fc1-810df58f5e41": {
+        "id": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
         "alias": "Four de Traitement Thermique",
         "filter": {
           "type": "entityName",
@@ -15,7 +15,7 @@
       }
     },
     "widgets": {
-      "27843155-0bf6-428f-a7e7-6ec7b914ae4e": {
+      "073aa476-bdf4-402f-9d6c-6e5d8c22e465": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +38,34 @@
         },
         "row": 0,
         "col": 0,
-        "id": "27843155-0bf6-428f-a7e7-6ec7b914ae4e"
+        "id": "073aa476-bdf4-402f-9d6c-6e5d8c22e465"
       },
-      "be51ed9d-8f15-4ea5-b7d4-4ac78ada20fa": {
+      "3b8d06c3-d1d1-4807-9a31-7bfe211c4f48": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Synoptique SCADA Process - Four de Traitement Thermique",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Four de Traitement Thermique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_THERMAL_FURNACE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Réacteur Process -->\n    <rect x=\"100\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#161F2E\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"190\" y=\"70\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"105\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#0284C7\" opacity=\"0.35\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 100 100\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"50\" y=\"90\" fill=\"#10B981\" font-size=\"9\">ALIMENTATION</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 280 150 L 400 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"430\" cy=\"150\" r=\"28\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(430, 150)\" class=\"scada-rotor-fast\">\n      <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"430\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 460 150 L 620 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"620\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#1A2234\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"680\" y=\"125\" fill=\"#F59E0B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"680\" y=\"145\" fill=\"#94A3B8\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 740 150 L 880 150\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"880,145 895,150 880,155\" fill=\"#10B981\"/>\n    <text x=\"830\" y=\"140\" fill=\"#10B981\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 45)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PROCESS | RÉGULATION</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">AUTOMATIQUE</text>\n    </g>\n    <g transform=\"translate(740, 45)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">BOUCLE | SÉCURITÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">VERROUILLÉE</text>\n    </g>\n  </svg>\n    \n</div>\n"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "3b8d06c3-d1d1-4807-9a31-7bfe211c4f48"
+      },
+      "d0a54004-c1fa-4dca-bb75-d75ef3fe96dd": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -52,7 +77,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -93,11 +118,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 0,
-        "id": "be51ed9d-8f15-4ea5-b7d4-4ac78ada20fa"
+        "id": "d0a54004-c1fa-4dca-bb75-d75ef3fe96dd"
       },
-      "e9a4b6a3-d56d-4998-b29a-f48e77cc8429": {
+      "b26af1ec-c49d-4172-9dbe-bf3b10d301d7": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -109,7 +134,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
               "dataKeys": [
                 {
                   "name": "temp_zone_2",
@@ -150,11 +175,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 6,
-        "id": "e9a4b6a3-d56d-4998-b29a-f48e77cc8429"
+        "id": "b26af1ec-c49d-4172-9dbe-bf3b10d301d7"
       },
-      "192b1040-d6a6-4a2e-9f9b-a4f58eaf754f": {
+      "0e4b7a9d-7fc2-4c7e-8518-620ef5e3f60e": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -166,7 +191,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
               "dataKeys": [
                 {
                   "name": "temp_zone_3",
@@ -207,11 +232,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 12,
-        "id": "192b1040-d6a6-4a2e-9f9b-a4f58eaf754f"
+        "id": "0e4b7a9d-7fc2-4c7e-8518-620ef5e3f60e"
       },
-      "39b4a80e-e0e5-40ff-8803-751be8822b53": {
+      "845a7c34-8b1b-46d3-80be-e0c80fcbadfa": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -223,7 +248,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
               "dataKeys": [
                 {
                   "name": "debit_gaz_combustible",
@@ -264,11 +289,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 18,
-        "id": "39b4a80e-e0e5-40ff-8803-751be8822b53"
+        "id": "845a7c34-8b1b-46d3-80be-e0c80fcbadfa"
       },
-      "5c3e4dce-d6a3-4d66-ada5-7674b19a739f": {
+      "f45d5b88-0527-47ef-96df-90726a0bc9e9": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -280,7 +305,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
               "dataKeys": [
                 {
                   "name": "puissance_bruleurs_pct",
@@ -321,11 +346,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 0,
-        "id": "5c3e4dce-d6a3-4d66-ada5-7674b19a739f"
+        "id": "f45d5b88-0527-47ef-96df-90726a0bc9e9"
       },
-      "fe89112b-baa9-4daf-850b-b4dcab2986d3": {
+      "af0fccf2-4488-4ec9-841e-d5325e99d44b": {
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "timeseries",
@@ -337,7 +362,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b56c04e4-bbd0-46bb-9825-237e22ba8f2a",
+              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -459,9 +484,9 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 13,
+        "row": 21,
         "col": 0,
-        "id": "fe89112b-baa9-4daf-850b-b4dcab2986d3"
+        "id": "af0fccf2-4488-4ec9-841e-d5325e99d44b"
       }
     },
     "states": {
@@ -471,46 +496,52 @@
         "layouts": {
           "main": {
             "widgets": {
-              "27843155-0bf6-428f-a7e7-6ec7b914ae4e": {
+              "073aa476-bdf4-402f-9d6c-6e5d8c22e465": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "be51ed9d-8f15-4ea5-b7d4-4ac78ada20fa": {
-                "sizeX": 6,
-                "sizeY": 5,
-                "row": 3,
-                "col": 0
-              },
-              "e9a4b6a3-d56d-4998-b29a-f48e77cc8429": {
-                "sizeX": 6,
-                "sizeY": 5,
-                "row": 3,
-                "col": 6
-              },
-              "192b1040-d6a6-4a2e-9f9b-a4f58eaf754f": {
-                "sizeX": 6,
-                "sizeY": 5,
-                "row": 3,
-                "col": 12
-              },
-              "39b4a80e-e0e5-40ff-8803-751be8822b53": {
-                "sizeX": 6,
-                "sizeY": 5,
-                "row": 3,
-                "col": 18
-              },
-              "5c3e4dce-d6a3-4d66-ada5-7674b19a739f": {
-                "sizeX": 6,
-                "sizeY": 5,
-                "row": 8,
-                "col": 0
-              },
-              "fe89112b-baa9-4daf-850b-b4dcab2986d3": {
+              "3b8d06c3-d1d1-4807-9a31-7bfe211c4f48": {
                 "sizeX": 24,
                 "sizeY": 8,
-                "row": 13,
+                "row": 3,
+                "col": 0
+              },
+              "d0a54004-c1fa-4dca-bb75-d75ef3fe96dd": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 0
+              },
+              "b26af1ec-c49d-4172-9dbe-bf3b10d301d7": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 6
+              },
+              "0e4b7a9d-7fc2-4c7e-8518-620ef5e3f60e": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 12
+              },
+              "845a7c34-8b1b-46d3-80be-e0c80fcbadfa": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 18
+              },
+              "f45d5b88-0527-47ef-96df-90726a0bc9e9": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 16,
+                "col": 0
+              },
+              "af0fccf2-4488-4ec9-841e-d5325e99d44b": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 21,
                 "col": 0
               }
             },

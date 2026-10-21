@@ -1,11 +1,11 @@
 {
-  "title": "Supervision - Groupe Froid Industriel",
-  "name": "Supervision - Groupe Froid Industriel",
+  "title": "Supervision SCADA - Groupe Froid Industriel",
+  "name": "Supervision SCADA - Groupe Froid Industriel",
   "configuration": {
-    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Groupe Froid Industriel' (ID: ind_chiller). Token: TOKEN_IND_CHILLER. Protocole: HTTP.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Groupe Froid Industriel' (ID: ind_chiller). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_CHILLER. Protocole: HTTP.",
     "entityAliases": {
-      "bfb2cc6e-6ea7-43fa-8819-9b70cd3d1621": {
-        "id": "bfb2cc6e-6ea7-43fa-8819-9b70cd3d1621",
+      "b1a4229b-1b36-4ba4-8354-11f3674ab6b1": {
+        "id": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
         "alias": "Groupe Froid Industriel",
         "filter": {
           "type": "entityName",
@@ -15,7 +15,7 @@
       }
     },
     "widgets": {
-      "13038e54-8a74-4b92-8aa4-153f355cba33": {
+      "63de69ec-b8aa-4d51-8212-db992fd1526b": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +38,34 @@
         },
         "row": 0,
         "col": 0,
-        "id": "13038e54-8a74-4b92-8aa4-153f355cba33"
+        "id": "63de69ec-b8aa-4d51-8212-db992fd1526b"
       },
-      "8400f471-a61e-4ce3-a223-c734ba2cb821": {
+      "15971d75-29df-441f-a82b-4230b80b0f72": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Synoptique SCADA Process - Groupe Froid Industriel",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Frigorifique SCADA : Groupe Froid Industriel\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_CHILLER</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Boucle Frigorifique fermée -->\n    <rect x=\"180\" y=\"60\" width=\"380\" height=\"140\" rx=\"16\" fill=\"#16202E\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"370\" y=\"90\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">CHILLER INDUSTRIEL (R134a)</text>\n\n    <!-- Évaporateur (Eau glacée) -->\n    <rect x=\"195\" y=\"110\" width=\"90\" height=\"70\" rx=\"8\" fill=\"#0C4A6E\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"240\" y=\"140\" fill=\"#38BDF8\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ÉVAPORATEUR</text>\n    <text x=\"240\" y=\"155\" fill=\"#E0F2FE\" font-size=\"9\" text-anchor=\"middle\">7°C / 12°C</text>\n\n    <!-- Compresseur à vis -->\n    <circle cx=\"370\" cy=\"145\" r=\"30\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(370,145)\" class=\"scada-rotor\">\n      <path d=\"M -16 -4 C -8 -12 8 -12 16 -4 C 8 12 -8 12 -16 -4 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"370\" y=\"190\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">COMPRESSEUR</text>\n\n    <!-- Condenseur Aéroréfrigérant -->\n    <rect x=\"455\" y=\"110\" width=\"90\" height=\"70\" rx=\"8\" fill=\"#7F1D1D\" stroke=\"#EF4444\" stroke-width=\"1.5\"/>\n    <text x=\"500\" y=\"140\" fill=\"#F87171\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONDENSEUR</text>\n\n    <!-- Circuit Eau Glacée Départ/Retour Usine -->\n    <path d=\"M 50 120 L 195 120\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"120\" y=\"110\" fill=\"#38BDF8\" font-size=\"10\">RETOUR USINE (12°C)</text>\n    <path d=\"M 195 160 L 50 160\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <text x=\"120\" y=\"180\" fill=\"#0284C7\" font-size=\"10\">DÉPART EAU GLACÉE (7°C)</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. EAU GLACÉE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">6.8 °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">COP INSTANTANÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">3.85</text>\n    </g>\n  </svg>\n    \n</div>\n"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "15971d75-29df-441f-a82b-4230b80b0f72"
+      },
+      "d1afb338-9ab5-4820-9c5d-2a928ae1ddad": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -52,7 +77,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb2cc6e-6ea7-43fa-8819-9b70cd3d1621",
+              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
               "dataKeys": [
                 {
                   "name": "temp_eau_depart",
@@ -93,11 +118,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 0,
-        "id": "8400f471-a61e-4ce3-a223-c734ba2cb821"
+        "id": "d1afb338-9ab5-4820-9c5d-2a928ae1ddad"
       },
-      "070b27eb-28e6-49f4-9080-78b6ecd4402e": {
+      "8de2637e-bb0a-4bba-b9a9-0550dfbeb9d6": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -109,7 +134,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb2cc6e-6ea7-43fa-8819-9b70cd3d1621",
+              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
               "dataKeys": [
                 {
                   "name": "temp_eau_retour",
@@ -150,11 +175,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 6,
-        "id": "070b27eb-28e6-49f4-9080-78b6ecd4402e"
+        "id": "8de2637e-bb0a-4bba-b9a9-0550dfbeb9d6"
       },
-      "03210179-cc9f-48b4-a408-ead5cebfd4dc": {
+      "ed4fd409-8301-4a38-853a-7ac5d06ed7ae": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -166,7 +191,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb2cc6e-6ea7-43fa-8819-9b70cd3d1621",
+              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
               "dataKeys": [
                 {
                   "name": "pression_hp",
@@ -207,11 +232,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 12,
-        "id": "03210179-cc9f-48b4-a408-ead5cebfd4dc"
+        "id": "ed4fd409-8301-4a38-853a-7ac5d06ed7ae"
       },
-      "0871e769-391f-4e63-8f11-949782c2f3a0": {
+      "10dbfff1-2e90-481c-98e0-d4605c734e64": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -223,7 +248,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb2cc6e-6ea7-43fa-8819-9b70cd3d1621",
+              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
               "dataKeys": [
                 {
                   "name": "cop_instantane",
@@ -264,11 +289,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 18,
-        "id": "0871e769-391f-4e63-8f11-949782c2f3a0"
+        "id": "10dbfff1-2e90-481c-98e0-d4605c734e64"
       },
-      "625a68a3-0cbd-4a82-b824-bee118e445f3": {
+      "37317345-168a-496e-bf5a-52118d6591a5": {
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "timeseries",
@@ -280,7 +305,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb2cc6e-6ea7-43fa-8819-9b70cd3d1621",
+              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
               "dataKeys": [
                 {
                   "name": "temp_eau_depart",
@@ -388,9 +413,9 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 0,
-        "id": "625a68a3-0cbd-4a82-b824-bee118e445f3"
+        "id": "37317345-168a-496e-bf5a-52118d6591a5"
       }
     },
     "states": {
@@ -400,40 +425,46 @@
         "layouts": {
           "main": {
             "widgets": {
-              "13038e54-8a74-4b92-8aa4-153f355cba33": {
+              "63de69ec-b8aa-4d51-8212-db992fd1526b": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "8400f471-a61e-4ce3-a223-c734ba2cb821": {
-                "sizeX": 6,
-                "sizeY": 5,
+              "15971d75-29df-441f-a82b-4230b80b0f72": {
+                "sizeX": 24,
+                "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "070b27eb-28e6-49f4-9080-78b6ecd4402e": {
+              "d1afb338-9ab5-4820-9c5d-2a928ae1ddad": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
+                "col": 0
+              },
+              "8de2637e-bb0a-4bba-b9a9-0550dfbeb9d6": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
                 "col": 6
               },
-              "03210179-cc9f-48b4-a408-ead5cebfd4dc": {
+              "ed4fd409-8301-4a38-853a-7ac5d06ed7ae": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 12
               },
-              "0871e769-391f-4e63-8f11-949782c2f3a0": {
+              "10dbfff1-2e90-481c-98e0-d4605c734e64": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 18
               },
-              "625a68a3-0cbd-4a82-b824-bee118e445f3": {
+              "37317345-168a-496e-bf5a-52118d6591a5": {
                 "sizeX": 24,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 0
               }
             },

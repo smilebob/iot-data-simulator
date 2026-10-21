@@ -2,6 +2,7 @@ import uuid
 from typing import List, Dict, Any, Optional
 from app.models.device import DeviceConfig, TransportProtocol
 from app.models.variable import VariableConfig, VariableType, DataType, SimMode
+from app.core.scada_synoptics import get_scada_synoptic_html
 
 # Palette de couleurs contrastées pour les courbes et jauges (charte technique sombre)
 PALETTE_COLORS = [
@@ -112,7 +113,46 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
     current_row += 3
 
     # -------------------------------------------------------------
-    # 2. Widgets Jauges Numériques pour les grandeurs analogiques
+    # 2. Widget Schéma Synoptique SCADA (P&ID / SLD / GTB Mimic)
+    # -------------------------------------------------------------
+    scada_synoptic_id = str(uuid.uuid4())
+    synoptic_html = get_scada_synoptic_html(device, variables)
+
+    widgets[scada_synoptic_id] = {
+        "isSystemType": True,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": f"Synoptique SCADA Process - {device_name}",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+            "datasources": [],
+            "settings": {
+                "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+                "html": synoptic_html
+            },
+            "showTitle": False,
+            "dropShadow": True,
+            "enableFullscreen": True,
+            "widgetStyle": {
+                "background": "transparent"
+            }
+        },
+        "row": current_row,
+        "col": 0,
+        "id": scada_synoptic_id
+    }
+    layout_widgets[scada_synoptic_id] = {
+        "sizeX": 24,
+        "sizeY": 8,
+        "row": current_row,
+        "col": 0
+    }
+    current_row += 8
+
+    # -------------------------------------------------------------
+    # 3. Widgets Jauges Numériques pour les grandeurs analogiques
     # -------------------------------------------------------------
     # On affiche jusqu'à 4 jauges sur une ligne (largeur 6 colonnes par jauge sur un total de 24)
     if numeric_vars:
@@ -376,10 +416,10 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
     # Configuration Complète du Dashboard ThingsBoard
     # -------------------------------------------------------------
     dashboard_json = {
-        "title": f"Supervision - {device_name}",
-        "name": f"Supervision - {device_name}",
+        "title": f"Supervision SCADA - {device_name}",
+        "name": f"Supervision SCADA - {device_name}",
         "configuration": {
-            "description": f"Tableau de bord ThingsBoard préconfiguré pour l'équipement '{device_name}' (ID: {device.id}). Token: {token_str}. Protocole: {proto_str}.",
+            "description": f"Tableau de bord SCADA HMI ThingsBoard pour l'équipement '{device_name}' (ID: {device.id}). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: {token_str}. Protocole: {proto_str}.",
             "entityAliases": {
                 alias_id: {
                     "id": alias_id,

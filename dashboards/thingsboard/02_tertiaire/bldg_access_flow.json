@@ -1,11 +1,11 @@
 {
-  "title": "Supervision - Contrôle d'Accès & Flux Bâtiment",
-  "name": "Supervision - Contrôle d'Accès & Flux Bâtiment",
+  "title": "Supervision SCADA - Contrôle d'Accès & Flux Bâtiment",
+  "name": "Supervision SCADA - Contrôle d'Accès & Flux Bâtiment",
   "configuration": {
-    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Contrôle d'Accès & Flux Bâtiment' (ID: bldg_access_flow). Token: TOKEN_BLDG_ACCESS_FLOW. Protocole: HTTP.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Contrôle d'Accès & Flux Bâtiment' (ID: bldg_access_flow). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_ACCESS_FLOW. Protocole: HTTP.",
     "entityAliases": {
-      "847e88c2-2b38-433c-9d9d-3e9bc3891ab1": {
-        "id": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+      "45f60698-4092-4e87-9b3c-cb8db1038970": {
+        "id": "45f60698-4092-4e87-9b3c-cb8db1038970",
         "alias": "Contrôle d'Accès & Flux Bâtiment",
         "filter": {
           "type": "entityName",
@@ -15,7 +15,7 @@
       }
     },
     "widgets": {
-      "05d994e4-8f50-4a1e-9681-2504d7549e32": {
+      "611a9ecc-ddce-4e33-9763-a563825afb40": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +38,34 @@
         },
         "row": 0,
         "col": 0,
-        "id": "05d994e4-8f50-4a1e-9681-2504d7549e32"
+        "id": "611a9ecc-ddce-4e33-9763-a563825afb40"
       },
-      "9dcaff72-58af-45ea-bf3a-ed5bc4e37438": {
+      "11c1874a-4d57-4390-b66a-cc867bdc2e99": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Synoptique SCADA Process - Contrôle d'Accès & Flux Bâtiment",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Contrôle d'Accès & Flux Bâtiment\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_BLDG_ACCESS_FLOW</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Réacteur Process -->\n    <rect x=\"100\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#161F2E\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"190\" y=\"70\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"105\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#0284C7\" opacity=\"0.35\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 100 100\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"50\" y=\"90\" fill=\"#10B981\" font-size=\"9\">ALIMENTATION</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 280 150 L 400 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"430\" cy=\"150\" r=\"28\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(430, 150)\" class=\"scada-rotor-fast\">\n      <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"430\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 460 150 L 620 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"620\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#1A2234\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"680\" y=\"125\" fill=\"#F59E0B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"680\" y=\"145\" fill=\"#94A3B8\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 740 150 L 880 150\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"880,145 895,150 880,155\" fill=\"#10B981\"/>\n    <text x=\"830\" y=\"140\" fill=\"#10B981\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 45)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PROCESS | RÉGULATION</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">AUTOMATIQUE</text>\n    </g>\n    <g transform=\"translate(740, 45)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">BOUCLE | SÉCURITÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">VERROUILLÉE</text>\n    </g>\n  </svg>\n    \n</div>\n"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "11c1874a-4d57-4390-b66a-cc867bdc2e99"
+      },
+      "d6683234-8029-4475-aeb0-b57396cd23cc": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -52,7 +77,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "entityAliasId": "45f60698-4092-4e87-9b3c-cb8db1038970",
               "dataKeys": [
                 {
                   "name": "flux_entrees_min",
@@ -93,11 +118,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 0,
-        "id": "9dcaff72-58af-45ea-bf3a-ed5bc4e37438"
+        "id": "d6683234-8029-4475-aeb0-b57396cd23cc"
       },
-      "348002c7-aafa-4f35-9f50-686fe26f80e9": {
+      "3a88d7e9-fcce-482c-9226-0b20acb6d140": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -109,7 +134,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "entityAliasId": "45f60698-4092-4e87-9b3c-cb8db1038970",
               "dataKeys": [
                 {
                   "name": "flux_sorties_min",
@@ -150,11 +175,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 6,
-        "id": "348002c7-aafa-4f35-9f50-686fe26f80e9"
+        "id": "3a88d7e9-fcce-482c-9226-0b20acb6d140"
       },
-      "71d92a93-74ee-4a92-ac5d-108321f123d4": {
+      "293e64dc-ba62-4bef-bd80-c14bc943d37d": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -166,7 +191,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "entityAliasId": "45f60698-4092-4e87-9b3c-cb8db1038970",
               "dataKeys": [
                 {
                   "name": "jauge_occupation_pct",
@@ -207,11 +232,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 12,
-        "id": "71d92a93-74ee-4a92-ac5d-108321f123d4"
+        "id": "293e64dc-ba62-4bef-bd80-c14bc943d37d"
       },
-      "51810572-56ff-4621-967a-c46704828f0d": {
+      "94a3801f-cbfc-44a4-bd43-4ea06fc8e55c": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -223,7 +248,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "entityAliasId": "45f60698-4092-4e87-9b3c-cb8db1038970",
               "dataKeys": [
                 {
                   "name": "tentatives_refusees_h",
@@ -264,11 +289,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 18,
-        "id": "51810572-56ff-4621-967a-c46704828f0d"
+        "id": "94a3801f-cbfc-44a4-bd43-4ea06fc8e55c"
       },
-      "94062aab-5ad1-4ad4-be4d-d0c97002ec95": {
+      "f297ff85-39b5-4f59-b7fb-99575002e8ab": {
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "timeseries",
@@ -280,7 +305,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "entityAliasId": "45f60698-4092-4e87-9b3c-cb8db1038970",
               "dataKeys": [
                 {
                   "name": "flux_entrees_min",
@@ -388,11 +413,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 0,
-        "id": "94062aab-5ad1-4ad4-be4d-d0c97002ec95"
+        "id": "f297ff85-39b5-4f59-b7fb-99575002e8ab"
       },
-      "94da3645-a482-4a33-b6b1-7d85b1473c9b": {
+      "3c6e3c57-afee-4e2e-be17-072f5a0c5687": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "latest_values",
@@ -404,7 +429,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "847e88c2-2b38-433c-9d9d-3e9bc3891ab1",
+              "entityAliasId": "45f60698-4092-4e87-9b3c-cb8db1038970",
               "dataKeys": [
                 {
                   "name": "issues_secours_verrouillees",
@@ -430,9 +455,9 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 16,
-        "id": "94da3645-a482-4a33-b6b1-7d85b1473c9b"
+        "id": "3c6e3c57-afee-4e2e-be17-072f5a0c5687"
       }
     },
     "states": {
@@ -442,46 +467,52 @@
         "layouts": {
           "main": {
             "widgets": {
-              "05d994e4-8f50-4a1e-9681-2504d7549e32": {
+              "611a9ecc-ddce-4e33-9763-a563825afb40": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "9dcaff72-58af-45ea-bf3a-ed5bc4e37438": {
-                "sizeX": 6,
-                "sizeY": 5,
+              "11c1874a-4d57-4390-b66a-cc867bdc2e99": {
+                "sizeX": 24,
+                "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "348002c7-aafa-4f35-9f50-686fe26f80e9": {
+              "d6683234-8029-4475-aeb0-b57396cd23cc": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
+                "col": 0
+              },
+              "3a88d7e9-fcce-482c-9226-0b20acb6d140": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
                 "col": 6
               },
-              "71d92a93-74ee-4a92-ac5d-108321f123d4": {
+              "293e64dc-ba62-4bef-bd80-c14bc943d37d": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 12
               },
-              "51810572-56ff-4621-967a-c46704828f0d": {
+              "94a3801f-cbfc-44a4-bd43-4ea06fc8e55c": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 18
               },
-              "94062aab-5ad1-4ad4-be4d-d0c97002ec95": {
+              "f297ff85-39b5-4f59-b7fb-99575002e8ab": {
                 "sizeX": 16,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 0
               },
-              "94da3645-a482-4a33-b6b1-7d85b1473c9b": {
+              "3c6e3c57-afee-4e2e-be17-072f5a0c5687": {
                 "sizeX": 8,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 16
               }
             },

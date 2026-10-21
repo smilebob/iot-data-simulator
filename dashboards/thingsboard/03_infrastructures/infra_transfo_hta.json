@@ -1,11 +1,11 @@
 {
-  "title": "Supervision - Transformateur HTA/BT",
-  "name": "Supervision - Transformateur HTA/BT",
+  "title": "Supervision SCADA - Transformateur HTA/BT",
+  "name": "Supervision SCADA - Transformateur HTA/BT",
   "configuration": {
-    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Transformateur HTA/BT' (ID: infra_transfo_hta). Token: TOKEN_INFRA_TRANSFO_HTA. Protocole: MQTT.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Transformateur HTA/BT' (ID: infra_transfo_hta). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_TRANSFO_HTA. Protocole: MQTT.",
     "entityAliases": {
-      "5d8673fc-7eaf-4d01-ba4a-b0fc988376f6": {
-        "id": "5d8673fc-7eaf-4d01-ba4a-b0fc988376f6",
+      "f015df64-27c5-4bff-9d6f-96c265bf7f58": {
+        "id": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
         "alias": "Transformateur HTA/BT",
         "filter": {
           "type": "entityName",
@@ -15,7 +15,7 @@
       }
     },
     "widgets": {
-      "dde9c2b5-4673-4c26-807a-b42eacddeef7": {
+      "b158701d-562a-4e27-80a4-984c9f013be7": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +38,34 @@
         },
         "row": 0,
         "col": 0,
-        "id": "dde9c2b5-4673-4c26-807a-b42eacddeef7"
+        "id": "b158701d-562a-4e27-80a4-984c9f013be7"
       },
-      "6f341ee5-9787-4112-b152-07b8c749c071": {
+      "0ab03a22-29bd-41c4-beb5-585bd78bfdd5": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Synoptique SCADA Process - Transformateur HTA/BT",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Schéma Unifilaire SCADA : Transformateur HTA/BT\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_TRANSFO_HTA</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <line x1=\"50\" y1=\"50\" x2=\"250\" y2=\"50\" stroke=\"#E2001A\" stroke-width=\"5\"/>\n    <text x=\"50\" y=\"35\" fill=\"#E2001A\" font-size=\"11\" font-weight=\"bold\">ARRIVÉE HTA / BT (400V TRIPHASÉ)</text>\n\n    <!-- Disjoncteur Général Masterpact -->\n    <g transform=\"translate(300, 50)\">\n      <rect x=\"-18\" y=\"-18\" width=\"36\" height=\"36\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2\"/>\n      <line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke=\"#10B981\" stroke-width=\"3\"/>\n      <line x1=\"-10\" y1=\"10\" x2=\"10\" y2=\"-10\" stroke=\"#10B981\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"30\" fill=\"#10B981\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DISJONCTEUR DGBT</text>\n    </g>\n\n    <!-- Jeu de Barres Général Cuivre -->\n    <line x1=\"420\" y1=\"35\" x2=\"420\" y2=\"230\" stroke=\"#F59E0B\" stroke-width=\"6\"/>\n    <text x=\"435\" y=\"35\" fill=\"#F59E0B\" font-size=\"11\" font-weight=\"bold\">JEU DE BARRES TGBT 1600A</text>\n\n    <!-- Départs Force, CVC, Éclairage -->\n    <g transform=\"translate(420, 75)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ CVC & Pompes (250A)</text>\n    </g>\n    <g transform=\"translate(420, 135)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ Informatique / Onduleur (160A)</text>\n    </g>\n    <g transform=\"translate(420, 195)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ Éclairage DALI (63A)</text>\n    </g>\n\n    <!-- Callouts Électriques -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PUISSANCE ACTIVE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">245 kW</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">COS PHI (FACTEUR)</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">0.96</text>\n    </g>\n  </svg>\n    \n</div>\n"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "0ab03a22-29bd-41c4-beb5-585bd78bfdd5"
+      },
+      "b0d598a5-06e7-49b0-8477-42d635a4c924": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -52,7 +77,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d8673fc-7eaf-4d01-ba4a-b0fc988376f6",
+              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
@@ -93,11 +118,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 0,
-        "id": "6f341ee5-9787-4112-b152-07b8c749c071"
+        "id": "b0d598a5-06e7-49b0-8477-42d635a4c924"
       },
-      "4cfacdfd-e21e-46db-a242-7863ec6dc4dd": {
+      "3076149c-c73c-4efb-9d76-1097bd36ae03": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -109,7 +134,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d8673fc-7eaf-4d01-ba4a-b0fc988376f6",
+              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
               "dataKeys": [
                 {
                   "name": "charge_transfo_pct",
@@ -150,11 +175,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 6,
-        "id": "4cfacdfd-e21e-46db-a242-7863ec6dc4dd"
+        "id": "3076149c-c73c-4efb-9d76-1097bd36ae03"
       },
-      "f6fa3a03-305f-4eff-ab56-219a3f58de57": {
+      "4a9ea003-a4c4-441d-9646-a5a7ce3b9cbf": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -166,7 +191,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d8673fc-7eaf-4d01-ba4a-b0fc988376f6",
+              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
               "dataKeys": [
                 {
                   "name": "pression_cuve",
@@ -207,11 +232,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 12,
-        "id": "f6fa3a03-305f-4eff-ab56-219a3f58de57"
+        "id": "4a9ea003-a4c4-441d-9646-a5a7ce3b9cbf"
       },
-      "9033924a-12bd-461f-a84a-586ac73b0319": {
+      "d4bb158e-9c47-4e22-b931-61b77b42389a": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -223,7 +248,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d8673fc-7eaf-4d01-ba4a-b0fc988376f6",
+              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
               "dataKeys": [
                 {
                   "name": "taux_thd",
@@ -264,11 +289,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 18,
-        "id": "9033924a-12bd-461f-a84a-586ac73b0319"
+        "id": "d4bb158e-9c47-4e22-b931-61b77b42389a"
       },
-      "e1fe1c35-f4b1-4c23-ac26-44f24ea56b7d": {
+      "8604d311-9192-415d-adf5-dc7ee38d0f4a": {
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "timeseries",
@@ -280,7 +305,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d8673fc-7eaf-4d01-ba4a-b0fc988376f6",
+              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
@@ -388,11 +413,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 0,
-        "id": "e1fe1c35-f4b1-4c23-ac26-44f24ea56b7d"
+        "id": "8604d311-9192-415d-adf5-dc7ee38d0f4a"
       },
-      "8c4d3906-9319-404a-8ef1-6048f9d9c80c": {
+      "c9b207ae-0aca-4005-989a-a62c5a9ec2ca": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "latest_values",
@@ -404,7 +429,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d8673fc-7eaf-4d01-ba4a-b0fc988376f6",
+              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
               "dataKeys": [
                 {
                   "name": "alarme_dgpt2",
@@ -430,9 +455,9 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 16,
-        "id": "8c4d3906-9319-404a-8ef1-6048f9d9c80c"
+        "id": "c9b207ae-0aca-4005-989a-a62c5a9ec2ca"
       }
     },
     "states": {
@@ -442,46 +467,52 @@
         "layouts": {
           "main": {
             "widgets": {
-              "dde9c2b5-4673-4c26-807a-b42eacddeef7": {
+              "b158701d-562a-4e27-80a4-984c9f013be7": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "6f341ee5-9787-4112-b152-07b8c749c071": {
-                "sizeX": 6,
-                "sizeY": 5,
+              "0ab03a22-29bd-41c4-beb5-585bd78bfdd5": {
+                "sizeX": 24,
+                "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "4cfacdfd-e21e-46db-a242-7863ec6dc4dd": {
+              "b0d598a5-06e7-49b0-8477-42d635a4c924": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
+                "col": 0
+              },
+              "3076149c-c73c-4efb-9d76-1097bd36ae03": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
                 "col": 6
               },
-              "f6fa3a03-305f-4eff-ab56-219a3f58de57": {
+              "4a9ea003-a4c4-441d-9646-a5a7ce3b9cbf": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 12
               },
-              "9033924a-12bd-461f-a84a-586ac73b0319": {
+              "d4bb158e-9c47-4e22-b931-61b77b42389a": {
                 "sizeX": 6,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 18
               },
-              "e1fe1c35-f4b1-4c23-ac26-44f24ea56b7d": {
+              "8604d311-9192-415d-adf5-dc7ee38d0f4a": {
                 "sizeX": 16,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 0
               },
-              "8c4d3906-9319-404a-8ef1-6048f9d9c80c": {
+              "c9b207ae-0aca-4005-989a-a62c5a9ec2ca": {
                 "sizeX": 8,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 16
               }
             },

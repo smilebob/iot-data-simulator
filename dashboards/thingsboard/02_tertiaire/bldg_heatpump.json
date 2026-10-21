@@ -1,11 +1,11 @@
 {
-  "title": "Supervision - Pompe à Chaleur Réversible (PAC)",
-  "name": "Supervision - Pompe à Chaleur Réversible (PAC)",
+  "title": "Supervision SCADA - Pompe à Chaleur Réversible (PAC)",
+  "name": "Supervision SCADA - Pompe à Chaleur Réversible (PAC)",
   "configuration": {
-    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Pompe à Chaleur Réversible (PAC)' (ID: bldg_heatpump). Token: TOKEN_BLDG_HEATPUMP. Protocole: HTTP.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Pompe à Chaleur Réversible (PAC)' (ID: bldg_heatpump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_HEATPUMP. Protocole: HTTP.",
     "entityAliases": {
-      "35ab36dc-6e0b-4421-97e6-2d2ca538c5de": {
-        "id": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+      "c6553800-c107-4239-9394-01bf4172f9f7": {
+        "id": "c6553800-c107-4239-9394-01bf4172f9f7",
         "alias": "Pompe à Chaleur Réversible (PAC)",
         "filter": {
           "type": "entityName",
@@ -15,7 +15,7 @@
       }
     },
     "widgets": {
-      "1fef67fe-a316-4243-90cb-e4819aa4735e": {
+      "12c6a5ed-af2a-4c28-aa91-0c0227b366d4": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +38,34 @@
         },
         "row": 0,
         "col": 0,
-        "id": "1fef67fe-a316-4243-90cb-e4819aa4735e"
+        "id": "12c6a5ed-af2a-4c28-aa91-0c0227b366d4"
       },
-      "92f1e20d-2dda-4a9e-9407-764887d06d64": {
+      "e92d2756-f076-4487-9f0d-cca837855306": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Synoptique SCADA Process - Pompe à Chaleur Réversible (PAC)",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Assainissement SCADA : Pompe à Chaleur Réversible (PAC)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_BLDG_HEATPUMP</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Fosse Humide Béton -->\n    <rect x=\"80\" y=\"40\" width=\"350\" height=\"180\" rx=\"10\" fill=\"#131B26\" stroke=\"#475569\" stroke-width=\"3\"/>\n    <text x=\"255\" y=\"70\" fill=\"#94A3B8\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">FOSSE DE RELEVAGE BÉTON (EAUX USÉES)</text>\n\n    <!-- Effluent / Niveau liquide -->\n    <rect x=\"85\" y=\"110\" width=\"340\" height=\"105\" rx=\"6\" fill=\"#065F46\" opacity=\"0.45\"/>\n    <!-- Sonde Ultrason Niveau -->\n    <g transform=\"translate(200, 40)\">\n      <rect x=\"-15\" y=\"0\" width=\"30\" height=\"20\" fill=\"#F59E0B\"/>\n      <path d=\"M 0 20 L -15 50 M 0 20 L 15 50\" stroke=\"#F59E0B\" stroke-width=\"1.5\" stroke-dasharray=\"3,3\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#F59E0B\" font-size=\"8\" text-anchor=\"middle\">SONDE ULTRASON</text>\n    </g>\n\n    <!-- Pompes Submersibles P1 et P2 -->\n    <g transform=\"translate(160, 165)\">\n      <rect x=\"-20\" y=\"-30\" width=\"40\" height=\"40\" rx=\"6\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#10B981\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE 1</text>\n    </g>\n    <g transform=\"translate(320, 165)\">\n      <rect x=\"-20\" y=\"-30\" width=\"40\" height=\"40\" rx=\"6\" fill=\"#1E293B\" stroke=\"#64748B\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#94A3B8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE 2 (SECOURS)</text>\n    </g>\n\n    <!-- Conduite de Refoulement PEHD -->\n    <path d=\"M 160 135 L 160 90 L 580 90\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <text x=\"640\" y=\"95\" fill=\"#10B981\" font-size=\"11\" font-weight=\"bold\">REFOULEMENT STEP</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">NIVEAU BACHE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">1.85 m</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">DÉBIT REFOULEMENT</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">128 m³/h</text>\n    </g>\n  </svg>\n    \n</div>\n"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "e92d2756-f076-4487-9f0d-cca837855306"
+      },
+      "2c67eb0e-c2cf-49dd-b277-6332a54006ac": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -52,7 +77,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -93,11 +118,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 0,
-        "id": "92f1e20d-2dda-4a9e-9407-764887d06d64"
+        "id": "2c67eb0e-c2cf-49dd-b277-6332a54006ac"
       },
-      "0b37f731-8bf3-4592-a3ca-726146c1fefb": {
+      "1f56f717-883a-4dec-b1c3-7d0ee260c103": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -109,7 +134,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
               "dataKeys": [
                 {
                   "name": "puissance_thermique_kw",
@@ -150,11 +175,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 8,
-        "id": "0b37f731-8bf3-4592-a3ca-726146c1fefb"
+        "id": "1f56f717-883a-4dec-b1c3-7d0ee260c103"
       },
-      "7a80fdc0-e5ae-4422-a3dd-8a132d6fe2d8": {
+      "134aaa81-5277-45b3-bd67-00a8ff98330e": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -166,7 +191,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
               "dataKeys": [
                 {
                   "name": "pression_circuit",
@@ -207,11 +232,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 16,
-        "id": "7a80fdc0-e5ae-4422-a3dd-8a132d6fe2d8"
+        "id": "134aaa81-5277-45b3-bd67-00a8ff98330e"
       },
-      "5be0a677-78ec-4d02-88ea-3ff3a793b79b": {
+      "b03770f2-73d7-4e24-9560-43fcf92f928e": {
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "timeseries",
@@ -223,7 +248,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -317,11 +342,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 0,
-        "id": "5be0a677-78ec-4d02-88ea-3ff3a793b79b"
+        "id": "b03770f2-73d7-4e24-9560-43fcf92f928e"
       },
-      "ef7f1aea-9254-4b58-a102-29ff341fc8eb": {
+      "8610aee0-2f9b-47d1-b431-b97502261e3d": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "latest_values",
@@ -333,7 +358,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "35ab36dc-6e0b-4421-97e6-2d2ca538c5de",
+              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
               "dataKeys": [
                 {
                   "name": "mode_chaud",
@@ -359,9 +384,9 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 16,
-        "id": "ef7f1aea-9254-4b58-a102-29ff341fc8eb"
+        "id": "8610aee0-2f9b-47d1-b431-b97502261e3d"
       }
     },
     "states": {
@@ -371,40 +396,46 @@
         "layouts": {
           "main": {
             "widgets": {
-              "1fef67fe-a316-4243-90cb-e4819aa4735e": {
+              "12c6a5ed-af2a-4c28-aa91-0c0227b366d4": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "92f1e20d-2dda-4a9e-9407-764887d06d64": {
-                "sizeX": 8,
-                "sizeY": 5,
+              "e92d2756-f076-4487-9f0d-cca837855306": {
+                "sizeX": 24,
+                "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "0b37f731-8bf3-4592-a3ca-726146c1fefb": {
+              "2c67eb0e-c2cf-49dd-b277-6332a54006ac": {
                 "sizeX": 8,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
+                "col": 0
+              },
+              "1f56f717-883a-4dec-b1c3-7d0ee260c103": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 11,
                 "col": 8
               },
-              "7a80fdc0-e5ae-4422-a3dd-8a132d6fe2d8": {
+              "134aaa81-5277-45b3-bd67-00a8ff98330e": {
                 "sizeX": 8,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 16
               },
-              "5be0a677-78ec-4d02-88ea-3ff3a793b79b": {
+              "b03770f2-73d7-4e24-9560-43fcf92f928e": {
                 "sizeX": 16,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 0
               },
-              "ef7f1aea-9254-4b58-a102-29ff341fc8eb": {
+              "8610aee0-2f9b-47d1-b431-b97502261e3d": {
                 "sizeX": 8,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 16
               }
             },

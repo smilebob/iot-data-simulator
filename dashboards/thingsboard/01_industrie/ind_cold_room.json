@@ -1,11 +1,11 @@
 {
-  "title": "Supervision - Chambre Froide Négative",
-  "name": "Supervision - Chambre Froide Négative",
+  "title": "Supervision SCADA - Chambre Froide Négative",
+  "name": "Supervision SCADA - Chambre Froide Négative",
   "configuration": {
-    "description": "Tableau de bord ThingsBoard préconfiguré pour l'équipement 'Chambre Froide Négative' (ID: ind_cold_room). Token: TOKEN_IND_COLD_ROOM. Protocole: MQTT.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Chambre Froide Négative' (ID: ind_cold_room). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_COLD_ROOM. Protocole: MQTT.",
     "entityAliases": {
-      "39ec2be4-1da6-4a67-8cec-b41906c524ca": {
-        "id": "39ec2be4-1da6-4a67-8cec-b41906c524ca",
+      "7612364b-692f-4fce-9f5f-9cd69e203364": {
+        "id": "7612364b-692f-4fce-9f5f-9cd69e203364",
         "alias": "Chambre Froide Négative",
         "filter": {
           "type": "entityName",
@@ -15,7 +15,7 @@
       }
     },
     "widgets": {
-      "a07673b4-b441-4e9b-b0ba-2881b0ffd970": {
+      "baf11e7b-68d8-4945-b5bc-171b0267b31a": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +38,34 @@
         },
         "row": 0,
         "col": 0,
-        "id": "a07673b4-b441-4e9b-b0ba-2881b0ffd970"
+        "id": "baf11e7b-68d8-4945-b5bc-171b0267b31a"
       },
-      "e54c4936-b8d0-46bb-824f-9df834f47dec": {
+      "abc89ef6-660b-4d2a-9430-0f0d83755b51": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Synoptique SCADA Process - Chambre Froide Négative",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Frigorifique SCADA : Chambre Froide Négative\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COLD_ROOM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Boucle Frigorifique fermée -->\n    <rect x=\"180\" y=\"60\" width=\"380\" height=\"140\" rx=\"16\" fill=\"#16202E\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"370\" y=\"90\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">CHILLER INDUSTRIEL (R134a)</text>\n\n    <!-- Évaporateur (Eau glacée) -->\n    <rect x=\"195\" y=\"110\" width=\"90\" height=\"70\" rx=\"8\" fill=\"#0C4A6E\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"240\" y=\"140\" fill=\"#38BDF8\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ÉVAPORATEUR</text>\n    <text x=\"240\" y=\"155\" fill=\"#E0F2FE\" font-size=\"9\" text-anchor=\"middle\">7°C / 12°C</text>\n\n    <!-- Compresseur à vis -->\n    <circle cx=\"370\" cy=\"145\" r=\"30\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(370,145)\" class=\"scada-rotor\">\n      <path d=\"M -16 -4 C -8 -12 8 -12 16 -4 C 8 12 -8 12 -16 -4 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"370\" y=\"190\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">COMPRESSEUR</text>\n\n    <!-- Condenseur Aéroréfrigérant -->\n    <rect x=\"455\" y=\"110\" width=\"90\" height=\"70\" rx=\"8\" fill=\"#7F1D1D\" stroke=\"#EF4444\" stroke-width=\"1.5\"/>\n    <text x=\"500\" y=\"140\" fill=\"#F87171\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONDENSEUR</text>\n\n    <!-- Circuit Eau Glacée Départ/Retour Usine -->\n    <path d=\"M 50 120 L 195 120\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"120\" y=\"110\" fill=\"#38BDF8\" font-size=\"10\">RETOUR USINE (12°C)</text>\n    <path d=\"M 195 160 L 50 160\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <text x=\"120\" y=\"180\" fill=\"#0284C7\" font-size=\"10\">DÉPART EAU GLACÉE (7°C)</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. EAU GLACÉE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">6.8 °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">COP INSTANTANÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">3.85</text>\n    </g>\n  </svg>\n    \n</div>\n"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "widgetStyle": {
+            "background": "transparent"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "abc89ef6-660b-4d2a-9430-0f0d83755b51"
+      },
+      "fff0be9e-9ac9-4062-bf12-06f1ef247d33": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -52,7 +77,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "39ec2be4-1da6-4a67-8cec-b41906c524ca",
+              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -93,11 +118,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 0,
-        "id": "e54c4936-b8d0-46bb-824f-9df834f47dec"
+        "id": "fff0be9e-9ac9-4062-bf12-06f1ef247d33"
       },
-      "41cfcf40-2c9d-41ab-b98e-546d1315c62f": {
+      "19b4799b-dd89-490d-8153-ee955e5cf187": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -109,7 +134,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "39ec2be4-1da6-4a67-8cec-b41906c524ca",
+              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
               "dataKeys": [
                 {
                   "name": "temp_evaporateur",
@@ -150,11 +175,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 8,
-        "id": "41cfcf40-2c9d-41ab-b98e-546d1315c62f"
+        "id": "19b4799b-dd89-490d-8153-ee955e5cf187"
       },
-      "9e6c5970-8f00-4059-9d4a-411c24e4fe3d": {
+      "19b3a452-d807-4713-8ae4-ce1f8b462ff0": {
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
         "typeAlias": "digital_gauge",
@@ -166,7 +191,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "39ec2be4-1da6-4a67-8cec-b41906c524ca",
+              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
               "dataKeys": [
                 {
                   "name": "puissance_groupe_kw",
@@ -207,11 +232,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 3,
+        "row": 11,
         "col": 16,
-        "id": "9e6c5970-8f00-4059-9d4a-411c24e4fe3d"
+        "id": "19b3a452-d807-4713-8ae4-ce1f8b462ff0"
       },
-      "9865e128-6301-4b0d-8cb3-da4d4ccfa232": {
+      "f50e6ddb-150e-4d29-9a67-f73bdd6d096c": {
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "timeseries",
@@ -223,7 +248,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "39ec2be4-1da6-4a67-8cec-b41906c524ca",
+              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -317,11 +342,11 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 0,
-        "id": "9865e128-6301-4b0d-8cb3-da4d4ccfa232"
+        "id": "f50e6ddb-150e-4d29-9a67-f73bdd6d096c"
       },
-      "40affa4c-62f2-41d3-b1eb-feb831e714f7": {
+      "5b59ec75-e97f-47e8-b8db-e3a5ef85b55f": {
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "latest_values",
@@ -333,7 +358,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "39ec2be4-1da6-4a67-8cec-b41906c524ca",
+              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
               "dataKeys": [
                 {
                   "name": "porte_ouverte",
@@ -366,9 +391,9 @@
             "border": "1px solid #2B3342"
           }
         },
-        "row": 8,
+        "row": 16,
         "col": 16,
-        "id": "40affa4c-62f2-41d3-b1eb-feb831e714f7"
+        "id": "5b59ec75-e97f-47e8-b8db-e3a5ef85b55f"
       }
     },
     "states": {
@@ -378,40 +403,46 @@
         "layouts": {
           "main": {
             "widgets": {
-              "a07673b4-b441-4e9b-b0ba-2881b0ffd970": {
+              "baf11e7b-68d8-4945-b5bc-171b0267b31a": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "e54c4936-b8d0-46bb-824f-9df834f47dec": {
-                "sizeX": 8,
-                "sizeY": 5,
+              "abc89ef6-660b-4d2a-9430-0f0d83755b51": {
+                "sizeX": 24,
+                "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "41cfcf40-2c9d-41ab-b98e-546d1315c62f": {
+              "fff0be9e-9ac9-4062-bf12-06f1ef247d33": {
                 "sizeX": 8,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
+                "col": 0
+              },
+              "19b4799b-dd89-490d-8153-ee955e5cf187": {
+                "sizeX": 8,
+                "sizeY": 5,
+                "row": 11,
                 "col": 8
               },
-              "9e6c5970-8f00-4059-9d4a-411c24e4fe3d": {
+              "19b3a452-d807-4713-8ae4-ce1f8b462ff0": {
                 "sizeX": 8,
                 "sizeY": 5,
-                "row": 3,
+                "row": 11,
                 "col": 16
               },
-              "9865e128-6301-4b0d-8cb3-da4d4ccfa232": {
+              "f50e6ddb-150e-4d29-9a67-f73bdd6d096c": {
                 "sizeX": 16,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 0
               },
-              "40affa4c-62f2-41d3-b1eb-feb831e714f7": {
+              "5b59ec75-e97f-47e8-b8db-e3a5ef85b55f": {
                 "sizeX": 8,
                 "sizeY": 8,
-                "row": 8,
+                "row": 16,
                 "col": 16
               }
             },
