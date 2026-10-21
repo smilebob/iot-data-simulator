@@ -411,6 +411,20 @@
           <p id="dev-protocol-hint" class="text-[11px] text-slate-500 mt-1">Collez ici l'Access Token généré par ThingsBoard lors de la création de l'équipement.</p>
         </div>
 
+        <div>
+          <label class="block font-medium text-slate-300 mb-1 flex items-center justify-between">
+            <span class="flex items-center gap-1.5"><i data-lucide="timer" class="w-3.5 h-3.5 text-amber-400"></i> Intervalle d'Envoi Global (secondes)</span>
+            <span class="text-[10px] text-slate-400 font-normal">Optionnel (écrase les variables)</span>
+          </label>
+          <div class="relative">
+            <input type="number" id="dev-publish-interval" min="0.1" step="0.1" placeholder="Ex: 2.0 (laisser vide pour conserver les cadences par variable)" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+            <span class="absolute right-3 top-2 text-xs text-slate-500">sec</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">
+            <span class="text-amber-400 font-semibold">Note :</span> Si vous saisissez une valeur, elle sera appliquée immédiatement à <strong>toutes les grandeurs</strong> rattachées à cet équipement.
+          </p>
+        </div>
+
         <!-- Paramètres Réseau de l'Équipement (Optionnels) -->
         <div class="border border-[#2B3342]/70 rounded-lg p-3 bg-[#12151B]/50 space-y-2">
           <div class="flex items-center justify-between cursor-pointer" onclick="toggleDeviceAdvancedNetwork()">
@@ -891,6 +905,18 @@
           <p class="text-[11px] text-slate-500 mt-1">Si vous laissez vide, l'équipement émettra sur le broker standard ou selon les identifiants globaux.</p>
         </div>
 
+        <div>
+          <label class="block font-medium text-slate-300 mb-1 flex items-center justify-between">
+            <span class="flex items-center gap-1.5"><i data-lucide="timer" class="w-3.5 h-3.5 text-amber-400"></i> Intervalle d'Envoi Global (secondes)</span>
+            <span class="text-[10px] text-slate-400 font-normal">Optionnel (écrase le modèle)</span>
+          </label>
+          <div class="relative">
+            <input type="number" id="instantiate-publish-interval" min="0.1" step="0.1" placeholder="Ex: 5.0 (par défaut: cadences propres au modèle)" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+            <span class="absolute right-3 top-2 text-xs text-slate-500">sec</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Si renseigné, cette cadence sera appliquée à toutes les grandeurs de ce modèle.</p>
+        </div>
+
         <!-- Résumé des grandeurs qui vont être créées -->
         <div class="bg-[#12151B] border border-[#2B3342] rounded-xl p-3">
           <span class="text-[11px] font-semibold text-slate-400 block mb-1.5 flex items-center gap-1.5">
@@ -921,7 +947,7 @@
         <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
       </div>
       <div class="text-[10px] font-mono text-slate-500 tracking-wider">
-        v<span id="app-version-badge">1.7.0</span>
+        v<span id="app-version-badge">1.8.0</span>
       </div>
     </div>
   </footer>

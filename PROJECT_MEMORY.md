@@ -61,7 +61,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Dépendances durcies contre les CVE récentes (Jinja2 >= 3.1.5, python-multipart >= 0.0.31, FastAPI >= 0.115.6)
 - [x] Broker Mosquitto local (image `eclipse-mosquitto:2`) + UI Web d'inspection MQTTX Web
 - [x] Licence Apache 2.0 (fichier LICENSE et notices légales)
-- [x] Numérotation de version automatique et affichage discret en bas de page (v1.7.0)
+- [x] Numérotation de version automatique et affichage discret en bas de page (v1.8.0)
 - [x] Système d'Authentification & Gestion des Utilisateurs RBAC (Admin, Opérateur, Observateur)
 - [x] Protection des secrets selon les directives du CIS Benchmark (hachage Scrypt RFC 7914, JWT HttpOnly, droits 0600)
 - [x] Compte administrateur par défaut initialisé au boot (`admin` / `Admin_123456!`) avec invite de modification
@@ -70,6 +70,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Dossier documentaire dédié `Documentation/use_cases/` avec 32 fiches techniques détaillées (architectures, variables, payloads ThingsBoard, règles d'alarmes)
 - [x] Moteur de Dépendance Physique & Variables Dérivées (`SimMode.DERIVED`, `SimMode.INTEGRATOR`) : évaluation causale en 3 passes, analyseur AST sécurisé sans `eval()`, intégrateurs d'énergie continus (kWh, MWh, m³) et rétro-application aux 32 presets métiers
 - [x] Guide d'architecture du moteur physique : `Documentation/developer/physics_and_dependencies.md`
+- [x] Configuration de l'intervalle d'envoi (`publish_interval`) au niveau équipement avec écrasement en cascade sur toutes les grandeurs associées, tout en préservant la possibilité de régler des cadences individuelles par variable (v1.8.0)
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

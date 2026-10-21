@@ -313,6 +313,18 @@ function renderEquipmentGroups() {
       }
     }
 
+    // Détermination du badge cadence d'envoi
+    let cadenceBadgeHtml = "";
+    if (device.publish_interval != null && device.publish_interval > 0) {
+      cadenceBadgeHtml = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950/70 text-amber-300 border border-amber-700/60 flex items-center gap-1" title="Cadence globale imposée : ${device.publish_interval}s sur toutes les grandeurs">
+        <i data-lucide="timer" class="w-3 h-3 text-amber-400"></i> Cadence : ${device.publish_interval}s
+      </span>`;
+    } else {
+      cadenceBadgeHtml = `<span class="px-2 py-0.5 rounded text-[10px] text-slate-400 bg-[#12151B] border border-[#2B3342] flex items-center gap-1" title="Cadences définies individuellement par grandeur">
+        <i data-lucide="clock" class="w-3 h-3 text-slate-500"></i> Cadence variable
+      </span>`;
+    }
+
     const canOperate = state.currentUser && (state.currentUser.role === "admin" || state.currentUser.role === "operator");
     let devActionsHtml = "";
     if (canOperate) {
@@ -369,6 +381,7 @@ function renderEquipmentGroups() {
             <div class="flex items-center gap-2 mt-1">
               ${platformBadgeHtml}
               ${protocolBadgeHtml}
+              ${cadenceBadgeHtml}
               ${device.token ? `
                 <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#12151B] text-slate-300 border border-[#2B3342] flex items-center gap-1" title="Token: ${escapeHtml(device.token)}">
                   <i data-lucide="key" class="w-3 h-3 text-amber-400"></i> Token: &bull;&bull;&bull;&bull;&bull;&bull;
@@ -639,6 +652,7 @@ function openDeviceModal(devToEdit = null) {
   const platformEl = document.getElementById("dev-platform");
   const protoEl = document.getElementById("dev-protocol");
   const tokenEl = document.getElementById("dev-token");
+  const publishIntervalEl = document.getElementById("dev-publish-interval");
   const customHostEl = document.getElementById("dev-custom-host");
   const customPortEl = document.getElementById("dev-custom-port");
   const useTlsEl = document.getElementById("dev-use-tls");
@@ -650,6 +664,7 @@ function openDeviceModal(devToEdit = null) {
     if (platformEl) platformEl.value = devToEdit.platform;
     if (protoEl) protoEl.value = devToEdit.protocol || "mqtt";
     if (tokenEl) tokenEl.value = devToEdit.token || "";
+    if (publishIntervalEl) publishIntervalEl.value = devToEdit.publish_interval != null ? devToEdit.publish_interval : "";
     if (customHostEl) customHostEl.value = devToEdit.custom_host || "";
     if (customPortEl) customPortEl.value = devToEdit.custom_port || "";
     if (useTlsEl) useTlsEl.checked = devToEdit.use_tls === true;
@@ -660,6 +675,7 @@ function openDeviceModal(devToEdit = null) {
     if (platformEl) platformEl.value = "thingsboard";
     if (protoEl) protoEl.value = "http"; // HTTP par défaut pour ThingsBoard (recommandé port 443 / Cloudflare)
     if (tokenEl) tokenEl.value = "";
+    if (publishIntervalEl) publishIntervalEl.value = "";
     if (customHostEl) customHostEl.value = "";
     if (customPortEl) customPortEl.value = "";
     if (useTlsEl) useTlsEl.checked = true;
@@ -835,6 +851,7 @@ async function deleteDevice(devId) {
 async function saveDeviceForm(e) {
   e.preventDefault();
   const customPortVal = document.getElementById("dev-custom-port").value;
+  const publishIntervalRaw = document.getElementById("dev-publish-interval") ? document.getElementById("dev-publish-interval").value.trim() : "";
   const devPayload = {
     id: document.getElementById("dev-id").value.trim(),
     name: document.getElementById("dev-name").value.trim(),
@@ -844,6 +861,7 @@ async function saveDeviceForm(e) {
     custom_host: document.getElementById("dev-custom-host").value.trim() || null,
     custom_port: customPortVal ? parseInt(customPortVal) : null,
     use_tls: document.getElementById("dev-use-tls").checked,
+    publish_interval: publishIntervalRaw ? parseFloat(publishIntervalRaw) : null,
     enabled: document.getElementById("dev-enabled").checked,
   };
 
@@ -935,7 +953,15 @@ function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
     }
     if (unitEl) unitEl.value = "";
     if (topicEl) topicEl.value = "";
-    if (intervalEl) intervalEl.value = "3.0";
+    
+    // Cadence par défaut héritée de l'équipement si configurée, sinon 3.0s
+    const activeDevId = (devSelect && devSelect.value) || preselectedDeviceId;
+    const parentDev = state.devices.find(d => d.id === activeDevId);
+    if (intervalEl) {
+      intervalEl.value = (parentDev && parentDev.publish_interval != null && parentDev.publish_interval > 0)
+        ? parentDev.publish_interval
+        : "3.0";
+    }
     if (modeEl) modeEl.value = "sine";
 
     const formulaInput = document.getElementById("derived-formula");
@@ -2054,6 +2080,8 @@ function prepareInstantiatePreset(presetId) {
   document.getElementById("instantiate-device-id").placeholder = `Ex: ${preset.id}_01`;
   document.getElementById("instantiate-protocol").value = preset.default_protocol || "mqtt";
   document.getElementById("instantiate-token").value = "";
+  const instantiateIntervalEl = document.getElementById("instantiate-publish-interval");
+  if (instantiateIntervalEl) instantiateIntervalEl.value = "";
 
   const errBox = document.getElementById("instantiate-error");
   if (errBox) errBox.classList.add("hidden");
@@ -2079,6 +2107,7 @@ async function submitInstantiatePreset(e) {
   const deviceId = document.getElementById("instantiate-device-id").value.trim();
   const protocol = document.getElementById("instantiate-protocol").value;
   const token = document.getElementById("instantiate-token").value.trim();
+  const publishIntervalRaw = document.getElementById("instantiate-publish-interval") ? document.getElementById("instantiate-publish-interval").value.trim() : "";
   const errBox = document.getElementById("instantiate-error");
 
   const payload = {
@@ -2086,7 +2115,8 @@ async function submitInstantiatePreset(e) {
     name: name || undefined,
     device_id: deviceId || undefined,
     protocol: protocol || undefined,
-    token: token || undefined
+    token: token || undefined,
+    publish_interval: publishIntervalRaw ? parseFloat(publishIntervalRaw) : undefined
   };
 
   try {

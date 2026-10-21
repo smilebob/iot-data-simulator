@@ -201,6 +201,11 @@ class StorageRepository:
     def save_device(self, device: DeviceConfig):
         with self._lock:
             self.devices[device.id] = device
+            # Si un intervalle d'envoi global est configuré, écraser l'intervalle de toutes ses variables
+            if device.publish_interval is not None and device.publish_interval > 0:
+                for v in self.variables.values():
+                    if v.device_id == device.id:
+                        v.publish_interval = device.publish_interval
             self._save_unsafe()
 
     def delete_device(self, device_id: str):

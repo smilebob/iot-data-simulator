@@ -2165,6 +2165,7 @@ class InstantiatePresetRequest(BaseModel):
     custom_host: Optional[str] = Field(default=None, description="Hôte spécifique")
     custom_port: Optional[int] = Field(default=None, description="Port spécifique")
     use_tls: Optional[bool] = Field(default=None, description="Chiffrement TLS")
+    publish_interval: Optional[float] = Field(default=None, description="Intervalle d'envoi global (sec)")
 
 def instantiate_preset(
     req: InstantiatePresetRequest,
@@ -2205,6 +2206,7 @@ def instantiate_preset(
         custom_host=req.custom_host.strip() if req.custom_host and req.custom_host.strip() else None,
         custom_port=req.custom_port,
         use_tls=req.use_tls,
+        publish_interval=req.publish_interval,
         enabled=True,
     )
     repo.save_device(device)
@@ -2216,6 +2218,8 @@ def instantiate_preset(
         var = orig_var.model_copy(deep=True)
         var.device_id = device.id
         var.id = f"{device.id}_{orig_var.id}"
+        if req.publish_interval is not None and req.publish_interval > 0:
+            var.publish_interval = req.publish_interval
         if not var.topic:
             var.topic = adapter.get_default_topic(device, var)
         repo.save_variable(var)

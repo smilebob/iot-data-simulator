@@ -22,4 +22,5 @@ class DeviceConfig(BaseModel):
     custom_host: Optional[str] = Field(default=None, description="Hôte spécifique (hérite du serveur par défaut si non renseigné)")
     custom_port: Optional[int] = Field(default=None, description="Port spécifique (déduit selon le protocole si non renseigné)")
     use_tls: Optional[bool] = Field(default=None, description="Chiffrement TLS / HTTPS / CoAPS")
+    publish_interval: Optional[float] = Field(default=None, description="Intervalle d'envoi global en secondes. Si défini, écrase l'intervalle des variables de cet équipement.")
     enabled: bool = Field(default=True, description="Équipement actif")
