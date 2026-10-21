@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Système Stockage Batteries (BESS)' (ID: infra_bess_storage). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "0891147d-146b-4f75-9a38-82dde4a0508b": {
-        "id": "0891147d-146b-4f75-9a38-82dde4a0508b",
+      "c30c4df2-8acc-4fcc-ad94-fbefb61610dd": {
+        "id": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
         "alias": "Système Stockage Batteries (BESS)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "2600e68e-d91e-4450-aa1f-b1c8cd2409b6": {
+      "b5e31441-0871-49ca-91cf-de539a066df9": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "2600e68e-d91e-4450-aa1f-b1c8cd2409b6"
+        "id": "b5e31441-0871-49ca-91cf-de539a066df9"
       },
-      "3301fba0-b569-4cda-a278-ce64dcf9105c": {
+      "f9235c13-35df-42f6-8613-53712780cd97": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0891147d-146b-4f75-9a38-82dde4a0508b",
+              "entityAliasId": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Stockage BESS SCADA : Système Stockage Batteries (BESS)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Conteneur Isotherme 40ft BESS -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">CONTENEUR STOCKAGE BATTERIES LFP (BESS 2 MWh / CLIMATISATION REDONDANTE)</text>\n\n    <!-- Racks Batteries Li-ion -->\n    <g transform=\"translate(100, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #01</text>\n    </g>\n    <g transform=\"translate(190, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #02</text>\n    </g>\n    <g transform=\"translate(280, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #03</text>\n    </g>\n\n    <!-- Onduleur Réversible PCS 4 Quadrants -->\n    <g transform=\"translate(420, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"130\" height=\"100\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"65\" y=\"45\" fill=\"#E2001A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONVERTISSEUR PCS</text>\n      <text x=\"65\" y=\"65\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\">Bi-directionnel AC/DC</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉTAT DE CHARGE (SOC)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soc_pct:1} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION DU PACK</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_pack_v:1} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT CHARGE/DÉCH.</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_charge_decharge_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SANTÉ BATTERIE (SOH)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soh_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Stockage BESS SCADA : Système Stockage Batteries (BESS)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Conteneur Isotherme 40ft BESS -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">CONTENEUR STOCKAGE BATTERIES LFP (BESS 2 MWh / CLIMATISATION REDONDANTE)</text>\n\n    <!-- Racks Batteries Li-ion -->\n    <g transform=\"translate(100, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #01</text>\n    </g>\n    <g transform=\"translate(190, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #02</text>\n    </g>\n    <g transform=\"translate(280, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #03</text>\n    </g>\n\n    <!-- Onduleur Réversible PCS 4 Quadrants -->\n    <g transform=\"translate(420, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"130\" height=\"100\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"65\" y=\"45\" fill=\"#E2001A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONVERTISSEUR PCS</text>\n      <text x=\"65\" y=\"65\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\">Bi-directionnel AC/DC</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉTAT DE CHARGE (SOC)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soc_pct:1} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION DU PACK</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_pack_v:1} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT CHARGE/DÉCH.</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_charge_decharge_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SANTÉ BATTERIE (SOH)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soh_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Stockage BESS SCADA : Système Stockage Batteries (BESS)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Conteneur Isotherme 40ft BESS -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">CONTENEUR STOCKAGE BATTERIES LFP (BESS 2 MWh / CLIMATISATION REDONDANTE)</text>\n\n    <!-- Racks Batteries Li-ion -->\n    <g transform=\"translate(100, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #01</text>\n    </g>\n    <g transform=\"translate(190, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #02</text>\n    </g>\n    <g transform=\"translate(280, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #03</text>\n    </g>\n\n    <!-- Onduleur Réversible PCS 4 Quadrants -->\n    <g transform=\"translate(420, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"130\" height=\"100\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"65\" y=\"45\" fill=\"#E2001A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONVERTISSEUR PCS</text>\n      <text x=\"65\" y=\"65\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\">Bi-directionnel AC/DC</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉTAT DE CHARGE (SOC)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soc_pct:1} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION DU PACK</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_pack_v:1} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT CHARGE/DÉCH.</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_charge_decharge_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SANTÉ BATTERIE (SOH)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soh_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Stockage BESS SCADA : Système Stockage Batteries (BESS)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Conteneur Isotherme 40ft BESS -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">CONTENEUR STOCKAGE BATTERIES LFP (BESS 2 MWh / CLIMATISATION REDONDANTE)</text>\n\n    <!-- Racks Batteries Li-ion -->\n    <g transform=\"translate(100, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #01</text>\n    </g>\n    <g transform=\"translate(190, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #02</text>\n    </g>\n    <g transform=\"translate(280, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #03</text>\n    </g>\n\n    <!-- Onduleur Réversible PCS 4 Quadrants -->\n    <g transform=\"translate(420, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"130\" height=\"100\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"65\" y=\"45\" fill=\"#E2001A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONVERTISSEUR PCS</text>\n      <text x=\"65\" y=\"65\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\">Bi-directionnel AC/DC</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉTAT DE CHARGE (SOC)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soc_pct:1} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION DU PACK</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_pack_v:1} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT CHARGE/DÉCH.</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_charge_decharge_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SANTÉ BATTERIE (SOH)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soh_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "3301fba0-b569-4cda-a278-ce64dcf9105c"
+        "id": "f9235c13-35df-42f6-8613-53712780cd97"
       },
-      "dfe09c50-eb7e-424e-bd5c-d4b2f43007ff": {
+      "f46b9f05-2030-4f8f-91df-9ab269b78243": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0891147d-146b-4f75-9a38-82dde4a0508b",
+              "entityAliasId": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "dfe09c50-eb7e-424e-bd5c-d4b2f43007ff"
+        "id": "f46b9f05-2030-4f8f-91df-9ab269b78243"
       },
-      "3d6783a4-5224-491b-88d9-408572542aac": {
+      "076eb722-5c15-488b-b093-9b0577072c0f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0891147d-146b-4f75-9a38-82dde4a0508b",
+              "entityAliasId": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
               "dataKeys": [
                 {
                   "name": "tension_pack_v",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "3d6783a4-5224-491b-88d9-408572542aac"
+        "id": "076eb722-5c15-488b-b093-9b0577072c0f"
       },
-      "e69bc9fd-c187-42fa-8efc-9469f3b077f9": {
+      "0d6f279b-dcc4-40e7-b95e-8e243ba26c19": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0891147d-146b-4f75-9a38-82dde4a0508b",
+              "entityAliasId": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
               "dataKeys": [
                 {
                   "name": "courant_charge_decharge_a",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "e69bc9fd-c187-42fa-8efc-9469f3b077f9"
+        "id": "0d6f279b-dcc4-40e7-b95e-8e243ba26c19"
       },
-      "386d06c4-b02e-4c7b-a4e6-1765fb7120e8": {
+      "f1ca3a13-3a52-4977-868f-b530a53b44e7": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0891147d-146b-4f75-9a38-82dde4a0508b",
+              "entityAliasId": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
               "dataKeys": [
                 {
                   "name": "temp_max_cellule",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "386d06c4-b02e-4c7b-a4e6-1765fb7120e8"
+        "id": "f1ca3a13-3a52-4977-868f-b530a53b44e7"
       },
-      "8b48352c-94d5-4eb1-a376-dee144124fb9": {
+      "b42895e5-a7e7-4048-ae78-60f672b32e55": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0891147d-146b-4f75-9a38-82dde4a0508b",
+              "entityAliasId": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -496,9 +496,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8b48352c-94d5-4eb1-a376-dee144124fb9"
+        "id": "b42895e5-a7e7-4048-ae78-60f672b32e55"
       },
-      "65f7a76b-fa91-4467-8599-9178d7d22e66": {
+      "f1a5c822-62ab-454c-b5c5-09499509dcd8": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -511,7 +511,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0891147d-146b-4f75-9a38-82dde4a0508b",
+              "entityAliasId": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
               "dataKeys": [
                 {
                   "name": "soh_pct",
@@ -544,9 +544,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "65f7a76b-fa91-4467-8599-9178d7d22e66"
+        "id": "f1a5c822-62ab-454c-b5c5-09499509dcd8"
       },
-      "65e5630a-7ac6-4aea-8a16-2ba5d0ca5d69": {
+      "38dab0a4-d91f-41fb-8ab1-413dbdae6db5": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -559,7 +559,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0891147d-146b-4f75-9a38-82dde4a0508b",
+              "entityAliasId": "c30c4df2-8acc-4fcc-ad94-fbefb61610dd",
               "dataKeys": [
                 {
                   "name": "soh_pct",
@@ -591,7 +591,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "65e5630a-7ac6-4aea-8a16-2ba5d0ca5d69"
+        "id": "38dab0a4-d91f-41fb-8ab1-413dbdae6db5"
       }
     },
     "states": {
@@ -601,55 +601,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "2600e68e-d91e-4450-aa1f-b1c8cd2409b6": {
+              "b5e31441-0871-49ca-91cf-de539a066df9": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "3301fba0-b569-4cda-a278-ce64dcf9105c": {
+              "f9235c13-35df-42f6-8613-53712780cd97": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "dfe09c50-eb7e-424e-bd5c-d4b2f43007ff": {
+              "f46b9f05-2030-4f8f-91df-9ab269b78243": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3d6783a4-5224-491b-88d9-408572542aac": {
+              "076eb722-5c15-488b-b093-9b0577072c0f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "e69bc9fd-c187-42fa-8efc-9469f3b077f9": {
+              "0d6f279b-dcc4-40e7-b95e-8e243ba26c19": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "386d06c4-b02e-4c7b-a4e6-1765fb7120e8": {
+              "f1ca3a13-3a52-4977-868f-b530a53b44e7": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "8b48352c-94d5-4eb1-a376-dee144124fb9": {
+              "b42895e5-a7e7-4048-ae78-60f672b32e55": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "65f7a76b-fa91-4467-8599-9178d7d22e66": {
+              "f1a5c822-62ab-454c-b5c5-09499509dcd8": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "65e5630a-7ac6-4aea-8a16-2ba5d0ca5d69": {
+              "38dab0a4-d91f-41fb-8ab1-413dbdae6db5": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

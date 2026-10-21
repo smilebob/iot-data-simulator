@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Salle Blanche & CTA Stérile (ISO)' (ID: ind_cleanroom_cta). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b": {
-        "id": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+      "dc2cf4f1-392c-4f64-84c8-5d567813ca5f": {
+        "id": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
         "alias": "Salle Blanche & CTA Stérile (ISO)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "0789d2d9-baf7-43ac-86a2-734545369059": {
+      "13db168f-ab79-423c-aa92-06cc4d5e2fa2": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "0789d2d9-baf7-43ac-86a2-734545369059"
+        "id": "13db168f-ab79-423c-aa92-06cc4d5e2fa2"
       },
-      "a2a05ee0-a2d0-4b07-a627-2e1632eeee4e": {
+      "95220155-fd77-4125-b939-ae7ffad20d62": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+              "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
               "dataKeys": [
                 {
                   "name": "surpression_salle_pa",
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Salle Blanche SCADA : Salle Blanche & CTA Stérile (ISO)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Salle Blanche ISO 5 / 7 -->\n    <rect x=\"50\" y=\"35\" width=\"580\" height=\"190\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"75\" y=\"60\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">SALLE BLANCHE STÉRILE (ISO 14644-1 / SURPRESSION CONTRÔLÉE)</text>\n\n    <!-- Plafond Soufflant Filtres HEPA H14 -->\n    <rect x=\"90\" y=\"75\" width=\"400\" height=\"30\" rx=\"4\" fill=\"#E2E8F0\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"90\" y1=\"90\" x2=\"490\" y2=\"90\" stroke=\"#0284C7\" stroke-width=\"2\" stroke-dasharray=\"6,4\"/>\n    <text x=\"290\" y=\"87\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">PLAFOND FILTRANT FLUX LAMINAIRE HEPA H14 (99.995%)</text>\n\n    <!-- Flux descendant d'air stérile -->\n    <path d=\"M 150 110 L 150 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n    <path d=\"M 290 110 L 290 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n    <path d=\"M 430 110 L 430 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n\n    <!-- Sas Personnel / Matériel Airlock -->\n    <rect x=\"520\" y=\"80\" width=\"80\" height=\"110\" rx=\"4\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n    <text x=\"560\" y=\"130\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">SAS AIRLOCK</text>\n    <text x=\"560\" y=\"145\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">Interverrouillé</text>\n\n    <!-- Compteur Optique de Particules Laser -->\n    <g transform=\"translate(290, 185)\">\n      <rect x=\"-20\" y=\"-15\" width=\"40\" height=\"25\" rx=\"3\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"2\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PARTICULES</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SURPRESSION SALLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${surpression_salle_pa:1} Pa</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENOUVELLEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${renouvellement_air_volh:1} vol/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COMPTAGE 0.5µm</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${comptage_particules_05:0} part/m³</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">HUMIDITÉ ABSOLUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${humidite_absolue_gkg:1} g/kg</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Salle Blanche SCADA : Salle Blanche & CTA Stérile (ISO)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Salle Blanche ISO 5 / 7 -->\n    <rect x=\"50\" y=\"35\" width=\"580\" height=\"190\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"75\" y=\"60\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">SALLE BLANCHE STÉRILE (ISO 14644-1 / SURPRESSION CONTRÔLÉE)</text>\n\n    <!-- Plafond Soufflant Filtres HEPA H14 -->\n    <rect x=\"90\" y=\"75\" width=\"400\" height=\"30\" rx=\"4\" fill=\"#E2E8F0\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"90\" y1=\"90\" x2=\"490\" y2=\"90\" stroke=\"#0284C7\" stroke-width=\"2\" stroke-dasharray=\"6,4\"/>\n    <text x=\"290\" y=\"87\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">PLAFOND FILTRANT FLUX LAMINAIRE HEPA H14 (99.995%)</text>\n\n    <!-- Flux descendant d'air stérile -->\n    <path d=\"M 150 110 L 150 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n    <path d=\"M 290 110 L 290 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n    <path d=\"M 430 110 L 430 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n\n    <!-- Sas Personnel / Matériel Airlock -->\n    <rect x=\"520\" y=\"80\" width=\"80\" height=\"110\" rx=\"4\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n    <text x=\"560\" y=\"130\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">SAS AIRLOCK</text>\n    <text x=\"560\" y=\"145\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">Interverrouillé</text>\n\n    <!-- Compteur Optique de Particules Laser -->\n    <g transform=\"translate(290, 185)\">\n      <rect x=\"-20\" y=\"-15\" width=\"40\" height=\"25\" rx=\"3\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"2\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PARTICULES</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SURPRESSION SALLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${surpression_salle_pa:1} Pa</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENOUVELLEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${renouvellement_air_volh:1} vol/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COMPTAGE 0.5µm</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${comptage_particules_05:0} part/m³</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">HUMIDITÉ ABSOLUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${humidite_absolue_gkg:1} g/kg</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Salle Blanche SCADA : Salle Blanche & CTA Stérile (ISO)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Salle Blanche ISO 5 / 7 -->\n    <rect x=\"50\" y=\"35\" width=\"580\" height=\"190\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"75\" y=\"60\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">SALLE BLANCHE STÉRILE (ISO 14644-1 / SURPRESSION CONTRÔLÉE)</text>\n\n    <!-- Plafond Soufflant Filtres HEPA H14 -->\n    <rect x=\"90\" y=\"75\" width=\"400\" height=\"30\" rx=\"4\" fill=\"#E2E8F0\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"90\" y1=\"90\" x2=\"490\" y2=\"90\" stroke=\"#0284C7\" stroke-width=\"2\" stroke-dasharray=\"6,4\"/>\n    <text x=\"290\" y=\"87\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">PLAFOND FILTRANT FLUX LAMINAIRE HEPA H14 (99.995%)</text>\n\n    <!-- Flux descendant d'air stérile -->\n    <path d=\"M 150 110 L 150 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n    <path d=\"M 290 110 L 290 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n    <path d=\"M 430 110 L 430 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n\n    <!-- Sas Personnel / Matériel Airlock -->\n    <rect x=\"520\" y=\"80\" width=\"80\" height=\"110\" rx=\"4\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n    <text x=\"560\" y=\"130\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">SAS AIRLOCK</text>\n    <text x=\"560\" y=\"145\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">Interverrouillé</text>\n\n    <!-- Compteur Optique de Particules Laser -->\n    <g transform=\"translate(290, 185)\">\n      <rect x=\"-20\" y=\"-15\" width=\"40\" height=\"25\" rx=\"3\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"2\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PARTICULES</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SURPRESSION SALLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${surpression_salle_pa:1} Pa</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENOUVELLEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${renouvellement_air_volh:1} vol/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COMPTAGE 0.5µm</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${comptage_particules_05:0} part/m³</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">HUMIDITÉ ABSOLUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${humidite_absolue_gkg:1} g/kg</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Salle Blanche SCADA : Salle Blanche & CTA Stérile (ISO)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Salle Blanche ISO 5 / 7 -->\n    <rect x=\"50\" y=\"35\" width=\"580\" height=\"190\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"75\" y=\"60\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">SALLE BLANCHE STÉRILE (ISO 14644-1 / SURPRESSION CONTRÔLÉE)</text>\n\n    <!-- Plafond Soufflant Filtres HEPA H14 -->\n    <rect x=\"90\" y=\"75\" width=\"400\" height=\"30\" rx=\"4\" fill=\"#E2E8F0\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <line x1=\"90\" y1=\"90\" x2=\"490\" y2=\"90\" stroke=\"#0284C7\" stroke-width=\"2\" stroke-dasharray=\"6,4\"/>\n    <text x=\"290\" y=\"87\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">PLAFOND FILTRANT FLUX LAMINAIRE HEPA H14 (99.995%)</text>\n\n    <!-- Flux descendant d'air stérile -->\n    <path d=\"M 150 110 L 150 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n    <path d=\"M 290 110 L 290 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n    <path d=\"M 430 110 L 430 170\" stroke=\"#0284C7\" stroke-width=\"4\" stroke-dasharray=\"6,4\" class=\"pipe-flow\"/>\n\n    <!-- Sas Personnel / Matériel Airlock -->\n    <rect x=\"520\" y=\"80\" width=\"80\" height=\"110\" rx=\"4\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n    <text x=\"560\" y=\"130\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">SAS AIRLOCK</text>\n    <text x=\"560\" y=\"145\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">Interverrouillé</text>\n\n    <!-- Compteur Optique de Particules Laser -->\n    <g transform=\"translate(290, 185)\">\n      <rect x=\"-20\" y=\"-15\" width=\"40\" height=\"25\" rx=\"3\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"2\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PARTICULES</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SURPRESSION SALLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${surpression_salle_pa:1} Pa</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENOUVELLEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${renouvellement_air_volh:1} vol/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COMPTAGE 0.5µm</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${comptage_particules_05:0} part/m³</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">HUMIDITÉ ABSOLUE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${humidite_absolue_gkg:1} g/kg</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a2a05ee0-a2d0-4b07-a627-2e1632eeee4e"
+        "id": "95220155-fd77-4125-b939-ae7ffad20d62"
       },
-      "b846917c-e140-48f5-8d15-105d04b99fef": {
+      "adbd6ea7-c085-4b14-86a6-ebc1e21c658a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+              "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
               "dataKeys": [
                 {
                   "name": "surpression_salle_pa",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "b846917c-e140-48f5-8d15-105d04b99fef"
+        "id": "adbd6ea7-c085-4b14-86a6-ebc1e21c658a"
       },
-      "1e110bda-8f43-4f82-a165-897764f43f7f": {
+      "df9d0bf6-c147-4188-aa7c-6d9d05adc5a6": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+              "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
               "dataKeys": [
                 {
                   "name": "renouvellement_air_volh",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "1e110bda-8f43-4f82-a165-897764f43f7f"
+        "id": "df9d0bf6-c147-4188-aa7c-6d9d05adc5a6"
       },
-      "97247f31-1817-4421-a6de-15bde0df0e18": {
+      "661fc21d-84df-4ef0-b1fd-44775f044ffb": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+              "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
               "dataKeys": [
                 {
                   "name": "comptage_particules_05",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "97247f31-1817-4421-a6de-15bde0df0e18"
+        "id": "661fc21d-84df-4ef0-b1fd-44775f044ffb"
       },
-      "ba13c3ce-ab6c-40ed-a678-b5a0ad97386d": {
+      "f1293eb1-36e5-4908-9017-7e3fec8c52bf": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+              "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
               "dataKeys": [
                 {
                   "name": "humidite_absolue_gkg",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "ba13c3ce-ab6c-40ed-a678-b5a0ad97386d"
+        "id": "f1293eb1-36e5-4908-9017-7e3fec8c52bf"
       },
-      "6867d3ae-5c5f-4bbc-9015-cd870f0e50b0": {
+      "88a5b8ce-9104-4fd5-a38f-7480aca1f896": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+              "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
               "dataKeys": [
                 {
                   "name": "surpression_salle_pa",
@@ -496,9 +496,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "6867d3ae-5c5f-4bbc-9015-cd870f0e50b0"
+        "id": "88a5b8ce-9104-4fd5-a38f-7480aca1f896"
       },
-      "b9cd8226-3aaa-4a0b-b81e-7ea1b5aceb2a": {
+      "dfcb7feb-3531-407f-950c-903dfb63de62": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -510,12 +510,12 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b"
+            "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+              "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
               "dataKeys": [
                 {
                   "name": "alarme_depressurisation",
@@ -554,9 +554,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "b9cd8226-3aaa-4a0b-b81e-7ea1b5aceb2a"
+        "id": "dfcb7feb-3531-407f-950c-903dfb63de62"
       },
-      "2e96a6c7-d00d-44c1-86ed-55bfd81adaf0": {
+      "219ab6ba-8957-42b7-8b38-4299a3e0bf3c": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -569,7 +569,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "28b3a5b4-f8a2-4f9a-bc98-9b37de0d596b",
+              "entityAliasId": "dc2cf4f1-392c-4f64-84c8-5d567813ca5f",
               "dataKeys": [
                 {
                   "name": "alarme_depressurisation",
@@ -601,7 +601,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "2e96a6c7-d00d-44c1-86ed-55bfd81adaf0"
+        "id": "219ab6ba-8957-42b7-8b38-4299a3e0bf3c"
       }
     },
     "states": {
@@ -611,55 +611,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "0789d2d9-baf7-43ac-86a2-734545369059": {
+              "13db168f-ab79-423c-aa92-06cc4d5e2fa2": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a2a05ee0-a2d0-4b07-a627-2e1632eeee4e": {
+              "95220155-fd77-4125-b939-ae7ffad20d62": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "b846917c-e140-48f5-8d15-105d04b99fef": {
+              "adbd6ea7-c085-4b14-86a6-ebc1e21c658a": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "1e110bda-8f43-4f82-a165-897764f43f7f": {
+              "df9d0bf6-c147-4188-aa7c-6d9d05adc5a6": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "97247f31-1817-4421-a6de-15bde0df0e18": {
+              "661fc21d-84df-4ef0-b1fd-44775f044ffb": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "ba13c3ce-ab6c-40ed-a678-b5a0ad97386d": {
+              "f1293eb1-36e5-4908-9017-7e3fec8c52bf": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "6867d3ae-5c5f-4bbc-9015-cd870f0e50b0": {
+              "88a5b8ce-9104-4fd5-a38f-7480aca1f896": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "b9cd8226-3aaa-4a0b-b81e-7ea1b5aceb2a": {
+              "dfcb7feb-3531-407f-950c-903dfb63de62": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "2e96a6c7-d00d-44c1-86ed-55bfd81adaf0": {
+              "219ab6ba-8957-42b7-8b38-4299a3e0bf3c": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

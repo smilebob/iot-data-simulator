@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Chaudière Industrielle Vapeur' (ID: ind_steam_boiler). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "043a727f-c940-4ece-8af7-9d302f0e840f": {
-        "id": "043a727f-c940-4ece-8af7-9d302f0e840f",
+      "9ee7b390-ef23-441a-a357-52c4ce53f3f6": {
+        "id": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
         "alias": "Chaudière Industrielle Vapeur",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "d0720328-1287-4452-8b93-0a444f239266": {
+      "1dcbdf60-5d20-4690-83e8-03deb1a4542d": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "d0720328-1287-4452-8b93-0a444f239266"
+        "id": "1dcbdf60-5d20-4690-83e8-03deb1a4542d"
       },
-      "36a117aa-ccce-473f-b7d0-fb603921658b": {
+      "48d986f8-c710-45b1-8296-d366404da79e": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "043a727f-c940-4ece-8af7-9d302f0e840f",
+              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
               "dataKeys": [
                 {
                   "name": "pression_vapeur_bar",
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Thermique SCADA : Chaudière Industrielle Vapeur\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bâche alimentaire (Eau) -->\n    <rect x=\"40\" y=\"80\" width=\"90\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"85\" y=\"105\" fill=\"#0284C7\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">BÂCHE ALIM.</text>\n    <rect x=\"45\" y=\"130\" width=\"80\" height=\"55\" rx=\"4\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    \n    <!-- Pompe alimentaire HP -->\n    <path d=\"M 130 150 L 190 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <circle cx=\"210\" cy=\"150\" r=\"20\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"210\" y=\"185\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE HP</text>\n\n    <!-- Corps de Chaudière Tubulaire -->\n    <path d=\"M 230 150 L 310 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <rect x=\"310\" y=\"45\" width=\"280\" height=\"160\" rx=\"20\" fill=\"#F1F5F9\" stroke=\"#DC2626\" stroke-width=\"2.5\"/>\n    <text x=\"450\" y=\"75\" fill=\"#0F172A\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">CHAUDIÈRE TUBE DE FUMÉES</text>\n\n    <!-- Brûleur Gaz Modulant -->\n    <rect x=\"250\" y=\"80\" width=\"60\" height=\"60\" rx=\"6\" fill=\"#FEE2E2\" stroke=\"#DC2626\" stroke-width=\"1.5\"/>\n    <polygon points=\"310,95 360,110 310,125\" fill=\"#F59E0B\" opacity=\"0.8\"/>\n    <text x=\"280\" y=\"155\" fill=\"#DC2626\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">BRÛLEUR</text>\n\n    <!-- Niveau d'Eau Chaudière -->\n    <rect x=\"330\" y=\"130\" width=\"240\" height=\"60\" rx=\"6\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <!-- Ciel de Vapeur HP -->\n    <rect x=\"330\" y=\"85\" width=\"240\" height=\"40\" fill=\"#E2E8F0\" opacity=\"0.5\"/>\n    <text x=\"450\" y=\"110\" fill=\"#334155\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">CIEL VAPEUR HP</text>\n\n    <!-- Départ Collecteur Vapeur Usine -->\n    <path d=\"M 450 45 L 450 20 L 640 20 L 640 90\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"610\" y=\"90\" width=\"60\" height=\"80\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#0F172A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">BARILLET</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(710, 25)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION VAPEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_vapeur_bar:1} bar</text>\n    </g>\n    \n    <g transform=\"translate(710, 75)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT VAPEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_vapeur_th:1} t/h</text>\n    </g>\n    \n    <g transform=\"translate(710, 125)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. FUMÉES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_fumees:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(710, 175)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENDEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${rendement_combustion_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Thermique SCADA : Chaudière Industrielle Vapeur\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bâche alimentaire (Eau) -->\n    <rect x=\"40\" y=\"80\" width=\"90\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"85\" y=\"105\" fill=\"#0284C7\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">BÂCHE ALIM.</text>\n    <rect x=\"45\" y=\"130\" width=\"80\" height=\"55\" rx=\"4\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    \n    <!-- Pompe alimentaire HP -->\n    <path d=\"M 130 150 L 190 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <circle cx=\"210\" cy=\"150\" r=\"20\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"210\" y=\"185\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE HP</text>\n\n    <!-- Corps de Chaudière Tubulaire -->\n    <path d=\"M 230 150 L 310 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <rect x=\"310\" y=\"45\" width=\"280\" height=\"160\" rx=\"20\" fill=\"#F1F5F9\" stroke=\"#DC2626\" stroke-width=\"2.5\"/>\n    <text x=\"450\" y=\"75\" fill=\"#0F172A\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">CHAUDIÈRE TUBE DE FUMÉES</text>\n\n    <!-- Brûleur Gaz Modulant -->\n    <rect x=\"250\" y=\"80\" width=\"60\" height=\"60\" rx=\"6\" fill=\"#FEE2E2\" stroke=\"#DC2626\" stroke-width=\"1.5\"/>\n    <polygon points=\"310,95 360,110 310,125\" fill=\"#F59E0B\" opacity=\"0.8\"/>\n    <text x=\"280\" y=\"155\" fill=\"#DC2626\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">BRÛLEUR</text>\n\n    <!-- Niveau d'Eau Chaudière -->\n    <rect x=\"330\" y=\"130\" width=\"240\" height=\"60\" rx=\"6\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <!-- Ciel de Vapeur HP -->\n    <rect x=\"330\" y=\"85\" width=\"240\" height=\"40\" fill=\"#E2E8F0\" opacity=\"0.5\"/>\n    <text x=\"450\" y=\"110\" fill=\"#334155\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">CIEL VAPEUR HP</text>\n\n    <!-- Départ Collecteur Vapeur Usine -->\n    <path d=\"M 450 45 L 450 20 L 640 20 L 640 90\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"610\" y=\"90\" width=\"60\" height=\"80\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#0F172A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">BARILLET</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(710, 25)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION VAPEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_vapeur_bar:1} bar</text>\n    </g>\n    \n    <g transform=\"translate(710, 75)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT VAPEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_vapeur_th:1} t/h</text>\n    </g>\n    \n    <g transform=\"translate(710, 125)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. FUMÉES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_fumees:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(710, 175)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENDEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${rendement_combustion_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Thermique SCADA : Chaudière Industrielle Vapeur\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bâche alimentaire (Eau) -->\n    <rect x=\"40\" y=\"80\" width=\"90\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"85\" y=\"105\" fill=\"#0284C7\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">BÂCHE ALIM.</text>\n    <rect x=\"45\" y=\"130\" width=\"80\" height=\"55\" rx=\"4\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    \n    <!-- Pompe alimentaire HP -->\n    <path d=\"M 130 150 L 190 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <circle cx=\"210\" cy=\"150\" r=\"20\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"210\" y=\"185\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE HP</text>\n\n    <!-- Corps de Chaudière Tubulaire -->\n    <path d=\"M 230 150 L 310 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <rect x=\"310\" y=\"45\" width=\"280\" height=\"160\" rx=\"20\" fill=\"#F1F5F9\" stroke=\"#DC2626\" stroke-width=\"2.5\"/>\n    <text x=\"450\" y=\"75\" fill=\"#0F172A\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">CHAUDIÈRE TUBE DE FUMÉES</text>\n\n    <!-- Brûleur Gaz Modulant -->\n    <rect x=\"250\" y=\"80\" width=\"60\" height=\"60\" rx=\"6\" fill=\"#FEE2E2\" stroke=\"#DC2626\" stroke-width=\"1.5\"/>\n    <polygon points=\"310,95 360,110 310,125\" fill=\"#F59E0B\" opacity=\"0.8\"/>\n    <text x=\"280\" y=\"155\" fill=\"#DC2626\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">BRÛLEUR</text>\n\n    <!-- Niveau d'Eau Chaudière -->\n    <rect x=\"330\" y=\"130\" width=\"240\" height=\"60\" rx=\"6\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <!-- Ciel de Vapeur HP -->\n    <rect x=\"330\" y=\"85\" width=\"240\" height=\"40\" fill=\"#E2E8F0\" opacity=\"0.5\"/>\n    <text x=\"450\" y=\"110\" fill=\"#334155\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">CIEL VAPEUR HP</text>\n\n    <!-- Départ Collecteur Vapeur Usine -->\n    <path d=\"M 450 45 L 450 20 L 640 20 L 640 90\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"610\" y=\"90\" width=\"60\" height=\"80\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#0F172A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">BARILLET</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(710, 25)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION VAPEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_vapeur_bar:1} bar</text>\n    </g>\n    \n    <g transform=\"translate(710, 75)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT VAPEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_vapeur_th:1} t/h</text>\n    </g>\n    \n    <g transform=\"translate(710, 125)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. FUMÉES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_fumees:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(710, 175)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENDEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${rendement_combustion_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Thermique SCADA : Chaudière Industrielle Vapeur\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bâche alimentaire (Eau) -->\n    <rect x=\"40\" y=\"80\" width=\"90\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"85\" y=\"105\" fill=\"#0284C7\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">BÂCHE ALIM.</text>\n    <rect x=\"45\" y=\"130\" width=\"80\" height=\"55\" rx=\"4\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    \n    <!-- Pompe alimentaire HP -->\n    <path d=\"M 130 150 L 190 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <circle cx=\"210\" cy=\"150\" r=\"20\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"210\" y=\"185\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE HP</text>\n\n    <!-- Corps de Chaudière Tubulaire -->\n    <path d=\"M 230 150 L 310 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"5\" class=\"pipe-flow\"/>\n    <rect x=\"310\" y=\"45\" width=\"280\" height=\"160\" rx=\"20\" fill=\"#F1F5F9\" stroke=\"#DC2626\" stroke-width=\"2.5\"/>\n    <text x=\"450\" y=\"75\" fill=\"#0F172A\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">CHAUDIÈRE TUBE DE FUMÉES</text>\n\n    <!-- Brûleur Gaz Modulant -->\n    <rect x=\"250\" y=\"80\" width=\"60\" height=\"60\" rx=\"6\" fill=\"#FEE2E2\" stroke=\"#DC2626\" stroke-width=\"1.5\"/>\n    <polygon points=\"310,95 360,110 310,125\" fill=\"#F59E0B\" opacity=\"0.8\"/>\n    <text x=\"280\" y=\"155\" fill=\"#DC2626\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">BRÛLEUR</text>\n\n    <!-- Niveau d'Eau Chaudière -->\n    <rect x=\"330\" y=\"130\" width=\"240\" height=\"60\" rx=\"6\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <!-- Ciel de Vapeur HP -->\n    <rect x=\"330\" y=\"85\" width=\"240\" height=\"40\" fill=\"#E2E8F0\" opacity=\"0.5\"/>\n    <text x=\"450\" y=\"110\" fill=\"#334155\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">CIEL VAPEUR HP</text>\n\n    <!-- Départ Collecteur Vapeur Usine -->\n    <path d=\"M 450 45 L 450 20 L 640 20 L 640 90\" fill=\"none\" stroke=\"#DC2626\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"610\" y=\"90\" width=\"60\" height=\"80\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#0F172A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">BARILLET</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(710, 25)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION VAPEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_vapeur_bar:1} bar</text>\n    </g>\n    \n    <g transform=\"translate(710, 75)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT VAPEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_vapeur_th:1} t/h</text>\n    </g>\n    \n    <g transform=\"translate(710, 125)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. FUMÉES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_fumees:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(710, 175)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENDEMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${rendement_combustion_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "36a117aa-ccce-473f-b7d0-fb603921658b"
+        "id": "48d986f8-c710-45b1-8296-d366404da79e"
       },
-      "0534eaa4-bfe0-4608-b2c3-e54086398c62": {
+      "94ef28da-568a-4e64-be11-4e30b09310d6": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "043a727f-c940-4ece-8af7-9d302f0e840f",
+              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
               "dataKeys": [
                 {
                   "name": "pression_vapeur_bar",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "0534eaa4-bfe0-4608-b2c3-e54086398c62"
+        "id": "94ef28da-568a-4e64-be11-4e30b09310d6"
       },
-      "84426e0d-d88a-4324-876e-0f58e5214b0a": {
+      "9da6aae2-a17e-41d7-b4c7-4c282d3bf40f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "043a727f-c940-4ece-8af7-9d302f0e840f",
+              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
               "dataKeys": [
                 {
                   "name": "debit_vapeur_th",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "84426e0d-d88a-4324-876e-0f58e5214b0a"
+        "id": "9da6aae2-a17e-41d7-b4c7-4c282d3bf40f"
       },
-      "2ecac879-466c-4e16-9ec3-b941838485e6": {
+      "e50815ef-b04b-4820-b10e-5eddbd7e2674": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "043a727f-c940-4ece-8af7-9d302f0e840f",
+              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
               "dataKeys": [
                 {
                   "name": "temp_fumees",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "2ecac879-466c-4e16-9ec3-b941838485e6"
+        "id": "e50815ef-b04b-4820-b10e-5eddbd7e2674"
       },
-      "79033a94-3662-4cf8-b18d-c1e11ad78a01": {
+      "035f7070-5c4e-4a94-a49a-71296761386b": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "043a727f-c940-4ece-8af7-9d302f0e840f",
+              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
               "dataKeys": [
                 {
                   "name": "rendement_combustion_pct",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "79033a94-3662-4cf8-b18d-c1e11ad78a01"
+        "id": "035f7070-5c4e-4a94-a49a-71296761386b"
       },
-      "98f2ca77-5953-4de6-8ec2-d5cf85cf47f1": {
+      "cd9bb9bf-88be-48cd-9da8-13a11cd25698": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "043a727f-c940-4ece-8af7-9d302f0e840f",
+              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
               "dataKeys": [
                 {
                   "name": "taux_o2_residuel",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "98f2ca77-5953-4de6-8ec2-d5cf85cf47f1"
+        "id": "cd9bb9bf-88be-48cd-9da8-13a11cd25698"
       },
-      "9430f82b-2bbb-4a7d-9b38-ca5de5b041c6": {
+      "e9330ca4-a5ba-434d-a2a2-903da8de6b2a": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "043a727f-c940-4ece-8af7-9d302f0e840f",
+              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
               "dataKeys": [
                 {
                   "name": "pression_vapeur_bar",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "9430f82b-2bbb-4a7d-9b38-ca5de5b041c6"
+        "id": "e9330ca4-a5ba-434d-a2a2-903da8de6b2a"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "d0720328-1287-4452-8b93-0a444f239266": {
+              "1dcbdf60-5d20-4690-83e8-03deb1a4542d": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "36a117aa-ccce-473f-b7d0-fb603921658b": {
+              "48d986f8-c710-45b1-8296-d366404da79e": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "0534eaa4-bfe0-4608-b2c3-e54086398c62": {
+              "94ef28da-568a-4e64-be11-4e30b09310d6": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "84426e0d-d88a-4324-876e-0f58e5214b0a": {
+              "9da6aae2-a17e-41d7-b4c7-4c282d3bf40f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "2ecac879-466c-4e16-9ec3-b941838485e6": {
+              "e50815ef-b04b-4820-b10e-5eddbd7e2674": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "79033a94-3662-4cf8-b18d-c1e11ad78a01": {
+              "035f7070-5c4e-4a94-a49a-71296761386b": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "98f2ca77-5953-4de6-8ec2-d5cf85cf47f1": {
+              "cd9bb9bf-88be-48cd-9da8-13a11cd25698": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "9430f82b-2bbb-4a7d-9b38-ca5de5b041c6": {
+              "e9330ca4-a5ba-434d-a2a2-903da8de6b2a": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

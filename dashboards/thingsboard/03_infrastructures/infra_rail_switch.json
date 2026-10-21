@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "fa9e5297-60c8-4e46-b7b4-9c8969c52212": {
-        "id": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+      "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb": {
+        "id": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
         "alias": "Aiguillage & Signalisation Ferroviaire",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "944803de-aef7-4ce2-8c49-de8cff86ce21": {
+      "23a07d72-abc4-4808-b6d1-41974ddb1572": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "944803de-aef7-4ce2-8c49-de8cff86ce21"
+        "id": "23a07d72-abc4-4808-b6d1-41974ddb1572"
       },
-      "73ad53d7-0b11-49bb-84be-ac4f26993f25": {
+      "3043a965-b177-4284-bd49-5932166cb82d": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Aiguillage Ferroviaire SCADA : Aiguillage & Signalisation Ferroviaire\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Voie Principale & Voie Déviée -->\n    <line x1=\"60\" y1=\"120\" x2=\"600\" y2=\"120\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <line x1=\"60\" y1=\"150\" x2=\"600\" y2=\"150\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <!-- Déviation -->\n    <path d=\"M 280 120 Q 420 80 600 60\" fill=\"none\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <text x=\"70\" y=\"100\" fill=\"#334155\" font-size=\"10\" font-weight=\"bold\">VOIE PRINCIPALE</text>\n    <text x=\"500\" y=\"45\" fill=\"#334155\" font-size=\"10\" font-weight=\"bold\">VOIE DÉVIÉE</text>\n\n    <!-- Moteur d'Aiguille Électromécanique -->\n    <g transform=\"translate(260, 160)\">\n      <rect x=\"0\" y=\"0\" width=\"100\" height=\"55\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"50\" y=\"25\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTEUR AIGUILLE</text>\n      <text x=\"50\" y=\"40\" fill=\"#475569\" font-size=\"8\" text-anchor=\"middle\">Contrôle de tringle</text>\n    </g>\n\n    <!-- Résistances de Réchauffage des Rails (Anti-gel) -->\n    <line x1=\"280\" y1=\"113\" x2=\"400\" y2=\"113\" stroke=\"#D97706\" stroke-width=\"3\" stroke-dasharray=\"4,2\"/>\n    <text x=\"340\" y=\"103\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉCHAUFFAGE RAIL</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT MOTEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_moteur_aiguille_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMPS MANŒUVRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temps_manoeuvre_ms:0} ms</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DU RAIL</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_rail_rechauffage:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">POSITION AIGUILLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${position_aiguille}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Aiguillage Ferroviaire SCADA : Aiguillage & Signalisation Ferroviaire\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Voie Principale & Voie Déviée -->\n    <line x1=\"60\" y1=\"120\" x2=\"600\" y2=\"120\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <line x1=\"60\" y1=\"150\" x2=\"600\" y2=\"150\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <!-- Déviation -->\n    <path d=\"M 280 120 Q 420 80 600 60\" fill=\"none\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <text x=\"70\" y=\"100\" fill=\"#334155\" font-size=\"10\" font-weight=\"bold\">VOIE PRINCIPALE</text>\n    <text x=\"500\" y=\"45\" fill=\"#334155\" font-size=\"10\" font-weight=\"bold\">VOIE DÉVIÉE</text>\n\n    <!-- Moteur d'Aiguille Électromécanique -->\n    <g transform=\"translate(260, 160)\">\n      <rect x=\"0\" y=\"0\" width=\"100\" height=\"55\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"50\" y=\"25\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTEUR AIGUILLE</text>\n      <text x=\"50\" y=\"40\" fill=\"#475569\" font-size=\"8\" text-anchor=\"middle\">Contrôle de tringle</text>\n    </g>\n\n    <!-- Résistances de Réchauffage des Rails (Anti-gel) -->\n    <line x1=\"280\" y1=\"113\" x2=\"400\" y2=\"113\" stroke=\"#D97706\" stroke-width=\"3\" stroke-dasharray=\"4,2\"/>\n    <text x=\"340\" y=\"103\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉCHAUFFAGE RAIL</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT MOTEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_moteur_aiguille_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMPS MANŒUVRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temps_manoeuvre_ms:0} ms</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DU RAIL</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_rail_rechauffage:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">POSITION AIGUILLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${position_aiguille}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Aiguillage Ferroviaire SCADA : Aiguillage & Signalisation Ferroviaire\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Voie Principale & Voie Déviée -->\n    <line x1=\"60\" y1=\"120\" x2=\"600\" y2=\"120\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <line x1=\"60\" y1=\"150\" x2=\"600\" y2=\"150\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <!-- Déviation -->\n    <path d=\"M 280 120 Q 420 80 600 60\" fill=\"none\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <text x=\"70\" y=\"100\" fill=\"#334155\" font-size=\"10\" font-weight=\"bold\">VOIE PRINCIPALE</text>\n    <text x=\"500\" y=\"45\" fill=\"#334155\" font-size=\"10\" font-weight=\"bold\">VOIE DÉVIÉE</text>\n\n    <!-- Moteur d'Aiguille Électromécanique -->\n    <g transform=\"translate(260, 160)\">\n      <rect x=\"0\" y=\"0\" width=\"100\" height=\"55\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"50\" y=\"25\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTEUR AIGUILLE</text>\n      <text x=\"50\" y=\"40\" fill=\"#475569\" font-size=\"8\" text-anchor=\"middle\">Contrôle de tringle</text>\n    </g>\n\n    <!-- Résistances de Réchauffage des Rails (Anti-gel) -->\n    <line x1=\"280\" y1=\"113\" x2=\"400\" y2=\"113\" stroke=\"#D97706\" stroke-width=\"3\" stroke-dasharray=\"4,2\"/>\n    <text x=\"340\" y=\"103\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉCHAUFFAGE RAIL</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT MOTEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_moteur_aiguille_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMPS MANŒUVRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temps_manoeuvre_ms:0} ms</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DU RAIL</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_rail_rechauffage:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">POSITION AIGUILLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${position_aiguille}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Aiguillage Ferroviaire SCADA : Aiguillage & Signalisation Ferroviaire\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Voie Principale & Voie Déviée -->\n    <line x1=\"60\" y1=\"120\" x2=\"600\" y2=\"120\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <line x1=\"60\" y1=\"150\" x2=\"600\" y2=\"150\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <!-- Déviation -->\n    <path d=\"M 280 120 Q 420 80 600 60\" fill=\"none\" stroke=\"#334155\" stroke-width=\"6\"/>\n    <text x=\"70\" y=\"100\" fill=\"#334155\" font-size=\"10\" font-weight=\"bold\">VOIE PRINCIPALE</text>\n    <text x=\"500\" y=\"45\" fill=\"#334155\" font-size=\"10\" font-weight=\"bold\">VOIE DÉVIÉE</text>\n\n    <!-- Moteur d'Aiguille Électromécanique -->\n    <g transform=\"translate(260, 160)\">\n      <rect x=\"0\" y=\"0\" width=\"100\" height=\"55\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"50\" y=\"25\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTEUR AIGUILLE</text>\n      <text x=\"50\" y=\"40\" fill=\"#475569\" font-size=\"8\" text-anchor=\"middle\">Contrôle de tringle</text>\n    </g>\n\n    <!-- Résistances de Réchauffage des Rails (Anti-gel) -->\n    <line x1=\"280\" y1=\"113\" x2=\"400\" y2=\"113\" stroke=\"#D97706\" stroke-width=\"3\" stroke-dasharray=\"4,2\"/>\n    <text x=\"340\" y=\"103\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉCHAUFFAGE RAIL</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT MOTEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_moteur_aiguille_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMPS MANŒUVRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temps_manoeuvre_ms:0} ms</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DU RAIL</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_rail_rechauffage:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">POSITION AIGUILLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${position_aiguille}</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "73ad53d7-0b11-49bb-84be-ac4f26993f25"
+        "id": "3043a965-b177-4284-bd49-5932166cb82d"
       },
-      "952c0f48-477e-442a-8b02-8e79e227568e": {
+      "c4c3cee5-cda0-4890-8a60-5469993fb166": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "952c0f48-477e-442a-8b02-8e79e227568e"
+        "id": "c4c3cee5-cda0-4890-8a60-5469993fb166"
       },
-      "1871b4c5-331f-419a-89bf-650f737feaa2": {
+      "775d45ba-bedb-4483-a3c9-a71e593cd80f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
               "dataKeys": [
                 {
                   "name": "temps_manoeuvre_ms",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "1871b4c5-331f-419a-89bf-650f737feaa2"
+        "id": "775d45ba-bedb-4483-a3c9-a71e593cd80f"
       },
-      "287c2aea-4241-4f3c-bd8f-365fc2f82d1a": {
+      "37bae15b-38ce-4370-a5d5-8984ed1315e7": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
               "dataKeys": [
                 {
                   "name": "temp_rail_rechauffage",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "287c2aea-4241-4f3c-bd8f-365fc2f82d1a"
+        "id": "37bae15b-38ce-4370-a5d5-8984ed1315e7"
       },
-      "1d118712-ef91-4587-b3bb-6a0092a7a096": {
+      "a73651a9-d3a1-455b-b377-95a1d6b107e9": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -422,9 +422,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "1d118712-ef91-4587-b3bb-6a0092a7a096"
+        "id": "a73651a9-d3a1-455b-b377-95a1d6b107e9"
       },
-      "ae38e092-5e2e-46a9-92d3-f03586b30c64": {
+      "cdcf5582-ce60-4f01-8548-8ab6e66b90c3": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -436,12 +436,12 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212"
+            "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -480,9 +480,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "ae38e092-5e2e-46a9-92d3-f03586b30c64"
+        "id": "cdcf5582-ce60-4f01-8548-8ab6e66b90c3"
       },
-      "1cd9efeb-384d-41e4-887a-e9ad23368754": {
+      "9d022b56-f6a1-4ac5-9620-9009c845eadb": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -495,7 +495,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
               "dataKeys": [
                 {
                   "name": "position_aiguille",
@@ -528,9 +528,9 @@
         },
         "row": 16,
         "col": 20,
-        "id": "1cd9efeb-384d-41e4-887a-e9ad23368754"
+        "id": "9d022b56-f6a1-4ac5-9620-9009c845eadb"
       },
-      "c77475db-b433-475d-b7da-30a9c4411bbe": {
+      "5a9efdd0-411b-4211-b6a4-eed87e628f33": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -543,7 +543,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
+              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -582,7 +582,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "c77475db-b433-475d-b7da-30a9c4411bbe"
+        "id": "5a9efdd0-411b-4211-b6a4-eed87e628f33"
       }
     },
     "states": {
@@ -592,55 +592,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "944803de-aef7-4ce2-8c49-de8cff86ce21": {
+              "23a07d72-abc4-4808-b6d1-41974ddb1572": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "73ad53d7-0b11-49bb-84be-ac4f26993f25": {
+              "3043a965-b177-4284-bd49-5932166cb82d": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "952c0f48-477e-442a-8b02-8e79e227568e": {
+              "c4c3cee5-cda0-4890-8a60-5469993fb166": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "1871b4c5-331f-419a-89bf-650f737feaa2": {
+              "775d45ba-bedb-4483-a3c9-a71e593cd80f": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "287c2aea-4241-4f3c-bd8f-365fc2f82d1a": {
+              "37bae15b-38ce-4370-a5d5-8984ed1315e7": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "1d118712-ef91-4587-b3bb-6a0092a7a096": {
+              "a73651a9-d3a1-455b-b377-95a1d6b107e9": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "ae38e092-5e2e-46a9-92d3-f03586b30c64": {
+              "cdcf5582-ce60-4f01-8548-8ab6e66b90c3": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "1cd9efeb-384d-41e4-887a-e9ad23368754": {
+              "9d022b56-f6a1-4ac5-9620-9009c845eadb": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "c77475db-b433-475d-b7da-30a9c4411bbe": {
+              "5a9efdd0-411b-4211-b6a4-eed87e628f33": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

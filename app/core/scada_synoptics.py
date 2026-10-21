@@ -82,8 +82,8 @@ SCADA_CSS = """
     animation: blink-live 1.5s infinite;
   }
   @keyframes blink-live {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.35; transform: scale(0.85); }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
   }
   .scada-badge {
     background: #F8FAFC;
@@ -109,12 +109,14 @@ SCADA_CSS = """
   }
   
   .scada-rotor {
+    transform-box: fill-box;
     transform-origin: center;
     animation: rotate-blade 2s linear infinite;
   }
   .scada-rotor-fast {
+    transform-box: fill-box;
     transform-origin: center;
-    animation: rotate-blade 0.7s linear infinite;
+    animation: rotate-blade 0.8s linear infinite;
   }
   @keyframes rotate-blade {
     100% { transform: rotate(360deg); }
@@ -168,7 +170,10 @@ def build_synoptic_compressor(name: str, token: str, proto: str, vars_list: list
     <rect x="180" y="60" width="130" height="130" rx="10" fill="#F1F5F9" stroke="#E2001A" stroke-width="2.5"/>
     <circle cx="245" cy="125" r="45" fill="#FFFFFF" stroke="#E2001A" stroke-width="1.5"/>
     <g transform="translate(245, 125)">
-      <path class="scada-rotor" d="M -30 -5 C -15 -25 15 -25 30 -5 C 15 25 -15 25 -30 -5 Z" fill="#E2001A" opacity="0.85"/>
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="2s" repeatCount="indefinite"/>
+        <path d="M -30 -5 C -15 -25 15 -25 30 -5 C 15 25 -15 25 -30 -5 Z" fill="#E2001A" opacity="0.85"/>
+      </g>
       <circle cx="0" cy="0" r="10" fill="#0F172A"/>
     </g>
     <text x="245" y="45" fill="#0F172A" font-size="11" text-anchor="middle" font-weight="bold">BLOC VIS BI-ÉTAGÉ</text>
@@ -269,8 +274,11 @@ def build_synoptic_chiller(name: str, token: str, proto: str, vars_list: list, v
 
     <!-- Compresseur à vis -->
     <circle cx="370" cy="145" r="30" fill="#FFFFFF" stroke="#E2001A" stroke-width="2"/>
-    <g transform="translate(370,145)" class="scada-rotor">
-      <path d="M -16 -4 C -8 -12 8 -12 16 -4 C 8 12 -8 12 -16 -4 Z" fill="#E2001A"/>
+    <g transform="translate(370, 145)">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="2s" repeatCount="indefinite"/>
+        <path d="M -16 -4 C -8 -12 8 -12 16 -4 C 8 12 -8 12 -16 -4 Z" fill="#E2001A"/>
+      </g>
     </g>
     <text x="370" y="190" fill="#E2001A" font-size="9" text-anchor="middle" font-weight="bold">COMPRESSEUR</text>
 
@@ -518,7 +526,8 @@ def build_synoptic_cta(name: str, token: str, proto: str, vars_list: list, var_m
     <!-- Ventilateur Soufflage Plug-Fan EC -->
     <g transform="translate(420, 92)">
       <circle cx="0" cy="0" r="28" fill="#FFFFFF" stroke="#059669" stroke-width="2"/>
-      <g class="scada-rotor">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="2s" repeatCount="indefinite"/>
         <path d="M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z" fill="#059669"/>
       </g>
       <circle cx="0" cy="0" r="6" fill="#0F172A"/>
@@ -640,7 +649,8 @@ def build_synoptic_heatpump(name: str, token: str, proto: str, vars_list: list, 
     <!-- Ventilateur Axial Hélicoïde -->
     <g transform="translate(130, 130)">
       <circle cx="0" cy="0" r="38" fill="#FFFFFF" stroke="#0284C7" stroke-width="2"/>
-      <g class="scada-rotor">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="2s" repeatCount="indefinite"/>
         <path d="M -24 -6 C -12 -20 12 -20 24 -6 C 12 20 -12 20 -24 -6 Z" fill="#0284C7"/>
       </g>
       <circle cx="0" cy="0" r="8" fill="#0F172A"/>
@@ -711,7 +721,8 @@ def build_synoptic_fire_ssi(name: str, token: str, proto: str, vars_list: list, 
     <!-- Ventilateur Tourelle de Désenfumage 400°C/2h -->
     <g transform="translate(440, 110)">
       <rect x="-30" y="-30" width="60" height="60" rx="8" fill="#FFFFFF" stroke="#059669" stroke-width="2"/>
-      <g class="scada-rotor-fast">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="0.8s" repeatCount="indefinite"/>
         <path d="M -15 -4 C -8 -12 8 -12 15 -4 C 8 12 -8 12 -15 -4 Z" fill="#059669"/>
       </g>
       <text x="0" y="45" fill="#059669" font-size="9" text-anchor="middle" font-weight="bold">DÉSENFUMAGE 400°/2h</text>
@@ -1026,7 +1037,8 @@ def build_synoptic_wind_turbine(name: str, token: str, proto: str, vars_list: li
     <!-- Rotor Éolien Tri-pales -->
     <g transform="translate(220, 80)">
       <circle cx="0" cy="0" r="10" fill="#0284C7"/>
-      <g class="scada-rotor">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="2.5s" repeatCount="indefinite"/>
         <path d="M 0 0 L -60 -20 Q -80 0 -60 20 Z" fill="#0284C7" opacity="0.8"/>
         <path d="M 0 0 L 40 -60 Q 60 -70 50 -40 Z" fill="#0284C7" opacity="0.8"/>
         <path d="M 0 0 L 40 60 Q 60 70 50 40 Z" fill="#0284C7" opacity="0.8"/>
@@ -1314,7 +1326,10 @@ def build_synoptic_city_traffic(name: str, token: str, proto: str, vars_list: li
       <rect width="26" height="65" rx="6" fill="#1E293B" stroke="#475569" stroke-width="2"/>
       <circle cx="13" cy="14" r="6" fill="#DC2626" opacity="0.3"/>
       <circle cx="13" cy="32" r="6" fill="#D97706" opacity="0.3"/>
-      <circle cx="13" cy="50" r="6" fill="#059669" opacity="1" class="scada-live-indicator"/>
+      <!-- Feu Vert Actif (parfaitement centré et stable) -->
+      <circle cx="13" cy="50" r="6" fill="#10B981">
+        <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
     </g>
 
     <!-- Callouts SCADA Light -->
@@ -1502,8 +1517,11 @@ def build_generic_scada_synoptic(name: str, token: str, proto: str, vars_list: l
     <!-- Pompe centrifuge -->
     <path d="M 260 150 L 380 150" fill="none" stroke="#0284C7" stroke-width="6" class="pipe-flow"/>
     <circle cx="410" cy="150" r="28" fill="#FFFFFF" stroke="#E2001A" stroke-width="2"/>
-    <g transform="translate(410, 150)" class="scada-rotor-fast">
-      <path d="M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z" fill="#E2001A"/>
+    <g transform="translate(410, 150)">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="0.8s" repeatCount="indefinite"/>
+        <path d="M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z" fill="#E2001A"/>
+      </g>
     </g>
     <text x="410" y="195" fill="#E2001A" font-size="9" text-anchor="middle" font-weight="bold">POMPE PROCESS</text>
 

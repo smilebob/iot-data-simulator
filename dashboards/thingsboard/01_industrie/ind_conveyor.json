@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Ligne de Convoyage & Robotique' (ID: ind_conveyor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "cb9b8809-7ced-41ca-a0f5-02487a89ef3d": {
-        "id": "cb9b8809-7ced-41ca-a0f5-02487a89ef3d",
+      "02f0e719-2147-4589-86a8-1706c8331954": {
+        "id": "02f0e719-2147-4589-86a8-1706c8331954",
         "alias": "Ligne de Convoyage & Robotique",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "c6594695-6c86-4433-8059-37027be4150c": {
+      "e7ea4178-d4e2-40e6-b84b-b9ee0cd8d808": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "c6594695-6c86-4433-8059-37027be4150c"
+        "id": "e7ea4178-d4e2-40e6-b84b-b9ee0cd8d808"
       },
-      "0c92e92f-308c-46f2-b2a6-331d22b36c4c": {
+      "e3a0cb33-2b4f-4f00-9a62-380d9d4f5b7e": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "cb9b8809-7ced-41ca-a0f5-02487a89ef3d",
+              "entityAliasId": "02f0e719-2147-4589-86a8-1706c8331954",
               "dataKeys": [
                 {
                   "name": "cadence_pieces",
@@ -92,8 +92,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Convoyage Industriel SCADA : Ligne de Convoyage & Robotique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Châssis Convoyeur -->\n    <rect x=\"50\" y=\"120\" width=\"580\" height=\"40\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <line x1=\"50\" y1=\"140\" x2=\"630\" y2=\"140\" stroke=\"#64748B\" stroke-width=\"3\" stroke-dasharray=\"12,6\" class=\"pipe-flow\"/>\n\n    <!-- Rouleaux d'Entraînement -->\n    <circle cx=\"80\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <circle cx=\"340\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <circle cx=\"600\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n\n    <!-- Cartons / Pièces en transit -->\n    <rect x=\"130\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#D97706\" stroke=\"#B45309\" stroke-width=\"1.5\"/>\n    <rect x=\"230\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#D97706\" stroke=\"#B45309\" stroke-width=\"1.5\"/>\n    <rect x=\"440\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#059669\" stroke=\"#047857\" stroke-width=\"1.5\"/>\n\n    <!-- Cellule Photoélectrique & Bras Robotique Pick & Place -->\n    <g transform=\"translate(340, 50)\">\n      <rect x=\"-15\" y=\"0\" width=\"30\" height=\"20\" rx=\"3\" fill=\"#E2001A\" stroke=\"#B91C1C\" stroke-width=\"1\"/>\n      <line x1=\"0\" y1=\"20\" x2=\"0\" y2=\"70\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CELLULE DÉTECTION</text>\n    </g>\n\n    <!-- Moteur Réducteur d'Entraînement 5.5kW -->\n    <rect x=\"580\" y=\"170\" width=\"70\" height=\"45\" rx=\"4\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"615\" y=\"195\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTORÉDUCTEUR</text>\n    <text x=\"615\" y=\"207\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">5.5 kW VFD</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(680, 40)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CADENCE PIÈCES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${cadence_pieces:0} pcs/min</text>\n    </g>\n    \n    <g transform=\"translate(680, 100)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE BANDE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_bande:2} m/s</text>\n    </g>\n    \n    <g transform=\"translate(680, 160)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENDEMENT TRS (OEE)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_rendement_trs:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Convoyage Industriel SCADA : Ligne de Convoyage & Robotique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Châssis Convoyeur -->\n    <rect x=\"50\" y=\"120\" width=\"580\" height=\"40\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <line x1=\"50\" y1=\"140\" x2=\"630\" y2=\"140\" stroke=\"#64748B\" stroke-width=\"3\" stroke-dasharray=\"12,6\" class=\"pipe-flow\"/>\n\n    <!-- Rouleaux d'Entraînement -->\n    <circle cx=\"80\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <circle cx=\"340\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <circle cx=\"600\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n\n    <!-- Cartons / Pièces en transit -->\n    <rect x=\"130\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#D97706\" stroke=\"#B45309\" stroke-width=\"1.5\"/>\n    <rect x=\"230\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#D97706\" stroke=\"#B45309\" stroke-width=\"1.5\"/>\n    <rect x=\"440\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#059669\" stroke=\"#047857\" stroke-width=\"1.5\"/>\n\n    <!-- Cellule Photoélectrique & Bras Robotique Pick & Place -->\n    <g transform=\"translate(340, 50)\">\n      <rect x=\"-15\" y=\"0\" width=\"30\" height=\"20\" rx=\"3\" fill=\"#E2001A\" stroke=\"#B91C1C\" stroke-width=\"1\"/>\n      <line x1=\"0\" y1=\"20\" x2=\"0\" y2=\"70\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CELLULE DÉTECTION</text>\n    </g>\n\n    <!-- Moteur Réducteur d'Entraînement 5.5kW -->\n    <rect x=\"580\" y=\"170\" width=\"70\" height=\"45\" rx=\"4\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"615\" y=\"195\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTORÉDUCTEUR</text>\n    <text x=\"615\" y=\"207\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">5.5 kW VFD</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(680, 40)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CADENCE PIÈCES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${cadence_pieces:0} pcs/min</text>\n    </g>\n    \n    <g transform=\"translate(680, 100)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE BANDE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_bande:2} m/s</text>\n    </g>\n    \n    <g transform=\"translate(680, 160)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENDEMENT TRS (OEE)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_rendement_trs:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Convoyage Industriel SCADA : Ligne de Convoyage & Robotique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Châssis Convoyeur -->\n    <rect x=\"50\" y=\"120\" width=\"580\" height=\"40\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <line x1=\"50\" y1=\"140\" x2=\"630\" y2=\"140\" stroke=\"#64748B\" stroke-width=\"3\" stroke-dasharray=\"12,6\" class=\"pipe-flow\"/>\n\n    <!-- Rouleaux d'Entraînement -->\n    <circle cx=\"80\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <circle cx=\"340\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <circle cx=\"600\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n\n    <!-- Cartons / Pièces en transit -->\n    <rect x=\"130\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#D97706\" stroke=\"#B45309\" stroke-width=\"1.5\"/>\n    <rect x=\"230\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#D97706\" stroke=\"#B45309\" stroke-width=\"1.5\"/>\n    <rect x=\"440\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#059669\" stroke=\"#047857\" stroke-width=\"1.5\"/>\n\n    <!-- Cellule Photoélectrique & Bras Robotique Pick & Place -->\n    <g transform=\"translate(340, 50)\">\n      <rect x=\"-15\" y=\"0\" width=\"30\" height=\"20\" rx=\"3\" fill=\"#E2001A\" stroke=\"#B91C1C\" stroke-width=\"1\"/>\n      <line x1=\"0\" y1=\"20\" x2=\"0\" y2=\"70\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CELLULE DÉTECTION</text>\n    </g>\n\n    <!-- Moteur Réducteur d'Entraînement 5.5kW -->\n    <rect x=\"580\" y=\"170\" width=\"70\" height=\"45\" rx=\"4\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"615\" y=\"195\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTORÉDUCTEUR</text>\n    <text x=\"615\" y=\"207\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">5.5 kW VFD</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(680, 40)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CADENCE PIÈCES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${cadence_pieces:0} pcs/min</text>\n    </g>\n    \n    <g transform=\"translate(680, 100)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE BANDE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_bande:2} m/s</text>\n    </g>\n    \n    <g transform=\"translate(680, 160)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENDEMENT TRS (OEE)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_rendement_trs:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Convoyage Industriel SCADA : Ligne de Convoyage & Robotique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Châssis Convoyeur -->\n    <rect x=\"50\" y=\"120\" width=\"580\" height=\"40\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <line x1=\"50\" y1=\"140\" x2=\"630\" y2=\"140\" stroke=\"#64748B\" stroke-width=\"3\" stroke-dasharray=\"12,6\" class=\"pipe-flow\"/>\n\n    <!-- Rouleaux d'Entraînement -->\n    <circle cx=\"80\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <circle cx=\"340\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <circle cx=\"600\" cy=\"140\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"2\"/>\n\n    <!-- Cartons / Pièces en transit -->\n    <rect x=\"130\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#D97706\" stroke=\"#B45309\" stroke-width=\"1.5\"/>\n    <rect x=\"230\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#D97706\" stroke=\"#B45309\" stroke-width=\"1.5\"/>\n    <rect x=\"440\" y=\"98\" width=\"35\" height=\"22\" rx=\"3\" fill=\"#059669\" stroke=\"#047857\" stroke-width=\"1.5\"/>\n\n    <!-- Cellule Photoélectrique & Bras Robotique Pick & Place -->\n    <g transform=\"translate(340, 50)\">\n      <rect x=\"-15\" y=\"0\" width=\"30\" height=\"20\" rx=\"3\" fill=\"#E2001A\" stroke=\"#B91C1C\" stroke-width=\"1\"/>\n      <line x1=\"0\" y1=\"20\" x2=\"0\" y2=\"70\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CELLULE DÉTECTION</text>\n    </g>\n\n    <!-- Moteur Réducteur d'Entraînement 5.5kW -->\n    <rect x=\"580\" y=\"170\" width=\"70\" height=\"45\" rx=\"4\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"615\" y=\"195\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTORÉDUCTEUR</text>\n    <text x=\"615\" y=\"207\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">5.5 kW VFD</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(680, 40)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CADENCE PIÈCES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${cadence_pieces:0} pcs/min</text>\n    </g>\n    \n    <g transform=\"translate(680, 100)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE BANDE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_bande:2} m/s</text>\n    </g>\n    \n    <g transform=\"translate(680, 160)\">\n      <rect width=\"200\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">RENDEMENT TRS (OEE)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_rendement_trs:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -111,9 +111,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "0c92e92f-308c-46f2-b2a6-331d22b36c4c"
+        "id": "e3a0cb33-2b4f-4f00-9a62-380d9d4f5b7e"
       },
-      "c01b601a-6e5c-43d2-b1a6-30e2aa6e89d6": {
+      "1f8550ec-0006-452e-b1f0-318bea7bfbec": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -126,7 +126,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "cb9b8809-7ced-41ca-a0f5-02487a89ef3d",
+              "entityAliasId": "02f0e719-2147-4589-86a8-1706c8331954",
               "dataKeys": [
                 {
                   "name": "cadence_pieces",
@@ -171,9 +171,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "c01b601a-6e5c-43d2-b1a6-30e2aa6e89d6"
+        "id": "1f8550ec-0006-452e-b1f0-318bea7bfbec"
       },
-      "a834b1fb-80f4-401a-9459-748c781131b6": {
+      "0316cbe2-a262-4c4c-a094-18aa46aeb41f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -186,7 +186,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "cb9b8809-7ced-41ca-a0f5-02487a89ef3d",
+              "entityAliasId": "02f0e719-2147-4589-86a8-1706c8331954",
               "dataKeys": [
                 {
                   "name": "vitesse_bande",
@@ -231,9 +231,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "a834b1fb-80f4-401a-9459-748c781131b6"
+        "id": "0316cbe2-a262-4c4c-a094-18aa46aeb41f"
       },
-      "f81af826-d865-4098-87ad-2e1d444334f9": {
+      "3f6e8767-c04b-4583-80dc-73245649c06c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -246,7 +246,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "cb9b8809-7ced-41ca-a0f5-02487a89ef3d",
+              "entityAliasId": "02f0e719-2147-4589-86a8-1706c8331954",
               "dataKeys": [
                 {
                   "name": "taux_rendement_trs",
@@ -291,9 +291,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "f81af826-d865-4098-87ad-2e1d444334f9"
+        "id": "3f6e8767-c04b-4583-80dc-73245649c06c"
       },
-      "0cec747d-5176-4c4a-93b3-aa8d7311f11c": {
+      "ff36719a-6624-48f4-a852-d75442595b57": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -306,7 +306,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "cb9b8809-7ced-41ca-a0f5-02487a89ef3d",
+              "entityAliasId": "02f0e719-2147-4589-86a8-1706c8331954",
               "dataKeys": [
                 {
                   "name": "cadence_pieces",
@@ -404,7 +404,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "0cec747d-5176-4c4a-93b3-aa8d7311f11c"
+        "id": "ff36719a-6624-48f4-a852-d75442595b57"
       }
     },
     "states": {
@@ -414,37 +414,37 @@
         "layouts": {
           "main": {
             "widgets": {
-              "c6594695-6c86-4433-8059-37027be4150c": {
+              "e7ea4178-d4e2-40e6-b84b-b9ee0cd8d808": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "0c92e92f-308c-46f2-b2a6-331d22b36c4c": {
+              "e3a0cb33-2b4f-4f00-9a62-380d9d4f5b7e": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "c01b601a-6e5c-43d2-b1a6-30e2aa6e89d6": {
+              "1f8550ec-0006-452e-b1f0-318bea7bfbec": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "a834b1fb-80f4-401a-9459-748c781131b6": {
+              "0316cbe2-a262-4c4c-a094-18aa46aeb41f": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "f81af826-d865-4098-87ad-2e1d444334f9": {
+              "3f6e8767-c04b-4583-80dc-73245649c06c": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "0cec747d-5176-4c4a-93b3-aa8d7311f11c": {
+              "ff36719a-6624-48f4-a852-d75442595b57": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,
