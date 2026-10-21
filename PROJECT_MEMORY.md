@@ -43,7 +43,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 
 ## 📌 État Actuel & Feuille de Route
 ### ✅ Implémenté & Validé
-- [x] Charte Graphique Groupe Eiffage intégrée (Rouge Eiffage `#E2001A`, thème sombre industriel épuré)
+- [x] Charte Graphique Industrielle (Rouge Technique `#E2001A`, thème sombre épuré sans logos d'entreprise)
 - [x] Regroupement clair et structuré des variables par équipement (sections dédiées)
 - [x] Fonctions complètes d'édition et de suppression d'équipements avec nettoyage en cascade
 - [x] Architecture modulaire par Adapters (`BasePlatformAdapter`)

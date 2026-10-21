@@ -16,13 +16,13 @@ Ouvrez ensuite votre navigateur préféré à l'adresse : **[http://localhost:80
 
 ---
 
-## 2. Découverte de l'Interface Graphique (Charte Graphique EIFFAGE)
+## 2. Découverte de l'Interface Graphique (Design Industriel Moderne)
 
-L'interface adopte la **charte graphique du Groupe Eiffage** (Rouge Eiffage `#E2001A`, fonds anthracites épurés, typographie industrielle soignée).
+L'interface adopte un design industriel moderne (Rouge Technique `#E2001A`, fonds anthracites épurés, typographie industrielle soignée).
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│ [EIFFAGE]  IoT Data Simulator      [● Broker: Connecté] [Simulation]   │
+│ [⚡]  IoT Data Simulator           [● Broker: Connecté] [Simulation]   │
 ├────────────────────────────────────────────────────────────────────────┤
 │ Vue : [Tous les équipements] [Station Météo] ...   [+ Nouvel Équipement]│
 ├────────────────────────────────────────────────────────────────────────┤
@@ -38,17 +38,17 @@ L'interface adopte la **charte graphique du Groupe Eiffage** (Rouge Eiffage `#E2
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-1. **La barre supérieure EIFFAGE** :
-   * **Logo & Marque EIFFAGE** : avec indicateur de connexion broker MQTT et compteur de publications en direct.
+1. **La barre supérieure** :
+   * Indicateur de connexion broker MQTT et compteur de publications en direct.
    * **Bouton Simulation Active** : permet de mettre en pause ou de relancer l'ensemble de la simulation en 1 clic.
 2. **Sections d'Équipements (Regroupement clair)** :
-   * Chaque équipement possède sa propre **carte conteneur dédiée** délimitée par un filet rouge Eiffage.
+   * Chaque équipement possède sa propre **carte conteneur dédiée** délimitée par un filet rouge technique.
    * Dans l'en-tête de chaque équipement :
      * **`+ Ajouter une Variable`** : crée une variable pré-associée à cet équipement.
      * **`Éditer`** : modifie le nom, le token ThingsBoard ou la plateforme.
      * **`Supprimer`** : supprime l'équipement et nettoie ses variables associées.
 3. **Les cartes de variables (internes à chaque équipement)** :
-   * Chaque variable affiche sa valeur en direct, son sparkline animé rouge Eiffage, son topic MQTT actif et les boutons d'anomalies (Chaos Button).
+   * Chaque variable affiche sa valeur en direct, son sparkline animé, son topic MQTT actif et les boutons d'anomalies (Chaos Button).
 
 ---
 

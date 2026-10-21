@@ -1,4 +1,4 @@
-// Application Web Frontend - IoT Data Simulator (Charte Graphique EIFFAGE)
+// Application Web Frontend - IoT Data Simulator
 
 let state = {
   devices: [],
@@ -16,13 +16,21 @@ let ws = null;
 
 // Initialisation au chargement de la page
 document.addEventListener("DOMContentLoaded", async () => {
-  if (window.lucide) {
-    lucide.createIcons();
-  }
+  safeCreateIcons();
   await loadAllData();
   setupWebSocket();
   setInterval(refreshStatus, 3000);
 });
+
+function safeCreateIcons() {
+  if (window.lucide && typeof window.lucide.createIcons === "function") {
+    try {
+      window.lucide.createIcons();
+    } catch (e) {
+      console.warn("Erreur chargement icônes Lucide:", e);
+    }
+  }
+}
 
 async function loadAllData() {
   try {
@@ -33,16 +41,23 @@ async function loadAllData() {
       fetch("/api/status")
     ]);
 
+    if (!devRes.ok || !varRes.ok || !brokerRes.ok || !statusRes.ok) {
+      console.error("Erreur HTTP lors du chargement des données API");
+      return;
+    }
+
     state.devices = await devRes.json();
     state.variables = await varRes.json();
     state.broker = await brokerRes.json();
     state.status = await statusRes.json();
 
+    console.log(`Données chargées : ${state.devices.length} équipement(s), ${state.variables.length} variable(s)`);
+
     updateStatusUI();
     renderDeviceFilters();
     renderEquipmentGroups();
   } catch (err) {
-    console.error("Erreur chargement données:", err);
+    console.error("Erreur globale chargement données:", err);
   }
 }
 
@@ -50,8 +65,10 @@ async function loadAllData() {
 async function refreshStatus() {
   try {
     const res = await fetch("/api/status");
-    state.status = await res.json();
-    updateStatusUI();
+    if (res.ok) {
+      state.status = await res.json();
+      updateStatusUI();
+    }
   } catch (err) {
     console.warn("Erreur mise à jour statut:", err);
   }
@@ -64,9 +81,11 @@ function updateStatusUI() {
   const btnEngine = document.getElementById("btn-toggle-engine");
   const textEngine = document.getElementById("btn-engine-text");
 
+  if (!dot || !text || !counter || !btnEngine || !textEngine) return;
+
   if (state.status.mqtt_connected) {
     dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50";
-    text.textContent = `MQTT: Connecté (${state.broker.host}:${state.broker.port})`;
+    text.textContent = `MQTT: Connecté (${state.broker.host || 'mosquitto'}:${state.broker.port || 1883})`;
   } else {
     dot.className = "w-2.5 h-2.5 rounded-full bg-[#E2001A] animate-pulse";
     text.textContent = state.status.mqtt_error ? `MQTT Erreur: ${state.status.mqtt_error}` : `MQTT Déconnecté`;
@@ -146,16 +165,20 @@ function handleLiveTelemetry(data) {
   }
 
   // Mettre à jour le graphique sparkline si présent et numérique
-  if (typeof value === "number" && state.charts[variable_id]) {
-    const chart = state.charts[variable_id];
-    const dataPoints = state.chartData[variable_id];
-    dataPoints.push(value);
-    if (dataPoints.length > 25) {
-      dataPoints.shift();
+  if (typeof value === "number" && state.charts && state.charts[variable_id]) {
+    try {
+      const chart = state.charts[variable_id];
+      const dataPoints = state.chartData[variable_id] || [];
+      dataPoints.push(value);
+      if (dataPoints.length > 25) {
+        dataPoints.shift();
+      }
+      chart.data.labels = dataPoints.map((_, i) => i);
+      chart.data.datasets[0].data = dataPoints;
+      chart.update("none");
+    } catch (e) {
+      console.debug("Erreur mise à jour sparkline:", e);
     }
-    chart.data.labels = dataPoints.map((_, i) => i);
-    chart.data.datasets[0].data = dataPoints;
-    chart.update("none");
   }
 }
 
@@ -163,7 +186,8 @@ function handleLiveTelemetry(data) {
 function renderDeviceFilters() {
   const filterBar = document.getElementById("devices-filter-bar");
   const countSpan = document.getElementById("total-vars-count");
-  countSpan.textContent = state.variables.length;
+  if (!filterBar) return;
+  if (countSpan) countSpan.textContent = state.variables.length;
 
   const oldBtns = filterBar.querySelectorAll(".dev-filter-btn");
   oldBtns.forEach(b => b.remove());
@@ -180,24 +204,46 @@ function renderDeviceFilters() {
 
 function selectDeviceFilter(filter) {
   state.activeFilter = filter;
-  document.getElementById("filter-dev-all").className = `filter-tab px-3 py-1.5 rounded-lg text-xs font-medium transition ${filter === 'all' ? 'active-filter-tab' : ''}`;
+  const allBtn = document.getElementById("filter-dev-all");
+  if (allBtn) {
+    allBtn.className = `filter-tab px-3 py-1.5 rounded-lg text-xs font-medium transition ${filter === 'all' ? 'active-filter-tab' : ''}`;
+  }
   renderDeviceFilters();
   renderEquipmentGroups();
 }
 
+// Nettoyage sécurisé des instances Chart.js
+function destroyAllCharts() {
+  for (const varId in state.charts) {
+    try {
+      if (state.charts[varId]) {
+        state.charts[varId].destroy();
+      }
+    } catch (e) {}
+  }
+  state.charts = {};
+}
+
 // Rendu STRUCTURÉ : Regroupement CLAIR des variables par Équipement
 function renderEquipmentGroups() {
-  const container = document.getElementById("equipment-groups-container");
+  const container = document.getElementById("equipment-groups-container") || document.getElementById("variables-grid");
   const emptyState = document.getElementById("empty-state");
+  if (!container) {
+    console.error("Conteneur d'affichage introuvable dans le DOM");
+    return;
+  }
+
+  // Nettoyage des graphiques existants
+  destroyAllCharts();
   container.innerHTML = "";
 
   const visibleDevices = state.devices.filter(d => state.activeFilter === "all" || d.id === state.activeFilter);
 
   if (visibleDevices.length === 0) {
-    emptyState.classList.remove("hidden");
+    if (emptyState) emptyState.classList.remove("hidden");
     return;
   }
-  emptyState.classList.add("hidden");
+  if (emptyState) emptyState.classList.add("hidden");
 
   visibleDevices.forEach(device => {
     const devVars = state.variables.filter(v => v.device_id === device.id);
@@ -218,7 +264,7 @@ function renderEquipmentGroups() {
       </span>`;
     } else {
       platformBadgeHtml = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1">
-        <i data-lucide="radio" class="w-3 h-3 text-slate-400"></i> MQTT Générique
+        <i data-lucide="radio" class="w-3 h-3 text-slate-400"></i> MQTT Standard
       </span>`;
     }
 
@@ -228,8 +274,8 @@ function renderEquipmentGroups() {
     section.id = `device-section-${device.id}`;
 
     section.innerHTML = `
-      <!-- Barre d'accent rouge Eiffage -->
-      <div class="eiffage-accent-line"></div>
+      <!-- Ligne d'accentuation supérieure -->
+      <div class="card-accent-line"></div>
 
       <!-- En-tête de l'Équipement -->
       <div class="bg-[#181D26] px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-[#2B3342]">
@@ -245,7 +291,7 @@ function renderEquipmentGroups() {
             <div class="flex items-center gap-2 mt-1">
               ${platformBadgeHtml}
               ${device.token ? `
-                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#12151B] text-slate-400 border border-[#2B3342] flex items-center gap-1" title="Token: ${escapeHtml(device.token)}">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#12151B] text-slate-300 border border-[#2B3342] flex items-center gap-1" title="Token: ${escapeHtml(device.token)}">
                   <i data-lucide="key" class="w-3 h-3 text-amber-400"></i> Token: &bull;&bull;&bull;&bull;&bull;&bull;
                 </span>
               ` : ''}
@@ -258,7 +304,7 @@ function renderEquipmentGroups() {
 
         <!-- Actions sur l'Équipement (Ajout Variable, Édition, Suppression) -->
         <div class="flex items-center gap-2">
-          <button onclick="openVariableModalForDevice('${device.id}')" class="flex items-center gap-1.5 btn-eiffage text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
+          <button onclick="openVariableModalForDevice('${device.id}')" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
             <i data-lucide="plus" class="w-3.5 h-3.5"></i>
             <span>Ajouter une Variable</span>
           </button>
@@ -287,24 +333,26 @@ function renderEquipmentGroups() {
       varsGrid.className = "text-center py-8 border border-dashed border-[#2B3342] rounded-xl p-4";
       varsGrid.innerHTML = `
         <p class="text-xs text-slate-400 mb-2">Aucune variable de télémétrie configurée pour cet équipement.</p>
-        <button onclick="openVariableModalForDevice('${device.id}')" class="inline-flex items-center gap-1.5 btn-eiffage text-xs font-semibold px-3 py-1.5 rounded-lg transition">
+        <button onclick="openVariableModalForDevice('${device.id}')" class="inline-flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-3 py-1.5 rounded-lg transition">
           <i data-lucide="plus" class="w-3.5 h-3.5"></i> Ajouter une première variable
         </button>
       `;
     } else {
       devVars.forEach(variable => {
-        const card = createVariableCard(variable, device);
-        varsGrid.appendChild(card);
-        if (variable.data_type === 'float' || variable.data_type === 'integer') {
-          initSparkline(variable.id);
+        try {
+          const card = createVariableCard(variable, device);
+          varsGrid.appendChild(card);
+          if (variable.data_type === 'float' || variable.data_type === 'integer') {
+            initSparkline(variable.id);
+          }
+        } catch (cardErr) {
+          console.error(`Erreur création carte variable ${variable.id}:`, cardErr);
         }
       });
     }
   });
 
-  if (window.lucide) {
-    lucide.createIcons();
-  }
+  safeCreateIcons();
 }
 
 // Création d'une carte de variable
@@ -397,38 +445,53 @@ function createVariableCard(variable, device) {
   return card;
 }
 
-// Initialisation sparkline Chart.js aux couleurs Eiffage Red
+// Initialisation sparkline Chart.js sécurisée avec protection try/catch
 function initSparkline(varId) {
-  const ctx = document.getElementById(`chart-${varId}`);
-  if (!ctx) return;
+  try {
+    const ctx = document.getElementById(`chart-${varId}`);
+    if (!ctx) return;
 
-  state.chartData[varId] = state.chartData[varId] || [0];
-
-  state.charts[varId] = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: state.chartData[varId].map((_, i) => i),
-      datasets: [{
-        data: state.chartData[varId],
-        borderColor: "#E2001A",
-        borderWidth: 2,
-        tension: 0.35,
-        pointRadius: 0,
-        fill: true,
-        backgroundColor: "rgba(226, 0, 26, 0.12)",
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: { enabled: false } },
-      scales: {
-        x: { display: false },
-        y: { display: false }
-      },
-      animation: false
+    if (typeof Chart === "undefined") {
+      return; // Chart.js indisponible, pas de blocage du rendu
     }
-  });
+
+    if (state.charts[varId]) {
+      try {
+        state.charts[varId].destroy();
+      } catch (e) {}
+      delete state.charts[varId];
+    }
+
+    state.chartData[varId] = state.chartData[varId] || [0];
+
+    state.charts[varId] = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: state.chartData[varId].map((_, i) => i),
+        datasets: [{
+          data: state.chartData[varId],
+          borderColor: "#E2001A",
+          borderWidth: 2,
+          tension: 0.35,
+          pointRadius: 0,
+          fill: true,
+          backgroundColor: "rgba(226, 0, 26, 0.12)",
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        scales: {
+          x: { display: false },
+          y: { display: false }
+        },
+        animation: false
+      }
+    });
+  } catch (err) {
+    console.warn(`Impossible d'initialiser le sparkline pour ${varId}:`, err);
+  }
 }
 
 // Contrôle Global de la Simulation
@@ -449,7 +512,8 @@ async function injectAnomaly(varId, anomalyType) {
 
 // Forçage Manuel
 async function toggleManualOverride(varId, enabled) {
-  const val = document.getElementById(`manual-input-${varId}`).value;
+  const inputEl = document.getElementById(`manual-input-${varId}`);
+  const val = inputEl ? inputEl.value : "";
   await fetch(`/api/variables/${varId}/override`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -478,27 +542,34 @@ async function updateManualValue(varId, val) {
 
 function openDeviceModal(devToEdit = null) {
   state.editingDevId = devToEdit ? devToEdit.id : null;
-  document.getElementById("dev-is-edit").value = devToEdit ? "true" : "false";
+  const isEditEl = document.getElementById("dev-is-edit");
+  if (isEditEl) isEditEl.value = devToEdit ? "true" : "false";
   
   const titleEl = document.getElementById("modal-device-title");
-  titleEl.innerHTML = devToEdit ?
-    `<i data-lucide="edit-3" class="w-5 h-5 text-[#E2001A]"></i> Modifier l'Équipement` :
-    `<i data-lucide="cpu" class="w-5 h-5 text-[#E2001A]"></i> Nouvel Équipement`;
+  if (titleEl) {
+    titleEl.innerHTML = devToEdit ?
+      `<i data-lucide="edit-3" class="w-5 h-5 text-[#E2001A]"></i> Modifier l'Équipement` :
+      `<i data-lucide="cpu" class="w-5 h-5 text-[#E2001A]"></i> Nouvel Équipement`;
+  }
+
+  const idEl = document.getElementById("dev-id");
+  const nameEl = document.getElementById("dev-name");
+  const platformEl = document.getElementById("dev-platform");
+  const tokenEl = document.getElementById("dev-token");
+  const enabledEl = document.getElementById("dev-enabled");
 
   if (devToEdit) {
-    document.getElementById("dev-id").value = devToEdit.id;
-    document.getElementById("dev-id").disabled = true;
-    document.getElementById("dev-name").value = devToEdit.name;
-    document.getElementById("dev-platform").value = devToEdit.platform;
-    document.getElementById("dev-token").value = devToEdit.token || "";
-    document.getElementById("dev-enabled").checked = devToEdit.enabled !== false;
+    if (idEl) { idEl.value = devToEdit.id; idEl.disabled = true; }
+    if (nameEl) nameEl.value = devToEdit.name;
+    if (platformEl) platformEl.value = devToEdit.platform;
+    if (tokenEl) tokenEl.value = devToEdit.token || "";
+    if (enabledEl) enabledEl.checked = devToEdit.enabled !== false;
   } else {
-    document.getElementById("dev-id").value = "";
-    document.getElementById("dev-id").disabled = false;
-    document.getElementById("dev-name").value = "";
-    document.getElementById("dev-platform").value = "thingsboard";
-    document.getElementById("dev-token").value = "";
-    document.getElementById("dev-enabled").checked = true;
+    if (idEl) { idEl.value = ""; idEl.disabled = false; }
+    if (nameEl) nameEl.value = "";
+    if (platformEl) platformEl.value = "thingsboard";
+    if (tokenEl) tokenEl.value = "";
+    if (enabledEl) enabledEl.checked = true;
   }
 
   openModal("modal-device");
@@ -556,31 +627,44 @@ function openVariableModalForDevice(deviceId) {
 
 function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
   state.editingVarId = varToEdit ? varToEdit.id : null;
-  document.getElementById("var-is-edit").value = varToEdit ? "true" : "false";
-  document.getElementById("modal-variable-title").innerHTML = varToEdit ?
-    `<i data-lucide="edit-2" class="w-5 h-5 text-[#E2001A]"></i> Modifier la Variable` :
-    `<i data-lucide="sliders" class="w-5 h-5 text-[#E2001A]"></i> Nouvelle Variable`;
+  const isEditEl = document.getElementById("var-is-edit");
+  if (isEditEl) isEditEl.value = varToEdit ? "true" : "false";
+
+  const titleEl = document.getElementById("modal-variable-title");
+  if (titleEl) {
+    titleEl.innerHTML = varToEdit ?
+      `<i data-lucide="edit-2" class="w-5 h-5 text-[#E2001A]"></i> Modifier la Variable` :
+      `<i data-lucide="sliders" class="w-5 h-5 text-[#E2001A]"></i> Nouvelle Variable`;
+  }
 
   const devSelect = document.getElementById("var-device-id");
-  devSelect.innerHTML = "";
-  state.devices.forEach(d => {
-    const opt = document.createElement("option");
-    opt.value = d.id;
-    opt.textContent = `${d.name} (${d.platform})`;
-    devSelect.appendChild(opt);
-  });
+  if (devSelect) {
+    devSelect.innerHTML = "";
+    state.devices.forEach(d => {
+      const opt = document.createElement("option");
+      opt.value = d.id;
+      opt.textContent = `${d.name} (${d.platform})`;
+      devSelect.appendChild(opt);
+    });
+  }
+
+  const idEl = document.getElementById("var-id");
+  const nameEl = document.getElementById("var-name");
+  const unitEl = document.getElementById("var-unit");
+  const topicEl = document.getElementById("var-topic");
+  const intervalEl = document.getElementById("var-interval");
+  const modeEl = document.getElementById("var-sim-mode");
 
   if (varToEdit) {
-    document.getElementById("var-id").value = varToEdit.id;
-    document.getElementById("var-id").disabled = true;
-    document.getElementById("var-name").value = varToEdit.name;
-    document.getElementById("var-device-id").value = varToEdit.device_id;
+    if (idEl) { idEl.value = varToEdit.id; idEl.disabled = true; }
+    if (nameEl) nameEl.value = varToEdit.name;
+    if (devSelect) devSelect.value = varToEdit.device_id;
     document.getElementById("var-data-type").value = varToEdit.data_type;
     document.getElementById("var-type").value = varToEdit.var_type;
-    document.getElementById("var-unit").value = varToEdit.unit || "";
-    document.getElementById("var-interval").value = varToEdit.publish_interval;
-    document.getElementById("var-topic").value = varToEdit.topic || "";
-    document.getElementById("var-sim-mode").value = varToEdit.sim_mode;
+    if (unitEl) unitEl.value = varToEdit.unit || "";
+    if (intervalEl) intervalEl.value = varToEdit.publish_interval;
+    if (topicEl) topicEl.value = varToEdit.topic || "";
+    if (modeEl) modeEl.value = varToEdit.sim_mode;
 
     document.getElementById("math-min").value = varToEdit.math_config.min_val;
     document.getElementById("math-max").value = varToEdit.math_config.max_val;
@@ -590,16 +674,15 @@ function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
 
     renderPointsTable(varToEdit.points_config ? varToEdit.points_config.points : []);
   } else {
-    document.getElementById("var-id").value = "";
-    document.getElementById("var-id").disabled = false;
-    document.getElementById("var-name").value = "";
-    if (preselectedDeviceId) {
-      document.getElementById("var-device-id").value = preselectedDeviceId;
+    if (idEl) { idEl.value = ""; idEl.disabled = false; }
+    if (nameEl) nameEl.value = "";
+    if (devSelect && preselectedDeviceId) {
+      devSelect.value = preselectedDeviceId;
     }
-    document.getElementById("var-unit").value = "";
-    document.getElementById("var-topic").value = "";
-    document.getElementById("var-interval").value = "3.0";
-    document.getElementById("var-sim-mode").value = "sine";
+    if (unitEl) unitEl.value = "";
+    if (topicEl) topicEl.value = "";
+    if (intervalEl) intervalEl.value = "3.0";
+    if (modeEl) modeEl.value = "sine";
     renderPointsTable([]);
   }
 
@@ -614,21 +697,22 @@ function toggleSimModeSections() {
   const constWrap = document.getElementById("constant-val-wrapper");
 
   if (mode === "points_table") {
-    mathSec.classList.add("hidden");
-    pointsSec.classList.remove("hidden");
+    if (mathSec) mathSec.classList.add("hidden");
+    if (pointsSec) pointsSec.classList.remove("hidden");
   } else {
-    mathSec.classList.remove("hidden");
-    pointsSec.classList.add("hidden");
+    if (mathSec) mathSec.classList.remove("hidden");
+    if (pointsSec) pointsSec.classList.add("hidden");
     if (mode === "constant") {
-      constWrap.classList.remove("hidden");
+      if (constWrap) constWrap.classList.remove("hidden");
     } else {
-      constWrap.classList.add("hidden");
+      if (constWrap) constWrap.classList.add("hidden");
     }
   }
 }
 
 function renderPointsTable(points) {
   const tbody = document.getElementById("points-table-body");
+  if (!tbody) return;
   tbody.innerHTML = "";
   if (!points || points.length === 0) {
     addPointRow(0, 0);
@@ -639,6 +723,7 @@ function renderPointsTable(points) {
 
 function addPointRow(offset = 0, val = 0) {
   const tbody = document.getElementById("points-table-body");
+  if (!tbody) return;
   const tr = document.createElement("tr");
   tr.className = "hover:bg-[#181D26]";
   tr.innerHTML = `
@@ -647,7 +732,7 @@ function addPointRow(offset = 0, val = 0) {
     <td class="p-2 text-right"><button type="button" onclick="this.closest('tr').remove()" class="text-rose-400 hover:text-rose-300"><i data-lucide="trash" class="w-4 h-4"></i></button></td>
   `;
   tbody.appendChild(tr);
-  if (window.lucide) lucide.createIcons();
+  safeCreateIcons();
 }
 
 async function saveVariableForm(e) {
@@ -740,12 +825,14 @@ async function saveBrokerForm(e) {
 }
 
 function openModal(id) {
-  document.getElementById(id).classList.remove("hidden");
-  if (window.lucide) lucide.createIcons();
+  const el = document.getElementById(id);
+  if (el) el.classList.remove("hidden");
+  safeCreateIcons();
 }
 
 function closeModal(id) {
-  document.getElementById(id).classList.add("hidden");
+  const el = document.getElementById(id);
+  if (el) el.classList.add("hidden");
 }
 
 // Export / Import Scénario
@@ -756,7 +843,7 @@ async function exportScenario() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `iot_scenario_eiffage_${new Date().toISOString().slice(0, 10)}.json`;
+  a.download = `iot_scenario_${new Date().toISOString().slice(0, 10)}.json`;
   a.click();
 }
 

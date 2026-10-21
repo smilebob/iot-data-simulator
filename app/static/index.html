@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EIFFAGE - IoT Data Simulator</title>
+  <title>IoT Data Simulator - ThingsBoard & Multi-Plateforme</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js CDN (version patchée 4.4.7) -->
+  <!-- Chart.js CDN (version 4.4.7 avec fallback sécurisé) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-  <!-- Lucide Icons (version patchée 0.468.0) -->
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body class="bg-[#0F1218] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-[#E2001A] selection:text-white">
 
-  <!-- En-tête / Barre supérieure - Charte Graphique EIFFAGE -->
+  <!-- En-tête / Barre supérieure -->
   <header class="bg-[#181D26] border-b border-[#2B3342] px-6 py-3 sticky top-0 z-40 shadow-xl">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
       
-      <!-- Logo et Identité Eiffage -->
+      <!-- Titre & Badge Applicatif -->
       <div class="flex items-center space-x-3">
-        <div class="px-3 py-1 bg-[#E2001A] rounded font-black tracking-widest text-sm text-white shadow-md shadow-red-900/50 flex items-center gap-1.5">
-          <span>EIFFAGE</span>
+        <div class="p-2 bg-[#E2001A] rounded-lg shadow-md shadow-red-900/40 text-white flex items-center justify-center">
+          <i data-lucide="activity" class="w-5 h-5"></i>
         </div>
-        <div class="h-6 w-[1px] bg-[#2B3342] hidden sm:block"></div>
         <div>
           <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-2">
             IoT Data Simulator
@@ -83,12 +82,11 @@
         <button onclick="selectDeviceFilter('all')" id="filter-dev-all" class="filter-tab active-filter-tab px-3 py-1.5 rounded-lg text-xs font-medium transition">
           Tous les équipements (<span id="total-vars-count">0</span>)
         </button>
-        <!-- Les boutons d'équipements sont insérés dynamiquement par JS -->
       </div>
 
       <!-- Actions globales -->
       <div class="flex items-center gap-2">
-        <button onclick="openDeviceModal()" class="flex items-center gap-1.5 btn-eiffage text-xs font-semibold px-4 py-2 rounded-lg transition shadow-md shadow-red-900/30">
+        <button onclick="openDeviceModal()" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-4 py-2 rounded-lg transition shadow-md shadow-red-900/30">
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span>Nouvel Équipement</span>
         </button>
@@ -99,13 +97,15 @@
     <div id="equipment-groups-container" class="space-y-8">
       <!-- Les sections d'équipements sont insérées dynamiquement par app.js -->
     </div>
+    <!-- Fallback container pour rétrocompatibilité éventuelle -->
+    <div id="variables-grid" class="hidden"></div>
 
     <!-- Message si aucun équipement -->
     <div id="empty-state" class="hidden text-center py-16 bg-[#181D26]/60 rounded-2xl border border-dashed border-[#2B3342] p-8">
       <i data-lucide="inbox" class="w-12 h-12 text-slate-600 mx-auto mb-3"></i>
       <h3 class="text-base font-semibold text-slate-300">Aucun équipement configuré</h3>
       <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-4">Créez votre premier équipement virtuel ThingsBoard ou industriel pour commencer à générer de la donnée.</p>
-      <button onclick="openDeviceModal()" class="inline-flex items-center gap-1.5 btn-eiffage text-xs font-semibold px-4 py-2 rounded-lg transition">
+      <button onclick="openDeviceModal()" class="inline-flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-4 py-2 rounded-lg transition">
         <i data-lucide="plus" class="w-4 h-4"></i> Créer un Équipement
       </button>
     </div>
@@ -259,7 +259,7 @@
 
         <div class="flex justify-end gap-3 pt-4 border-t border-[#2B3342]">
           <button type="button" onclick="closeModal('modal-variable')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
-          <button type="submit" class="btn-eiffage px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Enregistrer la variable</button>
+          <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Enregistrer la variable</button>
         </div>
       </form>
     </div>
@@ -308,7 +308,7 @@
 
         <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
           <button type="button" onclick="closeModal('modal-device')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
-          <button type="submit" class="btn-eiffage px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Enregistrer</button>
+          <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Enregistrer</button>
         </div>
       </form>
     </div>
@@ -354,15 +354,16 @@
 
         <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
           <button type="button" onclick="closeModal('modal-broker')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Fermer</button>
-          <button type="submit" class="btn-eiffage px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Appliquer & Reconnecter</button>
+          <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Appliquer & Reconnecter</button>
         </div>
       </form>
     </div>
   </div>
 
+  <!-- Pied de page -->
   <footer class="bg-[#181D26] border-t border-[#2B3342] py-3.5 text-center text-xs text-slate-400">
     <div class="flex items-center justify-center gap-2">
-      <span class="px-2 py-0.5 bg-[#E2001A] text-white rounded font-bold text-[10px]">EIFFAGE</span>
+      <span class="w-2 h-2 rounded-full bg-[#E2001A]"></span>
       <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
     </div>
   </footer>
