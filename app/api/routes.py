@@ -97,8 +97,10 @@ def get_status(
     engine: SimulationEngine = Depends(get_engine),
     mqtt: MqttManager = Depends(get_mqtt),
 ):
+    from app.main import APP_VERSION
     client = mqtt.default_client
     return {
+        "version": APP_VERSION,
         "engine_running": engine.is_running,
         "mqtt_connected": client.is_connected if client else False,
         "mqtt_error": client.last_error if client else None,

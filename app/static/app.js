@@ -93,6 +93,13 @@ function updateStatusUI() {
 
   counter.textContent = state.status.messages_published || 0;
 
+  if (state.status.version) {
+    const verBadge = document.getElementById("app-version-badge");
+    if (verBadge) {
+      verBadge.textContent = state.status.version;
+    }
+  }
+
   if (state.status.engine_running) {
     btnEngine.className = "flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs px-4 py-2 rounded-lg transition shadow-md shadow-emerald-900/30";
     textEngine.textContent = "Simulation Active";

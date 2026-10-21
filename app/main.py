@@ -20,6 +20,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger("iot_sim")
 
+# Version officielle de l'application
+APP_VERSION = "1.1.0"
+
 # Initialisation des instances globales
 repository = StorageRepository(file_path="data/simulator_state.json")
 mqtt_manager = MqttManager(repository.get_broker())
@@ -35,7 +38,7 @@ engine.register_ws_broadcast(ws_broadcaster)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Démarrage
-    logger.info("Démarrage de la stack IoT Data Simulator...")
+    logger.info(f"Démarrage de la stack IoT Data Simulator (v{APP_VERSION})...")
     mqtt_manager.start()
     engine.start()
     yield
@@ -46,7 +49,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="IoT Data Simulator for ThingsBoard & Multi-Platform",
-    version="1.0.0",
+    version=APP_VERSION,
     description="Simulateur IoT industriel sécurisé, modulaire et conforme CIS",
     lifespan=lifespan,
 )
@@ -77,6 +80,7 @@ app.add_middleware(
 def healthcheck():
     return {
         "status": "healthy",
+        "version": APP_VERSION,
         "engine_running": engine.is_running,
         "mqtt_connected": mqtt_manager.default_client.is_connected if mqtt_manager.default_client else False,
     }
