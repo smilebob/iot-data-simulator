@@ -68,3 +68,9 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
    - `MQTT_BROKER_PORT` (défaut: `1883`)
    - `MQTT_USE_TLS` (défaut: `false`)
    - `MQTT_USERNAME` / `MQTT_PASSWORD` (optionnels)
+
+---
+
+## 📜 Règles de Travail et de Maintenance (Consignes Utilisateur)
+1. **Documentation vivante automatique** : À chaque évolution ou refonte d'une partie de l'application, mettre à jour automatiquement l'ensemble des documentations concernées (`Documentation/developer/`, `Documentation/devops/`, `Documentation/user/`) ainsi que les mémoires IA (`MEMORY.md` / `PROJECT_MEMORY.md`).
+2. **Gestion Git / GitHub** : Ne JAMAIS effectuer de `git push` sur GitHub sans demande explicite de l'utilisateur. Les modifications restent locales jusqu'à instruction explicite.
