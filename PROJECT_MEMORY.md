@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.7 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.8 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
@@ -104,6 +104,12 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Correction Widgets Round Switch ThingsBoard 4.3** : Résolution du parsing JS (`parseValueFunction` traitant les objets JSON `{status, value}`), ajout de `valueKey` et rattachement à `CLIENT_SCOPE`.
   - **Persistance et Résilience Étendue** : Sauvegarde miroir `.bak` automatique, chargement résilient des équipements en cas d'erreur de schéma, backup d'urgence `.corrupted.{ts}` (zéro perte de données en cas de crash/coupure de courant).
   - **Volume Nommé Persistant & Découplage Git** : `docker-compose.yml` et `docker-compose.portainer.yml` unifiés sur le volume nommé `iot_simulator_data` (`simulator_data:/app/data`), `data/simulator_state.json` ignoré dans Git pour ne jamais être écrasé lors d'un `git pull` Portainer.
+- [x] Correction Régression Boucle Moteur & Robustesse des Types (v1.9.8) :
+  - **Import et Validation des Types de Protocoles** : Import explicite de `PlatformType` et `TransportProtocol` dans `app/core/engine.py` et suppression de la référence invalide à `TransportProtocol.MQTTS`/`WSS` qui bloquait le moteur avec une exception silencieuse à chaque tick.
+  - **Résilience du Listener Bidirectionnel** : Sécurisation de `_sync_device_listeners` avec extraction insensible au type via `getattr(dev.protocol, "value", str(dev.protocol))` et encapsulation `try...except` isolant chaque équipement.
+  - **Transmission des Paramètres Hôte/Port/TLS MQTT par Équipement** : `MqttManager.get_or_create_device_client` applique désormais les surcharges `custom_host`, `custom_port` et `use_tls` des équipements.
+  - **Ajout de `save_variables` dans `StorageRepository`** : Permet la sauvegarde groupée atomique des variables lors des commandes RPC et attributs partagés.
+  - **Format WebSocket Conforme pour RPC** : Encapsulation stricte sous `{"type": "telemetry", "data": {...}}` lors de l'application d'ordres de contrôle.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles

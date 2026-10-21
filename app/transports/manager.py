@@ -95,7 +95,7 @@ class TransportManager:
 
         else:
             # Mode standard MQTT
-            client = self.mqtt.get_or_create_device_client(device.id, device.token)
+            client = self.mqtt.get_or_create_device_client(device.id, device.token, device)
             success = False
             if client:
                 success = client.publish(topic, payload)

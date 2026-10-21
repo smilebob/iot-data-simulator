@@ -302,6 +302,12 @@ class StorageRepository:
             self.variables[variable.id] = variable
             self._save_unsafe()
 
+    def save_variables(self, variables: List[VariableConfig]):
+        with self._lock:
+            for v in variables:
+                self.variables[v.id] = v
+            self._save_unsafe()
+
     def delete_variable(self, var_id: str):
         with self._lock:
             if var_id in self.variables:

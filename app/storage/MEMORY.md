@@ -8,7 +8,7 @@ Couche de persistance atomique thread-safe assurant la sauvegarde et la restaura
 ## 🗂️ Fichiers & Composants Clés
 | Fichier / Export | Rôle | Entrées / Sorties Principales |
 | :--- | :--- | :--- |
-| [`repository.py:StorageRepository`](file:///home/pierre/Projets/iot-data-simulator/app/storage/repository.py) | Référentiel en mémoire avec écriture atomique sur disque | `get_devices()`, `save_device()`, `get_variables()`, `save_variable()`, `export_scenario()`, `import_scenario()` |
+| [`repository.py:StorageRepository`](file:///home/pierre/Projets/iot-data-simulator/app/storage/repository.py) | Référentiel en mémoire avec écriture atomique sur disque | `get_devices()`, `save_device()`, `get_variables()`, `save_variable()`, `save_variables()`, `export_scenario()`, `import_scenario()` |
 
 ## 🔄 Dépendances & Flux de Données
 - **Dépend de** : `app/models/` (validation Pydantic), `json`, `os`, `threading`.

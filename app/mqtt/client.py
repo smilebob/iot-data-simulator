@@ -205,7 +205,12 @@ class MqttManager:
                 pass
             del self.device_clients[device_id]
 
-    def get_or_create_device_client(self, device_id: str, token: Optional[str]) -> MqttConnection:
+    def get_or_create_device_client(
+        self,
+        device_id: str,
+        token: Optional[str],
+        device: Optional[Any] = None,
+    ) -> MqttConnection:
         if not token:
             return self.default_client
 
@@ -213,6 +218,13 @@ class MqttManager:
             dev_conf = self.global_config.model_copy()
             dev_conf.username = token
             dev_conf.password = ""
+            if device:
+                if getattr(device, "custom_host", None) and str(device.custom_host).strip():
+                    dev_conf.host = str(device.custom_host).strip()
+                if getattr(device, "custom_port", None):
+                    dev_conf.port = int(device.custom_port)
+                if getattr(device, "use_tls", None) is not None:
+                    dev_conf.use_tls = bool(device.use_tls)
             logger.info(f"Création d'un client MQTT dédié pour l'équipement '{device_id}' avec token ThingsBoard sur {dev_conf.host}:{dev_conf.port}")
             client = MqttConnection(
                 dev_conf,

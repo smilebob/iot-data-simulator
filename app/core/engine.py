@@ -3,7 +3,7 @@ import json
 import logging
 import time
 from typing import Any, Callable, Dict, List, Optional
-from app.models.device import DeviceConfig
+from app.models.device import DeviceConfig, PlatformType, TransportProtocol
 from app.models.variable import VariableConfig, SimMode, AnomalyType, DataType
 from app.core.generators import MathSignalGenerator
 from app.core.replay import ReplayEngine
@@ -68,16 +68,22 @@ class SimulationEngine:
         """Synchronise les abonnements de contrôle bidirectionnel (MQTT et Long-Polling HTTP)."""
         active_http_ids = set()
         for dev_id, dev in devices_map.items():
-            if dev.platform == PlatformType.THINGSBOARD and dev.token:
-                if dev.protocol == TransportProtocol.HTTP:
-                    active_http_ids.add(dev_id)
-                    if dev_id not in self._http_rpc_tasks or self._http_rpc_tasks[dev_id].done():
-                        self._http_rpc_tasks[dev_id] = asyncio.create_task(
-                            self._poll_http_rpc_worker(dev)
-                        )
-                elif dev.protocol in (TransportProtocol.MQTT, TransportProtocol.MQTTS, TransportProtocol.WSS):
-                    # Pré-connexion du client MQTT pour écouter les ordres dès le démarrage
-                    self.mqtt.get_or_create_device_client(dev.id, dev.token)
+            try:
+                platform_str = getattr(dev.platform, "value", str(dev.platform)).lower()
+                is_thingsboard = (platform_str == PlatformType.THINGSBOARD.value)
+                if is_thingsboard and dev.token:
+                    proto_str = getattr(dev.protocol, "value", str(dev.protocol)).lower()
+                    if proto_str == TransportProtocol.HTTP.value:
+                        active_http_ids.add(dev_id)
+                        if dev_id not in self._http_rpc_tasks or self._http_rpc_tasks[dev_id].done():
+                            self._http_rpc_tasks[dev_id] = asyncio.create_task(
+                                self._poll_http_rpc_worker(dev)
+                            )
+                    elif proto_str == TransportProtocol.MQTT.value:
+                        # Pré-connexion du client MQTT pour écouter les ordres dès le démarrage
+                        self.mqtt.get_or_create_device_client(dev.id, dev.token, dev)
+            except Exception as e:
+                logger.error(f"Erreur initialisation listener pour '{dev_id}': {e}")
 
         # Nettoyage des tâches HTTP orphelines
         for old_id in list(self._http_rpc_tasks.keys()):
@@ -258,7 +264,7 @@ class SimulationEngine:
                                 "published": published,
                                 "protocol": protocol_used,
                                 "topic": channel_info or topic_used,
-                                "anomaly": var.anomaly.value,
+                                "anomaly": getattr(var.anomaly, "value", str(var.anomaly)),
                             }
                         })
 
@@ -432,11 +438,18 @@ class SimulationEngine:
                     if self._ws_broadcast_callback:
                         for var in dev_vars:
                             self._ws_broadcast_callback({
-                                "variable_id": var.id,
-                                "device_id": var.device_id,
-                                "value": var.current_value,
-                                "timestamp": time.time(),
-                                "anomaly": var.anomaly.value,
+                                "type": "telemetry",
+                                "data": {
+                                    "variable_id": var.id,
+                                    "device_id": var.device_id,
+                                    "value": var.current_value,
+                                    "unit": var.unit,
+                                    "timestamp": time.time(),
+                                    "published": True,
+                                    "protocol": "MQTT",
+                                    "topic": "v1/devices/me/attributes",
+                                    "anomaly": getattr(var.anomaly, "value", str(var.anomaly)),
+                                }
                             })
             return
 
@@ -525,11 +538,18 @@ class SimulationEngine:
                 # Actualisation immédiate du dashboard web local du simulateur
                 if self._ws_broadcast_callback:
                     self._ws_broadcast_callback({
-                        "variable_id": target_var.id,
-                        "device_id": target_var.device_id,
-                        "value": target_var.current_value,
-                        "timestamp": time.time(),
-                        "anomaly": target_var.anomaly.value,
+                        "type": "telemetry",
+                        "data": {
+                            "variable_id": target_var.id,
+                            "device_id": target_var.device_id,
+                            "value": target_var.current_value,
+                            "unit": target_var.unit,
+                            "timestamp": time.time(),
+                            "published": True,
+                            "protocol": "MQTT",
+                            "topic": "v1/devices/me/attributes",
+                            "anomaly": getattr(target_var.anomaly, "value", str(target_var.anomaly)),
+                        }
                     })
                 return new_val
             else:
