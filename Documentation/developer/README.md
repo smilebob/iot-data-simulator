@@ -48,3 +48,4 @@ python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 * **Gestion de la concurrence** :
   * Les accès aux dictionnaires partagés en mémoire dans le stockage (`app/storage/repository.py`) et dans le client MQTT sont protégés par des verrous `threading.Lock()`.
   * La boucle principale de simulation tourne dans une tâche `asyncio.Task` non-bloquante avec un intervalle de tick de 500ms.
+* **Licence** : Le projet est distribué sous les termes de la licence **Apache 2.0** ([LICENSE](file:///home/pierre/Projets/iot-data-simulator/LICENSE)). Toute contribution doit respecter ces termes.

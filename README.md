@@ -108,3 +108,11 @@ source venv/bin/activate
 pip install -r requirements.txt
 python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+---
+
+## 📄 Licence
+
+Ce projet est sous licence **Apache 2.0** - voir le fichier [LICENSE](LICENSE) pour plus de détails.  
+Copyright (c) 2026 Pierre Roth (smilebob).
+
