@@ -31,7 +31,10 @@ services:
   # Application Simulateur IoT (Web GUI + Moteur Python)
   # ========================================================
   simulator:
-    image: ghcr.io/smilebob/iot-data-simulator:latest
+    image: ${SIMULATOR_IMAGE:-ghcr.io/smilebob/iot-data-simulator:latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: iot-sim-app
     restart: unless-stopped
     ports:
