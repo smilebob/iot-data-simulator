@@ -6,6 +6,8 @@
     "ca_cert_path": null,
     "username": null,
     "password": null,
+    "transport": "tcp",
+    "ws_path": "/mqtt",
     "client_id_prefix": "iot_sim_",
     "keepalive": 60
   },
@@ -15,6 +17,10 @@
       "name": "Station Météo Solaire",
       "platform": "thingsboard",
       "token": "r6287o9r1bu3wfvj3gfv",
+      "protocol": "http",
+      "custom_host": null,
+      "custom_port": null,
+      "use_tls": true,
       "enabled": true
     },
     {
@@ -22,6 +28,10 @@
       "name": "Compresseur Atelier",
       "platform": "generic",
       "token": null,
+      "protocol": "mqtt",
+      "custom_host": null,
+      "custom_port": null,
+      "use_tls": null,
       "enabled": true
     },
     {
@@ -29,6 +39,10 @@
       "name": "sss",
       "platform": "thingsboard",
       "token": null,
+      "protocol": "mqtt",
+      "custom_host": null,
+      "custom_port": null,
+      "use_tls": null,
       "enabled": true
     }
   ],
@@ -41,7 +55,7 @@
       "data_type": "float",
       "unit": "°C",
       "topic": "v1/devices/me/telemetry",
-      "publish_interval": 3.0,
+      "publish_interval": 60.0,
       "sim_mode": "sine",
       "math_config": {
         "min_val": 18.0,
@@ -50,10 +64,15 @@
         "offset": 0.0,
         "noise_percent": 2.5,
         "step": 1.0,
-        "constant_val": 0.0
+        "constant_val": "0"
       },
       "points_config": {
-        "points": [],
+        "points": [
+          {
+            "offset_seconds": 0.0,
+            "value": "0"
+          }
+        ],
         "loop": true,
         "playback_speed": 1.0,
         "interpolate": true
@@ -63,8 +82,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 22.518,
-      "last_published": 1792585643.9862828
+      "current_value": 20.584,
+      "last_published": 1792587163.5409243
     },
     {
       "id": "humidity",
@@ -74,7 +93,7 @@
       "data_type": "float",
       "unit": "%",
       "topic": "v1/devices/me/telemetry",
-      "publish_interval": 4.0,
+      "publish_interval": 60.0,
       "sim_mode": "cosine",
       "math_config": {
         "min_val": 35.0,
@@ -83,10 +102,15 @@
         "offset": 0.0,
         "noise_percent": 1.0,
         "step": 1.0,
-        "constant_val": 0.0
+        "constant_val": "0"
       },
       "points_config": {
-        "points": [],
+        "points": [
+          {
+            "offset_seconds": 0.0,
+            "value": "0"
+          }
+        ],
         "loop": true,
         "playback_speed": 1.0,
         "interpolate": true
@@ -96,8 +120,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 39.191,
-      "last_published": 1792585642.9856565
+      "current_value": 73.376,
+      "last_published": 1792587171.5419478
     },
     {
       "id": "powerMode",
@@ -107,7 +131,7 @@
       "data_type": "string",
       "unit": "",
       "topic": "v1/devices/me/attributes",
-      "publish_interval": 10.0,
+      "publish_interval": 60.0,
       "sim_mode": "constant",
       "math_config": {
         "min_val": 0.0,
@@ -119,7 +143,12 @@
         "constant_val": "SOLAR_OPTIMIZED"
       },
       "points_config": {
-        "points": [],
+        "points": [
+          {
+            "offset_seconds": 0.0,
+            "value": "0"
+          }
+        ],
         "loop": true,
         "playback_speed": 1.0,
         "interpolate": true
@@ -129,8 +158,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": "SOLAR_OPTIMIZED",
-      "last_published": 1792585642.9856565
+      "current_value": null,
+      "last_published": null
     },
     {
       "id": "vitesse_rpm",
@@ -187,8 +216,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 2677,
-      "last_published": 1792585644.9869578
+      "current_value": 364,
+      "last_published": 1792587184.8054996
     },
     {
       "id": "pression_bar",
@@ -220,8 +249,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 7.441,
-      "last_published": 1792585645.4870136
+      "current_value": 7.75,
+      "last_published": 1792587185.306037
     }
   ]
 }
