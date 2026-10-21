@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Shelter Télécoms / Nœud Fibre' (ID: telecom_shelter). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "90eccec4-2848-480a-b321-ac8c7839cb42": {
-        "id": "90eccec4-2848-480a-b321-ac8c7839cb42",
+      "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9": {
+        "id": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9",
         "alias": "Shelter Télécoms / Nœud Fibre",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "4a13a2d5-75ac-4d80-a136-87d616aaaf3d": {
+      "1bcc1300-ef86-45ae-8e9f-feb42743af09": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "4a13a2d5-75ac-4d80-a136-87d616aaaf3d"
+        "id": "1bcc1300-ef86-45ae-8e9f-feb42743af09"
       },
-      "82d7ec3b-1557-493f-b535-cd7a4a8e0584": {
+      "b1b8563d-6a6c-4209-a6ec-dd9ac5625c2c": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "90eccec4-2848-480a-b321-ac8c7839cb42",
+              "entityAliasId": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "82d7ec3b-1557-493f-b535-cd7a4a8e0584"
+        "id": "b1b8563d-6a6c-4209-a6ec-dd9ac5625c2c"
       },
-      "1f592fb0-48c4-4b11-85e5-6c15ef6ffb08": {
+      "af1caf28-9b68-45d0-9add-8cb00c3e74ab": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "90eccec4-2848-480a-b321-ac8c7839cb42",
+              "entityAliasId": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "1f592fb0-48c4-4b11-85e5-6c15ef6ffb08"
+        "id": "af1caf28-9b68-45d0-9add-8cb00c3e74ab"
       },
-      "bcca4a98-168f-41d9-8f17-6e0a449f59c6": {
+      "4d10bc53-1c6a-4c51-9d46-2997585e3b11": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "90eccec4-2848-480a-b321-ac8c7839cb42",
+              "entityAliasId": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9",
               "dataKeys": [
                 {
                   "name": "autonomie_batterie_min",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "bcca4a98-168f-41d9-8f17-6e0a449f59c6"
+        "id": "4d10bc53-1c6a-4c51-9d46-2997585e3b11"
       },
-      "1c6baf6a-d13b-4d38-9b72-55fb812d2c22": {
+      "2f634514-c4f9-404a-b3ee-a6885bd243d7": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "90eccec4-2848-480a-b321-ac8c7839cb42",
+              "entityAliasId": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9",
               "dataKeys": [
                 {
                   "name": "temp_baie_serveur",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "1c6baf6a-d13b-4d38-9b72-55fb812d2c22"
+        "id": "2f634514-c4f9-404a-b3ee-a6885bd243d7"
       },
-      "fb4e4872-7d15-4b83-9614-013a07b89125": {
+      "7f2542f1-20dd-4827-953d-c982da51405c": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "90eccec4-2848-480a-b321-ac8c7839cb42",
+              "entityAliasId": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "fb4e4872-7d15-4b83-9614-013a07b89125"
+        "id": "7f2542f1-20dd-4827-953d-c982da51405c"
       },
-      "697d54e6-4da6-4d48-a954-453556042e88": {
+      "ed78f488-f32e-4f47-afcf-46e8126e824a": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -427,19 +427,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "90eccec4-2848-480a-b321-ac8c7839cb42"
+            "entityAliasId": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "90eccec4-2848-480a-b321-ac8c7839cb42",
+              "entityAliasId": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9",
               "dataKeys": [
                 {
                   "name": "detection_inondation",
                   "type": "attribute",
                   "label": "detection_inondation",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -452,11 +454,12 @@
             "title": "Pilotage - Capteur Présence Eau / Fuite",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "detection_inondation",
             "valueAttribute": "detection_inondation",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_detection_inondation",
             "getValueMethod": "get_detection_inondation",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -468,9 +471,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "697d54e6-4da6-4d48-a954-453556042e88"
+        "id": "ed78f488-f32e-4f47-afcf-46e8126e824a"
       },
-      "53d321ec-3943-44d6-8c37-910f0b985329": {
+      "bcaf3525-f21d-4070-943d-5b3bfda16ae5": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -483,7 +486,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "90eccec4-2848-480a-b321-ac8c7839cb42",
+              "entityAliasId": "5bce19e1-38bc-4ace-a77e-f85f3b2ba5c9",
               "dataKeys": [
                 {
                   "name": "detection_inondation",
@@ -515,7 +518,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "53d321ec-3943-44d6-8c37-910f0b985329"
+        "id": "bcaf3525-f21d-4070-943d-5b3bfda16ae5"
       }
     },
     "states": {
@@ -525,49 +528,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "4a13a2d5-75ac-4d80-a136-87d616aaaf3d": {
+              "1bcc1300-ef86-45ae-8e9f-feb42743af09": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "82d7ec3b-1557-493f-b535-cd7a4a8e0584": {
+              "b1b8563d-6a6c-4209-a6ec-dd9ac5625c2c": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "1f592fb0-48c4-4b11-85e5-6c15ef6ffb08": {
+              "af1caf28-9b68-45d0-9add-8cb00c3e74ab": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "bcca4a98-168f-41d9-8f17-6e0a449f59c6": {
+              "4d10bc53-1c6a-4c51-9d46-2997585e3b11": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "1c6baf6a-d13b-4d38-9b72-55fb812d2c22": {
+              "2f634514-c4f9-404a-b3ee-a6885bd243d7": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "fb4e4872-7d15-4b83-9614-013a07b89125": {
+              "7f2542f1-20dd-4827-953d-c982da51405c": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "697d54e6-4da6-4d48-a954-453556042e88": {
+              "ed78f488-f32e-4f47-afcf-46e8126e824a": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "53d321ec-3943-44d6-8c37-910f0b985329": {
+              "bcaf3525-f21d-4070-943d-5b3bfda16ae5": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

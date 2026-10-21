@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "18757a36-668a-42b1-8fba-44e66a57018a": {
-        "id": "18757a36-668a-42b1-8fba-44e66a57018a",
+      "fa9e5297-60c8-4e46-b7b4-9c8969c52212": {
+        "id": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
         "alias": "Aiguillage & Signalisation Ferroviaire",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "ac1646ef-4011-4cdc-aa31-bbd60e5dbb58": {
+      "944803de-aef7-4ce2-8c49-de8cff86ce21": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "ac1646ef-4011-4cdc-aa31-bbd60e5dbb58"
+        "id": "944803de-aef7-4ce2-8c49-de8cff86ce21"
       },
-      "5bfa2215-139f-4b30-b232-3cc18555dbf0": {
+      "73ad53d7-0b11-49bb-84be-ac4f26993f25": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "5bfa2215-139f-4b30-b232-3cc18555dbf0"
+        "id": "73ad53d7-0b11-49bb-84be-ac4f26993f25"
       },
-      "191d592a-60ed-4df9-974d-04b3f8c0d57a": {
+      "952c0f48-477e-442a-8b02-8e79e227568e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "191d592a-60ed-4df9-974d-04b3f8c0d57a"
+        "id": "952c0f48-477e-442a-8b02-8e79e227568e"
       },
-      "83da7a6d-f71d-4f75-b47b-7911e34af070": {
+      "1871b4c5-331f-419a-89bf-650f737feaa2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
               "dataKeys": [
                 {
                   "name": "temps_manoeuvre_ms",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "83da7a6d-f71d-4f75-b47b-7911e34af070"
+        "id": "1871b4c5-331f-419a-89bf-650f737feaa2"
       },
-      "54d443d7-c50d-4157-802a-647204f6a1c6": {
+      "287c2aea-4241-4f3c-bd8f-365fc2f82d1a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
               "dataKeys": [
                 {
                   "name": "temp_rail_rechauffage",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "54d443d7-c50d-4157-802a-647204f6a1c6"
+        "id": "287c2aea-4241-4f3c-bd8f-365fc2f82d1a"
       },
-      "6b49331c-9f2b-4632-a431-be1dae39ed3f": {
+      "1d118712-ef91-4587-b3bb-6a0092a7a096": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -422,9 +422,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "6b49331c-9f2b-4632-a431-be1dae39ed3f"
+        "id": "1d118712-ef91-4587-b3bb-6a0092a7a096"
       },
-      "5f6da704-b98c-4353-9910-95194e37ee2c": {
+      "ae38e092-5e2e-46a9-92d3-f03586b30c64": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -436,19 +436,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a"
+            "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
                   "type": "attribute",
                   "label": "presence_essieu",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -461,11 +463,12 @@
             "title": "Pilotage - Pédale Détection Essieu",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "presence_essieu",
             "valueAttribute": "presence_essieu",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_presence_essieu",
             "getValueMethod": "get_presence_essieu",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -477,9 +480,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "5f6da704-b98c-4353-9910-95194e37ee2c"
+        "id": "ae38e092-5e2e-46a9-92d3-f03586b30c64"
       },
-      "01fdf63e-61e4-4509-9278-8d41ee6a8b3e": {
+      "1cd9efeb-384d-41e4-887a-e9ad23368754": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -492,7 +495,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
               "dataKeys": [
                 {
                   "name": "position_aiguille",
@@ -525,9 +528,9 @@
         },
         "row": 16,
         "col": 20,
-        "id": "01fdf63e-61e4-4509-9278-8d41ee6a8b3e"
+        "id": "1cd9efeb-384d-41e4-887a-e9ad23368754"
       },
-      "b06dbd83-8a21-416c-8bd3-77f271677eca": {
+      "c77475db-b433-475d-b7da-30a9c4411bbe": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -540,7 +543,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "18757a36-668a-42b1-8fba-44e66a57018a",
+              "entityAliasId": "fa9e5297-60c8-4e46-b7b4-9c8969c52212",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -579,7 +582,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "b06dbd83-8a21-416c-8bd3-77f271677eca"
+        "id": "c77475db-b433-475d-b7da-30a9c4411bbe"
       }
     },
     "states": {
@@ -589,55 +592,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "ac1646ef-4011-4cdc-aa31-bbd60e5dbb58": {
+              "944803de-aef7-4ce2-8c49-de8cff86ce21": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "5bfa2215-139f-4b30-b232-3cc18555dbf0": {
+              "73ad53d7-0b11-49bb-84be-ac4f26993f25": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "191d592a-60ed-4df9-974d-04b3f8c0d57a": {
+              "952c0f48-477e-442a-8b02-8e79e227568e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "83da7a6d-f71d-4f75-b47b-7911e34af070": {
+              "1871b4c5-331f-419a-89bf-650f737feaa2": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "54d443d7-c50d-4157-802a-647204f6a1c6": {
+              "287c2aea-4241-4f3c-bd8f-365fc2f82d1a": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "6b49331c-9f2b-4632-a431-be1dae39ed3f": {
+              "1d118712-ef91-4587-b3bb-6a0092a7a096": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "5f6da704-b98c-4353-9910-95194e37ee2c": {
+              "ae38e092-5e2e-46a9-92d3-f03586b30c64": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "01fdf63e-61e4-4509-9278-8d41ee6a8b3e": {
+              "1cd9efeb-384d-41e4-887a-e9ad23368754": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "b06dbd83-8a21-416c-8bd3-77f271677eca": {
+              "c77475db-b433-475d-b7da-30a9c4411bbe": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Conteneur Déchets & PAV Connecté' (ID: city_waste_bin). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44": {
-        "id": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+      "229f8b0a-e19d-4322-85cc-4579785f3f41": {
+        "id": "229f8b0a-e19d-4322-85cc-4579785f3f41",
         "alias": "Conteneur Déchets & PAV Connecté",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "51c4a5f5-4da8-48bb-bb97-3be3d91c2753": {
+      "6df27545-84b1-4411-aaf7-96dfc107bb3b": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "51c4a5f5-4da8-48bb-bb97-3be3d91c2753"
+        "id": "6df27545-84b1-4411-aaf7-96dfc107bb3b"
       },
-      "f2781eda-020a-4dd0-81f9-345bd076f26e": {
+      "b506818f-d972-4e1d-bfb3-9fc75a581456": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+              "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "f2781eda-020a-4dd0-81f9-345bd076f26e"
+        "id": "b506818f-d972-4e1d-bfb3-9fc75a581456"
       },
-      "691e542e-07fb-4760-aa56-8fd02324a3be": {
+      "374c79df-0e4b-4b4b-bd3c-d841c5710369": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+              "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "691e542e-07fb-4760-aa56-8fd02324a3be"
+        "id": "374c79df-0e4b-4b4b-bd3c-d841c5710369"
       },
-      "c4a8e957-84a5-48f1-96ac-fa9131762e65": {
+      "61c9b0f3-e979-4093-a052-25f38260c170": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+              "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41",
               "dataKeys": [
                 {
                   "name": "temp_interne_cuve",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "c4a8e957-84a5-48f1-96ac-fa9131762e65"
+        "id": "61c9b0f3-e979-4093-a052-25f38260c170"
       },
-      "8c2f1bd4-1ce0-4583-9b5a-23177af90534": {
+      "c1df5d32-d684-4e18-86c7-a09bda6cb4d7": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+              "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41",
               "dataKeys": [
                 {
                   "name": "batterie_autonomie_pct",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "8c2f1bd4-1ce0-4583-9b5a-23177af90534"
+        "id": "c1df5d32-d684-4e18-86c7-a09bda6cb4d7"
       },
-      "6a0917db-9e21-4e12-8568-8437976f8790": {
+      "37113825-0fa3-4080-bdd0-dcef0329ed9f": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+              "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -422,9 +422,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "6a0917db-9e21-4e12-8568-8437976f8790"
+        "id": "37113825-0fa3-4080-bdd0-dcef0329ed9f"
       },
-      "62717b22-ed2f-4f53-97a5-aa3eea137be8": {
+      "bd1b4006-8fdb-4d34-ab85-6c9c17f805bf": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -436,19 +436,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44"
+            "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+              "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41",
               "dataKeys": [
                 {
                   "name": "alerte_incendie",
                   "type": "attribute",
                   "label": "alerte_incendie",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -461,11 +463,12 @@
             "title": "Pilotage - Détection Fumée / Feu Bac",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "alerte_incendie",
             "valueAttribute": "alerte_incendie",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_alerte_incendie",
             "getValueMethod": "get_alerte_incendie",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -477,9 +480,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "62717b22-ed2f-4f53-97a5-aa3eea137be8"
+        "id": "bd1b4006-8fdb-4d34-ab85-6c9c17f805bf"
       },
-      "95045eac-c7a8-4d0b-9624-5d5daaf66afc": {
+      "c3f24b02-9b52-4ea4-b9ef-864ef72fd65f": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -491,19 +494,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44"
+            "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+              "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41",
               "dataKeys": [
                 {
                   "name": "alerte_basculement",
                   "type": "attribute",
                   "label": "alerte_basculement",
                   "color": "#F59E0B",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -516,11 +521,12 @@
             "title": "Pilotage - Capteur Choc / Basculement",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "alerte_basculement",
             "valueAttribute": "alerte_basculement",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_alerte_basculement",
             "getValueMethod": "get_alerte_basculement",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -532,9 +538,9 @@
         },
         "row": 16,
         "col": 20,
-        "id": "95045eac-c7a8-4d0b-9624-5d5daaf66afc"
+        "id": "c3f24b02-9b52-4ea4-b9ef-864ef72fd65f"
       },
-      "7c603eee-e48a-451a-94b3-aed58eb4392b": {
+      "5b65a607-de13-4198-adff-5f19edca2cde": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -547,7 +553,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "a06ae5ee-9f8a-4878-9c24-3a5bd8308a44",
+              "entityAliasId": "229f8b0a-e19d-4322-85cc-4579785f3f41",
               "dataKeys": [
                 {
                   "name": "alerte_incendie",
@@ -586,7 +592,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "7c603eee-e48a-451a-94b3-aed58eb4392b"
+        "id": "5b65a607-de13-4198-adff-5f19edca2cde"
       }
     },
     "states": {
@@ -596,55 +602,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "51c4a5f5-4da8-48bb-bb97-3be3d91c2753": {
+              "6df27545-84b1-4411-aaf7-96dfc107bb3b": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "f2781eda-020a-4dd0-81f9-345bd076f26e": {
+              "b506818f-d972-4e1d-bfb3-9fc75a581456": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "691e542e-07fb-4760-aa56-8fd02324a3be": {
+              "374c79df-0e4b-4b4b-bd3c-d841c5710369": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "c4a8e957-84a5-48f1-96ac-fa9131762e65": {
+              "61c9b0f3-e979-4093-a052-25f38260c170": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "8c2f1bd4-1ce0-4583-9b5a-23177af90534": {
+              "c1df5d32-d684-4e18-86c7-a09bda6cb4d7": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "6a0917db-9e21-4e12-8568-8437976f8790": {
+              "37113825-0fa3-4080-bdd0-dcef0329ed9f": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "62717b22-ed2f-4f53-97a5-aa3eea137be8": {
+              "bd1b4006-8fdb-4d34-ab85-6c9c17f805bf": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "95045eac-c7a8-4d0b-9624-5d5daaf66afc": {
+              "c3f24b02-9b52-4ea4-b9ef-864ef72fd65f": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "7c603eee-e48a-451a-94b3-aed58eb4392b": {
+              "5b65a607-de13-4198-adff-5f19edca2cde": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

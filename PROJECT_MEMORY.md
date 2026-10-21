@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.6 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.7 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
@@ -99,6 +99,11 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Tutoriel Pas-à-Pas de Pilotage TB 4.3** : Ajout de l'Étape 6 dans `Documentation/user/thingsboard_tutorial.md`.
   - **Documentation Développeur du Moteur de Simulation** : Boucle d'interruption RPC synchrone et extension multi-plateformes dans `Documentation/developer/`.
   - **Système de Mémoire Hiérarchique IA** : Réseau structuré `PROJECT_MEMORY.md` et sous-mémoires `app/*/MEMORY.md` conforme au standard `project-memory`.
+- [x] Contrôle Bidirectionnel Universel (MQTT & HTTP Long-Polling) & Persistance Renforcée (v1.9.7) :
+  - **Support RPC HTTP Long-Polling ThingsBoard** : Écoute active descendante `GET /api/v1/{token}/rpc?timeout=15000` et réponse synchrone `POST /api/v1/{token}/rpc/{id}` dans `SimulationEngine` et `ThingsBoardHttpClient` pour tous les équipements ThingsBoard utilisant le protocole HTTP (notamment les instances sous Cloudflare où les ports TCP 1883/8883 sont bloqués).
+  - **Correction Widgets Round Switch ThingsBoard 4.3** : Résolution du parsing JS (`parseValueFunction` traitant les objets JSON `{status, value}`), ajout de `valueKey` et rattachement à `CLIENT_SCOPE`.
+  - **Persistance et Résilience Étendue** : Sauvegarde miroir `.bak` automatique, chargement résilient des équipements en cas d'erreur de schéma, backup d'urgence `.corrupted.{ts}` (zéro perte de données en cas de crash/coupure de courant).
+  - **Volume Nommé Persistant & Découplage Git** : `docker-compose.yml` et `docker-compose.portainer.yml` unifiés sur le volume nommé `iot_simulator_data` (`simulator_data:/app/data`), `data/simulator_state.json` ignoré dans Git pour ne jamais être écrasé lors d'un `git pull` Portainer.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles

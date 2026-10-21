@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Surveillance Ouvrage d'Art (SHM)' (ID: city_structure_shm). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0": {
-        "id": "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0",
+      "6da5794e-2903-4fd3-98ac-369b5eef04bc": {
+        "id": "6da5794e-2903-4fd3-98ac-369b5eef04bc",
         "alias": "Surveillance Ouvrage d'Art (SHM)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "14136b96-79d6-4e90-b77c-6bb301ce850c": {
+      "5dd3ca25-53ca-4c86-b0cf-5bfccbfd04c9": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "14136b96-79d6-4e90-b77c-6bb301ce850c"
+        "id": "5dd3ca25-53ca-4c86-b0cf-5bfccbfd04c9"
       },
-      "0d4ec227-7425-4776-85e1-46c1c297a8f0": {
+      "777ac628-bd40-4832-9f02-01af97e7ed77": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0",
+              "entityAliasId": "6da5794e-2903-4fd3-98ac-369b5eef04bc",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "0d4ec227-7425-4776-85e1-46c1c297a8f0"
+        "id": "777ac628-bd40-4832-9f02-01af97e7ed77"
       },
-      "873cfa06-3635-4d46-8faf-c9cd4d58418f": {
+      "0505adf8-0bc9-4593-886c-bdf86268499d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0",
+              "entityAliasId": "6da5794e-2903-4fd3-98ac-369b5eef04bc",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "873cfa06-3635-4d46-8faf-c9cd4d58418f"
+        "id": "0505adf8-0bc9-4593-886c-bdf86268499d"
       },
-      "b7f2a91f-9731-4cfe-a6ad-c10cae58d111": {
+      "7d3088d2-b2d6-4a9c-ab28-3c4d0697908f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0",
+              "entityAliasId": "6da5794e-2903-4fd3-98ac-369b5eef04bc",
               "dataKeys": [
                 {
                   "name": "ecartement_fissure_mm",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "b7f2a91f-9731-4cfe-a6ad-c10cae58d111"
+        "id": "7d3088d2-b2d6-4a9c-ab28-3c4d0697908f"
       },
-      "7fc11b13-255a-4b22-b459-6b1a86ec75b8": {
+      "4da9cddf-9cd0-47ca-9be5-c5954d9da601": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0",
+              "entityAliasId": "6da5794e-2903-4fd3-98ac-369b5eef04bc",
               "dataKeys": [
                 {
                   "name": "deformation_microstrain",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "7fc11b13-255a-4b22-b459-6b1a86ec75b8"
+        "id": "4da9cddf-9cd0-47ca-9be5-c5954d9da601"
       },
-      "d30d983e-dc16-41f0-b83b-6b287b5fc4e9": {
+      "ac89d271-6821-4935-9a23-4f6d908dbdf5": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0",
+              "entityAliasId": "6da5794e-2903-4fd3-98ac-369b5eef04bc",
               "dataKeys": [
                 {
                   "name": "frequence_propre_hz",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "d30d983e-dc16-41f0-b83b-6b287b5fc4e9"
+        "id": "ac89d271-6821-4935-9a23-4f6d908dbdf5"
       },
-      "8879ab6c-c035-4014-b600-b7c8fa9f84eb": {
+      "23fb585d-e29a-4cd1-a22c-6abb05fc9a14": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0",
+              "entityAliasId": "6da5794e-2903-4fd3-98ac-369b5eef04bc",
               "dataKeys": [
                 {
                   "name": "temp_acier_beton",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8879ab6c-c035-4014-b600-b7c8fa9f84eb"
+        "id": "23fb585d-e29a-4cd1-a22c-6abb05fc9a14"
       },
-      "defda1e9-8659-4953-bb3b-fb3214ea5a1c": {
+      "823f1c43-a57a-4b39-83cb-b7a1a0063a98": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2ffb2e85-4e32-45fd-8d70-d219ce91d1a0",
+              "entityAliasId": "6da5794e-2903-4fd3-98ac-369b5eef04bc",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "defda1e9-8659-4953-bb3b-fb3214ea5a1c"
+        "id": "823f1c43-a57a-4b39-83cb-b7a1a0063a98"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "14136b96-79d6-4e90-b77c-6bb301ce850c": {
+              "5dd3ca25-53ca-4c86-b0cf-5bfccbfd04c9": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "0d4ec227-7425-4776-85e1-46c1c297a8f0": {
+              "777ac628-bd40-4832-9f02-01af97e7ed77": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "873cfa06-3635-4d46-8faf-c9cd4d58418f": {
+              "0505adf8-0bc9-4593-886c-bdf86268499d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "b7f2a91f-9731-4cfe-a6ad-c10cae58d111": {
+              "7d3088d2-b2d6-4a9c-ab28-3c4d0697908f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "7fc11b13-255a-4b22-b459-6b1a86ec75b8": {
+              "4da9cddf-9cd0-47ca-9be5-c5954d9da601": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "d30d983e-dc16-41f0-b83b-6b287b5fc4e9": {
+              "ac89d271-6821-4935-9a23-4f6d908dbdf5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "8879ab6c-c035-4014-b600-b7c8fa9f84eb": {
+              "23fb585d-e29a-4cd1-a22c-6abb05fc9a14": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "defda1e9-8659-4953-bb3b-fb3214ea5a1c": {
+              "823f1c43-a57a-4b39-83cb-b7a1a0063a98": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

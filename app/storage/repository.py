@@ -34,31 +34,93 @@ class StorageRepository:
     def load(self):
         with self._lock:
             if not os.path.exists(self.file_path):
-                logger.info(f"Fichier de configuration inexistant ({self.file_path}), initialisation des démos par défaut.")
-                self._init_defaults()
-                self._save_unsafe()
-                return
+                # Vérifier si un backup automatique existe
+                bak_path = f"{self.file_path}.bak"
+                if os.path.exists(bak_path):
+                    logger.warning(f"Fichier principal {self.file_path} absent, tentative de restauration depuis {bak_path}")
+                    try:
+                        import shutil
+                        shutil.copy2(bak_path, self.file_path)
+                    except Exception as e:
+                        logger.error(f"Erreur copie backup: {e}")
+                else:
+                    logger.info(f"Fichier de configuration inexistant ({self.file_path}), initialisation des démos par défaut.")
+                    self._init_defaults()
+                    self._save_unsafe()
+                    return
 
             try:
                 with open(self.file_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
 
-                if "broker" in data:
-                    self.broker_config = BrokerConfig.model_validate(data["broker"])
+                if "broker" in data and isinstance(data["broker"], dict):
+                    try:
+                        self.broker_config = BrokerConfig.model_validate(data["broker"])
+                    except Exception as e:
+                        logger.warning(f"Configuration broker invalide, conservation défaut: {e}")
 
                 self.devices.clear()
                 for d in data.get("devices", []):
-                    dev = DeviceConfig.model_validate(d)
-                    self.devices[dev.id] = dev
+                    try:
+                        dev = DeviceConfig.model_validate(d)
+                        self.devices[dev.id] = dev
+                    except Exception as e:
+                        logger.warning(f"Validation stricte échouée pour équipement {d.get('id', 'inconnu')}: {e}. Chargement résilient sans validation pour préserver vos données.")
+                        try:
+                            self.devices[d["id"]] = DeviceConfig.model_construct(**d)
+                        except Exception:
+                            pass
 
                 self.variables.clear()
                 for v in data.get("variables", []):
-                    var = VariableConfig.model_validate(v)
-                    self.variables[var.id] = var
+                    try:
+                        var = VariableConfig.model_validate(v)
+                        self.variables[var.id] = var
+                    except Exception as e:
+                        logger.warning(f"Validation stricte échouée pour variable {v.get('id', 'inconnue')}: {e}. Chargement résilient sans validation.")
+                        try:
+                            self.variables[v["id"]] = VariableConfig.model_construct(**v)
+                        except Exception:
+                            pass
 
-                logger.info(f"Chargé {len(self.devices)} équipement(s) et {len(self.variables)} variable(s) depuis {self.file_path}")
+                logger.info(f"✓ Chargé {len(self.devices)} équipement(s) et {len(self.variables)} variable(s) depuis {self.file_path}")
+
+                # Actualisation du backup sécurisé
+                try:
+                    import shutil
+                    shutil.copy2(self.file_path, f"{self.file_path}.bak")
+                except Exception:
+                    pass
+
             except Exception as e:
-                logger.error(f"Erreur chargement état: {e}. Restauration des valeurs par défaut.")
+                logger.error(f"Erreur critique lors de la lecture de {self.file_path}: {e}")
+                import time
+                try:
+                    import shutil
+                    corrupt_path = f"{self.file_path}.corrupted.{int(time.time())}"
+                    shutil.copy2(self.file_path, corrupt_path)
+                    logger.warning(f"Copie du fichier d'origine préservée dans {corrupt_path}")
+                except Exception:
+                    pass
+
+                # Tenter de restaurer depuis le backup .bak
+                bak_path = f"{self.file_path}.bak"
+                if os.path.exists(bak_path):
+                    logger.warning(f"Restauration automatique d'urgence depuis le backup {bak_path}")
+                    try:
+                        with open(bak_path, "r", encoding="utf-8") as f:
+                            data = json.load(f)
+                        self.devices.clear()
+                        for d in data.get("devices", []):
+                            self.devices[d["id"]] = DeviceConfig.model_construct(**d)
+                        self.variables.clear()
+                        for v in data.get("variables", []):
+                            self.variables[v["id"]] = VariableConfig.model_construct(**v)
+                        return
+                    except Exception as be:
+                        logger.error(f"Échec restauration backup: {be}")
+
+                logger.error("Restauration impossible, initialisation des valeurs par défaut.")
                 self._init_defaults()
                 self._save_unsafe()
 
@@ -182,6 +244,13 @@ class StorageRepository:
             with open(temp_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
             os.replace(temp_path, self.file_path)
+
+            # Mise à jour du backup persistant
+            try:
+                import shutil
+                shutil.copy2(self.file_path, f"{self.file_path}.bak")
+            except Exception:
+                pass
         except Exception as e:
             logger.error(f"Erreur sauvegarde fichier: {e}")
 

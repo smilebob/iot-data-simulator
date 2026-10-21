@@ -44,7 +44,7 @@ services:
       - MQTT_USERNAME=
       - MQTT_PASSWORD=
     volumes:
-      - ./data:/app/data
+      - simulator_data:/app/data
     depends_on:
       mosquitto:
         condition: service_healthy
@@ -69,6 +69,14 @@ services:
       - "no-new-privileges:true"
     networks:
       - iot-network
+
+volumes:
+  simulator_data:
+    name: iot_simulator_data
+  mosquitto_data:
+    name: iot_mosquitto_data
+  mosquitto_log:
+    name: iot_mosquitto_log
 
 networks:
   iot-network:

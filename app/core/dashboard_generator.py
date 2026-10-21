@@ -442,7 +442,9 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                                             "type": "attribute",
                                             "label": clean_key,
                                             "color": color,
-                                            "settings": {}
+                                            "settings": {
+                                                "dataKeyType": "client"
+                                            }
                                         }
                                     ]
                                 }
@@ -455,11 +457,12 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                                 "title": f"Pilotage - {var.name}",
                                 "initialValue": initial_val,
                                 "retrieveValueMethod": "attribute",
+                                "valueKey": clean_key,
                                 "valueAttribute": clean_key,
-                                "attributeScope": "SHARED_SCOPE",
+                                "attributeScope": "CLIENT_SCOPE",
                                 "setValueMethod": f"set_{clean_key}",
                                 "getValueMethod": f"get_{clean_key}",
-                                "parseValueFunction": "return data ? true : false;",
+                                "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
                                 "convertValueFunction": "return value;"
                             },
                             "widgetStyle": {

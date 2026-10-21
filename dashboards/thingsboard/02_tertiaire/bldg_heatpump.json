@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Pompe à Chaleur Réversible (PAC)' (ID: bldg_heatpump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab": {
-        "id": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab",
+      "3d602d5c-e59f-413b-8305-f9f5070beb7e": {
+        "id": "3d602d5c-e59f-413b-8305-f9f5070beb7e",
         "alias": "Pompe à Chaleur Réversible (PAC)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "76e53256-4a37-487b-a593-52c43794d766": {
+      "b86da064-26e0-4a91-85d8-9f5c4d92aa8f": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "76e53256-4a37-487b-a593-52c43794d766"
+        "id": "b86da064-26e0-4a91-85d8-9f5c4d92aa8f"
       },
-      "df308c99-9044-4d79-a346-8eb230b19f04": {
+      "ef5fb177-0fbb-43fa-949a-77ed8b8a5bd9": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab",
+              "entityAliasId": "3d602d5c-e59f-413b-8305-f9f5070beb7e",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "df308c99-9044-4d79-a346-8eb230b19f04"
+        "id": "ef5fb177-0fbb-43fa-949a-77ed8b8a5bd9"
       },
-      "f509c284-89a6-46a0-839c-5c244bc22115": {
+      "155da293-b4c5-4c1c-ad09-7d4c02ff6586": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab",
+              "entityAliasId": "3d602d5c-e59f-413b-8305-f9f5070beb7e",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "f509c284-89a6-46a0-839c-5c244bc22115"
+        "id": "155da293-b4c5-4c1c-ad09-7d4c02ff6586"
       },
-      "d0b4d5e0-24bd-40f2-b878-4c8a2d0f5743": {
+      "02b3994a-b602-4506-8413-3c1ac54ee311": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab",
+              "entityAliasId": "3d602d5c-e59f-413b-8305-f9f5070beb7e",
               "dataKeys": [
                 {
                   "name": "puissance_thermique_kw",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "d0b4d5e0-24bd-40f2-b878-4c8a2d0f5743"
+        "id": "02b3994a-b602-4506-8413-3c1ac54ee311"
       },
-      "2d65937b-e1ac-4e8d-99c3-c54260599da8": {
+      "c7ab0a5c-836e-42c0-9c20-505bb031d820": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab",
+              "entityAliasId": "3d602d5c-e59f-413b-8305-f9f5070beb7e",
               "dataKeys": [
                 {
                   "name": "pression_circuit",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "2d65937b-e1ac-4e8d-99c3-c54260599da8"
+        "id": "c7ab0a5c-836e-42c0-9c20-505bb031d820"
       },
-      "874441e3-b5fc-4e80-8d67-ce32dd3a6675": {
+      "47746d82-af5a-45e1-b229-fddd7d7722c0": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab",
+              "entityAliasId": "3d602d5c-e59f-413b-8305-f9f5070beb7e",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "874441e3-b5fc-4e80-8d67-ce32dd3a6675"
+        "id": "47746d82-af5a-45e1-b229-fddd7d7722c0"
       },
-      "0e23aa73-9b88-46ad-8ea5-08f4bc8b0082": {
+      "45f22d6b-e35a-4bc8-a739-05b10ccf2579": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -427,19 +427,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab"
+            "entityAliasId": "3d602d5c-e59f-413b-8305-f9f5070beb7e"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab",
+              "entityAliasId": "3d602d5c-e59f-413b-8305-f9f5070beb7e",
               "dataKeys": [
                 {
                   "name": "mode_chaud",
                   "type": "attribute",
                   "label": "mode_chaud",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -452,11 +454,12 @@
             "title": "Pilotage - Mode Fonctionnement Chaud",
             "initialValue": true,
             "retrieveValueMethod": "attribute",
+            "valueKey": "mode_chaud",
             "valueAttribute": "mode_chaud",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_mode_chaud",
             "getValueMethod": "get_mode_chaud",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -468,9 +471,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "0e23aa73-9b88-46ad-8ea5-08f4bc8b0082"
+        "id": "45f22d6b-e35a-4bc8-a739-05b10ccf2579"
       },
-      "db711fb7-a45d-42b9-9823-5e46b26d4a3d": {
+      "44fc1d39-0feb-4b15-8d35-f5668ce578e2": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -483,7 +486,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "732b5844-8b0c-4f9f-a29f-ee5cccfcc0ab",
+              "entityAliasId": "3d602d5c-e59f-413b-8305-f9f5070beb7e",
               "dataKeys": [
                 {
                   "name": "mode_chaud",
@@ -515,7 +518,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "db711fb7-a45d-42b9-9823-5e46b26d4a3d"
+        "id": "44fc1d39-0feb-4b15-8d35-f5668ce578e2"
       }
     },
     "states": {
@@ -525,49 +528,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "76e53256-4a37-487b-a593-52c43794d766": {
+              "b86da064-26e0-4a91-85d8-9f5c4d92aa8f": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "df308c99-9044-4d79-a346-8eb230b19f04": {
+              "ef5fb177-0fbb-43fa-949a-77ed8b8a5bd9": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "f509c284-89a6-46a0-839c-5c244bc22115": {
+              "155da293-b4c5-4c1c-ad09-7d4c02ff6586": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "d0b4d5e0-24bd-40f2-b878-4c8a2d0f5743": {
+              "02b3994a-b602-4506-8413-3c1ac54ee311": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "2d65937b-e1ac-4e8d-99c3-c54260599da8": {
+              "c7ab0a5c-836e-42c0-9c20-505bb031d820": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "874441e3-b5fc-4e80-8d67-ce32dd3a6675": {
+              "47746d82-af5a-45e1-b229-fddd7d7722c0": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "0e23aa73-9b88-46ad-8ea5-08f4bc8b0082": {
+              "45f22d6b-e35a-4bc8-a739-05b10ccf2579": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "db711fb7-a45d-42b9-9823-5e46b26d4a3d": {
+              "44fc1d39-0feb-4b15-8d35-f5668ce578e2": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

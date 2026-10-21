@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Sonde Acoustique & Nuisances Sonores' (ID: city_acoustic_sensor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "19b79c02-15e6-4543-bb21-c1aae2e6871c": {
-        "id": "19b79c02-15e6-4543-bb21-c1aae2e6871c",
+      "2e1c0787-4581-4530-b15c-208243e3777e": {
+        "id": "2e1c0787-4581-4530-b15c-208243e3777e",
         "alias": "Sonde Acoustique & Nuisances Sonores",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "a016cc37-1780-4111-ad7c-62db30da96e8": {
+      "7723b743-521b-45e8-a7c8-7f81de57ec73": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "a016cc37-1780-4111-ad7c-62db30da96e8"
+        "id": "7723b743-521b-45e8-a7c8-7f81de57ec73"
       },
-      "d344cbaa-cec9-48ce-a9e7-9c3f1fa3e831": {
+      "50a678a8-c32f-437a-8dd1-f772ecd0aa67": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19b79c02-15e6-4543-bb21-c1aae2e6871c",
+              "entityAliasId": "2e1c0787-4581-4530-b15c-208243e3777e",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "d344cbaa-cec9-48ce-a9e7-9c3f1fa3e831"
+        "id": "50a678a8-c32f-437a-8dd1-f772ecd0aa67"
       },
-      "13ef845c-530b-41cd-9955-b2759d5a4f29": {
+      "826ab0d8-fb27-4864-a803-87a09ba5c599": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19b79c02-15e6-4543-bb21-c1aae2e6871c",
+              "entityAliasId": "2e1c0787-4581-4530-b15c-208243e3777e",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "13ef845c-530b-41cd-9955-b2759d5a4f29"
+        "id": "826ab0d8-fb27-4864-a803-87a09ba5c599"
       },
-      "6ff3704e-edb0-426d-bce6-502cee3c5f0c": {
+      "9bb76d9f-9894-4f6b-a000-a1d0ca0e475e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19b79c02-15e6-4543-bb21-c1aae2e6871c",
+              "entityAliasId": "2e1c0787-4581-4530-b15c-208243e3777e",
               "dataKeys": [
                 {
                   "name": "niveau_lcpeak_dbc",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "6ff3704e-edb0-426d-bce6-502cee3c5f0c"
+        "id": "9bb76d9f-9894-4f6b-a000-a1d0ca0e475e"
       },
-      "df77abd3-3486-402e-8024-9d4cae950470": {
+      "55c1a245-91e3-4c84-b37a-a5d7b8398f41": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19b79c02-15e6-4543-bb21-c1aae2e6871c",
+              "entityAliasId": "2e1c0787-4581-4530-b15c-208243e3777e",
               "dataKeys": [
                 {
                   "name": "batterie_solaire_v",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "df77abd3-3486-402e-8024-9d4cae950470"
+        "id": "55c1a245-91e3-4c84-b37a-a5d7b8398f41"
       },
-      "7ffd430b-eca6-4536-9be4-d454934df531": {
+      "8e4a4b3e-cfa3-444a-890e-3a1134a20854": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19b79c02-15e6-4543-bb21-c1aae2e6871c",
+              "entityAliasId": "2e1c0787-4581-4530-b15c-208243e3777e",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "7ffd430b-eca6-4536-9be4-d454934df531"
+        "id": "8e4a4b3e-cfa3-444a-890e-3a1134a20854"
       },
-      "ee003f92-c16e-43f8-9813-32e06bac5e1f": {
+      "b1bf6ac0-ee05-466a-8052-d09b835acdd8": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -427,19 +427,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "19b79c02-15e6-4543-bb21-c1aae2e6871c"
+            "entityAliasId": "2e1c0787-4581-4530-b15c-208243e3777e"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19b79c02-15e6-4543-bb21-c1aae2e6871c",
+              "entityAliasId": "2e1c0787-4581-4530-b15c-208243e3777e",
               "dataKeys": [
                 {
                   "name": "depassement_seuil_nocturne",
                   "type": "attribute",
                   "label": "depassement_seuil_nocturne",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -452,11 +454,12 @@
             "title": "Pilotage - Alerte Dépassement Seuil Bruit",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "depassement_seuil_nocturne",
             "valueAttribute": "depassement_seuil_nocturne",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_depassement_seuil_nocturne",
             "getValueMethod": "get_depassement_seuil_nocturne",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -468,9 +471,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "ee003f92-c16e-43f8-9813-32e06bac5e1f"
+        "id": "b1bf6ac0-ee05-466a-8052-d09b835acdd8"
       },
-      "63b34cc4-491d-4a14-9e9e-a81328b63027": {
+      "98c48aaf-2440-43ab-9e1c-b81d67c019ab": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -483,7 +486,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19b79c02-15e6-4543-bb21-c1aae2e6871c",
+              "entityAliasId": "2e1c0787-4581-4530-b15c-208243e3777e",
               "dataKeys": [
                 {
                   "name": "depassement_seuil_nocturne",
@@ -515,7 +518,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "63b34cc4-491d-4a14-9e9e-a81328b63027"
+        "id": "98c48aaf-2440-43ab-9e1c-b81d67c019ab"
       }
     },
     "states": {
@@ -525,49 +528,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "a016cc37-1780-4111-ad7c-62db30da96e8": {
+              "7723b743-521b-45e8-a7c8-7f81de57ec73": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "d344cbaa-cec9-48ce-a9e7-9c3f1fa3e831": {
+              "50a678a8-c32f-437a-8dd1-f772ecd0aa67": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "13ef845c-530b-41cd-9955-b2759d5a4f29": {
+              "826ab0d8-fb27-4864-a803-87a09ba5c599": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "6ff3704e-edb0-426d-bce6-502cee3c5f0c": {
+              "9bb76d9f-9894-4f6b-a000-a1d0ca0e475e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "df77abd3-3486-402e-8024-9d4cae950470": {
+              "55c1a245-91e3-4c84-b37a-a5d7b8398f41": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "7ffd430b-eca6-4536-9be4-d454934df531": {
+              "8e4a4b3e-cfa3-444a-890e-3a1134a20854": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "ee003f92-c16e-43f8-9813-32e06bac5e1f": {
+              "b1bf6ac0-ee05-466a-8052-d09b835acdd8": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "63b34cc4-491d-4a14-9e9e-a81328b63027": {
+              "98c48aaf-2440-43ab-9e1c-b81d67c019ab": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

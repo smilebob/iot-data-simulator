@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale Sécurité Incendie (SSI)' (ID: bldg_fire_ssi). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "72d85509-2c27-4cee-a05d-9d321ede3ae6": {
-        "id": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+      "1a60a975-761a-416a-b8cc-f40948b9b27c": {
+        "id": "1a60a975-761a-416a-b8cc-f40948b9b27c",
         "alias": "Centrale Sécurité Incendie (SSI)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "9191705a-d378-489c-ba46-7e65f02c0ce2": {
+      "7d847d27-ebbd-4f8b-bd1f-d80c1a248e96": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "9191705a-d378-489c-ba46-7e65f02c0ce2"
+        "id": "7d847d27-ebbd-4f8b-bd1f-d80c1a248e96"
       },
-      "a2e1f555-4690-4aa8-b6d7-8b9732015166": {
+      "25409089-d31b-4529-a718-9de8c0e642e3": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+              "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a2e1f555-4690-4aa8-b6d7-8b9732015166"
+        "id": "25409089-d31b-4529-a718-9de8c0e642e3"
       },
-      "b0eb88bd-5f06-4555-a97f-5a12033c35e3": {
+      "eaecde5a-e312-4207-b4b8-b7e17c41d88f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+              "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "b0eb88bd-5f06-4555-a97f-5a12033c35e3"
+        "id": "eaecde5a-e312-4207-b4b8-b7e17c41d88f"
       },
-      "b682eb1d-909b-41e4-a0ce-26db99faf971": {
+      "b4df3732-4b95-4ff7-b8a0-d8a0429f6d1c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+              "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c",
               "dataKeys": [
                 {
                   "name": "debit_desenfumage_m3h",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "b682eb1d-909b-41e4-a0ce-26db99faf971"
+        "id": "b4df3732-4b95-4ff7-b8a0-d8a0429f6d1c"
       },
-      "66e44e90-7d42-405d-bd88-be6655f7ba02": {
+      "4f18d667-3cba-4fdc-8f5a-4b3c7666978a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+              "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c",
               "dataKeys": [
                 {
                   "name": "tension_alim_secours",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "66e44e90-7d42-405d-bd88-be6655f7ba02"
+        "id": "4f18d667-3cba-4fdc-8f5a-4b3c7666978a"
       },
-      "da05d56d-3b13-4da8-89a1-c428350cd099": {
+      "08e46892-83c0-47ec-96c7-55ac8e2ac16f": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+              "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -422,9 +422,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "da05d56d-3b13-4da8-89a1-c428350cd099"
+        "id": "08e46892-83c0-47ec-96c7-55ac8e2ac16f"
       },
-      "8d1e2e99-59e0-48ad-bb09-01a5e5041253": {
+      "d000b1fb-d97d-49a1-a638-70b3dbea3179": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -436,19 +436,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6"
+            "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+              "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c",
               "dataKeys": [
                 {
                   "name": "declencheur_manuel",
                   "type": "attribute",
                   "label": "declencheur_manuel",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -461,11 +463,12 @@
             "title": "Pilotage - Déclencheur Manuel Enclenché",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "declencheur_manuel",
             "valueAttribute": "declencheur_manuel",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_declencheur_manuel",
             "getValueMethod": "get_declencheur_manuel",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -477,9 +480,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "8d1e2e99-59e0-48ad-bb09-01a5e5041253"
+        "id": "d000b1fb-d97d-49a1-a638-70b3dbea3179"
       },
-      "2f918d27-3bba-4aee-a0cc-10b0042c6847": {
+      "7695650b-b44d-4043-b9b0-32fab0812b61": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -492,7 +495,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+              "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c",
               "dataKeys": [
                 {
                   "name": "statut_clapets_coupe_feu",
@@ -525,9 +528,9 @@
         },
         "row": 16,
         "col": 20,
-        "id": "2f918d27-3bba-4aee-a0cc-10b0042c6847"
+        "id": "7695650b-b44d-4043-b9b0-32fab0812b61"
       },
-      "5be8d4c0-7f5d-41ef-9dd6-f81481633846": {
+      "184024a1-85d3-402e-ad8b-2375b2bdd03e": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -540,7 +543,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "72d85509-2c27-4cee-a05d-9d321ede3ae6",
+              "entityAliasId": "1a60a975-761a-416a-b8cc-f40948b9b27c",
               "dataKeys": [
                 {
                   "name": "declencheur_manuel",
@@ -579,7 +582,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "5be8d4c0-7f5d-41ef-9dd6-f81481633846"
+        "id": "184024a1-85d3-402e-ad8b-2375b2bdd03e"
       }
     },
     "states": {
@@ -589,55 +592,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "9191705a-d378-489c-ba46-7e65f02c0ce2": {
+              "7d847d27-ebbd-4f8b-bd1f-d80c1a248e96": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a2e1f555-4690-4aa8-b6d7-8b9732015166": {
+              "25409089-d31b-4529-a718-9de8c0e642e3": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "b0eb88bd-5f06-4555-a97f-5a12033c35e3": {
+              "eaecde5a-e312-4207-b4b8-b7e17c41d88f": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "b682eb1d-909b-41e4-a0ce-26db99faf971": {
+              "b4df3732-4b95-4ff7-b8a0-d8a0429f6d1c": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "66e44e90-7d42-405d-bd88-be6655f7ba02": {
+              "4f18d667-3cba-4fdc-8f5a-4b3c7666978a": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "da05d56d-3b13-4da8-89a1-c428350cd099": {
+              "08e46892-83c0-47ec-96c7-55ac8e2ac16f": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "8d1e2e99-59e0-48ad-bb09-01a5e5041253": {
+              "d000b1fb-d97d-49a1-a638-70b3dbea3179": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "2f918d27-3bba-4aee-a0cc-10b0042c6847": {
+              "7695650b-b44d-4043-b9b0-32fab0812b61": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "5be8d4c0-7f5d-41ef-9dd6-f81481633846": {
+              "184024a1-85d3-402e-ad8b-2375b2bdd03e": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

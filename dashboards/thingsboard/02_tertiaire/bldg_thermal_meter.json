@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Compteur d'Énergie Thermique (Calories)' (ID: bldg_thermal_meter). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "df6f23eb-f16b-4606-8afb-a11d109c1c78": {
-        "id": "df6f23eb-f16b-4606-8afb-a11d109c1c78",
+      "768f8390-f75d-4010-a04f-6f43a03e33c9": {
+        "id": "768f8390-f75d-4010-a04f-6f43a03e33c9",
         "alias": "Compteur d'Énergie Thermique (Calories)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "4c7b3f0c-95db-4430-8051-be8a2fdf0938": {
+      "dd5f37cc-fddc-48ff-a786-4b7f2bb29954": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "4c7b3f0c-95db-4430-8051-be8a2fdf0938"
+        "id": "dd5f37cc-fddc-48ff-a786-4b7f2bb29954"
       },
-      "f6ead0dc-a4e1-4c9a-af6b-1d67e2dcb05e": {
+      "e9e70598-3a7c-4ee8-8772-c85b80c6f285": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "df6f23eb-f16b-4606-8afb-a11d109c1c78",
+              "entityAliasId": "768f8390-f75d-4010-a04f-6f43a03e33c9",
               "dataKeys": [
                 {
                   "name": "debit_volumique_m3h",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "f6ead0dc-a4e1-4c9a-af6b-1d67e2dcb05e"
+        "id": "e9e70598-3a7c-4ee8-8772-c85b80c6f285"
       },
-      "96f5da4d-cd21-40bf-b1ca-5b4dddeb31be": {
+      "cb682a4b-fbeb-4735-affa-65163fded8a3": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "df6f23eb-f16b-4606-8afb-a11d109c1c78",
+              "entityAliasId": "768f8390-f75d-4010-a04f-6f43a03e33c9",
               "dataKeys": [
                 {
                   "name": "debit_volumique_m3h",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "96f5da4d-cd21-40bf-b1ca-5b4dddeb31be"
+        "id": "cb682a4b-fbeb-4735-affa-65163fded8a3"
       },
-      "e8b011ee-3659-4478-8440-821c1e54ec89": {
+      "56ad622f-95d1-4c1d-b64e-9d6078500eb0": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "df6f23eb-f16b-4606-8afb-a11d109c1c78",
+              "entityAliasId": "768f8390-f75d-4010-a04f-6f43a03e33c9",
               "dataKeys": [
                 {
                   "name": "delta_t_deg",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "e8b011ee-3659-4478-8440-821c1e54ec89"
+        "id": "56ad622f-95d1-4c1d-b64e-9d6078500eb0"
       },
-      "a2044233-2007-4a92-ab80-93d2b7915bf8": {
+      "0e97cb5c-7fb1-447d-b3b5-9fcc76a909d8": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "df6f23eb-f16b-4606-8afb-a11d109c1c78",
+              "entityAliasId": "768f8390-f75d-4010-a04f-6f43a03e33c9",
               "dataKeys": [
                 {
                   "name": "puissance_thermique_kw",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "a2044233-2007-4a92-ab80-93d2b7915bf8"
+        "id": "0e97cb5c-7fb1-447d-b3b5-9fcc76a909d8"
       },
-      "b691e6c1-d157-4966-af59-c587be7c3562": {
+      "92769564-efee-45eb-b7a4-2805678b7c57": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "df6f23eb-f16b-4606-8afb-a11d109c1c78",
+              "entityAliasId": "768f8390-f75d-4010-a04f-6f43a03e33c9",
               "dataKeys": [
                 {
                   "name": "energie_cumulee_mwh",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "b691e6c1-d157-4966-af59-c587be7c3562"
+        "id": "92769564-efee-45eb-b7a4-2805678b7c57"
       },
-      "c5cb850d-e0a9-4b12-a0a6-be8ac800217c": {
+      "4541dc25-9ccc-46dc-9fed-dadbac1a0195": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "df6f23eb-f16b-4606-8afb-a11d109c1c78",
+              "entityAliasId": "768f8390-f75d-4010-a04f-6f43a03e33c9",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "c5cb850d-e0a9-4b12-a0a6-be8ac800217c"
+        "id": "4541dc25-9ccc-46dc-9fed-dadbac1a0195"
       },
-      "e86f8693-eeaa-4203-ab0b-048da86a41aa": {
+      "4a3912fa-b68f-49ec-b906-17fad58c9de2": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "df6f23eb-f16b-4606-8afb-a11d109c1c78",
+              "entityAliasId": "768f8390-f75d-4010-a04f-6f43a03e33c9",
               "dataKeys": [
                 {
                   "name": "debit_volumique_m3h",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "e86f8693-eeaa-4203-ab0b-048da86a41aa"
+        "id": "4a3912fa-b68f-49ec-b906-17fad58c9de2"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "4c7b3f0c-95db-4430-8051-be8a2fdf0938": {
+              "dd5f37cc-fddc-48ff-a786-4b7f2bb29954": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "f6ead0dc-a4e1-4c9a-af6b-1d67e2dcb05e": {
+              "e9e70598-3a7c-4ee8-8772-c85b80c6f285": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "96f5da4d-cd21-40bf-b1ca-5b4dddeb31be": {
+              "cb682a4b-fbeb-4735-affa-65163fded8a3": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "e8b011ee-3659-4478-8440-821c1e54ec89": {
+              "56ad622f-95d1-4c1d-b64e-9d6078500eb0": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "a2044233-2007-4a92-ab80-93d2b7915bf8": {
+              "0e97cb5c-7fb1-447d-b3b5-9fcc76a909d8": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "b691e6c1-d157-4966-af59-c587be7c3562": {
+              "92769564-efee-45eb-b7a4-2805678b7c57": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "c5cb850d-e0a9-4b12-a0a6-be8ac800217c": {
+              "4541dc25-9ccc-46dc-9fed-dadbac1a0195": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "e86f8693-eeaa-4203-ab0b-048da86a41aa": {
+              "4a3912fa-b68f-49ec-b906-17fad58c9de2": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

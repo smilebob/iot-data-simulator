@@ -85,6 +85,77 @@ class ThingsBoardHttpClient:
             logger.error(err_msg)
             return False, str(e)
 
+    async def poll_rpc(
+        self,
+        host: str,
+        port: int,
+        token: str,
+        timeout_sec: int = 15,
+        use_tls: bool = True,
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Interroge ThingsBoard en Long-Polling HTTP pour recevoir les commandes RPC descendantes.
+        GET /api/v1/{token}/rpc?timeout={timeout_ms}
+        """
+        protocol = "https" if use_tls else "http"
+        endpoint = f"/api/v1/{token}/rpc?timeout={int(timeout_sec * 1000)}"
+        if (use_tls and port == 443) or (not use_tls and port == 80):
+            url = f"{protocol}://{host}{endpoint}"
+        else:
+            url = f"{protocol}://{host}:{port}{endpoint}"
+
+        try:
+            try:
+                import httpx
+                async with httpx.AsyncClient(verify=False, timeout=timeout_sec + 5.0) as client:
+                    resp = await client.get(url)
+                    if resp.status_code == 200 and resp.text.strip():
+                        return resp.json()
+                    return None
+            except ImportError:
+                import asyncio
+                import ssl
+                import urllib.request
+
+                def _sync_get():
+                    ctx = ssl.create_default_context()
+                    ctx.check_hostname = False
+                    ctx.verify_mode = ssl.CERT_NONE
+                    req = urllib.request.Request(url, method="GET")
+                    with urllib.request.urlopen(req, timeout=timeout_sec + 5.0, context=ctx if use_tls else None) as resp:
+                        if resp.status == 200:
+                            body = resp.read().decode("utf-8")
+                            if body.strip():
+                                return json.loads(body)
+                    return None
+
+                return await asyncio.to_thread(_sync_get)
+        except Exception:
+            return None
+
+    async def respond_rpc(
+        self,
+        host: str,
+        port: int,
+        token: str,
+        req_id: Any,
+        resp_payload: str,
+        use_tls: bool = True,
+    ) -> bool:
+        """
+        Répond à une commande RPC bidirectionnelle ThingsBoard sur l'API HTTP.
+        POST /api/v1/{token}/rpc/{req_id}
+        """
+        endpoint = f"/api/v1/{token}/rpc/{req_id}"
+        success, _ = await self.post_payload(
+            host=host,
+            port=port,
+            endpoint=endpoint,
+            payload=resp_payload,
+            use_tls=use_tls,
+        )
+        return success
+
     async def test_connectivity(
         self,
         host: str,

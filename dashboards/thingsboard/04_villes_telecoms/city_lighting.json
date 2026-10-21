@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Armoire d'Éclairage Public' (ID: city_lighting). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f": {
-        "id": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f",
+      "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b": {
+        "id": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b",
         "alias": "Armoire d'Éclairage Public",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "9e2b2b1f-1408-47fe-ae5c-8289ab0270d4": {
+      "52f6213f-dd3a-4a06-9153-3590e29aedea": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "9e2b2b1f-1408-47fe-ae5c-8289ab0270d4"
+        "id": "52f6213f-dd3a-4a06-9153-3590e29aedea"
       },
-      "8d75e3e3-a169-4019-8a4a-1365cd278cbd": {
+      "799bba02-3366-406f-9f4f-21d448b8b2de": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f",
+              "entityAliasId": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "8d75e3e3-a169-4019-8a4a-1365cd278cbd"
+        "id": "799bba02-3366-406f-9f4f-21d448b8b2de"
       },
-      "782ca39a-722f-49be-9a7c-d938047082c5": {
+      "8a7e48e5-c28a-42d8-b3a1-064d2d97ef7f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f",
+              "entityAliasId": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "782ca39a-722f-49be-9a7c-d938047082c5"
+        "id": "8a7e48e5-c28a-42d8-b3a1-064d2d97ef7f"
       },
-      "58857b5d-1bd4-479c-ba18-a3479cd7f112": {
+      "7f42b54a-03fc-491e-9d5b-29ccd94f8e77": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f",
+              "entityAliasId": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b",
               "dataKeys": [
                 {
                   "name": "niveau_gradation_pct",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "58857b5d-1bd4-479c-ba18-a3479cd7f112"
+        "id": "7f42b54a-03fc-491e-9d5b-29ccd94f8e77"
       },
-      "a48a79cf-967e-404a-928e-bd0093012d0f": {
+      "41bf31ed-bee8-4aa2-8278-058041c4c236": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f",
+              "entityAliasId": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b",
               "dataKeys": [
                 {
                   "name": "courant_fuite_ma",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "a48a79cf-967e-404a-928e-bd0093012d0f"
+        "id": "41bf31ed-bee8-4aa2-8278-058041c4c236"
       },
-      "7b139cc8-06ac-40fc-9344-8edf2014980f": {
+      "342382df-0569-4363-98b2-cbaecdb04e19": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f",
+              "entityAliasId": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "7b139cc8-06ac-40fc-9344-8edf2014980f"
+        "id": "342382df-0569-4363-98b2-cbaecdb04e19"
       },
-      "038cd6da-61f0-44f2-9adf-d1b68e67943e": {
+      "06daeea3-6b0a-408d-ad9e-86d4fa6340c6": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -427,19 +427,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f"
+            "entityAliasId": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f",
+              "entityAliasId": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b",
               "dataKeys": [
                 {
                   "name": "alerte_porte_ouverte",
                   "type": "attribute",
                   "label": "alerte_porte_ouverte",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -452,11 +454,12 @@
             "title": "Pilotage - Contact d'Ouverture Porte",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "alerte_porte_ouverte",
             "valueAttribute": "alerte_porte_ouverte",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_alerte_porte_ouverte",
             "getValueMethod": "get_alerte_porte_ouverte",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -468,9 +471,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "038cd6da-61f0-44f2-9adf-d1b68e67943e"
+        "id": "06daeea3-6b0a-408d-ad9e-86d4fa6340c6"
       },
-      "82a0f173-e169-45e9-8807-8d7d1d7f5358": {
+      "13579dbb-17b9-4e97-986c-ceb0d10d9775": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -483,7 +486,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "aa490f9f-eb6a-40f5-bbb7-714ad39fd98f",
+              "entityAliasId": "e3f2a122-3cbf-48d9-8353-84a6c8cefa7b",
               "dataKeys": [
                 {
                   "name": "alerte_porte_ouverte",
@@ -515,7 +518,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "82a0f173-e169-45e9-8807-8d7d1d7f5358"
+        "id": "13579dbb-17b9-4e97-986c-ceb0d10d9775"
       }
     },
     "states": {
@@ -525,49 +528,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "9e2b2b1f-1408-47fe-ae5c-8289ab0270d4": {
+              "52f6213f-dd3a-4a06-9153-3590e29aedea": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "8d75e3e3-a169-4019-8a4a-1365cd278cbd": {
+              "799bba02-3366-406f-9f4f-21d448b8b2de": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "782ca39a-722f-49be-9a7c-d938047082c5": {
+              "8a7e48e5-c28a-42d8-b3a1-064d2d97ef7f": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "58857b5d-1bd4-479c-ba18-a3479cd7f112": {
+              "7f42b54a-03fc-491e-9d5b-29ccd94f8e77": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "a48a79cf-967e-404a-928e-bd0093012d0f": {
+              "41bf31ed-bee8-4aa2-8278-058041c4c236": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "7b139cc8-06ac-40fc-9344-8edf2014980f": {
+              "342382df-0569-4363-98b2-cbaecdb04e19": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "038cd6da-61f0-44f2-9adf-d1b68e67943e": {
+              "06daeea3-6b0a-408d-ad9e-86d4fa6340c6": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "82a0f173-e169-45e9-8807-8d7d1d7f5358": {
+              "13579dbb-17b9-4e97-986c-ceb0d10d9775": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

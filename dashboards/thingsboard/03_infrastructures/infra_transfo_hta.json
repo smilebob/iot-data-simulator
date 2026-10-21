@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Transformateur HTA/BT' (ID: infra_transfo_hta). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "b4e500fc-be6e-433b-8852-47907864fe29": {
-        "id": "b4e500fc-be6e-433b-8852-47907864fe29",
+      "9edc3dfc-f9b7-484a-a34e-c53dadd224c4": {
+        "id": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
         "alias": "Transformateur HTA/BT",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "061d93d7-107e-4dcc-8dab-b83186198556": {
+      "2aa99fec-5640-42e5-ac26-5b04ac06f747": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "061d93d7-107e-4dcc-8dab-b83186198556"
+        "id": "2aa99fec-5640-42e5-ac26-5b04ac06f747"
       },
-      "53d5cac4-cead-4c84-9a99-2b512b4f9720": {
+      "5f0343dd-b3fe-4b31-9bb3-b3197f6c297e": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29",
+              "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "53d5cac4-cead-4c84-9a99-2b512b4f9720"
+        "id": "5f0343dd-b3fe-4b31-9bb3-b3197f6c297e"
       },
-      "06c3d9c8-aa8c-4474-9796-92ac51533630": {
+      "9ab9ff65-b51a-435c-842e-3e61eb14204d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29",
+              "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "06c3d9c8-aa8c-4474-9796-92ac51533630"
+        "id": "9ab9ff65-b51a-435c-842e-3e61eb14204d"
       },
-      "7d4bc16b-0512-4909-8b94-5fa169126325": {
+      "1523f97e-3d09-4ffc-b668-8c72fa796a6e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29",
+              "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
               "dataKeys": [
                 {
                   "name": "charge_transfo_pct",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "7d4bc16b-0512-4909-8b94-5fa169126325"
+        "id": "1523f97e-3d09-4ffc-b668-8c72fa796a6e"
       },
-      "e3e3051a-d1b2-4867-83b8-dbad8fd72ace": {
+      "0a33a630-a055-4564-ba5c-276e8815a584": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29",
+              "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
               "dataKeys": [
                 {
                   "name": "pression_cuve",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "e3e3051a-d1b2-4867-83b8-dbad8fd72ace"
+        "id": "0a33a630-a055-4564-ba5c-276e8815a584"
       },
-      "1a42e6dc-2a6f-477f-9a41-bfd8bc8e892f": {
+      "9d6428c2-558c-496d-a5fc-7d25e2dc8149": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29",
+              "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
               "dataKeys": [
                 {
                   "name": "taux_thd",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "1a42e6dc-2a6f-477f-9a41-bfd8bc8e892f"
+        "id": "9d6428c2-558c-496d-a5fc-7d25e2dc8149"
       },
-      "096cbe70-0662-4ad7-b84f-3424e879c081": {
+      "fd3245d4-c4df-46cc-b7fb-769a2390c8b6": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29",
+              "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
@@ -496,9 +496,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "096cbe70-0662-4ad7-b84f-3424e879c081"
+        "id": "fd3245d4-c4df-46cc-b7fb-769a2390c8b6"
       },
-      "871999e7-f500-4425-9b20-913c2cc97ace": {
+      "7d3989de-ec21-4a06-a33d-f72a1e475b80": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -510,19 +510,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29"
+            "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29",
+              "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
               "dataKeys": [
                 {
                   "name": "alarme_dgpt2",
                   "type": "attribute",
                   "label": "alarme_dgpt2",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -535,11 +537,12 @@
             "title": "Pilotage - Alerte Sécurité DGPT2",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "alarme_dgpt2",
             "valueAttribute": "alarme_dgpt2",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_alarme_dgpt2",
             "getValueMethod": "get_alarme_dgpt2",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -551,9 +554,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "871999e7-f500-4425-9b20-913c2cc97ace"
+        "id": "7d3989de-ec21-4a06-a33d-f72a1e475b80"
       },
-      "051af059-1f54-42eb-a3f9-2a622b3eb9ad": {
+      "f07b184f-cb17-4fb2-9b2a-432134bee9e6": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -566,7 +569,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b4e500fc-be6e-433b-8852-47907864fe29",
+              "entityAliasId": "9edc3dfc-f9b7-484a-a34e-c53dadd224c4",
               "dataKeys": [
                 {
                   "name": "alarme_dgpt2",
@@ -598,7 +601,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "051af059-1f54-42eb-a3f9-2a622b3eb9ad"
+        "id": "f07b184f-cb17-4fb2-9b2a-432134bee9e6"
       }
     },
     "states": {
@@ -608,55 +611,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "061d93d7-107e-4dcc-8dab-b83186198556": {
+              "2aa99fec-5640-42e5-ac26-5b04ac06f747": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "53d5cac4-cead-4c84-9a99-2b512b4f9720": {
+              "5f0343dd-b3fe-4b31-9bb3-b3197f6c297e": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "06c3d9c8-aa8c-4474-9796-92ac51533630": {
+              "9ab9ff65-b51a-435c-842e-3e61eb14204d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "7d4bc16b-0512-4909-8b94-5fa169126325": {
+              "1523f97e-3d09-4ffc-b668-8c72fa796a6e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "e3e3051a-d1b2-4867-83b8-dbad8fd72ace": {
+              "0a33a630-a055-4564-ba5c-276e8815a584": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "1a42e6dc-2a6f-477f-9a41-bfd8bc8e892f": {
+              "9d6428c2-558c-496d-a5fc-7d25e2dc8149": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "096cbe70-0662-4ad7-b84f-3424e879c081": {
+              "fd3245d4-c4df-46cc-b7fb-769a2390c8b6": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "871999e7-f500-4425-9b20-913c2cc97ace": {
+              "7d3989de-ec21-4a06-a33d-f72a1e475b80": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "051af059-1f54-42eb-a3f9-2a622b3eb9ad": {
+              "f07b184f-cb17-4fb2-9b2a-432134bee9e6": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

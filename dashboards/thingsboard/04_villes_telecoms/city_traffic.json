@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Comptage Trafic & Mobilités' (ID: city_traffic). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "57b6ac51-3e22-4994-af05-2f659e4ef2f5": {
-        "id": "57b6ac51-3e22-4994-af05-2f659e4ef2f5",
+      "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74": {
+        "id": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74",
         "alias": "Comptage Trafic & Mobilités",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "69e1ae29-84b8-4f56-99ac-b13d091d143e": {
+      "edbd279b-2ff8-4bd8-b82b-15e455a181a9": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "69e1ae29-84b8-4f56-99ac-b13d091d143e"
+        "id": "edbd279b-2ff8-4bd8-b82b-15e455a181a9"
       },
-      "5761f2c1-85e8-4cc4-9a61-8037b6e80514": {
+      "6537357e-0b4c-4c03-950b-d7d41b07693b": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57b6ac51-3e22-4994-af05-2f659e4ef2f5",
+              "entityAliasId": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74",
               "dataKeys": [
                 {
                   "name": "debit_vehicules",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "5761f2c1-85e8-4cc4-9a61-8037b6e80514"
+        "id": "6537357e-0b4c-4c03-950b-d7d41b07693b"
       },
-      "fcf88db2-92ec-403d-a1d6-d0b61850e4d8": {
+      "ed8a1d99-c0d6-4c5a-ad9c-e4436bebafe6": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57b6ac51-3e22-4994-af05-2f659e4ef2f5",
+              "entityAliasId": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74",
               "dataKeys": [
                 {
                   "name": "debit_vehicules",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "fcf88db2-92ec-403d-a1d6-d0b61850e4d8"
+        "id": "ed8a1d99-c0d6-4c5a-ad9c-e4436bebafe6"
       },
-      "aa807f45-0475-448e-9f19-4cdb8e68118b": {
+      "eabdc6d5-a1a8-4b9a-83f8-43129301bcd1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57b6ac51-3e22-4994-af05-2f659e4ef2f5",
+              "entityAliasId": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74",
               "dataKeys": [
                 {
                   "name": "debit_cyclistes",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "aa807f45-0475-448e-9f19-4cdb8e68118b"
+        "id": "eabdc6d5-a1a8-4b9a-83f8-43129301bcd1"
       },
-      "404f2912-30d7-4939-89dc-8fa55ea1a9df": {
+      "2b6fb3ee-d388-4ca0-bf73-c122dbdba7e1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57b6ac51-3e22-4994-af05-2f659e4ef2f5",
+              "entityAliasId": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74",
               "dataKeys": [
                 {
                   "name": "vitesse_moyenne_kmh",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "404f2912-30d7-4939-89dc-8fa55ea1a9df"
+        "id": "2b6fb3ee-d388-4ca0-bf73-c122dbdba7e1"
       },
-      "87a3a6d7-1535-4592-a772-d99b5b70400e": {
+      "0ccc7220-3616-4faa-a113-33ba64c14003": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57b6ac51-3e22-4994-af05-2f659e4ef2f5",
+              "entityAliasId": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74",
               "dataKeys": [
                 {
                   "name": "debit_vehicules",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "87a3a6d7-1535-4592-a772-d99b5b70400e"
+        "id": "0ccc7220-3616-4faa-a113-33ba64c14003"
       },
-      "8f55a7c7-fd33-4a25-b3d9-e31a872ac16a": {
+      "7921677a-5e0c-48a7-aa43-8701baf9c697": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -427,19 +427,21 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "57b6ac51-3e22-4994-af05-2f659e4ef2f5"
+            "entityAliasId": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57b6ac51-3e22-4994-af05-2f659e4ef2f5",
+              "entityAliasId": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74",
               "dataKeys": [
                 {
                   "name": "alerte_congestion",
                   "type": "attribute",
                   "label": "alerte_congestion",
                   "color": "#10B981",
-                  "settings": {}
+                  "settings": {
+                    "dataKeyType": "client"
+                  }
                 }
               ]
             }
@@ -452,11 +454,12 @@
             "title": "Pilotage - Seuil de Congestion Dépassé",
             "initialValue": false,
             "retrieveValueMethod": "attribute",
+            "valueKey": "alerte_congestion",
             "valueAttribute": "alerte_congestion",
-            "attributeScope": "SHARED_SCOPE",
+            "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_alerte_congestion",
             "getValueMethod": "get_alerte_congestion",
-            "parseValueFunction": "return data ? true : false;",
+            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
           "widgetStyle": {
@@ -468,9 +471,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "8f55a7c7-fd33-4a25-b3d9-e31a872ac16a"
+        "id": "7921677a-5e0c-48a7-aa43-8701baf9c697"
       },
-      "c4d11470-e590-4d37-8f6d-f61e799cc5db": {
+      "cb1980c9-b451-4f60-90f8-955f82d5dcad": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -483,7 +486,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57b6ac51-3e22-4994-af05-2f659e4ef2f5",
+              "entityAliasId": "a5f1da2b-0a9a-4d6e-bf6c-55be43c7fd74",
               "dataKeys": [
                 {
                   "name": "alerte_congestion",
@@ -515,7 +518,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "c4d11470-e590-4d37-8f6d-f61e799cc5db"
+        "id": "cb1980c9-b451-4f60-90f8-955f82d5dcad"
       }
     },
     "states": {
@@ -525,49 +528,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "69e1ae29-84b8-4f56-99ac-b13d091d143e": {
+              "edbd279b-2ff8-4bd8-b82b-15e455a181a9": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "5761f2c1-85e8-4cc4-9a61-8037b6e80514": {
+              "6537357e-0b4c-4c03-950b-d7d41b07693b": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "fcf88db2-92ec-403d-a1d6-d0b61850e4d8": {
+              "ed8a1d99-c0d6-4c5a-ad9c-e4436bebafe6": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "aa807f45-0475-448e-9f19-4cdb8e68118b": {
+              "eabdc6d5-a1a8-4b9a-83f8-43129301bcd1": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "404f2912-30d7-4939-89dc-8fa55ea1a9df": {
+              "2b6fb3ee-d388-4ca0-bf73-c122dbdba7e1": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "87a3a6d7-1535-4592-a772-d99b5b70400e": {
+              "0ccc7220-3616-4faa-a113-33ba64c14003": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "8f55a7c7-fd33-4a25-b3d9-e31a872ac16a": {
+              "7921677a-5e0c-48a7-aa43-8701baf9c697": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "c4d11470-e590-4d37-8f6d-f61e799cc5db": {
+              "cb1980c9-b451-4f60-90f8-955f82d5dcad": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

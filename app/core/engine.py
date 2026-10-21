@@ -39,6 +39,7 @@ class SimulationEngine:
         self._drift_offsets: Dict[str, float] = {}
         self._integrator_accumulators: Dict[str, float] = {}
         self._last_tick_time: float = time.time()
+        self._http_rpc_tasks: Dict[str, asyncio.Task] = {}
 
         # Enregistrement du callback RPC Thingsboard
         self.mqtt.on_rpc_callback = self._handle_rpc
@@ -57,7 +58,92 @@ class SimulationEngine:
         self.is_running = False
         if self._task and not self._task.done():
             self._task.cancel()
+        for dev_id, t in list(self._http_rpc_tasks.items()):
+            if not t.done():
+                t.cancel()
+        self._http_rpc_tasks.clear()
         logger.info("Moteur de simulation arrêté.")
+
+    def _sync_device_listeners(self, devices_map: Dict[str, DeviceConfig]):
+        """Synchronise les abonnements de contrôle bidirectionnel (MQTT et Long-Polling HTTP)."""
+        active_http_ids = set()
+        for dev_id, dev in devices_map.items():
+            if dev.platform == PlatformType.THINGSBOARD and dev.token:
+                if dev.protocol == TransportProtocol.HTTP:
+                    active_http_ids.add(dev_id)
+                    if dev_id not in self._http_rpc_tasks or self._http_rpc_tasks[dev_id].done():
+                        self._http_rpc_tasks[dev_id] = asyncio.create_task(
+                            self._poll_http_rpc_worker(dev)
+                        )
+                elif dev.protocol in (TransportProtocol.MQTT, TransportProtocol.MQTTS, TransportProtocol.WSS):
+                    # Pré-connexion du client MQTT pour écouter les ordres dès le démarrage
+                    self.mqtt.get_or_create_device_client(dev.id, dev.token)
+
+        # Nettoyage des tâches HTTP orphelines
+        for old_id in list(self._http_rpc_tasks.keys()):
+            if old_id not in active_http_ids:
+                task = self._http_rpc_tasks.pop(old_id, None)
+                if task and not task.done():
+                    task.cancel()
+
+    async def _poll_http_rpc_worker(self, device: DeviceConfig):
+        """Boucle de Long-Polling HTTP pour recevoir les ordres RPC ThingsBoard en continu."""
+        token = device.token
+        if not token:
+            return
+
+        global_broker = self.repo.get_broker()
+        host = (device.custom_host or global_broker.host or "localhost").strip()
+        use_tls = device.use_tls if device.use_tls is not None else True
+        port = device.custom_port or (443 if use_tls else 80)
+
+        logger.info(f"✓ Listener RPC HTTP activé pour '{device.id}' ({host}:{port}, token: {token[:4]}***)")
+
+        while self.is_running and device.enabled:
+            try:
+                rpc_data = await self.transports.http.poll_rpc(
+                    host=host,
+                    port=port,
+                    token=token,
+                    timeout_sec=15,
+                    use_tls=use_tls,
+                )
+                if rpc_data and isinstance(rpc_data, dict):
+                    req_id = rpc_data.get("id")
+                    logger.info(f"📥 Commande RPC HTTP reçue pour '{device.id}' (ID #{req_id}) : {rpc_data}")
+
+                    # 1. Traitement de la commande par la logique commune
+                    resp_val = self._handle_rpc(device.id, f"v1/devices/me/rpc/request/{req_id}", json.dumps(rpc_data))
+
+                    # 2. Réponse synchrone HTTP POST /api/v1/{token}/rpc/{req_id}
+                    if req_id is not None:
+                        resp_payload = json.dumps({"status": "SUCCESS", "value": resp_val if resp_val is not None else True})
+                        await self.transports.http.respond_rpc(
+                            host=host,
+                            port=port,
+                            token=token,
+                            req_id=req_id,
+                            resp_payload=resp_payload,
+                            use_tls=use_tls,
+                        )
+
+                    # 3. Synchronisation immédiate de l'attribut client sur ThingsBoard
+                    method_name = rpc_data.get("method", "")
+                    clean_name = method_name.replace("set_", "").replace("toggle_", "")
+                    if clean_name and resp_val is not None:
+                        attr_payload = json.dumps({clean_name: resp_val})
+                        await self.transports.http.post_payload(
+                            host=host,
+                            port=port,
+                            endpoint=f"/api/v1/{token}/attributes",
+                            payload=attr_payload,
+                            use_tls=use_tls,
+                        )
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.debug(f"Tick polling RPC HTTP pour '{device.id}': {e}")
+                await asyncio.sleep(2.0)
 
     async def _run_loop(self):
         while self.is_running:
@@ -68,6 +154,7 @@ class SimulationEngine:
                 self._last_tick_time = now
 
                 devices_map = {d.id: d for d in self.repo.get_devices() if d.enabled}
+                self._sync_device_listeners(devices_map)
                 variables = self.repo.get_variables()
 
                 # 1. Organisation du contexte de calcul par équipement
@@ -444,7 +531,9 @@ class SimulationEngine:
                         "timestamp": time.time(),
                         "anomaly": target_var.anomaly.value,
                     })
+                return new_val
             else:
                 # Répondre tout de même pour éviter le timeout de ThingsBoard
                 self.mqtt.publish_device_message(device_id, f"v1/devices/me/rpc/response/{req_id}", json.dumps({"status": "NOT_FOUND"}))
                 logger.warning(f"Commande RPC ignorée : aucune variable correspondante pour {method} sur '{device_id}'")
+                return None

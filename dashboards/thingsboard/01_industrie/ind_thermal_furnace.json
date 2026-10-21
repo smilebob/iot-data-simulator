@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Four de Traitement Thermique' (ID: ind_thermal_furnace). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "855d6b46-2c41-46b4-80c7-608bc2a773c2": {
-        "id": "855d6b46-2c41-46b4-80c7-608bc2a773c2",
+      "01f407b6-a8e1-4c1a-b808-6566a99a6722": {
+        "id": "01f407b6-a8e1-4c1a-b808-6566a99a6722",
         "alias": "Four de Traitement Thermique",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "1aefa8b3-73ff-45ee-9e56-9f341487b8e9": {
+      "bff76312-5a78-4532-872b-95c2d57f40d0": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "1aefa8b3-73ff-45ee-9e56-9f341487b8e9"
+        "id": "bff76312-5a78-4532-872b-95c2d57f40d0"
       },
-      "1306d09f-2ef2-4360-b628-57994a96c0de": {
+      "f54e322c-7263-4f77-81e8-6c3a299a3bbc": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "855d6b46-2c41-46b4-80c7-608bc2a773c2",
+              "entityAliasId": "01f407b6-a8e1-4c1a-b808-6566a99a6722",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "1306d09f-2ef2-4360-b628-57994a96c0de"
+        "id": "f54e322c-7263-4f77-81e8-6c3a299a3bbc"
       },
-      "151263c0-bb05-4671-a140-71d40baab4ef": {
+      "2dd9844e-8744-40a4-9870-500b4571ec7c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "855d6b46-2c41-46b4-80c7-608bc2a773c2",
+              "entityAliasId": "01f407b6-a8e1-4c1a-b808-6566a99a6722",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "151263c0-bb05-4671-a140-71d40baab4ef"
+        "id": "2dd9844e-8744-40a4-9870-500b4571ec7c"
       },
-      "39b05c12-6a25-4edc-9f0e-5f277edf89ae": {
+      "834382f0-3f2c-468c-a91a-7a10d7281afd": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "855d6b46-2c41-46b4-80c7-608bc2a773c2",
+              "entityAliasId": "01f407b6-a8e1-4c1a-b808-6566a99a6722",
               "dataKeys": [
                 {
                   "name": "temp_zone_2",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "39b05c12-6a25-4edc-9f0e-5f277edf89ae"
+        "id": "834382f0-3f2c-468c-a91a-7a10d7281afd"
       },
-      "a374a3a6-6d80-43a9-9b2e-06f3a8141509": {
+      "826c3570-7f38-49ba-8eaa-a06b459d002e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "855d6b46-2c41-46b4-80c7-608bc2a773c2",
+              "entityAliasId": "01f407b6-a8e1-4c1a-b808-6566a99a6722",
               "dataKeys": [
                 {
                   "name": "temp_zone_3",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "a374a3a6-6d80-43a9-9b2e-06f3a8141509"
+        "id": "826c3570-7f38-49ba-8eaa-a06b459d002e"
       },
-      "3b7dfff0-0e2e-4e96-b670-029ebbc2866d": {
+      "1edfa586-3956-4833-85f2-8bf0c7face99": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "855d6b46-2c41-46b4-80c7-608bc2a773c2",
+              "entityAliasId": "01f407b6-a8e1-4c1a-b808-6566a99a6722",
               "dataKeys": [
                 {
                   "name": "debit_gaz_combustible",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "3b7dfff0-0e2e-4e96-b670-029ebbc2866d"
+        "id": "1edfa586-3956-4833-85f2-8bf0c7face99"
       },
-      "71132e40-febd-459a-9766-d5191b037c08": {
+      "f23022ba-691f-49c8-b371-de5feb6348fe": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "855d6b46-2c41-46b4-80c7-608bc2a773c2",
+              "entityAliasId": "01f407b6-a8e1-4c1a-b808-6566a99a6722",
               "dataKeys": [
                 {
                   "name": "puissance_bruleurs_pct",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "71132e40-febd-459a-9766-d5191b037c08"
+        "id": "f23022ba-691f-49c8-b371-de5feb6348fe"
       },
-      "d749cb0f-7118-49d1-8c21-1c00b4a3997e": {
+      "39432f88-2519-4078-b801-3c6569436e1e": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "855d6b46-2c41-46b4-80c7-608bc2a773c2",
+              "entityAliasId": "01f407b6-a8e1-4c1a-b808-6566a99a6722",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "d749cb0f-7118-49d1-8c21-1c00b4a3997e"
+        "id": "39432f88-2519-4078-b801-3c6569436e1e"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "1aefa8b3-73ff-45ee-9e56-9f341487b8e9": {
+              "bff76312-5a78-4532-872b-95c2d57f40d0": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "1306d09f-2ef2-4360-b628-57994a96c0de": {
+              "f54e322c-7263-4f77-81e8-6c3a299a3bbc": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "151263c0-bb05-4671-a140-71d40baab4ef": {
+              "2dd9844e-8744-40a4-9870-500b4571ec7c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "39b05c12-6a25-4edc-9f0e-5f277edf89ae": {
+              "834382f0-3f2c-468c-a91a-7a10d7281afd": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "a374a3a6-6d80-43a9-9b2e-06f3a8141509": {
+              "826c3570-7f38-49ba-8eaa-a06b459d002e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "3b7dfff0-0e2e-4e96-b670-029ebbc2866d": {
+              "1edfa586-3956-4833-85f2-8bf0c7face99": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "71132e40-febd-459a-9766-d5191b037c08": {
+              "f23022ba-691f-49c8-b371-de5feb6348fe": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "d749cb0f-7118-49d1-8c21-1c00b4a3997e": {
+              "39432f88-2519-4078-b801-3c6569436e1e": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,
