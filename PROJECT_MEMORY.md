@@ -1,11 +1,11 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.7.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8
+> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.4 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
 ## 🎯 Vue d'Ensemble & Objectif
-- **Description** : Simulateur de données IoT industriel pour démonstrations dynamiques sur **ThingsBoard** et plateformes compatibles MQTT (**Home Assistant**, **Datacake**, etc.). Permet la génération de signaux mathématiques purs paramétrables, le rejeu de séries temporelles (points/CSV), l'injection d'anomalies en direct (*Chaos Button*) et le forçage manuel.
+- **Description** : Simulateur de données IoT industriel pour démonstrations dynamiques sur **ThingsBoard 4.3** et plateformes compatibles MQTT (**Home Assistant**, **Datacake**, etc.). Permet la génération de signaux mathématiques purs paramétrables, le rejeu de séries temporelles (points/CSV), l'injection d'anomalies en direct (*Chaos Button*) et le forçage manuel.
 - **Stack Technique** : Python 3.11+ (FastAPI, asyncio, Paho-MQTT v2, Pydantic v2), Eclipse Mosquitto 2.0, MQTTX Web, Docker Compose multi-stage non-root.
 - **Point d'Entrée Principal** : [`app/main.py`](file:///home/pierre/Projets/iot-data-simulator/app/main.py)
 - **Ports Exposés** :
@@ -85,6 +85,10 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Pipeline CI/CD GitHub Actions (`.github/workflows/docker-build-push.yml`)** : compilation automatisée multi-architecture (`linux/amd64` et `linux/arm64`) sur chaque push `main` et tag `v*`, et publication sur GitHub Container Registry (`ghcr.io/smilebob/iot-data-simulator:latest`).
   - **Déploiement Portainer Clé en Main** : création de `docker-compose.portainer.yml` (compatible Web Editor et Stack Git avec volumes managés), template applicatif `templates/portainer-template.json`, et support du webhook Portainer pour mise à jour continue sans interruption.
   - **Guide DevOps Portainer** : `Documentation/devops/portainer_deployment.md`.
+- [x] Compatibilité ThingsBoard 4.3 & Résolution du Data Binding HTML Value Card (v1.9.4) :
+  - **Moteur de rendu ThingsBoard 4.3** : Résolution des balises `${cle:format}` dans les widgets HTML Value Card (`system.cards.html_value_card`) par correspondance stricte avec le champ `label` des `dataKeys` (et non `name`).
+  - **Alignement `label = clean_key`** : Définition de `label: clean_key` pour toutes les grandeurs des synoptiques SCADA, tout en maintenant les libellés complets en français sur les jauges numériques JustGage, graphiques temporels et tables d'attributs.
+  - **Propriétés de synchronisation TB 4.3** : Ajout de `useDashboardTimewindow: True`, `cardCss`/`css` et `cardHtml`/`html` simultanés sur les widgets de cartes.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles
@@ -98,7 +102,10 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 1. **Zéro `eval()` / `exec()`** : Toute formule mathématique doit impérativement passer par `MathSignalGenerator` pour préserver l'intégrité de la sandbox.
 2. **Écriture Disque Atomique** : Toujours utiliser le pattern de fichier temporaire + `os.replace` implémenté dans `StorageRepository` pour éviter la corruption du fichier JSON en environnement conteneurisé.
 3. **Isolation Réseau & Permissions CIS** : Le conteneur s'exécute avec toutes les capacités Linux révoquées (`cap_drop: [ALL]`). Ne jamais introduire de dépendance nécessitant des privilèges root ou des sockets brutes.
-4. **Variables d'Environnement** :
+4. **Moteur ThingsBoard 4.3 (`html_value_card`)** :
+   - Dans ThingsBoard 4.3, le widget `system.cards.html_value_card` remplace les balises de type `${cle:format}` **UNIQUEMENT si le `label` du dataKey correspond exactement à `cle`** (la plateforme ignore le champ `name` pour cette substitution de template).
+   - Tout modèle de carte ou de synoptique vectoriel SVG dynamique DOIT avoir `dataKey.label == 'cle_technique'`.
+5. **Variables d'Environnement** :
    - `MQTT_BROKER_HOST` (défaut: `mosquitto`)
    - `MQTT_BROKER_PORT` (défaut: `1883`)
    - `MQTT_USE_TLS` (défaut: `false`)
@@ -110,3 +117,4 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 1. **Documentation vivante automatique** : À chaque évolution ou refonte d'une partie de l'application, mettre à jour automatiquement l'ensemble des documentations concernées (`Documentation/developer/`, `Documentation/devops/`, `Documentation/user/`) ainsi que les mémoires IA (`MEMORY.md` / `PROJECT_MEMORY.md`).
 2. **Gestion Git / GitHub** : Ne JAMAIS effectuer de `git push` sur GitHub sans demande explicite de l'utilisateur. Les modifications restent locales jusqu'à instruction explicite.
 3. **Exigence stricte de Cybersécurité & Stack à jour (Zero-Legacy / Zero-CVE)** : L'application et l'intégralité de sa stack (OS Debian du conteneur, runtime Python, dépendances pip, broker Mosquitto, images Docker et bibliothèques frontend) doivent TOUJOURS utiliser les versions maintenues les plus récentes exemptes de vulnérabilités connues (CVE). Tout nouvel ajout de composant doit faire l'objet d'un audit de sécurité systématique.
+4. **Environnement Cible ThingsBoard 4.3** : L'instance cible de référence de l'utilisateur est **ThingsBoard 4.3**. Tout développement, export JSON de dashboard, mapping d'alias, widget ou protocole de transport doit impérativement être testé et maintenu conforme aux spécifications et particularités de cette version.
