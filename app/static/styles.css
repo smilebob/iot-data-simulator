@@ -1,0 +1,46 @@
+/* Styles complémentaires et animations temps réel */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.flash-update {
+  animation: flash-highlight 0.4s ease-out;
+}
+
+@keyframes flash-highlight {
+  0% { color: #38bdf8; transform: scale(1.04); }
+  100% { color: inherit; transform: scale(1); }
+}
+
+.active-filter-tab {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+}
+
+.filter-tab {
+  background-color: #1e293b;
+  color: #94a3b8;
+}
+
+.filter-tab:hover {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}

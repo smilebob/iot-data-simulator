@@ -1,0 +1,110 @@
+# ⚡ IoT Data Simulator (ThingsBoard, Home Assistant, Datacake & Multi-Platform)
+
+Simulateur de données IoT industriel développé en Python (FastAPI + Paho-MQTT + WebSockets), packagé dans une stack Docker auto-portante intégrant le broker MQTT Eclipse Mosquitto.
+
+Conçu spécialement pour réaliser des démonstrations dynamiques et réalistes sur **ThingsBoard** et compatible nativement avec **Home Assistant**, **Datacake** et tout broker MQTT distant.
+
+---
+
+## 🚀 Démarrage Rapide (Stack Docker)
+
+### 1. Lancement de la stack
+```bash
+cd iot-data-simulator
+docker compose up -d
+```
+
+### 2. Accès aux interfaces Web
+* **Simulateur IoT (GUI)** : **[http://localhost:8000](http://localhost:8000)**  
+  Gérez vos équipements virtuels, variables, fonctions mathématiques, scénarios et injections d'anomalies.
+* **Explorateur Web MQTT (MQTTX)** : **[http://localhost:8080](http://localhost:8080)**  
+  Visualisez l'arbre des topics Mosquitto, souscrivez aux topics en temps réel (`#` ou `v1/#`) et inspectez les payloads JSON envoyés par le simulateur.
+  > *Pour connecter MQTTX au broker local dans l'interface web :*  
+  > Protocole : `ws://` | Hôte : `localhost` | Port : `9001` | Path : `/` ou `/mqtt`
+
+* Le broker Mosquitto écoute sur les ports `1883` (TCP standard) et `9001` (WebSockets).
+
+---
+
+## 🎯 Connexion avec ThingsBoard
+
+L'application intègre le connecteur natif ThingsBoard :
+
+1. **Création du device dans ThingsBoard** :
+   * Rendez-vous sur votre ThingsBoard (ex: *ThingsBoard Cloud* ou instance locale).
+   * Créez un nouvel équipement (Device) et copiez son **Access Token**.
+2. **Dans l'interface Web du simulateur** :
+   * Cliquez sur **`Paramètres Broker (icône écrou)`** :
+     * Si vous utilisez ThingsBoard Cloud : Host = `mqtt.thingsboard.cloud`, Port = `1883` (ou `8883` TLS).
+     * Si vous utilisez ThingsBoard Local : Host = votre IP / domaine ThingsBoard.
+   * Modifiez ou créez un **Équipement** :
+     * Plateforme : `ThingsBoard`
+     * Token : collez le Token ThingsBoard de votre équipement.
+3. **Publication automatique** :
+   * Les variables de type **Télémétrie** sont envoyées sur `v1/devices/me/telemetry` au format horodaté ThingsBoard :
+     ```json
+     {"ts": 1729506400000, "values": {"temperature": 24.5}}
+     ```
+   * Les variables de type **Attribut / Contrôle** sont publiées sur `v1/devices/me/attributes`.
+
+---
+
+## 🔌 Interopérabilité Multi-Plateformes
+
+| Plateforme | Connecteur | Fonctionnement |
+| :--- | :--- | :--- |
+| **ThingsBoard** | `ThingsBoardAdapter` | Format JSON natif avec horodatage milliseconde, Device Tokens, écoute des requêtes RPC. |
+| **Home Assistant** | `HomeAssistantAdapter` | **Auto-découverte (MQTT Discovery)** sur `homeassistant/sensor/.../config`. Aucun YAML nécessaire dans HA ! |
+| **Datacake** | `DatacakeAdapter` | Télémétrie horodatée structurée pour tableaux de bord Datacake. |
+| **Générique / Custom** | `GenericMqttAdapter` | Topics personnalisables à volonté (`usine/batA/compresseur/pression`), formats JSON ou bruts. |
+
+---
+
+## 🧪 Fonctions Démo & Injection d'Anomalies ("Chaos Button")
+
+Pour rendre vos démonstrations percutantes et valider vos **règles d'alarmes (Alarm Rules ThingsBoard)**, chaque variable dispose de commandes rapides en 1 clic :
+* 💥 **Pic (Spike)** : Injecte un saut brutal de valeur pour déclencher instantanément une alarme de seuil critique.
+* 📈 **Dérive (Drift)** : Simule une dérive thermique ou mécanique progressive.
+* ❄️ **Gel (Freeze)** : Bloque la valeur courante pour simuler un capteur grippé.
+* 🔇 **Coupure (Timeout)** : Coupe l'émission de la variable pour tester la détection de perte de connectivité ThingsBoard.
+* 🎛️ **Forçage Manuel** : Curseur / champ de saisie pour imposer une valeur fixe en temps réel.
+
+---
+
+## 📈 Modes de Génération des Données
+
+* **Signaux Mathématiques purs** :
+  * Sinusoïde, Cosinus, Triangulaire, Créneau (Square), Dent de scie, Rampe linéaire, Marche aléatoire (Random Walk), Bruit gaussien, Constante.
+  * Réglages : Min, Max, Période du cycle en secondes, Offset et pourcentage de bruit aléatoire superposé.
+* **Tableau de points horodatés (Rejeu temporel)** :
+  * Définition d'une série de points `(offset_secondes, valeur)`.
+  * Support de la répétition en boucle, interpolation linéaire, et import direct de fichiers CSV.
+
+---
+
+## 🔒 Conformité aux Bonnes Pratiques du CIS (Center for Internet Security)
+
+* **CIS Docker Benchmark Rule 4.1 (Non-root user)** :
+  * L'application s'exécute sous un utilisateur système non privilégié dédié (`appuser`, UID/GID 10001).
+* **CIS Docker Benchmark Rule 5.16 & 5.17 (Moindre privilège)** :
+  * Activation de `no-new-privileges: true` et suppression intégrale des capacités du kernel (`cap_drop: [ALL]`).
+* **CIS Docker Benchmark Rule 4.3 & 4.4 (Multi-stage build & Surface minimale)** :
+  * Image Python Debian épurée, compilateurs et caches purgés.
+* **CIS Docker Benchmark Rule 4.6 (Healthcheck)** :
+  * Sonde de santé intégrée vérifiant `/healthz`.
+* **Sécurité applicative** :
+  * Aucun usage de `eval()` ou code dynamique non maîtrisé.
+  * En-têtes HTTP sécurisés (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`).
+  * Support de TLS 1.2+ obligatoire lors des connexions chiffrées MQTTS.
+
+---
+
+## 🛠️ Exécution en local sans Docker (Développement)
+
+```bash
+cd iot-data-simulator
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```

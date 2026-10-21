@@ -1,0 +1,75 @@
+services:
+  # ========================================================
+  # Broker MQTT Mosquitto (Broker Local Embarqué)
+  # ========================================================
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: iot-sim-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    # CIS Benchmark : Sécurité renforcée
+    security_opt:
+      - "no-new-privileges:true"
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 2 nc -z localhost 1883 || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - iot-network
+
+  # ========================================================
+  # Application Simulateur IoT (Web GUI + Moteur Python)
+  # ========================================================
+  simulator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: iot-sim-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Configuration Broker MQTT (modifiable ici pour pointer vers un broker distant)
+      - MQTT_BROKER_HOST=mosquitto
+      - MQTT_BROKER_PORT=1883
+      - MQTT_USE_TLS=false
+      - MQTT_USERNAME=
+      - MQTT_PASSWORD=
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    # CIS Benchmark : Moindre privilège et isolation maximale
+    security_opt:
+      - "no-new-privileges:true"
+    cap_drop:
+      - ALL
+    networks:
+      - iot-network
+
+  # ========================================================
+  # Interface Web d'Exploration MQTT (MQTTX Web UI)
+  # ========================================================
+  mqtt-web:
+    image: emqx/mqttx-web:latest
+    container_name: iot-sim-mqttx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    security_opt:
+      - "no-new-privileges:true"
+    networks:
+      - iot-network
+
+networks:
+  iot-network:
+    name: iot-simulator-net
+    driver: bridge
