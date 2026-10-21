@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Système Stockage Batteries (BESS)' (ID: infra_bess_storage). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_BESS_STORAGE. Protocole: MQTT.",
     "entityAliases": {
-      "fd759a0e-b47f-4c78-8e21-a6a4e9474020": {
-        "id": "fd759a0e-b47f-4c78-8e21-a6a4e9474020",
+      "619112e4-4c86-46a0-882c-0c8482dd3806": {
+        "id": "619112e4-4c86-46a0-882c-0c8482dd3806",
         "alias": "Système Stockage Batteries (BESS)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "71d4e90c-13d7-4146-b65b-802b15e9d988": {
+      "0e546395-b5e1-44a5-98cf-eb4349dbfb14": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -29,24 +29,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Système Stockage Batteries (BESS)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_bess_storage</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_BESS_STORAGE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Système Stockage Batteries (BESS)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: infra_bess_storage</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_BESS_STORAGE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Système Stockage Batteries (BESS)</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: infra_bess_storage</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_BESS_STORAGE</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Système Stockage Batteries (BESS)</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: infra_bess_storage</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_INFRA_BESS_STORAGE</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": false,
-          "backgroundColor": "transparent",
-          "color": "#F1F5F9",
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
           "widgetStyle": {
-            "background": "transparent"
+            "backgroundColor": "#FFFFFF"
           }
         },
         "row": 0,
         "col": 0,
-        "id": "71d4e90c-13d7-4146-b65b-802b15e9d988"
+        "id": "0e546395-b5e1-44a5-98cf-eb4349dbfb14"
       },
-      "ed5eef92-227c-4882-ba80-e0fbf1198eaa": {
+      "8c459fc0-b5b9-4256-9b97-8725b77192fa": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fd759a0e-b47f-4c78-8e21-a6a4e9474020",
+              "entityAliasId": "619112e4-4c86-46a0-882c-0c8482dd3806",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -100,24 +100,24 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Schéma Unifilaire SCADA : Système Stockage Batteries (BESS)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_BESS_STORAGE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <line x1=\"50\" y1=\"50\" x2=\"250\" y2=\"50\" stroke=\"#E2001A\" stroke-width=\"5\"/>\n    <text x=\"50\" y=\"35\" fill=\"#E2001A\" font-size=\"11\" font-weight=\"bold\">ARRIVÉE HTA / BT (400V TRIPHASÉ)</text>\n\n    <!-- Disjoncteur Général Masterpact -->\n    <g transform=\"translate(300, 50)\">\n      <rect x=\"-18\" y=\"-18\" width=\"36\" height=\"36\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2\"/>\n      <line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke=\"#10B981\" stroke-width=\"3\"/>\n      <line x1=\"-10\" y1=\"10\" x2=\"10\" y2=\"-10\" stroke=\"#10B981\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"30\" fill=\"#10B981\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DISJONCTEUR DGBT</text>\n    </g>\n\n    <!-- Jeu de Barres Général Cuivre -->\n    <line x1=\"420\" y1=\"35\" x2=\"420\" y2=\"230\" stroke=\"#F59E0B\" stroke-width=\"6\"/>\n    <text x=\"435\" y=\"35\" fill=\"#F59E0B\" font-size=\"11\" font-weight=\"bold\">JEU DE BARRES TGBT 1600A</text>\n\n    <!-- Départs Force, CVC, Éclairage -->\n    <g transform=\"translate(420, 75)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ CVC & Pompes (250A)</text>\n    </g>\n    <g transform=\"translate(420, 135)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ Informatique / Onduleur (160A)</text>\n    </g>\n    <g transform=\"translate(420, 195)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ Éclairage DALI (63A)</text>\n    </g>\n\n    <!-- Callouts Électriques -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PUISSANCE ACTIVE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_active_totale:1} kW</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">COS PHI (FACTEUR)</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${facteur_puissance:2}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Schéma Unifilaire SCADA : Système Stockage Batteries (BESS)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_BESS_STORAGE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <line x1=\"50\" y1=\"50\" x2=\"250\" y2=\"50\" stroke=\"#E2001A\" stroke-width=\"5\"/>\n    <text x=\"50\" y=\"35\" fill=\"#E2001A\" font-size=\"11\" font-weight=\"bold\">ARRIVÉE HTA / BT (400V TRIPHASÉ)</text>\n\n    <!-- Disjoncteur Général Masterpact -->\n    <g transform=\"translate(300, 50)\">\n      <rect x=\"-18\" y=\"-18\" width=\"36\" height=\"36\" fill=\"#1E293B\" stroke=\"#10B981\" stroke-width=\"2\"/>\n      <line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke=\"#10B981\" stroke-width=\"3\"/>\n      <line x1=\"-10\" y1=\"10\" x2=\"10\" y2=\"-10\" stroke=\"#10B981\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"30\" fill=\"#10B981\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DISJONCTEUR DGBT</text>\n    </g>\n\n    <!-- Jeu de Barres Général Cuivre -->\n    <line x1=\"420\" y1=\"35\" x2=\"420\" y2=\"230\" stroke=\"#F59E0B\" stroke-width=\"6\"/>\n    <text x=\"435\" y=\"35\" fill=\"#F59E0B\" font-size=\"11\" font-weight=\"bold\">JEU DE BARRES TGBT 1600A</text>\n\n    <!-- Départs Force, CVC, Éclairage -->\n    <g transform=\"translate(420, 75)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ CVC & Pompes (250A)</text>\n    </g>\n    <g transform=\"translate(420, 135)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ Informatique / Onduleur (160A)</text>\n    </g>\n    <g transform=\"translate(420, 195)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#38BDF8\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#94A3B8\" font-size=\"10\">Départ Éclairage DALI (63A)</text>\n    </g>\n\n    <!-- Callouts Électriques -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PUISSANCE ACTIVE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_active_totale:1} kW</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">COS PHI (FACTEUR)</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${facteur_puissance:2}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Stockage BESS SCADA : Système Stockage Batteries (BESS)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_BESS_STORAGE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Conteneur Isotherme 40ft BESS -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">CONTENEUR STOCKAGE BATTERIES LFP (BESS 2 MWh / CLIMATISATION REDONDANTE)</text>\n\n    <!-- Racks Batteries Li-ion -->\n    <g transform=\"translate(100, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #01</text>\n    </g>\n    <g transform=\"translate(190, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #02</text>\n    </g>\n    <g transform=\"translate(280, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #03</text>\n    </g>\n\n    <!-- Onduleur Réversible PCS 4 Quadrants -->\n    <g transform=\"translate(420, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"130\" height=\"100\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"65\" y=\"45\" fill=\"#E2001A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONVERTISSEUR PCS</text>\n      <text x=\"65\" y=\"65\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\">Bi-directionnel AC/DC</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉTAT DE CHARGE (SOC)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soc_pct:1} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION DU PACK</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_pack_v:1} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT CHARGE/DÉCH.</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_charge_decharge_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SANTÉ BATTERIE (SOH)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soh_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Stockage BESS SCADA : Système Stockage Batteries (BESS)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_INFRA_BESS_STORAGE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Conteneur Isotherme 40ft BESS -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#059669\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">CONTENEUR STOCKAGE BATTERIES LFP (BESS 2 MWh / CLIMATISATION REDONDANTE)</text>\n\n    <!-- Racks Batteries Li-ion -->\n    <g transform=\"translate(100, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #01</text>\n    </g>\n    <g transform=\"translate(190, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #02</text>\n    </g>\n    <g transform=\"translate(280, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"70\" height=\"100\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"35\" y=\"55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RACK #03</text>\n    </g>\n\n    <!-- Onduleur Réversible PCS 4 Quadrants -->\n    <g transform=\"translate(420, 90)\">\n      <rect x=\"0\" y=\"0\" width=\"130\" height=\"100\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"65\" y=\"45\" fill=\"#E2001A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONVERTISSEUR PCS</text>\n      <text x=\"65\" y=\"65\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\">Bi-directionnel AC/DC</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉTAT DE CHARGE (SOC)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soc_pct:1} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION DU PACK</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_pack_v:1} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT CHARGE/DÉCH.</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_charge_decharge_a:1} A</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SANTÉ BATTERIE (SOH)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${soh_pct:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
-          "backgroundColor": "transparent",
-          "color": "#F1F5F9",
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
           "widgetStyle": {
-            "background": "transparent"
+            "backgroundColor": "#FFFFFF"
           }
         },
         "row": 3,
         "col": 0,
-        "id": "ed5eef92-227c-4882-ba80-e0fbf1198eaa"
+        "id": "8c459fc0-b5b9-4256-9b97-8725b77192fa"
       },
-      "cffa9057-c223-40fa-9b85-37855ad8e96c": {
+      "9c4ca2a6-5579-4b6b-a2b9-eb94e68eb7ad": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +130,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fd759a0e-b47f-4c78-8e21-a6a4e9474020",
+              "entityAliasId": "619112e4-4c86-46a0-882c-0c8482dd3806",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -153,11 +153,11 @@
             "unitTitle": "%",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#E2001A",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#E2001A"
             ]
           },
@@ -165,17 +165,19 @@
           "title": "État de Charge (SoC)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 0,
-        "id": "cffa9057-c223-40fa-9b85-37855ad8e96c"
+        "id": "9c4ca2a6-5579-4b6b-a2b9-eb94e68eb7ad"
       },
-      "3eee4acc-75fa-4f66-b88c-05ce354776c0": {
+      "c2db53f0-de11-41d0-97fb-e6b1b9083aa0": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -188,7 +190,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fd759a0e-b47f-4c78-8e21-a6a4e9474020",
+              "entityAliasId": "619112e4-4c86-46a0-882c-0c8482dd3806",
               "dataKeys": [
                 {
                   "name": "tension_pack_v",
@@ -211,11 +213,11 @@
             "unitTitle": "V",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#3B82F6",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#3B82F6"
             ]
           },
@@ -223,17 +225,19 @@
           "title": "Tension Bus Continu DC",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 6,
-        "id": "3eee4acc-75fa-4f66-b88c-05ce354776c0"
+        "id": "c2db53f0-de11-41d0-97fb-e6b1b9083aa0"
       },
-      "0587ea62-7c85-4781-8b6c-9c913219debf": {
+      "b34a916d-6025-4e98-b731-129880b23ff7": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -246,7 +250,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fd759a0e-b47f-4c78-8e21-a6a4e9474020",
+              "entityAliasId": "619112e4-4c86-46a0-882c-0c8482dd3806",
               "dataKeys": [
                 {
                   "name": "courant_charge_decharge_a",
@@ -269,11 +273,11 @@
             "unitTitle": "A",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#10B981",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#10B981"
             ]
           },
@@ -281,17 +285,19 @@
           "title": "Courant Charge / Décharge",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 12,
-        "id": "0587ea62-7c85-4781-8b6c-9c913219debf"
+        "id": "b34a916d-6025-4e98-b731-129880b23ff7"
       },
-      "2638b47a-9078-48f3-9f8c-82a33863c135": {
+      "8e59d594-f601-4a5a-9afe-83a846352c64": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -304,7 +310,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fd759a0e-b47f-4c78-8e21-a6a4e9474020",
+              "entityAliasId": "619112e4-4c86-46a0-882c-0c8482dd3806",
               "dataKeys": [
                 {
                   "name": "temp_max_cellule",
@@ -327,11 +333,11 @@
             "unitTitle": "°C",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#F59E0B",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#F59E0B"
             ]
           },
@@ -339,17 +345,19 @@
           "title": "Température Cellule Critique",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 18,
-        "id": "2638b47a-9078-48f3-9f8c-82a33863c135"
+        "id": "8e59d594-f601-4a5a-9afe-83a846352c64"
       },
-      "f720055c-542a-4ab6-8625-84ac31670c60": {
+      "7140004c-a62c-4632-9797-cf2bd3e6a036": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -362,7 +370,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fd759a0e-b47f-4c78-8e21-a6a4e9474020",
+              "entityAliasId": "619112e4-4c86-46a0-882c-0c8482dd3806",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -446,35 +454,37 @@
               "showCurrent": true
             },
             "grid": {
-              "color": "#2B3342",
-              "tickColor": "#2B3342",
+              "color": "#E2E8F0",
+              "tickColor": "#CBD5E1",
               "verticalLines": true,
               "horizontalLines": true
             },
             "xaxis": {
               "showLabels": true,
-              "color": "#94A3B8"
+              "color": "#475569"
             },
             "yaxis": {
               "showLabels": true,
-              "color": "#94A3B8"
+              "color": "#475569"
             }
           },
           "showTitle": true,
           "title": "Évolution Télémétrique (4 grandeurs)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 16,
         "col": 0,
-        "id": "f720055c-542a-4ab6-8625-84ac31670c60"
+        "id": "7140004c-a62c-4632-9797-cf2bd3e6a036"
       },
-      "1d5b597a-764a-47d8-a26a-5560f91dbf51": {
+      "a07faf93-7996-45e6-a3b6-8e3220d5184f": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -487,7 +497,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fd759a0e-b47f-4c78-8e21-a6a4e9474020",
+              "entityAliasId": "619112e4-4c86-46a0-882c-0c8482dd3806",
               "dataKeys": [
                 {
                   "name": "soh_pct",
@@ -509,15 +519,17 @@
           "title": "Attributs & États Opérationnels",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 16,
         "col": 16,
-        "id": "1d5b597a-764a-47d8-a26a-5560f91dbf51"
+        "id": "a07faf93-7996-45e6-a3b6-8e3220d5184f"
       }
     },
     "states": {
@@ -527,49 +539,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "71d4e90c-13d7-4146-b65b-802b15e9d988": {
+              "0e546395-b5e1-44a5-98cf-eb4349dbfb14": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "ed5eef92-227c-4882-ba80-e0fbf1198eaa": {
+              "8c459fc0-b5b9-4256-9b97-8725b77192fa": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "cffa9057-c223-40fa-9b85-37855ad8e96c": {
+              "9c4ca2a6-5579-4b6b-a2b9-eb94e68eb7ad": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3eee4acc-75fa-4f66-b88c-05ce354776c0": {
+              "c2db53f0-de11-41d0-97fb-e6b1b9083aa0": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "0587ea62-7c85-4781-8b6c-9c913219debf": {
+              "b34a916d-6025-4e98-b731-129880b23ff7": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "2638b47a-9078-48f3-9f8c-82a33863c135": {
+              "8e59d594-f601-4a5a-9afe-83a846352c64": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "f720055c-542a-4ab6-8625-84ac31670c60": {
+              "7140004c-a62c-4632-9797-cf2bd3e6a036": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "1d5b597a-764a-47d8-a26a-5560f91dbf51": {
+              "a07faf93-7996-45e6-a3b6-8e3220d5184f": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,
@@ -580,7 +592,7 @@
               "columns": 24,
               "margin": 10,
               "outerMargin": true,
-              "backgroundColor": "#0F1218",
+              "backgroundColor": "#F1F5F9",
               "backgroundSizeMode": "100%",
               "autoFillHeight": false
             }

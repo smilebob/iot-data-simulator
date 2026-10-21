@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Chambre Froide Négative' (ID: ind_cold_room). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_COLD_ROOM. Protocole: MQTT.",
     "entityAliases": {
-      "1f7dfdc8-6ca5-471d-a500-31237f50b2d5": {
-        "id": "1f7dfdc8-6ca5-471d-a500-31237f50b2d5",
+      "ba8658b2-bc0b-4217-a3eb-b8f9b66b5859": {
+        "id": "ba8658b2-bc0b-4217-a3eb-b8f9b66b5859",
         "alias": "Chambre Froide Négative",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "ca40f292-9ca6-4c8a-8177-191126034e5e": {
+      "f214c368-f0d1-4be7-a2cb-cd6b9505bfe3": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -29,24 +29,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Chambre Froide Négative</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: ind_cold_room</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_IND_COLD_ROOM</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Chambre Froide Négative</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: ind_cold_room</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_IND_COLD_ROOM</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Chambre Froide Négative</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: ind_cold_room</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_IND_COLD_ROOM</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Chambre Froide Négative</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: ind_cold_room</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_IND_COLD_ROOM</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": false,
-          "backgroundColor": "transparent",
-          "color": "#F1F5F9",
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
           "widgetStyle": {
-            "background": "transparent"
+            "backgroundColor": "#FFFFFF"
           }
         },
         "row": 0,
         "col": 0,
-        "id": "ca40f292-9ca6-4c8a-8177-191126034e5e"
+        "id": "f214c368-f0d1-4be7-a2cb-cd6b9505bfe3"
       },
-      "4ad8a975-b06a-4367-b0b9-215c1a3a19ca": {
+      "3a4c10a7-40ba-4ad4-9ad9-278cec0aeb51": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1f7dfdc8-6ca5-471d-a500-31237f50b2d5",
+              "entityAliasId": "ba8658b2-bc0b-4217-a3eb-b8f9b66b5859",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -100,24 +100,24 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Frigorifique SCADA : Chambre Froide Négative\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COLD_ROOM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Boucle Frigorifique fermée -->\n    <rect x=\"180\" y=\"60\" width=\"380\" height=\"140\" rx=\"16\" fill=\"#16202E\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"370\" y=\"90\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">CHILLER INDUSTRIEL (R134a)</text>\n\n    <!-- Évaporateur (Eau glacée) -->\n    <rect x=\"195\" y=\"110\" width=\"90\" height=\"70\" rx=\"8\" fill=\"#0C4A6E\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"240\" y=\"140\" fill=\"#38BDF8\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ÉVAPORATEUR</text>\n    <text x=\"240\" y=\"155\" fill=\"#E0F2FE\" font-size=\"9\" text-anchor=\"middle\">7°C / 12°C</text>\n\n    <!-- Compresseur à vis -->\n    <circle cx=\"370\" cy=\"145\" r=\"30\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(370,145)\" class=\"scada-rotor\">\n      <path d=\"M -16 -4 C -8 -12 8 -12 16 -4 C 8 12 -8 12 -16 -4 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"370\" y=\"190\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">COMPRESSEUR</text>\n\n    <!-- Condenseur Aéroréfrigérant -->\n    <rect x=\"455\" y=\"110\" width=\"90\" height=\"70\" rx=\"8\" fill=\"#7F1D1D\" stroke=\"#EF4444\" stroke-width=\"1.5\"/>\n    <text x=\"500\" y=\"140\" fill=\"#F87171\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONDENSEUR</text>\n\n    <!-- Circuit Eau Glacée Départ/Retour Usine -->\n    <path d=\"M 50 120 L 195 120\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"120\" y=\"110\" fill=\"#38BDF8\" font-size=\"10\">RETOUR USINE (12°C)</text>\n    <path d=\"M 195 160 L 50 160\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <text x=\"120\" y=\"180\" fill=\"#0284C7\" font-size=\"10\">DÉPART EAU GLACÉE (7°C)</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. EAU GLACÉE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temperature_eau_depart:1} °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">COP INSTANTANÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${cop:2}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Frigorifique SCADA : Chambre Froide Négative\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COLD_ROOM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Boucle Frigorifique fermée -->\n    <rect x=\"180\" y=\"60\" width=\"380\" height=\"140\" rx=\"16\" fill=\"#16202E\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"370\" y=\"90\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">CHILLER INDUSTRIEL (R134a)</text>\n\n    <!-- Évaporateur (Eau glacée) -->\n    <rect x=\"195\" y=\"110\" width=\"90\" height=\"70\" rx=\"8\" fill=\"#0C4A6E\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"240\" y=\"140\" fill=\"#38BDF8\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ÉVAPORATEUR</text>\n    <text x=\"240\" y=\"155\" fill=\"#E0F2FE\" font-size=\"9\" text-anchor=\"middle\">7°C / 12°C</text>\n\n    <!-- Compresseur à vis -->\n    <circle cx=\"370\" cy=\"145\" r=\"30\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(370,145)\" class=\"scada-rotor\">\n      <path d=\"M -16 -4 C -8 -12 8 -12 16 -4 C 8 12 -8 12 -16 -4 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"370\" y=\"190\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">COMPRESSEUR</text>\n\n    <!-- Condenseur Aéroréfrigérant -->\n    <rect x=\"455\" y=\"110\" width=\"90\" height=\"70\" rx=\"8\" fill=\"#7F1D1D\" stroke=\"#EF4444\" stroke-width=\"1.5\"/>\n    <text x=\"500\" y=\"140\" fill=\"#F87171\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CONDENSEUR</text>\n\n    <!-- Circuit Eau Glacée Départ/Retour Usine -->\n    <path d=\"M 50 120 L 195 120\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"120\" y=\"110\" fill=\"#38BDF8\" font-size=\"10\">RETOUR USINE (12°C)</text>\n    <path d=\"M 195 160 L 50 160\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <text x=\"120\" y=\"180\" fill=\"#0284C7\" font-size=\"10\">DÉPART EAU GLACÉE (7°C)</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. EAU GLACÉE</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temperature_eau_depart:1} °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">COP INSTANTANÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${cop:2}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Chambre Froide SCADA : Chambre Froide Négative\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COLD_ROOM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Frigorifique Isolée -->\n    <rect x=\"60\" y=\"40\" width=\"560\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n    <text x=\"80\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">ENCEINTE ISOTHERME NÉGATIVE (-20°C / PANNEAUX PIR 150mm)</text>\n\n    <!-- Porte Isotherme avec Contacteur -->\n    <rect x=\"580\" y=\"75\" width=\"20\" height=\"110\" rx=\"2\" fill=\"#E2E8F0\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <text x=\"590\" y=\"200\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PORTE</text>\n\n    <!-- Évaporateur Plafonnier avec Ventilateurs -->\n    <rect x=\"100\" y=\"70\" width=\"220\" height=\"60\" rx=\"6\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"210\" y=\"95\" fill=\"#0369A1\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ÉVAPORATEUR PLAFONNIER</text>\n    <circle cx=\"140\" cy=\"115\" r=\"10\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"210\" cy=\"115\" r=\"10\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"280\" cy=\"115\" r=\"10\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n\n    <!-- Résistances de Dégivrage Électrique -->\n    <line x1=\"110\" y1=\"125\" x2=\"310\" y2=\"125\" stroke=\"#D97706\" stroke-width=\"3\" stroke-dasharray=\"6,4\"/>\n    <text x=\"210\" y=\"145\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉSISTANCES DÉGIVRAGE</text>\n\n    <!-- Palettes de stockage produits surgelés -->\n    <g transform=\"translate(140, 160)\">\n      <rect x=\"0\" y=\"0\" width=\"60\" height=\"45\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n      <rect x=\"80\" y=\"0\" width=\"60\" height=\"45\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n      <rect x=\"160\" y=\"0\" width=\"60\" height=\"45\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n      <text x=\"150\" y=\"30\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\">STOCK SURGELÉ</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(670, 35)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. AMBIANTE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_chambre_froide:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(670, 85)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0369A1\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. ÉVAPORATEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_evaporateur:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(670, 135)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE GROUPE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_groupe_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(670, 185)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">STATUT SYSTÈME</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${statut_degivrage}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Chambre Froide SCADA : Chambre Froide Négative\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COLD_ROOM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Frigorifique Isolée -->\n    <rect x=\"60\" y=\"40\" width=\"560\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n    <text x=\"80\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">ENCEINTE ISOTHERME NÉGATIVE (-20°C / PANNEAUX PIR 150mm)</text>\n\n    <!-- Porte Isotherme avec Contacteur -->\n    <rect x=\"580\" y=\"75\" width=\"20\" height=\"110\" rx=\"2\" fill=\"#E2E8F0\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <text x=\"590\" y=\"200\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PORTE</text>\n\n    <!-- Évaporateur Plafonnier avec Ventilateurs -->\n    <rect x=\"100\" y=\"70\" width=\"220\" height=\"60\" rx=\"6\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"210\" y=\"95\" fill=\"#0369A1\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ÉVAPORATEUR PLAFONNIER</text>\n    <circle cx=\"140\" cy=\"115\" r=\"10\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"210\" cy=\"115\" r=\"10\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n    <circle cx=\"280\" cy=\"115\" r=\"10\" fill=\"#FFFFFF\" stroke=\"#0284C7\"/>\n\n    <!-- Résistances de Dégivrage Électrique -->\n    <line x1=\"110\" y1=\"125\" x2=\"310\" y2=\"125\" stroke=\"#D97706\" stroke-width=\"3\" stroke-dasharray=\"6,4\"/>\n    <text x=\"210\" y=\"145\" fill=\"#D97706\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">RÉSISTANCES DÉGIVRAGE</text>\n\n    <!-- Palettes de stockage produits surgelés -->\n    <g transform=\"translate(140, 160)\">\n      <rect x=\"0\" y=\"0\" width=\"60\" height=\"45\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n      <rect x=\"80\" y=\"0\" width=\"60\" height=\"45\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n      <rect x=\"160\" y=\"0\" width=\"60\" height=\"45\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n      <text x=\"150\" y=\"30\" fill=\"#334155\" font-size=\"9\" text-anchor=\"middle\">STOCK SURGELÉ</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(670, 35)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. AMBIANTE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_chambre_froide:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(670, 85)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0369A1\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. ÉVAPORATEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_evaporateur:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(670, 135)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE GROUPE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_groupe_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(670, 185)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">STATUT SYSTÈME</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${statut_degivrage}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
-          "backgroundColor": "transparent",
-          "color": "#F1F5F9",
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
           "widgetStyle": {
-            "background": "transparent"
+            "backgroundColor": "#FFFFFF"
           }
         },
         "row": 3,
         "col": 0,
-        "id": "4ad8a975-b06a-4367-b0b9-215c1a3a19ca"
+        "id": "3a4c10a7-40ba-4ad4-9ad9-278cec0aeb51"
       },
-      "f06f60b5-0e94-4bab-9082-1d28f9b28ca0": {
+      "8f245786-8017-44b4-a12d-05d2d785afaf": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +130,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1f7dfdc8-6ca5-471d-a500-31237f50b2d5",
+              "entityAliasId": "ba8658b2-bc0b-4217-a3eb-b8f9b66b5859",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -153,11 +153,11 @@
             "unitTitle": "°C",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#E2001A",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#E2001A"
             ]
           },
@@ -165,17 +165,19 @@
           "title": "Température Ambiante Négative",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 0,
-        "id": "f06f60b5-0e94-4bab-9082-1d28f9b28ca0"
+        "id": "8f245786-8017-44b4-a12d-05d2d785afaf"
       },
-      "d7be133c-f9ac-4b61-a321-502868722d74": {
+      "1a56f4a0-c1cb-4cd4-9a95-0cee501902a2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -188,7 +190,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1f7dfdc8-6ca5-471d-a500-31237f50b2d5",
+              "entityAliasId": "ba8658b2-bc0b-4217-a3eb-b8f9b66b5859",
               "dataKeys": [
                 {
                   "name": "temp_evaporateur",
@@ -211,11 +213,11 @@
             "unitTitle": "°C",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#3B82F6",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#3B82F6"
             ]
           },
@@ -223,17 +225,19 @@
           "title": "Température Évaporateur",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 8,
-        "id": "d7be133c-f9ac-4b61-a321-502868722d74"
+        "id": "1a56f4a0-c1cb-4cd4-9a95-0cee501902a2"
       },
-      "25a44212-6680-41c4-900f-fc79fa680695": {
+      "44ce4263-94fc-4717-bdad-d1667f69b412": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -246,7 +250,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1f7dfdc8-6ca5-471d-a500-31237f50b2d5",
+              "entityAliasId": "ba8658b2-bc0b-4217-a3eb-b8f9b66b5859",
               "dataKeys": [
                 {
                   "name": "puissance_groupe_kw",
@@ -269,11 +273,11 @@
             "unitTitle": "kW",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#10B981",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#10B981"
             ]
           },
@@ -281,17 +285,19 @@
           "title": "Puissance Groupe Frigorifique",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 16,
-        "id": "25a44212-6680-41c4-900f-fc79fa680695"
+        "id": "44ce4263-94fc-4717-bdad-d1667f69b412"
       },
-      "505a2db4-aea0-4f53-8c76-6be85c1255c0": {
+      "7a82ccc1-a0b6-49bd-a250-9924267b601a": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -304,7 +310,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1f7dfdc8-6ca5-471d-a500-31237f50b2d5",
+              "entityAliasId": "ba8658b2-bc0b-4217-a3eb-b8f9b66b5859",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -374,35 +380,37 @@
               "showCurrent": true
             },
             "grid": {
-              "color": "#2B3342",
-              "tickColor": "#2B3342",
+              "color": "#E2E8F0",
+              "tickColor": "#CBD5E1",
               "verticalLines": true,
               "horizontalLines": true
             },
             "xaxis": {
               "showLabels": true,
-              "color": "#94A3B8"
+              "color": "#475569"
             },
             "yaxis": {
               "showLabels": true,
-              "color": "#94A3B8"
+              "color": "#475569"
             }
           },
           "showTitle": true,
           "title": "Évolution Télémétrique (3 grandeurs)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 16,
         "col": 0,
-        "id": "505a2db4-aea0-4f53-8c76-6be85c1255c0"
+        "id": "7a82ccc1-a0b6-49bd-a250-9924267b601a"
       },
-      "9cd0e8ba-2de2-4639-ad00-85e4a396d214": {
+      "36688fa4-99de-471d-b5d6-347d5116750c": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -415,7 +423,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1f7dfdc8-6ca5-471d-a500-31237f50b2d5",
+              "entityAliasId": "ba8658b2-bc0b-4217-a3eb-b8f9b66b5859",
               "dataKeys": [
                 {
                   "name": "porte_ouverte",
@@ -444,15 +452,17 @@
           "title": "Attributs & États Opérationnels",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 16,
         "col": 16,
-        "id": "9cd0e8ba-2de2-4639-ad00-85e4a396d214"
+        "id": "36688fa4-99de-471d-b5d6-347d5116750c"
       }
     },
     "states": {
@@ -462,43 +472,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "ca40f292-9ca6-4c8a-8177-191126034e5e": {
+              "f214c368-f0d1-4be7-a2cb-cd6b9505bfe3": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "4ad8a975-b06a-4367-b0b9-215c1a3a19ca": {
+              "3a4c10a7-40ba-4ad4-9ad9-278cec0aeb51": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "f06f60b5-0e94-4bab-9082-1d28f9b28ca0": {
+              "8f245786-8017-44b4-a12d-05d2d785afaf": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "d7be133c-f9ac-4b61-a321-502868722d74": {
+              "1a56f4a0-c1cb-4cd4-9a95-0cee501902a2": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "25a44212-6680-41c4-900f-fc79fa680695": {
+              "44ce4263-94fc-4717-bdad-d1667f69b412": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "505a2db4-aea0-4f53-8c76-6be85c1255c0": {
+              "7a82ccc1-a0b6-49bd-a250-9924267b601a": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "9cd0e8ba-2de2-4639-ad00-85e4a396d214": {
+              "36688fa4-99de-471d-b5d6-347d5116750c": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,
@@ -509,7 +519,7 @@
               "columns": 24,
               "margin": 10,
               "outerMargin": true,
-              "backgroundColor": "#0F1218",
+              "backgroundColor": "#F1F5F9",
               "backgroundSizeMode": "100%",
               "autoFillHeight": false
             }

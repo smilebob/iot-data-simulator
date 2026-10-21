@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Surveillance Ouvrage d'Art (SHM)' (ID: city_structure_shm). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_CITY_STRUCTURE_SHM. Protocole: MQTT.",
     "entityAliases": {
-      "fb822175-2d89-4ad2-a0a7-fdbe359f50c0": {
-        "id": "fb822175-2d89-4ad2-a0a7-fdbe359f50c0",
+      "bb29d26e-b055-48af-8f84-fdb4572fd03c": {
+        "id": "bb29d26e-b055-48af-8f84-fdb4572fd03c",
         "alias": "Surveillance Ouvrage d'Art (SHM)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "64220c2e-979f-4d87-91f1-07f0ccc8bd69": {
+      "02c33f96-2623-496e-b959-98388f63e480": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -29,24 +29,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Surveillance Ouvrage d'Art (SHM)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: city_structure_shm</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_STRUCTURE_SHM</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Surveillance Ouvrage d'Art (SHM)</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: city_structure_shm</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_STRUCTURE_SHM</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Surveillance Ouvrage d'Art (SHM)</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: city_structure_shm</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_STRUCTURE_SHM</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Surveillance Ouvrage d'Art (SHM)</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: city_structure_shm</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_CITY_STRUCTURE_SHM</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": false,
-          "backgroundColor": "transparent",
-          "color": "#F1F5F9",
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
           "widgetStyle": {
-            "background": "transparent"
+            "backgroundColor": "#FFFFFF"
           }
         },
         "row": 0,
         "col": 0,
-        "id": "64220c2e-979f-4d87-91f1-07f0ccc8bd69"
+        "id": "02c33f96-2623-496e-b959-98388f63e480"
       },
-      "3b8921bd-cfca-47c1-89f3-363d2fdadf7d": {
+      "e484394e-6a41-4da7-92d4-88d5754c15e9": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fb822175-2d89-4ad2-a0a7-fdbe359f50c0",
+              "entityAliasId": "bb29d26e-b055-48af-8f84-fdb4572fd03c",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -100,24 +100,24 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_CITY_STRUCTURE_SHM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Réacteur Process -->\n    <rect x=\"100\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#161F2E\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"190\" y=\"70\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"105\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#0284C7\" opacity=\"0.35\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 100 100\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"50\" y=\"90\" fill=\"#10B981\" font-size=\"9\">ALIMENTATION</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 280 150 L 400 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"430\" cy=\"150\" r=\"28\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(430, 150)\" class=\"scada-rotor-fast\">\n      <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"430\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 460 150 L 620 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"620\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#1A2234\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"680\" y=\"125\" fill=\"#F59E0B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"680\" y=\"145\" fill=\"#94A3B8\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 740 150 L 880 150\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"880,145 895,150 880,155\" fill=\"#10B981\"/>\n    <text x=\"830\" y=\"140\" fill=\"#10B981\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 45)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PROCESS | RÉGULATION</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${valeur:1}</text>\n    </g>\n    <g transform=\"translate(740, 45)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">BOUCLE | SÉCURITÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">ACTIVE</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_CITY_STRUCTURE_SHM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Réacteur Process -->\n    <rect x=\"100\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#161F2E\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"190\" y=\"70\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"105\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#0284C7\" opacity=\"0.35\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 100 100\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"50\" y=\"90\" fill=\"#10B981\" font-size=\"9\">ALIMENTATION</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 280 150 L 400 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"430\" cy=\"150\" r=\"28\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(430, 150)\" class=\"scada-rotor-fast\">\n      <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"430\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 460 150 L 620 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"620\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#1A2234\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"680\" y=\"125\" fill=\"#F59E0B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"680\" y=\"145\" fill=\"#94A3B8\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 740 150 L 880 150\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"880,145 895,150 880,155\" fill=\"#10B981\"/>\n    <text x=\"830\" y=\"140\" fill=\"#10B981\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 45)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PROCESS | RÉGULATION</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${valeur:1}</text>\n    </g>\n    <g transform=\"translate(740, 45)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">BOUCLE | SÉCURITÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">ACTIVE</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SHM Ouvrage d'Art SCADA : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_CITY_STRUCTURE_SHM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Tablier de Pont en Béton Précontraint / Ouvrage d'Art -->\n    <rect x=\"60\" y=\"75\" width=\"560\" height=\"45\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <text x=\"340\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TABLIER OUVRAGE D'ART / PILE BÉTON PRÉCONTRAINT (SHM)</text>\n\n    <!-- Piles de Pont -->\n    <rect x=\"140\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"490\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n\n    <!-- Inclinomètre MEMS Biaxial Haute Précision -->\n    <g transform=\"translate(165, 60)\">\n      <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-8\" y1=\"0\" x2=\"8\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-16\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">INCLINOMÈTRE</text>\n    </g>\n\n    <!-- Fissuromètre Électronique Corde Vibrante -->\n    <g transform=\"translate(340, 130)\">\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#E2001A\" stroke-width=\"3\"/>\n      <circle cx=\"-25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <circle cx=\"25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"18\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">FISSUROMÈTRE (mm)</text>\n    </g>\n\n    <!-- Jauges de Déformation (Extensométrie Fibre Optique) -->\n    <line x1=\"240\" y1=\"115\" x2=\"440\" y2=\"115\" stroke=\"#059669\" stroke-width=\"3\" stroke-dasharray=\"6,3\"/>\n    <text x=\"340\" y=\"70\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CORDE VIBRANTE / FIBRE BRAGG</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INCLINOMÉTRIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${inclinometrie_mrad:2} mrad</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCARTEMENT FISSURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ecartement_fissure_mm:3} mm</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉFORMATION (STRAIN)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${deformation_microstrain:1} µε</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FRÉQUENCE PROPRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${frequence_propre_hz:2} Hz</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SHM Ouvrage d'Art SCADA : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_CITY_STRUCTURE_SHM</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Tablier de Pont en Béton Précontraint / Ouvrage d'Art -->\n    <rect x=\"60\" y=\"75\" width=\"560\" height=\"45\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <text x=\"340\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TABLIER OUVRAGE D'ART / PILE BÉTON PRÉCONTRAINT (SHM)</text>\n\n    <!-- Piles de Pont -->\n    <rect x=\"140\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"490\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n\n    <!-- Inclinomètre MEMS Biaxial Haute Précision -->\n    <g transform=\"translate(165, 60)\">\n      <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-8\" y1=\"0\" x2=\"8\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-16\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">INCLINOMÈTRE</text>\n    </g>\n\n    <!-- Fissuromètre Électronique Corde Vibrante -->\n    <g transform=\"translate(340, 130)\">\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#E2001A\" stroke-width=\"3\"/>\n      <circle cx=\"-25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <circle cx=\"25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"18\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">FISSUROMÈTRE (mm)</text>\n    </g>\n\n    <!-- Jauges de Déformation (Extensométrie Fibre Optique) -->\n    <line x1=\"240\" y1=\"115\" x2=\"440\" y2=\"115\" stroke=\"#059669\" stroke-width=\"3\" stroke-dasharray=\"6,3\"/>\n    <text x=\"340\" y=\"70\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CORDE VIBRANTE / FIBRE BRAGG</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INCLINOMÉTRIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${inclinometrie_mrad:2} mrad</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCARTEMENT FISSURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ecartement_fissure_mm:3} mm</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉFORMATION (STRAIN)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${deformation_microstrain:1} µε</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FRÉQUENCE PROPRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${frequence_propre_hz:2} Hz</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
-          "backgroundColor": "transparent",
-          "color": "#F1F5F9",
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
           "widgetStyle": {
-            "background": "transparent"
+            "backgroundColor": "#FFFFFF"
           }
         },
         "row": 3,
         "col": 0,
-        "id": "3b8921bd-cfca-47c1-89f3-363d2fdadf7d"
+        "id": "e484394e-6a41-4da7-92d4-88d5754c15e9"
       },
-      "8a89613b-5f2a-48e1-a09a-00bb04874e78": {
+      "9406443a-6ed3-4485-8685-c579fdc2a08a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +130,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fb822175-2d89-4ad2-a0a7-fdbe359f50c0",
+              "entityAliasId": "bb29d26e-b055-48af-8f84-fdb4572fd03c",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -153,11 +153,11 @@
             "unitTitle": "mrad",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#E2001A",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#E2001A"
             ]
           },
@@ -165,17 +165,19 @@
           "title": "Inclinaison Piles / Tablier",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 0,
-        "id": "8a89613b-5f2a-48e1-a09a-00bb04874e78"
+        "id": "9406443a-6ed3-4485-8685-c579fdc2a08a"
       },
-      "509b896c-67c0-4f6a-af80-a63251847cd2": {
+      "0a01300a-7dde-4ab4-91dc-3f4be7a7028f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -188,7 +190,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fb822175-2d89-4ad2-a0a7-fdbe359f50c0",
+              "entityAliasId": "bb29d26e-b055-48af-8f84-fdb4572fd03c",
               "dataKeys": [
                 {
                   "name": "ecartement_fissure_mm",
@@ -211,11 +213,11 @@
             "unitTitle": "mm",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#3B82F6",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#3B82F6"
             ]
           },
@@ -223,17 +225,19 @@
           "title": "Écartement Fissuromètre",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 6,
-        "id": "509b896c-67c0-4f6a-af80-a63251847cd2"
+        "id": "0a01300a-7dde-4ab4-91dc-3f4be7a7028f"
       },
-      "2cfc3558-fc82-4719-835b-c07ae3f1a6fc": {
+      "75e338f6-26ae-47d4-9f51-869268ec86d6": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -246,7 +250,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fb822175-2d89-4ad2-a0a7-fdbe359f50c0",
+              "entityAliasId": "bb29d26e-b055-48af-8f84-fdb4572fd03c",
               "dataKeys": [
                 {
                   "name": "deformation_microstrain",
@@ -269,11 +273,11 @@
             "unitTitle": "µε",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#10B981",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#10B981"
             ]
           },
@@ -281,17 +285,19 @@
           "title": "Contrainte Déformation (Jauge)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 12,
-        "id": "2cfc3558-fc82-4719-835b-c07ae3f1a6fc"
+        "id": "75e338f6-26ae-47d4-9f51-869268ec86d6"
       },
-      "fe814c0b-6ebe-48db-9edb-a9c8e8d7b548": {
+      "1dd104a5-019e-4775-b4d3-57dca689ea64": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -304,7 +310,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fb822175-2d89-4ad2-a0a7-fdbe359f50c0",
+              "entityAliasId": "bb29d26e-b055-48af-8f84-fdb4572fd03c",
               "dataKeys": [
                 {
                   "name": "frequence_propre_hz",
@@ -327,11 +333,11 @@
             "unitTitle": "Hz",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#F59E0B",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#F59E0B"
             ]
           },
@@ -339,17 +345,19 @@
           "title": "Fréquence Fondamentale Propre",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 18,
-        "id": "fe814c0b-6ebe-48db-9edb-a9c8e8d7b548"
+        "id": "1dd104a5-019e-4775-b4d3-57dca689ea64"
       },
-      "4f909591-4c25-4924-bbcb-535f2faf9ea7": {
+      "5be45c4b-5cc8-4c17-9c21-1c985f62c4c3": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -362,7 +370,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fb822175-2d89-4ad2-a0a7-fdbe359f50c0",
+              "entityAliasId": "bb29d26e-b055-48af-8f84-fdb4572fd03c",
               "dataKeys": [
                 {
                   "name": "temp_acier_beton",
@@ -385,11 +393,11 @@
             "unitTitle": "°C",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#8B5CF6",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#8B5CF6"
             ]
           },
@@ -397,17 +405,19 @@
           "title": "Température Interne Béton/Acier",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 16,
         "col": 0,
-        "id": "4f909591-4c25-4924-bbcb-535f2faf9ea7"
+        "id": "5be45c4b-5cc8-4c17-9c21-1c985f62c4c3"
       },
-      "bb27f194-5dab-462e-ab20-913517759b48": {
+      "904069ee-61af-45bc-a391-4115d9ee4ab5": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -420,7 +430,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fb822175-2d89-4ad2-a0a7-fdbe359f50c0",
+              "entityAliasId": "bb29d26e-b055-48af-8f84-fdb4572fd03c",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -518,33 +528,35 @@
               "showCurrent": true
             },
             "grid": {
-              "color": "#2B3342",
-              "tickColor": "#2B3342",
+              "color": "#E2E8F0",
+              "tickColor": "#CBD5E1",
               "verticalLines": true,
               "horizontalLines": true
             },
             "xaxis": {
               "showLabels": true,
-              "color": "#94A3B8"
+              "color": "#475569"
             },
             "yaxis": {
               "showLabels": true,
-              "color": "#94A3B8"
+              "color": "#475569"
             }
           },
           "showTitle": true,
           "title": "Évolution Télémétrique (5 grandeurs)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 21,
         "col": 0,
-        "id": "bb27f194-5dab-462e-ab20-913517759b48"
+        "id": "904069ee-61af-45bc-a391-4115d9ee4ab5"
       }
     },
     "states": {
@@ -554,49 +566,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "64220c2e-979f-4d87-91f1-07f0ccc8bd69": {
+              "02c33f96-2623-496e-b959-98388f63e480": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "3b8921bd-cfca-47c1-89f3-363d2fdadf7d": {
+              "e484394e-6a41-4da7-92d4-88d5754c15e9": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "8a89613b-5f2a-48e1-a09a-00bb04874e78": {
+              "9406443a-6ed3-4485-8685-c579fdc2a08a": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "509b896c-67c0-4f6a-af80-a63251847cd2": {
+              "0a01300a-7dde-4ab4-91dc-3f4be7a7028f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "2cfc3558-fc82-4719-835b-c07ae3f1a6fc": {
+              "75e338f6-26ae-47d4-9f51-869268ec86d6": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "fe814c0b-6ebe-48db-9edb-a9c8e8d7b548": {
+              "1dd104a5-019e-4775-b4d3-57dca689ea64": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "4f909591-4c25-4924-bbcb-535f2faf9ea7": {
+              "5be45c4b-5cc8-4c17-9c21-1c985f62c4c3": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "bb27f194-5dab-462e-ab20-913517759b48": {
+              "904069ee-61af-45bc-a391-4115d9ee4ab5": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,
@@ -607,7 +619,7 @@
               "columns": 24,
               "margin": 10,
               "outerMargin": true,
-              "backgroundColor": "#0F1218",
+              "backgroundColor": "#F1F5F9",
               "backgroundSizeMode": "100%",
               "autoFillHeight": false
             }

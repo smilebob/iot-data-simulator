@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Four de Traitement Thermique' (ID: ind_thermal_furnace). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_THERMAL_FURNACE. Protocole: MQTT.",
     "entityAliases": {
-      "ceef9fcf-562d-4304-aaba-b3921ab79d4f": {
-        "id": "ceef9fcf-562d-4304-aaba-b3921ab79d4f",
+      "99e4c339-0234-4755-a567-00e14c3d3545": {
+        "id": "99e4c339-0234-4755-a567-00e14c3d3545",
         "alias": "Four de Traitement Thermique",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "bab565e1-f93d-4f0a-a404-d75301590e33": {
+      "f32cfde0-fc28-4387-9e36-2a6e675e18eb": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -29,24 +29,24 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Four de Traitement Thermique</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: ind_thermal_furnace</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_IND_THERMAL_FURNACE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;\">Four de Traitement Thermique</div>\n          <div style=\"font-size: 12px; color: #94A3B8; font-family: monospace;\">ID Technique: ind_thermal_furnace</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;\">\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Protocole:</span>\n          <strong style=\"color: #38BDF8; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #FBBF24; font-family: monospace; margin-left: 4px;\">TOKEN_IND_THERMAL_FURNACE</strong>\n        </div>\n        <div style=\"background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #94A3B8;\">Cadence:</span>\n          <strong style=\"color: #34D399; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Four de Traitement Thermique</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: ind_thermal_furnace</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_IND_THERMAL_FURNACE</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Four de Traitement Thermique</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: ind_thermal_furnace</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_IND_THERMAL_FURNACE</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": false,
-          "backgroundColor": "transparent",
-          "color": "#F1F5F9",
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
           "widgetStyle": {
-            "background": "transparent"
+            "backgroundColor": "#FFFFFF"
           }
         },
         "row": 0,
         "col": 0,
-        "id": "bab565e1-f93d-4f0a-a404-d75301590e33"
+        "id": "f32cfde0-fc28-4387-9e36-2a6e675e18eb"
       },
-      "b8e0ea3c-9db6-4f8e-8e71-40a587638bc4": {
+      "6d990072-ee52-42b6-b010-b3bba74b335e": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ceef9fcf-562d-4304-aaba-b3921ab79d4f",
+              "entityAliasId": "99e4c339-0234-4755-a567-00e14c3d3545",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -100,24 +100,24 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Four de Traitement Thermique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_THERMAL_FURNACE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Réacteur Process -->\n    <rect x=\"100\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#161F2E\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"190\" y=\"70\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"105\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#0284C7\" opacity=\"0.35\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 100 100\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"50\" y=\"90\" fill=\"#10B981\" font-size=\"9\">ALIMENTATION</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 280 150 L 400 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"430\" cy=\"150\" r=\"28\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(430, 150)\" class=\"scada-rotor-fast\">\n      <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"430\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 460 150 L 620 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"620\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#1A2234\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"680\" y=\"125\" fill=\"#F59E0B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"680\" y=\"145\" fill=\"#94A3B8\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 740 150 L 880 150\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"880,145 895,150 880,155\" fill=\"#10B981\"/>\n    <text x=\"830\" y=\"140\" fill=\"#10B981\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 45)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PROCESS | RÉGULATION</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${valeur:1}</text>\n    </g>\n    <g transform=\"translate(740, 45)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">BOUCLE | SÉCURITÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">ACTIVE</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Four de Traitement Thermique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_THERMAL_FURNACE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Réacteur Process -->\n    <rect x=\"100\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#161F2E\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"190\" y=\"70\" fill=\"#38BDF8\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"105\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#0284C7\" opacity=\"0.35\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 100 100\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"50\" y=\"90\" fill=\"#10B981\" font-size=\"9\">ALIMENTATION</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 280 150 L 400 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"430\" cy=\"150\" r=\"28\" fill=\"#1E293B\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(430, 150)\" class=\"scada-rotor-fast\">\n      <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n    </g>\n    <text x=\"430\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 460 150 L 620 150\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"620\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#1A2234\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"680\" y=\"125\" fill=\"#F59E0B\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"680\" y=\"145\" fill=\"#94A3B8\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 740 150 L 880 150\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"880,145 895,150 880,155\" fill=\"#10B981\"/>\n    <text x=\"830\" y=\"140\" fill=\"#10B981\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(480, 45)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PROCESS | RÉGULATION</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${valeur:1}</text>\n    </g>\n    <g transform=\"translate(740, 45)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">BOUCLE | SÉCURITÉ</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">ACTIVE</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Four Traitement Thermique SCADA : Four de Traitement Thermique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_THERMAL_FURNACE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Réfractaire du Four -->\n    <rect x=\"50\" y=\"45\" width=\"580\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#DC2626\" stroke-width=\"2.5\"/>\n    <text x=\"80\" y=\"70\" fill=\"#991B1B\" font-size=\"11\" font-weight=\"bold\">FOUR DE TRAITEMENT THERMIQUE INDUSTRIEL (ATMOSPHÈRE CONTRÔLÉE)</text>\n\n    <!-- Zone 1 : Préchauffage -->\n    <rect x=\"80\" y=\"90\" width=\"150\" height=\"100\" rx=\"6\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"155\" y=\"115\" fill=\"#B45309\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ZONE 1 : PRÉCHAUFFE</text>\n    <polygon points=\"155,140 140,170 170,170\" fill=\"#D97706\" opacity=\"0.7\"/>\n\n    <!-- Zone 2 : Maintien Haute Température (Austénitisation) -->\n    <rect x=\"260\" y=\"90\" width=\"150\" height=\"100\" rx=\"6\" fill=\"#FEE2E2\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n    <text x=\"335\" y=\"115\" fill=\"#B91C1C\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ZONE 2 : HAUTE TEMP</text>\n    <polygon points=\"335,140 320,170 350,170\" fill=\"#DC2626\" opacity=\"0.8\"/>\n\n    <!-- Zone 3 : Recuit / Homogénéisation -->\n    <rect x=\"440\" y=\"90\" width=\"150\" height=\"100\" rx=\"6\" fill=\"#FFEDD5\" stroke=\"#EA580C\" stroke-width=\"2\"/>\n    <text x=\"515\" y=\"115\" fill=\"#C2410C\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ZONE 3 : RECUIT</text>\n    <polygon points=\"515,140 500,170 530,170\" fill=\"#EA580C\" opacity=\"0.7\"/>\n\n    <!-- Rampe de Gaz Brûleurs -->\n    <path d=\"M 50 205 L 610 205\" fill=\"none\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"8,4\"/>\n    <text x=\"330\" y=\"225\" fill=\"#D97706\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RAMPE GAZ GAZ NATUREL / BRÛLEURS MODULANTS</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. ZONE 1</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_zone_1:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. ZONE 2 (HP)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_zone_2:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#EA580C\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. ZONE 3</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_zone_3:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT GAZ</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_gaz_combustible:1} Nm³/h</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Four Traitement Thermique SCADA : Four de Traitement Thermique\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_THERMAL_FURNACE</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Réfractaire du Four -->\n    <rect x=\"50\" y=\"45\" width=\"580\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#DC2626\" stroke-width=\"2.5\"/>\n    <text x=\"80\" y=\"70\" fill=\"#991B1B\" font-size=\"11\" font-weight=\"bold\">FOUR DE TRAITEMENT THERMIQUE INDUSTRIEL (ATMOSPHÈRE CONTRÔLÉE)</text>\n\n    <!-- Zone 1 : Préchauffage -->\n    <rect x=\"80\" y=\"90\" width=\"150\" height=\"100\" rx=\"6\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"155\" y=\"115\" fill=\"#B45309\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ZONE 1 : PRÉCHAUFFE</text>\n    <polygon points=\"155,140 140,170 170,170\" fill=\"#D97706\" opacity=\"0.7\"/>\n\n    <!-- Zone 2 : Maintien Haute Température (Austénitisation) -->\n    <rect x=\"260\" y=\"90\" width=\"150\" height=\"100\" rx=\"6\" fill=\"#FEE2E2\" stroke=\"#DC2626\" stroke-width=\"2\"/>\n    <text x=\"335\" y=\"115\" fill=\"#B91C1C\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ZONE 2 : HAUTE TEMP</text>\n    <polygon points=\"335,140 320,170 350,170\" fill=\"#DC2626\" opacity=\"0.8\"/>\n\n    <!-- Zone 3 : Recuit / Homogénéisation -->\n    <rect x=\"440\" y=\"90\" width=\"150\" height=\"100\" rx=\"6\" fill=\"#FFEDD5\" stroke=\"#EA580C\" stroke-width=\"2\"/>\n    <text x=\"515\" y=\"115\" fill=\"#C2410C\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ZONE 3 : RECUIT</text>\n    <polygon points=\"515,140 500,170 530,170\" fill=\"#EA580C\" opacity=\"0.7\"/>\n\n    <!-- Rampe de Gaz Brûleurs -->\n    <path d=\"M 50 205 L 610 205\" fill=\"none\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"8,4\"/>\n    <text x=\"330\" y=\"225\" fill=\"#D97706\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">RAMPE GAZ GAZ NATUREL / BRÛLEURS MODULANTS</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. ZONE 1</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_zone_1:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. ZONE 2 (HP)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_zone_2:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#EA580C\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. ZONE 3</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_zone_3:0} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT GAZ</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_gaz_combustible:1} Nm³/h</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
           "dropShadow": true,
           "enableFullscreen": true,
-          "backgroundColor": "transparent",
-          "color": "#F1F5F9",
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
           "widgetStyle": {
-            "background": "transparent"
+            "backgroundColor": "#FFFFFF"
           }
         },
         "row": 3,
         "col": 0,
-        "id": "b8e0ea3c-9db6-4f8e-8e71-40a587638bc4"
+        "id": "6d990072-ee52-42b6-b010-b3bba74b335e"
       },
-      "f97bfcd9-0c70-4dc2-90de-5a29cdaac1ac": {
+      "e5f62a25-d3db-441d-83a4-dd5eba824710": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -130,7 +130,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ceef9fcf-562d-4304-aaba-b3921ab79d4f",
+              "entityAliasId": "99e4c339-0234-4755-a567-00e14c3d3545",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -153,11 +153,11 @@
             "unitTitle": "°C",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#E2001A",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#E2001A"
             ]
           },
@@ -165,17 +165,19 @@
           "title": "Température Zone 1 (Préchauffe)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 0,
-        "id": "f97bfcd9-0c70-4dc2-90de-5a29cdaac1ac"
+        "id": "e5f62a25-d3db-441d-83a4-dd5eba824710"
       },
-      "4f066009-1014-480b-9da8-5d2a488177ed": {
+      "b54ade10-f1ce-4ae4-86d4-7dc5b4b3294e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -188,7 +190,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ceef9fcf-562d-4304-aaba-b3921ab79d4f",
+              "entityAliasId": "99e4c339-0234-4755-a567-00e14c3d3545",
               "dataKeys": [
                 {
                   "name": "temp_zone_2",
@@ -211,11 +213,11 @@
             "unitTitle": "°C",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#3B82F6",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#3B82F6"
             ]
           },
@@ -223,17 +225,19 @@
           "title": "Température Zone 2 (Maintien)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 6,
-        "id": "4f066009-1014-480b-9da8-5d2a488177ed"
+        "id": "b54ade10-f1ce-4ae4-86d4-7dc5b4b3294e"
       },
-      "0fafca40-8764-417a-ad8b-b26cb5f32dbf": {
+      "b0cf9683-4119-4e7e-8c52-7744393addc1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -246,7 +250,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ceef9fcf-562d-4304-aaba-b3921ab79d4f",
+              "entityAliasId": "99e4c339-0234-4755-a567-00e14c3d3545",
               "dataKeys": [
                 {
                   "name": "temp_zone_3",
@@ -269,11 +273,11 @@
             "unitTitle": "°C",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#10B981",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#10B981"
             ]
           },
@@ -281,17 +285,19 @@
           "title": "Température Zone 3 (Homogénéisation)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 12,
-        "id": "0fafca40-8764-417a-ad8b-b26cb5f32dbf"
+        "id": "b0cf9683-4119-4e7e-8c52-7744393addc1"
       },
-      "57c4229a-2a85-490c-8506-dae7016ced41": {
+      "0ecbd306-f7d1-4a14-b650-ab054c28c925": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -304,7 +310,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ceef9fcf-562d-4304-aaba-b3921ab79d4f",
+              "entityAliasId": "99e4c339-0234-4755-a567-00e14c3d3545",
               "dataKeys": [
                 {
                   "name": "debit_gaz_combustible",
@@ -327,11 +333,11 @@
             "unitTitle": "Nm³/h",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#F59E0B",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#F59E0B"
             ]
           },
@@ -339,17 +345,19 @@
           "title": "Débit Gaz Combustible",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 11,
         "col": 18,
-        "id": "57c4229a-2a85-490c-8506-dae7016ced41"
+        "id": "0ecbd306-f7d1-4a14-b650-ab054c28c925"
       },
-      "252d6798-6ddb-4bc2-8a68-f6c476686837": {
+      "21212821-1040-4e30-ab06-a86e5d4fd2d8": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -362,7 +370,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ceef9fcf-562d-4304-aaba-b3921ab79d4f",
+              "entityAliasId": "99e4c339-0234-4755-a567-00e14c3d3545",
               "dataKeys": [
                 {
                   "name": "puissance_bruleurs_pct",
@@ -385,11 +393,11 @@
             "unitTitle": "%",
             "decimals": 2,
             "gaugeWidthScale": 0.8,
-            "gaugeColor": "#202531",
-            "colorCounter": "#8B5CF6",
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
             "levelColors": [
-              "#10B981",
-              "#F59E0B",
+              "#059669",
+              "#D97706",
               "#8B5CF6"
             ]
           },
@@ -397,17 +405,19 @@
           "title": "Modulation Puissance Brûleurs",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 16,
         "col": 0,
-        "id": "252d6798-6ddb-4bc2-8a68-f6c476686837"
+        "id": "21212821-1040-4e30-ab06-a86e5d4fd2d8"
       },
-      "8ade19ef-f898-482d-8459-f27415ca2133": {
+      "594cc9f2-5424-4c4d-9e7c-cf1da9c66fb9": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -420,7 +430,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ceef9fcf-562d-4304-aaba-b3921ab79d4f",
+              "entityAliasId": "99e4c339-0234-4755-a567-00e14c3d3545",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -518,33 +528,35 @@
               "showCurrent": true
             },
             "grid": {
-              "color": "#2B3342",
-              "tickColor": "#2B3342",
+              "color": "#E2E8F0",
+              "tickColor": "#CBD5E1",
               "verticalLines": true,
               "horizontalLines": true
             },
             "xaxis": {
               "showLabels": true,
-              "color": "#94A3B8"
+              "color": "#475569"
             },
             "yaxis": {
               "showLabels": true,
-              "color": "#94A3B8"
+              "color": "#475569"
             }
           },
           "showTitle": true,
           "title": "Évolution Télémétrique (5 grandeurs)",
           "dropShadow": true,
           "enableFullscreen": true,
+          "color": "#0F172A",
           "widgetStyle": {
-            "backgroundColor": "#181D26",
+            "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
-            "border": "1px solid #2B3342"
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
           }
         },
         "row": 21,
         "col": 0,
-        "id": "8ade19ef-f898-482d-8459-f27415ca2133"
+        "id": "594cc9f2-5424-4c4d-9e7c-cf1da9c66fb9"
       }
     },
     "states": {
@@ -554,49 +566,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "bab565e1-f93d-4f0a-a404-d75301590e33": {
+              "f32cfde0-fc28-4387-9e36-2a6e675e18eb": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "b8e0ea3c-9db6-4f8e-8e71-40a587638bc4": {
+              "6d990072-ee52-42b6-b010-b3bba74b335e": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "f97bfcd9-0c70-4dc2-90de-5a29cdaac1ac": {
+              "e5f62a25-d3db-441d-83a4-dd5eba824710": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "4f066009-1014-480b-9da8-5d2a488177ed": {
+              "b54ade10-f1ce-4ae4-86d4-7dc5b4b3294e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "0fafca40-8764-417a-ad8b-b26cb5f32dbf": {
+              "b0cf9683-4119-4e7e-8c52-7744393addc1": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "57c4229a-2a85-490c-8506-dae7016ced41": {
+              "0ecbd306-f7d1-4a14-b650-ab054c28c925": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "252d6798-6ddb-4bc2-8a68-f6c476686837": {
+              "21212821-1040-4e30-ab06-a86e5d4fd2d8": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "8ade19ef-f898-482d-8459-f27415ca2133": {
+              "594cc9f2-5424-4c4d-9e7c-cf1da9c66fb9": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,
@@ -607,7 +619,7 @@
               "columns": 24,
               "margin": 10,
               "outerMargin": true,
-              "backgroundColor": "#0F1218",
+              "backgroundColor": "#F1F5F9",
               "backgroundSizeMode": "100%",
               "autoFillHeight": false
             }

@@ -57,29 +57,29 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
     # -------------------------------------------------------------
     header_widget_id = str(uuid.uuid4())
     header_html = f"""
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 12px 18px; background: linear-gradient(135deg, #181D26 0%, #12151B 100%); border-radius: 12px; border: 1px solid #2B3342; color: #F1F5F9; font-family: system-ui, -apple-system, sans-serif;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;">
       <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="background: rgba(226, 0, 26, 0.15); border: 1px solid #E2001A; border-radius: 10px; padding: 8px 12px; font-size: 20px; font-weight: bold; color: #E2001A;">
+        <div style="background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;">
           IoT
         </div>
         <div>
-          <div style="font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em;">{device_name}</div>
-          <div style="font-size: 12px; color: #94A3B8; font-family: monospace;">ID Technique: {device.id}</div>
+          <div style="font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;">{device_name}</div>
+          <div style="font-size: 12px; color: #64748B; font-family: monospace;">ID Technique: {device.id}</div>
         </div>
       </div>
 
-      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 12px;">
-        <div style="background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;">
-          <span style="color: #94A3B8;">Protocole:</span>
-          <strong style="color: #38BDF8; margin-left: 4px;">{proto_str}</strong>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;">
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;">
+          <span style="color: #64748B;">Protocole:</span>
+          <strong style="color: #0284C7; margin-left: 4px;">{proto_str}</strong>
         </div>
-        <div style="background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;">
-          <span style="color: #94A3B8;">Access Token ThingsBoard:</span>
-          <strong style="color: #FBBF24; font-family: monospace; margin-left: 4px;">{token_str}</strong>
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;">
+          <span style="color: #64748B;">Access Token ThingsBoard:</span>
+          <strong style="color: #D97706; font-family: monospace; margin-left: 4px;">{token_str}</strong>
         </div>
-        <div style="background: #202531; border: 1px solid #2B3342; border-radius: 8px; padding: 6px 12px;">
-          <span style="color: #94A3B8;">Cadence:</span>
-          <strong style="color: #34D399; margin-left: 4px;">{f'{device.publish_interval}s' if device.publish_interval else 'Par variable'}</strong>
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;">
+          <span style="color: #64748B;">Cadence:</span>
+          <strong style="color: #059669; margin-left: 4px;">{f'{device.publish_interval}s' if device.publish_interval else 'Par variable'}</strong>
         </div>
       </div>
     </div>
@@ -99,15 +99,15 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
             "settings": {
                 "cardHtml": header_html,
                 "html": header_html,
-                "cardCss": "border-radius: 12px; border: 1px solid #2B3342; background: transparent;"
+                "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF;"
             },
             "showTitle": False,
             "dropShadow": True,
             "enableFullscreen": False,
-            "backgroundColor": "transparent",
-            "color": "#F1F5F9",
+            "backgroundColor": "#FFFFFF",
+            "color": "#0F172A",
             "widgetStyle": {
-                "background": "transparent"
+                "backgroundColor": "#FFFFFF"
             }
         },
         "row": current_row,
@@ -160,15 +160,15 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
             "settings": {
                 "cardHtml": synoptic_html,
                 "html": synoptic_html,
-                "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
+                "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
             },
             "showTitle": False,
             "dropShadow": True,
             "enableFullscreen": True,
-            "backgroundColor": "transparent",
-            "color": "#F1F5F9",
+            "backgroundColor": "#FFFFFF",
+            "color": "#0F172A",
             "widgetStyle": {
-                "background": "transparent"
+                "backgroundColor": "#FFFFFF"
             }
         },
         "row": current_row,
@@ -246,18 +246,20 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                         "unitTitle": var.unit or "",
                         "decimals": 2 if var.data_type == DataType.FLOAT else 0,
                         "gaugeWidthScale": 0.8,
-                        "gaugeColor": "#202531",
-                        "colorCounter": color,
-                        "levelColors": ["#10B981", "#F59E0B", color]
+                        "gaugeColor": "#E2E8F0",
+                        "colorCounter": "#0F172A",
+                        "levelColors": ["#059669", "#D97706", color]
                     },
                     "showTitle": True,
                     "title": var.name,
                     "dropShadow": True,
                     "enableFullscreen": True,
+                    "color": "#0F172A",
                     "widgetStyle": {
-                        "backgroundColor": "#181D26",
+                        "backgroundColor": "#FFFFFF",
                         "borderRadius": "12px",
-                        "border": "1px solid #2B3342"
+                        "border": "1px solid #CBD5E1",
+                        "color": "#0F172A"
                     }
                 },
                 "row": current_row,
@@ -345,28 +347,30 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                         "showCurrent": True
                     },
                     "grid": {
-                        "color": "#2B3342",
-                        "tickColor": "#2B3342",
+                        "color": "#E2E8F0",
+                        "tickColor": "#CBD5E1",
                         "verticalLines": True,
                         "horizontalLines": True
                     },
                     "xaxis": {
                         "showLabels": True,
-                        "color": "#94A3B8"
+                        "color": "#475569"
                     },
                     "yaxis": {
                         "showLabels": True,
-                        "color": "#94A3B8"
+                        "color": "#475569"
                     }
                 },
                 "showTitle": True,
                 "title": f"Évolution Télémétrique ({len(chart_datakeys)} grandeurs)",
                 "dropShadow": True,
                 "enableFullscreen": True,
+                "color": "#0F172A",
                 "widgetStyle": {
-                    "backgroundColor": "#181D26",
+                    "backgroundColor": "#FFFFFF",
                     "borderRadius": "12px",
-                    "border": "1px solid #2B3342"
+                    "border": "1px solid #CBD5E1",
+                    "color": "#0F172A"
                 }
             },
             "row": current_row,
@@ -430,10 +434,12 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                     "title": "Attributs & États Opérationnels",
                     "dropShadow": True,
                     "enableFullscreen": True,
+                    "color": "#0F172A",
                     "widgetStyle": {
-                        "backgroundColor": "#181D26",
+                        "backgroundColor": "#FFFFFF",
                         "borderRadius": "12px",
-                        "border": "1px solid #2B3342"
+                        "border": "1px solid #CBD5E1",
+                        "color": "#0F172A"
                     }
                 },
                 "row": current_row,
@@ -482,7 +488,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                                 "columns": 24,
                                 "margin": 10,
                                 "outerMargin": True,
-                                "backgroundColor": "#0F1218",
+                                "backgroundColor": "#F1F5F9",
                                 "backgroundSizeMode": "100%",
                                 "autoFillHeight": False
                             }
