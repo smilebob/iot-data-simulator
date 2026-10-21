@@ -24,6 +24,10 @@ docker compose up -d
 
 * Le broker Mosquitto écoute sur les ports `1883` (TCP standard) et `9001` (WebSockets).
 
+### 3. Déploiement via Portainer (Clé en main & CI/CD)
+La stack peut être déployée en 1 clic dans **Portainer** (CE ou BE) avec images précompilées multi-architectures (`amd64` / `arm64`) et mise à jour automatique via Webhook GitHub Actions.  
+👉 Consultez le [Guide de Déploiement Portainer Pas-à-Pas](Documentation/devops/portainer_deployment.md).
+
 ---
 
 ## 🎯 Connexion avec ThingsBoard
