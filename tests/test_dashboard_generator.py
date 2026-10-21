@@ -93,7 +93,8 @@ def test_thingsboard_dashboard_generation():
     dashboard = generate_thingsboard_dashboard(dev, vars_list)
 
     assert dashboard["title"] == "Supervision SCADA - Chaudière Test #1"
-    assert "TB_TOKEN_SECRET_9876" in dashboard["configuration"]["description"]
+    # Sécurité CIS / OWASP : Le token ne doit JAMAIS fuiter dans la description ou les widgets
+    assert "TB_TOKEN_SECRET_9876" not in dashboard["configuration"]["description"]
 
     # Vérification de l'alias d'entité (singleEntity avec ID placeholder pour assistant ThingsBoard)
     aliases = dashboard["configuration"]["entityAliases"]
@@ -107,7 +108,7 @@ def test_thingsboard_dashboard_generation():
     widgets = dashboard["configuration"]["widgets"]
     assert len(widgets) >= 4  # Header + Synoptique SCADA + Jauges + Graphique + Carte Attributs
 
-    # Vérification du synoptique SCADA (html_value_card dynamique temps réel)
+    # Vérification du synoptique SCADA (html_value_card dynamique temps réel sans fuite de token)
     synoptic_w = next(w for w in widgets.values() if "Synoptique SCADA" in w.get("title", ""))
     assert synoptic_w.get("typeFullFqn") == "system.cards.html_value_card"
     assert synoptic_w.get("typeAlias") == "html_value_card"
@@ -117,11 +118,13 @@ def test_thingsboard_dashboard_generation():
     assert synoptic_w["config"]["settings"]["cardHtml"] == synoptic_w["config"]["settings"]["html"]
     assert "pipe-flow" in synoptic_w["config"]["settings"]["cardHtml"]
     assert "${" in synoptic_w["config"]["settings"]["cardHtml"]
+    assert "TB_TOKEN_SECRET_9876" not in synoptic_w["config"]["settings"]["cardHtml"]
 
-    # Vérification du widget d'en-tête (HTML) avec le token
+    # Vérification du widget d'en-tête (HTML) sécurisé (Token masqué / protégé)
     header_w = next(w for w in widgets.values() if w.get("typeAlias") == "html_card" and "Informations" in w.get("title", ""))
     assert header_w.get("typeFullFqn") == "system.cards.html_card"
-    assert "TB_TOKEN_SECRET_9876" in header_w["config"]["settings"]["cardHtml"]
+    assert "TB_TOKEN_SECRET_9876" not in header_w["config"]["settings"]["cardHtml"]
+    assert "Jeton Sécurisé" in header_w["config"]["settings"]["cardHtml"]
     assert header_w["config"]["settings"]["cardHtml"] == header_w["config"]["settings"]["html"]
     assert "Chaudière Test #1" in header_w["config"]["settings"]["cardHtml"]
     assert "MQTT" in header_w["config"]["settings"]["cardHtml"]

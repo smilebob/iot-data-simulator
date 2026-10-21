@@ -20,7 +20,7 @@ Chaque tableau de bord respecte les règles métier et conventions graphiques de
 - **Pupitre d'Instrumentation & Jauges** : Jauges de processus industrielles avec zones de consigne (*Setpoint*) et seuils opérationnels.
 - **Enregistreur de Tendance (*SCADA Historian & Trend Viewer*)** : Fenêtre glissante de 2 minutes en temps réel avec statistiques (min, max, moyenne, valeur courante).
 - **Registre des Attributs & Paramètres Automate** : Synthèse des attributs de contrôle, modes (Auto / Manuel / Local / Distant) et grandeurs d'état.
-- **Bannière d'Identification & Token ThingsBoard** : En-tête sécurisé intégrant le nom de l'équipement, l'identifiant technique, le protocole et **votre vrai Access Token ThingsBoard**.
+- **Bannière d'Identification Sécurisée** : En-tête épuré intégrant le nom de l'équipement, l'identifiant technique, le protocole actif et un badge d'authentification sécurisée. Par mesure de cybersécurité (conforme CIS & OWASP), **l'Access Token n'est jamais divulgué ni affiché en clair sur l'écran**, protégeant vos identifiants lors de partages d'écrans ou de projections en salle de contrôle.
 - **Thème Graphique Light & Haute Lisibilité (WCAG AA)** :
   - Palette claire professionnelle privilégiant les fonds blancs (`#FFFFFF`) et gris clair (`#F1F5F9`).
   - Textes et typographies en fort contraste sombre (`#0F172A` / `#475569`, ratio > 7:1) garantissant une lisibilité parfaite en salle de contrôle ou bureau éclairé.

@@ -1,0 +1,40 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "type": 3,
+      "title": "IoT Data Simulator & MQTT Stack",
+      "description": "Simulateur de données IoT industriel pour démonstrations dynamiques sur ThingsBoard et plateformes MQTT. 32 cas d'usage métiers préconfigurés, schémas SCADA P&ID/SLD animés en thème Light, injection de pannes en direct et broker Mosquitto intégré.",
+      "note": "Expose les ports 8000 (Simulateur Web UI & API REST), 1883/9001 (Mosquitto MQTT) et 8080 (MQTTX Web Inspector).",
+      "categories": ["IoT", "Simulation", "ThingsBoard", "Industrial"],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/smilebob/iot-data-simulator/main/Documentation/assets/logo.png",
+      "repository": {
+        "url": "https://github.com/smilebob/iot-data-simulator",
+        "stackfile": "docker-compose.portainer.yml"
+      },
+      "env": [
+        {
+          "name": "SIMULATOR_PORT",
+          "label": "Port Web Simulator",
+          "default": "8000"
+        },
+        {
+          "name": "MQTT_BROKER_HOST",
+          "label": "Hôte Broker MQTT",
+          "default": "mosquitto"
+        },
+        {
+          "name": "MQTT_BROKER_PORT",
+          "label": "Port Broker MQTT",
+          "default": "1883"
+        },
+        {
+          "name": "MQTT_USE_TLS",
+          "label": "Activer TLS MQTT",
+          "default": "false"
+        }
+      ]
+    }
+  ]
+}

@@ -2,10 +2,10 @@
   "title": "Supervision SCADA - TGBT & Compteur Multi-Fluides",
   "name": "Supervision SCADA - TGBT & Compteur Multi-Fluides",
   "configuration": {
-    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'TGBT & Compteur Multi-Fluides' (ID: bldg_tgbt). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_TGBT. Protocole: MQTT.",
+    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'TGBT & Compteur Multi-Fluides' (ID: bldg_tgbt). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "673552c3-4c7e-4afa-947f-5e60d9001906": {
-        "id": "673552c3-4c7e-4afa-947f-5e60d9001906",
+      "9bb2ecd8-a161-4b3c-9fef-4bf698a5c832": {
+        "id": "9bb2ecd8-a161-4b3c-9fef-4bf698a5c832",
         "alias": "TGBT & Compteur Multi-Fluides",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "546e07b1-098f-4b93-9901-969c8524e735": {
+      "698d4a54-f32d-4cc2-bfec-1dc33de996d2": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -29,8 +29,8 @@
         "config": {
           "datasources": [],
           "settings": {
-            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">TGBT & Compteur Multi-Fluides</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: bldg_tgbt</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_TGBT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
-            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">TGBT & Compteur Multi-Fluides</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: bldg_tgbt</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Access Token ThingsBoard:</span>\n          <strong style=\"color: #D97706; font-family: monospace; margin-left: 4px;\">TOKEN_BLDG_TGBT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">TGBT & Compteur Multi-Fluides</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: bldg_tgbt</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Authentification:</span>\n          <strong style=\"color: #059669; font-weight: 600; margin-left: 4px;\">Jeton Sécurisé</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">TGBT & Compteur Multi-Fluides</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: bldg_tgbt</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Authentification:</span>\n          <strong style=\"color: #059669; font-weight: 600; margin-left: 4px;\">Jeton Sécurisé</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF;"
           },
           "showTitle": false,
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "546e07b1-098f-4b93-9901-969c8524e735"
+        "id": "698d4a54-f32d-4cc2-bfec-1dc33de996d2"
       },
-      "1894b1f3-db75-4c8f-9806-ab9f26213a6a": {
+      "0af4f56b-4e07-46fb-a787-8267b0173774": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "673552c3-4c7e-4afa-947f-5e60d9001906",
+              "entityAliasId": "9bb2ecd8-a161-4b3c-9fef-4bf698a5c832",
               "dataKeys": [
                 {
                   "name": "puissance_totale_kw",
@@ -93,8 +93,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Schéma Unifilaire SCADA : TGBT & Compteur Multi-Fluides\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_BLDG_TGBT</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <line x1=\"50\" y1=\"50\" x2=\"220\" y2=\"50\" stroke=\"#E2001A\" stroke-width=\"5\"/>\n    <text x=\"50\" y=\"35\" fill=\"#E2001A\" font-size=\"11\" font-weight=\"bold\">ARRIVÉE HTA / BT (400V TRIPHASÉ)</text>\n\n    <!-- Disjoncteur Général Masterpact -->\n    <g transform=\"translate(260, 50)\">\n      <rect x=\"-18\" y=\"-18\" width=\"36\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke=\"#059669\" stroke-width=\"3\"/>\n      <line x1=\"-10\" y1=\"10\" x2=\"10\" y2=\"-10\" stroke=\"#059669\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"30\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DISJONCTEUR DGBT</text>\n    </g>\n\n    <!-- Jeu de Barres Général Cuivre -->\n    <line x1=\"380\" y1=\"35\" x2=\"380\" y2=\"230\" stroke=\"#D97706\" stroke-width=\"6\"/>\n    <text x=\"395\" y=\"35\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">JEU DE BARRES TGBT 1600A</text>\n\n    <!-- Départs Force, CVC, Éclairage -->\n    <g transform=\"translate(380, 75)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ CVC & Pompes (250A)</text>\n    </g>\n    <g transform=\"translate(380, 135)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ Informatique / Onduleur (160A)</text>\n    </g>\n    <g transform=\"translate(380, 195)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ Éclairage DALI (63A)</text>\n    </g>\n\n    <!-- Callouts Électriques Light -->\n    \n    <g transform=\"translate(670, 25)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE TOTALE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_totale_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(670, 75)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COS PHI (FACTEUR)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${facteur_puissance:2}</text>\n    </g>\n    \n    <g transform=\"translate(670, 125)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION PH-PH</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_l1_l2:0} V</text>\n    </g>\n    \n    <g transform=\"translate(670, 175)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">EAU GÉNÉRALE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_eau_general:1} m³/h</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Schéma Unifilaire SCADA : TGBT & Compteur Multi-Fluides\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_BLDG_TGBT</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <line x1=\"50\" y1=\"50\" x2=\"220\" y2=\"50\" stroke=\"#E2001A\" stroke-width=\"5\"/>\n    <text x=\"50\" y=\"35\" fill=\"#E2001A\" font-size=\"11\" font-weight=\"bold\">ARRIVÉE HTA / BT (400V TRIPHASÉ)</text>\n\n    <!-- Disjoncteur Général Masterpact -->\n    <g transform=\"translate(260, 50)\">\n      <rect x=\"-18\" y=\"-18\" width=\"36\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke=\"#059669\" stroke-width=\"3\"/>\n      <line x1=\"-10\" y1=\"10\" x2=\"10\" y2=\"-10\" stroke=\"#059669\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"30\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DISJONCTEUR DGBT</text>\n    </g>\n\n    <!-- Jeu de Barres Général Cuivre -->\n    <line x1=\"380\" y1=\"35\" x2=\"380\" y2=\"230\" stroke=\"#D97706\" stroke-width=\"6\"/>\n    <text x=\"395\" y=\"35\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">JEU DE BARRES TGBT 1600A</text>\n\n    <!-- Départs Force, CVC, Éclairage -->\n    <g transform=\"translate(380, 75)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ CVC & Pompes (250A)</text>\n    </g>\n    <g transform=\"translate(380, 135)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ Informatique / Onduleur (160A)</text>\n    </g>\n    <g transform=\"translate(380, 195)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ Éclairage DALI (63A)</text>\n    </g>\n\n    <!-- Callouts Électriques Light -->\n    \n    <g transform=\"translate(670, 25)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE TOTALE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_totale_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(670, 75)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COS PHI (FACTEUR)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${facteur_puissance:2}</text>\n    </g>\n    \n    <g transform=\"translate(670, 125)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION PH-PH</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_l1_l2:0} V</text>\n    </g>\n    \n    <g transform=\"translate(670, 175)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">EAU GÉNÉRALE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_eau_general:1} m³/h</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Schéma Unifilaire SCADA : TGBT & Compteur Multi-Fluides\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <line x1=\"50\" y1=\"50\" x2=\"220\" y2=\"50\" stroke=\"#E2001A\" stroke-width=\"5\"/>\n    <text x=\"50\" y=\"35\" fill=\"#E2001A\" font-size=\"11\" font-weight=\"bold\">ARRIVÉE HTA / BT (400V TRIPHASÉ)</text>\n\n    <!-- Disjoncteur Général Masterpact -->\n    <g transform=\"translate(260, 50)\">\n      <rect x=\"-18\" y=\"-18\" width=\"36\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke=\"#059669\" stroke-width=\"3\"/>\n      <line x1=\"-10\" y1=\"10\" x2=\"10\" y2=\"-10\" stroke=\"#059669\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"30\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DISJONCTEUR DGBT</text>\n    </g>\n\n    <!-- Jeu de Barres Général Cuivre -->\n    <line x1=\"380\" y1=\"35\" x2=\"380\" y2=\"230\" stroke=\"#D97706\" stroke-width=\"6\"/>\n    <text x=\"395\" y=\"35\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">JEU DE BARRES TGBT 1600A</text>\n\n    <!-- Départs Force, CVC, Éclairage -->\n    <g transform=\"translate(380, 75)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ CVC & Pompes (250A)</text>\n    </g>\n    <g transform=\"translate(380, 135)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ Informatique / Onduleur (160A)</text>\n    </g>\n    <g transform=\"translate(380, 195)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ Éclairage DALI (63A)</text>\n    </g>\n\n    <!-- Callouts Électriques Light -->\n    \n    <g transform=\"translate(670, 25)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE TOTALE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_totale_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(670, 75)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COS PHI (FACTEUR)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${facteur_puissance:2}</text>\n    </g>\n    \n    <g transform=\"translate(670, 125)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION PH-PH</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_l1_l2:0} V</text>\n    </g>\n    \n    <g transform=\"translate(670, 175)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">EAU GÉNÉRALE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_eau_general:1} m³/h</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Schéma Unifilaire SCADA : TGBT & Compteur Multi-Fluides\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <line x1=\"50\" y1=\"50\" x2=\"220\" y2=\"50\" stroke=\"#E2001A\" stroke-width=\"5\"/>\n    <text x=\"50\" y=\"35\" fill=\"#E2001A\" font-size=\"11\" font-weight=\"bold\">ARRIVÉE HTA / BT (400V TRIPHASÉ)</text>\n\n    <!-- Disjoncteur Général Masterpact -->\n    <g transform=\"translate(260, 50)\">\n      <rect x=\"-18\" y=\"-18\" width=\"36\" height=\"36\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <line x1=\"-10\" y1=\"-10\" x2=\"10\" y2=\"10\" stroke=\"#059669\" stroke-width=\"3\"/>\n      <line x1=\"-10\" y1=\"10\" x2=\"10\" y2=\"-10\" stroke=\"#059669\" stroke-width=\"3\"/>\n      <text x=\"0\" y=\"30\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">DISJONCTEUR DGBT</text>\n    </g>\n\n    <!-- Jeu de Barres Général Cuivre -->\n    <line x1=\"380\" y1=\"35\" x2=\"380\" y2=\"230\" stroke=\"#D97706\" stroke-width=\"6\"/>\n    <text x=\"395\" y=\"35\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">JEU DE BARRES TGBT 1600A</text>\n\n    <!-- Départs Force, CVC, Éclairage -->\n    <g transform=\"translate(380, 75)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ CVC & Pompes (250A)</text>\n    </g>\n    <g transform=\"translate(380, 135)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ Informatique / Onduleur (160A)</text>\n    </g>\n    <g transform=\"translate(380, 195)\">\n      <line x1=\"0\" y1=\"0\" x2=\"120\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"3\"/>\n      <text x=\"130\" y=\"4\" fill=\"#334155\" font-size=\"10\" font-weight=\"600\">Départ Éclairage DALI (63A)</text>\n    </g>\n\n    <!-- Callouts Électriques Light -->\n    \n    <g transform=\"translate(670, 25)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE TOTALE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_totale_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(670, 75)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COS PHI (FACTEUR)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${facteur_puissance:2}</text>\n    </g>\n    \n    <g transform=\"translate(670, 125)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION PH-PH</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_l1_l2:0} V</text>\n    </g>\n    \n    <g transform=\"translate(670, 175)\">\n      <rect width=\"220\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">EAU GÉNÉRALE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_eau_general:1} m³/h</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
           "showTitle": false,
@@ -108,9 +108,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "1894b1f3-db75-4c8f-9806-ab9f26213a6a"
+        "id": "0af4f56b-4e07-46fb-a787-8267b0173774"
       },
-      "d09e3d78-1238-4bc0-bbc7-4493e81b69af": {
+      "497682dc-eb3a-4ade-8b39-455aba4958e2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -123,7 +123,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "673552c3-4c7e-4afa-947f-5e60d9001906",
+              "entityAliasId": "9bb2ecd8-a161-4b3c-9fef-4bf698a5c832",
               "dataKeys": [
                 {
                   "name": "puissance_totale_kw",
@@ -168,9 +168,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "d09e3d78-1238-4bc0-bbc7-4493e81b69af"
+        "id": "497682dc-eb3a-4ade-8b39-455aba4958e2"
       },
-      "ab555fb4-4185-4013-a7a8-4c4bd0a4660a": {
+      "58541a3c-34de-42a6-8bf6-d8d7830297e2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -183,7 +183,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "673552c3-4c7e-4afa-947f-5e60d9001906",
+              "entityAliasId": "9bb2ecd8-a161-4b3c-9fef-4bf698a5c832",
               "dataKeys": [
                 {
                   "name": "facteur_puissance",
@@ -228,9 +228,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "ab555fb4-4185-4013-a7a8-4c4bd0a4660a"
+        "id": "58541a3c-34de-42a6-8bf6-d8d7830297e2"
       },
-      "dc3fe3e1-85d3-477a-b9a5-ee96e17b2d22": {
+      "240a08c8-d2cd-4f34-b366-20190897408d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -243,7 +243,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "673552c3-4c7e-4afa-947f-5e60d9001906",
+              "entityAliasId": "9bb2ecd8-a161-4b3c-9fef-4bf698a5c832",
               "dataKeys": [
                 {
                   "name": "tension_l1_l2",
@@ -288,9 +288,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "dc3fe3e1-85d3-477a-b9a5-ee96e17b2d22"
+        "id": "240a08c8-d2cd-4f34-b366-20190897408d"
       },
-      "f086ca5c-ba5f-4bb7-b41f-64baeb11189e": {
+      "56180cc8-ab5c-4d86-a23b-04eabc2e166d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -303,7 +303,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "673552c3-4c7e-4afa-947f-5e60d9001906",
+              "entityAliasId": "9bb2ecd8-a161-4b3c-9fef-4bf698a5c832",
               "dataKeys": [
                 {
                   "name": "debit_eau_general",
@@ -348,9 +348,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "f086ca5c-ba5f-4bb7-b41f-64baeb11189e"
+        "id": "56180cc8-ab5c-4d86-a23b-04eabc2e166d"
       },
-      "efeb5964-7d01-4626-829f-f9261d4964dd": {
+      "9a3ef2cf-aa3b-4451-98d3-a2671545c2d7": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -363,7 +363,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "673552c3-4c7e-4afa-947f-5e60d9001906",
+              "entityAliasId": "9bb2ecd8-a161-4b3c-9fef-4bf698a5c832",
               "dataKeys": [
                 {
                   "name": "puissance_totale_kw",
@@ -475,7 +475,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "efeb5964-7d01-4626-829f-f9261d4964dd"
+        "id": "9a3ef2cf-aa3b-4451-98d3-a2671545c2d7"
       }
     },
     "states": {
@@ -485,43 +485,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "546e07b1-098f-4b93-9901-969c8524e735": {
+              "698d4a54-f32d-4cc2-bfec-1dc33de996d2": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "1894b1f3-db75-4c8f-9806-ab9f26213a6a": {
+              "0af4f56b-4e07-46fb-a787-8267b0173774": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "d09e3d78-1238-4bc0-bbc7-4493e81b69af": {
+              "497682dc-eb3a-4ade-8b39-455aba4958e2": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "ab555fb4-4185-4013-a7a8-4c4bd0a4660a": {
+              "58541a3c-34de-42a6-8bf6-d8d7830297e2": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "dc3fe3e1-85d3-477a-b9a5-ee96e17b2d22": {
+              "240a08c8-d2cd-4f34-b366-20190897408d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "f086ca5c-ba5f-4bb7-b41f-64baeb11189e": {
+              "56180cc8-ab5c-4d86-a23b-04eabc2e166d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "efeb5964-7d01-4626-829f-f9261d4964dd": {
+              "9a3ef2cf-aa3b-4451-98d3-a2671545c2d7": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

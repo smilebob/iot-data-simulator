@@ -94,7 +94,6 @@ SCADA_CSS = """
     color: #475569;
   }
   .scada-badge strong { color: #0284C7; }
-  .scada-badge-token { color: #D97706; font-family: monospace; font-weight: 700; }
   
   .pipe-flow {
     stroke-dasharray: 8, 4;
@@ -124,7 +123,7 @@ SCADA_CSS = """
 """
 
 def scada_wrapper(title: str, token: str, proto: str, svg_content: str) -> str:
-    """Enveloppe le contenu SVG dans le conteneur SCADA Light normalisé."""
+    """Enveloppe le contenu SVG dans le conteneur SCADA Light normalisé (sans fuite de secret)."""
     return f"""{SCADA_CSS}
 <div class="scada-container">
   <div class="scada-header">
@@ -134,7 +133,7 @@ def scada_wrapper(title: str, token: str, proto: str, svg_content: str) -> str:
     </div>
     <div style="display:flex; gap:10px; align-items:center;">
       <div class="scada-badge">Protocole: <strong>{proto}</strong></div>
-      <div class="scada-badge">Token TB: <strong class="scada-badge-token">{token}</strong></div>
+      <div class="scada-badge">Supervision: <strong style="color: #059669;">Temps Réel</strong></div>
     </div>
   </div>
   {svg_content}

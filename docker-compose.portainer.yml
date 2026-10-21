@@ -1,0 +1,84 @@
+# ========================================================
+# IoT Data Simulator - Stack Docker Compose pour Portainer
+# Utilise les images multi-architectures officielles GHCR
+# ========================================================
+services:
+  # ========================================================
+  # Broker MQTT Mosquitto (Broker Local Embarqué)
+  # ========================================================
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: iot-sim-mosquitto
+    restart: unless-stopped
+    ports:
+      - "${MOSQUITTO_PORT:-1883}:1883"
+      - "${MOSQUITTO_WS_PORT:-9001}:9001"
+    volumes:
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    # CIS Benchmark : Sécurité renforcée
+    security_opt:
+      - "no-new-privileges:true"
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 2 nc -z localhost 1883 || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - iot-network
+
+  # ========================================================
+  # Application Simulateur IoT (Web GUI + Moteur Python)
+  # ========================================================
+  simulator:
+    image: ghcr.io/smilebob/iot-data-simulator:latest
+    container_name: iot-sim-app
+    restart: unless-stopped
+    ports:
+      - "${SIMULATOR_PORT:-8000}:8000"
+    environment:
+      # Configuration Broker MQTT (laisser 'mosquitto' pour le broker embarqué ou pointer vers ThingsBoard)
+      - MQTT_BROKER_HOST=${MQTT_BROKER_HOST:-mosquitto}
+      - MQTT_BROKER_PORT=${MQTT_BROKER_PORT:-1883}
+      - MQTT_USE_TLS=${MQTT_USE_TLS:-false}
+      - MQTT_USERNAME=${MQTT_USERNAME:-}
+      - MQTT_PASSWORD=${MQTT_PASSWORD:-}
+    volumes:
+      - simulator_data:/app/data
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    # CIS Benchmark : Moindre privilège et isolation maximale
+    security_opt:
+      - "no-new-privileges:true"
+    cap_drop:
+      - ALL
+    networks:
+      - iot-network
+
+  # ========================================================
+  # Interface Web d'Exploration MQTT (MQTTX Web UI)
+  # ========================================================
+  mqtt-web:
+    image: emqx/mqttx-web:latest
+    container_name: iot-sim-mqttx
+    restart: unless-stopped
+    ports:
+      - "${MQTTX_PORT:-8080}:80"
+    security_opt:
+      - "no-new-privileges:true"
+    networks:
+      - iot-network
+
+volumes:
+  simulator_data:
+    name: iot_simulator_data
+  mosquitto_data:
+    name: iot_mosquitto_data
+  mosquitto_log:
+    name: iot_mosquitto_log
+
+networks:
+  iot-network:
+    name: iot-simulator-net
+    driver: bridge

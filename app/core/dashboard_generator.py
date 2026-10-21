@@ -74,8 +74,8 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
           <strong style="color: #0284C7; margin-left: 4px;">{proto_str}</strong>
         </div>
         <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;">
-          <span style="color: #64748B;">Access Token ThingsBoard:</span>
-          <strong style="color: #D97706; font-family: monospace; margin-left: 4px;">{token_str}</strong>
+          <span style="color: #64748B;">Authentification:</span>
+          <strong style="color: #059669; font-weight: 600; margin-left: 4px;">Jeton Sécurisé</strong>
         </div>
         <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;">
           <span style="color: #64748B;">Cadence:</span>
@@ -462,7 +462,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
         "title": f"Supervision SCADA - {device_name}",
         "name": f"Supervision SCADA - {device_name}",
         "configuration": {
-            "description": f"Tableau de bord SCADA HMI ThingsBoard pour l'équipement '{device_name}' (ID: {device.id}). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: {token_str}. Protocole: {proto_str}.",
+            "description": f"Tableau de bord SCADA HMI ThingsBoard pour l'équipement '{device_name}' (ID: {device.id}). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: {proto_str}.",
             "entityAliases": {
                 alias_id: {
                     "id": alias_id,

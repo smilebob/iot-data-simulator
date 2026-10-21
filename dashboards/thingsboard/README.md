@@ -20,12 +20,13 @@ Toutes les jauges, graphiques temps réel et indicateurs s'animent instantanéme
 
 ---
 
-## 💡 Astuce : Téléchargement Direct depuis l'Application
+## 💡 Téléchargement Direct depuis l'Application & Sécurité des Données
 
-Vous pouvez également télécharger un tableau de bord contenant **directement votre vrai Access Token ThingsBoard** :
+Vous pouvez télécharger le tableau de bord préconfiguré pour n'importe quel équipement instancié :
 - Dans l'application web du simulateur, localisez votre équipement créé dans la liste.
 - Cliquez sur le bouton **`Dashboard TB`** présent dans la barre d'outils de l'équipement.
-- Le fichier JSON téléchargé intègrera automatiquement votre Token d'authentification et votre nom d'équipement exact !
+- Le fichier JSON généré intègre le synoptique SCADA dédié, l'ensemble des grandeurs et la configuration d'alias.
+- **Sécurité & Protection des Secrets (CIS / OWASP)** : Par mesure de sécurité, l'Access Token ThingsBoard n'est jamais affiché ni gravé en clair dans le tableau de bord, évitant ainsi toute fuite de secret lors de l'export ou du partage d'écrans. Le rattachement s'effectue automatiquement via l'alias d'entité lors de l'importation.
 
 ---
 
