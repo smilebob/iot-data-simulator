@@ -19,6 +19,8 @@ from app.models.variable import (
     MathConfig,
     PointsTableConfig,
     TimestampedPoint,
+    DerivedConfig,
+    IntegratorConfig,
 )
 from app.platforms import get_adapter
 
@@ -232,9 +234,9 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 var_type=VariableType.TELEMETRY,
                 data_type=DataType.FLOAT,
                 unit="",
-                publish_interval=5.0,
-                sim_mode=SimMode.GAUSSIAN,
-                math_config=MathConfig(min_val=3.2, max_val=4.6, offset=3.9, noise_percent=3.0),
+                publish_interval=3.0,
+                sim_mode=SimMode.DERIVED,
+                derived_config=DerivedConfig(formula="round(max(2.5, min(5.2, (273.15 + temp_eau_depart) / max(temp_eau_retour - temp_eau_depart, 1.0) * 0.08)), 2)"),
             ),
         ]
     ))
@@ -1001,8 +1003,8 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 data_type=DataType.FLOAT,
                 unit="kW",
                 publish_interval=3.0,
-                sim_mode=SimMode.SINE,
-                math_config=MathConfig(min_val=25.0, max_val=140.0, period=80.0, noise_percent=2.0),
+                sim_mode=SimMode.DERIVED,
+                derived_config=DerivedConfig(formula="round(debit_volumique_m3h * delta_t_deg * 1.163, 1)"),
             ),
             VariableConfig(
                 id="energie_cumulee_mwh",
@@ -1012,8 +1014,13 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 data_type=DataType.FLOAT,
                 unit="MWh",
                 publish_interval=10.0,
-                sim_mode=SimMode.RAMP,
-                math_config=MathConfig(min_val=142.0, max_val=155.0, period=400.0, noise_percent=0.2),
+                sim_mode=SimMode.INTEGRATOR,
+                integrator_config=IntegratorConfig(
+                    source_variable_id="puissance_thermique_kw",
+                    time_unit="hour",
+                    multiplier=0.001,
+                    initial_value=142.5,
+                ),
             ),
             VariableConfig(
                 id="temp_depart_eau",
@@ -1185,17 +1192,6 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
         default_platform=PlatformType.THINGSBOARD,
         variables=[
             VariableConfig(
-                id="puissance_injection_kw",
-                name="Puissance AC Injectée",
-                device_id="",
-                var_type=VariableType.TELEMETRY,
-                data_type=DataType.FLOAT,
-                unit="kW",
-                publish_interval=2.0,
-                sim_mode=SimMode.SINE,
-                math_config=MathConfig(min_val=0.0, max_val=125.0, period=90.0, noise_percent=4.0),
-            ),
-            VariableConfig(
                 id="ensoleillement",
                 name="Irradiation Pyranomètre",
                 device_id="",
@@ -1207,17 +1203,6 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 math_config=MathConfig(min_val=50.0, max_val=980.0, period=90.0, noise_percent=3.0),
             ),
             VariableConfig(
-                id="tension_dc_string",
-                name="Tension DC Chaîne PV",
-                device_id="",
-                var_type=VariableType.TELEMETRY,
-                data_type=DataType.FLOAT,
-                unit="V",
-                publish_interval=2.0,
-                sim_mode=SimMode.GAUSSIAN,
-                math_config=MathConfig(min_val=580.0, max_val=740.0, offset=660.0, noise_percent=1.5),
-            ),
-            VariableConfig(
                 id="rendement_onduleur",
                 name="Rendement de Conversion",
                 device_id="",
@@ -1227,6 +1212,28 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 publish_interval=5.0,
                 sim_mode=SimMode.GAUSSIAN,
                 math_config=MathConfig(min_val=96.5, max_val=98.8, offset=97.9, noise_percent=0.4),
+            ),
+            VariableConfig(
+                id="puissance_injection_kw",
+                name="Puissance AC Injectée",
+                device_id="",
+                var_type=VariableType.TELEMETRY,
+                data_type=DataType.FLOAT,
+                unit="kW",
+                publish_interval=2.0,
+                sim_mode=SimMode.DERIVED,
+                derived_config=DerivedConfig(formula="round((ensoleillement / 1000.0) * 125.0 * (rendement_onduleur / 100.0), 2)"),
+            ),
+            VariableConfig(
+                id="tension_dc_string",
+                name="Tension DC Chaîne PV",
+                device_id="",
+                var_type=VariableType.TELEMETRY,
+                data_type=DataType.FLOAT,
+                unit="V",
+                publish_interval=2.0,
+                sim_mode=SimMode.DERIVED,
+                derived_config=DerivedConfig(formula="round(580.0 + (ensoleillement / 1000.0) * 140.0, 1)"),
             ),
         ]
     ))
@@ -1272,8 +1279,13 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 data_type=DataType.FLOAT,
                 unit="kWh",
                 publish_interval=4.0,
-                sim_mode=SimMode.RAMP,
-                math_config=MathConfig(min_val=0.0, max_val=42.0, period=120.0, noise_percent=0.5),
+                sim_mode=SimMode.INTEGRATOR,
+                integrator_config=IntegratorConfig(
+                    source_variable_id="puissance_charge_kw",
+                    time_unit="hour",
+                    multiplier=1.0,
+                    initial_value=0.0,
+                ),
             ),
             VariableConfig(
                 id="courant_charge_a",
@@ -1283,8 +1295,8 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 data_type=DataType.FLOAT,
                 unit="A",
                 publish_interval=2.0,
-                sim_mode=SimMode.SINE,
-                math_config=MathConfig(min_val=0.0, max_val=32.0, period=60.0, noise_percent=2.0),
+                sim_mode=SimMode.DERIVED,
+                derived_config=DerivedConfig(formula="round((puissance_charge_kw * 1000.0) / (230.0 * 3.0), 1)"),
             ),
             VariableConfig(
                 id="statut_connecteur",
@@ -1388,8 +1400,8 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 data_type=DataType.FLOAT,
                 unit="rpm",
                 publish_interval=2.0,
-                sim_mode=SimMode.SINE,
-                math_config=MathConfig(min_val=8.0, max_val=17.5, period=60.0, noise_percent=2.0),
+                sim_mode=SimMode.DERIVED,
+                derived_config=DerivedConfig(formula="round(max(0.0, (vitesse_vent_ms - 2.0) * 1.05), 1)"),
             ),
             VariableConfig(
                 id="puissance_active_mw",
@@ -1399,8 +1411,8 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 data_type=DataType.FLOAT,
                 unit="MW",
                 publish_interval=2.0,
-                sim_mode=SimMode.SINE,
-                math_config=MathConfig(min_val=0.4, max_val=2.8, period=60.0, noise_percent=3.0),
+                sim_mode=SimMode.DERIVED,
+                derived_config=DerivedConfig(formula="min(2.8, round(0.00055 * pow(vitesse_vent_ms, 3), 3))"),
             ),
             VariableConfig(
                 id="angle_nacelle_yaw_deg",
@@ -1993,8 +2005,13 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
                 data_type=DataType.FLOAT,
                 unit="m³",
                 publish_interval=10.0,
-                sim_mode=SimMode.RAMP,
-                math_config=MathConfig(min_val=0.0, max_val=1.8, period=60.0, noise_percent=0.0),
+                sim_mode=SimMode.INTEGRATOR,
+                integrator_config=IntegratorConfig(
+                    source_variable_id="debit_arrosage_lmin",
+                    time_unit="minute",
+                    multiplier=0.001,
+                    initial_value=0.0,
+                ),
             ),
             VariableConfig(
                 id="vanne_secteur_ouverte",

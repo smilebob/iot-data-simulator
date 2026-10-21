@@ -44,6 +44,17 @@
       "custom_port": null,
       "use_tls": true,
       "enabled": true
+    },
+    {
+      "id": "bldg_cta_ad5d",
+      "name": "Centrale Traitement d'Air (CTA)",
+      "platform": "thingsboard",
+      "token": "i056fisuslzqiqgx9xiq",
+      "protocol": "http",
+      "custom_host": null,
+      "custom_port": null,
+      "use_tls": null,
+      "enabled": true
     }
   ],
   "variables": [
@@ -82,8 +93,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 26.436,
-      "last_published": 1792589193.5732663
+      "current_value": 23.675,
+      "last_published": 1792590873.36257
     },
     {
       "id": "humidity",
@@ -120,8 +131,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 86.083,
-      "last_published": 1792589190.3922148
+      "current_value": 81.888,
+      "last_published": 1792590873.36257
     },
     {
       "id": "powerMode",
@@ -159,7 +170,7 @@
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
       "current_value": "SOLAR_OPTIMIZED",
-      "last_published": 1792589193.5732663
+      "last_published": 1792590873.36257
     },
     {
       "id": "vitesse_rpm",
@@ -216,8 +227,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 2829,
-      "last_published": 1792589220.0945067
+      "current_value": 2817,
+      "last_published": 1792590875.4461591
     },
     {
       "id": "pression_bar",
@@ -254,8 +265,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 4.974,
-      "last_published": 1792589220.0945067
+      "current_value": 4.526,
+      "last_published": 1792590875.4461591
     },
     {
       "id": "co2",
@@ -292,8 +303,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 79.72,
-      "last_published": 1792589200.899419
+      "current_value": 67.998,
+      "last_published": 1792590877.2320209
     },
     {
       "id": "temperature_00",
@@ -321,6 +332,171 @@
             "value": "0"
           }
         ],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": 22.793,
+      "last_published": 1792590873.36257
+    },
+    {
+      "id": "bldg_cta_ad5d_temp_soufflage",
+      "name": "Température Soufflage",
+      "device_id": "bldg_cta_ad5d",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 4.0,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 19.5,
+        "max_val": 22.5,
+        "period": 80.0,
+        "offset": 0.0,
+        "noise_percent": 1.0,
+        "step": 1.0,
+        "constant_val": 0.0
+      },
+      "points_config": {
+        "points": [],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "bldg_cta_ad5d_temp_reprise",
+      "name": "Température Reprise",
+      "device_id": "bldg_cta_ad5d",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 4.0,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 21.0,
+        "max_val": 24.0,
+        "period": 80.0,
+        "offset": 0.0,
+        "noise_percent": 1.0,
+        "step": 1.0,
+        "constant_val": 0.0
+      },
+      "points_config": {
+        "points": [],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "bldg_cta_ad5d_debit_soufflage",
+      "name": "Débit d'Air Soufflé",
+      "device_id": "bldg_cta_ad5d",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "m³/h",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 5.0,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 1500.0,
+        "max_val": 4200.0,
+        "period": 60.0,
+        "offset": 0.0,
+        "noise_percent": 2.0,
+        "step": 80.0,
+        "constant_val": 0.0
+      },
+      "points_config": {
+        "points": [],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "bldg_cta_ad5d_pression_filtre",
+      "name": "Delta Pression Filtre",
+      "device_id": "bldg_cta_ad5d",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "Pa",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 5.0,
+      "sim_mode": "ramp",
+      "math_config": {
+        "min_val": 120.0,
+        "max_val": 280.0,
+        "period": 240.0,
+        "offset": 0.0,
+        "noise_percent": 1.5,
+        "step": 1.0,
+        "constant_val": 0.0
+      },
+      "points_config": {
+        "points": [],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "bldg_cta_ad5d_registre_air_neuf",
+      "name": "Ouverture Registre Air Neuf",
+      "device_id": "bldg_cta_ad5d",
+      "var_type": "attribute",
+      "data_type": "integer",
+      "unit": "%",
+      "topic": "v1/devices/me/attributes",
+      "publish_interval": 30.0,
+      "sim_mode": "constant",
+      "math_config": {
+        "min_val": 0.0,
+        "max_val": 100.0,
+        "period": 60.0,
+        "offset": 0.0,
+        "noise_percent": 0.0,
+        "step": 1.0,
+        "constant_val": 35
+      },
+      "points_config": {
+        "points": [],
         "loop": true,
         "playback_speed": 1.0,
         "interpolate": true

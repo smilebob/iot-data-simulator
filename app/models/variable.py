@@ -23,6 +23,17 @@ class SimMode(str, Enum):
     GAUSSIAN = "gaussian"
     CONSTANT = "constant"
     POINTS_TABLE = "points_table"
+    DERIVED = "derived"          # Formule physique liant d'autres grandeurs
+    INTEGRATOR = "integrator"    # Intégrateur temporel continu (ex: kWh = ∫ kW dt)
+
+class DerivedConfig(BaseModel):
+    formula: str = Field(default="", description="Expression mathématique (ex: 'debit_m3h * delta_t_c * 1.163')")
+
+class IntegratorConfig(BaseModel):
+    source_variable_id: str = Field(default="", description="ID de la variable source à intégrer (ex: 'puissance_kw')")
+    time_unit: str = Field(default="hour", description="Unité de temps ('second', 'minute', 'hour')")
+    multiplier: float = Field(default=1.0, description="Facteur d'échelle (ex: 0.001 pour kW vers MWh)")
+    initial_value: float = Field(default=0.0, description="Valeur initiale de l'index cumulé")
 
 class MathConfig(BaseModel):
     min_val: float = Field(default=0.0, description="Valeur minimale")
@@ -62,6 +73,8 @@ class VariableConfig(BaseModel):
     sim_mode: SimMode = Field(default=SimMode.SINE, description="Mode de simulation")
     math_config: MathConfig = Field(default_factory=MathConfig)
     points_config: PointsTableConfig = Field(default_factory=PointsTableConfig)
+    derived_config: DerivedConfig = Field(default_factory=DerivedConfig)
+    integrator_config: IntegratorConfig = Field(default_factory=IntegratorConfig)
     enabled: bool = Field(default=True, description="Variable active dans la boucle de simulation")
     
     # Contrôle manuel & forçage

@@ -496,9 +496,13 @@ function createVariableCard(variable, device) {
           </span>
           <span class="text-sm font-bold text-[#FF4D61]">${escapeHtml(variable.unit || '')}</span>
         </div>
-        <span class="text-[10px] text-slate-400 font-mono">
-          ${variable.sim_mode.toUpperCase()} &bull; ${variable.publish_interval}s
-        </span>
+        <div class="text-right">
+          <span class="text-[10px] text-slate-400 font-mono block">
+            ${variable.sim_mode === 'derived' ? '<span class="text-amber-400 font-bold" title="Formule: ' + escapeHtml(variable.derived_config?.formula || '') + '">ƒ(x) COUPLÉ</span>' : (variable.sim_mode === 'integrator' ? '<span class="text-emerald-400 font-bold" title="Source: ' + escapeHtml(variable.integrator_config?.source_variable_id || '') + '">∫ INTÉGRÉ</span>' : variable.sim_mode.toUpperCase())} &bull; ${variable.publish_interval}s
+          </span>
+          ${variable.sim_mode === 'derived' && variable.derived_config?.formula ? `<span class="text-[9px] text-amber-500/80 font-mono truncate max-w-[140px] block" title="${escapeHtml(variable.derived_config.formula)}">${escapeHtml(variable.derived_config.formula)}</span>` : ''}
+          ${variable.sim_mode === 'integrator' && variable.integrator_config?.source_variable_id ? `<span class="text-[9px] text-emerald-500/80 font-mono truncate max-w-[140px] block" title="Source: ${escapeHtml(variable.integrator_config.source_variable_id)}">∫ ${escapeHtml(variable.integrator_config.source_variable_id)}</span>` : ''}
+        </div>
       </div>
 
       <!-- Topic MQTT actif -->
@@ -908,6 +912,20 @@ function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
     document.getElementById("math-noise").value = varToEdit.math_config.noise_percent;
     document.getElementById("math-constant").value = varToEdit.math_config.constant_val;
 
+    const formulaInput = document.getElementById("derived-formula");
+    if (formulaInput) formulaInput.value = varToEdit.derived_config?.formula || "";
+
+    const intSourceSelect = document.getElementById("integrator-source-var");
+    if (intSourceSelect && varToEdit.integrator_config?.source_variable_id) {
+      intSourceSelect.value = varToEdit.integrator_config.source_variable_id;
+    }
+    const timeUnitSelect = document.getElementById("integrator-time-unit");
+    if (timeUnitSelect) timeUnitSelect.value = varToEdit.integrator_config?.time_unit || "hour";
+    const multInput = document.getElementById("integrator-multiplier");
+    if (multInput) multInput.value = varToEdit.integrator_config?.multiplier ?? 1.0;
+    const initValInput = document.getElementById("integrator-initial-val");
+    if (initValInput) initValInput.value = varToEdit.integrator_config?.initial_value ?? 0.0;
+
     renderPointsTable(varToEdit.points_config ? varToEdit.points_config.points : []);
   } else {
     if (idEl) { idEl.value = ""; idEl.disabled = false; }
@@ -919,7 +937,46 @@ function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
     if (topicEl) topicEl.value = "";
     if (intervalEl) intervalEl.value = "3.0";
     if (modeEl) modeEl.value = "sine";
+
+    const formulaInput = document.getElementById("derived-formula");
+    if (formulaInput) formulaInput.value = "";
+    const timeUnitSelect = document.getElementById("integrator-time-unit");
+    if (timeUnitSelect) timeUnitSelect.value = "hour";
+    const multInput = document.getElementById("integrator-multiplier");
+    if (multInput) multInput.value = "1.0";
+    const initValInput = document.getElementById("integrator-initial-val");
+    if (initValInput) initValInput.value = "0.0";
+
     renderPointsTable([]);
+  }
+
+  // Peuplement des aides contextuelles pour formules et intégrateurs
+  const targetDevId = varToEdit ? varToEdit.device_id : (devSelect ? devSelect.value : "");
+  const devVars = state.variables.filter(v => v.device_id === targetDevId && (!varToEdit || v.id !== varToEdit.id));
+  
+  const chipsContainer = document.getElementById("derived-variables-chips");
+  if (chipsContainer) {
+    if (devVars.length === 0) {
+      chipsContainer.innerHTML = '<span class="text-slate-500 text-[10px]">Aucune autre variable disponible sur cet équipement</span>';
+    } else {
+      chipsContainer.innerHTML = devVars.map(v => 
+        `<button type="button" onclick="insertFormulaVariable('${escapeHtml(v.id)}')" class="px-2 py-0.5 rounded bg-[#181D26] hover:bg-[#2B3342] border border-[#2B3342] text-[10px] text-amber-300 font-mono transition" title="${escapeHtml(v.name)}">${escapeHtml(v.id)}</button>`
+      ).join("");
+    }
+  }
+
+  const intSourceSelect = document.getElementById("integrator-source-var");
+  if (intSourceSelect) {
+    intSourceSelect.innerHTML = "";
+    devVars.forEach(v => {
+      const opt = document.createElement("option");
+      opt.value = v.id;
+      opt.textContent = `${v.name} (${v.id})${v.unit ? ' [' + v.unit + ']' : ''}`;
+      intSourceSelect.appendChild(opt);
+    });
+    if (varToEdit && varToEdit.integrator_config?.source_variable_id) {
+      intSourceSelect.value = varToEdit.integrator_config.source_variable_id;
+    }
   }
 
   toggleSimModeSections();
@@ -930,20 +987,36 @@ function toggleSimModeSections() {
   const mode = document.getElementById("var-sim-mode").value;
   const mathSec = document.getElementById("section-math-params");
   const pointsSec = document.getElementById("section-points-params");
+  const derivedSec = document.getElementById("section-derived-params");
+  const intSec = document.getElementById("section-integrator-params");
   const constWrap = document.getElementById("constant-val-wrapper");
 
+  if (mathSec) mathSec.classList.add("hidden");
+  if (pointsSec) pointsSec.classList.add("hidden");
+  if (derivedSec) derivedSec.classList.add("hidden");
+  if (intSec) intSec.classList.add("hidden");
+
   if (mode === "points_table") {
-    if (mathSec) mathSec.classList.add("hidden");
     if (pointsSec) pointsSec.classList.remove("hidden");
+  } else if (mode === "derived") {
+    if (derivedSec) derivedSec.classList.remove("hidden");
+  } else if (mode === "integrator") {
+    if (intSec) intSec.classList.remove("hidden");
   } else {
     if (mathSec) mathSec.classList.remove("hidden");
-    if (pointsSec) pointsSec.classList.add("hidden");
     if (mode === "constant") {
       if (constWrap) constWrap.classList.remove("hidden");
     } else {
       if (constWrap) constWrap.classList.add("hidden");
     }
   }
+}
+
+function insertFormulaVariable(varId) {
+  const input = document.getElementById("derived-formula");
+  if (!input) return;
+  input.value = input.value ? `${input.value} * ${varId}` : varId;
+  input.focus();
 }
 
 function renderPointsTable(points) {
@@ -1004,6 +1077,15 @@ async function saveVariableForm(e) {
       loop: document.getElementById("points-loop").checked,
       interpolate: document.getElementById("points-interpolate").checked,
       playback_speed: 1.0,
+    },
+    derived_config: {
+      formula: document.getElementById("derived-formula") ? document.getElementById("derived-formula").value.trim() : "",
+    },
+    integrator_config: {
+      source_variable_id: document.getElementById("integrator-source-var") ? document.getElementById("integrator-source-var").value : "",
+      time_unit: document.getElementById("integrator-time-unit") ? document.getElementById("integrator-time-unit").value : "hour",
+      multiplier: parseFloat(document.getElementById("integrator-multiplier")?.value) || 1.0,
+      initial_value: parseFloat(document.getElementById("integrator-initial-val")?.value) || 0.0,
     },
     enabled: true,
   };

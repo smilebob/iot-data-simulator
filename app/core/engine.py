@@ -6,6 +6,7 @@ from app.models.device import DeviceConfig
 from app.models.variable import VariableConfig, SimMode, AnomalyType, DataType
 from app.core.generators import MathSignalGenerator
 from app.core.replay import ReplayEngine
+from app.core.physics import SafeExpressionEvaluator
 from app.platforms import get_adapter
 from app.storage.repository import StorageRepository
 from app.mqtt.client import MqttManager
@@ -35,6 +36,8 @@ class SimulationEngine:
         self._ws_broadcast_callback: Optional[Callable[[Dict[str, Any]], None]] = None
         self._anomaly_counters: Dict[str, int] = {}
         self._drift_offsets: Dict[str, float] = {}
+        self._integrator_accumulators: Dict[str, float] = {}
+        self._last_tick_time: float = time.time()
 
         # Enregistrement du callback RPC Thingsboard
         self.mqtt.on_rpc_callback = self._handle_rpc
@@ -60,21 +63,60 @@ class SimulationEngine:
             try:
                 now = time.time()
                 elapsed = now - self._start_time
+                dt = max(0.01, min(now - self._last_tick_time, 2.0))
+                self._last_tick_time = now
+
                 devices_map = {d.id: d for d in self.repo.get_devices() if d.enabled}
                 variables = self.repo.get_variables()
 
+                # 1. Organisation du contexte de calcul par équipement
+                device_contexts: Dict[str, Dict[str, Any]] = {}
+                for dev_id in devices_map:
+                    device_contexts[dev_id] = {}
+
+                # Séparation des variables en 3 passes d'évaluation causale
+                primary_vars: List[VariableConfig] = []
+                derived_vars: List[VariableConfig] = []
+                integrator_vars: List[VariableConfig] = []
+
                 for var in variables:
-                    if not var.enabled:
+                    if not var.enabled or var.device_id not in devices_map:
                         continue
+                    if var.sim_mode == SimMode.DERIVED:
+                        derived_vars.append(var)
+                    elif var.sim_mode == SimMode.INTEGRATOR:
+                        integrator_vars.append(var)
+                    else:
+                        primary_vars.append(var)
+
+                # Passe 1 : Évaluation des grandeurs motrices indépendantes
+                for var in primary_vars:
+                    val = self._compute_primary_value(var, elapsed)
+                    var.current_value = val
+                    self._update_context(device_contexts, var, val)
+
+                # Passe 2 : Évaluation des grandeurs dérivées (formules physiques couplées)
+                for var in derived_vars:
+                    ctx = device_contexts.get(var.device_id, {})
+                    val = self._compute_derived_value(var, ctx)
+                    var.current_value = val
+                    self._update_context(device_contexts, var, val)
+
+                # Passe 3 : Évaluation des intégrateurs temporels continus (énergie = ∫ P dt)
+                for var in integrator_vars:
+                    ctx = device_contexts.get(var.device_id, {})
+                    val = self._compute_integrator_value(var, dt, ctx)
+                    var.current_value = val
+                    self._update_context(device_contexts, var, val)
+
+                # 2. Publication et streaming WebSocket pour toutes les variables actives
+                all_active_vars = primary_vars + derived_vars + integrator_vars
+                for var in all_active_vars:
                     device = devices_map.get(var.device_id)
                     if not device:
                         continue
 
-                    # 1. Calcul de la valeur courante
-                    new_val = self._compute_value(var, elapsed)
-                    var.current_value = new_val
-
-                    # 2. Vérification de l'intervalle de publication
+                    new_val = var.current_value
                     should_publish = (
                         var.last_published is None or 
                         (now - var.last_published) >= max(var.publish_interval, 0.1)
@@ -139,17 +181,25 @@ class SimulationEngine:
                 logger.error(f"Erreur boucle simulation: {e}")
                 await asyncio.sleep(1.0)
 
-    def _compute_value(self, var: VariableConfig, elapsed: float) -> Any:
-        # Forçage manuel prioritaire
+    def _update_context(self, device_contexts: Dict[str, Dict[str, Any]], var: VariableConfig, val: Any):
+        ctx = device_contexts.setdefault(var.device_id, {})
+        ctx[var.id] = val
+        # Clé courte (ex: si var.id == 'comp_01_pression', on enregistre aussi 'pression')
+        if "_" in var.id:
+            parts = var.id.split("_")
+            short_key = "_".join(parts[1:])
+            ctx[short_key] = val
+            # Dernière partie comme clé directe (ex: 'pression')
+            ctx[parts[-1]] = val
+        ctx[var.name] = val
+
+    def _compute_primary_value(self, var: VariableConfig, elapsed: float) -> Any:
         if var.manual_override and var.manual_value is not None:
             return MathSignalGenerator._cast_type(var.manual_value, var.data_type)
 
-        # Mode Gel
         if var.anomaly == AnomalyType.FREEZE and var.current_value is not None:
             return var.current_value
 
-        # Calcul standard
-        val: Any
         if var.sim_mode == SimMode.POINTS_TABLE:
             val = ReplayEngine.evaluate(var.points_config, elapsed, var.data_type)
         else:
@@ -160,10 +210,69 @@ class SimulationEngine:
                 previous_value=var.current_value if isinstance(var.current_value, (int, float)) else None,
                 data_type=var.data_type,
             )
+        return self._apply_anomalies(var, val)
 
-        # Gestion des anomalies
+    def _compute_derived_value(self, var: VariableConfig, context: Dict[str, Any]) -> Any:
+        if var.manual_override and var.manual_value is not None:
+            return MathSignalGenerator._cast_type(var.manual_value, var.data_type)
+
+        if var.anomaly == AnomalyType.FREEZE and var.current_value is not None:
+            return var.current_value
+
+        formula = getattr(var.derived_config, "formula", "")
+        raw_val = SafeExpressionEvaluator.evaluate(formula, context)
+        val = self._apply_anomalies(var, raw_val)
+        return MathSignalGenerator._cast_type(val, var.data_type)
+
+    def _compute_integrator_value(self, var: VariableConfig, dt: float, context: Dict[str, Any]) -> Any:
+        if var.manual_override and var.manual_value is not None:
+            return MathSignalGenerator._cast_type(var.manual_value, var.data_type)
+
+        if var.anomaly == AnomalyType.FREEZE and var.current_value is not None:
+            return var.current_value
+
+        source_id = getattr(var.integrator_config, "source_variable_id", "")
+        source_val = 0.0
+        if source_id in context:
+            try:
+                source_val = float(context[source_id])
+            except Exception:
+                pass
+        else:
+            # Recherche par suffixe
+            for k, v in context.items():
+                if k.endswith(f"_{source_id}") or k == source_id:
+                    try:
+                        source_val = float(v)
+                        break
+                    except Exception:
+                        pass
+
+        # Facteur temporel (heures, minutes, secondes)
+        time_unit = getattr(var.integrator_config, "time_unit", "hour").lower()
+        if time_unit == "hour":
+            dt_unit = dt / 3600.0
+        elif time_unit == "minute":
+            dt_unit = dt / 60.0
+        else:
+            dt_unit = dt
+
+        multiplier = getattr(var.integrator_config, "multiplier", 1.0)
+        increment = source_val * dt_unit * multiplier
+
+        acc = self._integrator_accumulators.get(var.id)
+        if acc is None:
+            init_v = getattr(var.integrator_config, "initial_value", 0.0)
+            acc = float(init_v if init_v is not None else (var.current_value if var.current_value is not None else 0.0))
+
+        acc += increment
+        self._integrator_accumulators[var.id] = acc
+
+        val = self._apply_anomalies(var, acc)
+        return MathSignalGenerator._cast_type(val, var.data_type)
+
+    def _apply_anomalies(self, var: VariableConfig, val: Any) -> Any:
         if var.anomaly == AnomalyType.SPIKE:
-            # Pic ponctuel actif pendant 3 ticks puis réinitialisé
             cnt = self._anomaly_counters.get(var.id, 0)
             if cnt < 3:
                 self._anomaly_counters[var.id] = cnt + 1
@@ -174,7 +283,6 @@ class SimulationEngine:
                 self._anomaly_counters[var.id] = 0
 
         elif var.anomaly == AnomalyType.DRIFT:
-            # Dérive progressive
             curr_drift = self._drift_offsets.get(var.id, 0.0)
             curr_drift += (var.anomaly_magnitude / 100.0)
             self._drift_offsets[var.id] = curr_drift
@@ -184,6 +292,7 @@ class SimulationEngine:
             self._drift_offsets[var.id] = 0.0
 
         return MathSignalGenerator._cast_type(val, var.data_type)
+
 
     def trigger_anomaly(self, var_id: str, anomaly: AnomalyType, magnitude: float = 50.0):
         """Déclenche une anomalie à la volée (idéal pour déclencher les alertes ThingsBoard)."""

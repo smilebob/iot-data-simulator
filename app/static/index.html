@@ -222,6 +222,8 @@
             <option value="gaussian">Bruit Gaussien</option>
             <option value="constant">Valeur Constante</option>
             <option value="points_table">Tableau de Points Horodatés (Rejeu Temporel)</option>
+            <option value="derived">⚡ Formule Physique Dérivée (Couplage avec d'autres grandeurs)</option>
+            <option value="integrator">📈 Intégrateur Temporel Continu (Index cumulé : kWh = ∫ kW dt)</option>
           </select>
         </div>
 
@@ -289,6 +291,65 @@
               <i data-lucide="file-up" class="w-3.5 h-3.5"></i> Importer fichier CSV (offset,valeur)
               <input type="file" id="points-csv-input" accept=".csv,.txt" class="hidden" onchange="uploadPointsCSV(event)">
             </label>
+          </div>
+        </div>
+
+        <!-- Section Formule Physique Dérivée -->
+        <div id="section-derived-params" class="hidden bg-[#0F1218] p-4 rounded-xl border border-[#2B3342] space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="font-semibold text-slate-300 text-xs uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="calculator" class="w-4 h-4 text-amber-400"></i> Formule Mathématique Dérivée
+            </h4>
+            <span class="text-[10px] text-slate-500 font-mono">Calculé en temps réel</span>
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1">Expression / Équation Physique</label>
+            <input type="text" id="derived-formula" placeholder="Ex: debit * delta_t * 1.163 ou (u * i * 1.732) / 1000" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-3 py-2 text-slate-100 font-mono text-xs focus:outline-none focus:border-[#E2001A]">
+            <p class="text-[11px] text-slate-500 mt-1">Opérateurs autorisés : +, -, *, /, %, **, round(x, n), sqrt(x), min(a,b), max(a,b), abs(x), sin(x), cos(x).</p>
+          </div>
+          <div>
+            <span class="text-[10px] font-semibold text-slate-400 block mb-1">Variables de cet équipement utilisables (cliquez pour insérer) :</span>
+            <div id="derived-variables-chips" class="flex flex-wrap gap-1">
+              <!-- Inséré dynamiquement par app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Intégrateur Temporel Continu -->
+        <div id="section-integrator-params" class="hidden bg-[#0F1218] p-4 rounded-xl border border-[#2B3342] space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="font-semibold text-slate-300 text-xs uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i> Intégrateur Temporel Continu (Index Cumulé)
+            </h4>
+            <span class="text-[10px] text-slate-500 font-mono">Index(t) = ∫ X dt</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Variable Source à intégrer</label>
+              <select id="integrator-source-var" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100 text-xs focus:outline-none focus:border-[#E2001A]">
+                <!-- Inséré dynamiquement par app.js -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Unité Temporelle de Base</label>
+              <select id="integrator-time-unit" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100 text-xs focus:outline-none focus:border-[#E2001A]">
+                <option value="hour">Heures (ex: kW → kWh ou t/h → tonnes)</option>
+                <option value="minute">Minutes (ex: l/min → litres ou m³)</option>
+                <option value="second">Secondes (intégration pure par seconde)</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-slate-300 mb-1">Facteur d'échelle (Multiplicateur)</label>
+              <input type="number" id="integrator-multiplier" step="any" value="1.0" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100 text-xs">
+              <p class="text-[10px] text-slate-500 mt-0.5">Ex: 0.001 pour convertir kW en MWh ou litres en m³.</p>
+            </div>
+            <div>
+              <label class="block text-slate-300 mb-1">Index Initial de Départ</label>
+              <input type="number" id="integrator-initial-val" step="any" value="0.0" class="w-full bg-[#181D26] border border-[#2B3342] rounded px-2.5 py-1.5 text-slate-100 text-xs">
+              <p class="text-[10px] text-slate-500 mt-0.5">Valeur de départ du compteur (ex: 1250.0 MWh).</p>
+            </div>
           </div>
         </div>
 
@@ -860,7 +921,7 @@
         <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
       </div>
       <div class="text-[10px] font-mono text-slate-500 tracking-wider">
-        v<span id="app-version-badge">1.6.0</span>
+        v<span id="app-version-badge">1.7.0</span>
       </div>
     </div>
   </footer>
