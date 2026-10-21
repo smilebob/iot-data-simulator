@@ -26,23 +26,23 @@
     {
       "id": "ind_motor_02",
       "name": "Compresseur Atelier",
-      "platform": "generic",
-      "token": null,
-      "protocol": "mqtt",
+      "platform": "thingsboard",
+      "token": "hww00zqfsih818gxssoi",
+      "protocol": "http",
       "custom_host": null,
       "custom_port": null,
-      "use_tls": null,
+      "use_tls": true,
       "enabled": true
     },
     {
-      "id": "xxx",
-      "name": "sss",
+      "id": "qualite_air",
+      "name": "Qualité de l'air",
       "platform": "thingsboard",
       "token": null,
-      "protocol": "mqtt",
+      "protocol": "http",
       "custom_host": null,
       "custom_port": null,
-      "use_tls": null,
+      "use_tls": true,
       "enabled": true
     }
   ],
@@ -82,8 +82,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 20.584,
-      "last_published": 1792587163.5409243
+      "current_value": 23.411,
+      "last_published": 1792588188.7037091
     },
     {
       "id": "humidity",
@@ -120,8 +120,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 73.376,
-      "last_published": 1792587171.5419478
+      "current_value": 35.172,
+      "last_published": 1792588196.8379455
     },
     {
       "id": "powerMode",
@@ -158,8 +158,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": null,
-      "last_published": null
+      "current_value": "SOLAR_OPTIMIZED",
+      "last_published": 1792588211.5929418
     },
     {
       "id": "vitesse_rpm",
@@ -169,7 +169,7 @@
       "data_type": "integer",
       "unit": "rpm",
       "topic": "usines/atelier1/compresseur/rpm",
-      "publish_interval": 2.0,
+      "publish_interval": 35.0,
       "sim_mode": "points_table",
       "math_config": {
         "min_val": 0.0,
@@ -178,33 +178,33 @@
         "offset": 0.0,
         "noise_percent": 0.0,
         "step": 1.0,
-        "constant_val": 0.0
+        "constant_val": "0"
       },
       "points_config": {
         "points": [
           {
             "offset_seconds": 0.0,
-            "value": 0
+            "value": "0"
           },
           {
             "offset_seconds": 10.0,
-            "value": 1200
+            "value": "1200"
           },
           {
             "offset_seconds": 25.0,
-            "value": 2800
+            "value": "2800"
           },
           {
             "offset_seconds": 40.0,
-            "value": 2850
+            "value": "2850"
           },
           {
             "offset_seconds": 50.0,
-            "value": 1000
+            "value": "1000"
           },
           {
             "offset_seconds": 60.0,
-            "value": 0
+            "value": "0"
           }
         ],
         "loop": true,
@@ -216,8 +216,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 364,
-      "last_published": 1792587184.8054996
+      "current_value": 2816,
+      "last_published": 1792588236.9122286
     },
     {
       "id": "pression_bar",
@@ -227,7 +227,7 @@
       "data_type": "float",
       "unit": "bar",
       "topic": "usines/atelier1/compresseur/pression",
-      "publish_interval": 2.5,
+      "publish_interval": 35.0,
       "sim_mode": "sawtooth",
       "math_config": {
         "min_val": 4.5,
@@ -236,10 +236,15 @@
         "offset": 0.0,
         "noise_percent": 0.0,
         "step": 1.0,
-        "constant_val": 0.0
+        "constant_val": "0"
       },
       "points_config": {
-        "points": [],
+        "points": [
+          {
+            "offset_seconds": 0.0,
+            "value": "0"
+          }
+        ],
         "loop": true,
         "playback_speed": 1.0,
         "interpolate": true
@@ -249,8 +254,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 7.75,
-      "last_published": 1792587185.306037
+      "current_value": 8.166,
+      "last_published": 1792588212.2600534
     }
   ]
 }

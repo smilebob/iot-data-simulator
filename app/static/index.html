@@ -59,16 +59,37 @@
             <span class="text-xs hidden md:inline font-medium">Logs</span>
             <span id="log-error-badge" class="hidden absolute -top-1.5 -right-1.5 bg-[#E2001A] text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
           </button>
-          <button onclick="openBrokerModal()" title="Paramètres Broker MQTT" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
+          <button onclick="openBrokerModal()" id="btn-broker-settings" title="Paramètres Broker MQTT" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
             <i data-lucide="settings" class="w-4 h-4"></i>
           </button>
-          <button onclick="exportScenario()" title="Exporter le Scénario (JSON)" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
+          <button onclick="exportScenario()" id="btn-export-scenario" title="Exporter le Scénario (JSON)" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
             <i data-lucide="download" class="w-4 h-4"></i>
           </button>
-          <label title="Importer un Scénario (JSON)" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342] cursor-pointer">
+          <label id="lbl-import-scenario" title="Importer un Scénario (JSON)" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342] cursor-pointer">
             <i data-lucide="upload" class="w-4 h-4"></i>
             <input type="file" id="import-scenario-file" accept=".json" class="hidden" onchange="importScenario(event)">
           </label>
+        </div>
+
+        <!-- Session Utilisateur & RBAC -->
+        <div id="user-session-bar" class="flex items-center gap-2 border-l border-[#2B3342] pl-3">
+          <div class="flex items-center gap-2 bg-[#12151B] border border-[#2B3342] px-2.5 py-1.5 rounded-lg text-xs font-medium">
+            <i data-lucide="user" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span id="user-display-name" class="font-semibold text-white">admin</span>
+            <span id="user-display-role" class="px-1.5 py-0.2 text-[10px] font-bold rounded bg-red-950 text-red-300 border border-red-800">ADMIN</span>
+          </div>
+
+          <button id="btn-admin-users" onclick="openUsersModal()" title="Gestion des Utilisateurs & Rôles RBAC (Admin)" class="hidden p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
+            <i data-lucide="users" class="w-4 h-4 text-sky-400"></i>
+          </button>
+
+          <button onclick="openChangePasswordModal()" title="Modifier mon mot de passe" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
+            <i data-lucide="key" class="w-4 h-4 text-amber-400"></i>
+          </button>
+
+          <button onclick="logout()" title="Se déconnecter" class="p-2 text-rose-400 hover:text-white bg-[#12151B] hover:bg-rose-950/50 rounded-lg transition border border-[#2B3342]">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -91,7 +112,7 @@
 
       <!-- Actions globales -->
       <div class="flex items-center gap-2">
-        <button onclick="openDeviceModal()" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-4 py-2 rounded-lg transition shadow-md shadow-red-900/30">
+        <button id="btn-new-device" onclick="openDeviceModal()" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-4 py-2 rounded-lg transition shadow-md shadow-red-900/30">
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span>Nouvel Équipement</span>
         </button>
@@ -505,6 +526,199 @@
     </div>
   </div>
 
+  <!-- Modal Authentification / Connexion (Incontournable si non connecté) -->
+  <div id="modal-login" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md hidden p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+      <div class="text-center space-y-2">
+        <div class="inline-flex p-3 bg-[#E2001A] rounded-xl text-white shadow-lg shadow-red-950/50 mb-1">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <h2 class="text-base font-bold text-white tracking-tight">Authentification Sécurisée</h2>
+        <p class="text-xs text-slate-400">Accès restreint par contrôle de rôles RBAC (Admin, Opérateur, Observateur)</p>
+      </div>
+
+      <div id="login-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
+
+      <form id="form-login" onsubmit="submitLogin(event)" class="space-y-3.5 text-xs">
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Identifiant</label>
+          <div class="relative">
+            <i data-lucide="user" class="w-4 h-4 text-slate-500 absolute left-3 top-2.5"></i>
+            <input type="text" id="login-username" required placeholder="admin, operateur..." class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg pl-9 pr-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Mot de passe</label>
+          <div class="relative">
+            <i data-lucide="lock" class="w-4 h-4 text-slate-500 absolute left-3 top-2.5"></i>
+            <input type="password" id="login-password" required placeholder="••••••••" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg pl-9 pr-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+          </div>
+        </div>
+
+        <button type="submit" id="btn-login-submit" class="w-full btn-primary-red py-2.5 rounded-lg font-semibold text-xs transition shadow-md shadow-red-900/40 flex items-center justify-center gap-2">
+          <i data-lucide="log-in" class="w-4 h-4"></i>
+          <span id="btn-login-label">Se Connecter</span>
+        </button>
+      </form>
+
+      <div class="pt-2 text-center text-[10px] text-slate-500 border-t border-[#2B3342]/60">
+        Conforme CIS Benchmark &bull; Hachage Scrypt &amp; JWT HTTP-Only
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Gestion des Utilisateurs & Rôles RBAC (Admin Only) -->
+  <div id="modal-users" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4 overflow-y-auto">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 my-8">
+      <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="p-2 bg-sky-950 text-sky-400 rounded-lg border border-sky-800/60">
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Gestion des Utilisateurs &amp; Rôles RBAC</h3>
+            <p class="text-xs text-slate-400">Contrôle des comptes d'accès et des privilèges système</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-users')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <span class="text-xs text-slate-400">Comptes enregistrés : <strong id="users-count" class="text-white">0</strong></span>
+        <button onclick="openCreateUserModal()" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
+          <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+          <span>Nouvel Utilisateur</span>
+        </button>
+      </div>
+
+      <!-- Table des Utilisateurs -->
+      <div class="border border-[#2B3342] rounded-xl overflow-hidden bg-[#12151B]">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-[#181D26] text-slate-400 border-b border-[#2B3342] uppercase text-[10px] tracking-wider">
+            <tr>
+              <th class="p-3">Utilisateur</th>
+              <th class="p-3">Nom Complet</th>
+              <th class="p-3">Rôle RBAC</th>
+              <th class="p-3">Dernière Connexion</th>
+              <th class="p-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body" class="divide-y divide-[#2B3342] font-mono text-[11px]">
+            <!-- Généré dynamiquement -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-[#2B3342]">
+        <button type="button" onclick="closeModal('modal-users')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium text-xs">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Création d'Utilisateur -->
+  <div id="modal-create-user" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="user-plus" class="w-4 h-4 text-[#E2001A]"></i> Ajouter un Utilisateur
+        </h3>
+        <button onclick="closeModal('modal-create-user')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div id="create-user-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
+
+      <form id="form-create-user" onsubmit="submitCreateUser(event)" class="space-y-3.5 text-xs">
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Identifiant (minuscules, chiffres, tirets)</label>
+          <input type="text" id="create-username" required placeholder="nom_utilisateur" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Nom Complet</label>
+          <input type="text" id="create-fullname" required placeholder="ex: Jean Dupont" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Rôle RBAC</label>
+          <select id="create-role" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+            <option value="operator">Opérateur (Simulation, Chaos, Équipements, Variables)</option>
+            <option value="viewer">Observateur (Lecture seule / Monitoring)</option>
+            <option value="admin">Administrateur (Contrôle total + Gestion utilisateurs)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Mot de passe initial (Min 8 car., Majuscule + Chiffre)</label>
+          <input type="password" id="create-password" required placeholder="••••••••" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+        </div>
+
+        <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
+          <button type="button" onclick="closeModal('modal-create-user')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
+          <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Créer l'utilisateur</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Changement Mot de Passe Personnel -->
+  <div id="modal-change-password" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="key" class="w-4 h-4 text-amber-400"></i> Modifier mon Mot de Passe
+        </h3>
+        <button onclick="closeModal('modal-change-password')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div id="change-pw-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
+
+      <form id="form-change-password" onsubmit="submitChangePassword(event)" class="space-y-3.5 text-xs">
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Mot de passe actuel</label>
+          <input type="password" id="pw-current" required placeholder="••••••••" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Nouveau mot de passe (min 8 car., Maj + Chiffre)</label>
+          <input type="password" id="pw-new" required placeholder="••••••••" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+        </div>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Confirmer le nouveau mot de passe</label>
+          <input type="password" id="pw-confirm" required placeholder="••••••••" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+        </div>
+
+        <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
+          <button type="button" onclick="closeModal('modal-change-password')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
+          <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Modifier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Réinitialisation Mot de Passe par Admin -->
+  <div id="modal-reset-password" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i> Réinitialiser Mot de Passe
+        </h3>
+        <button onclick="closeModal('modal-reset-password')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div id="reset-pw-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
+
+      <form id="form-reset-password" onsubmit="submitResetPassword(event)" class="space-y-3.5 text-xs">
+        <input type="hidden" id="reset-target-username" value="">
+        <p class="text-xs text-slate-300">Utilisateur cible : <strong id="reset-target-display" class="text-white font-mono"></strong></p>
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Nouveau mot de passe (min 8 car., Maj + Chiffre)</label>
+          <input type="password" id="reset-new-password" required placeholder="••••••••" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+        </div>
+
+        <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
+          <button type="button" onclick="closeModal('modal-reset-password')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
+          <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Réinitialiser</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Pied de page avec affichage du numéro de version au milieu en petit -->
   <footer class="bg-[#181D26] border-t border-[#2B3342] py-3 text-center text-xs text-slate-400">
     <div class="flex flex-col items-center justify-center space-y-1">
@@ -513,7 +727,7 @@
         <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
       </div>
       <div class="text-[10px] font-mono text-slate-500 tracking-wider">
-        v<span id="app-version-badge">1.3.0</span>
+        v<span id="app-version-badge">1.4.0</span>
       </div>
     </div>
   </footer>

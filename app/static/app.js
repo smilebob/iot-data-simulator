@@ -1,6 +1,7 @@
 // Application Web Frontend - IoT Data Simulator
 
 let state = {
+  currentUser: null,
   devices: [],
   variables: [],
   broker: {},
@@ -13,13 +14,18 @@ let state = {
 };
 
 let ws = null;
+let statusInterval = null;
 
 // Initialisation au chargement de la page
 document.addEventListener("DOMContentLoaded", async () => {
   safeCreateIcons();
-  await loadAllData();
-  setupWebSocket();
-  setInterval(refreshStatus, 3000);
+  const isAuthenticated = await checkAuthStatus();
+  if (isAuthenticated) {
+    await loadAllData();
+    setupWebSocket();
+    if (statusInterval) clearInterval(statusInterval);
+    statusInterval = setInterval(refreshStatus, 3000);
+  }
 });
 
 function safeCreateIcons() {
@@ -40,6 +46,11 @@ async function loadAllData() {
       fetch("/api/broker"),
       fetch("/api/status")
     ]);
+
+    if (devRes.status === 401 || varRes.status === 401 || brokerRes.status === 401 || statusRes.status === 401) {
+      await checkAuthStatus();
+      return;
+    }
 
     if (!devRes.ok || !varRes.ok || !brokerRes.ok || !statusRes.ok) {
       console.error("Erreur HTTP lors du chargement des données API");
@@ -132,9 +143,15 @@ function setupWebSocket() {
     }
   };
 
-  ws.onclose = () => {
+  ws.onclose = (e) => {
+    if (e.code === 1008 || e.code === 4001 || !state.currentUser) {
+      console.warn("WebSocket fermé : authentification requise.");
+      return;
+    }
     console.warn("WebSocket fermé. Reconnexion dans 2s...");
-    setTimeout(setupWebSocket, 2000);
+    setTimeout(() => {
+      if (state.currentUser) setupWebSocket();
+    }, 2000);
   };
 }
 
@@ -296,6 +313,39 @@ function renderEquipmentGroups() {
       }
     }
 
+    const canOperate = state.currentUser && (state.currentUser.role === "admin" || state.currentUser.role === "operator");
+    let devActionsHtml = "";
+    if (canOperate) {
+      devActionsHtml = `
+        <div class="flex items-center gap-2">
+          <button onclick="openVariableModalForDevice('${device.id}')" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Ajouter une Variable</span>
+          </button>
+          <button onclick="testDeviceById('${device.id}')" title="Tester la communication avec ThingsBoard" class="p-2 text-amber-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
+            <i data-lucide="activity" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>Tester</span>
+          </button>
+          <button onclick="editDevice('${device.id}')" title="Modifier cet équipement" class="p-2 text-slate-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span>Éditer</span>
+          </button>
+          <button onclick="deleteDevice('${device.id}')" title="Supprimer cet équipement" class="p-2 text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>Supprimer</span>
+          </button>
+        </div>
+      `;
+    } else {
+      devActionsHtml = `
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] text-slate-500 italic bg-[#12151B] px-2.5 py-1 rounded border border-[#2B3342] flex items-center gap-1">
+            <i data-lucide="eye" class="w-3 h-3 text-slate-500"></i> Observateur (Lecture Seule)
+          </span>
+        </div>
+      `;
+    }
+
     // Bloc de Section d'Équipement
     const section = document.createElement("section");
     section.className = "device-group-card shadow-2xl overflow-hidden";
@@ -331,25 +381,7 @@ function renderEquipmentGroups() {
           </div>
         </div>
 
-        <!-- Actions sur l'Équipement (Ajout Variable, Tester, Édition, Suppression) -->
-        <div class="flex items-center gap-2">
-          <button onclick="openVariableModalForDevice('${device.id}')" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
-            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-            <span>Ajouter une Variable</span>
-          </button>
-          <button onclick="testDeviceById('${device.id}')" title="Tester la communication avec ThingsBoard" class="p-2 text-amber-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
-            <i data-lucide="activity" class="w-3.5 h-3.5 text-amber-400"></i>
-            <span>Tester</span>
-          </button>
-          <button onclick="editDevice('${device.id}')" title="Modifier cet équipement" class="p-2 text-slate-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
-            <i data-lucide="edit-3" class="w-3.5 h-3.5 text-slate-400"></i>
-            <span>Éditer</span>
-          </button>
-          <button onclick="deleteDevice('${device.id}')" title="Supprimer cet équipement" class="p-2 text-rose-400 hover:text-rose-300 hover:bg-rose-950/40 rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
-            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-            <span>Supprimer</span>
-          </button>
-        </div>
+        ${devActionsHtml}
       </div>
 
       <!-- Grille interne des variables de cet équipement -->
@@ -396,6 +428,47 @@ function createVariableCard(variable, device) {
 
   const initialVal = variable.current_value !== null && variable.current_value !== undefined ? variable.current_value : "--";
 
+  const canOperateVar = state.currentUser && (state.currentUser.role === "admin" || state.currentUser.role === "operator");
+  const varActionsHtml = canOperateVar ? `
+    <div class="flex items-center gap-1">
+      <button onclick="editVariable('${variable.id}')" title="Modifier la variable" class="p-1.5 text-slate-400 hover:text-white hover:bg-[#202531] rounded-lg transition">
+        <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+      </button>
+      <button onclick="deleteVariable('${variable.id}')" title="Supprimer la variable" class="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-[#202531] rounded-lg transition">
+        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+  ` : '';
+
+  const chaosActionsHtml = canOperateVar ? `
+    <!-- Actions de démo ThingsBoard (Anomalies & Forçage) -->
+    <div class="pt-3 border-t border-[#2B3342] space-y-2">
+      <div class="flex items-center justify-between text-[11px] text-slate-400">
+        <span class="font-medium text-slate-300">Chaos Button :</span>
+        <div class="flex items-center gap-1">
+          <button onclick="injectAnomaly('${variable.id}', 'spike')" title="Pic anormal (+50)" class="px-2 py-0.5 rounded bg-amber-950/80 hover:bg-amber-900 text-amber-300 border border-amber-800/60 font-semibold">💥 Pic</button>
+          <button onclick="injectAnomaly('${variable.id}', 'drift')" title="Dérive progressive" class="px-2 py-0.5 rounded bg-orange-950/80 hover:bg-orange-900 text-orange-300 border border-orange-800/60 font-semibold">📈 Dérive</button>
+          <button onclick="injectAnomaly('${variable.id}', 'freeze')" title="Geler la valeur" class="px-2 py-0.5 rounded bg-blue-950/80 hover:bg-blue-900 text-blue-300 border border-blue-800/60 font-semibold">❄️ Gel</button>
+          <button onclick="injectAnomaly('${variable.id}', 'timeout')" title="Coupure réseau" class="px-2 py-0.5 rounded bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800/60 font-semibold">🔇 Timeout</button>
+          <button onclick="injectAnomaly('${variable.id}', 'none')" title="Rétablir signal normal" class="px-2 py-0.5 rounded bg-[#202531] hover:bg-[#2B3342] text-slate-300 font-semibold">🔄</button>
+        </div>
+      </div>
+
+      <!-- Forçage Manuel -->
+      <div class="flex items-center gap-2 pt-1">
+        <label class="flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer">
+          <input type="checkbox" onchange="toggleManualOverride('${variable.id}', this.checked)" ${variable.manual_override ? 'checked' : ''} class="rounded border-[#2B3342] text-[#E2001A]">
+          <span>Forcer :</span>
+        </label>
+        <input type="text" id="manual-input-${variable.id}" value="${variable.manual_value || ''}" placeholder="valeur..." onchange="updateManualValue('${variable.id}', this.value)" class="flex-1 bg-[#0F1218] border border-[#2B3342] rounded px-2 py-0.5 text-xs text-white">
+      </div>
+    </div>
+  ` : `
+    <div class="pt-2 border-t border-[#2B3342]/60 text-right">
+      <span class="text-[10px] text-slate-500 italic">Affichage télémétrique en direct (Lecture seule)</span>
+    </div>
+  `;
+
   card.innerHTML = `
     <div>
       <!-- En-tête de la carte -->
@@ -412,14 +485,7 @@ function createVariableCard(variable, device) {
             <span id="anomaly-badge-${variable.id}" class="hidden"></span>
           </div>
         </div>
-        <div class="flex items-center gap-1">
-          <button onclick="editVariable('${variable.id}')" title="Modifier la variable" class="p-1.5 text-slate-400 hover:text-white hover:bg-[#202531] rounded-lg transition">
-            <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
-          </button>
-          <button onclick="deleteVariable('${variable.id}')" title="Supprimer la variable" class="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-[#202531] rounded-lg transition">
-            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
+        ${varActionsHtml}
       </div>
 
       <!-- Valeur courante & Unité -->
@@ -451,28 +517,7 @@ function createVariableCard(variable, device) {
       ` : ''}
     </div>
 
-    <!-- Actions de démo ThingsBoard (Anomalies & Forçage) -->
-    <div class="pt-3 border-t border-[#2B3342] space-y-2">
-      <div class="flex items-center justify-between text-[11px] text-slate-400">
-        <span class="font-medium text-slate-300">Chaos Button :</span>
-        <div class="flex items-center gap-1">
-          <button onclick="injectAnomaly('${variable.id}', 'spike')" title="Pic anormal (+50)" class="px-2 py-0.5 rounded bg-amber-950/80 hover:bg-amber-900 text-amber-300 border border-amber-800/60 font-semibold">💥 Pic</button>
-          <button onclick="injectAnomaly('${variable.id}', 'drift')" title="Dérive progressive" class="px-2 py-0.5 rounded bg-orange-950/80 hover:bg-orange-900 text-orange-300 border border-orange-800/60 font-semibold">📈 Dérive</button>
-          <button onclick="injectAnomaly('${variable.id}', 'freeze')" title="Geler la valeur" class="px-2 py-0.5 rounded bg-blue-950/80 hover:bg-blue-900 text-blue-300 border border-blue-800/60 font-semibold">❄️ Gel</button>
-          <button onclick="injectAnomaly('${variable.id}', 'timeout')" title="Coupure réseau" class="px-2 py-0.5 rounded bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800/60 font-semibold">🔇 Timeout</button>
-          <button onclick="injectAnomaly('${variable.id}', 'none')" title="Rétablir signal normal" class="px-2 py-0.5 rounded bg-[#202531] hover:bg-[#2B3342] text-slate-300 font-semibold">🔄</button>
-        </div>
-      </div>
-
-      <!-- Forçage Manuel -->
-      <div class="flex items-center gap-2 pt-1">
-        <label class="flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer">
-          <input type="checkbox" onchange="toggleManualOverride('${variable.id}', this.checked)" ${variable.manual_override ? 'checked' : ''} class="rounded border-[#2B3342] text-[#E2001A]">
-          <span>Forcer :</span>
-        </label>
-        <input type="text" id="manual-input-${variable.id}" value="${variable.manual_value || ''}" placeholder="valeur..." onchange="updateManualValue('${variable.id}', this.value)" class="flex-1 bg-[#0F1218] border border-[#2B3342] rounded px-2 py-0.5 text-xs text-white">
-      </div>
-    </div>
+    ${chaosActionsHtml}
   `;
 
   return card;
@@ -1363,4 +1408,388 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+// =============================================================
+// MODULE GESTION DES UTILISATEURS & AUTHENTIFICATION (RBAC / CIS)
+// =============================================================
+
+async function checkAuthStatus() {
+  try {
+    const res = await fetch("/api/auth/me");
+    if (res.ok) {
+      state.currentUser = await res.json();
+      updateUserSessionUI();
+      closeModal("modal-login");
+      return true;
+    } else {
+      state.currentUser = null;
+      openModal("modal-login");
+      return false;
+    }
+  } catch (err) {
+    state.currentUser = null;
+    openModal("modal-login");
+    return false;
+  }
+}
+
+function updateUserSessionUI() {
+  if (!state.currentUser) return;
+  const nameEl = document.getElementById("user-display-name");
+  const roleEl = document.getElementById("user-display-role");
+  const adminBtn = document.getElementById("btn-admin-users");
+  const brokerBtn = document.getElementById("btn-broker-settings");
+  const importLabel = document.getElementById("lbl-import-scenario");
+  const newDevBtn = document.getElementById("btn-new-device");
+  const engineBtn = document.getElementById("btn-toggle-engine");
+
+  if (nameEl) nameEl.textContent = state.currentUser.full_name || state.currentUser.username;
+  if (roleEl) {
+    const r = (state.currentUser.role || "viewer").toUpperCase();
+    roleEl.textContent = r;
+    if (r === "ADMIN") {
+      roleEl.className = "px-1.5 py-0.2 text-[10px] font-bold rounded bg-red-950 text-red-300 border border-red-800";
+    } else if (r === "OPERATOR") {
+      roleEl.className = "px-1.5 py-0.2 text-[10px] font-bold rounded bg-sky-950 text-sky-300 border border-sky-800";
+    } else {
+      roleEl.className = "px-1.5 py-0.2 text-[10px] font-bold rounded bg-slate-800 text-slate-300 border border-slate-700";
+    }
+  }
+
+  const isAdmin = state.currentUser.role === "admin";
+  const canOperate = state.currentUser.role === "admin" || state.currentUser.role === "operator";
+
+  if (adminBtn) {
+    if (isAdmin) adminBtn.classList.remove("hidden");
+    else adminBtn.classList.add("hidden");
+  }
+
+  if (brokerBtn) {
+    if (isAdmin) brokerBtn.classList.remove("hidden");
+    else brokerBtn.classList.add("hidden");
+  }
+
+  if (importLabel) {
+    if (canOperate) importLabel.classList.remove("hidden");
+    else importLabel.classList.add("hidden");
+  }
+
+  if (newDevBtn) {
+    if (canOperate) newDevBtn.classList.remove("hidden");
+    else newDevBtn.classList.add("hidden");
+  }
+
+  if (engineBtn) {
+    if (canOperate) {
+      engineBtn.disabled = false;
+      engineBtn.classList.remove("opacity-50", "cursor-not-allowed");
+    } else {
+      engineBtn.disabled = true;
+      engineBtn.classList.add("opacity-50", "cursor-not-allowed");
+      engineBtn.title = "Action réservée aux opérateurs et administrateurs";
+    }
+  }
+}
+
+async function submitLogin(e) {
+  e.preventDefault();
+  const btn = document.getElementById("btn-login-submit");
+  const label = document.getElementById("btn-login-label");
+  const errBox = document.getElementById("login-error");
+
+  const username = document.getElementById("login-username").value.trim();
+  const password = document.getElementById("login-password").value;
+
+  if (btn) btn.disabled = true;
+  if (label) label.textContent = "Connexion en cours...";
+  if (errBox) errBox.classList.add("hidden");
+
+  try {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+    if (btn) btn.disabled = false;
+    if (label) label.textContent = "Se Connecter";
+
+    if (!res.ok) {
+      if (errBox) {
+        errBox.textContent = data.detail || "Identifiant ou mot de passe incorrect.";
+        errBox.classList.remove("hidden");
+      }
+      return;
+    }
+
+    state.currentUser = data.user;
+    updateUserSessionUI();
+    closeModal("modal-login");
+
+    // Chargement initial des données et ouverture du WebSocket
+    await loadAllData();
+    setupWebSocket();
+
+    if (statusInterval) clearInterval(statusInterval);
+    statusInterval = setInterval(refreshStatus, 3000);
+
+    // Alerte si mot de passe par défaut
+    if (data.user.must_change_password) {
+      alert("⚠️ Sécurité : Vous utilisez le mot de passe initial par défaut. Veuillez le modifier via le menu de votre profil.");
+    }
+  } catch (err) {
+    if (btn) btn.disabled = false;
+    if (label) label.textContent = "Se Connecter";
+    if (errBox) {
+      errBox.textContent = `Erreur réseau : ${err.message}`;
+      errBox.classList.remove("hidden");
+    }
+  }
+}
+
+async function logout() {
+  if (confirm("Confirmez-vous votre déconnexion ?")) {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch (e) {
+      console.warn("Erreur logout:", e);
+    }
+    if (ws) {
+      ws.close();
+      ws = null;
+    }
+    if (statusInterval) {
+      clearInterval(statusInterval);
+      statusInterval = null;
+    }
+    state.currentUser = null;
+    openModal("modal-login");
+  }
+}
+
+// -------------------------------------------------------------
+// Gestion des Utilisateurs (Admin Only)
+// -------------------------------------------------------------
+
+async function openUsersModal() {
+  openModal("modal-users");
+  await fetchUsersList();
+}
+
+async function fetchUsersList() {
+  const tbody = document.getElementById("users-table-body");
+  const countEl = document.getElementById("users-count");
+  if (!tbody) return;
+
+  tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500 italic">Chargement des utilisateurs...</td></tr>`;
+
+  try {
+    const res = await fetch("/api/users");
+    if (!res.ok) {
+      tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-400">Erreur lors de la récupération des utilisateurs.</td></tr>`;
+      return;
+    }
+
+    const users = await res.json();
+    if (countEl) countEl.textContent = users.length;
+
+    if (users.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500 italic">Aucun utilisateur trouvé.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = users.map(u => {
+      let roleBadge = "";
+      if (u.role === "admin") {
+        roleBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-950 text-red-300 border border-red-800">ADMIN</span>`;
+      } else if (u.role === "operator") {
+        roleBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-950 text-sky-300 border border-sky-800">OPERATOR</span>`;
+      } else {
+        roleBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700">VIEWER</span>`;
+      }
+
+      const isSelf = state.currentUser && state.currentUser.username === u.username;
+      const lastLoginStr = u.last_login ? u.last_login.replace("T", " ").slice(0, 19) : "Jamais";
+
+      return `
+        <tr class="hover:bg-white/5 transition">
+          <td class="p-3 font-semibold text-white flex items-center gap-1.5">
+            <i data-lucide="user" class="w-3.5 h-3.5 text-slate-500"></i>
+            <span>${escapeHtml(u.username)}</span>
+            ${isSelf ? '<span class="text-[9px] bg-slate-800 text-slate-400 px-1 rounded">vous</span>' : ''}
+          </td>
+          <td class="p-3 text-slate-300 font-sans">${escapeHtml(u.full_name)}</td>
+          <td class="p-3">${roleBadge}</td>
+          <td class="p-3 text-slate-400 text-[10px]">${escapeHtml(lastLoginStr)}</td>
+          <td class="p-3 text-right space-x-1">
+            <button onclick="openResetPasswordModal('${escapeHtml(u.username)}')" title="Réinitialiser le mot de passe" class="p-1.5 rounded bg-[#202531] hover:bg-[#2B3342] text-amber-300 transition inline-flex items-center">
+              <i data-lucide="key" class="w-3.5 h-3.5"></i>
+            </button>
+            ${!isSelf ? `
+              <button onclick="deleteUser('${escapeHtml(u.username)}')" title="Supprimer cet utilisateur" class="p-1.5 rounded bg-[#202531] hover:bg-rose-950/60 text-rose-400 transition inline-flex items-center">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            ` : ''}
+          </td>
+        </tr>
+      `;
+    }).join("");
+
+    safeCreateIcons();
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-400">Erreur technique : ${escapeHtml(err.message)}</td></tr>`;
+  }
+}
+
+function openCreateUserModal() {
+  document.getElementById("create-username").value = "";
+  document.getElementById("create-fullname").value = "";
+  document.getElementById("create-role").value = "operator";
+  document.getElementById("create-password").value = "";
+  const errBox = document.getElementById("create-user-error");
+  if (errBox) errBox.classList.add("hidden");
+  openModal("modal-create-user");
+}
+
+async function submitCreateUser(e) {
+  e.preventDefault();
+  const errBox = document.getElementById("create-user-error");
+  if (errBox) errBox.classList.add("hidden");
+
+  const payload = {
+    username: document.getElementById("create-username").value.trim().toLowerCase(),
+    full_name: document.getElementById("create-fullname").value.trim(),
+    role: document.getElementById("create-role").value,
+    password: document.getElementById("create-password").value,
+  };
+
+  try {
+    const res = await fetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      if (errBox) {
+        errBox.textContent = data.detail || "Erreur de validation lors de la création.";
+        errBox.classList.remove("hidden");
+      }
+      return;
+    }
+
+    closeModal("modal-create-user");
+    await fetchUsersList();
+    alert(`✅ Utilisateur "${payload.username}" créé avec succès !`);
+  } catch (err) {
+    if (errBox) {
+      errBox.textContent = `Erreur réseau : ${err.message}`;
+      errBox.classList.remove("hidden");
+    }
+  }
+}
+
+async function deleteUser(username) {
+  if (confirm(`Confirmez-vous la suppression définitive du compte "${username}" ?`)) {
+    try {
+      const res = await fetch(`/api/users/${username}`, { method: "DELETE" });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(`❌ Erreur : ${data.detail || 'Impossible de supprimer cet utilisateur'}`);
+        return;
+      }
+      await fetchUsersList();
+    } catch (err) {
+      alert(`Erreur technique : ${err.message}`);
+    }
+  }
+}
+
+function openResetPasswordModal(username) {
+  document.getElementById("reset-target-username").value = username;
+  document.getElementById("reset-target-display").textContent = username;
+  document.getElementById("reset-new-password").value = "";
+  const errBox = document.getElementById("reset-pw-error");
+  if (errBox) errBox.classList.add("hidden");
+  openModal("modal-reset-password");
+}
+
+async function submitResetPassword(e) {
+  e.preventDefault();
+  const username = document.getElementById("reset-target-username").value;
+  const newPassword = document.getElementById("reset-new-password").value;
+  const errBox = document.getElementById("reset-pw-error");
+
+  try {
+    const res = await fetch(`/api/users/${username}/reset-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ new_password: newPassword })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      if (errBox) {
+        errBox.textContent = data.detail || "Erreur lors de la réinitialisation.";
+        errBox.classList.remove("hidden");
+      }
+      return;
+    }
+    closeModal("modal-reset-password");
+    alert(`✅ Mot de passe réinitialisé pour "${username}".`);
+  } catch (err) {
+    if (errBox) {
+      errBox.textContent = `Erreur : ${err.message}`;
+      errBox.classList.remove("hidden");
+    }
+  }
+}
+
+function openChangePasswordModal() {
+  document.getElementById("pw-current").value = "";
+  document.getElementById("pw-new").value = "";
+  document.getElementById("pw-confirm").value = "";
+  const errBox = document.getElementById("change-pw-error");
+  if (errBox) errBox.classList.add("hidden");
+  openModal("modal-change-password");
+}
+
+async function submitChangePassword(e) {
+  e.preventDefault();
+  const currentPassword = document.getElementById("pw-current").value;
+  const newPassword = document.getElementById("pw-new").value;
+  const confirmPassword = document.getElementById("pw-confirm").value;
+  const errBox = document.getElementById("change-pw-error");
+
+  if (newPassword !== confirmPassword) {
+    if (errBox) {
+      errBox.textContent = "Le nouveau mot de passe et sa confirmation ne correspondent pas.";
+      errBox.classList.remove("hidden");
+    }
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/auth/change-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ current_password: currentPassword, new_password: newPassword })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      if (errBox) {
+        errBox.textContent = data.detail || "Erreur lors de la modification.";
+        errBox.classList.remove("hidden");
+      }
+      return;
+    }
+    closeModal("modal-change-password");
+    alert("✅ Votre mot de passe a été mis à jour avec succès !");
+  } catch (err) {
+    if (errBox) {
+      errBox.textContent = `Erreur : ${err.message}`;
+      errBox.classList.remove("hidden");
+    }
+  }
 }

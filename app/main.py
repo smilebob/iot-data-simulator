@@ -22,10 +22,13 @@ logging.basicConfig(
 logger = logging.getLogger("iot_sim")
 
 # Version officielle de l'application
-APP_VERSION = "1.3.0"
+APP_VERSION = "1.4.0"
 
 # Initialisation des instances globales
 repository = StorageRepository(file_path="data/simulator_state.json")
+from app.storage.user_repository import UserRepository
+user_repository = UserRepository(file_path="data/users.json")
+
 mqtt_manager = MqttManager(repository.get_broker())
 from app.transports.manager import TransportManager
 transport_manager = TransportManager(repository, mqtt_manager)
@@ -89,11 +92,22 @@ def healthcheck():
         "mqtt_connected": mqtt_manager.default_client.is_connected if mqtt_manager.default_client else False,
     }
 
+from app.api.auth import auth_router
+from app.core.security import decode_jwt_token
+from fastapi import status
+
+app.include_router(auth_router)
 app.include_router(api_router)
 
-# WebSocket pour télémétrie en temps réel
+# WebSocket sécurisé pour télémétrie en temps réel (Vérification JWT Cookie / Paramètre)
 @app.websocket("/ws/live")
 async def websocket_endpoint(websocket: WebSocket):
+    token = websocket.cookies.get("access_token") or websocket.query_params.get("token")
+    if not token or not decode_jwt_token(token):
+        # Code 1008 : Policy Violation / Unauthorized
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION, reason="Authentification requise")
+        return
+
     await ws_manager.connect(websocket)
     try:
         while True:

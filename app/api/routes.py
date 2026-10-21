@@ -11,6 +11,13 @@ from app.mqtt.client import MqttManager
 from app.core.engine import SimulationEngine
 from app.core.logger import log_handler
 from app.mqtt.diagnostics import test_broker_connectivity
+from app.api.auth import require_role
+from app.models.user import UserRole
+
+# Groupes de rôles RBAC
+ROLE_ANY = [UserRole.ADMIN, UserRole.OPERATOR, UserRole.VIEWER]
+ROLE_OPERATOR_OR_ADMIN = [UserRole.ADMIN, UserRole.OPERATOR]
+ROLE_ADMIN_ONLY = [UserRole.ADMIN]
 
 router = APIRouter(prefix="/api")
 
@@ -32,11 +39,11 @@ def get_transports():
     return transport_manager
 
 # --- Équipements (Devices) ---
-@router.get("/devices", response_model=List[DeviceConfig])
+@router.get("/devices", response_model=List[DeviceConfig], dependencies=[Depends(require_role(ROLE_ANY))])
 def list_devices(repo: StorageRepository = Depends(get_repo)):
     return repo.get_devices()
 
-@router.post("/devices", response_model=DeviceConfig)
+@router.post("/devices", response_model=DeviceConfig, dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def save_device(
     device: DeviceConfig,
     repo: StorageRepository = Depends(get_repo),
@@ -47,7 +54,7 @@ def save_device(
     mqtt.remove_device_client(device.id)
     return device
 
-@router.delete("/devices/{device_id}")
+@router.delete("/devices/{device_id}", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def delete_device(
     device_id: str,
     repo: StorageRepository = Depends(get_repo),
@@ -57,7 +64,7 @@ def delete_device(
     mqtt.remove_device_client(device_id)
     return {"status": "deleted", "device_id": device_id}
 
-@router.post("/devices/test-custom")
+@router.post("/devices/test-custom", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 async def test_custom_device_communication(
     device: DeviceConfig,
     transports = Depends(get_transports),
@@ -65,7 +72,7 @@ async def test_custom_device_communication(
     """Teste la communication directe (MQTT, HTTP, CoAP) selon la configuration spécifiée."""
     return await transports.test_device_communication(device)
 
-@router.post("/devices/{device_id}/test")
+@router.post("/devices/{device_id}/test", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 async def test_device_communication_by_id(
     device_id: str,
     repo: StorageRepository = Depends(get_repo),
@@ -78,11 +85,11 @@ async def test_device_communication_by_id(
     return await transports.test_device_communication(device)
 
 # --- Variables ---
-@router.get("/variables", response_model=List[VariableConfig])
+@router.get("/variables", response_model=List[VariableConfig], dependencies=[Depends(require_role(ROLE_ANY))])
 def list_variables(device_id: Optional[str] = None, repo: StorageRepository = Depends(get_repo)):
     return repo.get_variables(device_id=device_id)
 
-@router.post("/variables", response_model=VariableConfig)
+@router.post("/variables", response_model=VariableConfig, dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def save_variable(
     var: VariableConfig,
     repo: StorageRepository = Depends(get_repo),
@@ -107,17 +114,17 @@ def save_variable(
 
     return var
 
-@router.delete("/variables/{var_id}")
+@router.delete("/variables/{var_id}", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def delete_variable(var_id: str, repo: StorageRepository = Depends(get_repo)):
     repo.delete_variable(var_id)
     return {"status": "deleted", "var_id": var_id}
 
 # --- Broker MQTT ---
-@router.get("/broker", response_model=BrokerConfig)
+@router.get("/broker", response_model=BrokerConfig, dependencies=[Depends(require_role(ROLE_ANY))])
 def get_broker(repo: StorageRepository = Depends(get_repo)):
     return repo.get_broker()
 
-@router.post("/broker", response_model=BrokerConfig)
+@router.post("/broker", response_model=BrokerConfig, dependencies=[Depends(require_role(ROLE_ADMIN_ONLY))])
 def update_broker(
     broker: BrokerConfig,
     repo: StorageRepository = Depends(get_repo),
@@ -127,22 +134,22 @@ def update_broker(
     mqtt.update_global_config(broker)
     return broker
 
-@router.post("/broker/test")
+@router.post("/broker/test", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def test_broker(broker: BrokerConfig):
     return test_broker_connectivity(broker)
 
 # --- Logs & Outil de Traçabilité des Erreurs ---
-@router.get("/logs")
+@router.get("/logs", dependencies=[Depends(require_role(ROLE_ANY))])
 def get_logs(level: Optional[str] = None, limit: int = 100):
     return log_handler.get_logs(level=level, limit=limit)
 
-@router.delete("/logs")
+@router.delete("/logs", dependencies=[Depends(require_role(ROLE_ADMIN_ONLY))])
 def clear_logs():
     log_handler.clear()
     return {"status": "cleared"}
 
 # --- Statut & Contrôle du Simulateur ---
-@router.get("/status")
+@router.get("/status", dependencies=[Depends(require_role(ROLE_ANY))])
 def get_status(
     repo: StorageRepository = Depends(get_repo),
     engine: SimulationEngine = Depends(get_engine),
@@ -160,12 +167,12 @@ def get_status(
         "variables_count": len(repo.get_variables()),
     }
 
-@router.post("/simulation/start")
+@router.post("/simulation/start", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def start_simulation(engine: SimulationEngine = Depends(get_engine)):
     engine.start()
     return {"status": "running"}
 
-@router.post("/simulation/stop")
+@router.post("/simulation/stop", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def stop_simulation(engine: SimulationEngine = Depends(get_engine)):
     engine.stop()
     return {"status": "stopped"}
@@ -175,7 +182,7 @@ class OverrideRequest(BaseModel):
     manual_override: bool
     manual_value: Optional[Any] = None
 
-@router.post("/variables/{var_id}/override")
+@router.post("/variables/{var_id}/override", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def override_variable(
     var_id: str,
     req: OverrideRequest,
@@ -193,7 +200,7 @@ class AnomalyRequest(BaseModel):
     anomaly: AnomalyType
     magnitude: float = 50.0
 
-@router.post("/variables/{var_id}/anomaly")
+@router.post("/variables/{var_id}/anomaly", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def trigger_anomaly(
     var_id: str,
     req: AnomalyRequest,
@@ -203,7 +210,7 @@ def trigger_anomaly(
     return {"status": "ok", "var_id": var_id, "anomaly": req.anomaly.value}
 
 # --- Importation CSV pour Tableau de Points ---
-@router.post("/variables/{var_id}/csv")
+@router.post("/variables/{var_id}/csv", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 async def upload_csv_points(
     var_id: str,
     file: UploadFile = File(...),
@@ -223,11 +230,11 @@ async def upload_csv_points(
     return {"status": "ok", "points_imported": len(points)}
 
 # --- Export / Import Scénario Complet ---
-@router.get("/scenario/export")
+@router.get("/scenario/export", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def export_scenario(repo: StorageRepository = Depends(get_repo)):
     return repo.export_scenario()
 
-@router.post("/scenario/import")
+@router.post("/scenario/import", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
 def import_scenario(
     data: Dict[str, Any],
     repo: StorageRepository = Depends(get_repo),

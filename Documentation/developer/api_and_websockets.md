@@ -2,7 +2,17 @@
 
 ## Contrats d'API REST
 
-Tous les endpoints sont préfixés par `/api`. Les requêtes et réponses utilisent le format JSON standard.
+Tous les endpoints sont préfixés par `/api`. Les requêtes et réponses utilisent le format JSON standard. L'accès aux endpoints est contrôlé par le module RBAC (Admin, Opérateur, Observateur).
+
+### 0. Authentification & Gestion des Utilisateurs
+* **`POST /api/auth/login`** : Authentifie l'utilisateur (`username`, `password`) et émet un cookie `access_token` HTTP-Only sécurisé.
+* **`POST /api/auth/logout`** : Clôture la session et révoque le cookie d'authentification.
+* **`GET /api/auth/me`** : Retourne les informations de l'utilisateur connecté (`username`, `role`, `full_name`).
+* **`POST /api/auth/change-password`** : Permet à l'utilisateur connecté de modifier son mot de passe.
+* **`GET /api/users`** *(Admin)* : Liste tous les utilisateurs enregistrés avec leurs rôles.
+* **`POST /api/users`** *(Admin)* : Crée un compte (`username`, `full_name`, `role`, `password`).
+* **`DELETE /api/users/{username}`** *(Admin)* : Supprime un compte utilisateur (protection du dernier admin).
+* **`POST /api/users/{username}/reset-password`** *(Admin)* : Réinitialise le mot de passe d'un utilisateur.
 
 ### 1. Équipements (`/api/devices`)
 * **`GET /api/devices`** : Retourne la liste de tous les équipements configurés.
