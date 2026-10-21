@@ -1,8 +1,13 @@
 # 📚 Catalogue Exhaustif des Cas d'Usages Métiers IoT
 
-Ce dossier rassemble la documentation technique intégrale des **32 modèles d'équipements virtuels pré-configurés** intégrés dans l'application **IoT Data Simulator** (version 1.6.0).
+Ce dossier rassemble la documentation technique intégrale des **32 modèles d'équipements virtuels pré-configurés** intégrés dans l'application **IoT Data Simulator** (version 1.9.2).
 
 Chaque fiche détaille le contexte physique, l'architecture de communication, le dictionnaire de grandeurs, les schémas de payload JSON ThingsBoard, les scénarios d'anomalies et les recommandations de tableaux de bord.
+
+> [!TIP]
+> **Tableaux de Bord SCADA ThingsBoard Dédiés (Thème Light)** :  
+> Chaque cas d'usage dispose d'un tableau de bord officiel ThingsBoard JSON pré-configuré intégrant son **propre schéma synoptique vectoriel P&ID / SLD / GTB animé** en thème Light haute lisibilité (fond clair, bordures nettes, WCAG AA).  
+> Consultez le **[Guide & Référentiel des 32 Synoptiques SCADA](../user/thingsboard_dashboards.md)** pour explorer les représentations et télécharger les fichiers prêts à l'emploi.
 
 ---
 

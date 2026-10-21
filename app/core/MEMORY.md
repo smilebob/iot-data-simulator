@@ -11,6 +11,10 @@ Moteur d'exécution asynchrone non-bloquant responsable du calcul périodique (t
 | [`engine.py:SimulationEngine`](file:///home/pierre/Projets/iot-data-simulator/app/core/engine.py) | Boucle `asyncio`, trigger de publication MQTT & broadcast WS | `start()`, `stop()`, `trigger_anomaly(var_id, anomaly)` |
 | [`generators.py:MathSignalGenerator`](file:///home/pierre/Projets/iot-data-simulator/app/core/generators.py) | Générateur mathématique pur déterministe (sans `eval`) | `generate(mode, config, elapsed, prev_val, data_type)` -> `Any` |
 | [`replay.py:ReplayEngine`](file:///home/pierre/Projets/iot-data-simulator/app/core/replay.py) | Évaluateur de tables de points avec interpolation & parseur CSV | `evaluate(config, elapsed, data_type)` -> `Any`, `parse_csv_points(str)` -> `List[TimestampedPoint]` |
+| [`equipment_catalog.py:get_equipment_catalog`](file:///home/pierre/Projets/iot-data-simulator/app/core/equipment_catalog.py) | Référentiel des 32 presets d'équipements métiers classés par secteur | `EQUIPMENT_CATALOG`, `get_preset_by_id(id)` |
+| [`dashboard_generator.py:generate_thingsboard_dashboard`](file:///home/pierre/Projets/iot-data-simulator/app/core/dashboard_generator.py) | Générateur de tableaux de bord ThingsBoard v3.x en thème Light | `generate_thingsboard_dashboard(device, vars)` -> `dict (JSON TB)` |
+| [`scada_synoptics.py:get_scada_synoptic_html`](file:///home/pierre/Projets/iot-data-simulator/app/core/scada_synoptics.py) | Rendu vectoriel SVG des 32 synoptiques SCADA P&ID/SLD animés | `get_scada_synoptic_html(device, vars, preset_id)` -> `str (HTML/SVG)` |
+| [`physics.py:PhysicsEvaluator`](file:///home/pierre/Projets/iot-data-simulator/app/core/physics.py) | Résolution causale multi-passes des variables dérivées et intégrateurs | `evaluate_derived_variables(...)`, `evaluate_integrators(...)` |
 
 ## 🔄 Dépendances & Flux de Données
 - **Dépend de** : `app/models/variable.py`, `app/platforms/`, `app/storage/repository.py`, `app/mqtt/client.py`.

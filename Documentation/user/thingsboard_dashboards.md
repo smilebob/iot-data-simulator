@@ -29,7 +29,69 @@ Chaque tableau de bord respecte les règles métier et conventions graphiques de
 
 ---
 
-## 2. Deux Méthodes pour Télécharger votre Dashboard
+## 2. Référentiel & Cohérence Métier des 32 Synoptiques SCADA Vectoriels
+
+Chaque cas d'usage dispose de sa propre représentation vectorielle SVG animée, conçue selon les règles de l'art du métier concerné.
+
+> [!IMPORTANT]
+> **Cohérence Métier Garantie** :
+> Chaque équipement est modélisé de façon stricte. Par exemple, la **Pompe à Chaleur Réversible** (`bldg_heatpump`) dispose d'un synoptique thermodynamique complet (compresseur Scroll inverter, vanne 4 voies d'inversion de cycle, échangeur à plaques et ventilateur axial) et ne doit jamais être confondue avec le **Poste de Relevage Assainissement** (`infra_water_pump`) qui possède sa propre fosse humide béton avec pompes submersibles d'eaux usées et refoulement STEP.
+
+### 🏭 2.1 Secteur Industrie & Automatismes (8 cas d'usage)
+
+| ID Modèle | Cas d'Usage Métier | Norme / Type SCADA | Description du Schéma Synoptique Dédié |
+| :--- | :--- | :---: | :--- |
+| `ind_compressor` | **Centrale d'Air Comprimé** | P&ID ISO 10628 | Filtre d'aspiration G4, compresseur bi-étagé à vis avec rotor animé (`#E2001A`), séparateur huile/air, réservoir tampon 1000L et ligne usine. |
+| `ind_spindle` | **Broche d'Usinage & Moteur CNC** | Mimic ISA-101 | Cartouche de broche HSK-63, roulements céramiques avant/arrière, stator 24kW, chemise de refroidissement et accéléromètre de vibration RMS. |
+| `ind_chiller` | **Groupe Froid Industriel (Chiller)** | P&ID Frigorifique | Circuit fermé R134a, compresseur à vis avec rotor animé, évaporateur eau glacée 7/12°C, condenseur et boucle de départ/retour usine. |
+| `ind_conveyor` | **Ligne de Convoyage & Robotique** | Mimic Manutention | Châssis convoyeur à rouleaux motorisés, pièces en transit, cellule photoélectrique de détection, motoréducteur 5.5kW avec variateur VFD. |
+| `ind_cold_room` | **Chambre Froide Négative (-20°C)** | CVC / Froid Négatif | Enceinte isotherme (panneaux PIR 150mm), évaporateur plafonnier avec ventilateurs, résistances de dégivrage, palettes surgelées et capteur de porte. |
+| `ind_steam_boiler` | **Chaudière Industrielle Vapeur** | P&ID Vapeur HP | Bâche alimentaire d'eau, pompe HP, corps chaudière tube de fumées avec brûleur gaz modulant, ciel de vapeur et barillet collecteur usine. |
+| `ind_cleanroom_cta` | **Salle Blanche & CTA Stérile (ISO)** | GTB Salle Propre | Enceinte stérile ISO 14644-1, plafond soufflant flux laminaire HEPA H14 (99.995%), sas matériel airlock interverrouillé et compteur optique laser de particules. |
+| `ind_thermal_furnace` | **Four Traitement Thermique** | Pyrométrie Industrielle | Enceinte réfractaire 3 zones (Zone 1 Préchauffe, Zone 2 Haute Température, Zone 3 Recuit), rampe brûleurs gaz et flammes modulées. |
+
+### 🏢 2.2 Secteur Bâtiment & Tertiaire (8 cas d'usage)
+
+| ID Modèle | Cas d'Usage Métier | Norme / Type SCADA | Description du Schéma Synoptique Dédié |
+| :--- | :--- | :---: | :--- |
+| `bldg_cta` | **Centrale Traitement d'Air (CTA)** | GTB DIN 1946 | Voie soufflage air neuf avec registre, filtre F7, batteries chaud/froid, ventilateur Plug-Fan EC animé et voie reprise extraction. |
+| `bldg_tgbt` | **TGBT & Compteur Multi-Fluides** | SLD IEC 60617 | Arrivée HTA/BT 400V, disjoncteur général DGBT Masterpact, jeu de barres cuivre 1600A, départs divisionnaires CVC, IT/Onduleur et DALI. |
+| `bldg_qai` | **Station Qualité d'Air Intérieur (QAI)** | Bâtiment BREEAM / WELL | Boîtier station confort, capteur CO2 NDIR infrarouge, capteur laser particules fines PM2.5 et capteur semi-conducteur MOx COV totaux. |
+| `bldg_heatpump` | **Pompe à Chaleur Réversible (PAC)** | CVC Thermodynamique | **Unité extérieure R32, compresseur Inverter Scroll, vanne 4 voies d'inversion de cycle, échangeur à plaques hydro (module intérieur) et ventilateur hélicoïde.** |
+| `bldg_fire_ssi` | **Centrale Sécurité Incendie (SSI)** | SMSI NF S 61-931 | Centrale ECS / CMSI, boucle détecteur optique de fumée, clapets coupe-feu motorisés et tourelle d'extraction de désenfumage 400°C/2h. |
+| `bldg_dali_lighting` | **Gestion d'Éclairage DALI-2** | DALI-2 / GTB | Passerelle de commande, bus 2 fils DALI-2 (64 adresses), luminaires LED graduables avec faisceau lumineux et détecteur PIR/Luxmètre. |
+| `bldg_thermal_meter` | **Compteur d'Énergie Thermique** | Calorimétrie EN 1434 | Conduite aller eau chaude avec sonde PT100, conduite retour avec débitmètre ultrasonique, sonde retour et intégrateur calorimétrique $Q = m \cdot Cp \cdot \Delta T$. |
+| `bldg_access_flow` | **Contrôle d'Accès & Flux Bâtiment** | Sécurité Sûreté | Hall d'accueil, portillons motorisés rapides d'accès (*Speed Gates*) entrée/sortie, lecteurs RFID et caméra stéréoscopique 3D de comptage des flux. |
+
+### ⚡ 2.3 Secteur Infrastructures & Réseaux (8 cas d'usage)
+
+| ID Modèle | Cas d'Usage Métier | Norme / Type SCADA | Description du Schéma Synoptique Dédié |
+| :--- | :--- | :---: | :--- |
+| `infra_transfo_hta` | **Transformateur HTA/BT** | Électrotechnique HTA | Cuve à ailettes refroidie par huile diélectrique, traversées HTA 20kV, bornes BT 400V et relais combiné de protection DGPT2 (Gaz, Pression, Température). |
+| `infra_solar_pv` | **Onduleur Solaire Photovoltaïque** | Photovoltaïque IEC | Champ de modules solaires 500kWc, pyranomètre, ligne DC 820V, onduleur central MPPT bi-étagé et transformateur d'injection réseau HTA. |
+| `infra_irve_charger` | **Borne de Recharge IRVE Ultra-Rapide** | Électromobilité DC | Borne DC 150kW avec écran tactile et lecteur RFID, câble combo CCS2 à refroidissement liquide relié à la silhouette du véhicule électrique. |
+| `infra_water_pump` | **Poste de Relevage Assainissement** | Génie Civil STEP | **Fosse humide béton pour eaux usées, double pompe submersible P1/P2, sonde ultrasonique de niveau de bâche et conduite PEHD de refoulement vers la STEP.** |
+| `infra_wind_turbine` | **Aérogénérateur / Éolienne MW** | Éolien IEC 61400 | Mât tubulaire béton/acier, nacelle 3MW avec anémomètre, rotor tripale à pales animées et transmission génératrice. |
+| `infra_bess_storage` | **Stockage Batteries BESS (2 MWh)** | Stockage Réseau | Conteneur 40ft climatisé, racks modulaires de cellules batteries LFP avec BMS et convertisseur réversible PCS 4 quadrants bi-directionnel AC/DC. |
+| `infra_rail_switch` | **Aiguillage Ferroviaire (ADV)** | Signalisation Ferroviaire | Voie principale et voie déviée avec aiguilles mobiles, moteur électromécanique à contrôle de tringle et résistances de réchauffage anti-gel des rails. |
+| `infra_water_treatment` | **Bassin d'Aération & Traitement STEP** | Épuration Biologique | Bassin d'aération boues activées avec rampe de micro-diffuseurs d'air bullé, sonde optique à oxygène dissous LDO et sonde pH/Redox. |
+
+### 🏙️ 2.4 Secteur Villes Intelligentes & Télécoms (8 cas d'usage)
+
+| ID Modèle | Cas d'Usage Métier | Norme / Type SCADA | Description du Schéma Synoptique Dédié |
+| :--- | :--- | :---: | :--- |
+| `city_lighting` | **Armoire d'Éclairage Public** | Smart Lighting Urbain | Armoire de télégestion sur voirie avec horloge astronomique, ligne souterraine d'alimentation et candélabres LED à faisceau lumineux graduable. |
+| `city_weather` | **Station Météo & Climat Urbain** | Météorologie Urbaine | Mât instrumenté avec anémomètre girouette ultrasonique, capteur pyranomètre UV, abri thermo-hygrométrique ventilé et pluviomètre à augets. |
+| `telecom_shelter` | **Shelter Télécoms / Nœud Fibre** | Télécoms & Data Center | Enceinte shelter sécurisée, baies de routeurs IP et OLT fibre 19", onduleur UPS 40kVA double conversion et climatisation de précision N+1 redondante. |
+| `city_traffic` | **Comptage Trafic & Mobilités** | Gestion de Trafic Urbain | Chaussée routière VL amont/aval, piste cyclable verte normée, boucles électromagnétiques au sol, portique radar Doppler et feu tricolore de régulation. |
+| `city_waste_bin` | **Conteneur Déchets & PAV Connecté** | Smart Waste / Propreté | Borne d'apport volontaire hors sol, cuve enterrée 4m³ avec niveau volumique, sonde ultrasonique haute précision et alarme thermique/incendie. |
+| `city_smart_irrigation` | **Arrosage Intelligent Espaces Verts** | Tensiométrie & Espaces Verts | Espace vert gazonné, sonde tensiométrique multi-profondeurs (-10cm), électrovanne motorisée 24V et tuyères d'arrosage déployées avec jet d'eau. |
+| `city_acoustic_sensor` | **Sonde Acoustique & Bruit Urbain** | Nuisances / IEC 61672 | Microphone de mesure environnemental Classe 1 avec boule anti-vent, panneau solaire autonome et processeur DSP d'analyse spectrale par tiers d'octave. |
+| `city_structure_shm` | **Surveillance Ouvrage d'Art (SHM)** | Génie Civil / Auscultation | Tablier et piles de pont en béton précontraint, fissuromètre électronique à corde vibrante (mm), inclinomètre bi-axial MEMS et jauges de déformation. |
+
+---
+
+## 3. Deux Méthodes pour Télécharger votre Dashboard
 
 ### Méthode 1 : Téléchargement Direct depuis l'Équipement Instancié (Recommandé)
 Lorsque vous avez créé un équipement virtuel dans le simulateur (par exemple avec votre vrai token ThingsBoard) :
@@ -50,7 +112,7 @@ Lorsque vous avez créé un équipement virtuel dans le simulateur (par exemple 
 
 ---
 
-## 3. Procédure d'Importation dans ThingsBoard (3 Étapes)
+## 4. Procédure d'Importation dans ThingsBoard (3 Étapes)
 
 ```mermaid
 flowchart TD
@@ -75,7 +137,7 @@ ThingsBoard analyse le fichier et ouvre la boîte de dialogue **« Résolution d
 
 ---
 
-## 4. Dépannage & Bonnes Pratiques
+## 5. Dépannage & Bonnes Pratiques
 
 - **Les widgets affichent `No data`** :
   - Vérifiez que la simulation est bien active dans le simulateur (indicateur vert *Simulation en cours*).

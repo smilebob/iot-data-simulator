@@ -8,8 +8,9 @@ Contrôleurs HTTP FastAPI (CRUD, configuration broker, forçage manuel, injectio
 ## 🗂️ Fichiers & Composants Clés
 | Fichier / Export | Rôle | Entrées / Sorties Principales |
 | :--- | :--- | :--- |
-| [`routes.py:router`](file:///home/pierre/Projets/iot-data-simulator/app/api/routes.py) | Router APIRouter FastAPI (préfixe `/api`) | Endpoints REST (`/devices`, `/variables`, `/broker`, `/broker/test`, `/logs`, `/status`, `/scenario`) |
+| [`routes.py:router`](file:///home/pierre/Projets/iot-data-simulator/app/api/routes.py) | Router APIRouter FastAPI (préfixe `/api`) | Endpoints REST (`/devices`, `/variables`, `/broker`, `/broker/test`, `/logs`, `/status`, `/scenario`, `/presets`, `/devices/{id}/thingsboard-dashboard`, `/presets/{id}/thingsboard-dashboard`) |
 | [`websocket.py:WebSocketManager`](file:///home/pierre/Projets/iot-data-simulator/app/api/websocket.py) | Hub de diffusion WebSocket non-bloquant | `connect()`, `disconnect()`, `broadcast_json(message)` (télémétrie & logs) |
+| [`routes.py:auth_router`](file:///home/pierre/Projets/iot-data-simulator/app/api/routes.py) | Routes d'authentification et gestion RBAC | `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me`, `/api/users` |
 
 ## 🔄 Dépendances & Flux de Données
 - **Dépend de** : `fastapi`, `app/models/`, `app/storage/repository.py`, `app/core/engine.py`, `app/mqtt/client.py`, `app/mqtt/diagnostics.py`, `app/core/logger.py`.

@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble du Système
 
-L'application **IoT Data Simulator** est articulée autour d'une architecture découplée en 6 couches principales :
+L'application **IoT Data Simulator** est articulée autour d'une architecture modulaire et découplée :
 
 ```
 ┌────────────────────────────────────────────────────────┐
@@ -12,19 +12,20 @@ L'application **IoT Data Simulator** est articulée autour d'une architecture d�
                             │ REST & WebSockets
 ┌───────────────────────────▼────────────────────────────┐
 │                    Couche Contrôleur                    │
-│      app/api/ (FastAPI Routes, WebSocket Manager)       │
+│   app/api/ (FastAPI Routes, WebSocket Manager, RBAC)   │
 └───────────────────────────▲────────────────────────────┘
                             │
 ┌───────────────────────────▼────────────────────────────┐
 │                  Couche Moteur Métier                   │
-│     app/core/ (SimulationEngine, Generators, Replay)   │
+│     app/core/ (SimulationEngine, Generators, Replay,   │
+│     Physics, EquipmentCatalog, SCADA Dashboard Gen)    │
 └─────────────┬────────────────────────────┬─────────────┘
               │                            │
               ▼                            ▼
 ┌──────────────────────────┐  ┌──────────────────────────┐
-│  Couche Plateformes IoT  │  │    Couche Réseau MQTT    │
-│  app/platforms/          │  │    app/mqtt/             │
-│  (ThingsBoard, HA, ...)  │  │    (Paho-MQTT v2, TLS)   │
+│  Couche Plateformes IoT  │  │ Couche Transports Réseau │
+│  app/platforms/          │  │ app/transports/          │
+│  (ThingsBoard, HA, ...)  │  │ (MQTT, HTTP v1, CoAP UDP)│
 └──────────────────────────┘  └──────────────────────────┘
               │                            │
               └─────────────┬──────────────┘
@@ -70,3 +71,18 @@ Cette abstraction permet d'ajouter n'importe quelle plateforme cible sans jamais
 
 ### 5. `app/storage/` (Persistance Atomique)
 * `StorageRepository` : Sauvegarde sous format JSON avec écriture atomique (écriture dans un fichier `.tmp` suivie d'un `os.replace` atomique sur le système de fichiers Linux) évitant toute corruption en cas d'arrêt brutal du conteneur.
+
+### 6. `app/transports/` (Aiguillage Multi-Protocoles)
+* `TransportManager` : Route chaque trame télémétrique selon le protocole de l'équipement :
+  * **MQTT** : via `MqttManager` (TCP standard port 1883/8883 ou WebSockets port 443).
+  * **HTTP REST** : via `ThingsBoardHttpClient` (API v1 `POST /api/v1/{token}/telemetry`, HTTPS port 443 natif pour traverser les proxys Cloudflare).
+  * **CoAP** : via `ThingsBoardCoapClient` (RFC 7252 sur UDP 5683 avec options `Uri-Path` et `Content-Format: application/json`).
+
+### 7. `app/core/` (Sous-système Tableaux de Bord SCADA & Catalogue)
+* `dashboard_generator.py` : Générateur dynamique de fichiers JSON ThingsBoard v3.x avec alias d'entité `singleEntity`, thème Light haute lisibilité (fond `#F1F5F9`, cartes `#FFFFFF`, WCAG AA) et widgets normalisés (`system.cards.html_value_card`, `system.digital_gauges.simple_gauge_justgage`, `system.charts.basic_timeseries`, `system.cards.entities_table`).
+* `scada_synoptics.py` : Moteur de rendu vectoriel SVG fournissant **32 synoptiques SCADA industriels dédiés** (P&ID, SLD, GTB) avec tuyauteries animées, rotors en mouvement et souscription temps réel aux grandeurs via `${key}`.
+* `equipment_catalog.py` : Référentiel des 32 presets métiers (Industrie, Tertiaire, Infrastructures, Villes & Télécoms).
+* `physics.py` : Résolution causale multi-passes des variables dérivées et intégrateurs continus temporels (énergie en kWh/MWh).
+
+### 8. `app/auth/` (Contrôle d'Accès RBAC & Sécurité CIS)
+* `service.py` & `models.py` : Gestion des rôles `ADMIN`, `OPERATOR`, `VIEWER`, hachage cryptographique Scrypt RFC 7914, sessions par cookies signés JWT HttpOnly et ségrégation stricte des secrets dans `data/users.json` (droits `0600`).

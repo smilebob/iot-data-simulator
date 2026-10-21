@@ -10,6 +10,7 @@ Bienvenue dans la documentation opérationnelle du projet **IoT Data Simulator**
 2. [Durcissement du Broker Mosquitto](mosquitto_hardening.md) : Configuration TLS 1.2/1.3, génération de certificats X.509, gestion des mots de passe et fichiers ACL.
 3. [Supervision, Sondes & Logs](monitoring_and_health.md) : Endpoint `/healthz`, sondes de vivacité/disponibilité (Kubernetes / Docker healthcheck), centralisation des logs.
 4. [Déploiement Distant & Reverse Proxy](remote_deployment.md) : Mise en production sur serveur dédié/cloud (VPS, EC2), reverse proxy Nginx / Traefik avec HTTPS (Let's Encrypt), variables d'environnement.
+5. [Contrôle d'Accès (RBAC) & Protection des Secrets CIS](rbac_and_secrets.md) : Modèle RBAC à 3 niveaux (Admin, Opérateur, Observateur), hachage Scrypt RFC 7914, sessions JWT HttpOnly, permissions 0600 et initialisation sécurisée.
 
 ---
 
