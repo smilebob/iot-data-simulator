@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Borne de Recharge IRVE' (ID: infra_irve_charger). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_IRVE_CHARGER. Protocole: HTTP.",
     "entityAliases": {
-      "642d4804-ad74-4b0e-8678-eb22b5d165aa": {
-        "id": "642d4804-ad74-4b0e-8678-eb22b5d165aa",
+      "0d82e222-40e5-49ef-bbe9-7473ea920b7d": {
+        "id": "0d82e222-40e5-49ef-bbe9-7473ea920b7d",
         "alias": "Borne de Recharge IRVE",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Borne de Recharge IRVE"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "ffe40833-5062-4a12-b780-854f01f3c410": {
+      "5d631cfd-3d8d-4aed-80e2-3a8ade9acc54": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "ffe40833-5062-4a12-b780-854f01f3c410"
+        "id": "5d631cfd-3d8d-4aed-80e2-3a8ade9acc54"
       },
-      "81f886e4-f142-467f-b266-41171656d2e7": {
+      "0374ec08-68d6-4ee4-aa98-9b8c0218c0dc": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "81f886e4-f142-467f-b266-41171656d2e7"
+        "id": "0374ec08-68d6-4ee4-aa98-9b8c0218c0dc"
       },
-      "3619f791-c535-42f9-8bdf-7f60f6ce0c26": {
+      "09bdb8b3-650d-4e4a-b2ab-3b576ec33188": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance de Charge Délivrée",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "642d4804-ad74-4b0e-8678-eb22b5d165aa",
+              "entityAliasId": "0d82e222-40e5-49ef-bbe9-7473ea920b7d",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "3619f791-c535-42f9-8bdf-7f60f6ce0c26"
+        "id": "09bdb8b3-650d-4e4a-b2ab-3b576ec33188"
       },
-      "15ee72ac-781e-4e39-9f03-ee27b0bcf347": {
+      "ede1d989-c05d-4348-b1ce-6e64df66a101": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Énergie Consommée Session",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "642d4804-ad74-4b0e-8678-eb22b5d165aa",
+              "entityAliasId": "0d82e222-40e5-49ef-bbe9-7473ea920b7d",
               "dataKeys": [
                 {
                   "name": "energie_session_kwh",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "15ee72ac-781e-4e39-9f03-ee27b0bcf347"
+        "id": "ede1d989-c05d-4348-b1ce-6e64df66a101"
       },
-      "c2f05652-e929-41d8-b6d6-11351bf6e4e3": {
+      "88865e8f-c9a6-4b4d-865e-b6d509900370": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Courant Délivré Prise",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "642d4804-ad74-4b0e-8678-eb22b5d165aa",
+              "entityAliasId": "0d82e222-40e5-49ef-bbe9-7473ea920b7d",
               "dataKeys": [
                 {
                   "name": "courant_charge_a",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "c2f05652-e929-41d8-b6d6-11351bf6e4e3"
+        "id": "88865e8f-c9a6-4b4d-865e-b6d509900370"
       },
-      "4f85c090-beb9-4905-bcc2-4bdd7f8afac2": {
+      "6f878f5b-10ad-4f52-96bf-19e8a0766226": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Borne de Recharge IRVE",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "642d4804-ad74-4b0e-8678-eb22b5d165aa",
+              "entityAliasId": "0d82e222-40e5-49ef-bbe9-7473ea920b7d",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "4f85c090-beb9-4905-bcc2-4bdd7f8afac2"
+        "id": "6f878f5b-10ad-4f52-96bf-19e8a0766226"
       },
-      "f46022ab-0e8d-4f9f-a5e0-88fe2113bcca": {
+      "ae88cd0a-4fc4-4da4-8acc-9f7a13ab3cf9": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "642d4804-ad74-4b0e-8678-eb22b5d165aa",
+              "entityAliasId": "0d82e222-40e5-49ef-bbe9-7473ea920b7d",
               "dataKeys": [
                 {
                   "name": "statut_connecteur",
@@ -371,8 +380,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -386,7 +397,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "f46022ab-0e8d-4f9f-a5e0-88fe2113bcca"
+        "id": "ae88cd0a-4fc4-4da4-8acc-9f7a13ab3cf9"
       }
     },
     "states": {
@@ -396,43 +407,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "ffe40833-5062-4a12-b780-854f01f3c410": {
+              "5d631cfd-3d8d-4aed-80e2-3a8ade9acc54": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "81f886e4-f142-467f-b266-41171656d2e7": {
+              "0374ec08-68d6-4ee4-aa98-9b8c0218c0dc": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "3619f791-c535-42f9-8bdf-7f60f6ce0c26": {
+              "09bdb8b3-650d-4e4a-b2ab-3b576ec33188": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "15ee72ac-781e-4e39-9f03-ee27b0bcf347": {
+              "ede1d989-c05d-4348-b1ce-6e64df66a101": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "c2f05652-e929-41d8-b6d6-11351bf6e4e3": {
+              "88865e8f-c9a6-4b4d-865e-b6d509900370": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "4f85c090-beb9-4905-bcc2-4bdd7f8afac2": {
+              "6f878f5b-10ad-4f52-96bf-19e8a0766226": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "f46022ab-0e8d-4f9f-a5e0-88fe2113bcca": {
+              "ae88cd0a-4fc4-4da4-8acc-9f7a13ab3cf9": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

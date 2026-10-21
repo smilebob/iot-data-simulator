@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale Traitement d'Air (CTA)' (ID: bldg_cta). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_CTA. Protocole: HTTP.",
     "entityAliases": {
-      "34244b1e-9bcc-4808-ab49-4028a29cc7ba": {
-        "id": "34244b1e-9bcc-4808-ab49-4028a29cc7ba",
+      "ccbdc840-448b-45c3-acb8-b70f46456de1": {
+        "id": "ccbdc840-448b-45c3-acb8-b70f46456de1",
         "alias": "Centrale Traitement d'Air (CTA)",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Centrale Traitement d'Air (CTA)"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "9d8daf8d-6604-4acb-bfa5-af4bc4e1b2fe": {
+      "a6d41527-d490-4747-9655-d44d72a059dd": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "9d8daf8d-6604-4acb-bfa5-af4bc4e1b2fe"
+        "id": "a6d41527-d490-4747-9655-d44d72a059dd"
       },
-      "03f3302a-6970-443c-99f1-4b7d70e3dfb2": {
+      "c9ea1151-9c97-4ccb-b309-aa9a0c5d40cc": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "03f3302a-6970-443c-99f1-4b7d70e3dfb2"
+        "id": "c9ea1151-9c97-4ccb-b309-aa9a0c5d40cc"
       },
-      "00e7a650-072f-485e-8295-63aed241706a": {
+      "c3f035d9-5ab4-4e5f-8fb5-0a4068f6dd25": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Soufflage",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "34244b1e-9bcc-4808-ab49-4028a29cc7ba",
+              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
               "dataKeys": [
                 {
                   "name": "temp_soufflage",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "00e7a650-072f-485e-8295-63aed241706a"
+        "id": "c3f035d9-5ab4-4e5f-8fb5-0a4068f6dd25"
       },
-      "e514506b-79b8-4a7e-a27a-c088d2fcf5e4": {
+      "915a1b3c-eb23-4633-b027-a14a1e240413": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Reprise",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "34244b1e-9bcc-4808-ab49-4028a29cc7ba",
+              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
               "dataKeys": [
                 {
                   "name": "temp_reprise",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "e514506b-79b8-4a7e-a27a-c088d2fcf5e4"
+        "id": "915a1b3c-eb23-4633-b027-a14a1e240413"
       },
-      "dbaa546d-b873-4d06-9926-3ef1773cd5ef": {
+      "c4a31ed1-db78-4900-a3bb-6a6e769aaa7d": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit d'Air Soufflé",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "34244b1e-9bcc-4808-ab49-4028a29cc7ba",
+              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
               "dataKeys": [
                 {
                   "name": "debit_soufflage",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "dbaa546d-b873-4d06-9926-3ef1773cd5ef"
+        "id": "c4a31ed1-db78-4900-a3bb-6a6e769aaa7d"
       },
-      "95361b4a-96a6-481e-b031-165192cbb6b3": {
+      "990c0d8d-60bb-4ebd-8edd-c7a6116fb8ed": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Delta Pression Filtre",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "34244b1e-9bcc-4808-ab49-4028a29cc7ba",
+              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
               "dataKeys": [
                 {
                   "name": "pression_filtre",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "95361b4a-96a6-481e-b031-165192cbb6b3"
+        "id": "990c0d8d-60bb-4ebd-8edd-c7a6116fb8ed"
       },
-      "cfa4a20d-05c4-41dd-96f1-d9754889693e": {
+      "49adf405-8fab-46c8-8f0c-7b550b9fa336": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Centrale Traitement d'Air (CTA)",
         "sizeX": 16,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "34244b1e-9bcc-4808-ab49-4028a29cc7ba",
+              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
               "dataKeys": [
                 {
                   "name": "temp_soufflage",
@@ -415,12 +424,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "cfa4a20d-05c4-41dd-96f1-d9754889693e"
+        "id": "49adf405-8fab-46c8-8f0c-7b550b9fa336"
       },
-      "1a6f323b-1263-48ab-bf29-8c9a3b3c32ab": {
+      "adb75d3d-f1e5-409c-a03b-e0cb05583d9a": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -429,7 +439,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "34244b1e-9bcc-4808-ab49-4028a29cc7ba",
+              "entityAliasId": "ccbdc840-448b-45c3-acb8-b70f46456de1",
               "dataKeys": [
                 {
                   "name": "registre_air_neuf",
@@ -442,8 +452,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -457,7 +469,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "1a6f323b-1263-48ab-bf29-8c9a3b3c32ab"
+        "id": "adb75d3d-f1e5-409c-a03b-e0cb05583d9a"
       }
     },
     "states": {
@@ -467,49 +479,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "9d8daf8d-6604-4acb-bfa5-af4bc4e1b2fe": {
+              "a6d41527-d490-4747-9655-d44d72a059dd": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "03f3302a-6970-443c-99f1-4b7d70e3dfb2": {
+              "c9ea1151-9c97-4ccb-b309-aa9a0c5d40cc": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "00e7a650-072f-485e-8295-63aed241706a": {
+              "c3f035d9-5ab4-4e5f-8fb5-0a4068f6dd25": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "e514506b-79b8-4a7e-a27a-c088d2fcf5e4": {
+              "915a1b3c-eb23-4633-b027-a14a1e240413": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "dbaa546d-b873-4d06-9926-3ef1773cd5ef": {
+              "c4a31ed1-db78-4900-a3bb-6a6e769aaa7d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "95361b4a-96a6-481e-b031-165192cbb6b3": {
+              "990c0d8d-60bb-4ebd-8edd-c7a6116fb8ed": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "cfa4a20d-05c4-41dd-96f1-d9754889693e": {
+              "49adf405-8fab-46c8-8f0c-7b550b9fa336": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "1a6f323b-1263-48ab-bf29-8c9a3b3c32ab": {
+              "adb75d3d-f1e5-409c-a03b-e0cb05583d9a": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

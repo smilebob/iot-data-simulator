@@ -2097,7 +2097,9 @@ function prepareInstantiatePreset(presetId) {
   document.getElementById("instantiate-name").value = preset.name;
   document.getElementById("instantiate-device-id").value = "";
   document.getElementById("instantiate-device-id").placeholder = `Ex: ${preset.id}_01`;
-  document.getElementById("instantiate-protocol").value = preset.default_protocol || "mqtt";
+  document.getElementById("instantiate-protocol").value = preset.default_protocol || "http";
+  const useTlsEl = document.getElementById("instantiate-use-tls");
+  if (useTlsEl) useTlsEl.checked = true;
   document.getElementById("instantiate-token").value = "";
   const instantiateIntervalEl = document.getElementById("instantiate-publish-interval");
   if (instantiateIntervalEl) instantiateIntervalEl.value = "";
@@ -2125,6 +2127,7 @@ async function submitInstantiatePreset(e) {
   const name = document.getElementById("instantiate-name").value.trim();
   const deviceId = document.getElementById("instantiate-device-id").value.trim();
   const protocol = document.getElementById("instantiate-protocol").value;
+  const useTls = document.getElementById("instantiate-use-tls") ? document.getElementById("instantiate-use-tls").checked : true;
   const token = document.getElementById("instantiate-token").value.trim();
   const publishIntervalRaw = document.getElementById("instantiate-publish-interval") ? document.getElementById("instantiate-publish-interval").value.trim() : "";
   const errBox = document.getElementById("instantiate-error");
@@ -2135,6 +2138,7 @@ async function submitInstantiatePreset(e) {
     device_id: deviceId || undefined,
     protocol: protocol || undefined,
     token: token || undefined,
+    use_tls: useTls,
     publish_interval: publishIntervalRaw ? parseFloat(publishIntervalRaw) : undefined
   };
 
@@ -2156,7 +2160,16 @@ async function submitInstantiatePreset(e) {
 
     closeModal("modal-instantiate-preset");
     await loadAllData();
-    alert(`✅ L'équipement '${data.device.name}' et ses ${data.variables_count} variables ont été créés avec succès !\n\n💡 Astuce : Cliquez sur le bouton "Dashboard TB" de cet équipement pour télécharger son tableau de bord ThingsBoard préconfiguré (intégrant son Token et toutes ses grandeurs).`);
+    let msg = `✅ L'équipement '${data.device.name}' et ses ${data.variables_count} variables ont été créés avec succès !`;
+    if (data.validation) {
+      if (data.validation.success) {
+        msg += `\n\n🟢 Communication validée immédiatement : ${data.validation.message} (latence: ${data.validation.latency_ms || 0}ms)`;
+      } else {
+        msg += `\n\n⚠️ Test initial de communication : ${data.validation.message}`;
+      }
+    }
+    msg += `\n\n💡 Astuce : Cliquez sur le bouton "Dashboard TB" de cet équipement pour télécharger son tableau de bord ThingsBoard préconfiguré (intégrant son Token et toutes ses grandeurs).`;
+    alert(msg);
   } catch (err) {
     if (errBox) {
       errBox.textContent = `Erreur : ${err.message}`;

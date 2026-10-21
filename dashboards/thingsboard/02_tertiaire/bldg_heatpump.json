@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Pompe à Chaleur Réversible (PAC)' (ID: bldg_heatpump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_HEATPUMP. Protocole: HTTP.",
     "entityAliases": {
-      "c6553800-c107-4239-9394-01bf4172f9f7": {
-        "id": "c6553800-c107-4239-9394-01bf4172f9f7",
+      "bf335957-dd98-4fbc-80f5-3f1cea487a15": {
+        "id": "bf335957-dd98-4fbc-80f5-3f1cea487a15",
         "alias": "Pompe à Chaleur Réversible (PAC)",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Pompe à Chaleur Réversible (PAC)"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "12c6a5ed-af2a-4c28-aa91-0c0227b366d4": {
+      "f64c9559-6de4-41c3-9de5-82bd38555973": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "12c6a5ed-af2a-4c28-aa91-0c0227b366d4"
+        "id": "f64c9559-6de4-41c3-9de5-82bd38555973"
       },
-      "e92d2756-f076-4487-9f0d-cca837855306": {
+      "2ccb85c8-a58e-4f0d-94dc-274dc27453e9": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "e92d2756-f076-4487-9f0d-cca837855306"
+        "id": "2ccb85c8-a58e-4f0d-94dc-274dc27453e9"
       },
-      "2c67eb0e-c2cf-49dd-b277-6332a54006ac": {
+      "5648a5a0-0b73-4d1b-a7b5-099d3e0d6a2b": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Eau Départ PAC",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
+              "entityAliasId": "bf335957-dd98-4fbc-80f5-3f1cea487a15",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "2c67eb0e-c2cf-49dd-b277-6332a54006ac"
+        "id": "5648a5a0-0b73-4d1b-a7b5-099d3e0d6a2b"
       },
-      "1f56f717-883a-4dec-b1c3-7d0ee260c103": {
+      "38412553-a87a-4456-bc5d-d11bebf8e83e": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Thermique Fournie",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
+              "entityAliasId": "bf335957-dd98-4fbc-80f5-3f1cea487a15",
               "dataKeys": [
                 {
                   "name": "puissance_thermique_kw",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "1f56f717-883a-4dec-b1c3-7d0ee260c103"
+        "id": "38412553-a87a-4456-bc5d-d11bebf8e83e"
       },
-      "134aaa81-5277-45b3-bd67-00a8ff98330e": {
+      "27857be7-180c-477d-b620-ee0afa5d7571": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Pression Circuit Primaire",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
+              "entityAliasId": "bf335957-dd98-4fbc-80f5-3f1cea487a15",
               "dataKeys": [
                 {
                   "name": "pression_circuit",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "134aaa81-5277-45b3-bd67-00a8ff98330e"
+        "id": "27857be7-180c-477d-b620-ee0afa5d7571"
       },
-      "b03770f2-73d7-4e24-9560-43fcf92f928e": {
+      "625928b7-fdd1-4f2d-9997-a06083884bd0": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Pompe à Chaleur Réversible (PAC)",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
+              "entityAliasId": "bf335957-dd98-4fbc-80f5-3f1cea487a15",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "b03770f2-73d7-4e24-9560-43fcf92f928e"
+        "id": "625928b7-fdd1-4f2d-9997-a06083884bd0"
       },
-      "8610aee0-2f9b-47d1-b431-b97502261e3d": {
+      "8f1f3376-0fb5-4535-8537-d73970405814": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "c6553800-c107-4239-9394-01bf4172f9f7",
+              "entityAliasId": "bf335957-dd98-4fbc-80f5-3f1cea487a15",
               "dataKeys": [
                 {
                   "name": "mode_chaud",
@@ -371,8 +380,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -386,7 +397,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "8610aee0-2f9b-47d1-b431-b97502261e3d"
+        "id": "8f1f3376-0fb5-4535-8537-d73970405814"
       }
     },
     "states": {
@@ -396,43 +407,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "12c6a5ed-af2a-4c28-aa91-0c0227b366d4": {
+              "f64c9559-6de4-41c3-9de5-82bd38555973": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "e92d2756-f076-4487-9f0d-cca837855306": {
+              "2ccb85c8-a58e-4f0d-94dc-274dc27453e9": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "2c67eb0e-c2cf-49dd-b277-6332a54006ac": {
+              "5648a5a0-0b73-4d1b-a7b5-099d3e0d6a2b": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "1f56f717-883a-4dec-b1c3-7d0ee260c103": {
+              "38412553-a87a-4456-bc5d-d11bebf8e83e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "134aaa81-5277-45b3-bd67-00a8ff98330e": {
+              "27857be7-180c-477d-b620-ee0afa5d7571": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "b03770f2-73d7-4e24-9560-43fcf92f928e": {
+              "625928b7-fdd1-4f2d-9997-a06083884bd0": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "8610aee0-2f9b-47d1-b431-b97502261e3d": {
+              "8f1f3376-0fb5-4535-8537-d73970405814": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

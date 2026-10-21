@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'TGBT & Compteur Multi-Fluides' (ID: bldg_tgbt). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_TGBT. Protocole: MQTT.",
     "entityAliases": {
-      "b5baff13-9cd0-4d36-8ac2-4dc5c65195b6": {
-        "id": "b5baff13-9cd0-4d36-8ac2-4dc5c65195b6",
+      "19875fba-cc01-4415-94cc-1eef76c59e24": {
+        "id": "19875fba-cc01-4415-94cc-1eef76c59e24",
         "alias": "TGBT & Compteur Multi-Fluides",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "TGBT & Compteur Multi-Fluides"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "4f1ec14a-a4fc-42d6-a7db-091744608aeb": {
+      "079131f5-8ba1-460e-9f28-20979e43ff1d": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "4f1ec14a-a4fc-42d6-a7db-091744608aeb"
+        "id": "079131f5-8ba1-460e-9f28-20979e43ff1d"
       },
-      "8ce61164-10f2-4dd2-940e-ffa6ae3efda6": {
+      "e3aee686-b7ea-4684-bf9a-56da88e33642": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "8ce61164-10f2-4dd2-940e-ffa6ae3efda6"
+        "id": "e3aee686-b7ea-4684-bf9a-56da88e33642"
       },
-      "d771a454-c8e5-4732-8eff-f9a493479959": {
+      "da74cb08-c390-4f55-9ea6-1e2c1ffca8b5": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Active Triphasée",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b5baff13-9cd0-4d36-8ac2-4dc5c65195b6",
+              "entityAliasId": "19875fba-cc01-4415-94cc-1eef76c59e24",
               "dataKeys": [
                 {
                   "name": "puissance_totale_kw",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "d771a454-c8e5-4732-8eff-f9a493479959"
+        "id": "da74cb08-c390-4f55-9ea6-1e2c1ffca8b5"
       },
-      "9d4b1cf5-9c4c-4042-bcc0-6aed6ff514b3": {
+      "f4a68eac-8d50-4844-ab8d-c16509c300d4": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Facteur de Puissance (Cos Phi)",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b5baff13-9cd0-4d36-8ac2-4dc5c65195b6",
+              "entityAliasId": "19875fba-cc01-4415-94cc-1eef76c59e24",
               "dataKeys": [
                 {
                   "name": "facteur_puissance",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "9d4b1cf5-9c4c-4042-bcc0-6aed6ff514b3"
+        "id": "f4a68eac-8d50-4844-ab8d-c16509c300d4"
       },
-      "e74d3472-9f3d-4eb4-9be5-52790cb50d54": {
+      "93155d4f-f4c9-4a30-90fa-344d14e0b755": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Tension Phase-Neutre L1",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b5baff13-9cd0-4d36-8ac2-4dc5c65195b6",
+              "entityAliasId": "19875fba-cc01-4415-94cc-1eef76c59e24",
               "dataKeys": [
                 {
                   "name": "tension_l1_l2",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "e74d3472-9f3d-4eb4-9be5-52790cb50d54"
+        "id": "93155d4f-f4c9-4a30-90fa-344d14e0b755"
       },
-      "1aa24db3-6a28-47cd-8c6d-5649dbbbfcec": {
+      "584f9911-6bdb-4379-a519-467fec7ae393": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Eau Générale",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b5baff13-9cd0-4d36-8ac2-4dc5c65195b6",
+              "entityAliasId": "19875fba-cc01-4415-94cc-1eef76c59e24",
               "dataKeys": [
                 {
                   "name": "debit_eau_general",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "1aa24db3-6a28-47cd-8c6d-5649dbbbfcec"
+        "id": "584f9911-6bdb-4379-a519-467fec7ae393"
       },
-      "91dabc0c-a6ea-4780-ba0e-6e6f6e9c143b": {
+      "bcfd270a-50c1-4642-ae88-f65e3a5c98e7": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - TGBT & Compteur Multi-Fluides",
         "sizeX": 24,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b5baff13-9cd0-4d36-8ac2-4dc5c65195b6",
+              "entityAliasId": "19875fba-cc01-4415-94cc-1eef76c59e24",
               "dataKeys": [
                 {
                   "name": "puissance_totale_kw",
@@ -415,7 +424,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "91dabc0c-a6ea-4780-ba0e-6e6f6e9c143b"
+        "id": "bcfd270a-50c1-4642-ae88-f65e3a5c98e7"
       }
     },
     "states": {
@@ -425,43 +434,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "4f1ec14a-a4fc-42d6-a7db-091744608aeb": {
+              "079131f5-8ba1-460e-9f28-20979e43ff1d": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "8ce61164-10f2-4dd2-940e-ffa6ae3efda6": {
+              "e3aee686-b7ea-4684-bf9a-56da88e33642": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "d771a454-c8e5-4732-8eff-f9a493479959": {
+              "da74cb08-c390-4f55-9ea6-1e2c1ffca8b5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "9d4b1cf5-9c4c-4042-bcc0-6aed6ff514b3": {
+              "f4a68eac-8d50-4844-ab8d-c16509c300d4": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "e74d3472-9f3d-4eb4-9be5-52790cb50d54": {
+              "93155d4f-f4c9-4a30-90fa-344d14e0b755": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "1aa24db3-6a28-47cd-8c6d-5649dbbbfcec": {
+              "584f9911-6bdb-4379-a519-467fec7ae393": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "91dabc0c-a6ea-4780-ba0e-6e6f6e9c143b": {
+              "bcfd270a-50c1-4642-ae88-f65e3a5c98e7": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

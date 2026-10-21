@@ -72,6 +72,9 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Guide d'architecture du moteur physique : `Documentation/developer/physics_and_dependencies.md`
 - [x] Configuration de l'intervalle d'envoi (`publish_interval`) au niveau équipement avec écrasement en cascade sur toutes les grandeurs associées, tout en préservant la possibilité de régler des cadences individuelles par variable (v1.8.0)
 - [x] Tableaux de Bord SCADA ThingsBoard (v1.9.0) : Intégration de schémas synoptiques professionnels conformes aux règles métiers (P&ID tuyauterie/instrumentation ISO 10628, schémas unifilaires électriques SLD IEC 60617, synoptiques aérauliques GTB/CVC DIN 1946) avec animations de fluides, rotors en mouvement, tags de mesure en temps réel, jauges de process et téléchargement direct en 1 clic avec Token ThingsBoard préconfiguré pour chaque équipement et cas d'usage.
+- [x] Correctifs Robustesse Communication & Dashboards Plug-and-Play (v1.9.1) : 
+  - Connectivité immédiate dès l'instanciation de presets : sélection par défaut HTTP REST (port 443 HTTPS) avec `use_tls=True`, fallback TLS intelligent pour hôtes distants, et ping de validation instantané au moment de l'instanciation.
+  - Résolution des erreurs d'importation ThingsBoard : FQN systèmes conformes (`system.digital_gauges.simple_gauge_justgage`, `system.charts.basic_timeseries`, `system.cards.entities_table`, `system.cards.html_card`), alias d'entité `singleEntity` avec déclenchement automatique de l'assistant de mapping ThingsBoard à l'import, synchronisation des clés de télémétrie courtes sans préfixe polluant (`debit_vehicules`, etc.), et synoptique SCADA dédié au comptage routier et mobilités douces.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles

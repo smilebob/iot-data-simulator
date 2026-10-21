@@ -31,6 +31,12 @@ class ThingsBoardAdapter(BasePlatformAdapter):
         action = "attributes" if variable.var_type == VariableType.ATTRIBUTE else "telemetry"
         return ["api", "v1", token, action]
 
+    def get_telemetry_key(self, variable: VariableConfig) -> str:
+        """Extrait la clé métrique propre (sans le préfixe unique de l'équipement dans le simulateur)."""
+        if variable.device_id and variable.id.startswith(f"{variable.device_id}_"):
+            return variable.id[len(variable.device_id) + 1:]
+        return variable.id
+
     def format_message(
         self,
         device: DeviceConfig,
@@ -40,16 +46,17 @@ class ThingsBoardAdapter(BasePlatformAdapter):
     ) -> Tuple[str, str]:
         # Topic personnalisé ou défaut ThingsBoard
         topic = variable.topic.strip() if variable.topic and variable.topic.strip() else self.get_default_topic(device, variable)
+        key = self.get_telemetry_key(variable)
 
         # Structure native ThingsBoard avec horodatage
         if variable.var_type == VariableType.ATTRIBUTE:
-            payload = json.dumps({variable.id: value})
+            payload = json.dumps({key: value})
         else:
             # Format horodaté ThingsBoard
             payload = json.dumps({
                 "ts": timestamp_ms,
                 "values": {
-                    variable.id: value
+                    key: value
                 }
             })
 

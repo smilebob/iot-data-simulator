@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Station Météo & Climat Urbain' (ID: city_weather). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_CITY_WEATHER. Protocole: HTTP.",
     "entityAliases": {
-      "11262612-b643-4e1a-9136-f98a69790490": {
-        "id": "11262612-b643-4e1a-9136-f98a69790490",
+      "c17942b7-03d6-4a83-879a-8551c9426fe7": {
+        "id": "c17942b7-03d6-4a83-879a-8551c9426fe7",
         "alias": "Station Météo & Climat Urbain",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Station Météo & Climat Urbain"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "ee9c6e53-c2a0-4e9a-b4ed-5afb364292ef": {
+      "aa12b044-eaf7-492c-a15a-a32573879e70": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "ee9c6e53-c2a0-4e9a-b4ed-5afb364292ef"
+        "id": "aa12b044-eaf7-492c-a15a-a32573879e70"
       },
-      "33b8e5a0-30b3-40dc-af1f-0ec27ff70159": {
+      "030c74a5-9457-4a7b-b9b1-41c6e3824ca4": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "33b8e5a0-30b3-40dc-af1f-0ec27ff70159"
+        "id": "030c74a5-9457-4a7b-b9b1-41c6e3824ca4"
       },
-      "579feacf-fcf1-490b-b520-e98a04cf0707": {
+      "1cd4b775-3acc-4911-b918-b02fa0ae7b91": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température sous Abri",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "11262612-b643-4e1a-9136-f98a69790490",
+              "entityAliasId": "c17942b7-03d6-4a83-879a-8551c9426fe7",
               "dataKeys": [
                 {
                   "name": "temp_ext",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "579feacf-fcf1-490b-b520-e98a04cf0707"
+        "id": "1cd4b775-3acc-4911-b918-b02fa0ae7b91"
       },
-      "6d3558a9-4cb6-4ca7-8641-94e8a46b9096": {
+      "e4a11ca0-8589-4ea6-919a-68125bf25ad7": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Vitesse du Vent",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "11262612-b643-4e1a-9136-f98a69790490",
+              "entityAliasId": "c17942b7-03d6-4a83-879a-8551c9426fe7",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_kmh",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "6d3558a9-4cb6-4ca7-8641-94e8a46b9096"
+        "id": "e4a11ca0-8589-4ea6-919a-68125bf25ad7"
       },
-      "016f6786-91fd-4132-8a4e-9a83ebe062c5": {
+      "680c0c46-71e3-4c1a-9f85-f486f3e395e5": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Hygrométrie Extérieure",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "11262612-b643-4e1a-9136-f98a69790490",
+              "entityAliasId": "c17942b7-03d6-4a83-879a-8551c9426fe7",
               "dataKeys": [
                 {
                   "name": "humidite_ext",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "016f6786-91fd-4132-8a4e-9a83ebe062c5"
+        "id": "680c0c46-71e3-4c1a-9f85-f486f3e395e5"
       },
-      "83409a8f-4286-43b9-9900-a3c2501db8a4": {
+      "875362c3-ddba-4c13-a76f-e05fb6f34f55": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Indice Rayonnement UV",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "11262612-b643-4e1a-9136-f98a69790490",
+              "entityAliasId": "c17942b7-03d6-4a83-879a-8551c9426fe7",
               "dataKeys": [
                 {
                   "name": "indice_uv",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "83409a8f-4286-43b9-9900-a3c2501db8a4"
+        "id": "875362c3-ddba-4c13-a76f-e05fb6f34f55"
       },
-      "55372864-d2ea-4c01-bd9b-0fadc66fd34a": {
+      "ba300a80-0939-4eb4-aaf5-5c6dd6711779": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Station Météo & Climat Urbain",
         "sizeX": 24,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "11262612-b643-4e1a-9136-f98a69790490",
+              "entityAliasId": "c17942b7-03d6-4a83-879a-8551c9426fe7",
               "dataKeys": [
                 {
                   "name": "temp_ext",
@@ -415,7 +424,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "55372864-d2ea-4c01-bd9b-0fadc66fd34a"
+        "id": "ba300a80-0939-4eb4-aaf5-5c6dd6711779"
       }
     },
     "states": {
@@ -425,43 +434,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "ee9c6e53-c2a0-4e9a-b4ed-5afb364292ef": {
+              "aa12b044-eaf7-492c-a15a-a32573879e70": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "33b8e5a0-30b3-40dc-af1f-0ec27ff70159": {
+              "030c74a5-9457-4a7b-b9b1-41c6e3824ca4": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "579feacf-fcf1-490b-b520-e98a04cf0707": {
+              "1cd4b775-3acc-4911-b918-b02fa0ae7b91": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "6d3558a9-4cb6-4ca7-8641-94e8a46b9096": {
+              "e4a11ca0-8589-4ea6-919a-68125bf25ad7": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "016f6786-91fd-4132-8a4e-9a83ebe062c5": {
+              "680c0c46-71e3-4c1a-9f85-f486f3e395e5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "83409a8f-4286-43b9-9900-a3c2501db8a4": {
+              "875362c3-ddba-4c13-a76f-e05fb6f34f55": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "55372864-d2ea-4c01-bd9b-0fadc66fd34a": {
+              "ba300a80-0939-4eb4-aaf5-5c6dd6711779": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

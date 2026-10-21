@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Surveillance Ouvrage d'Art (SHM)' (ID: city_structure_shm). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_CITY_STRUCTURE_SHM. Protocole: MQTT.",
     "entityAliases": {
-      "abe2d97e-5b45-4f8f-9d8f-266293de7d4b": {
-        "id": "abe2d97e-5b45-4f8f-9d8f-266293de7d4b",
+      "22535cce-71c0-435e-9f2a-88aad720db87": {
+        "id": "22535cce-71c0-435e-9f2a-88aad720db87",
         "alias": "Surveillance Ouvrage d'Art (SHM)",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Surveillance Ouvrage d'Art (SHM)"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "fb4bde9b-3e44-4be3-a3df-2ddb04e866e2": {
+      "d04ca0c7-7d81-4dfc-900b-c84dcec0ef4c": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "fb4bde9b-3e44-4be3-a3df-2ddb04e866e2"
+        "id": "d04ca0c7-7d81-4dfc-900b-c84dcec0ef4c"
       },
-      "2744f638-15e0-4f07-81d1-2a4e581dc630": {
+      "97f83bb6-96e1-4330-938c-f06b3c9eb12b": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "2744f638-15e0-4f07-81d1-2a4e581dc630"
+        "id": "97f83bb6-96e1-4330-938c-f06b3c9eb12b"
       },
-      "8522ee74-1aad-4f9d-be62-bdbc902d570f": {
+      "d63a1a02-0c8a-40e1-9ae9-d24b904a95f5": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Inclinaison Piles / Tablier",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "abe2d97e-5b45-4f8f-9d8f-266293de7d4b",
+              "entityAliasId": "22535cce-71c0-435e-9f2a-88aad720db87",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "8522ee74-1aad-4f9d-be62-bdbc902d570f"
+        "id": "d63a1a02-0c8a-40e1-9ae9-d24b904a95f5"
       },
-      "d16194ac-5428-4a72-b4b2-3675d9dd50e3": {
+      "30f7d36e-5788-4a74-adf3-21c02515e83c": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Écartement Fissuromètre",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "abe2d97e-5b45-4f8f-9d8f-266293de7d4b",
+              "entityAliasId": "22535cce-71c0-435e-9f2a-88aad720db87",
               "dataKeys": [
                 {
                   "name": "ecartement_fissure_mm",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "d16194ac-5428-4a72-b4b2-3675d9dd50e3"
+        "id": "30f7d36e-5788-4a74-adf3-21c02515e83c"
       },
-      "0562b025-ee26-457d-86b3-d04a88b66caa": {
+      "c2867c2b-b894-4207-8646-08007e8e8a6c": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Contrainte Déformation (Jauge)",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "abe2d97e-5b45-4f8f-9d8f-266293de7d4b",
+              "entityAliasId": "22535cce-71c0-435e-9f2a-88aad720db87",
               "dataKeys": [
                 {
                   "name": "deformation_microstrain",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "0562b025-ee26-457d-86b3-d04a88b66caa"
+        "id": "c2867c2b-b894-4207-8646-08007e8e8a6c"
       },
-      "2d281b4b-13eb-42a2-b1b8-d08c240794a9": {
+      "0ef431eb-7939-4352-9165-38770aebdb0e": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Fréquence Fondamentale Propre",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "abe2d97e-5b45-4f8f-9d8f-266293de7d4b",
+              "entityAliasId": "22535cce-71c0-435e-9f2a-88aad720db87",
               "dataKeys": [
                 {
                   "name": "frequence_propre_hz",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "2d281b4b-13eb-42a2-b1b8-d08c240794a9"
+        "id": "0ef431eb-7939-4352-9165-38770aebdb0e"
       },
-      "ab5243e6-21e7-44bb-bf36-43f27e91e1e9": {
+      "6fa47508-cdeb-4545-9a5f-a6c7e7bdc1ab": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Interne Béton/Acier",
         "sizeX": 6,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "abe2d97e-5b45-4f8f-9d8f-266293de7d4b",
+              "entityAliasId": "22535cce-71c0-435e-9f2a-88aad720db87",
               "dataKeys": [
                 {
                   "name": "temp_acier_beton",
@@ -348,12 +357,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "ab5243e6-21e7-44bb-bf36-43f27e91e1e9"
+        "id": "6fa47508-cdeb-4545-9a5f-a6c7e7bdc1ab"
       },
-      "824e9eee-388f-4923-90bf-6c3f797645fd": {
+      "cf498de7-3356-46e0-82dd-fb89063730eb": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Surveillance Ouvrage d'Art (SHM)",
         "sizeX": 24,
@@ -362,7 +372,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "abe2d97e-5b45-4f8f-9d8f-266293de7d4b",
+              "entityAliasId": "22535cce-71c0-435e-9f2a-88aad720db87",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -486,7 +496,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "824e9eee-388f-4923-90bf-6c3f797645fd"
+        "id": "cf498de7-3356-46e0-82dd-fb89063730eb"
       }
     },
     "states": {
@@ -496,49 +506,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "fb4bde9b-3e44-4be3-a3df-2ddb04e866e2": {
+              "d04ca0c7-7d81-4dfc-900b-c84dcec0ef4c": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "2744f638-15e0-4f07-81d1-2a4e581dc630": {
+              "97f83bb6-96e1-4330-938c-f06b3c9eb12b": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "8522ee74-1aad-4f9d-be62-bdbc902d570f": {
+              "d63a1a02-0c8a-40e1-9ae9-d24b904a95f5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "d16194ac-5428-4a72-b4b2-3675d9dd50e3": {
+              "30f7d36e-5788-4a74-adf3-21c02515e83c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "0562b025-ee26-457d-86b3-d04a88b66caa": {
+              "c2867c2b-b894-4207-8646-08007e8e8a6c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "2d281b4b-13eb-42a2-b1b8-d08c240794a9": {
+              "0ef431eb-7939-4352-9165-38770aebdb0e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "ab5243e6-21e7-44bb-bf36-43f27e91e1e9": {
+              "6fa47508-cdeb-4545-9a5f-a6c7e7bdc1ab": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "824e9eee-388f-4923-90bf-6c3f797645fd": {
+              "cf498de7-3356-46e0-82dd-fb89063730eb": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

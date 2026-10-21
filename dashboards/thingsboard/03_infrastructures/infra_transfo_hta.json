@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Transformateur HTA/BT' (ID: infra_transfo_hta). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_TRANSFO_HTA. Protocole: MQTT.",
     "entityAliases": {
-      "f015df64-27c5-4bff-9d6f-96c265bf7f58": {
-        "id": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
+      "7c7633e9-f3a9-4f90-9496-a96e85ddca21": {
+        "id": "7c7633e9-f3a9-4f90-9496-a96e85ddca21",
         "alias": "Transformateur HTA/BT",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Transformateur HTA/BT"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "b158701d-562a-4e27-80a4-984c9f013be7": {
+      "d493ef90-aa3d-49f1-8b7e-d78095dd9ba9": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "b158701d-562a-4e27-80a4-984c9f013be7"
+        "id": "d493ef90-aa3d-49f1-8b7e-d78095dd9ba9"
       },
-      "0ab03a22-29bd-41c4-beb5-585bd78bfdd5": {
+      "a91cd5ea-7069-4176-9070-e85eeb79d4c2": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "0ab03a22-29bd-41c4-beb5-585bd78bfdd5"
+        "id": "a91cd5ea-7069-4176-9070-e85eeb79d4c2"
       },
-      "b0d598a5-06e7-49b0-8477-42d635a4c924": {
+      "d659b479-93d5-42ef-987c-f1797aff68fe": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Huile Diélectrique",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
+              "entityAliasId": "7c7633e9-f3a9-4f90-9496-a96e85ddca21",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "b0d598a5-06e7-49b0-8477-42d635a4c924"
+        "id": "d659b479-93d5-42ef-987c-f1797aff68fe"
       },
-      "3076149c-c73c-4efb-9d76-1097bd36ae03": {
+      "9e10c320-c27e-4a43-9f22-d5bd381dc937": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Taux de Charge Transformateur",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
+              "entityAliasId": "7c7633e9-f3a9-4f90-9496-a96e85ddca21",
               "dataKeys": [
                 {
                   "name": "charge_transfo_pct",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "3076149c-c73c-4efb-9d76-1097bd36ae03"
+        "id": "9e10c320-c27e-4a43-9f22-d5bd381dc937"
       },
-      "4a9ea003-a4c4-441d-9646-a5a7ce3b9cbf": {
+      "e05694bf-44b6-4260-bddb-82734964ddfd": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Pression Interne Cuve",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
+              "entityAliasId": "7c7633e9-f3a9-4f90-9496-a96e85ddca21",
               "dataKeys": [
                 {
                   "name": "pression_cuve",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "4a9ea003-a4c4-441d-9646-a5a7ce3b9cbf"
+        "id": "e05694bf-44b6-4260-bddb-82734964ddfd"
       },
-      "d4bb158e-9c47-4e22-b931-61b77b42389a": {
+      "0b2b3efd-d720-4598-8099-be820aae0323": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Taux Harmonique THD-I",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
+              "entityAliasId": "7c7633e9-f3a9-4f90-9496-a96e85ddca21",
               "dataKeys": [
                 {
                   "name": "taux_thd",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "d4bb158e-9c47-4e22-b931-61b77b42389a"
+        "id": "0b2b3efd-d720-4598-8099-be820aae0323"
       },
-      "8604d311-9192-415d-adf5-dc7ee38d0f4a": {
+      "1beef5e6-62fd-4ecb-b93b-4a001674cdfb": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Transformateur HTA/BT",
         "sizeX": 16,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
+              "entityAliasId": "7c7633e9-f3a9-4f90-9496-a96e85ddca21",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
@@ -415,12 +424,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8604d311-9192-415d-adf5-dc7ee38d0f4a"
+        "id": "1beef5e6-62fd-4ecb-b93b-4a001674cdfb"
       },
-      "c9b207ae-0aca-4005-989a-a62c5a9ec2ca": {
+      "a24771c4-8b8e-4282-8f00-f0f4cfdaaf02": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -429,7 +439,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f015df64-27c5-4bff-9d6f-96c265bf7f58",
+              "entityAliasId": "7c7633e9-f3a9-4f90-9496-a96e85ddca21",
               "dataKeys": [
                 {
                   "name": "alarme_dgpt2",
@@ -442,8 +452,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -457,7 +469,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "c9b207ae-0aca-4005-989a-a62c5a9ec2ca"
+        "id": "a24771c4-8b8e-4282-8f00-f0f4cfdaaf02"
       }
     },
     "states": {
@@ -467,49 +479,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "b158701d-562a-4e27-80a4-984c9f013be7": {
+              "d493ef90-aa3d-49f1-8b7e-d78095dd9ba9": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "0ab03a22-29bd-41c4-beb5-585bd78bfdd5": {
+              "a91cd5ea-7069-4176-9070-e85eeb79d4c2": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "b0d598a5-06e7-49b0-8477-42d635a4c924": {
+              "d659b479-93d5-42ef-987c-f1797aff68fe": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3076149c-c73c-4efb-9d76-1097bd36ae03": {
+              "9e10c320-c27e-4a43-9f22-d5bd381dc937": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "4a9ea003-a4c4-441d-9646-a5a7ce3b9cbf": {
+              "e05694bf-44b6-4260-bddb-82734964ddfd": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "d4bb158e-9c47-4e22-b931-61b77b42389a": {
+              "0b2b3efd-d720-4598-8099-be820aae0323": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "8604d311-9192-415d-adf5-dc7ee38d0f4a": {
+              "1beef5e6-62fd-4ecb-b93b-4a001674cdfb": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "c9b207ae-0aca-4005-989a-a62c5a9ec2ca": {
+              "a24771c4-8b8e-4282-8f00-f0f4cfdaaf02": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

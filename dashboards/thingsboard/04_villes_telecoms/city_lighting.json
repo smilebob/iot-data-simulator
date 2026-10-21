@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Armoire d'Éclairage Public' (ID: city_lighting). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_CITY_LIGHTING. Protocole: COAP.",
     "entityAliases": {
-      "bfb4853e-6d14-4bd1-887d-6f3ce643ec28": {
-        "id": "bfb4853e-6d14-4bd1-887d-6f3ce643ec28",
+      "5df11f1f-5f36-4657-809c-35eb4673fe83": {
+        "id": "5df11f1f-5f36-4657-809c-35eb4673fe83",
         "alias": "Armoire d'Éclairage Public",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Armoire d'Éclairage Public"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "a6460ba1-ffd5-45e6-a9fa-4e72f8243b2c": {
+      "88deb3ec-6023-4790-bd09-3bf248d7a46d": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "a6460ba1-ffd5-45e6-a9fa-4e72f8243b2c"
+        "id": "88deb3ec-6023-4790-bd09-3bf248d7a46d"
       },
-      "38061a25-7ea1-492a-a33c-4b9de6767b41": {
+      "2701305d-0f60-49eb-b517-75d61b2e12fd": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "38061a25-7ea1-492a-a33c-4b9de6767b41"
+        "id": "2701305d-0f60-49eb-b517-75d61b2e12fd"
       },
-      "70a6b72a-47e5-44a7-89a8-2463dcf58df7": {
+      "c9fc4be6-4819-421a-8012-df0169e34a10": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Circuit Éclairage",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb4853e-6d14-4bd1-887d-6f3ce643ec28",
+              "entityAliasId": "5df11f1f-5f36-4657-809c-35eb4673fe83",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "70a6b72a-47e5-44a7-89a8-2463dcf58df7"
+        "id": "c9fc4be6-4819-421a-8012-df0169e34a10"
       },
-      "b72a831a-58f7-4f7c-adf8-862d014bc354": {
+      "a45bf082-30b2-4564-aff4-63e984f8a434": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Niveau Gradation (Abaissement)",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb4853e-6d14-4bd1-887d-6f3ce643ec28",
+              "entityAliasId": "5df11f1f-5f36-4657-809c-35eb4673fe83",
               "dataKeys": [
                 {
                   "name": "niveau_gradation_pct",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "b72a831a-58f7-4f7c-adf8-862d014bc354"
+        "id": "a45bf082-30b2-4564-aff4-63e984f8a434"
       },
-      "1944b764-bb76-42d1-a416-b3e0ce199eff": {
+      "242e40c7-e6e3-428d-876f-491077faee0e": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Courant de Fuite Différentiel",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb4853e-6d14-4bd1-887d-6f3ce643ec28",
+              "entityAliasId": "5df11f1f-5f36-4657-809c-35eb4673fe83",
               "dataKeys": [
                 {
                   "name": "courant_fuite_ma",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "1944b764-bb76-42d1-a416-b3e0ce199eff"
+        "id": "242e40c7-e6e3-428d-876f-491077faee0e"
       },
-      "2ce07c64-78b9-44da-ac9c-744a81278c41": {
+      "b2f331d1-93da-48b4-b065-8e8665e19ef5": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Armoire d'Éclairage Public",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb4853e-6d14-4bd1-887d-6f3ce643ec28",
+              "entityAliasId": "5df11f1f-5f36-4657-809c-35eb4673fe83",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "2ce07c64-78b9-44da-ac9c-744a81278c41"
+        "id": "b2f331d1-93da-48b4-b065-8e8665e19ef5"
       },
-      "5569560a-ebd9-43ed-91f1-9b9ca845027c": {
+      "54d40eb2-8c2a-4851-ac57-54eb5941f6aa": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bfb4853e-6d14-4bd1-887d-6f3ce643ec28",
+              "entityAliasId": "5df11f1f-5f36-4657-809c-35eb4673fe83",
               "dataKeys": [
                 {
                   "name": "alerte_porte_ouverte",
@@ -371,8 +380,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -386,7 +397,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "5569560a-ebd9-43ed-91f1-9b9ca845027c"
+        "id": "54d40eb2-8c2a-4851-ac57-54eb5941f6aa"
       }
     },
     "states": {
@@ -396,43 +407,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "a6460ba1-ffd5-45e6-a9fa-4e72f8243b2c": {
+              "88deb3ec-6023-4790-bd09-3bf248d7a46d": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "38061a25-7ea1-492a-a33c-4b9de6767b41": {
+              "2701305d-0f60-49eb-b517-75d61b2e12fd": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "70a6b72a-47e5-44a7-89a8-2463dcf58df7": {
+              "c9fc4be6-4819-421a-8012-df0169e34a10": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "b72a831a-58f7-4f7c-adf8-862d014bc354": {
+              "a45bf082-30b2-4564-aff4-63e984f8a434": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "1944b764-bb76-42d1-a416-b3e0ce199eff": {
+              "242e40c7-e6e3-428d-876f-491077faee0e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "2ce07c64-78b9-44da-ac9c-744a81278c41": {
+              "b2f331d1-93da-48b4-b065-8e8665e19ef5": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "5569560a-ebd9-43ed-91f1-9b9ca845027c": {
+              "54d40eb2-8c2a-4851-ac57-54eb5941f6aa": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

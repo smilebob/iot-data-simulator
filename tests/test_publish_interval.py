@@ -1,6 +1,55 @@
 import os
+import sys
 import shutil
 import tempfile
+import types
+
+if 'pydantic' not in sys.modules:
+    pyd = types.ModuleType('pydantic')
+    class BaseModel:
+        def __init__(self, **kwargs):
+            for k, v in kwargs.items():
+                setattr(self, k, v)
+        def model_copy(self, deep=True):
+            import copy
+            return copy.deepcopy(self)
+        @classmethod
+        def model_validate(cls, data):
+            if isinstance(data, cls):
+                return data
+            return cls(**data)
+        def model_dump(self):
+            res = {}
+            for k, v in self.__dict__.items():
+                if hasattr(v, 'model_dump'):
+                    res[k] = v.model_dump()
+                elif isinstance(v, list):
+                    res[k] = [x.model_dump() if hasattr(x, 'model_dump') else x for x in v]
+                elif hasattr(v, 'value'):
+                    res[k] = v.value
+                else:
+                    res[k] = v
+            return res
+    def Field(default=None, default_factory=None, description=None, **kwargs):
+        if default_factory:
+            return default_factory()
+        return default
+    pyd.BaseModel = BaseModel
+    pyd.Field = Field
+    pyd.field_validator = lambda *a, **k: (lambda f: f)
+    sys.modules['pydantic'] = pyd
+
+for mod in ['paho', 'paho.mqtt', 'paho.mqtt.client', 'fastapi', 'fastapi.responses', 'aiocoap', 'httpx']:
+    if mod not in sys.modules:
+        m = types.ModuleType(mod)
+        m.Client = lambda *a, **k: None
+        m.Response = lambda *a, **k: None
+        sys.modules[mod] = m
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
 from app.models.device import DeviceConfig, PlatformType, TransportProtocol
 from app.models.variable import VariableConfig, VariableType, DataType, SimMode, MathConfig
 from app.storage.repository import StorageRepository

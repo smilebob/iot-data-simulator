@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Shelter Télécoms / Nœud Fibre' (ID: telecom_shelter). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_TELECOM_SHELTER. Protocole: MQTT.",
     "entityAliases": {
-      "f61c026e-39ab-4fe5-b421-8558f6d98cac": {
-        "id": "f61c026e-39ab-4fe5-b421-8558f6d98cac",
+      "d6e41606-0f4c-49b4-96c7-9c8ba3eb5851": {
+        "id": "d6e41606-0f4c-49b4-96c7-9c8ba3eb5851",
         "alias": "Shelter Télécoms / Nœud Fibre",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Shelter Télécoms / Nœud Fibre"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "c3ff467a-e074-4c83-85c6-d8cfed589218": {
+      "40b95c16-1583-4a7d-bac6-4c7ab3486c78": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "c3ff467a-e074-4c83-85c6-d8cfed589218"
+        "id": "40b95c16-1583-4a7d-bac6-4c7ab3486c78"
       },
-      "3199727a-9af0-4c36-9df9-4ba165ec67fc": {
+      "eaf69437-cbbe-48c0-a022-aab7a8671bde": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "3199727a-9af0-4c36-9df9-4ba165ec67fc"
+        "id": "eaf69437-cbbe-48c0-a022-aab7a8671bde"
       },
-      "d87b36ee-13d9-499e-a2fb-3ec698bde6e5": {
+      "21b3c7e9-4156-4942-b7a5-97217f281d72": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Charge Onduleur ASI/UPS",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f61c026e-39ab-4fe5-b421-8558f6d98cac",
+              "entityAliasId": "d6e41606-0f4c-49b4-96c7-9c8ba3eb5851",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "d87b36ee-13d9-499e-a2fb-3ec698bde6e5"
+        "id": "21b3c7e9-4156-4942-b7a5-97217f281d72"
       },
-      "89e97036-bb6a-4f5e-9821-584a955607c3": {
+      "4453f445-b1a2-4e28-b4d6-ce7f9a93df47": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Autonomie Batterie Restante",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f61c026e-39ab-4fe5-b421-8558f6d98cac",
+              "entityAliasId": "d6e41606-0f4c-49b4-96c7-9c8ba3eb5851",
               "dataKeys": [
                 {
                   "name": "autonomie_batterie_min",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "89e97036-bb6a-4f5e-9821-584a955607c3"
+        "id": "4453f445-b1a2-4e28-b4d6-ce7f9a93df47"
       },
-      "4e937be9-1e17-4f58-8493-1d57337fbb19": {
+      "865cc658-35a4-475f-8f69-833ff26ebd03": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Couloir Chaud",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f61c026e-39ab-4fe5-b421-8558f6d98cac",
+              "entityAliasId": "d6e41606-0f4c-49b4-96c7-9c8ba3eb5851",
               "dataKeys": [
                 {
                   "name": "temp_baie_serveur",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "4e937be9-1e17-4f58-8493-1d57337fbb19"
+        "id": "865cc658-35a4-475f-8f69-833ff26ebd03"
       },
-      "1effebec-cc2c-4a20-b32a-10186216d4cb": {
+      "217cd01c-0bd3-49b3-9b33-249e6f5edd30": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Shelter Télécoms / Nœud Fibre",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f61c026e-39ab-4fe5-b421-8558f6d98cac",
+              "entityAliasId": "d6e41606-0f4c-49b4-96c7-9c8ba3eb5851",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "1effebec-cc2c-4a20-b32a-10186216d4cb"
+        "id": "217cd01c-0bd3-49b3-9b33-249e6f5edd30"
       },
-      "d094d6e0-8c30-4289-8ede-91ba843ff22f": {
+      "bef8208b-a7de-4550-810b-027cebe22581": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f61c026e-39ab-4fe5-b421-8558f6d98cac",
+              "entityAliasId": "d6e41606-0f4c-49b4-96c7-9c8ba3eb5851",
               "dataKeys": [
                 {
                   "name": "detection_inondation",
@@ -371,8 +380,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -386,7 +397,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "d094d6e0-8c30-4289-8ede-91ba843ff22f"
+        "id": "bef8208b-a7de-4550-810b-027cebe22581"
       }
     },
     "states": {
@@ -396,43 +407,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "c3ff467a-e074-4c83-85c6-d8cfed589218": {
+              "40b95c16-1583-4a7d-bac6-4c7ab3486c78": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "3199727a-9af0-4c36-9df9-4ba165ec67fc": {
+              "eaf69437-cbbe-48c0-a022-aab7a8671bde": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "d87b36ee-13d9-499e-a2fb-3ec698bde6e5": {
+              "21b3c7e9-4156-4942-b7a5-97217f281d72": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "89e97036-bb6a-4f5e-9821-584a955607c3": {
+              "4453f445-b1a2-4e28-b4d6-ce7f9a93df47": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "4e937be9-1e17-4f58-8493-1d57337fbb19": {
+              "865cc658-35a4-475f-8f69-833ff26ebd03": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "1effebec-cc2c-4a20-b32a-10186216d4cb": {
+              "217cd01c-0bd3-49b3-9b33-249e6f5edd30": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "d094d6e0-8c30-4289-8ede-91ba843ff22f": {
+              "bef8208b-a7de-4550-810b-027cebe22581": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

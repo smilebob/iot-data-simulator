@@ -888,15 +888,22 @@
           <div>
             <label class="block font-medium text-slate-300 mb-1">Protocole de transport</label>
             <select id="instantiate-protocol" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
-              <option value="mqtt">MQTT (standard)</option>
-              <option value="http">HTTP POST JSON</option>
-              <option value="coap">CoAP (UDP)</option>
+              <option value="http" selected>HTTP POST (Port 443 HTTPS - Recommandé)</option>
+              <option value="mqtt">MQTT (standard ThingsBoard)</option>
+              <option value="coap">CoAP (UDP ThingsBoard)</option>
             </select>
           </div>
           <div>
             <label class="block font-medium text-slate-300 mb-1">Plateforme cible</label>
             <input type="text" value="ThingsBoard" disabled class="w-full bg-[#12151B] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-400">
           </div>
+        </div>
+
+        <div class="flex items-center gap-2 pt-0.5">
+          <input type="checkbox" id="instantiate-use-tls" checked class="rounded border-[#2B3342] text-[#E2001A] focus:ring-0">
+          <label for="instantiate-use-tls" class="text-xs text-slate-300 select-none cursor-pointer">
+            Chiffrement TLS / HTTPS activé (Port 443 recommandé pour ThingsBoard Cloud / distant)
+          </label>
         </div>
 
         <div>

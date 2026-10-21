@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Station Qualité d'Air (QAI)' (ID: bldg_qai). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_QAI. Protocole: COAP.",
     "entityAliases": {
-      "f86b31d1-c1d7-4447-83da-ec9f43c2d540": {
-        "id": "f86b31d1-c1d7-4447-83da-ec9f43c2d540",
+      "36508ef6-625e-4646-947f-37b696b8714c": {
+        "id": "36508ef6-625e-4646-947f-37b696b8714c",
         "alias": "Station Qualité d'Air (QAI)",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Station Qualité d'Air (QAI)"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "09c03f81-4b0b-4f36-a21e-c868b78a508b": {
+      "416fe6b7-e272-4340-96f5-7ae0cb72ee66": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "09c03f81-4b0b-4f36-a21e-c868b78a508b"
+        "id": "416fe6b7-e272-4340-96f5-7ae0cb72ee66"
       },
-      "3e62cb14-17a2-44fb-bae3-131efa70a5a6": {
+      "f1b5995f-1218-473c-b63c-180572a4abc9": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "3e62cb14-17a2-44fb-bae3-131efa70a5a6"
+        "id": "f1b5995f-1218-473c-b63c-180572a4abc9"
       },
-      "a26aafec-485c-40fc-aa36-4f4d2eca2289": {
+      "9b7f0506-b1df-4132-8809-a2574b22f6de": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Concentration CO₂",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f86b31d1-c1d7-4447-83da-ec9f43c2d540",
+              "entityAliasId": "36508ef6-625e-4646-947f-37b696b8714c",
               "dataKeys": [
                 {
                   "name": "taux_co2",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "a26aafec-485c-40fc-aa36-4f4d2eca2289"
+        "id": "9b7f0506-b1df-4132-8809-a2574b22f6de"
       },
-      "a1867f80-a274-4ed6-996d-0e98ba3529a1": {
+      "176df5ca-a1d3-4c91-9892-6391fec171e3": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Particules Fines PM2.5",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f86b31d1-c1d7-4447-83da-ec9f43c2d540",
+              "entityAliasId": "36508ef6-625e-4646-947f-37b696b8714c",
               "dataKeys": [
                 {
                   "name": "particules_pm25",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "a1867f80-a274-4ed6-996d-0e98ba3529a1"
+        "id": "176df5ca-a1d3-4c91-9892-6391fec171e3"
       },
-      "7ba40304-a3ed-43db-bcec-708c046a3b54": {
+      "3023036d-0dc9-4dee-9983-35252308f880": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Composés Organiques Volatils (COV)",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f86b31d1-c1d7-4447-83da-ec9f43c2d540",
+              "entityAliasId": "36508ef6-625e-4646-947f-37b696b8714c",
               "dataKeys": [
                 {
                   "name": "cov_totaux",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "7ba40304-a3ed-43db-bcec-708c046a3b54"
+        "id": "3023036d-0dc9-4dee-9983-35252308f880"
       },
-      "08782d38-c834-4095-89c6-a501f3dacbae": {
+      "e2daf456-e4ba-406c-a2b2-bf4369b50633": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Ambiante",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f86b31d1-c1d7-4447-83da-ec9f43c2d540",
+              "entityAliasId": "36508ef6-625e-4646-947f-37b696b8714c",
               "dataKeys": [
                 {
                   "name": "temp_ambiante",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "08782d38-c834-4095-89c6-a501f3dacbae"
+        "id": "e2daf456-e4ba-406c-a2b2-bf4369b50633"
       },
-      "8c9aaab4-36fe-424b-824c-9993dc01584e": {
+      "0ff316ed-c724-4c4c-82a5-42fd18b0f5aa": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Humidité Relative",
         "sizeX": 6,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f86b31d1-c1d7-4447-83da-ec9f43c2d540",
+              "entityAliasId": "36508ef6-625e-4646-947f-37b696b8714c",
               "dataKeys": [
                 {
                   "name": "humidite_ambiante",
@@ -348,12 +357,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8c9aaab4-36fe-424b-824c-9993dc01584e"
+        "id": "0ff316ed-c724-4c4c-82a5-42fd18b0f5aa"
       },
-      "89a999eb-86f5-4184-9189-f9c2400ef358": {
+      "a87e5bcd-6699-43dc-b42e-36f864adcc26": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Station Qualité d'Air (QAI)",
         "sizeX": 24,
@@ -362,7 +372,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f86b31d1-c1d7-4447-83da-ec9f43c2d540",
+              "entityAliasId": "36508ef6-625e-4646-947f-37b696b8714c",
               "dataKeys": [
                 {
                   "name": "taux_co2",
@@ -486,7 +496,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "89a999eb-86f5-4184-9189-f9c2400ef358"
+        "id": "a87e5bcd-6699-43dc-b42e-36f864adcc26"
       }
     },
     "states": {
@@ -496,49 +506,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "09c03f81-4b0b-4f36-a21e-c868b78a508b": {
+              "416fe6b7-e272-4340-96f5-7ae0cb72ee66": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "3e62cb14-17a2-44fb-bae3-131efa70a5a6": {
+              "f1b5995f-1218-473c-b63c-180572a4abc9": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "a26aafec-485c-40fc-aa36-4f4d2eca2289": {
+              "9b7f0506-b1df-4132-8809-a2574b22f6de": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "a1867f80-a274-4ed6-996d-0e98ba3529a1": {
+              "176df5ca-a1d3-4c91-9892-6391fec171e3": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "7ba40304-a3ed-43db-bcec-708c046a3b54": {
+              "3023036d-0dc9-4dee-9983-35252308f880": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "08782d38-c834-4095-89c6-a501f3dacbae": {
+              "e2daf456-e4ba-406c-a2b2-bf4369b50633": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "8c9aaab4-36fe-424b-824c-9993dc01584e": {
+              "0ff316ed-c724-4c4c-82a5-42fd18b0f5aa": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "89a999eb-86f5-4184-9189-f9c2400ef358": {
+              "a87e5bcd-6699-43dc-b42e-36f864adcc26": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

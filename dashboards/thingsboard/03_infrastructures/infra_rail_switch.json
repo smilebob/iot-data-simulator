@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_RAIL_SWITCH. Protocole: HTTP.",
     "entityAliases": {
-      "57614a0d-07c0-4760-bc3e-b6048572836c": {
-        "id": "57614a0d-07c0-4760-bc3e-b6048572836c",
+      "d3a67d51-21fb-4192-bf9e-c4110facd8ea": {
+        "id": "d3a67d51-21fb-4192-bf9e-c4110facd8ea",
         "alias": "Aiguillage & Signalisation Ferroviaire",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Aiguillage & Signalisation Ferroviaire"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "84e2c9bd-5257-43d9-9694-1e96fcc68fd4": {
+      "316585f6-8d3c-4559-9d66-33c471c78746": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "84e2c9bd-5257-43d9-9694-1e96fcc68fd4"
+        "id": "316585f6-8d3c-4559-9d66-33c471c78746"
       },
-      "81d17bc7-5eee-4f03-94b1-c7526075bd17": {
+      "9f8b28db-0fa3-47b9-9fa6-b4f12c385564": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "81d17bc7-5eee-4f03-94b1-c7526075bd17"
+        "id": "9f8b28db-0fa3-47b9-9fa6-b4f12c385564"
       },
-      "62a68da4-e3a1-4a28-b4fc-ab37e91db528": {
+      "f0199448-e97c-4f7a-ac47-04be7b764ecd": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Courant d'Effort Manœuvre",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
+              "entityAliasId": "d3a67d51-21fb-4192-bf9e-c4110facd8ea",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "62a68da4-e3a1-4a28-b4fc-ab37e91db528"
+        "id": "f0199448-e97c-4f7a-ac47-04be7b764ecd"
       },
-      "28723ee1-6384-437c-960d-063ee507d870": {
+      "3f002b31-6709-4b3a-b6d5-8f5b382d8e0f": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Durée de Manœuvre Moteur",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
+              "entityAliasId": "d3a67d51-21fb-4192-bf9e-c4110facd8ea",
               "dataKeys": [
                 {
                   "name": "temps_manoeuvre_ms",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "28723ee1-6384-437c-960d-063ee507d870"
+        "id": "3f002b31-6709-4b3a-b6d5-8f5b382d8e0f"
       },
-      "59564e6d-9233-4d97-be75-f28c014b4b8f": {
+      "a881c47f-44d2-4fee-ad12-fde5721fa13b": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Rail Détectée",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
+              "entityAliasId": "d3a67d51-21fb-4192-bf9e-c4110facd8ea",
               "dataKeys": [
                 {
                   "name": "temp_rail_rechauffage",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "59564e6d-9233-4d97-be75-f28c014b4b8f"
+        "id": "a881c47f-44d2-4fee-ad12-fde5721fa13b"
       },
-      "247b0200-a45f-4182-b885-2b05152049c2": {
+      "5255d2c9-69ae-4fad-9533-00f76cec4c52": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Aiguillage & Signalisation Ferroviaire",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
+              "entityAliasId": "d3a67d51-21fb-4192-bf9e-c4110facd8ea",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "247b0200-a45f-4182-b885-2b05152049c2"
+        "id": "5255d2c9-69ae-4fad-9533-00f76cec4c52"
       },
-      "0b6c3a3e-3d78-40df-8dcd-8d50a4f44ddd": {
+      "ddf0de76-26a9-4e25-9d98-c883dbc3c86a": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "57614a0d-07c0-4760-bc3e-b6048572836c",
+              "entityAliasId": "d3a67d51-21fb-4192-bf9e-c4110facd8ea",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -378,8 +387,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -393,7 +404,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "0b6c3a3e-3d78-40df-8dcd-8d50a4f44ddd"
+        "id": "ddf0de76-26a9-4e25-9d98-c883dbc3c86a"
       }
     },
     "states": {
@@ -403,43 +414,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "84e2c9bd-5257-43d9-9694-1e96fcc68fd4": {
+              "316585f6-8d3c-4559-9d66-33c471c78746": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "81d17bc7-5eee-4f03-94b1-c7526075bd17": {
+              "9f8b28db-0fa3-47b9-9fa6-b4f12c385564": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "62a68da4-e3a1-4a28-b4fc-ab37e91db528": {
+              "f0199448-e97c-4f7a-ac47-04be7b764ecd": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "28723ee1-6384-437c-960d-063ee507d870": {
+              "3f002b31-6709-4b3a-b6d5-8f5b382d8e0f": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "59564e6d-9233-4d97-be75-f28c014b4b8f": {
+              "a881c47f-44d2-4fee-ad12-fde5721fa13b": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "247b0200-a45f-4182-b885-2b05152049c2": {
+              "5255d2c9-69ae-4fad-9533-00f76cec4c52": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "0b6c3a3e-3d78-40df-8dcd-8d50a4f44ddd": {
+              "ddf0de76-26a9-4e25-9d98-c883dbc3c86a": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

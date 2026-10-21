@@ -18,6 +18,12 @@ PALETTE_COLORS = [
     "#14B8A6",  # Teal
 ]
 
+def get_clean_var_key(variable: VariableConfig) -> str:
+    """Extrait la clé métrique sans le préfixe unique équipement interne du simulateur."""
+    if variable.device_id and variable.id.startswith(f"{variable.device_id}_"):
+        return variable.id[len(variable.device_id) + 1:]
+    return variable.id
+
 def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[VariableConfig]) -> Dict[str, Any]:
     """
     Génère un fichier de configuration JSON complet de tableau de bord ThingsBoard (v3.x / v3.5 - v3.8+),
@@ -80,6 +86,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
     """
 
     widgets[header_widget_id] = {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": True,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -119,6 +126,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
     synoptic_html = get_scada_synoptic_html(device, variables)
 
     widgets[scada_synoptic_id] = {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": True,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -179,7 +187,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                 max_display = 100.0
 
             datakey = {
-                "name": var.id,
+                "name": get_clean_var_key(var),
                 "type": "timeseries",
                 "label": var.name,
                 "color": color,
@@ -189,9 +197,10 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
             }
 
             widgets[gauge_id] = {
+                "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
                 "isSystemType": True,
                 "bundleAlias": "digital_gauges",
-                "typeAlias": "digital_gauge",
+                "typeAlias": "simple_gauge_justgage",
                 "type": "latest",
                 "title": var.name,
                 "sizeX": gauge_width,
@@ -255,7 +264,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
         for i, var in enumerate(telemetry_vars):
             color = PALETTE_COLORS[i % len(PALETTE_COLORS)]
             chart_datakeys.append({
-                "name": var.id,
+                "name": get_clean_var_key(var),
                 "type": "timeseries",
                 "label": f"{var.name} ({var.unit})" if var.unit else var.name,
                 "color": color,
@@ -273,9 +282,10 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
         chart_height = 8
 
         widgets[chart_id] = {
+            "typeFullFqn": "system.charts.basic_timeseries",
             "isSystemType": True,
             "bundleAlias": "charts",
-            "typeAlias": "timeseries",
+            "typeAlias": "basic_timeseries",
             "type": "timeseries",
             "title": f"Télémétries en Temps Réel - {device_name}",
             "sizeX": chart_width,
@@ -354,7 +364,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
             attr_datakeys = []
             for v in attribute_vars:
                 attr_datakeys.append({
-                    "name": v.id,
+                    "name": get_clean_var_key(v),
                     "type": "attribute",
                     "label": v.name,
                     "color": "#38BDF8",
@@ -362,7 +372,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                 })
             for v in other_telemetry_vars:
                 attr_datakeys.append({
-                    "name": v.id,
+                    "name": get_clean_var_key(v),
                     "type": "timeseries",
                     "label": v.name,
                     "color": "#34D399",
@@ -370,9 +380,10 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                 })
 
             widgets[attr_table_id] = {
+                "typeFullFqn": "system.cards.entities_table",
                 "isSystemType": True,
                 "bundleAlias": "cards",
-                "typeAlias": "latest_values",
+                "typeAlias": "entities_table",
                 "type": "latest",
                 "title": "Attributs & États Opérationnels",
                 "sizeX": 8,
@@ -386,8 +397,10 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                         }
                     ],
                     "settings": {
-                        "showTitle": True,
-                        "displayDetails": True
+                        "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+                        "enableSearch": False,
+                        "displayPagination": False,
+                        "defaultPageSize": 10
                     },
                     "showTitle": True,
                     "title": "Attributs & États Opérationnels",
@@ -425,9 +438,11 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                     "id": alias_id,
                     "alias": device_name,
                     "filter": {
-                        "type": "entityName",
-                        "entityType": "DEVICE",
-                        "entityNameFilter": device_name
+                        "type": "singleEntity",
+                        "singleEntity": {
+                            "entityType": "DEVICE",
+                            "id": "00000000-0000-0000-0000-000000000000"
+                        }
                     }
                 }
             },

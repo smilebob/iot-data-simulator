@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Onduleur Solaire Photovoltaïque' (ID: infra_solar_pv). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_SOLAR_PV. Protocole: HTTP.",
     "entityAliases": {
-      "40236047-aecb-435b-9208-8bf3ca80f167": {
-        "id": "40236047-aecb-435b-9208-8bf3ca80f167",
+      "476750c1-0ff0-4f1c-ad1f-40a9d01b2f41": {
+        "id": "476750c1-0ff0-4f1c-ad1f-40a9d01b2f41",
         "alias": "Onduleur Solaire Photovoltaïque",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Onduleur Solaire Photovoltaïque"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "72664c02-0a99-4177-9527-2638b6620bb2": {
+      "c8c20121-7459-4f3e-bd38-6aad52cbb28e": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "72664c02-0a99-4177-9527-2638b6620bb2"
+        "id": "c8c20121-7459-4f3e-bd38-6aad52cbb28e"
       },
-      "72aea93b-c673-46bf-9229-67b9baf9821f": {
+      "a26836e9-ae03-48b5-ac5d-198538ba0fd7": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "72aea93b-c673-46bf-9229-67b9baf9821f"
+        "id": "a26836e9-ae03-48b5-ac5d-198538ba0fd7"
       },
-      "6bd49a95-a8c5-4af0-b8cf-9dfa1bfb26b7": {
+      "8733a3f5-f9cb-4798-a0f4-a5ec6b3da40c": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Irradiation Pyranomètre",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
+              "entityAliasId": "476750c1-0ff0-4f1c-ad1f-40a9d01b2f41",
               "dataKeys": [
                 {
                   "name": "ensoleillement",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "6bd49a95-a8c5-4af0-b8cf-9dfa1bfb26b7"
+        "id": "8733a3f5-f9cb-4798-a0f4-a5ec6b3da40c"
       },
-      "87b536d4-95c5-43bb-9c7a-1217ade553e1": {
+      "2cac2de3-52a3-4212-a5bb-ce78e0288005": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Rendement de Conversion",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
+              "entityAliasId": "476750c1-0ff0-4f1c-ad1f-40a9d01b2f41",
               "dataKeys": [
                 {
                   "name": "rendement_onduleur",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "87b536d4-95c5-43bb-9c7a-1217ade553e1"
+        "id": "2cac2de3-52a3-4212-a5bb-ce78e0288005"
       },
-      "926a5842-b1f1-46a2-b2d6-87f21029e97e": {
+      "a5860d66-b9f1-4f06-a291-b88733dc7bca": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance AC Injectée",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
+              "entityAliasId": "476750c1-0ff0-4f1c-ad1f-40a9d01b2f41",
               "dataKeys": [
                 {
                   "name": "puissance_injection_kw",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "926a5842-b1f1-46a2-b2d6-87f21029e97e"
+        "id": "a5860d66-b9f1-4f06-a291-b88733dc7bca"
       },
-      "d4bd25a9-fd7b-4e2d-b86c-e8cbe492bc3b": {
+      "23083309-b30e-4f60-849e-c5551085d4e9": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Tension DC Chaîne PV",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
+              "entityAliasId": "476750c1-0ff0-4f1c-ad1f-40a9d01b2f41",
               "dataKeys": [
                 {
                   "name": "tension_dc_string",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "d4bd25a9-fd7b-4e2d-b86c-e8cbe492bc3b"
+        "id": "23083309-b30e-4f60-849e-c5551085d4e9"
       },
-      "ae3108ba-3645-4e89-ab78-b13011e3f409": {
+      "abad59e9-0f1a-4777-bfb8-3545b895e4e4": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Onduleur Solaire Photovoltaïque",
         "sizeX": 24,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "40236047-aecb-435b-9208-8bf3ca80f167",
+              "entityAliasId": "476750c1-0ff0-4f1c-ad1f-40a9d01b2f41",
               "dataKeys": [
                 {
                   "name": "ensoleillement",
@@ -415,7 +424,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "ae3108ba-3645-4e89-ab78-b13011e3f409"
+        "id": "abad59e9-0f1a-4777-bfb8-3545b895e4e4"
       }
     },
     "states": {
@@ -425,43 +434,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "72664c02-0a99-4177-9527-2638b6620bb2": {
+              "c8c20121-7459-4f3e-bd38-6aad52cbb28e": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "72aea93b-c673-46bf-9229-67b9baf9821f": {
+              "a26836e9-ae03-48b5-ac5d-198538ba0fd7": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "6bd49a95-a8c5-4af0-b8cf-9dfa1bfb26b7": {
+              "8733a3f5-f9cb-4798-a0f4-a5ec6b3da40c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "87b536d4-95c5-43bb-9c7a-1217ade553e1": {
+              "2cac2de3-52a3-4212-a5bb-ce78e0288005": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "926a5842-b1f1-46a2-b2d6-87f21029e97e": {
+              "a5860d66-b9f1-4f06-a291-b88733dc7bca": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "d4bd25a9-fd7b-4e2d-b86c-e8cbe492bc3b": {
+              "23083309-b30e-4f60-849e-c5551085d4e9": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "ae3108ba-3645-4e89-ab78-b13011e3f409": {
+              "abad59e9-0f1a-4777-bfb8-3545b895e4e4": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

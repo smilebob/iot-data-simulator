@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Salle Blanche & CTA Stérile (ISO)' (ID: ind_cleanroom_cta). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_CLEANROOM_CTA. Protocole: COAP.",
     "entityAliases": {
-      "4b1eef19-b77f-4f9b-882d-bf12cf8db652": {
-        "id": "4b1eef19-b77f-4f9b-882d-bf12cf8db652",
+      "dce9c140-13c1-44a9-9560-dfa76974c751": {
+        "id": "dce9c140-13c1-44a9-9560-dfa76974c751",
         "alias": "Salle Blanche & CTA Stérile (ISO)",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Salle Blanche & CTA Stérile (ISO)"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "95577ce1-d425-4d9f-84b5-ce707a63e7fa": {
+      "3708723d-d02d-40b1-ab95-dff124e045fe": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "95577ce1-d425-4d9f-84b5-ce707a63e7fa"
+        "id": "3708723d-d02d-40b1-ab95-dff124e045fe"
       },
-      "8026b86a-bcb1-4375-a52a-1658016a5ef8": {
+      "ca3f3ce3-6107-4564-bf42-77fbbead4de5": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "8026b86a-bcb1-4375-a52a-1658016a5ef8"
+        "id": "ca3f3ce3-6107-4564-bf42-77fbbead4de5"
       },
-      "5fc684e8-d103-494d-b148-7f5ac9cdf8f5": {
+      "109d6b2a-e7ae-4d9f-a6c0-365001890f40": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Cascade Surpression Salle",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b1eef19-b77f-4f9b-882d-bf12cf8db652",
+              "entityAliasId": "dce9c140-13c1-44a9-9560-dfa76974c751",
               "dataKeys": [
                 {
                   "name": "surpression_salle_pa",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "5fc684e8-d103-494d-b148-7f5ac9cdf8f5"
+        "id": "109d6b2a-e7ae-4d9f-a6c0-365001890f40"
       },
-      "7371b869-4f0c-4ea7-a6c1-3810aec1a2b1": {
+      "b53fef8d-6f23-40c1-97d5-dfb57592c490": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Taux de Renouvellement",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b1eef19-b77f-4f9b-882d-bf12cf8db652",
+              "entityAliasId": "dce9c140-13c1-44a9-9560-dfa76974c751",
               "dataKeys": [
                 {
                   "name": "renouvellement_air_volh",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "7371b869-4f0c-4ea7-a6c1-3810aec1a2b1"
+        "id": "b53fef8d-6f23-40c1-97d5-dfb57592c490"
       },
-      "59120d4c-0f11-42fd-a441-133297d1ab38": {
+      "94dece81-024a-46ed-9bdb-467b8014396d": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Particules ≥ 0.5 µm",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b1eef19-b77f-4f9b-882d-bf12cf8db652",
+              "entityAliasId": "dce9c140-13c1-44a9-9560-dfa76974c751",
               "dataKeys": [
                 {
                   "name": "comptage_particules_05",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "59120d4c-0f11-42fd-a441-133297d1ab38"
+        "id": "94dece81-024a-46ed-9bdb-467b8014396d"
       },
-      "24bf36ee-1576-414c-9c1d-6fd490cf4d3d": {
+      "f87a59da-ebff-4922-b8ab-b6f9dd092381": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Humidité Absolue Précision",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b1eef19-b77f-4f9b-882d-bf12cf8db652",
+              "entityAliasId": "dce9c140-13c1-44a9-9560-dfa76974c751",
               "dataKeys": [
                 {
                   "name": "humidite_absolue_gkg",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "24bf36ee-1576-414c-9c1d-6fd490cf4d3d"
+        "id": "f87a59da-ebff-4922-b8ab-b6f9dd092381"
       },
-      "8e3afa6d-184d-4f7e-9e56-3b9b8ae069ee": {
+      "306051a5-cb8b-4beb-a55d-7c9fc2e09e07": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Salle Blanche & CTA Stérile (ISO)",
         "sizeX": 16,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b1eef19-b77f-4f9b-882d-bf12cf8db652",
+              "entityAliasId": "dce9c140-13c1-44a9-9560-dfa76974c751",
               "dataKeys": [
                 {
                   "name": "surpression_salle_pa",
@@ -415,12 +424,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8e3afa6d-184d-4f7e-9e56-3b9b8ae069ee"
+        "id": "306051a5-cb8b-4beb-a55d-7c9fc2e09e07"
       },
-      "3047eae3-9122-4452-8aae-4da6f24be28e": {
+      "695e5978-1cb6-49ed-b4e2-d3787492c20f": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -429,7 +439,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4b1eef19-b77f-4f9b-882d-bf12cf8db652",
+              "entityAliasId": "dce9c140-13c1-44a9-9560-dfa76974c751",
               "dataKeys": [
                 {
                   "name": "alarme_depressurisation",
@@ -442,8 +452,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -457,7 +469,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "3047eae3-9122-4452-8aae-4da6f24be28e"
+        "id": "695e5978-1cb6-49ed-b4e2-d3787492c20f"
       }
     },
     "states": {
@@ -467,49 +479,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "95577ce1-d425-4d9f-84b5-ce707a63e7fa": {
+              "3708723d-d02d-40b1-ab95-dff124e045fe": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "8026b86a-bcb1-4375-a52a-1658016a5ef8": {
+              "ca3f3ce3-6107-4564-bf42-77fbbead4de5": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "5fc684e8-d103-494d-b148-7f5ac9cdf8f5": {
+              "109d6b2a-e7ae-4d9f-a6c0-365001890f40": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "7371b869-4f0c-4ea7-a6c1-3810aec1a2b1": {
+              "b53fef8d-6f23-40c1-97d5-dfb57592c490": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "59120d4c-0f11-42fd-a441-133297d1ab38": {
+              "94dece81-024a-46ed-9bdb-467b8014396d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "24bf36ee-1576-414c-9c1d-6fd490cf4d3d": {
+              "f87a59da-ebff-4922-b8ab-b6f9dd092381": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "8e3afa6d-184d-4f7e-9e56-3b9b8ae069ee": {
+              "306051a5-cb8b-4beb-a55d-7c9fc2e09e07": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "3047eae3-9122-4452-8aae-4da6f24be28e": {
+              "695e5978-1cb6-49ed-b4e2-d3787492c20f": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

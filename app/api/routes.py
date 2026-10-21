@@ -282,18 +282,23 @@ def get_presets_catalog():
     return get_equipment_catalog()
 
 @router.post("/presets/instantiate", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
-def instantiate_equipment_preset(
+async def instantiate_equipment_preset(
     req: InstantiatePresetRequest,
     repo: StorageRepository = Depends(get_repo),
+    transports = Depends(get_transports),
 ):
     """Instancie un équipement métier avec toutes ses grandeurs et formules associées."""
     try:
         device, variables = instantiate_preset(req, repo)
+        validation_info = None
+        if device.token:
+            validation_info = await transports.test_device_communication(device)
         return {
             "status": "created",
             "device": device,
             "variables_count": len(variables),
             "variables": variables,
+            "validation": validation_info,
         }
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))

@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Arrosage Intelligent Espaces Verts' (ID: city_smart_irrigation). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_CITY_SMART_IRRIGATION. Protocole: HTTP.",
     "entityAliases": {
-      "7ab87f02-5c62-4cd2-a802-a71ffaee08ea": {
-        "id": "7ab87f02-5c62-4cd2-a802-a71ffaee08ea",
+      "876d0666-b319-46c4-bfba-05817bb41772": {
+        "id": "876d0666-b319-46c4-bfba-05817bb41772",
         "alias": "Arrosage Intelligent Espaces Verts",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Arrosage Intelligent Espaces Verts"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "5915d7ec-8658-4083-85c8-4b5f920e4aa9": {
+      "600c3aa4-35d7-4dd7-8080-bb5c883ca9f5": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "5915d7ec-8658-4083-85c8-4b5f920e4aa9"
+        "id": "600c3aa4-35d7-4dd7-8080-bb5c883ca9f5"
       },
-      "a9e673cb-a513-4146-ba07-65759aef38b1": {
+      "f93fb41e-4aec-4a15-93d5-9bb4d2e62612": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a9e673cb-a513-4146-ba07-65759aef38b1"
+        "id": "f93fb41e-4aec-4a15-93d5-9bb4d2e62612"
       },
-      "84d82a80-9126-4c94-87fa-bdfde3e03bb3": {
+      "bf6cd80f-416f-4a84-9d92-a44a204513db": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Tension Hydrique Sol (Tensiomètre)",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7ab87f02-5c62-4cd2-a802-a71ffaee08ea",
+              "entityAliasId": "876d0666-b319-46c4-bfba-05817bb41772",
               "dataKeys": [
                 {
                   "name": "tension_matricielle_sol_cbar",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "84d82a80-9126-4c94-87fa-bdfde3e03bb3"
+        "id": "bf6cd80f-416f-4a84-9d92-a44a204513db"
       },
-      "bd1c1913-2af7-462b-a3a4-a6c0fb15b04e": {
+      "757ad6a2-c8e2-4794-b996-72749554adce": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Sol (-10cm)",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7ab87f02-5c62-4cd2-a802-a71ffaee08ea",
+              "entityAliasId": "876d0666-b319-46c4-bfba-05817bb41772",
               "dataKeys": [
                 {
                   "name": "temp_sol_10cm",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "bd1c1913-2af7-462b-a3a4-a6c0fb15b04e"
+        "id": "757ad6a2-c8e2-4794-b996-72749554adce"
       },
-      "62409cd0-99ab-4671-846b-bf06f102b66c": {
+      "dbcc449f-82e3-46d1-baef-db4af858eb3a": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Injecté Électrovanne",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7ab87f02-5c62-4cd2-a802-a71ffaee08ea",
+              "entityAliasId": "876d0666-b319-46c4-bfba-05817bb41772",
               "dataKeys": [
                 {
                   "name": "debit_arrosage_lmin",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "62409cd0-99ab-4671-846b-bf06f102b66c"
+        "id": "dbcc449f-82e3-46d1-baef-db4af858eb3a"
       },
-      "93d5694b-2426-4166-bb54-5aeb21138b82": {
+      "39a15c8e-2e61-4b44-95a7-907333731bc9": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Volume Arrosage Session",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7ab87f02-5c62-4cd2-a802-a71ffaee08ea",
+              "entityAliasId": "876d0666-b319-46c4-bfba-05817bb41772",
               "dataKeys": [
                 {
                   "name": "conso_eau_session_m3",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "93d5694b-2426-4166-bb54-5aeb21138b82"
+        "id": "39a15c8e-2e61-4b44-95a7-907333731bc9"
       },
-      "9418e1db-9609-4856-a5c5-ada35297862d": {
+      "dec7ae1c-5578-4d51-86de-86cabdec7070": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Arrosage Intelligent Espaces Verts",
         "sizeX": 16,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7ab87f02-5c62-4cd2-a802-a71ffaee08ea",
+              "entityAliasId": "876d0666-b319-46c4-bfba-05817bb41772",
               "dataKeys": [
                 {
                   "name": "tension_matricielle_sol_cbar",
@@ -415,12 +424,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "9418e1db-9609-4856-a5c5-ada35297862d"
+        "id": "dec7ae1c-5578-4d51-86de-86cabdec7070"
       },
-      "4e9ee26c-d1fb-48a2-a508-41b807b8814f": {
+      "85c5d430-3581-48c6-86c5-4fb603869df9": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -429,7 +439,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7ab87f02-5c62-4cd2-a802-a71ffaee08ea",
+              "entityAliasId": "876d0666-b319-46c4-bfba-05817bb41772",
               "dataKeys": [
                 {
                   "name": "vanne_secteur_ouverte",
@@ -442,8 +452,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -457,7 +469,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "4e9ee26c-d1fb-48a2-a508-41b807b8814f"
+        "id": "85c5d430-3581-48c6-86c5-4fb603869df9"
       }
     },
     "states": {
@@ -467,49 +479,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "5915d7ec-8658-4083-85c8-4b5f920e4aa9": {
+              "600c3aa4-35d7-4dd7-8080-bb5c883ca9f5": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a9e673cb-a513-4146-ba07-65759aef38b1": {
+              "f93fb41e-4aec-4a15-93d5-9bb4d2e62612": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "84d82a80-9126-4c94-87fa-bdfde3e03bb3": {
+              "bf6cd80f-416f-4a84-9d92-a44a204513db": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "bd1c1913-2af7-462b-a3a4-a6c0fb15b04e": {
+              "757ad6a2-c8e2-4794-b996-72749554adce": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "62409cd0-99ab-4671-846b-bf06f102b66c": {
+              "dbcc449f-82e3-46d1-baef-db4af858eb3a": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "93d5694b-2426-4166-bb54-5aeb21138b82": {
+              "39a15c8e-2e61-4b44-95a7-907333731bc9": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "9418e1db-9609-4856-a5c5-ada35297862d": {
+              "dec7ae1c-5578-4d51-86de-86cabdec7070": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "4e9ee26c-d1fb-48a2-a508-41b807b8814f": {
+              "85c5d430-3581-48c6-86c5-4fb603869df9": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

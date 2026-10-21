@@ -2196,16 +2196,21 @@ def instantiate_preset(
         count = sum(1 for d in repo.get_devices() if d.id.startswith(preset.id))
         device_name = f"{preset.name} #{count + 1}" if count > 0 else preset.name
 
+    target_protocol = req.protocol or preset.default_protocol
+    target_use_tls = req.use_tls
+    if target_use_tls is None and target_protocol == TransportProtocol.HTTP:
+        target_use_tls = True
+
     # Création et sauvegarde de l'équipement
     device = DeviceConfig(
         id=device_id,
         name=device_name,
         platform=preset.default_platform,
         token=req.token.strip() if req.token and req.token.strip() else None,
-        protocol=req.protocol or preset.default_protocol,
+        protocol=target_protocol,
         custom_host=req.custom_host.strip() if req.custom_host and req.custom_host.strip() else None,
         custom_port=req.custom_port,
-        use_tls=req.use_tls,
+        use_tls=target_use_tls,
         publish_interval=req.publish_interval,
         enabled=True,
     )

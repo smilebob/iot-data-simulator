@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Sonde Acoustique & Nuisances Sonores' (ID: city_acoustic_sensor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_CITY_ACOUSTIC_SENSOR. Protocole: HTTP.",
     "entityAliases": {
-      "d8f8c319-0e36-4872-9923-fda8d5b46272": {
-        "id": "d8f8c319-0e36-4872-9923-fda8d5b46272",
+      "9ab3932f-1070-4403-8c51-e0b047549be9": {
+        "id": "9ab3932f-1070-4403-8c51-e0b047549be9",
         "alias": "Sonde Acoustique & Nuisances Sonores",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Sonde Acoustique & Nuisances Sonores"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "cbb89756-63e1-4f76-b8c7-c84388f08879": {
+      "3afb1fa6-55f2-4484-be37-a65d4ec92632": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "cbb89756-63e1-4f76-b8c7-c84388f08879"
+        "id": "3afb1fa6-55f2-4484-be37-a65d4ec92632"
       },
-      "a1644b29-6ddb-4f35-bc3e-3295707f54b2": {
+      "a3c76839-8cac-415e-817b-b9783beb7883": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a1644b29-6ddb-4f35-bc3e-3295707f54b2"
+        "id": "a3c76839-8cac-415e-817b-b9783beb7883"
       },
-      "809ac4af-360e-4867-8e5b-c05010f460e8": {
+      "e66a5c06-563b-4efd-a2bc-ecaf42181748": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Pression Acoustique Équivalente LAeq",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8f8c319-0e36-4872-9923-fda8d5b46272",
+              "entityAliasId": "9ab3932f-1070-4403-8c51-e0b047549be9",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "809ac4af-360e-4867-8e5b-c05010f460e8"
+        "id": "e66a5c06-563b-4efd-a2bc-ecaf42181748"
       },
-      "77ec62d6-1473-4bd8-bd5b-2ad1917ad18e": {
+      "ff4539e3-801a-4ce4-8a6b-8b6a7dad06bf": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Niveau Crête Instantané LCpeak",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8f8c319-0e36-4872-9923-fda8d5b46272",
+              "entityAliasId": "9ab3932f-1070-4403-8c51-e0b047549be9",
               "dataKeys": [
                 {
                   "name": "niveau_lcpeak_dbc",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "77ec62d6-1473-4bd8-bd5b-2ad1917ad18e"
+        "id": "ff4539e3-801a-4ce4-8a6b-8b6a7dad06bf"
       },
-      "45df7719-c0af-4cdc-8686-a1c2d57ac31e": {
+      "0bc4bf65-77cd-4b8c-9e52-1153761452a8": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Tension Batterie Solaire",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8f8c319-0e36-4872-9923-fda8d5b46272",
+              "entityAliasId": "9ab3932f-1070-4403-8c51-e0b047549be9",
               "dataKeys": [
                 {
                   "name": "batterie_solaire_v",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "45df7719-c0af-4cdc-8686-a1c2d57ac31e"
+        "id": "0bc4bf65-77cd-4b8c-9e52-1153761452a8"
       },
-      "46cfccb5-3034-4d13-b821-6b1763df7aa3": {
+      "2a264820-de62-43e4-a962-9c251dafa029": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Sonde Acoustique & Nuisances Sonores",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8f8c319-0e36-4872-9923-fda8d5b46272",
+              "entityAliasId": "9ab3932f-1070-4403-8c51-e0b047549be9",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "46cfccb5-3034-4d13-b821-6b1763df7aa3"
+        "id": "2a264820-de62-43e4-a962-9c251dafa029"
       },
-      "f6b2d4ba-9523-45a6-9b1a-ef579199a4f9": {
+      "64b111d3-f639-4a17-97e9-047e7513d17f": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8f8c319-0e36-4872-9923-fda8d5b46272",
+              "entityAliasId": "9ab3932f-1070-4403-8c51-e0b047549be9",
               "dataKeys": [
                 {
                   "name": "depassement_seuil_nocturne",
@@ -371,8 +380,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -386,7 +397,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "f6b2d4ba-9523-45a6-9b1a-ef579199a4f9"
+        "id": "64b111d3-f639-4a17-97e9-047e7513d17f"
       }
     },
     "states": {
@@ -396,43 +407,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "cbb89756-63e1-4f76-b8c7-c84388f08879": {
+              "3afb1fa6-55f2-4484-be37-a65d4ec92632": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a1644b29-6ddb-4f35-bc3e-3295707f54b2": {
+              "a3c76839-8cac-415e-817b-b9783beb7883": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "809ac4af-360e-4867-8e5b-c05010f460e8": {
+              "e66a5c06-563b-4efd-a2bc-ecaf42181748": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "77ec62d6-1473-4bd8-bd5b-2ad1917ad18e": {
+              "ff4539e3-801a-4ce4-8a6b-8b6a7dad06bf": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "45df7719-c0af-4cdc-8686-a1c2d57ac31e": {
+              "0bc4bf65-77cd-4b8c-9e52-1153761452a8": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "46cfccb5-3034-4d13-b821-6b1763df7aa3": {
+              "2a264820-de62-43e4-a962-9c251dafa029": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "f6b2d4ba-9523-45a6-9b1a-ef579199a4f9": {
+              "64b111d3-f639-4a17-97e9-047e7513d17f": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

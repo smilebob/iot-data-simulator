@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Chaudière Industrielle Vapeur' (ID: ind_steam_boiler). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_STEAM_BOILER. Protocole: HTTP.",
     "entityAliases": {
-      "48b1caa7-d71d-44ff-b6d0-28e067b3a12d": {
-        "id": "48b1caa7-d71d-44ff-b6d0-28e067b3a12d",
+      "53c735a2-bb03-4766-bbb6-86c8d8e7ea7e": {
+        "id": "53c735a2-bb03-4766-bbb6-86c8d8e7ea7e",
         "alias": "Chaudière Industrielle Vapeur",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Chaudière Industrielle Vapeur"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "b8c39748-6933-4592-b167-3b63477e1c12": {
+      "a8b1ed06-6f5c-4980-ad4d-c2b37e90f8af": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "b8c39748-6933-4592-b167-3b63477e1c12"
+        "id": "a8b1ed06-6f5c-4980-ad4d-c2b37e90f8af"
       },
-      "d0732605-8514-4c50-b3c3-3df5a03e0649": {
+      "88ce122c-da8c-4b7d-99ce-6355ebba84eb": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "d0732605-8514-4c50-b3c3-3df5a03e0649"
+        "id": "88ce122c-da8c-4b7d-99ce-6355ebba84eb"
       },
-      "283f8671-2bab-4ad6-912b-55d8f951d518": {
+      "b600276d-91f3-401b-9efa-968daf8c40fb": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Pression Vapeur Vive",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48b1caa7-d71d-44ff-b6d0-28e067b3a12d",
+              "entityAliasId": "53c735a2-bb03-4766-bbb6-86c8d8e7ea7e",
               "dataKeys": [
                 {
                   "name": "pression_vapeur_bar",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "283f8671-2bab-4ad6-912b-55d8f951d518"
+        "id": "b600276d-91f3-401b-9efa-968daf8c40fb"
       },
-      "0200f80d-ed70-4fab-9312-9958dd644eb6": {
+      "e8e505d2-092d-47c4-b853-b6f984575f64": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Massique Vapeur",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48b1caa7-d71d-44ff-b6d0-28e067b3a12d",
+              "entityAliasId": "53c735a2-bb03-4766-bbb6-86c8d8e7ea7e",
               "dataKeys": [
                 {
                   "name": "debit_vapeur_th",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "0200f80d-ed70-4fab-9312-9958dd644eb6"
+        "id": "e8e505d2-092d-47c4-b853-b6f984575f64"
       },
-      "570c3db6-b1dd-4a1d-8c1e-57b515598afd": {
+      "ef08c60c-3b10-4cea-9d05-965cb1ff976a": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température des Fumées",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48b1caa7-d71d-44ff-b6d0-28e067b3a12d",
+              "entityAliasId": "53c735a2-bb03-4766-bbb6-86c8d8e7ea7e",
               "dataKeys": [
                 {
                   "name": "temp_fumees",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "570c3db6-b1dd-4a1d-8c1e-57b515598afd"
+        "id": "ef08c60c-3b10-4cea-9d05-965cb1ff976a"
       },
-      "2d56737f-f42a-455d-951e-69744b74d65d": {
+      "8815339f-7e60-4095-a849-41ae74e95d32": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Rendement de Combustion",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48b1caa7-d71d-44ff-b6d0-28e067b3a12d",
+              "entityAliasId": "53c735a2-bb03-4766-bbb6-86c8d8e7ea7e",
               "dataKeys": [
                 {
                   "name": "rendement_combustion_pct",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "2d56737f-f42a-455d-951e-69744b74d65d"
+        "id": "8815339f-7e60-4095-a849-41ae74e95d32"
       },
-      "a5683e45-d2fa-4c9c-9a91-e76c2d71611e": {
+      "d49a0239-67a4-4f43-bad3-11033455ebac": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Teneur O₂ Résiduel",
         "sizeX": 6,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48b1caa7-d71d-44ff-b6d0-28e067b3a12d",
+              "entityAliasId": "53c735a2-bb03-4766-bbb6-86c8d8e7ea7e",
               "dataKeys": [
                 {
                   "name": "taux_o2_residuel",
@@ -348,12 +357,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "a5683e45-d2fa-4c9c-9a91-e76c2d71611e"
+        "id": "d49a0239-67a4-4f43-bad3-11033455ebac"
       },
-      "cb56dd9f-dfdd-44f5-8b3b-ac677fd53eaa": {
+      "a92e6d04-fc04-4273-a819-532ab4ce7e30": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Chaudière Industrielle Vapeur",
         "sizeX": 24,
@@ -362,7 +372,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48b1caa7-d71d-44ff-b6d0-28e067b3a12d",
+              "entityAliasId": "53c735a2-bb03-4766-bbb6-86c8d8e7ea7e",
               "dataKeys": [
                 {
                   "name": "pression_vapeur_bar",
@@ -486,7 +496,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "cb56dd9f-dfdd-44f5-8b3b-ac677fd53eaa"
+        "id": "a92e6d04-fc04-4273-a819-532ab4ce7e30"
       }
     },
     "states": {
@@ -496,49 +506,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "b8c39748-6933-4592-b167-3b63477e1c12": {
+              "a8b1ed06-6f5c-4980-ad4d-c2b37e90f8af": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "d0732605-8514-4c50-b3c3-3df5a03e0649": {
+              "88ce122c-da8c-4b7d-99ce-6355ebba84eb": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "283f8671-2bab-4ad6-912b-55d8f951d518": {
+              "b600276d-91f3-401b-9efa-968daf8c40fb": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "0200f80d-ed70-4fab-9312-9958dd644eb6": {
+              "e8e505d2-092d-47c4-b853-b6f984575f64": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "570c3db6-b1dd-4a1d-8c1e-57b515598afd": {
+              "ef08c60c-3b10-4cea-9d05-965cb1ff976a": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "2d56737f-f42a-455d-951e-69744b74d65d": {
+              "8815339f-7e60-4095-a849-41ae74e95d32": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "a5683e45-d2fa-4c9c-9a91-e76c2d71611e": {
+              "d49a0239-67a4-4f43-bad3-11033455ebac": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "cb56dd9f-dfdd-44f5-8b3b-ac677fd53eaa": {
+              "a92e6d04-fc04-4273-a819-532ab4ce7e30": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

@@ -53,7 +53,16 @@ class TransportManager:
 
         if target_protocol == TransportProtocol.HTTP:
             # Mode ThingsBoard HTTP REST
-            use_tls = device.use_tls if device.use_tls is not None else global_broker.use_tls
+            if device.use_tls is not None:
+                use_tls = device.use_tls
+            elif device.custom_port == 443:
+                use_tls = True
+            elif device.custom_port == 80:
+                use_tls = False
+            else:
+                # Si non spécifié : pour un ThingsBoard distant ou cloud, HTTPS (port 443) par défaut
+                is_local = target_host.lower() in ("localhost", "127.0.0.1", "mosquitto", "thingsboard")
+                use_tls = False if is_local else True
             default_port = 443 if use_tls else 80
             target_port = device.custom_port or default_port
 
@@ -101,7 +110,15 @@ class TransportManager:
         target_host = device.custom_host.strip() if device.custom_host and device.custom_host.strip() else global_broker.host
 
         if target_protocol == TransportProtocol.HTTP:
-            use_tls = device.use_tls if device.use_tls is not None else global_broker.use_tls
+            if device.use_tls is not None:
+                use_tls = device.use_tls
+            elif device.custom_port == 443:
+                use_tls = True
+            elif device.custom_port == 80:
+                use_tls = False
+            else:
+                is_local = target_host.lower() in ("localhost", "127.0.0.1", "mosquitto", "thingsboard")
+                use_tls = False if is_local else True
             default_port = 443 if use_tls else 80
             target_port = device.custom_port or default_port
 

@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Groupe Froid Industriel' (ID: ind_chiller). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_CHILLER. Protocole: HTTP.",
     "entityAliases": {
-      "b1a4229b-1b36-4ba4-8354-11f3674ab6b1": {
-        "id": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
+      "ca9f63c5-b201-4b75-80ec-5652a4b768cb": {
+        "id": "ca9f63c5-b201-4b75-80ec-5652a4b768cb",
         "alias": "Groupe Froid Industriel",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Groupe Froid Industriel"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "63de69ec-b8aa-4d51-8212-db992fd1526b": {
+      "e1da5a26-f492-4b12-bf37-f8fe9b994df9": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "63de69ec-b8aa-4d51-8212-db992fd1526b"
+        "id": "e1da5a26-f492-4b12-bf37-f8fe9b994df9"
       },
-      "15971d75-29df-441f-a82b-4230b80b0f72": {
+      "e41290aa-f708-4909-8f25-8680081ab37b": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "15971d75-29df-441f-a82b-4230b80b0f72"
+        "id": "e41290aa-f708-4909-8f25-8680081ab37b"
       },
-      "d1afb338-9ab5-4820-9c5d-2a928ae1ddad": {
+      "bb23d157-fdaf-4cd5-a68a-eb108663c68c": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Eau Glacée Départ",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
+              "entityAliasId": "ca9f63c5-b201-4b75-80ec-5652a4b768cb",
               "dataKeys": [
                 {
                   "name": "temp_eau_depart",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "d1afb338-9ab5-4820-9c5d-2a928ae1ddad"
+        "id": "bb23d157-fdaf-4cd5-a68a-eb108663c68c"
       },
-      "8de2637e-bb0a-4bba-b9a9-0550dfbeb9d6": {
+      "a6c11b15-1edc-4f06-aa76-34d2e68f6046": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Eau Glacée Retour",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
+              "entityAliasId": "ca9f63c5-b201-4b75-80ec-5652a4b768cb",
               "dataKeys": [
                 {
                   "name": "temp_eau_retour",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "8de2637e-bb0a-4bba-b9a9-0550dfbeb9d6"
+        "id": "a6c11b15-1edc-4f06-aa76-34d2e68f6046"
       },
-      "ed4fd409-8301-4a38-853a-7ac5d06ed7ae": {
+      "2aae1e99-83b6-4c5a-b84d-f2869e9ab4ce": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Pression Haute Pression (HP)",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
+              "entityAliasId": "ca9f63c5-b201-4b75-80ec-5652a4b768cb",
               "dataKeys": [
                 {
                   "name": "pression_hp",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "ed4fd409-8301-4a38-853a-7ac5d06ed7ae"
+        "id": "2aae1e99-83b6-4c5a-b84d-f2869e9ab4ce"
       },
-      "10dbfff1-2e90-481c-98e0-d4605c734e64": {
+      "a6a434dd-a2e9-496a-9036-77ae14bc75e4": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Coefficient de Performance (COP)",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
+              "entityAliasId": "ca9f63c5-b201-4b75-80ec-5652a4b768cb",
               "dataKeys": [
                 {
                   "name": "cop_instantane",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "10dbfff1-2e90-481c-98e0-d4605c734e64"
+        "id": "a6a434dd-a2e9-496a-9036-77ae14bc75e4"
       },
-      "37317345-168a-496e-bf5a-52118d6591a5": {
+      "11f433e9-b0ed-4943-b78d-972bad7a1fba": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Groupe Froid Industriel",
         "sizeX": 24,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b1a4229b-1b36-4ba4-8354-11f3674ab6b1",
+              "entityAliasId": "ca9f63c5-b201-4b75-80ec-5652a4b768cb",
               "dataKeys": [
                 {
                   "name": "temp_eau_depart",
@@ -415,7 +424,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "37317345-168a-496e-bf5a-52118d6591a5"
+        "id": "11f433e9-b0ed-4943-b78d-972bad7a1fba"
       }
     },
     "states": {
@@ -425,43 +434,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "63de69ec-b8aa-4d51-8212-db992fd1526b": {
+              "e1da5a26-f492-4b12-bf37-f8fe9b994df9": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "15971d75-29df-441f-a82b-4230b80b0f72": {
+              "e41290aa-f708-4909-8f25-8680081ab37b": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "d1afb338-9ab5-4820-9c5d-2a928ae1ddad": {
+              "bb23d157-fdaf-4cd5-a68a-eb108663c68c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "8de2637e-bb0a-4bba-b9a9-0550dfbeb9d6": {
+              "a6c11b15-1edc-4f06-aa76-34d2e68f6046": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "ed4fd409-8301-4a38-853a-7ac5d06ed7ae": {
+              "2aae1e99-83b6-4c5a-b84d-f2869e9ab4ce": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "10dbfff1-2e90-481c-98e0-d4605c734e64": {
+              "a6a434dd-a2e9-496a-9036-77ae14bc75e4": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "37317345-168a-496e-bf5a-52118d6591a5": {
+              "11f433e9-b0ed-4943-b78d-972bad7a1fba": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

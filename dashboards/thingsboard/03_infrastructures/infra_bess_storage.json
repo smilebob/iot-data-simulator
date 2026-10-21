@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Système Stockage Batteries (BESS)' (ID: infra_bess_storage). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_BESS_STORAGE. Protocole: MQTT.",
     "entityAliases": {
-      "7399aefd-1648-4362-a33b-516bab03baeb": {
-        "id": "7399aefd-1648-4362-a33b-516bab03baeb",
+      "a52b9e16-aca8-446c-9bf5-7ef5f459aabd": {
+        "id": "a52b9e16-aca8-446c-9bf5-7ef5f459aabd",
         "alias": "Système Stockage Batteries (BESS)",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Système Stockage Batteries (BESS)"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "f9a9b67b-77b0-46b3-beec-18282a6548fe": {
+      "59c3ff6c-ecde-4d3c-927d-5515413d606d": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "f9a9b67b-77b0-46b3-beec-18282a6548fe"
+        "id": "59c3ff6c-ecde-4d3c-927d-5515413d606d"
       },
-      "81e26d3b-2afd-4b88-8ea1-6aef61dccbf1": {
+      "177ef178-8d0b-477a-9149-55d2c2d5610e": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "81e26d3b-2afd-4b88-8ea1-6aef61dccbf1"
+        "id": "177ef178-8d0b-477a-9149-55d2c2d5610e"
       },
-      "ff534853-24bf-43d5-9906-3685daba8db7": {
+      "4b606530-6862-4eb9-8af7-d7e9bc6c329c": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "État de Charge (SoC)",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7399aefd-1648-4362-a33b-516bab03baeb",
+              "entityAliasId": "a52b9e16-aca8-446c-9bf5-7ef5f459aabd",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "ff534853-24bf-43d5-9906-3685daba8db7"
+        "id": "4b606530-6862-4eb9-8af7-d7e9bc6c329c"
       },
-      "3454415f-dc15-488a-883c-e8a9f7b78d90": {
+      "164a60d5-bc52-4656-8801-367812e4ddad": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Tension Bus Continu DC",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7399aefd-1648-4362-a33b-516bab03baeb",
+              "entityAliasId": "a52b9e16-aca8-446c-9bf5-7ef5f459aabd",
               "dataKeys": [
                 {
                   "name": "tension_pack_v",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "3454415f-dc15-488a-883c-e8a9f7b78d90"
+        "id": "164a60d5-bc52-4656-8801-367812e4ddad"
       },
-      "de37680e-a1da-4707-b77c-4edf65c28244": {
+      "1d05737c-615c-4618-b488-82e683a67b00": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Courant Charge / Décharge",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7399aefd-1648-4362-a33b-516bab03baeb",
+              "entityAliasId": "a52b9e16-aca8-446c-9bf5-7ef5f459aabd",
               "dataKeys": [
                 {
                   "name": "courant_charge_decharge_a",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "de37680e-a1da-4707-b77c-4edf65c28244"
+        "id": "1d05737c-615c-4618-b488-82e683a67b00"
       },
-      "ec02c6ef-fa93-4c45-b44d-abd262700478": {
+      "9c97d030-15e0-44d9-9e3e-91726a2c249c": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Cellule Critique",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7399aefd-1648-4362-a33b-516bab03baeb",
+              "entityAliasId": "a52b9e16-aca8-446c-9bf5-7ef5f459aabd",
               "dataKeys": [
                 {
                   "name": "temp_max_cellule",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "ec02c6ef-fa93-4c45-b44d-abd262700478"
+        "id": "9c97d030-15e0-44d9-9e3e-91726a2c249c"
       },
-      "73c163ac-d320-4be1-8ad3-9e83b668b92e": {
+      "a77c6667-3ec5-48c0-9de9-bdf3e6ca5948": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Système Stockage Batteries (BESS)",
         "sizeX": 16,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7399aefd-1648-4362-a33b-516bab03baeb",
+              "entityAliasId": "a52b9e16-aca8-446c-9bf5-7ef5f459aabd",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -415,12 +424,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "73c163ac-d320-4be1-8ad3-9e83b668b92e"
+        "id": "a77c6667-3ec5-48c0-9de9-bdf3e6ca5948"
       },
-      "f6dfc11e-29e0-4697-af4f-57f02f4fbc7a": {
+      "90881b42-ff45-433b-9e25-b0feb1c8acde": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -429,7 +439,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7399aefd-1648-4362-a33b-516bab03baeb",
+              "entityAliasId": "a52b9e16-aca8-446c-9bf5-7ef5f459aabd",
               "dataKeys": [
                 {
                   "name": "soh_pct",
@@ -442,8 +452,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -457,7 +469,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "f6dfc11e-29e0-4697-af4f-57f02f4fbc7a"
+        "id": "90881b42-ff45-433b-9e25-b0feb1c8acde"
       }
     },
     "states": {
@@ -467,49 +479,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "f9a9b67b-77b0-46b3-beec-18282a6548fe": {
+              "59c3ff6c-ecde-4d3c-927d-5515413d606d": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "81e26d3b-2afd-4b88-8ea1-6aef61dccbf1": {
+              "177ef178-8d0b-477a-9149-55d2c2d5610e": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "ff534853-24bf-43d5-9906-3685daba8db7": {
+              "4b606530-6862-4eb9-8af7-d7e9bc6c329c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3454415f-dc15-488a-883c-e8a9f7b78d90": {
+              "164a60d5-bc52-4656-8801-367812e4ddad": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "de37680e-a1da-4707-b77c-4edf65c28244": {
+              "1d05737c-615c-4618-b488-82e683a67b00": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "ec02c6ef-fa93-4c45-b44d-abd262700478": {
+              "9c97d030-15e0-44d9-9e3e-91726a2c249c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "73c163ac-d320-4be1-8ad3-9e83b668b92e": {
+              "a77c6667-3ec5-48c0-9de9-bdf3e6ca5948": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "f6dfc11e-29e0-4697-af4f-57f02f4fbc7a": {
+              "90881b42-ff45-433b-9e25-b0feb1c8acde": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

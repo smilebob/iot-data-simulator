@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Conteneur Déchets & PAV Connecté' (ID: city_waste_bin). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_CITY_WASTE_BIN. Protocole: COAP.",
     "entityAliases": {
-      "f140bf69-fe9d-4a9b-a44b-15c5f7fb2328": {
-        "id": "f140bf69-fe9d-4a9b-a44b-15c5f7fb2328",
+      "9ff1562c-753d-4580-b07d-416ec94b571c": {
+        "id": "9ff1562c-753d-4580-b07d-416ec94b571c",
         "alias": "Conteneur Déchets & PAV Connecté",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Conteneur Déchets & PAV Connecté"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "adb51dcb-9ac9-4f26-9dfc-489254003a76": {
+      "b41ce5ee-25ce-4f9b-8309-842002846c60": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "adb51dcb-9ac9-4f26-9dfc-489254003a76"
+        "id": "b41ce5ee-25ce-4f9b-8309-842002846c60"
       },
-      "bbad8054-e7ba-497c-b3da-6351a6fe9d46": {
+      "165811ad-813b-4d01-b54e-d86066b1da62": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "bbad8054-e7ba-497c-b3da-6351a6fe9d46"
+        "id": "165811ad-813b-4d01-b54e-d86066b1da62"
       },
-      "40fa89a7-b1fe-43e2-bbdc-3d852692dc20": {
+      "a80779aa-4ad9-4689-a8ab-acadfe3abc48": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Taux Remplissage Cuve",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f140bf69-fe9d-4a9b-a44b-15c5f7fb2328",
+              "entityAliasId": "9ff1562c-753d-4580-b07d-416ec94b571c",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "40fa89a7-b1fe-43e2-bbdc-3d852692dc20"
+        "id": "a80779aa-4ad9-4689-a8ab-acadfe3abc48"
       },
-      "4db0064e-3e77-4c30-8edb-ca44c80e9bce": {
+      "0d0acbff-7ccb-4f91-9ce5-e4f33136cecd": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Interne Cuve",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f140bf69-fe9d-4a9b-a44b-15c5f7fb2328",
+              "entityAliasId": "9ff1562c-753d-4580-b07d-416ec94b571c",
               "dataKeys": [
                 {
                   "name": "temp_interne_cuve",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "4db0064e-3e77-4c30-8edb-ca44c80e9bce"
+        "id": "0d0acbff-7ccb-4f91-9ce5-e4f33136cecd"
       },
-      "eb73bcd5-7d7a-49e5-a281-6fe86d722891": {
+      "4c374a96-5eda-490a-a38f-a0c284c11380": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Niveau Batterie Capteur",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f140bf69-fe9d-4a9b-a44b-15c5f7fb2328",
+              "entityAliasId": "9ff1562c-753d-4580-b07d-416ec94b571c",
               "dataKeys": [
                 {
                   "name": "batterie_autonomie_pct",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "eb73bcd5-7d7a-49e5-a281-6fe86d722891"
+        "id": "4c374a96-5eda-490a-a38f-a0c284c11380"
       },
-      "c68edd70-5767-4ab3-aac6-954c692ac83d": {
+      "050f0c1f-d4db-4f22-bf15-28d15e334063": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Conteneur Déchets & PAV Connecté",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f140bf69-fe9d-4a9b-a44b-15c5f7fb2328",
+              "entityAliasId": "9ff1562c-753d-4580-b07d-416ec94b571c",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "c68edd70-5767-4ab3-aac6-954c692ac83d"
+        "id": "050f0c1f-d4db-4f22-bf15-28d15e334063"
       },
-      "1f8b26b1-518e-4631-be45-6b85baa822cb": {
+      "f1320b25-e102-4419-a8fe-282b5138e852": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f140bf69-fe9d-4a9b-a44b-15c5f7fb2328",
+              "entityAliasId": "9ff1562c-753d-4580-b07d-416ec94b571c",
               "dataKeys": [
                 {
                   "name": "alerte_incendie",
@@ -378,8 +387,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -393,7 +404,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "1f8b26b1-518e-4631-be45-6b85baa822cb"
+        "id": "f1320b25-e102-4419-a8fe-282b5138e852"
       }
     },
     "states": {
@@ -403,43 +414,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "adb51dcb-9ac9-4f26-9dfc-489254003a76": {
+              "b41ce5ee-25ce-4f9b-8309-842002846c60": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "bbad8054-e7ba-497c-b3da-6351a6fe9d46": {
+              "165811ad-813b-4d01-b54e-d86066b1da62": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "40fa89a7-b1fe-43e2-bbdc-3d852692dc20": {
+              "a80779aa-4ad9-4689-a8ab-acadfe3abc48": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "4db0064e-3e77-4c30-8edb-ca44c80e9bce": {
+              "0d0acbff-7ccb-4f91-9ce5-e4f33136cecd": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "eb73bcd5-7d7a-49e5-a281-6fe86d722891": {
+              "4c374a96-5eda-490a-a38f-a0c284c11380": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "c68edd70-5767-4ab3-aac6-954c692ac83d": {
+              "050f0c1f-d4db-4f22-bf15-28d15e334063": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "1f8b26b1-518e-4631-be45-6b85baa822cb": {
+              "f1320b25-e102-4419-a8fe-282b5138e852": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

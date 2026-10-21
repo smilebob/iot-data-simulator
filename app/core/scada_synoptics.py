@@ -577,7 +577,80 @@ def build_synoptic_telecom(name: str, token: str, proto: str, vars_list: list, v
     return scada_wrapper(f"Supervision Shelter Télécoms SCADA : {name}", token, proto, svg)
 
 # =====================================================================
-# 10. SYNOPTIQUE SCADA UNIVERSEL AVEC PYRAMIDE CIM / PROCESS MIMIC
+# 10. VILLES INTELLIGENTES : COMPTAGE TRAFIC, MOBILITÉS & RADAR
+# =====================================================================
+def build_synoptic_city_traffic(name: str, token: str, proto: str, vars_list: list, var_map: dict) -> str:
+    svg = """
+  <svg viewBox="0 0 950 260" style="width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;">
+    <!-- Voie Routière Principale (Asphalte sombre) -->
+    <rect x="50" y="70" width="600" height="150" rx="8" fill="#141A23" stroke="#2B3342" stroke-width="2"/>
+
+    <!-- Voie Cyclable & Mobilités Douces (Bande verte normée) -->
+    <rect x="50" y="70" width="600" height="35" rx="4" fill="#064E3B" opacity="0.45" stroke="#10B981" stroke-width="1"/>
+    <text x="70" y="92" fill="#34D399" font-size="10" font-weight="bold">VOIE CYCLABLE & TROTTINETTES (BIKE LANE)</text>
+    <line x1="50" y1="105" x2="650" y2="105" stroke="#10B981" stroke-width="2"/>
+
+    <!-- Ligne médiane blanche discontinue animée pour flux VL -->
+    <line x1="50" y1="160" x2="650" y2="160" stroke="#F8FAFC" stroke-width="3" stroke-dasharray="14,10" class="pipe-flow"/>
+    <text x="70" y="140" fill="#94A3B8" font-size="10">VOIE VL 1 (AMONT)</text>
+    <text x="70" y="195" fill="#94A3B8" font-size="10">VOIE VL 2 (AVAL / BUS)</text>
+
+    <!-- Boucles à Induction Magnétiques au sol -->
+    <rect x="220" y="115" width="45" height="35" rx="3" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <rect x="220" y="170" width="45" height="35" rx="3" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <text x="242" y="136" fill="#38BDF8" font-size="8" text-anchor="middle">BOUCLE 1</text>
+    <text x="242" y="191" fill="#38BDF8" font-size="8" text-anchor="middle">BOUCLE 2</text>
+
+    <!-- Portique Radar Doppler & Caméra IA -->
+    <line x1="380" y1="50" x2="380" y2="230" stroke="#64748B" stroke-width="4"/>
+    <line x1="375" y1="50" x2="480" y2="50" stroke="#64748B" stroke-width="4"/>
+    <rect x="420" y="40" width="45" height="20" rx="4" fill="#E2001A" stroke="#FFFFFF" stroke-width="1.5"/>
+    <text x="442" y="54" fill="#FFFFFF" font-size="8" text-anchor="middle" font-weight="bold">RADAR</text>
+    <polygon points="430,62 455,62 490,135 395,135" fill="#38BDF8" opacity="0.15"/>
+
+    <!-- Feu Tricolore de Régulation Urbaine -->
+    <g transform="translate(560, 40)">
+      <rect width="26" height="65" rx="6" fill="#0B0F17" stroke="#475569" stroke-width="2"/>
+      <circle cx="13" cy="14" r="6" fill="#EF4444" opacity="0.3"/>
+      <circle cx="13" cy="32" r="6" fill="#F59E0B" opacity="0.3"/>
+      <circle cx="13" cy="50" r="6" fill="#10B981" opacity="1" class="scada-live-indicator"/>
+    </g>
+
+    <!-- Armoire Régulateur de Carrefour (Contrôleur) -->
+    <rect x="580" y="170" width="55" height="45" rx="4" fill="#1E293B" stroke="#FBBF24" stroke-width="1.5"/>
+    <text x="607" y="195" fill="#FBBF24" font-size="8" text-anchor="middle" font-weight="bold">RÉGULATEUR</text>
+    <text x="607" y="206" fill="#94A3B8" font-size="7" text-anchor="middle">PRIORITÉ BUS</text>
+
+    <!-- Callouts SCADA Temps Réel -->
+    <g transform="translate(680, 45)">
+      <rect width="230" height="42" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <text x="12" y="18" fill="#94A3B8" font-size="9">COMPTAGE VÉHICULES LÉGERS</text>
+      <text x="12" y="34" fill="#38BDF8" font-size="14" font-weight="bold" font-family="monospace">DÉBIT : 450 véh/h</text>
+    </g>
+
+    <g transform="translate(680, 97)">
+      <rect width="230" height="42" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <text x="12" y="18" fill="#94A3B8" font-size="9">PASSAGES VÉLOS & MOBILITÉS</text>
+      <text x="12" y="34" fill="#10B981" font-size="14" font-weight="bold" font-family="monospace">FLUX : 68 vélos/h</text>
+    </g>
+
+    <g transform="translate(680, 149)">
+      <rect width="230" height="42" rx="6" fill="#141A24" stroke="#F59E0B" stroke-width="1.5"/>
+      <text x="12" y="18" fill="#94A3B8" font-size="9">VITESSE MOYENNE DOPPLER</text>
+      <text x="12" y="34" fill="#F59E0B" font-size="14" font-weight="bold" font-family="monospace">RADAR : 41.8 km/h</text>
+    </g>
+
+    <g transform="translate(680, 201)">
+      <rect width="230" height="42" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <text x="12" y="18" fill="#94A3B8" font-size="9">ÉTAT DE CONGESTION & TRAFIC</text>
+      <text x="12" y="34" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">TRAFIC FLUIDE &bull; NORMAL</text>
+    </g>
+  </svg>
+    """
+    return scada_wrapper(f"Supervision Trafic & Mobilités SCADA : {name}", token, proto, svg)
+
+# =====================================================================
+# 11. SYNOPTIQUE SCADA UNIVERSEL AVEC PYRAMIDE CIM / PROCESS MIMIC
 # =====================================================================
 def build_generic_scada_synoptic(name: str, token: str, proto: str, vars_list: list, var_map: dict) -> str:
     svg = """
@@ -649,4 +722,7 @@ SYNOPTIC_BUILDERS = {
     "eclairage": build_synoptic_city_lighting,
     "telecom": build_synoptic_telecom,
     "shelter": build_synoptic_telecom,
+    "traffic": build_synoptic_city_traffic,
+    "city_traffic": build_synoptic_city_traffic,
+    "mobilite": build_synoptic_city_traffic,
 }

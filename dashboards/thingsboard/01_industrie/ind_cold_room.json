@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Chambre Froide Négative' (ID: ind_cold_room). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_COLD_ROOM. Protocole: MQTT.",
     "entityAliases": {
-      "7612364b-692f-4fce-9f5f-9cd69e203364": {
-        "id": "7612364b-692f-4fce-9f5f-9cd69e203364",
+      "cca03a98-0e71-44d2-8a56-998f49045aa5": {
+        "id": "cca03a98-0e71-44d2-8a56-998f49045aa5",
         "alias": "Chambre Froide Négative",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Chambre Froide Négative"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "baf11e7b-68d8-4945-b5bc-171b0267b31a": {
+      "91f13170-9578-489f-bd82-30e96e72da71": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "baf11e7b-68d8-4945-b5bc-171b0267b31a"
+        "id": "91f13170-9578-489f-bd82-30e96e72da71"
       },
-      "abc89ef6-660b-4d2a-9430-0f0d83755b51": {
+      "c6bcdff4-8f96-4fa6-9ba2-58c5b8aaec32": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "abc89ef6-660b-4d2a-9430-0f0d83755b51"
+        "id": "c6bcdff4-8f96-4fa6-9ba2-58c5b8aaec32"
       },
-      "fff0be9e-9ac9-4062-bf12-06f1ef247d33": {
+      "9f2d6979-db8e-40be-844a-a62ad7dd4c75": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Ambiante Négative",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
+              "entityAliasId": "cca03a98-0e71-44d2-8a56-998f49045aa5",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "fff0be9e-9ac9-4062-bf12-06f1ef247d33"
+        "id": "9f2d6979-db8e-40be-844a-a62ad7dd4c75"
       },
-      "19b4799b-dd89-490d-8153-ee955e5cf187": {
+      "79f10ae7-33ad-4915-8980-fa58faa8a226": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Évaporateur",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
+              "entityAliasId": "cca03a98-0e71-44d2-8a56-998f49045aa5",
               "dataKeys": [
                 {
                   "name": "temp_evaporateur",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "19b4799b-dd89-490d-8153-ee955e5cf187"
+        "id": "79f10ae7-33ad-4915-8980-fa58faa8a226"
       },
-      "19b3a452-d807-4713-8ae4-ce1f8b462ff0": {
+      "d62ef6d9-87ad-4b35-a54b-28e5cdbbc90b": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Groupe Frigorifique",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
+              "entityAliasId": "cca03a98-0e71-44d2-8a56-998f49045aa5",
               "dataKeys": [
                 {
                   "name": "puissance_groupe_kw",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "19b3a452-d807-4713-8ae4-ce1f8b462ff0"
+        "id": "d62ef6d9-87ad-4b35-a54b-28e5cdbbc90b"
       },
-      "f50e6ddb-150e-4d29-9a67-f73bdd6d096c": {
+      "70d6bbac-f83c-456d-8624-d13463e7b9a2": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Chambre Froide Négative",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
+              "entityAliasId": "cca03a98-0e71-44d2-8a56-998f49045aa5",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "f50e6ddb-150e-4d29-9a67-f73bdd6d096c"
+        "id": "70d6bbac-f83c-456d-8624-d13463e7b9a2"
       },
-      "5b59ec75-e97f-47e8-b8db-e3a5ef85b55f": {
+      "bcc5c360-f6a1-4de9-b547-b694f2b5d945": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "7612364b-692f-4fce-9f5f-9cd69e203364",
+              "entityAliasId": "cca03a98-0e71-44d2-8a56-998f49045aa5",
               "dataKeys": [
                 {
                   "name": "porte_ouverte",
@@ -378,8 +387,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -393,7 +404,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "5b59ec75-e97f-47e8-b8db-e3a5ef85b55f"
+        "id": "bcc5c360-f6a1-4de9-b547-b694f2b5d945"
       }
     },
     "states": {
@@ -403,43 +414,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "baf11e7b-68d8-4945-b5bc-171b0267b31a": {
+              "91f13170-9578-489f-bd82-30e96e72da71": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "abc89ef6-660b-4d2a-9430-0f0d83755b51": {
+              "c6bcdff4-8f96-4fa6-9ba2-58c5b8aaec32": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "fff0be9e-9ac9-4062-bf12-06f1ef247d33": {
+              "9f2d6979-db8e-40be-844a-a62ad7dd4c75": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "19b4799b-dd89-490d-8153-ee955e5cf187": {
+              "79f10ae7-33ad-4915-8980-fa58faa8a226": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "19b3a452-d807-4713-8ae4-ce1f8b462ff0": {
+              "d62ef6d9-87ad-4b35-a54b-28e5cdbbc90b": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "f50e6ddb-150e-4d29-9a67-f73bdd6d096c": {
+              "70d6bbac-f83c-456d-8624-d13463e7b9a2": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "5b59ec75-e97f-47e8-b8db-e3a5ef85b55f": {
+              "bcc5c360-f6a1-4de9-b547-b694f2b5d945": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

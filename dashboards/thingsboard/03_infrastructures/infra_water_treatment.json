@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Bassin d'Aération & Traitement STEP' (ID: infra_water_treatment). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_WATER_TREATMENT. Protocole: COAP.",
     "entityAliases": {
-      "48e9eae6-e7f3-47d8-b32a-00a1bd62181e": {
-        "id": "48e9eae6-e7f3-47d8-b32a-00a1bd62181e",
+      "8e9f084f-c33b-457e-ab92-74e457fb7c01": {
+        "id": "8e9f084f-c33b-457e-ab92-74e457fb7c01",
         "alias": "Bassin d'Aération & Traitement STEP",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Bassin d'Aération & Traitement STEP"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "9389acb3-1664-42c5-8b85-67fb16e8269f": {
+      "f2cab658-c720-4241-b21c-5fad45800d2c": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "9389acb3-1664-42c5-8b85-67fb16e8269f"
+        "id": "f2cab658-c720-4241-b21c-5fad45800d2c"
       },
-      "8aca299c-538f-4c90-8253-0bf5ae4a565a": {
+      "ce9a95fa-7c25-4c2a-bb89-315d3031ad94": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "8aca299c-538f-4c90-8253-0bf5ae4a565a"
+        "id": "ce9a95fa-7c25-4c2a-bb89-315d3031ad94"
       },
-      "4c5fde36-842c-4e46-bb9b-897beeb2d811": {
+      "a628ef38-2c4f-4c5b-83a9-412753a68acf": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Taux Oxygène Dissous (O₂)",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48e9eae6-e7f3-47d8-b32a-00a1bd62181e",
+              "entityAliasId": "8e9f084f-c33b-457e-ab92-74e457fb7c01",
               "dataKeys": [
                 {
                   "name": "oxygene_dissous_mgl",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "4c5fde36-842c-4e46-bb9b-897beeb2d811"
+        "id": "a628ef38-2c4f-4c5b-83a9-412753a68acf"
       },
-      "89142ce9-e956-42c6-addb-f0f1d28c496e": {
+      "a2453859-3bfa-4ebd-902e-79e9f14d9751": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Potentiel d'Oxydoréduction (Redox)",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48e9eae6-e7f3-47d8-b32a-00a1bd62181e",
+              "entityAliasId": "8e9f084f-c33b-457e-ab92-74e457fb7c01",
               "dataKeys": [
                 {
                   "name": "potentiel_redox_mv",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "89142ce9-e956-42c6-addb-f0f1d28c496e"
+        "id": "a2453859-3bfa-4ebd-902e-79e9f14d9751"
       },
-      "95edf32a-ab0b-4dbc-8f93-8e7905945e92": {
+      "3e33ce8d-1338-49ab-a4df-f5fe2341da4f": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Acidité / Basicité pH",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48e9eae6-e7f3-47d8-b32a-00a1bd62181e",
+              "entityAliasId": "8e9f084f-c33b-457e-ab92-74e457fb7c01",
               "dataKeys": [
                 {
                   "name": "ph_eau",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "95edf32a-ab0b-4dbc-8f93-8e7905945e92"
+        "id": "3e33ce8d-1338-49ab-a4df-f5fe2341da4f"
       },
-      "cf82ea5a-8c11-46bd-ae9b-77e1fdfa8d2e": {
+      "d5013f9d-23d3-4507-970b-e2c536493a27": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Indice Turbidité Eau",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48e9eae6-e7f3-47d8-b32a-00a1bd62181e",
+              "entityAliasId": "8e9f084f-c33b-457e-ab92-74e457fb7c01",
               "dataKeys": [
                 {
                   "name": "turbidite_ntu",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "cf82ea5a-8c11-46bd-ae9b-77e1fdfa8d2e"
+        "id": "d5013f9d-23d3-4507-970b-e2c536493a27"
       },
-      "bd08e78f-4eb0-4437-a012-35483cdbb4a4": {
+      "dd46ba4f-14d1-4c67-b31b-f7068d914804": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Air Surpresseurs",
         "sizeX": 6,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48e9eae6-e7f3-47d8-b32a-00a1bd62181e",
+              "entityAliasId": "8e9f084f-c33b-457e-ab92-74e457fb7c01",
               "dataKeys": [
                 {
                   "name": "debit_insufflation_nm3h",
@@ -348,12 +357,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "bd08e78f-4eb0-4437-a012-35483cdbb4a4"
+        "id": "dd46ba4f-14d1-4c67-b31b-f7068d914804"
       },
-      "fd1255c0-48f9-402d-9edf-d673c08d0ea2": {
+      "191e061c-8529-4681-a7e2-fa3f4dcb07e8": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Bassin d'Aération & Traitement STEP",
         "sizeX": 24,
@@ -362,7 +372,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "48e9eae6-e7f3-47d8-b32a-00a1bd62181e",
+              "entityAliasId": "8e9f084f-c33b-457e-ab92-74e457fb7c01",
               "dataKeys": [
                 {
                   "name": "oxygene_dissous_mgl",
@@ -486,7 +496,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "fd1255c0-48f9-402d-9edf-d673c08d0ea2"
+        "id": "191e061c-8529-4681-a7e2-fa3f4dcb07e8"
       }
     },
     "states": {
@@ -496,49 +506,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "9389acb3-1664-42c5-8b85-67fb16e8269f": {
+              "f2cab658-c720-4241-b21c-5fad45800d2c": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "8aca299c-538f-4c90-8253-0bf5ae4a565a": {
+              "ce9a95fa-7c25-4c2a-bb89-315d3031ad94": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "4c5fde36-842c-4e46-bb9b-897beeb2d811": {
+              "a628ef38-2c4f-4c5b-83a9-412753a68acf": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "89142ce9-e956-42c6-addb-f0f1d28c496e": {
+              "a2453859-3bfa-4ebd-902e-79e9f14d9751": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "95edf32a-ab0b-4dbc-8f93-8e7905945e92": {
+              "3e33ce8d-1338-49ab-a4df-f5fe2341da4f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "cf82ea5a-8c11-46bd-ae9b-77e1fdfa8d2e": {
+              "d5013f9d-23d3-4507-970b-e2c536493a27": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "bd08e78f-4eb0-4437-a012-35483cdbb4a4": {
+              "dd46ba4f-14d1-4c67-b31b-f7068d914804": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "fd1255c0-48f9-402d-9edf-d673c08d0ea2": {
+              "191e061c-8529-4681-a7e2-fa3f4dcb07e8": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

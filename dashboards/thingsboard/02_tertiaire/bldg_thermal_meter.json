@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Compteur d'Énergie Thermique (Calories)' (ID: bldg_thermal_meter). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_THERMAL_METER. Protocole: COAP.",
     "entityAliases": {
-      "ae446514-2159-4c0d-8dc3-d0e98e24e98f": {
-        "id": "ae446514-2159-4c0d-8dc3-d0e98e24e98f",
+      "8928f93b-b8b3-4a0f-ab80-11dc167f96c0": {
+        "id": "8928f93b-b8b3-4a0f-ab80-11dc167f96c0",
         "alias": "Compteur d'Énergie Thermique (Calories)",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Compteur d'Énergie Thermique (Calories)"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "f463e754-cf2b-415e-9d73-61fd5f8c5487": {
+      "09e7cda7-44a6-4e79-a03f-dd95cf6d5c2a": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "f463e754-cf2b-415e-9d73-61fd5f8c5487"
+        "id": "09e7cda7-44a6-4e79-a03f-dd95cf6d5c2a"
       },
-      "3edcac85-6f35-4af6-824a-e708f2e4fc98": {
+      "13322753-a552-41c3-9a65-9289c973402e": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "3edcac85-6f35-4af6-824a-e708f2e4fc98"
+        "id": "13322753-a552-41c3-9a65-9289c973402e"
       },
-      "628f4a76-af15-45ca-871d-220e0974f903": {
+      "b5112ff8-b835-4987-8e61-d56a9020d9b3": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Volumique Fluide",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ae446514-2159-4c0d-8dc3-d0e98e24e98f",
+              "entityAliasId": "8928f93b-b8b3-4a0f-ab80-11dc167f96c0",
               "dataKeys": [
                 {
                   "name": "debit_volumique_m3h",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "628f4a76-af15-45ca-871d-220e0974f903"
+        "id": "b5112ff8-b835-4987-8e61-d56a9020d9b3"
       },
-      "aa539073-e415-4d94-9099-682f749df351": {
+      "3d9d6608-1d25-4770-ad34-5114d1a3d681": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Écart Température Aller/Retour",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ae446514-2159-4c0d-8dc3-d0e98e24e98f",
+              "entityAliasId": "8928f93b-b8b3-4a0f-ab80-11dc167f96c0",
               "dataKeys": [
                 {
                   "name": "delta_t_deg",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "aa539073-e415-4d94-9099-682f749df351"
+        "id": "3d9d6608-1d25-4770-ad34-5114d1a3d681"
       },
-      "cff8a2ab-76b7-43d3-a13d-7de868ed07cf": {
+      "54f53941-f330-441f-9c86-6122cf78c361": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Thermique Instantanée",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ae446514-2159-4c0d-8dc3-d0e98e24e98f",
+              "entityAliasId": "8928f93b-b8b3-4a0f-ab80-11dc167f96c0",
               "dataKeys": [
                 {
                   "name": "puissance_thermique_kw",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "cff8a2ab-76b7-43d3-a13d-7de868ed07cf"
+        "id": "54f53941-f330-441f-9c86-6122cf78c361"
       },
-      "4c212691-b3c5-4bcb-a95a-d6feaf235998": {
+      "5b00b5c6-bf23-4da3-8039-0fd2c11e066c": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Énergie Calorifique Cumulée",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ae446514-2159-4c0d-8dc3-d0e98e24e98f",
+              "entityAliasId": "8928f93b-b8b3-4a0f-ab80-11dc167f96c0",
               "dataKeys": [
                 {
                   "name": "energie_cumulee_mwh",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "4c212691-b3c5-4bcb-a95a-d6feaf235998"
+        "id": "5b00b5c6-bf23-4da3-8039-0fd2c11e066c"
       },
-      "edf5538f-6d52-4b81-807f-461946de6d14": {
+      "f39eb7a8-6c30-4f95-a97a-09719e70710c": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Départ Eau Chaude",
         "sizeX": 6,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ae446514-2159-4c0d-8dc3-d0e98e24e98f",
+              "entityAliasId": "8928f93b-b8b3-4a0f-ab80-11dc167f96c0",
               "dataKeys": [
                 {
                   "name": "temp_depart_eau",
@@ -348,12 +357,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "edf5538f-6d52-4b81-807f-461946de6d14"
+        "id": "f39eb7a8-6c30-4f95-a97a-09719e70710c"
       },
-      "374b4b8e-942b-447c-9c57-1108dec91d55": {
+      "a6e0bc65-34fd-46c8-8336-3596e899aed7": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Compteur d'Énergie Thermique (Calories)",
         "sizeX": 24,
@@ -362,7 +372,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ae446514-2159-4c0d-8dc3-d0e98e24e98f",
+              "entityAliasId": "8928f93b-b8b3-4a0f-ab80-11dc167f96c0",
               "dataKeys": [
                 {
                   "name": "debit_volumique_m3h",
@@ -486,7 +496,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "374b4b8e-942b-447c-9c57-1108dec91d55"
+        "id": "a6e0bc65-34fd-46c8-8336-3596e899aed7"
       }
     },
     "states": {
@@ -496,49 +506,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "f463e754-cf2b-415e-9d73-61fd5f8c5487": {
+              "09e7cda7-44a6-4e79-a03f-dd95cf6d5c2a": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "3edcac85-6f35-4af6-824a-e708f2e4fc98": {
+              "13322753-a552-41c3-9a65-9289c973402e": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "628f4a76-af15-45ca-871d-220e0974f903": {
+              "b5112ff8-b835-4987-8e61-d56a9020d9b3": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "aa539073-e415-4d94-9099-682f749df351": {
+              "3d9d6608-1d25-4770-ad34-5114d1a3d681": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "cff8a2ab-76b7-43d3-a13d-7de868ed07cf": {
+              "54f53941-f330-441f-9c86-6122cf78c361": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "4c212691-b3c5-4bcb-a95a-d6feaf235998": {
+              "5b00b5c6-bf23-4da3-8039-0fd2c11e066c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "edf5538f-6d52-4b81-807f-461946de6d14": {
+              "f39eb7a8-6c30-4f95-a97a-09719e70710c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "374b4b8e-942b-447c-9c57-1108dec91d55": {
+              "a6e0bc65-34fd-46c8-8336-3596e899aed7": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

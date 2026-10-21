@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale Sécurité Incendie (SSI)' (ID: bldg_fire_ssi). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_FIRE_SSI. Protocole: MQTT.",
     "entityAliases": {
-      "ed86e36a-4540-436f-91bb-7dbf3b171591": {
-        "id": "ed86e36a-4540-436f-91bb-7dbf3b171591",
+      "a47b4c6d-ee97-4b02-97ee-69273d8e6210": {
+        "id": "a47b4c6d-ee97-4b02-97ee-69273d8e6210",
         "alias": "Centrale Sécurité Incendie (SSI)",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Centrale Sécurité Incendie (SSI)"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "21676960-a8bf-418b-86e6-957302cc0736": {
+      "b3a14d1c-4684-4a12-abb6-e3d70dbbea25": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "21676960-a8bf-418b-86e6-957302cc0736"
+        "id": "b3a14d1c-4684-4a12-abb6-e3d70dbbea25"
       },
-      "45ecd7c2-c42f-4442-90af-9099dfc83804": {
+      "42e60380-5373-4313-8cec-96c6c764cd0d": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "45ecd7c2-c42f-4442-90af-9099dfc83804"
+        "id": "42e60380-5373-4313-8cec-96c6c764cd0d"
       },
-      "4a2f00e1-5883-4da2-8013-af73c10626d0": {
+      "537c3bc9-440b-4f6a-8d33-0c0ebe14e295": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Opacité Détection Fumée",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed86e36a-4540-436f-91bb-7dbf3b171591",
+              "entityAliasId": "a47b4c6d-ee97-4b02-97ee-69273d8e6210",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "4a2f00e1-5883-4da2-8013-af73c10626d0"
+        "id": "537c3bc9-440b-4f6a-8d33-0c0ebe14e295"
       },
-      "b44bcfe6-6cd3-46ec-b09d-39ad2dfa2f48": {
+      "5c704a64-93b0-49e5-a7f9-a7c278304fd9": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Extracteur Désenfumage",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed86e36a-4540-436f-91bb-7dbf3b171591",
+              "entityAliasId": "a47b4c6d-ee97-4b02-97ee-69273d8e6210",
               "dataKeys": [
                 {
                   "name": "debit_desenfumage_m3h",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "b44bcfe6-6cd3-46ec-b09d-39ad2dfa2f48"
+        "id": "5c704a64-93b0-49e5-a7f9-a7c278304fd9"
       },
-      "7bec3f86-33e9-49ae-a5dd-0478545cd9f4": {
+      "88d0200e-7d60-4e57-a8f6-296319db24c7": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Tension Alimentation Secourue (AES)",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed86e36a-4540-436f-91bb-7dbf3b171591",
+              "entityAliasId": "a47b4c6d-ee97-4b02-97ee-69273d8e6210",
               "dataKeys": [
                 {
                   "name": "tension_alim_secours",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "7bec3f86-33e9-49ae-a5dd-0478545cd9f4"
+        "id": "88d0200e-7d60-4e57-a8f6-296319db24c7"
       },
-      "53f395ad-9516-42f3-b4e9-a794ac68f2ad": {
+      "93463dc6-c890-467d-886c-d24e3d237321": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Centrale Sécurité Incendie (SSI)",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed86e36a-4540-436f-91bb-7dbf3b171591",
+              "entityAliasId": "a47b4c6d-ee97-4b02-97ee-69273d8e6210",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "53f395ad-9516-42f3-b4e9-a794ac68f2ad"
+        "id": "93463dc6-c890-467d-886c-d24e3d237321"
       },
-      "4319c2e6-f18e-4a04-9252-127ee9b50f90": {
+      "54e968a4-ce8c-4a2d-8411-018d5a2be451": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ed86e36a-4540-436f-91bb-7dbf3b171591",
+              "entityAliasId": "a47b4c6d-ee97-4b02-97ee-69273d8e6210",
               "dataKeys": [
                 {
                   "name": "declencheur_manuel",
@@ -378,8 +387,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -393,7 +404,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "4319c2e6-f18e-4a04-9252-127ee9b50f90"
+        "id": "54e968a4-ce8c-4a2d-8411-018d5a2be451"
       }
     },
     "states": {
@@ -403,43 +414,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "21676960-a8bf-418b-86e6-957302cc0736": {
+              "b3a14d1c-4684-4a12-abb6-e3d70dbbea25": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "45ecd7c2-c42f-4442-90af-9099dfc83804": {
+              "42e60380-5373-4313-8cec-96c6c764cd0d": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "4a2f00e1-5883-4da2-8013-af73c10626d0": {
+              "537c3bc9-440b-4f6a-8d33-0c0ebe14e295": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "b44bcfe6-6cd3-46ec-b09d-39ad2dfa2f48": {
+              "5c704a64-93b0-49e5-a7f9-a7c278304fd9": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "7bec3f86-33e9-49ae-a5dd-0478545cd9f4": {
+              "88d0200e-7d60-4e57-a8f6-296319db24c7": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "53f395ad-9516-42f3-b4e9-a794ac68f2ad": {
+              "93463dc6-c890-467d-886c-d24e3d237321": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "4319c2e6-f18e-4a04-9252-127ee9b50f90": {
+              "54e968a4-ce8c-4a2d-8411-018d5a2be451": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

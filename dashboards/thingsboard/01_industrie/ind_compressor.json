@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale d'Air Comprimé' (ID: ind_compressor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_COMPRESSOR. Protocole: MQTT.",
     "entityAliases": {
-      "690e0c59-3a2c-4900-a968-e439fbbf6b5c": {
-        "id": "690e0c59-3a2c-4900-a968-e439fbbf6b5c",
+      "8d7c3298-7e01-46ec-889c-865a52025549": {
+        "id": "8d7c3298-7e01-46ec-889c-865a52025549",
         "alias": "Centrale d'Air Comprimé",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Centrale d'Air Comprimé"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "1f228958-60e7-45e8-9241-3f8fc2ef3eb3": {
+      "7cd5aa66-04e1-42f6-905d-b2e4ba518654": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "1f228958-60e7-45e8-9241-3f8fc2ef3eb3"
+        "id": "7cd5aa66-04e1-42f6-905d-b2e4ba518654"
       },
-      "23b16903-1a4c-4518-9377-4484377b79ee": {
+      "607f6669-ca0b-4bb0-9d31-c0e3c33eed71": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "23b16903-1a4c-4518-9377-4484377b79ee"
+        "id": "607f6669-ca0b-4bb0-9d31-c0e3c33eed71"
       },
-      "b7131f2d-7404-4884-a0e9-fcb38f224260": {
+      "32f1f8ab-1659-4490-89bd-14f3a11c60c8": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Pression Réseau",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "690e0c59-3a2c-4900-a968-e439fbbf6b5c",
+              "entityAliasId": "8d7c3298-7e01-46ec-889c-865a52025549",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "b7131f2d-7404-4884-a0e9-fcb38f224260"
+        "id": "32f1f8ab-1659-4490-89bd-14f3a11c60c8"
       },
-      "baed331d-e9f3-48a6-b142-845894bae8cb": {
+      "6cc9b2ca-f8ce-4b58-a2d1-467f1effa6b9": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Huile / Vis",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "690e0c59-3a2c-4900-a968-e439fbbf6b5c",
+              "entityAliasId": "8d7c3298-7e01-46ec-889c-865a52025549",
               "dataKeys": [
                 {
                   "name": "temp_vis_huile",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "baed331d-e9f3-48a6-b142-845894bae8cb"
+        "id": "6cc9b2ca-f8ce-4b58-a2d1-467f1effa6b9"
       },
-      "64bb87a0-b92b-4bf2-bd2c-2361108c91e2": {
+      "6ad0e62d-7513-4b6e-ac0d-421482abf8a5": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Massique",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "690e0c59-3a2c-4900-a968-e439fbbf6b5c",
+              "entityAliasId": "8d7c3298-7e01-46ec-889c-865a52025549",
               "dataKeys": [
                 {
                   "name": "debit_air",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "64bb87a0-b92b-4bf2-bd2c-2361108c91e2"
+        "id": "6ad0e62d-7513-4b6e-ac0d-421482abf8a5"
       },
-      "a593f7ba-1357-41d3-86ec-04835c056c19": {
+      "07d20e17-103b-47a3-99cf-9c33d3681ba9": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Électrique Active",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "690e0c59-3a2c-4900-a968-e439fbbf6b5c",
+              "entityAliasId": "8d7c3298-7e01-46ec-889c-865a52025549",
               "dataKeys": [
                 {
                   "name": "puissance_active",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "a593f7ba-1357-41d3-86ec-04835c056c19"
+        "id": "07d20e17-103b-47a3-99cf-9c33d3681ba9"
       },
-      "58a1ecd2-8305-4b24-ad8a-edfe75e3f4d7": {
+      "b19eaedf-aa1a-41cd-bf12-7c971043c5c0": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Centrale d'Air Comprimé",
         "sizeX": 16,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "690e0c59-3a2c-4900-a968-e439fbbf6b5c",
+              "entityAliasId": "8d7c3298-7e01-46ec-889c-865a52025549",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -415,12 +424,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "58a1ecd2-8305-4b24-ad8a-edfe75e3f4d7"
+        "id": "b19eaedf-aa1a-41cd-bf12-7c971043c5c0"
       },
-      "2714b072-6bae-4289-9425-64cdf21d6fb8": {
+      "62bb1754-dbdf-41c0-8e12-037662273009": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -429,7 +439,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "690e0c59-3a2c-4900-a968-e439fbbf6b5c",
+              "entityAliasId": "8d7c3298-7e01-46ec-889c-865a52025549",
               "dataKeys": [
                 {
                   "name": "etat_marche",
@@ -442,8 +452,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -457,7 +469,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "2714b072-6bae-4289-9425-64cdf21d6fb8"
+        "id": "62bb1754-dbdf-41c0-8e12-037662273009"
       }
     },
     "states": {
@@ -467,49 +479,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "1f228958-60e7-45e8-9241-3f8fc2ef3eb3": {
+              "7cd5aa66-04e1-42f6-905d-b2e4ba518654": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "23b16903-1a4c-4518-9377-4484377b79ee": {
+              "607f6669-ca0b-4bb0-9d31-c0e3c33eed71": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "b7131f2d-7404-4884-a0e9-fcb38f224260": {
+              "32f1f8ab-1659-4490-89bd-14f3a11c60c8": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "baed331d-e9f3-48a6-b142-845894bae8cb": {
+              "6cc9b2ca-f8ce-4b58-a2d1-467f1effa6b9": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "64bb87a0-b92b-4bf2-bd2c-2361108c91e2": {
+              "6ad0e62d-7513-4b6e-ac0d-421482abf8a5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "a593f7ba-1357-41d3-86ec-04835c056c19": {
+              "07d20e17-103b-47a3-99cf-9c33d3681ba9": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "58a1ecd2-8305-4b24-ad8a-edfe75e3f4d7": {
+              "b19eaedf-aa1a-41cd-bf12-7c971043c5c0": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "2714b072-6bae-4289-9425-64cdf21d6fb8": {
+              "62bb1754-dbdf-41c0-8e12-037662273009": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

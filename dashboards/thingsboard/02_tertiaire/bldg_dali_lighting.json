@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Gestion d'Éclairage DALI & Présence' (ID: bldg_dali_lighting). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_BLDG_DALI_LIGHTING. Protocole: HTTP.",
     "entityAliases": {
-      "fff1765d-6e98-4e56-894d-223583fa1a9a": {
-        "id": "fff1765d-6e98-4e56-894d-223583fa1a9a",
+      "01dd4548-eaf4-4b9f-83d0-b85b687d0bce": {
+        "id": "01dd4548-eaf4-4b9f-83d0-b85b687d0bce",
         "alias": "Gestion d'Éclairage DALI & Présence",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Gestion d'Éclairage DALI & Présence"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "f908dfe0-1ee8-400f-8310-8bc7a1381713": {
+      "c3634947-a71a-4041-9220-1ed8e12139a0": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "f908dfe0-1ee8-400f-8310-8bc7a1381713"
+        "id": "c3634947-a71a-4041-9220-1ed8e12139a0"
       },
-      "9c0286d1-8def-4fcf-ae5c-6d0d155bbfb5": {
+      "79a1d578-376a-4f06-ad71-55eddea5138d": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "9c0286d1-8def-4fcf-ae5c-6d0d155bbfb5"
+        "id": "79a1d578-376a-4f06-ad71-55eddea5138d"
       },
-      "ebf2907e-f30e-4538-88c7-1682369af9bc": {
+      "0c426152-9d45-4260-8e5a-dcef6ab9cd72": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Éclairement Mesuré Plan Travail",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fff1765d-6e98-4e56-894d-223583fa1a9a",
+              "entityAliasId": "01dd4548-eaf4-4b9f-83d0-b85b687d0bce",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "ebf2907e-f30e-4538-88c7-1682369af9bc"
+        "id": "0c426152-9d45-4260-8e5a-dcef6ab9cd72"
       },
-      "23ea4524-e71c-456c-a179-f8321d4d5205": {
+      "35840fc6-ea69-4d6d-a4c2-dede91f92630": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Taux d'Occupation de Zone",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fff1765d-6e98-4e56-894d-223583fa1a9a",
+              "entityAliasId": "01dd4548-eaf4-4b9f-83d0-b85b687d0bce",
               "dataKeys": [
                 {
                   "name": "taux_presence_zone_pct",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "23ea4524-e71c-456c-a179-f8321d4d5205"
+        "id": "35840fc6-ea69-4d6d-a4c2-dede91f92630"
       },
-      "086815f7-ef99-4540-8ece-f419e041a8e8": {
+      "c7497d8e-e4f9-4ba4-ace0-833f4e65c961": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Gradation Sortie Ballast DALI",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fff1765d-6e98-4e56-894d-223583fa1a9a",
+              "entityAliasId": "01dd4548-eaf4-4b9f-83d0-b85b687d0bce",
               "dataKeys": [
                 {
                   "name": "gradation_dali_pct",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "086815f7-ef99-4540-8ece-f419e041a8e8"
+        "id": "c7497d8e-e4f9-4ba4-ace0-833f4e65c961"
       },
-      "436ad2bc-e3a4-4f5f-803e-1c281f8331e7": {
+      "4c41ed0b-25d2-47c2-9332-04cc45e5284d": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Électrique Circuit",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fff1765d-6e98-4e56-894d-223583fa1a9a",
+              "entityAliasId": "01dd4548-eaf4-4b9f-83d0-b85b687d0bce",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_w",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "436ad2bc-e3a4-4f5f-803e-1c281f8331e7"
+        "id": "4c41ed0b-25d2-47c2-9332-04cc45e5284d"
       },
-      "dc7e1477-18c1-4edc-88f3-ab9c49c39ab6": {
+      "ee74f225-4dd9-4b3d-8c77-00eac81bf2f6": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Heures d'Allumage Cumulées",
         "sizeX": 6,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fff1765d-6e98-4e56-894d-223583fa1a9a",
+              "entityAliasId": "01dd4548-eaf4-4b9f-83d0-b85b687d0bce",
               "dataKeys": [
                 {
                   "name": "heures_fonctionnement_h",
@@ -348,12 +357,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "dc7e1477-18c1-4edc-88f3-ab9c49c39ab6"
+        "id": "ee74f225-4dd9-4b3d-8c77-00eac81bf2f6"
       },
-      "c5452789-6682-46f8-a2f7-6350114393e8": {
+      "a2070965-886d-4830-a0d2-444f9389134a": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Gestion d'Éclairage DALI & Présence",
         "sizeX": 24,
@@ -362,7 +372,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "fff1765d-6e98-4e56-894d-223583fa1a9a",
+              "entityAliasId": "01dd4548-eaf4-4b9f-83d0-b85b687d0bce",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
@@ -486,7 +496,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "c5452789-6682-46f8-a2f7-6350114393e8"
+        "id": "a2070965-886d-4830-a0d2-444f9389134a"
       }
     },
     "states": {
@@ -496,49 +506,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "f908dfe0-1ee8-400f-8310-8bc7a1381713": {
+              "c3634947-a71a-4041-9220-1ed8e12139a0": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "9c0286d1-8def-4fcf-ae5c-6d0d155bbfb5": {
+              "79a1d578-376a-4f06-ad71-55eddea5138d": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "ebf2907e-f30e-4538-88c7-1682369af9bc": {
+              "0c426152-9d45-4260-8e5a-dcef6ab9cd72": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "23ea4524-e71c-456c-a179-f8321d4d5205": {
+              "35840fc6-ea69-4d6d-a4c2-dede91f92630": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "086815f7-ef99-4540-8ece-f419e041a8e8": {
+              "c7497d8e-e4f9-4ba4-ace0-833f4e65c961": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "436ad2bc-e3a4-4f5f-803e-1c281f8331e7": {
+              "4c41ed0b-25d2-47c2-9332-04cc45e5284d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "dc7e1477-18c1-4edc-88f3-ab9c49c39ab6": {
+              "ee74f225-4dd9-4b3d-8c77-00eac81bf2f6": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "c5452789-6682-46f8-a2f7-6350114393e8": {
+              "a2070965-886d-4830-a0d2-444f9389134a": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

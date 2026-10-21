@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aérogénérateur / Éolienne MW' (ID: infra_wind_turbine). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_WIND_TURBINE. Protocole: MQTT.",
     "entityAliases": {
-      "8b6c2641-03dd-4285-a95c-a48c64f25704": {
-        "id": "8b6c2641-03dd-4285-a95c-a48c64f25704",
+      "8c1275dc-7306-42e7-88f7-b22f2e15547d": {
+        "id": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
         "alias": "Aérogénérateur / Éolienne MW",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Aérogénérateur / Éolienne MW"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "cd4c6160-e2f3-4d7d-8034-be98c97fbd08": {
+      "b495b2ae-8b36-43db-9d6f-31fbc39754c6": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "cd4c6160-e2f3-4d7d-8034-be98c97fbd08"
+        "id": "b495b2ae-8b36-43db-9d6f-31fbc39754c6"
       },
-      "74ca6cf1-982a-4f9e-8b9f-343af8f8cd02": {
+      "4caea310-9fe4-4e34-a098-f2a3c6a5cbf1": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "74ca6cf1-982a-4f9e-8b9f-343af8f8cd02"
+        "id": "4caea310-9fe4-4e34-a098-f2a3c6a5cbf1"
       },
-      "47f849b5-cd82-4bdc-b7d1-82452ebdaffb": {
+      "c3423d4f-1d79-416d-9323-b79c2f62011a": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Vitesse Vent Anémomètre",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8b6c2641-03dd-4285-a95c-a48c64f25704",
+              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "47f849b5-cd82-4bdc-b7d1-82452ebdaffb"
+        "id": "c3423d4f-1d79-416d-9323-b79c2f62011a"
       },
-      "2c676b8f-26b1-4ad9-9459-9e9485e3daab": {
+      "c244956e-a34f-4219-9d17-5bae0594dc4f": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Vitesse de Rotation Rotor",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8b6c2641-03dd-4285-a95c-a48c64f25704",
+              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
               "dataKeys": [
                 {
                   "name": "vitesse_rotor_rpm",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "2c676b8f-26b1-4ad9-9459-9e9485e3daab"
+        "id": "c244956e-a34f-4219-9d17-5bae0594dc4f"
       },
-      "9f0d1a3c-f7dc-4ec5-bd09-ef2411e232a1": {
+      "7d0e88c5-290b-4b93-a801-fbe10010b2b5": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Électrique Active",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8b6c2641-03dd-4285-a95c-a48c64f25704",
+              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
               "dataKeys": [
                 {
                   "name": "puissance_active_mw",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "9f0d1a3c-f7dc-4ec5-bd09-ef2411e232a1"
+        "id": "7d0e88c5-290b-4b93-a801-fbe10010b2b5"
       },
-      "b8991fbd-a684-4d5a-8d54-eab0fc9ac304": {
+      "93f82bcb-7c38-4eda-82d6-b8ca40c26270": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Orientation Nacelle (Yaw)",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8b6c2641-03dd-4285-a95c-a48c64f25704",
+              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
               "dataKeys": [
                 {
                   "name": "angle_nacelle_yaw_deg",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "b8991fbd-a684-4d5a-8d54-eab0fc9ac304"
+        "id": "93f82bcb-7c38-4eda-82d6-b8ca40c26270"
       },
-      "cf26a91b-d6aa-4816-abfd-7baa9ebeef3b": {
+      "a7310c76-1082-4afa-82ed-4ad86633b14d": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Génératrice",
         "sizeX": 6,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8b6c2641-03dd-4285-a95c-a48c64f25704",
+              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
               "dataKeys": [
                 {
                   "name": "temp_generatrice",
@@ -348,12 +357,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "cf26a91b-d6aa-4816-abfd-7baa9ebeef3b"
+        "id": "a7310c76-1082-4afa-82ed-4ad86633b14d"
       },
-      "1da1b816-4101-45dc-bcef-758eafb85bd3": {
+      "61c471f2-539b-4c43-bde8-36058689b5f5": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Aérogénérateur / Éolienne MW",
         "sizeX": 24,
@@ -362,7 +372,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8b6c2641-03dd-4285-a95c-a48c64f25704",
+              "entityAliasId": "8c1275dc-7306-42e7-88f7-b22f2e15547d",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -486,7 +496,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "1da1b816-4101-45dc-bcef-758eafb85bd3"
+        "id": "61c471f2-539b-4c43-bde8-36058689b5f5"
       }
     },
     "states": {
@@ -496,49 +506,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "cd4c6160-e2f3-4d7d-8034-be98c97fbd08": {
+              "b495b2ae-8b36-43db-9d6f-31fbc39754c6": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "74ca6cf1-982a-4f9e-8b9f-343af8f8cd02": {
+              "4caea310-9fe4-4e34-a098-f2a3c6a5cbf1": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "47f849b5-cd82-4bdc-b7d1-82452ebdaffb": {
+              "c3423d4f-1d79-416d-9323-b79c2f62011a": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "2c676b8f-26b1-4ad9-9459-9e9485e3daab": {
+              "c244956e-a34f-4219-9d17-5bae0594dc4f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "9f0d1a3c-f7dc-4ec5-bd09-ef2411e232a1": {
+              "7d0e88c5-290b-4b93-a801-fbe10010b2b5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "b8991fbd-a684-4d5a-8d54-eab0fc9ac304": {
+              "93f82bcb-7c38-4eda-82d6-b8ca40c26270": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "cf26a91b-d6aa-4816-abfd-7baa9ebeef3b": {
+              "a7310c76-1082-4afa-82ed-4ad86633b14d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "1da1b816-4101-45dc-bcef-758eafb85bd3": {
+              "61c471f2-539b-4c43-bde8-36058689b5f5": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

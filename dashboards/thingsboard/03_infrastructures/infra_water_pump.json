@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Poste de Relevage Assainissement' (ID: infra_water_pump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_INFRA_WATER_PUMP. Protocole: COAP.",
     "entityAliases": {
-      "5ed8ddf4-d152-4059-a4ce-9961b04d5204": {
-        "id": "5ed8ddf4-d152-4059-a4ce-9961b04d5204",
+      "20eb6f41-3031-41d6-8637-72b5881d8a30": {
+        "id": "20eb6f41-3031-41d6-8637-72b5881d8a30",
         "alias": "Poste de Relevage Assainissement",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Poste de Relevage Assainissement"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "edd99f48-1c18-40bd-b1de-1856d846f428": {
+      "2dd3c43d-b56d-4681-9721-3fe67ead8826": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "edd99f48-1c18-40bd-b1de-1856d846f428"
+        "id": "2dd3c43d-b56d-4681-9721-3fe67ead8826"
       },
-      "deed7673-7625-43d7-9a7e-78380c6b331e": {
+      "d64fd44e-d2b6-427e-9183-16ea17c5e1c2": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "deed7673-7625-43d7-9a7e-78380c6b331e"
+        "id": "d64fd44e-d2b6-427e-9183-16ea17c5e1c2"
       },
-      "4fd72a56-e4a0-4b21-9148-52cc160d5890": {
+      "d2c19f4d-3721-4a32-b488-7563087a49d0": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Niveau d'Eau en Bâche",
         "sizeX": 8,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5ed8ddf4-d152-4059-a4ce-9961b04d5204",
+              "entityAliasId": "20eb6f41-3031-41d6-8637-72b5881d8a30",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "4fd72a56-e4a0-4b21-9148-52cc160d5890"
+        "id": "d2c19f4d-3721-4a32-b488-7563087a49d0"
       },
-      "c17d7c98-c0a4-4d34-8eda-e2c0268ab93e": {
+      "5fc567fb-3b54-4fd7-8d80-0473793af523": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Pompe de Refoulement",
         "sizeX": 8,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5ed8ddf4-d152-4059-a4ce-9961b04d5204",
+              "entityAliasId": "20eb6f41-3031-41d6-8637-72b5881d8a30",
               "dataKeys": [
                 {
                   "name": "debit_refoulement",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 8,
-        "id": "c17d7c98-c0a4-4d34-8eda-e2c0268ab93e"
+        "id": "5fc567fb-3b54-4fd7-8d80-0473793af523"
       },
-      "bf7940c7-e543-4126-8e12-c5007049f09c": {
+      "29cb5ac9-de3c-4579-be06-05eac21c1d36": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Puissance Électrique Pompe",
         "sizeX": 8,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5ed8ddf4-d152-4059-a4ce-9961b04d5204",
+              "entityAliasId": "20eb6f41-3031-41d6-8637-72b5881d8a30",
               "dataKeys": [
                 {
                   "name": "conso_pompe_kw",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 16,
-        "id": "bf7940c7-e543-4126-8e12-c5007049f09c"
+        "id": "29cb5ac9-de3c-4579-be06-05eac21c1d36"
       },
-      "08c45067-65f7-4b62-a5c6-d05c61f9752d": {
+      "9dcbafb8-b023-46b9-999b-2b88049f76f3": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Poste de Relevage Assainissement",
         "sizeX": 16,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5ed8ddf4-d152-4059-a4ce-9961b04d5204",
+              "entityAliasId": "20eb6f41-3031-41d6-8637-72b5881d8a30",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -344,12 +352,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "08c45067-65f7-4b62-a5c6-d05c61f9752d"
+        "id": "9dcbafb8-b023-46b9-999b-2b88049f76f3"
       },
-      "2bb17106-d699-4945-9a5f-3b2f394b5113": {
+      "53260f94-a4cf-4548-8e88-47daefab800e": {
+        "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "latest_values",
+        "typeAlias": "entities_table",
         "type": "latest",
         "title": "Attributs & États Opérationnels",
         "sizeX": 8,
@@ -358,7 +367,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5ed8ddf4-d152-4059-a4ce-9961b04d5204",
+              "entityAliasId": "20eb6f41-3031-41d6-8637-72b5881d8a30",
               "dataKeys": [
                 {
                   "name": "alarme_debordement",
@@ -371,8 +380,10 @@
             }
           ],
           "settings": {
-            "showTitle": true,
-            "displayDetails": true
+            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
           },
           "showTitle": true,
           "title": "Attributs & États Opérationnels",
@@ -386,7 +397,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "2bb17106-d699-4945-9a5f-3b2f394b5113"
+        "id": "53260f94-a4cf-4548-8e88-47daefab800e"
       }
     },
     "states": {
@@ -396,43 +407,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "edd99f48-1c18-40bd-b1de-1856d846f428": {
+              "2dd3c43d-b56d-4681-9721-3fe67ead8826": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "deed7673-7625-43d7-9a7e-78380c6b331e": {
+              "d64fd44e-d2b6-427e-9183-16ea17c5e1c2": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "4fd72a56-e4a0-4b21-9148-52cc160d5890": {
+              "d2c19f4d-3721-4a32-b488-7563087a49d0": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "c17d7c98-c0a4-4d34-8eda-e2c0268ab93e": {
+              "5fc567fb-3b54-4fd7-8d80-0473793af523": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "bf7940c7-e543-4126-8e12-c5007049f09c": {
+              "29cb5ac9-de3c-4579-be06-05eac21c1d36": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "08c45067-65f7-4b62-a5c6-d05c61f9752d": {
+              "9dcbafb8-b023-46b9-999b-2b88049f76f3": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "2bb17106-d699-4945-9a5f-3b2f394b5113": {
+              "53260f94-a4cf-4548-8e88-47daefab800e": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

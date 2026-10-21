@@ -4,18 +4,21 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Four de Traitement Thermique' (ID: ind_thermal_furnace). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_THERMAL_FURNACE. Protocole: MQTT.",
     "entityAliases": {
-      "bc17de0d-321d-4b4b-8fc1-810df58f5e41": {
-        "id": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
+      "56f0957c-25d9-4186-a6ed-299d3bbc23f4": {
+        "id": "56f0957c-25d9-4186-a6ed-299d3bbc23f4",
         "alias": "Four de Traitement Thermique",
         "filter": {
-          "type": "entityName",
-          "entityType": "DEVICE",
-          "entityNameFilter": "Four de Traitement Thermique"
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
         }
       }
     },
     "widgets": {
-      "073aa476-bdf4-402f-9d6c-6e5d8c22e465": {
+      "df4f23fa-b65d-4b27-aef2-d4501e52be59": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -38,9 +41,10 @@
         },
         "row": 0,
         "col": 0,
-        "id": "073aa476-bdf4-402f-9d6c-6e5d8c22e465"
+        "id": "df4f23fa-b65d-4b27-aef2-d4501e52be59"
       },
-      "3b8d06c3-d1d1-4807-9a31-7bfe211c4f48": {
+      "cb29b5b6-c2d9-40e1-a62e-742ec2ef549f": {
+        "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "html_card",
@@ -63,12 +67,13 @@
         },
         "row": 3,
         "col": 0,
-        "id": "3b8d06c3-d1d1-4807-9a31-7bfe211c4f48"
+        "id": "cb29b5b6-c2d9-40e1-a62e-742ec2ef549f"
       },
-      "d0a54004-c1fa-4dca-bb75-d75ef3fe96dd": {
+      "5d16c7ce-7cd8-4aaf-af52-72b9c4d852fc": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Zone 1 (Préchauffe)",
         "sizeX": 6,
@@ -77,7 +82,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
+              "entityAliasId": "56f0957c-25d9-4186-a6ed-299d3bbc23f4",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -120,12 +125,13 @@
         },
         "row": 11,
         "col": 0,
-        "id": "d0a54004-c1fa-4dca-bb75-d75ef3fe96dd"
+        "id": "5d16c7ce-7cd8-4aaf-af52-72b9c4d852fc"
       },
-      "b26af1ec-c49d-4172-9dbe-bf3b10d301d7": {
+      "1e4d00c6-22b6-4508-90f4-fe58e2786422": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Zone 2 (Maintien)",
         "sizeX": 6,
@@ -134,7 +140,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
+              "entityAliasId": "56f0957c-25d9-4186-a6ed-299d3bbc23f4",
               "dataKeys": [
                 {
                   "name": "temp_zone_2",
@@ -177,12 +183,13 @@
         },
         "row": 11,
         "col": 6,
-        "id": "b26af1ec-c49d-4172-9dbe-bf3b10d301d7"
+        "id": "1e4d00c6-22b6-4508-90f4-fe58e2786422"
       },
-      "0e4b7a9d-7fc2-4c7e-8518-620ef5e3f60e": {
+      "a8f28328-1f61-438e-ba36-ad427708eb4d": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Température Zone 3 (Homogénéisation)",
         "sizeX": 6,
@@ -191,7 +198,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
+              "entityAliasId": "56f0957c-25d9-4186-a6ed-299d3bbc23f4",
               "dataKeys": [
                 {
                   "name": "temp_zone_3",
@@ -234,12 +241,13 @@
         },
         "row": 11,
         "col": 12,
-        "id": "0e4b7a9d-7fc2-4c7e-8518-620ef5e3f60e"
+        "id": "a8f28328-1f61-438e-ba36-ad427708eb4d"
       },
-      "845a7c34-8b1b-46d3-80be-e0c80fcbadfa": {
+      "ecf1e1b8-a8f7-4c45-aa0b-d0b8c5b9e212": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Débit Gaz Combustible",
         "sizeX": 6,
@@ -248,7 +256,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
+              "entityAliasId": "56f0957c-25d9-4186-a6ed-299d3bbc23f4",
               "dataKeys": [
                 {
                   "name": "debit_gaz_combustible",
@@ -291,12 +299,13 @@
         },
         "row": 11,
         "col": 18,
-        "id": "845a7c34-8b1b-46d3-80be-e0c80fcbadfa"
+        "id": "ecf1e1b8-a8f7-4c45-aa0b-d0b8c5b9e212"
       },
-      "f45d5b88-0527-47ef-96df-90726a0bc9e9": {
+      "e9794aec-5d2a-4591-baa0-34fcca4d9dab": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
-        "typeAlias": "digital_gauge",
+        "typeAlias": "simple_gauge_justgage",
         "type": "latest",
         "title": "Modulation Puissance Brûleurs",
         "sizeX": 6,
@@ -305,7 +314,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
+              "entityAliasId": "56f0957c-25d9-4186-a6ed-299d3bbc23f4",
               "dataKeys": [
                 {
                   "name": "puissance_bruleurs_pct",
@@ -348,12 +357,13 @@
         },
         "row": 16,
         "col": 0,
-        "id": "f45d5b88-0527-47ef-96df-90726a0bc9e9"
+        "id": "e9794aec-5d2a-4591-baa0-34fcca4d9dab"
       },
-      "af0fccf2-4488-4ec9-841e-d5325e99d44b": {
+      "d889e849-c5b8-4dd1-bae7-9a25c999a666": {
+        "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
-        "typeAlias": "timeseries",
+        "typeAlias": "basic_timeseries",
         "type": "timeseries",
         "title": "Télémétries en Temps Réel - Four de Traitement Thermique",
         "sizeX": 24,
@@ -362,7 +372,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bc17de0d-321d-4b4b-8fc1-810df58f5e41",
+              "entityAliasId": "56f0957c-25d9-4186-a6ed-299d3bbc23f4",
               "dataKeys": [
                 {
                   "name": "temp_zone_1",
@@ -486,7 +496,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "af0fccf2-4488-4ec9-841e-d5325e99d44b"
+        "id": "d889e849-c5b8-4dd1-bae7-9a25c999a666"
       }
     },
     "states": {
@@ -496,49 +506,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "073aa476-bdf4-402f-9d6c-6e5d8c22e465": {
+              "df4f23fa-b65d-4b27-aef2-d4501e52be59": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "3b8d06c3-d1d1-4807-9a31-7bfe211c4f48": {
+              "cb29b5b6-c2d9-40e1-a62e-742ec2ef549f": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "d0a54004-c1fa-4dca-bb75-d75ef3fe96dd": {
+              "5d16c7ce-7cd8-4aaf-af52-72b9c4d852fc": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "b26af1ec-c49d-4172-9dbe-bf3b10d301d7": {
+              "1e4d00c6-22b6-4508-90f4-fe58e2786422": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "0e4b7a9d-7fc2-4c7e-8518-620ef5e3f60e": {
+              "a8f28328-1f61-438e-ba36-ad427708eb4d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "845a7c34-8b1b-46d3-80be-e0c80fcbadfa": {
+              "ecf1e1b8-a8f7-4c45-aa0b-d0b8c5b9e212": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "f45d5b88-0527-47ef-96df-90726a0bc9e9": {
+              "e9794aec-5d2a-4591-baa0-34fcca4d9dab": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "af0fccf2-4488-4ec9-841e-d5325e99d44b": {
+              "d889e849-c5b8-4dd1-bae7-9a25c999a666": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,
