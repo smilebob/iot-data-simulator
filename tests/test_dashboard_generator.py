@@ -107,12 +107,16 @@ def test_thingsboard_dashboard_generation():
     widgets = dashboard["configuration"]["widgets"]
     assert len(widgets) >= 4  # Header + Synoptique SCADA + Jauges + Graphique + Carte Attributs
 
-    # Vérification du synoptique SCADA
+    # Vérification du synoptique SCADA (html_value_card dynamique temps réel)
     synoptic_w = next(w for w in widgets.values() if "Synoptique SCADA" in w.get("title", ""))
-    assert synoptic_w.get("typeFullFqn") == "system.cards.html_card"
+    assert synoptic_w.get("typeFullFqn") == "system.cards.html_value_card"
+    assert synoptic_w.get("typeAlias") == "html_value_card"
+    assert synoptic_w.get("type") == "latest"
+    assert len(synoptic_w["config"]["datasources"][0]["dataKeys"]) >= 2
     assert "<svg" in synoptic_w["config"]["settings"]["cardHtml"]
     assert synoptic_w["config"]["settings"]["cardHtml"] == synoptic_w["config"]["settings"]["html"]
     assert "pipe-flow" in synoptic_w["config"]["settings"]["cardHtml"]
+    assert "${" in synoptic_w["config"]["settings"]["cardHtml"]
 
     # Vérification du widget d'en-tête (HTML) avec le token
     header_w = next(w for w in widgets.values() if w.get("typeAlias") == "html_card" and "Informations" in w.get("title", ""))

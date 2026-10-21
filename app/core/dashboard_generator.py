@@ -124,21 +124,39 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
 
     # -------------------------------------------------------------
     # 2. Widget Schéma Synoptique SCADA (P&ID / SLD / GTB Mimic)
+    #    Type: html_value_card (dynamique temps réel ThingsBoard)
     # -------------------------------------------------------------
     scada_synoptic_id = str(uuid.uuid4())
     synoptic_html = get_scada_synoptic_html(device, variables)
 
+    # Alimentation des dataKeys de télémétrie pour injection dynamique ${key} dans le SVG
+    synoptic_datakeys = []
+    for i, v in enumerate(telemetry_vars + attribute_vars):
+        synoptic_datakeys.append({
+            "name": get_clean_var_key(v),
+            "type": "timeseries" if v.var_type == VariableType.TELEMETRY else "attribute",
+            "label": v.name,
+            "color": PALETTE_COLORS[i % len(PALETTE_COLORS)],
+            "settings": {}
+        })
+
     widgets[scada_synoptic_id] = {
-        "typeFullFqn": "system.cards.html_card",
+        "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": True,
         "bundleAlias": "cards",
-        "typeAlias": "html_card",
-        "type": "static",
+        "typeAlias": "html_value_card",
+        "type": "latest",
         "title": f"Synoptique SCADA Process - {device_name}",
         "sizeX": 24,
         "sizeY": 8,
         "config": {
-            "datasources": [],
+            "datasources": [
+                {
+                    "type": "entity",
+                    "entityAliasId": alias_id,
+                    "dataKeys": synoptic_datakeys
+                }
+            ],
             "settings": {
                 "cardHtml": synoptic_html,
                 "html": synoptic_html,

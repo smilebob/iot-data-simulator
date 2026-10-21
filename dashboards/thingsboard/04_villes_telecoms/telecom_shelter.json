@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Shelter Télécoms / Nœud Fibre' (ID: telecom_shelter). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_TELECOM_SHELTER. Protocole: MQTT.",
     "entityAliases": {
-      "0a1113fa-bf02-472b-aed9-37a38d5bc0ed": {
-        "id": "0a1113fa-bf02-472b-aed9-37a38d5bc0ed",
+      "520d2cbe-0532-4616-ad73-5f4184c734ab": {
+        "id": "520d2cbe-0532-4616-ad73-5f4184c734ab",
         "alias": "Shelter Télécoms / Nœud Fibre",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "de4f5fac-1b28-4ef0-8d38-bd3f9a7538d8": {
+      "cd2feb86-8b02-4479-9a20-fe71dab539b2": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,22 +44,57 @@
         },
         "row": 0,
         "col": 0,
-        "id": "de4f5fac-1b28-4ef0-8d38-bd3f9a7538d8"
+        "id": "cd2feb86-8b02-4479-9a20-fe71dab539b2"
       },
-      "154081a8-643f-4f0b-a043-b824a7a4c95a": {
-        "typeFullFqn": "system.cards.html_card",
+      "c6339dae-c35a-48c0-bbba-f424ffe5f66d": {
+        "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "html_card",
-        "type": "static",
+        "typeAlias": "html_value_card",
+        "type": "latest",
         "title": "Synoptique SCADA Process - Shelter Télécoms / Nœud Fibre",
         "sizeX": 24,
         "sizeY": 8,
         "config": {
-          "datasources": [],
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "520d2cbe-0532-4616-ad73-5f4184c734ab",
+              "dataKeys": [
+                {
+                  "name": "charge_onduleur_pct",
+                  "type": "timeseries",
+                  "label": "Charge Onduleur ASI/UPS",
+                  "color": "#E2001A",
+                  "settings": {}
+                },
+                {
+                  "name": "autonomie_batterie_min",
+                  "type": "timeseries",
+                  "label": "Autonomie Batterie Restante",
+                  "color": "#3B82F6",
+                  "settings": {}
+                },
+                {
+                  "name": "temp_baie_serveur",
+                  "type": "timeseries",
+                  "label": "Température Couloir Chaud",
+                  "color": "#10B981",
+                  "settings": {}
+                },
+                {
+                  "name": "detection_inondation",
+                  "type": "attribute",
+                  "label": "Capteur Présence Eau / Fuite",
+                  "color": "#F59E0B",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Shelter Télécoms SCADA : Shelter Télécoms / Nœud Fibre\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_TELECOM_SHELTER</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Enceinte Shelter Sécurisé -->\n    <rect x=\"70\" y=\"40\" width=\"550\" height=\"180\" rx=\"10\" fill=\"#131B26\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"180\" y=\"65\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">SHELTER TÉLÉCOMS / POP FIBRE</text>\n\n    <!-- Baies Serveurs / Switchs 19 pouces -->\n    <rect x=\"110\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <line x1=\"115\" y1=\"100\" x2=\"170\" y2=\"100\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <line x1=\"115\" y1=\"120\" x2=\"170\" y2=\"120\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"142\" y=\"190\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">BAIE ROUTEURS</text>\n\n    <rect x=\"200\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <line x1=\"205\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#10B981\" stroke-width=\"2\"/>\n    <text x=\"232\" y=\"190\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">BAIE OLT FIBRE</text>\n\n    <!-- Onduleur UPS Double Conversion -->\n    <rect x=\"290\" y=\"80\" width=\"70\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n    <text x=\"325\" y=\"130\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">UPS 40kVA</text>\n    <text x=\"325\" y=\"145\" fill=\"#F59E0B\" font-size=\"8\" text-anchor=\"middle\">BATTERIES</text>\n\n    <!-- Climatisation Redondante N+1 -->\n    <rect x=\"400\" y=\"80\" width=\"80\" height=\"120\" rx=\"4\" fill=\"#0C4A6E\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"440\" y=\"130\" fill=\"#38BDF8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">CLIM PRECISION</text>\n    <text x=\"440\" y=\"145\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">N+1 REDONDANT</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. SALLE (CONSIGNE)</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">22.1 °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">CHARGE ONDULEUR</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">48 %</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Shelter Télécoms SCADA : Shelter Télécoms / Nœud Fibre\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_TELECOM_SHELTER</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Enceinte Shelter Sécurisé -->\n    <rect x=\"70\" y=\"40\" width=\"550\" height=\"180\" rx=\"10\" fill=\"#131B26\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"180\" y=\"65\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">SHELTER TÉLÉCOMS / POP FIBRE</text>\n\n    <!-- Baies Serveurs / Switchs 19 pouces -->\n    <rect x=\"110\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <line x1=\"115\" y1=\"100\" x2=\"170\" y2=\"100\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <line x1=\"115\" y1=\"120\" x2=\"170\" y2=\"120\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"142\" y=\"190\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">BAIE ROUTEURS</text>\n\n    <rect x=\"200\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <line x1=\"205\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#10B981\" stroke-width=\"2\"/>\n    <text x=\"232\" y=\"190\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">BAIE OLT FIBRE</text>\n\n    <!-- Onduleur UPS Double Conversion -->\n    <rect x=\"290\" y=\"80\" width=\"70\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n    <text x=\"325\" y=\"130\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">UPS 40kVA</text>\n    <text x=\"325\" y=\"145\" fill=\"#F59E0B\" font-size=\"8\" text-anchor=\"middle\">BATTERIES</text>\n\n    <!-- Climatisation Redondante N+1 -->\n    <rect x=\"400\" y=\"80\" width=\"80\" height=\"120\" rx=\"4\" fill=\"#0C4A6E\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"440\" y=\"130\" fill=\"#38BDF8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">CLIM PRECISION</text>\n    <text x=\"440\" y=\"145\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">N+1 REDONDANT</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. SALLE (CONSIGNE)</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">22.1 °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"140\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">CHARGE ONDULEUR</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">48 %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Shelter Télécoms SCADA : Shelter Télécoms / Nœud Fibre\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_TELECOM_SHELTER</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Enceinte Shelter Sécurisé -->\n    <rect x=\"70\" y=\"40\" width=\"550\" height=\"180\" rx=\"10\" fill=\"#131B26\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"180\" y=\"65\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">SHELTER TÉLÉCOMS / POP FIBRE</text>\n\n    <!-- Baies Serveurs / Switchs 19 pouces -->\n    <rect x=\"110\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <line x1=\"115\" y1=\"100\" x2=\"170\" y2=\"100\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <line x1=\"115\" y1=\"120\" x2=\"170\" y2=\"120\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"142\" y=\"190\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">BAIE ROUTEURS</text>\n\n    <rect x=\"200\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <line x1=\"205\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#10B981\" stroke-width=\"2\"/>\n    <text x=\"232\" y=\"190\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">BAIE OLT FIBRE</text>\n\n    <!-- Onduleur UPS Double Conversion -->\n    <rect x=\"290\" y=\"80\" width=\"70\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n    <text x=\"325\" y=\"130\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">UPS 40kVA</text>\n    <text x=\"325\" y=\"145\" fill=\"#F59E0B\" font-size=\"8\" text-anchor=\"middle\">BATTERIES</text>\n\n    <!-- Climatisation Redondante N+1 -->\n    <rect x=\"400\" y=\"80\" width=\"80\" height=\"120\" rx=\"4\" fill=\"#0C4A6E\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"440\" y=\"130\" fill=\"#38BDF8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">CLIM PRECISION</text>\n    <text x=\"440\" y=\"145\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">N+1 REDONDANT</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. SALLE (CONSIGNE)</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temperature_baie:1} °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">CHARGE ONDULEUR</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${charge_ups_pct:0} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Shelter Télécoms SCADA : Shelter Télécoms / Nœud Fibre\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_TELECOM_SHELTER</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Enceinte Shelter Sécurisé -->\n    <rect x=\"70\" y=\"40\" width=\"550\" height=\"180\" rx=\"10\" fill=\"#131B26\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"180\" y=\"65\" fill=\"#38BDF8\" font-size=\"11\" font-weight=\"bold\">SHELTER TÉLÉCOMS / POP FIBRE</text>\n\n    <!-- Baies Serveurs / Switchs 19 pouces -->\n    <rect x=\"110\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <line x1=\"115\" y1=\"100\" x2=\"170\" y2=\"100\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <line x1=\"115\" y1=\"120\" x2=\"170\" y2=\"120\" stroke=\"#38BDF8\" stroke-width=\"2\"/>\n    <text x=\"142\" y=\"190\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">BAIE ROUTEURS</text>\n\n    <rect x=\"200\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n    <line x1=\"205\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#10B981\" stroke-width=\"2\"/>\n    <text x=\"232\" y=\"190\" fill=\"#94A3B8\" font-size=\"8\" text-anchor=\"middle\">BAIE OLT FIBRE</text>\n\n    <!-- Onduleur UPS Double Conversion -->\n    <rect x=\"290\" y=\"80\" width=\"70\" height=\"120\" rx=\"4\" fill=\"#1E293B\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n    <text x=\"325\" y=\"130\" fill=\"#F59E0B\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">UPS 40kVA</text>\n    <text x=\"325\" y=\"145\" fill=\"#F59E0B\" font-size=\"8\" text-anchor=\"middle\">BATTERIES</text>\n\n    <!-- Climatisation Redondante N+1 -->\n    <rect x=\"400\" y=\"80\" width=\"80\" height=\"120\" rx=\"4\" fill=\"#0C4A6E\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"440\" y=\"130\" fill=\"#38BDF8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">CLIM PRECISION</text>\n    <text x=\"440\" y=\"145\" fill=\"#38BDF8\" font-size=\"8\" text-anchor=\"middle\">N+1 REDONDANT</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 50)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMP. SALLE (CONSIGNE)</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temperature_baie:1} °C</text>\n    </g>\n    <g transform=\"translate(680, 110)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#10B981\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">CHARGE ONDULEUR</text>\n      <text x=\"10\" y=\"31\" fill=\"#10B981\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${charge_ups_pct:0} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
           },
           "showTitle": false,
@@ -73,9 +108,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "154081a8-643f-4f0b-a043-b824a7a4c95a"
+        "id": "c6339dae-c35a-48c0-bbba-f424ffe5f66d"
       },
-      "645183f9-9443-4f78-979f-ca37e76308e5": {
+      "38426d3c-7d00-4b76-9dbd-d3a266179b7d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -88,7 +123,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0a1113fa-bf02-472b-aed9-37a38d5bc0ed",
+              "entityAliasId": "520d2cbe-0532-4616-ad73-5f4184c734ab",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -131,9 +166,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "645183f9-9443-4f78-979f-ca37e76308e5"
+        "id": "38426d3c-7d00-4b76-9dbd-d3a266179b7d"
       },
-      "b70a45c3-6134-4de3-892c-cf2379571e1e": {
+      "8efdf136-af04-470b-b1e8-70cd80365b5e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -146,7 +181,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0a1113fa-bf02-472b-aed9-37a38d5bc0ed",
+              "entityAliasId": "520d2cbe-0532-4616-ad73-5f4184c734ab",
               "dataKeys": [
                 {
                   "name": "autonomie_batterie_min",
@@ -189,9 +224,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "b70a45c3-6134-4de3-892c-cf2379571e1e"
+        "id": "8efdf136-af04-470b-b1e8-70cd80365b5e"
       },
-      "edaea5fd-13c8-40b4-9329-afd6ec99b7f4": {
+      "6f5a3bde-decd-4f08-b36f-6e0386f14f9d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +239,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0a1113fa-bf02-472b-aed9-37a38d5bc0ed",
+              "entityAliasId": "520d2cbe-0532-4616-ad73-5f4184c734ab",
               "dataKeys": [
                 {
                   "name": "temp_baie_serveur",
@@ -247,9 +282,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "edaea5fd-13c8-40b4-9329-afd6ec99b7f4"
+        "id": "6f5a3bde-decd-4f08-b36f-6e0386f14f9d"
       },
-      "8c24a8ac-06ac-47d1-90ac-e61532383103": {
+      "ea4cc932-8738-4500-9e53-4066d65cd9c8": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -262,7 +297,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0a1113fa-bf02-472b-aed9-37a38d5bc0ed",
+              "entityAliasId": "520d2cbe-0532-4616-ad73-5f4184c734ab",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -358,9 +393,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8c24a8ac-06ac-47d1-90ac-e61532383103"
+        "id": "ea4cc932-8738-4500-9e53-4066d65cd9c8"
       },
-      "ce839032-0385-4c15-9b23-31471e6f4f00": {
+      "539c2ada-f8b2-43b0-8f6c-3b7202b2f7cd": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -373,7 +408,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0a1113fa-bf02-472b-aed9-37a38d5bc0ed",
+              "entityAliasId": "520d2cbe-0532-4616-ad73-5f4184c734ab",
               "dataKeys": [
                 {
                   "name": "detection_inondation",
@@ -403,7 +438,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "ce839032-0385-4c15-9b23-31471e6f4f00"
+        "id": "539c2ada-f8b2-43b0-8f6c-3b7202b2f7cd"
       }
     },
     "states": {
@@ -413,43 +448,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "de4f5fac-1b28-4ef0-8d38-bd3f9a7538d8": {
+              "cd2feb86-8b02-4479-9a20-fe71dab539b2": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "154081a8-643f-4f0b-a043-b824a7a4c95a": {
+              "c6339dae-c35a-48c0-bbba-f424ffe5f66d": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "645183f9-9443-4f78-979f-ca37e76308e5": {
+              "38426d3c-7d00-4b76-9dbd-d3a266179b7d": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "b70a45c3-6134-4de3-892c-cf2379571e1e": {
+              "8efdf136-af04-470b-b1e8-70cd80365b5e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "edaea5fd-13c8-40b4-9329-afd6ec99b7f4": {
+              "6f5a3bde-decd-4f08-b36f-6e0386f14f9d": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "8c24a8ac-06ac-47d1-90ac-e61532383103": {
+              "ea4cc932-8738-4500-9e53-4066d65cd9c8": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "ce839032-0385-4c15-9b23-31471e6f4f00": {
+              "539c2ada-f8b2-43b0-8f6c-3b7202b2f7cd": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

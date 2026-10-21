@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale d'Air Comprimé' (ID: ind_compressor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Token: TOKEN_IND_COMPRESSOR. Protocole: MQTT.",
     "entityAliases": {
-      "51367279-bbfc-4843-914d-f70cdfb8eaaf": {
-        "id": "51367279-bbfc-4843-914d-f70cdfb8eaaf",
+      "15144fcc-1ba1-4b6a-a654-e486593a509e": {
+        "id": "15144fcc-1ba1-4b6a-a654-e486593a509e",
         "alias": "Centrale d'Air Comprimé",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "1335f549-9c23-4bdb-b029-3bdfc456dec1": {
+      "cd20db09-7d68-4fad-b8ec-2784b4ad8341": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,22 +44,64 @@
         },
         "row": 0,
         "col": 0,
-        "id": "1335f549-9c23-4bdb-b029-3bdfc456dec1"
+        "id": "cd20db09-7d68-4fad-b8ec-2784b4ad8341"
       },
-      "00134315-231a-4280-b759-5c96213d015b": {
-        "typeFullFqn": "system.cards.html_card",
+      "f88a9f11-7819-4cde-b662-ab4950137189": {
+        "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
-        "typeAlias": "html_card",
-        "type": "static",
+        "typeAlias": "html_value_card",
+        "type": "latest",
         "title": "Synoptique SCADA Process - Centrale d'Air Comprimé",
         "sizeX": 24,
         "sizeY": 8,
         "config": {
-          "datasources": [],
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "15144fcc-1ba1-4b6a-a654-e486593a509e",
+              "dataKeys": [
+                {
+                  "name": "pression_reseau",
+                  "type": "timeseries",
+                  "label": "Pression Réseau",
+                  "color": "#E2001A",
+                  "settings": {}
+                },
+                {
+                  "name": "temp_vis_huile",
+                  "type": "timeseries",
+                  "label": "Température Huile / Vis",
+                  "color": "#3B82F6",
+                  "settings": {}
+                },
+                {
+                  "name": "debit_air",
+                  "type": "timeseries",
+                  "label": "Débit Massique",
+                  "color": "#10B981",
+                  "settings": {}
+                },
+                {
+                  "name": "puissance_active",
+                  "type": "timeseries",
+                  "label": "Puissance Électrique Active",
+                  "color": "#F59E0B",
+                  "settings": {}
+                },
+                {
+                  "name": "etat_marche",
+                  "type": "attribute",
+                  "label": "État de Fonctionnement",
+                  "color": "#8B5CF6",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique P&ID SCADA : Centrale d'Air Comprimé\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COMPRESSOR</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Filtre aspiration -->\n    <rect x=\"30\" y=\"90\" width=\"60\" height=\"70\" rx=\"6\" fill=\"#1E293B\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"60\" y=\"125\" fill=\"#94A3B8\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">FILTRE G4</text>\n    <path d=\"M 90 125 L 180 125\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n\n    <!-- Bloc Vis Bi-Étagé -->\n    <rect x=\"180\" y=\"60\" width=\"130\" height=\"130\" rx=\"10\" fill=\"#182030\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <circle cx=\"245\" cy=\"125\" r=\"45\" fill=\"#111827\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n    <g transform=\"translate(245, 125)\">\n      <path class=\"scada-rotor\" d=\"M -30 -5 C -15 -25 15 -25 30 -5 C 15 25 -15 25 -30 -5 Z\" fill=\"#E2001A\" opacity=\"0.85\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"10\" fill=\"#F8FAFC\"/>\n    </g>\n    <text x=\"245\" y=\"45\" fill=\"#F1F5F9\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">BLOC VIS BI-ÉTAGÉ</text>\n    <!-- Moteur 75kW -->\n    <rect x=\"210\" y=\"200\" width=\"70\" height=\"45\" rx=\"4\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"245\" y=\"227\" fill=\"#38BDF8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTEUR 75kW</text>\n\n    <!-- Tuyauterie huile/air -->\n    <path d=\"M 310 125 L 410 125\" fill=\"none\" stroke=\"#F59E0B\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n\n    <!-- Séparateur Huile/Air -->\n    <rect x=\"410\" y=\"75\" width=\"85\" height=\"100\" rx=\"8\" fill=\"#1E293B\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"452\" y=\"105\" fill=\"#F59E0B\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">SÉPARATEUR</text>\n    <rect x=\"420\" y=\"145\" width=\"65\" height=\"20\" rx=\"3\" fill=\"#D97706\" opacity=\"0.6\"/>\n\n    <!-- Cuve Tampon 1000L -->\n    <path d=\"M 495 125 L 590 125\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <rect x=\"590\" y=\"50\" width=\"110\" height=\"150\" rx=\"20\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2.5\"/>\n    <text x=\"645\" y=\"80\" fill=\"#38BDF8\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">RÉSERVOIR AIR</text>\n    <text x=\"645\" y=\"95\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Capacité: 1000L</text>\n    <line x1=\"645\" y1=\"110\" x2=\"645\" y2=\"175\" stroke=\"#10B981\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n\n    <!-- Sortie Réseau -->\n    <path d=\"M 700 125 L 860 125\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"860,120 875,125 860,130\" fill=\"#10B981\"/>\n    <text x=\"900\" y=\"129\" fill=\"#10B981\" font-size=\"11\" font-weight=\"bold\">USINE</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 40)\">\n      <rect width=\"135\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PRESSION RÉSEAU</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">7.4 bar</text>\n    </g>\n    <g transform=\"translate(385, 190)\">\n      <rect width=\"135\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMPÉRATURE HUILE</text>\n      <text x=\"10\" y=\"31\" fill=\"#F59E0B\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">76.5 °C</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique P&ID SCADA : Centrale d'Air Comprimé\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COMPRESSOR</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Filtre aspiration -->\n    <rect x=\"30\" y=\"90\" width=\"60\" height=\"70\" rx=\"6\" fill=\"#1E293B\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"60\" y=\"125\" fill=\"#94A3B8\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">FILTRE G4</text>\n    <path d=\"M 90 125 L 180 125\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n\n    <!-- Bloc Vis Bi-Étagé -->\n    <rect x=\"180\" y=\"60\" width=\"130\" height=\"130\" rx=\"10\" fill=\"#182030\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <circle cx=\"245\" cy=\"125\" r=\"45\" fill=\"#111827\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n    <g transform=\"translate(245, 125)\">\n      <path class=\"scada-rotor\" d=\"M -30 -5 C -15 -25 15 -25 30 -5 C 15 25 -15 25 -30 -5 Z\" fill=\"#E2001A\" opacity=\"0.85\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"10\" fill=\"#F8FAFC\"/>\n    </g>\n    <text x=\"245\" y=\"45\" fill=\"#F1F5F9\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">BLOC VIS BI-ÉTAGÉ</text>\n    <!-- Moteur 75kW -->\n    <rect x=\"210\" y=\"200\" width=\"70\" height=\"45\" rx=\"4\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"245\" y=\"227\" fill=\"#38BDF8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTEUR 75kW</text>\n\n    <!-- Tuyauterie huile/air -->\n    <path d=\"M 310 125 L 410 125\" fill=\"none\" stroke=\"#F59E0B\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n\n    <!-- Séparateur Huile/Air -->\n    <rect x=\"410\" y=\"75\" width=\"85\" height=\"100\" rx=\"8\" fill=\"#1E293B\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"452\" y=\"105\" fill=\"#F59E0B\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">SÉPARATEUR</text>\n    <rect x=\"420\" y=\"145\" width=\"65\" height=\"20\" rx=\"3\" fill=\"#D97706\" opacity=\"0.6\"/>\n\n    <!-- Cuve Tampon 1000L -->\n    <path d=\"M 495 125 L 590 125\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <rect x=\"590\" y=\"50\" width=\"110\" height=\"150\" rx=\"20\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2.5\"/>\n    <text x=\"645\" y=\"80\" fill=\"#38BDF8\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">RÉSERVOIR AIR</text>\n    <text x=\"645\" y=\"95\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Capacité: 1000L</text>\n    <line x1=\"645\" y1=\"110\" x2=\"645\" y2=\"175\" stroke=\"#10B981\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n\n    <!-- Sortie Réseau -->\n    <path d=\"M 700 125 L 860 125\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"860,120 875,125 860,130\" fill=\"#10B981\"/>\n    <text x=\"900\" y=\"129\" fill=\"#10B981\" font-size=\"11\" font-weight=\"bold\">USINE</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 40)\">\n      <rect width=\"135\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PRESSION RÉSEAU</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">7.4 bar</text>\n    </g>\n    <g transform=\"translate(385, 190)\">\n      <rect width=\"135\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMPÉRATURE HUILE</text>\n      <text x=\"10\" y=\"31\" fill=\"#F59E0B\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">76.5 °C</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique P&ID SCADA : Centrale d'Air Comprimé\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COMPRESSOR</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Filtre aspiration -->\n    <rect x=\"30\" y=\"90\" width=\"60\" height=\"70\" rx=\"6\" fill=\"#1E293B\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"60\" y=\"125\" fill=\"#94A3B8\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">FILTRE G4</text>\n    <path d=\"M 90 125 L 180 125\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n\n    <!-- Bloc Vis Bi-Étagé -->\n    <rect x=\"180\" y=\"60\" width=\"130\" height=\"130\" rx=\"10\" fill=\"#182030\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <circle cx=\"245\" cy=\"125\" r=\"45\" fill=\"#111827\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n    <g transform=\"translate(245, 125)\">\n      <path class=\"scada-rotor\" d=\"M -30 -5 C -15 -25 15 -25 30 -5 C 15 25 -15 25 -30 -5 Z\" fill=\"#E2001A\" opacity=\"0.85\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"10\" fill=\"#F8FAFC\"/>\n    </g>\n    <text x=\"245\" y=\"45\" fill=\"#F1F5F9\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">BLOC VIS BI-ÉTAGÉ</text>\n    <!-- Moteur 75kW -->\n    <rect x=\"210\" y=\"200\" width=\"70\" height=\"45\" rx=\"4\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"245\" y=\"227\" fill=\"#38BDF8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTEUR 75kW</text>\n\n    <!-- Tuyauterie huile/air -->\n    <path d=\"M 310 125 L 410 125\" fill=\"none\" stroke=\"#F59E0B\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n\n    <!-- Séparateur Huile/Air -->\n    <rect x=\"410\" y=\"75\" width=\"85\" height=\"100\" rx=\"8\" fill=\"#1E293B\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"452\" y=\"105\" fill=\"#F59E0B\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">SÉPARATEUR</text>\n    <rect x=\"420\" y=\"145\" width=\"65\" height=\"20\" rx=\"3\" fill=\"#D97706\" opacity=\"0.6\"/>\n\n    <!-- Cuve Tampon 1000L -->\n    <path d=\"M 495 125 L 590 125\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <rect x=\"590\" y=\"50\" width=\"110\" height=\"150\" rx=\"20\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2.5\"/>\n    <text x=\"645\" y=\"80\" fill=\"#38BDF8\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">RÉSERVOIR AIR</text>\n    <text x=\"645\" y=\"95\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Capacité: 1000L</text>\n    <line x1=\"645\" y1=\"110\" x2=\"645\" y2=\"175\" stroke=\"#10B981\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n\n    <!-- Sortie Réseau -->\n    <path d=\"M 700 125 L 860 125\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"860,120 875,125 860,130\" fill=\"#10B981\"/>\n    <text x=\"900\" y=\"129\" fill=\"#10B981\" font-size=\"11\" font-weight=\"bold\">USINE</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 40)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PRESSION RÉSEAU</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_reseau:1} bar</text>\n    </g>\n    <g transform=\"translate(385, 190)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMPÉRATURE HUILE</text>\n      <text x=\"10\" y=\"31\" fill=\"#F59E0B\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temperature_huile:1} °C</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #0B0F17;\n    border: 1px solid #1F2937;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #E2E8F0;\n    box-shadow: 0 10px 30px rgba(0,0,0,0.5);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #1E293B;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #F8FAFC;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 8px;\n    height: 8px;\n    background: #10B981;\n    border-radius: 50%;\n    box-shadow: 0 0 10px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; transform: scale(1); }\n    50% { opacity: 0.35; transform: scale(0.85); }\n  }\n  .scada-badge {\n    background: #131B28;\n    border: 1px solid #283548;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #94A3B8;\n  }\n  .scada-badge strong { color: #38BDF8; }\n  .scada-badge-token { color: #F59E0B; font-family: monospace; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-origin: center;\n    animation: rotate-blade 0.7s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique P&ID SCADA : Centrale d'Air Comprimé\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Token TB: <strong class=\"scada-badge-token\">TOKEN_IND_COMPRESSOR</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#0F141E; border-radius:8px; border:1px solid #1C2433;\">\n    <!-- Filtre aspiration -->\n    <rect x=\"30\" y=\"90\" width=\"60\" height=\"70\" rx=\"6\" fill=\"#1E293B\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"60\" y=\"125\" fill=\"#94A3B8\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">FILTRE G4</text>\n    <path d=\"M 90 125 L 180 125\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"6\" class=\"pipe-flow\"/>\n\n    <!-- Bloc Vis Bi-Étagé -->\n    <rect x=\"180\" y=\"60\" width=\"130\" height=\"130\" rx=\"10\" fill=\"#182030\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <circle cx=\"245\" cy=\"125\" r=\"45\" fill=\"#111827\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n    <g transform=\"translate(245, 125)\">\n      <path class=\"scada-rotor\" d=\"M -30 -5 C -15 -25 15 -25 30 -5 C 15 25 -15 25 -30 -5 Z\" fill=\"#E2001A\" opacity=\"0.85\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"10\" fill=\"#F8FAFC\"/>\n    </g>\n    <text x=\"245\" y=\"45\" fill=\"#F1F5F9\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">BLOC VIS BI-ÉTAGÉ</text>\n    <!-- Moteur 75kW -->\n    <rect x=\"210\" y=\"200\" width=\"70\" height=\"45\" rx=\"4\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n    <text x=\"245\" y=\"227\" fill=\"#38BDF8\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MOTEUR 75kW</text>\n\n    <!-- Tuyauterie huile/air -->\n    <path d=\"M 310 125 L 410 125\" fill=\"none\" stroke=\"#F59E0B\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n\n    <!-- Séparateur Huile/Air -->\n    <rect x=\"410\" y=\"75\" width=\"85\" height=\"100\" rx=\"8\" fill=\"#1E293B\" stroke=\"#F59E0B\" stroke-width=\"2\"/>\n    <text x=\"452\" y=\"105\" fill=\"#F59E0B\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">SÉPARATEUR</text>\n    <rect x=\"420\" y=\"145\" width=\"65\" height=\"20\" rx=\"3\" fill=\"#D97706\" opacity=\"0.6\"/>\n\n    <!-- Cuve Tampon 1000L -->\n    <path d=\"M 495 125 L 590 125\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <rect x=\"590\" y=\"50\" width=\"110\" height=\"150\" rx=\"20\" fill=\"#1E293B\" stroke=\"#38BDF8\" stroke-width=\"2.5\"/>\n    <text x=\"645\" y=\"80\" fill=\"#38BDF8\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">RÉSERVOIR AIR</text>\n    <text x=\"645\" y=\"95\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Capacité: 1000L</text>\n    <line x1=\"645\" y1=\"110\" x2=\"645\" y2=\"175\" stroke=\"#10B981\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n\n    <!-- Sortie Réseau -->\n    <path d=\"M 700 125 L 860 125\" fill=\"none\" stroke=\"#10B981\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"860,120 875,125 860,130\" fill=\"#10B981\"/>\n    <text x=\"900\" y=\"129\" fill=\"#10B981\" font-size=\"11\" font-weight=\"bold\">USINE</text>\n\n    <!-- Callouts SCADA -->\n    <g transform=\"translate(680, 40)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#38BDF8\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">PRESSION RÉSEAU</text>\n      <text x=\"10\" y=\"31\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_reseau:1} bar</text>\n    </g>\n    <g transform=\"translate(385, 190)\">\n      <rect width=\"145\" height=\"38\" rx=\"6\" fill=\"#141A24\" stroke=\"#F59E0B\" stroke-width=\"1.5\"/>\n      <text x=\"10\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\">TEMPÉRATURE HUILE</text>\n      <text x=\"10\" y=\"31\" fill=\"#F59E0B\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temperature_huile:1} °C</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #1E293B; background: transparent; padding: 0;"
           },
           "showTitle": false,
@@ -73,9 +115,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "00134315-231a-4280-b759-5c96213d015b"
+        "id": "f88a9f11-7819-4cde-b662-ab4950137189"
       },
-      "1dfde52b-7ae9-4f91-b78f-5a819cf9ce13": {
+      "837d0321-d7fe-4434-94de-97f95b48b35d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -88,7 +130,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "51367279-bbfc-4843-914d-f70cdfb8eaaf",
+              "entityAliasId": "15144fcc-1ba1-4b6a-a654-e486593a509e",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -131,9 +173,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "1dfde52b-7ae9-4f91-b78f-5a819cf9ce13"
+        "id": "837d0321-d7fe-4434-94de-97f95b48b35d"
       },
-      "fe87c42c-9668-40be-99ee-19d0ace4b370": {
+      "e8c8b635-6a8a-417b-8a8b-85272d5efb7b": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -146,7 +188,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "51367279-bbfc-4843-914d-f70cdfb8eaaf",
+              "entityAliasId": "15144fcc-1ba1-4b6a-a654-e486593a509e",
               "dataKeys": [
                 {
                   "name": "temp_vis_huile",
@@ -189,9 +231,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "fe87c42c-9668-40be-99ee-19d0ace4b370"
+        "id": "e8c8b635-6a8a-417b-8a8b-85272d5efb7b"
       },
-      "3a2244df-08d1-4680-b494-4714646be173": {
+      "72c5c8fd-1a62-4402-93a3-9d0445adea43": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +246,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "51367279-bbfc-4843-914d-f70cdfb8eaaf",
+              "entityAliasId": "15144fcc-1ba1-4b6a-a654-e486593a509e",
               "dataKeys": [
                 {
                   "name": "debit_air",
@@ -247,9 +289,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "3a2244df-08d1-4680-b494-4714646be173"
+        "id": "72c5c8fd-1a62-4402-93a3-9d0445adea43"
       },
-      "132b910c-e72b-442f-b746-0015c571c9d9": {
+      "bdba86d3-1958-4451-a5db-20cdeb57cd70": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -262,7 +304,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "51367279-bbfc-4843-914d-f70cdfb8eaaf",
+              "entityAliasId": "15144fcc-1ba1-4b6a-a654-e486593a509e",
               "dataKeys": [
                 {
                   "name": "puissance_active",
@@ -305,9 +347,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "132b910c-e72b-442f-b746-0015c571c9d9"
+        "id": "bdba86d3-1958-4451-a5db-20cdeb57cd70"
       },
-      "3606d5a2-4337-4832-8400-ef31b0e26350": {
+      "0073ea7a-5bf5-431f-b380-e4e5d633c987": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -320,7 +362,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "51367279-bbfc-4843-914d-f70cdfb8eaaf",
+              "entityAliasId": "15144fcc-1ba1-4b6a-a654-e486593a509e",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -430,9 +472,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "3606d5a2-4337-4832-8400-ef31b0e26350"
+        "id": "0073ea7a-5bf5-431f-b380-e4e5d633c987"
       },
-      "a86c2eca-3fd8-4d4d-9d98-e3418efb4bae": {
+      "b214ed94-76f0-48d3-9ffe-87f32ae492ae": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -445,7 +487,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "51367279-bbfc-4843-914d-f70cdfb8eaaf",
+              "entityAliasId": "15144fcc-1ba1-4b6a-a654-e486593a509e",
               "dataKeys": [
                 {
                   "name": "etat_marche",
@@ -475,7 +517,7 @@
         },
         "row": 16,
         "col": 16,
-        "id": "a86c2eca-3fd8-4d4d-9d98-e3418efb4bae"
+        "id": "b214ed94-76f0-48d3-9ffe-87f32ae492ae"
       }
     },
     "states": {
@@ -485,49 +527,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "1335f549-9c23-4bdb-b029-3bdfc456dec1": {
+              "cd20db09-7d68-4fad-b8ec-2784b4ad8341": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "00134315-231a-4280-b759-5c96213d015b": {
+              "f88a9f11-7819-4cde-b662-ab4950137189": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "1dfde52b-7ae9-4f91-b78f-5a819cf9ce13": {
+              "837d0321-d7fe-4434-94de-97f95b48b35d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "fe87c42c-9668-40be-99ee-19d0ace4b370": {
+              "e8c8b635-6a8a-417b-8a8b-85272d5efb7b": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "3a2244df-08d1-4680-b494-4714646be173": {
+              "72c5c8fd-1a62-4402-93a3-9d0445adea43": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "132b910c-e72b-442f-b746-0015c571c9d9": {
+              "bdba86d3-1958-4451-a5db-20cdeb57cd70": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "3606d5a2-4337-4832-8400-ef31b0e26350": {
+              "0073ea7a-5bf5-431f-b380-e4e5d633c987": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "a86c2eca-3fd8-4d4d-9d98-e3418efb4bae": {
+              "b214ed94-76f0-48d3-9ffe-87f32ae492ae": {
                 "sizeX": 8,
                 "sizeY": 8,
                 "row": 16,

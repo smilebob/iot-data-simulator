@@ -173,14 +173,14 @@ def build_synoptic_compressor(name: str, token: str, proto: str, vars_list: list
 
     <!-- Callouts SCADA -->
     <g transform="translate(680, 40)">
-      <rect width="135" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">PRESSION RÉSEAU</text>
-      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">7.4 bar</text>
+      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">${pression_reseau:1} bar</text>
     </g>
     <g transform="translate(385, 190)">
-      <rect width="135" height="38" rx="6" fill="#141A24" stroke="#F59E0B" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#F59E0B" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">TEMPÉRATURE HUILE</text>
-      <text x="10" y="31" fill="#F59E0B" font-size="13" font-weight="bold" font-family="monospace">76.5 °C</text>
+      <text x="10" y="31" fill="#F59E0B" font-size="13" font-weight="bold" font-family="monospace">${temperature_huile:1} °C</text>
     </g>
   </svg>
     """
@@ -226,14 +226,14 @@ def build_synoptic_steam_boiler(name: str, token: str, proto: str, vars_list: li
 
     <!-- Callouts SCADA -->
     <g transform="translate(620, 185)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#EF4444" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#EF4444" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">PRESSION VAPEUR</text>
-      <text x="10" y="31" fill="#EF4444" font-size="13" font-weight="bold" font-family="monospace">12.4 bar</text>
+      <text x="10" y="31" fill="#EF4444" font-size="13" font-weight="bold" font-family="monospace">${pression_vapeur:1} bar</text>
     </g>
     <g transform="translate(420, 210)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#F59E0B" stroke-width="1.5"/>
-      <text x="10" y="16" fill="#94A3B8" font-size="9">TEMP. FUMÉES</text>
-      <text x="10" y="31" fill="#F59E0B" font-size="13" font-weight="bold" font-family="monospace">178.5 °C</text>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#F59E0B" stroke-width="1.5"/>
+      <text x="10" y="16" fill="#94A3B8" font-size="9">TEMP. FOYER / FUMÉES</text>
+      <text x="10" y="31" fill="#F59E0B" font-size="13" font-weight="bold" font-family="monospace">${temperature_foyer:0} °C</text>
     </g>
   </svg>
     """
@@ -273,14 +273,14 @@ def build_synoptic_chiller(name: str, token: str, proto: str, vars_list: list, v
 
     <!-- Callouts SCADA -->
     <g transform="translate(680, 50)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">TEMP. EAU GLACÉE</text>
-      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">6.8 °C</text>
+      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">${temperature_eau_depart:1} °C</text>
     </g>
     <g transform="translate(680, 110)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">COP INSTANTANÉ</text>
-      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">3.85</text>
+      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">${cop:2}</text>
     </g>
   </svg>
     """
@@ -329,14 +329,14 @@ def build_synoptic_cta(name: str, token: str, proto: str, vars_list: list, var_m
 
     <!-- Callouts SCADA -->
     <g transform="translate(680, 40)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">TEMP. SOUFFLAGE</text>
-      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">21.2 °C</text>
+      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">${temperature_soufflage:1} °C</text>
     </g>
     <g transform="translate(680, 110)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">DÉBIT SOUFFLAGE</text>
-      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">1 850 m³/h</text>
+      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">${debit_air_soufflage:0} m³/h</text>
     </g>
   </svg>
     """
@@ -379,14 +379,14 @@ def build_synoptic_tgbt(name: str, token: str, proto: str, vars_list: list, var_
 
     <!-- Callouts Électriques -->
     <g transform="translate(680, 50)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">PUISSANCE ACTIVE</text>
-      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">245 kW</text>
+      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">${puissance_active_totale:1} kW</text>
     </g>
     <g transform="translate(680, 110)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">COS PHI (FACTEUR)</text>
-      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">0.96</text>
+      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">${facteur_puissance:2}</text>
     </g>
   </svg>
     """
@@ -425,14 +425,14 @@ def build_synoptic_solar_pv(name: str, token: str, proto: str, vars_list: list, 
 
     <!-- Callouts SCADA -->
     <g transform="translate(480, 180)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">PUISSANCE INJECTÉE</text>
-      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">412 kW</text>
+      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">${puissance_active_ac:1} kW</text>
     </g>
     <g transform="translate(680, 180)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
-      <text x="10" y="16" fill="#94A3B8" font-size="9">CUMUL PRODUCTION</text>
-      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">2 450 kWh</text>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <text x="10" y="16" fill="#94A3B8" font-size="9">ÉNERGIE PRODUITE</text>
+      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">${energie_active_totale:1} kWh</text>
     </g>
   </svg>
     """
@@ -473,14 +473,14 @@ def build_synoptic_water_pump(name: str, token: str, proto: str, vars_list: list
 
     <!-- Callouts SCADA -->
     <g transform="translate(680, 50)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">NIVEAU BACHE</text>
-      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">1.85 m</text>
+      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">${niveau_bache_m:2} m</text>
     </g>
     <g transform="translate(680, 110)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">DÉBIT REFOULEMENT</text>
-      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">128 m³/h</text>
+      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">${debit_instantane_m3h:1} m³/h</text>
     </g>
   </svg>
     """
@@ -518,14 +518,14 @@ def build_synoptic_city_lighting(name: str, token: str, proto: str, vars_list: l
 
     <!-- Callouts SCADA -->
     <g transform="translate(680, 50)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#F59E0B" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#F59E0B" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">PUISSANCE ACTIVE</text>
-      <text x="10" y="31" fill="#F59E0B" font-size="13" font-weight="bold" font-family="monospace">18.4 kW</text>
+      <text x="10" y="31" fill="#F59E0B" font-size="13" font-weight="bold" font-family="monospace">${puissance_active_kw:1} kW</text>
     </g>
     <g transform="translate(680, 110)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">TAUX DE GRADATION</text>
-      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">60 %</text>
+      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">${taux_gradation_pct:0} %</text>
     </g>
   </svg>
     """
@@ -563,14 +563,14 @@ def build_synoptic_telecom(name: str, token: str, proto: str, vars_list: list, v
 
     <!-- Callouts SCADA -->
     <g transform="translate(680, 50)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">TEMP. SALLE (CONSIGNE)</text>
-      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">22.1 °C</text>
+      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">${temperature_baie:1} °C</text>
     </g>
     <g transform="translate(680, 110)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">CHARGE ONDULEUR</text>
-      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">48 %</text>
+      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">${charge_ups_pct:0} %</text>
     </g>
   </svg>
     """
@@ -625,25 +625,25 @@ def build_synoptic_city_traffic(name: str, token: str, proto: str, vars_list: li
     <g transform="translate(680, 45)">
       <rect width="230" height="42" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="12" y="18" fill="#94A3B8" font-size="9">COMPTAGE VÉHICULES LÉGERS</text>
-      <text x="12" y="34" fill="#38BDF8" font-size="14" font-weight="bold" font-family="monospace">DÉBIT : 450 véh/h</text>
+      <text x="12" y="34" fill="#38BDF8" font-size="14" font-weight="bold" font-family="monospace">DÉBIT : ${debit_vehicules:0} véh/h</text>
     </g>
 
     <g transform="translate(680, 97)">
       <rect width="230" height="42" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="12" y="18" fill="#94A3B8" font-size="9">PASSAGES VÉLOS & MOBILITÉS</text>
-      <text x="12" y="34" fill="#10B981" font-size="14" font-weight="bold" font-family="monospace">FLUX : 68 vélos/h</text>
+      <text x="12" y="34" fill="#10B981" font-size="14" font-weight="bold" font-family="monospace">FLUX : ${debit_cyclistes:0} vélos/h</text>
     </g>
 
     <g transform="translate(680, 149)">
       <rect width="230" height="42" rx="6" fill="#141A24" stroke="#F59E0B" stroke-width="1.5"/>
       <text x="12" y="18" fill="#94A3B8" font-size="9">VITESSE MOYENNE DOPPLER</text>
-      <text x="12" y="34" fill="#F59E0B" font-size="14" font-weight="bold" font-family="monospace">RADAR : 41.8 km/h</text>
+      <text x="12" y="34" fill="#F59E0B" font-size="14" font-weight="bold" font-family="monospace">RADAR : ${vitesse_moyenne_kmh:1} km/h</text>
     </g>
 
     <g transform="translate(680, 201)">
       <rect width="230" height="42" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="12" y="18" fill="#94A3B8" font-size="9">ÉTAT DE CONGESTION & TRAFIC</text>
-      <text x="12" y="34" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">TRAFIC FLUIDE &bull; NORMAL</text>
+      <text x="12" y="34" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">ALERTE CONGESTION : ${alerte_congestion}</text>
     </g>
   </svg>
     """
@@ -685,14 +685,14 @@ def build_generic_scada_synoptic(name: str, token: str, proto: str, vars_list: l
 
     <!-- Callouts SCADA -->
     <g transform="translate(480, 45)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#38BDF8" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">PROCESS | RÉGULATION</text>
-      <text x="10" y="31" fill="#38BDF8" font-size="13" font-weight="bold" font-family="monospace">AUTOMATIQUE</text>
+      <text x="10" y="31" fill="#38BDF8" font-size="12" font-weight="bold" font-family="monospace">${valeur:1}</text>
     </g>
     <g transform="translate(740, 45)">
-      <rect width="140" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
+      <rect width="145" height="38" rx="6" fill="#141A24" stroke="#10B981" stroke-width="1.5"/>
       <text x="10" y="16" fill="#94A3B8" font-size="9">BOUCLE | SÉCURITÉ</text>
-      <text x="10" y="31" fill="#10B981" font-size="13" font-weight="bold" font-family="monospace">VERROUILLÉE</text>
+      <text x="10" y="31" fill="#10B981" font-size="12" font-weight="bold" font-family="monospace">ACTIVE</text>
     </g>
   </svg>
     """
