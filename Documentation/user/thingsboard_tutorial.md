@@ -100,3 +100,25 @@ Pour bluffer votre audience lors d'une démonstration :
      2. ThingsBoard reçoit le pic télémétrique sur `v1/devices/me/telemetry`.
      3. La règle d'alarme se déclenche instantanément : une alerte rouge clignotante apparaît sur votre dashboard ThingsBoard !
      4. Au bout de quelques secondes, la simulation reprend son onde normale (retour sous 35°C), et l'alarme repasse automatiquement à l'état résolu !
+
+---
+
+## 📝 Étape 6 : Pilotage Bidirectionnel & Commande RPC en Direct (ThingsBoard 4.3)
+
+Le simulateur prend en charge la **communication bidirectionnelle complète** (RPC et Attributs partagés). Vous pouvez piloter vos équipements virtuels directement depuis ThingsBoard 4.3 :
+
+### 1. Importer un Tableau de Bord Officiel Interactif
+1. Dans le simulateur, cliquez sur le bouton **`Dashboard TB`** d'un équipement (ex: *Pompe à Chaleur* ou *Centrale d'Air Comprimé*).
+2. Dans ThingsBoard, allez dans **`Dashboards`** > cliquez sur **`+`** > **`Import dashboard`** et importez le fichier JSON téléchargé.
+3. Résolvez l'alias en sélectionnant votre équipement cible créé à l'Étape 1.
+4. Ouvrez le tableau de bord : un widget **Round Switch** (interrupteur circulaire) est automatiquement disposé à droite des graphiques.
+
+### 2. Actionner le Commutateur depuis ThingsBoard
+1. Cliquez sur le bouton de l'interrupteur (ex: bascule du *Mode Chaud* ou de l'*État de Marche*).
+2. **Ce qui se passe sous le capot (en moins de 50 ms)** :
+   - ThingsBoard 4.3 émet une requête RPC descendante sur le topic MQTT `v1/devices/me/rpc/request/{id}` avec le payload `{"method": "set_mode_chaud", "params": true}`.
+   - Le simulateur intercepte la requête, active le verrouillage manuel (`manual_override = True`), assigne la nouvelle valeur à la variable et sauvegarde son état.
+   - Le simulateur répond immédiatement à ThingsBoard sur le topic `v1/devices/me/rpc/response/{id}` avec le payload `{"status": "SUCCESS", "value": true}`.
+   - Le simulateur confirme également la valeur sur `v1/devices/me/attributes` (`SHARED_SCOPE`).
+   - L'événement est diffusé en WebSocket : l'interface web locale du simulateur bascule instantanément sans rafraîchir la page !
+3. **Résultat visuel** : L'interrupteur reste stabilisé sur sa nouvelle position (aucun timeout), le synoptique SCADA vectoriel P&ID s'actualise avec les nouvelles dynamiques de flux, et les courbes de télémétries réagissent en temps réel.

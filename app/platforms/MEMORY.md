@@ -22,3 +22,4 @@ Couche d'abstraction (Pattern Adapter / Strategy) isolant les spécificités des
 ## ⚠️ Pièges & Consignes du Module (Gotchas)
 - **Règle 1** : Si l'utilisateur a renseigné un topic explicite dans `variable.topic`, l'adaptateur **doit** le respecter en priorité au lieu du topic par défaut.
 - **Règle 2** : Pour ThingsBoard, l'horodatage `ts` est impérativement en **millisecondes** (`int(now * 1000)`), alors que Datacake attend des **secondes** (`int(now)`).
+- **Règle 3 (ThingsBoard 4.3 Attributs & RPC)** : Les attributs partagés sont publiés et reçus sur `v1/devices/me/attributes`. Les commandes directes transitent par `v1/devices/me/rpc/request/{id}` et requièrent une réponse sur `v1/devices/me/rpc/response/{id}` pour satisfaire les widgets interactifs de ThingsBoard 4.3 (Round Switch, Input Forms).

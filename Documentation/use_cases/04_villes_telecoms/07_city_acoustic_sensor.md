@@ -67,10 +67,29 @@ flowchart LR
 }
 ```
 
-### 4.2 Attributs d'État Partagés & Client
+### 4.2 Attributs d'État Partagés, Client & RPC ThingsBoard
+
+#### Topic d'Attributs Partagés (`v1/devices/me/attributes`)
+Le simulateur publie et synchronise ses attributs d'état opérationnels :
 ```json
 {
-  "depassement_seuil_nocturne": false
+  "depassement_seuil_nocturne": true
+}
+```
+
+#### Pilotage par RPC Bidirectionnel (`v1/devices/me/rpc/request/{id}`)
+L'opérateur peut envoyer une consigne ou basculer un état depuis un widget de tableau de bord ThingsBoard 4.3 :
+```json
+// Requête descendante ThingsBoard -> Simulateur
+{
+  "method": "set_depassement_seuil_nocturne",
+  "params": true
+}
+
+// Réponse immédiate Simulateur -> ThingsBoard (sur v1/devices/me/rpc/response/{id})
+{
+  "status": "SUCCESS",
+  "value": true
 }
 ```
 
@@ -91,10 +110,12 @@ Le moteur du simulateur permet d'injecter des défaillances en direct (*Chaos Te
 
 ---
 
-## 6. Recommandations de Visualisation & Tableaux de Bord
+## 6. Pilotage Interactif & Tableaux de Bord ThingsBoard 4.3
 
-Pour restituer la valeur métier de cet équipement sur ThingsBoard, les widgets suivants sont conseillés :
+Le tableau de bord officiel préconfiguré [`dashboards/thingsboard/04_villes_telecoms/city_acoustic_sensor.json`](file:///home/pierre/Projets/iot-data-simulator/dashboards/thingsboard/04_villes_telecoms/city_acoustic_sensor.json) intègre l'ensemble des composants nécessaires à l'exploitation temps réel sous ThingsBoard 4.3 :
 
-- Sonomètre temps réel de rue (Vert/Orange/Rouge)
-- Courbe temporelle LAeq heure par heure
-- Indicateur de dépassement du seuil OMS
+- **Synoptique SCADA Vectoriel P&ID (Widget HTML Card)** : Schéma de principe industriel vectoriel SVG haute résolution, adapté aux écrans de contrôle (fond clair pro WCAG AA, animations CSS de flux/rotations). Les pastilles de télémétries dynamiques sont liées par clé technique exacte (`clean_key` comme `dataKey.label`) garantissant une résolution instantanée des variables `${cle:decimales}` sous ThingsBoard 4.3.
+- **Commandes & Pilotage Interactif Bidirectionnel** :
+  - **Interrupteur Circulaire (*Round Switch*) - Alerte Dépassement Seuil Bruit** : Commutateur interactif (`system.control_widgets.round_switch`) lié à l'attribut partagé `depassement_seuil_nocturne` (`SHARED_SCOPE`). Permet à l'opérateur de basculer la commande (ON/OFF) depuis ThingsBoard. Le simulateur intercepte la requête RPC (`set_depassement_seuil_nocturne` ou `setValue`), applique immédiatement la consigne avec forçage manuel (`manual_override = True`), acquitte la requête sur `v1/devices/me/rpc/response/{id}` et confirme le nouvel état d'attribut sur `v1/devices/me/attributes`.
+- **Jauges Analogiques (JustGage Widgets)** : Restitution visuelle instantanée des grandeurs critiques (Pression Acoustique Équivalente LAeq (dB(A)), Niveau Crête Instantané LCpeak (dB(C)), Tension Batterie Solaire (V)) avec paliers de couleur normés (vert = nominal, ambre = vigilance, rouge = seuil critique).
+- **Courbes d'Historique Télémétrique & Table d'Attributs** : Graphique temporel multi-courbes synchronisé (fenêtre glissante de 24h) et vue tabulaire des attributs client/partagés.

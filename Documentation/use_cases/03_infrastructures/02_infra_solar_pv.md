@@ -68,9 +68,14 @@ flowchart LR
 }
 ```
 
-### 4.2 Attributs d'État Partagés & Client
+### 4.2 Attributs d'État Partagés, Client & RPC ThingsBoard
+
 ```json
-{}
+{
+  "modele": "Onduleur Solaire Photovoltaïque",
+  "firmware_version": "v2.4.1",
+  "statut_equipement": "OPERATIONNEL"
+}
 ```
 
 ---
@@ -90,10 +95,11 @@ Le moteur du simulateur permet d'injecter des défaillances en direct (*Chaos Te
 
 ---
 
-## 6. Recommandations de Visualisation & Tableaux de Bord
+## 6. Pilotage Interactif & Tableaux de Bord ThingsBoard 4.3
 
-Pour restituer la valeur métier de cet équipement sur ThingsBoard, les widgets suivants sont conseillés :
+Le tableau de bord officiel préconfiguré [`dashboards/thingsboard/03_infrastructures/infra_solar_pv.json`](file:///home/pierre/Projets/iot-data-simulator/dashboards/thingsboard/03_infrastructures/infra_solar_pv.json) intègre l'ensemble des composants nécessaires à l'exploitation temps réel sous ThingsBoard 4.3 :
 
-- Courbe de production journalière en cloche
-- Rendement instantané MPPT
-- Indicateur d'émissions de CO2 évitées
+- **Synoptique SCADA Vectoriel P&ID (Widget HTML Card)** : Schéma de principe industriel vectoriel SVG haute résolution, adapté aux écrans de contrôle (fond clair pro WCAG AA, animations CSS de flux/rotations). Les pastilles de télémétries dynamiques sont liées par clé technique exacte (`clean_key` comme `dataKey.label`) garantissant une résolution instantanée des variables `${cle:decimales}` sous ThingsBoard 4.3.
+- **Mode Opérationnel Autonome & Télémétrie Pure** : Cet équipement fonctionne en régulation automatique continue. Les attributs affichés dans la table récapitulative fournissent les métadonnées d'inventaire technique (modèle constructeur, révision logicielle, protocole de liaison).
+- **Jauges Analogiques (JustGage Widgets)** : Restitution visuelle instantanée des grandeurs critiques (Irradiation Pyranomètre (W/m²), Rendement de Conversion (%), Puissance AC Injectée (kW)) avec paliers de couleur normés (vert = nominal, ambre = vigilance, rouge = seuil critique).
+- **Courbes d'Historique Télémétrique & Table d'Attributs** : Graphique temporel multi-courbes synchronisé (fenêtre glissante de 24h) et vue tabulaire des attributs client/partagés.

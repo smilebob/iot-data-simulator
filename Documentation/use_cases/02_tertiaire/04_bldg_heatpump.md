@@ -67,10 +67,29 @@ flowchart LR
 }
 ```
 
-### 4.2 Attributs d'État Partagés & Client
+### 4.2 Attributs d'État Partagés, Client & RPC ThingsBoard
+
+#### Topic d'Attributs Partagés (`v1/devices/me/attributes`)
+Le simulateur publie et synchronise ses attributs d'état opérationnels :
 ```json
 {
-  "mode_chaud": false
+  "mode_chaud": true
+}
+```
+
+#### Pilotage par RPC Bidirectionnel (`v1/devices/me/rpc/request/{id}`)
+L'opérateur peut envoyer une consigne ou basculer un état depuis un widget de tableau de bord ThingsBoard 4.3 :
+```json
+// Requête descendante ThingsBoard -> Simulateur
+{
+  "method": "set_mode_chaud",
+  "params": true
+}
+
+// Réponse immédiate Simulateur -> ThingsBoard (sur v1/devices/me/rpc/response/{id})
+{
+  "status": "SUCCESS",
+  "value": true
 }
 ```
 
@@ -93,9 +112,10 @@ Le moteur du simulateur permet d'injecter des défaillances en direct (*Chaos Te
 
 ## 6. Pilotage Interactif & Tableaux de Bord ThingsBoard 4.3
 
-Le tableau de bord officiel préconfiguré [`dashboards/thingsboard/02_tertiaire/bldg_heatpump.json`](file:///home/pierre/Projets/iot-data-simulator/dashboards/thingsboard/02_tertiaire/bldg_heatpump.json) intègre :
+Le tableau de bord officiel préconfiguré [`dashboards/thingsboard/02_tertiaire/bldg_heatpump.json`](file:///home/pierre/Projets/iot-data-simulator/dashboards/thingsboard/02_tertiaire/bldg_heatpump.json) intègre l'ensemble des composants nécessaires à l'exploitation temps réel sous ThingsBoard 4.3 :
 
-- **Synoptique SCADA Vectoriel P&ID** : Circuit frigorifique R32 avec compresseur Scroll inverter, vanne 4 voies d'inversion, échangeur à plaques hydro et ventilateur hélicoïde animé.
-- **Interrupteur de Pilotage Interactif (*Round Switch*)** : Widget dédié permettant à l'opérateur de basculer en direct le `mode_chaud` (Chaud = ON / Froid = OFF) depuis ThingsBoard 4.3, avec prise en compte instantanée par le simulateur (RPC bidirectionnel).
-- **Jauges JustGage** : Température de départ eau (42-48°C), puissance thermique (15-55 kW) et pression circuit primaire (1.8-2.3 bar).
-- **Courbes Temps Réel & Table d'Attributs** : Historique glissant et état opérationnel de la PAC.
+- **Synoptique SCADA Vectoriel P&ID (Widget HTML Card)** : Schéma de principe industriel vectoriel SVG haute résolution, adapté aux écrans de contrôle (fond clair pro WCAG AA, animations CSS de flux/rotations). Les pastilles de télémétries dynamiques sont liées par clé technique exacte (`clean_key` comme `dataKey.label`) garantissant une résolution instantanée des variables `${cle:decimales}` sous ThingsBoard 4.3.
+- **Commandes & Pilotage Interactif Bidirectionnel** :
+  - **Interrupteur Circulaire (*Round Switch*) - Mode Fonctionnement Chaud** : Commutateur interactif (`system.control_widgets.round_switch`) lié à l'attribut partagé `mode_chaud` (`SHARED_SCOPE`). Permet à l'opérateur de basculer la commande (ON/OFF) depuis ThingsBoard. Le simulateur intercepte la requête RPC (`set_mode_chaud` ou `setValue`), applique immédiatement la consigne avec forçage manuel (`manual_override = True`), acquitte la requête sur `v1/devices/me/rpc/response/{id}` et confirme le nouvel état d'attribut sur `v1/devices/me/attributes`.
+- **Jauges Analogiques (JustGage Widgets)** : Restitution visuelle instantanée des grandeurs critiques (Température Eau Départ PAC (°C), Puissance Thermique Fournie (kW), Pression Circuit Primaire (bar)) avec paliers de couleur normés (vert = nominal, ambre = vigilance, rouge = seuil critique).
+- **Courbes d'Historique Télémétrique & Table d'Attributs** : Graphique temporel multi-courbes synchronisé (fenêtre glissante de 24h) et vue tabulaire des attributs client/partagés.

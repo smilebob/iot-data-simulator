@@ -66,9 +66,14 @@ flowchart LR
 }
 ```
 
-### 4.2 Attributs d'État Partagés & Client
+### 4.2 Attributs d'État Partagés, Client & RPC ThingsBoard
+
 ```json
-{}
+{
+  "modele": "Ligne de Convoyage & Robotique",
+  "firmware_version": "v2.4.1",
+  "statut_equipement": "OPERATIONNEL"
+}
 ```
 
 ---
@@ -88,10 +93,11 @@ Le moteur du simulateur permet d'injecter des défaillances en direct (*Chaos Te
 
 ---
 
-## 6. Recommandations de Visualisation & Tableaux de Bord
+## 6. Pilotage Interactif & Tableaux de Bord ThingsBoard 4.3
 
-Pour restituer la valeur métier de cet équipement sur ThingsBoard, les widgets suivants sont conseillés :
+Le tableau de bord officiel préconfiguré [`dashboards/thingsboard/01_industrie/ind_conveyor.json`](file:///home/pierre/Projets/iot-data-simulator/dashboards/thingsboard/01_industrie/ind_conveyor.json) intègre l'ensemble des composants nécessaires à l'exploitation temps réel sous ThingsBoard 4.3 :
 
-- Jauge de cadence vs Objectif
-- Widget TRS / OEE avec répartition des pertes
-- Historique de production journalier
+- **Synoptique SCADA Vectoriel P&ID (Widget HTML Card)** : Schéma de principe industriel vectoriel SVG haute résolution, adapté aux écrans de contrôle (fond clair pro WCAG AA, animations CSS de flux/rotations). Les pastilles de télémétries dynamiques sont liées par clé technique exacte (`clean_key` comme `dataKey.label`) garantissant une résolution instantanée des variables `${cle:decimales}` sous ThingsBoard 4.3.
+- **Mode Opérationnel Autonome & Télémétrie Pure** : Cet équipement fonctionne en régulation automatique continue. Les attributs affichés dans la table récapitulative fournissent les métadonnées d'inventaire technique (modèle constructeur, révision logicielle, protocole de liaison).
+- **Jauges Analogiques (JustGage Widgets)** : Restitution visuelle instantanée des grandeurs critiques (Cadence Instantanée (pièces/min), Vitesse Tapis Roulant (m/s), Taux de Rendement Synthétique (TRS) (%)) avec paliers de couleur normés (vert = nominal, ambre = vigilance, rouge = seuil critique).
+- **Courbes d'Historique Télémétrique & Table d'Attributs** : Graphique temporel multi-courbes synchronisé (fenêtre glissante de 24h) et vue tabulaire des attributs client/partagés.

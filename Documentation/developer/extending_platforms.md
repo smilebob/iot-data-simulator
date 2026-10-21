@@ -90,3 +90,19 @@ Dans [app/static/index.html](file:///home/pierre/Projets/iot-data-simulator/app/
 ```
 
 C'est terminé ! Votre nouvelle plateforme est immédiatement reconnue par l'interface web, le moteur de publication, et le stockage persistant.
+
+---
+
+## Étape 5 : Support du Pilotage Bidirectionnel & Commandes Descendantes (Downlinks)
+
+Si la plateforme cible prend en charge l'actionnement ou la modification de consignes (Downlinks / RPC) :
+
+1. **Abonnement MQTT aux ordres descendants** :
+   Dans l'adaptateur, définissez les topics d'écoute correspondants :
+   - **ThingsBoard 4.3** : `v1/devices/me/rpc/request/+` (RPC direct) et `v1/devices/me/attributes` (Attributs partagés).
+   - **Home Assistant** : Topic de commande configuré dans le Discovery MQTT (`~/set`).
+   - **Datacake** : `dtck/{device_id}/downlink`.
+2. **Callback d'actionnement** :
+   Le moteur `SimulationEngine` écoute les messages arrivant sur ces topics et appelle la méthode de mise à jour dédiée (`_handle_rpc` ou `_handle_shared_attributes`).
+3. **Réponse d'acquittement** :
+   Pour éviter les timeouts de la plateforme (comme le commutateur ThingsBoard 4.3 qui attend confirmation sous peine de revenir en position initiale), assurez-vous de renvoyer un accusé de réception synchrone sur le topic de réponse dédié (ex: `v1/devices/me/rpc/response/{request_id}`).

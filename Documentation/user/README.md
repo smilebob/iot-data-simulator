@@ -12,7 +12,7 @@ Cette application a été conçue pour vous permettre de générer très simplem
 2. [Tutoriel Pas à Pas : Connexion avec ThingsBoard](thingsboard_tutorial.md) : **Le guide pas-à-pas complet**, depuis la création d'un équipement dans ThingsBoard jusqu'à la création d'un dashboard de démo et le déclenchement d'une alarme via le bouton *Chaos*.
 3. [Guide des Modes de Simulation](simulation_modes.md) : Explication de chaque mode de génération (Sinus, Triangle, Rampe, Bruit gaussien, Marche aléatoire, Tableau de points horodatés et import de fichiers CSV).
 4. [Exploration des flux avec MQTTX Web](mqttx_inspection.md) : Comment utiliser l'interface web intégrée pour espionner et valider les trames MQTT émises en direct.
-5. [Tableaux de Bord SCADA ThingsBoard Préconfigurés](thingsboard_dashboards.md) : Guide d'utilisation, téléchargement en 1 clic avec token ThingsBoard préconfiguré, thème Light haute lisibilité (WCAG AA), procédure d'importation en 3 étapes et **référentiel exhaustif des 32 synoptiques vectoriels SCADA métiers**.
+5. [Tableaux de Bord SCADA ThingsBoard 4.3 & Pilotage Bidirectionnel](thingsboard_dashboards.md) : Guide d'utilisation, téléchargement en 1 clic avec token ThingsBoard préconfiguré, thème Light haute lisibilité (WCAG AA), procédure d'importation en 3 étapes, **référentiel exhaustif des 32 synoptiques vectoriels SCADA métiers** et des **18 commandes interactives de pilotage bidirectionnel (switches & formulaires)** sous ThingsBoard 4.3.
 
 ---
 

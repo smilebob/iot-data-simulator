@@ -164,6 +164,33 @@ Chaque tableau de bord intègre désormais des composants de **pilotage interact
 - Pour les grandeurs continues ou énumérées (ex: *Ouverture Registre Air Neuf %* sur la CTA, *Position Aiguillage* ferroviaire, *Statut Prise IRVE*), un widget de saisie permet de modifier la consigne et de l'appliquer via le bouton **`Valider`**.
 - La nouvelle consigne est immédiatement transmise au simulateur qui adapte ses calculs mathématiques et ses dépendances physiques.
 
+### 5.3 Répertoire des 18 Contrôles & Attributs Pilotables du Catalogue
+
+| Secteur | Équipement (`preset_id`) | Attribut / Variable | Type & Widget | Méthode RPC / Topic | Effet Métier sur la Simulation |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Industrie** | `ind_compressor` | État de Marche (`etat_marche`) | Booléen (`round_switch`) | `set_etat_marche` | Démarrage / arrêt du compresseur, montée en pression réseau |
+| **Industrie** | `ind_cold_room` | Porte Ouverte (`porte_ouverte`) | Booléen (`round_switch`) | `set_porte_ouverte` | Rupture pont thermique, élévation de température |
+| **Industrie** | `ind_cold_room` | Statut Dégivrage (`statut_degivrage`) | Booléen (`round_switch`) | `set_statut_degivrage` | Enclenchement résistance de dégivrage évaporateur |
+| **Industrie** | `ind_cleanroom_cta` | Alarme Dépressurisation (`alarme_depressurisation`) | Booléen (`round_switch`) | `set_alarme_depressurisation` | Simulation rupture cascade de surpression stérile |
+| **Tertiaire** | `bldg_cta` | Ouverture Registre (`registre_air_neuf`) | Entier (`update_multiple_attributes`) | `v1/devices/me/attributes` | Débit d'air neuf et apport thermique extérieur |
+| **Tertiaire** | `bldg_heatpump` | Mode Chaud (`mode_chaud`) | Booléen (`round_switch`) | `set_mode_chaud` | Inversion cycle thermodynamique (Chaud 45°C / Froid 7°C) |
+| **Tertiaire** | `bldg_fire_ssi` | Déclencheur Manuel (`declencheur_manuel`) | Booléen (`round_switch`) | `set_declencheur_manuel` | Alarme générale SSI et scénario évacuation |
+| **Tertiaire** | `bldg_fire_ssi` | Clapets Coupe-Feu (`statut_clapets_coupe_feu`) | Chaîne (`update_multiple_attributes`) | `v1/devices/me/attributes` | Position d'asservissement des DAS coupe-feu |
+| **Tertiaire** | `bldg_access_flow` | Issues Secours Verrouillées (`issues_secours_verrouillees`) | Booléen (`round_switch`) | `set_issues_secours_verrouillees` | Verrouillage électromagnétique des issues |
+| **Infrastructure** | `infra_transfo_hta` | Alarme DGPT2 (`alarme_dgpt2`) | Booléen (`round_switch`) | `set_alarme_dgpt2` | Alerte thermique & gaz sur transformateur diélectrique |
+| **Infrastructure** | `infra_irve_charger` | Statut Prise T2 (`statut_connecteur`) | Chaîne (`update_multiple_attributes`) | `v1/devices/me/attributes` | Présence véhicule branché / charge en cours |
+| **Infrastructure** | `infra_water_pump` | Alarme Débordement (`alarme_debordement`) | Booléen (`round_switch`) | `set_alarme_debordement` | Sécurité niveau haut poste de relèvement |
+| **Infrastructure** | `infra_bess_storage` | Santé Batterie SoH (`soh_pct`) | Flottant (`update_multiple_attributes`) | `v1/devices/me/attributes` | État d'usure et dégradation de capacité BESS |
+| **Infrastructure** | `infra_rail_switch` | Présence Essieu (`presence_essieu`) | Booléen (`round_switch`) | `set_presence_essieu` | Pédale d'occupation de canton ferroviaire |
+| **Infrastructure** | `infra_rail_switch` | Position Aiguille (`position_aiguille`) | Chaîne (`update_multiple_attributes`) | `v1/devices/me/attributes` | Contrôle d'orientation et verrou mécanique |
+| **Smart City** | `city_lighting` | Alerte Porte Armoire (`alerte_porte_ouverte`) | Booléen (`round_switch`) | `set_alerte_porte_ouverte` | Anti-intrusion / contact de baie candélabres |
+| **Smart City** | `telecom_shelter` | Détection Inondation (`detection_inondation`) | Booléen (`round_switch`) | `set_detection_inondation` | Sonde de fuite au sol shelter télécom |
+| **Smart City** | `city_traffic` | Alerte Congestion (`alerte_congestion`) | Booléen (`round_switch`) | `set_alerte_congestion` | Déclenchement scénario régulation de feux |
+| **Smart City** | `city_waste_bin` | Alerte Incendie Bac (`alerte_incendie`) | Booléen (`round_switch`) | `set_alerte_incendie` | Capteur pyrométrique / fumée dans conteneur |
+| **Smart City** | `city_waste_bin` | Alerte Basculement (`alerte_basculement`) | Booléen (`round_switch`) | `set_alerte_basculement` | Capteur inclinaison / vandalisme PAV |
+| **Smart City** | `city_smart_irrigation` | Électrovanne Secteur (`vanne_secteur_ouverte`) | Booléen (`round_switch`) | `set_vanne_secteur_ouverte` | Ouverture circuit d'arrosage automatique |
+| **Smart City** | `city_acoustic_sensor` | Seuil Bruit Nocturne (`depassement_seuil_nocturne`) | Booléen (`round_switch`) | `set_depassement_seuil_nocturne` | Alarme dépassement dB(A) riverains |
+
 ---
 
 ## 6. Dépannage & Bonnes Pratiques

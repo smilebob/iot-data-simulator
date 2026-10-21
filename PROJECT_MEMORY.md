@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.5 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.6 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
@@ -93,6 +93,12 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Génération de Widgets de Contrôle Interactifs** : Ajout automatique d'interrupteurs rotatifs (`system.control_widgets.round_switch`) et formulaires de saisie (`system.input_widgets.update_multiple_attributes`) sur les 32 tableaux de bord pour piloter les 22 attributs et modes d'exploitation (ex: `mode_chaud` PAC, `etat_marche` compresseur, `registre_air_neuf` CTA, `vanne_secteur_ouverte` arrosage).
   - **Souscription Bidirectionnelle MQTT** : Écoute active de `v1/devices/me/rpc/request/+` (RPC direct) et `v1/devices/me/attributes` (Shared Attributes) dans `app/mqtt/client.py`.
   - **Traitement & Acquittement dans l'Engine** : Résolution des commandes RPC (`setValue`, `set_<key>`, `getValue`), mise à jour instantanée de la simulation, acquittement sur `v1/devices/me/rpc/response/{id}`, rétro-publication d'attribut et notification WebSocket en direct.
+- [x] Documentation Intégrale & Réseau de Mémoires IA (v1.9.6) :
+  - **32 Cas d'Usage Métiers Actualisés** : Mise à jour de Section 6 (pilotage interactif TB 4.3, widgets Switch/Form, synoptiques SCADA P&ID vectoriels) et Section 4.2 (RPC & Attributs partagés) pour l'intégralité des 32 modèles industriels.
+  - **Répertoire Exhaustif des Commandes** : Tableau de synthèse des 18 commandes interactives dans `Documentation/user/thingsboard_dashboards.md`.
+  - **Tutoriel Pas-à-Pas de Pilotage TB 4.3** : Ajout de l'Étape 6 dans `Documentation/user/thingsboard_tutorial.md`.
+  - **Documentation Développeur du Moteur de Simulation** : Boucle d'interruption RPC synchrone et extension multi-plateformes dans `Documentation/developer/`.
+  - **Système de Mémoire Hiérarchique IA** : Réseau structuré `PROJECT_MEMORY.md` et sous-mémoires `app/*/MEMORY.md` conforme au standard `project-memory`.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles
@@ -109,7 +115,10 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 4. **Moteur ThingsBoard 4.3 (`html_value_card`)** :
    - Dans ThingsBoard 4.3, le widget `system.cards.html_value_card` remplace les balises de type `${cle:format}` **UNIQUEMENT si le `label` du dataKey correspond exactement à `cle`** (la plateforme ignore le champ `name` pour cette substitution de template).
    - Tout modèle de carte ou de synoptique vectoriel SVG dynamique DOIT avoir `dataKey.label == 'cle_technique'`.
-5. **Variables d'Environnement** :
+5. **Acquittement RPC Obligatoire ThingsBoard 4.3** :
+   - Pour tout équipement virtuel recevant une requête RPC sur `v1/devices/me/rpc/request/{id}`, il est impératif de répondre immédiatement sur `v1/devices/me/rpc/response/{id}` avec un statut de succès (ex: `{"status": "SUCCESS", "value": val}`) et QoS 1.
+   - Sans cette réponse synchrone, ThingsBoard 4.3 lève une alerte de timeout (délai dépassé) et le widget interrupteur (*Round Switch*) se met en défaut avant de revenir automatiquement à sa position antérieure.
+6. **Variables d'Environnement** :
    - `MQTT_BROKER_HOST` (défaut: `mosquitto`)
    - `MQTT_BROKER_PORT` (défaut: `1883`)
    - `MQTT_USE_TLS` (défaut: `false`)

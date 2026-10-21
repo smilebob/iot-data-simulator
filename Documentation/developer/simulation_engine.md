@@ -51,3 +51,46 @@ Dans [app/core/engine.py](file:///home/pierre/Projets/iot-data-simulator/app/cor
 * **Dérive (Drift)** : Accumule un offset continu à chaque cycle pour simuler un vieillissement ou encrassement de capteur.
 * **Gel (Freeze)** : Désactive le calcul et republie indéfiniment la dernière valeur mesurée.
 * **Timeout** : Interrompt temporairement l'émission MQTT pour simuler une coupure de réseau ou une panne de batterie.
+
+---
+
+## 🎛️ 4. Boucle d'Interruption & Pilotage Bidirectionnel (RPC & Attributs Partagés)
+
+Dans [`app/core/engine.py`](file:///home/pierre/Projets/iot-data-simulator/app/core/engine.py), le moteur de simulation écoute en continu les commandes descendantes de la plateforme IoT (ThingsBoard 4.3) :
+
+```mermaid
+sequenceDiagram
+    participant TB as ThingsBoard 4.3 (Switch / Form)
+    participant MQTT as Broker MQTT (Paho Client)
+    participant ENG as SimulationEngine (engine.py)
+    participant REPO as StorageRepository (SQLite)
+    participant WS as Client Web Simulator (WebSocket)
+
+    TB->>MQTT: PUBLISH v1/devices/me/rpc/request/{id} {"method": "set_mode_chaud", "params": true}
+    MQTT->>ENG: Callback on_rpc_request(device_id, req_id, payload)
+    ENG->>ENG: Normalisation (method, clean_key)
+    ENG->>ENG: Application consigne (manual_override=True, manual_value=val)
+    ENG->>REPO: Sauvegarde persistance (variable.manual_override)
+    ENG->>MQTT: PUBLISH v1/devices/me/rpc/response/{id} {"status": "SUCCESS", "value": true}
+    MQTT-->>TB: Acquittement RPC (Pas de timeout sur le switch !)
+    ENG->>MQTT: PUBLISH v1/devices/me/attributes {"mode_chaud": true}
+    ENG->>WS: Broadcast WebSocket {"type": "variable_updated", ...}
+```
+
+### 4.1 Traitement des Requêtes RPC (`_handle_rpc`)
+1. **Normalisation des Méthodes** :
+   - `setValue` ou `getValue`
+   - `set_<clean_key>` (ex: `set_mode_chaud`, `set_etat_marche`)
+   - `toggle_<clean_key>` ou `toggle`
+2. **Recherche de la Variable** :
+   - Identification par correspondance exacte de clé technique nettoyée (`clean_key`), d'identifiant (`id`) ou de libellé (`name`).
+3. **Application & Forçage Déterministe** :
+   - Activation du forçage : `variable.manual_override = True`
+   - Affectation : `variable.manual_value = new_val` et `variable.current_value = new_val`
+   - Conversion typée stricte selon `variable.data_type` (booléen, entier, flottant, chaîne).
+4. **Réponse RPC Synchrone & Anti-Timeout** :
+   - Publication immédiate sur `v1/devices/me/rpc/response/{req_id}` avec QoS 1 du payload `{"status": "SUCCESS", "value": new_val}`.
+   - Cette réponse instantanée garantit que les widgets interactifs de ThingsBoard 4.3 (Round Switch, Toggle Button) valident l'état visuel sans lever d'erreur RPC de délai dépassé.
+5. **Confirmation d'Attribut & Broadcast IHM** :
+   - Émission du nouvel état sur `v1/devices/me/attributes`.
+   - Notification des sessions Web UI ouvertes via `WebSocketManager.broadcast()`.
