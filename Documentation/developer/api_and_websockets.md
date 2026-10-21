@@ -7,8 +7,10 @@ Tous les endpoints sont préfixés par `/api`. Les requêtes et réponses utilis
 ### 1. Équipements (`/api/devices`)
 * **`GET /api/devices`** : Retourne la liste de tous les équipements configurés.
 * **`POST /api/devices`** : Crée ou met à jour un équipement.
-  * *Body* : `{ "id": "comp_01", "name": "Compresseur", "platform": "thingsboard", "token": "TOKEN_SECRET", "enabled": true }`
+  * *Body* : `{ "id": "comp_01", "name": "Compresseur", "platform": "thingsboard", "protocol": "mqtt" | "http" | "coap", "token": "TOKEN_SECRET", "custom_host": null, "custom_port": null, "use_tls": true, "enabled": true }`
 * **`DELETE /api/devices/{id}`** : Supprime un équipement ainsi que toutes les variables qui lui sont rattachées.
+* **`POST /api/devices/{id}/test`** : Exécute un test de communication immédiat avec la plateforme (MQTT, HTTP, ou CoAP) pour cet équipement.
+* **`POST /api/devices/test-custom`** : Teste la communication avec une configuration d'équipement à la volée avant son enregistrement.
 
 ### 2. Variables (`/api/variables`)
 * **`GET /api/variables`** : Liste toutes les variables (filtrable avec `?device_id=...`).

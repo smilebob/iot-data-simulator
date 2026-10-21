@@ -27,6 +27,10 @@ def get_mqtt() -> MqttManager:
     from app.main import mqtt_manager
     return mqtt_manager
 
+def get_transports():
+    from app.main import transport_manager
+    return transport_manager
+
 # --- Équipements (Devices) ---
 @router.get("/devices", response_model=List[DeviceConfig])
 def list_devices(repo: StorageRepository = Depends(get_repo)):
@@ -52,6 +56,26 @@ def delete_device(
     repo.delete_device(device_id)
     mqtt.remove_device_client(device_id)
     return {"status": "deleted", "device_id": device_id}
+
+@router.post("/devices/test-custom")
+async def test_custom_device_communication(
+    device: DeviceConfig,
+    transports = Depends(get_transports),
+):
+    """Teste la communication directe (MQTT, HTTP, CoAP) selon la configuration spécifiée."""
+    return await transports.test_device_communication(device)
+
+@router.post("/devices/{device_id}/test")
+async def test_device_communication_by_id(
+    device_id: str,
+    repo: StorageRepository = Depends(get_repo),
+    transports = Depends(get_transports),
+):
+    """Teste la communication d'un équipement existant."""
+    device = repo.get_device(device_id)
+    if not device:
+        raise HTTPException(status_code=404, detail="Équipement non trouvé")
+    return await transports.test_device_communication(device)
 
 # --- Variables ---
 @router.get("/variables", response_model=List[VariableConfig])

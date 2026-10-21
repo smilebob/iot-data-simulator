@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.2.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8
+> **Dernière MAJ** : 2026-10-21 | **Version** : 1.3.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8
 
 ---
 
@@ -33,6 +33,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 | Sous-Dossier / Module | Rôle & Responsabilité | Sous-Mémoire IA |
 | :--- | :--- | :--- |
 | `app/core/` | Moteur de simulation `asyncio`, signaux mathématiques purs et rejeu de points | [app/core/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/core/MEMORY.md) |
+| `app/transports/` | Gestionnaire multi-protocoles (MQTT, HTTP REST v1, CoAP RFC 7252) | [app/transports/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/transports/MEMORY.md) |
 | `app/platforms/` | Adaptateurs IoT (ThingsBoard, Home Assistant, Datacake, Generic) | [app/platforms/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/platforms/MEMORY.md) |
 | `app/mqtt/` | Client Paho-MQTT v2, reconnexion, sessions TLS 1.2+ et multi-tokens | [app/mqtt/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/mqtt/MEMORY.md) |
 | `app/storage/` | Persistance atomique JSON (`data/simulator_state.json`) et bootstrapping démo | [app/storage/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/storage/MEMORY.md) |
@@ -47,7 +48,8 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Regroupement clair et structuré des variables par équipement (sections dédiées)
 - [x] Fonctions complètes d'édition et de suppression d'équipements avec nettoyage en cascade
 - [x] Architecture modulaire par Adapters (`BasePlatformAdapter`)
-- [x] Support ThingsBoard natif : télémétrie horodatée milliseconde, attributs, tokens par équipement
+- [x] Multi-Protocoles ThingsBoard : support complet de **MQTT**, **HTTP REST v1** (port 443 HTTPS), et **CoAP** (RFC 7252 sur UDP 5683) avec sélecteur par équipement
+- [x] Diagnostic et test de communication en direct (bouton Tester pour chaque équipement et dans le modal de création/édition)
 - [x] Support des transports MQTT TCP standard et WebSockets (WSS / port 443) pour contourner les proxys CDN Cloudflare
 - [x] Console de Logs & Diagnostics temps réel (tampon circulaire 200 entrées, streaming WebSocket, filtrage par niveau et badge d'erreurs)
 - [x] Outil de diagnostic direct de connectivité broker MQTT (`POST /api/broker/test`) avec détection reverse proxy CDN Cloudflare et calcul de latence
@@ -58,7 +60,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Dépendances durcies contre les CVE récentes (Jinja2 >= 3.1.5, python-multipart >= 0.0.31, FastAPI >= 0.115.6)
 - [x] Broker Mosquitto local (image `eclipse-mosquitto:2`) + UI Web d'inspection MQTTX Web
 - [x] Licence Apache 2.0 (fichier LICENSE et notices légales)
-- [x] Numérotation de version automatique et affichage discret en bas de page (v1.2.0)
+- [x] Numérotation de version automatique et affichage discret en bas de page (v1.3.0)
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

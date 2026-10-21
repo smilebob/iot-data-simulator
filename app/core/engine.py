@@ -9,18 +9,25 @@ from app.core.replay import ReplayEngine
 from app.platforms import get_adapter
 from app.storage.repository import StorageRepository
 from app.mqtt.client import MqttManager
+from app.transports.manager import TransportManager
 
 logger = logging.getLogger("iot_sim.engine")
 
 class SimulationEngine:
     """
     Moteur de simulation asynchrone non-bloquant.
-    Gère le calcul périodique des variables, l'injection de défaillances et la publication MQTT.
+    Gère le calcul périodique des variables, l'injection de défaillances et la transmission (MQTT, HTTP, CoAP).
     """
 
-    def __init__(self, repository: StorageRepository, mqtt_manager: MqttManager):
+    def __init__(
+        self,
+        repository: StorageRepository,
+        mqtt_manager: MqttManager,
+        transport_manager: Optional[TransportManager] = None,
+    ):
         self.repo = repository
         self.mqtt = mqtt_manager
+        self.transports = transport_manager or TransportManager(repository, mqtt_manager)
         self.is_running = False
         self._task: Optional[asyncio.Task] = None
         self._start_time = time.time()
@@ -76,6 +83,12 @@ class SimulationEngine:
                     published = False
                     topic_used = ""
                     payload_used = ""
+                    protocol_used = getattr(device, "protocol", "mqtt")
+                    if hasattr(protocol_used, "value"):
+                        protocol_used = protocol_used.value.upper()
+                    else:
+                        protocol_used = str(protocol_used).upper()
+                    channel_info = ""
 
                     if should_publish:
                         # Si anomalie timeout (perte de com), on saute la publication
@@ -91,10 +104,14 @@ class SimulationEngine:
                             timestamp_ms=timestamp_ms,
                         )
 
-                        # Récupération du bon client MQTT (token Thingsboard ou global)
-                        client = self.mqtt.get_or_create_device_client(device.id, device.token)
-                        if client:
-                            published = client.publish(topic_used, payload_used)
+                        # Transmission unifiée selon le protocole (MQTT, HTTP, CoAP)
+                        published, protocol_used, channel_info = await self.transports.publish(
+                            device=device,
+                            variable=var,
+                            payload=payload_used,
+                            topic=topic_used,
+                            timestamp_ms=timestamp_ms,
+                        )
 
                         var.last_published = now
 
@@ -109,7 +126,8 @@ class SimulationEngine:
                                 "unit": var.unit,
                                 "timestamp": now,
                                 "published": published,
-                                "topic": topic_used,
+                                "protocol": protocol_used,
+                                "topic": channel_info or topic_used,
                                 "anomaly": var.anomaly.value,
                             }
                         })

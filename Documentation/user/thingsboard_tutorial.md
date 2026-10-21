@@ -29,22 +29,23 @@ Ce tutoriel illustre pas à pas comment connecter l'application à **ThingsBoard
 
 ---
 
-## 📝 Étape 2 : Configurer le Simulateur IoT
+## 📝 Étape 2 : Configurer le Simulateur IoT & Choisir le Protocole
+
+L'application permet d'émettre vers ThingsBoard selon **3 protocoles au choix** pour chaque équipement virtuel :
 
 1. Ouvrez l'interface du simulateur sur **[http://localhost:8000](http://localhost:8000)**.
-2. Cliquez sur l'icône **`Paramètres Broker (icône écrou)`** dans la barre supérieure :
-   * Si vous utilisez **ThingsBoard Cloud** :
-     * **Hôte** : `mqtt.thingsboard.cloud`
-     * **Port** : `1883` (ou `8883` avec case TLS cochée)
-   * Si vous utilisez une instance **ThingsBoard locale** :
-     * **Hôte** : l'adresse IP ou le nom de votre serveur ThingsBoard.
-     * **Port** : `1883`.
-   * Cliquez sur **`Appliquer & Reconnecter`**.
-3. Dans la barre de filtres, cliquez sur **`Nouvel Équipement`** :
+2. Dans la barre supérieure ou les paramètres de l'équipement :
+   * Renseignez le nom d'hôte de votre ThingsBoard (ex: `easythings.app...` ou `thingsboard.cloud`).
+3. Cliquez sur **`Nouvel Équipement`** (ou éditez un équipement existant) :
    * **Identifiant Unique** : `compresseur_01`
    * **Nom d'affichage** : `Compresseur Atelier 01`
    * **Plateforme Cible** : `ThingsBoard`
+   * **Protocole ThingsBoard** :
+     * 🟢 **HTTP REST (Recommandé pour Cloudflare / Port 443 HTTPS)** : Envoie les données en requêtes `POST https://{host}/api/v1/{token}/telemetry`. Idéal lorsque le serveur est protégé par un CDN ou reverse proxy qui bloque les flux TCP bruts sur le port 1883.
+     * 🔵 **MQTT (Broker TCP standard)** : Utilise une session TCP persistante sur le port 1883 ou 8883 (MQTTS).
+     * 🟣 **CoAP (RFC 7252 / UDP Port 5683)** : Transmission par datagrammes légers sans overhead de session.
    * **Access Token** : Collez le token copié à l'étape 1 (`TOKEN_COMPRESSEUR_DEMO`).
+   * Cliquez sur **`Tester la communication`** : le simulateur valide immédiatement si ThingsBoard répond et si le Token est accepté !
    * Cliquez sur **`Enregistrer`**.
 4. Cliquez sur **`Ajouter une Variable`** pour créer une mesure de température :
    * **Identifiant Unique** : `temperature`
@@ -54,12 +55,7 @@ Ce tutoriel illustre pas à pas comment connecter l'application à **ThingsBoard
    * **Type de Donnée** : `Nombre Flottant`
    * **Unité** : `°C`
    * **Intervalle d'Envoi** : `2.0` (secondes)
-   * **Topic MQTT** : Laissez vide (le simulateur utilisera automatiquement le topic officiel `v1/devices/me/telemetry`).
-   * **Mode de Simulation** : `Fonction Sinusoïdale`
-     * Min : `22.0`
-     * Max : `34.0`
-     * Période : `30.0`
-     * Bruit aléatoire : `2.0`
+   * **Mode de Simulation** : `Fonction Sinusoïdale` (Min: `22.0`, Max: `34.0`, Période: `30.0`, Bruit: `2.0`)
    * Cliquez sur **`Enregistrer la variable`**.
 
 ---

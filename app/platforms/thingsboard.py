@@ -18,6 +18,19 @@ class ThingsBoardAdapter(BasePlatformAdapter):
             return "v1/devices/me/attributes"
         return "v1/devices/me/telemetry"
 
+    def get_http_endpoint(self, device: DeviceConfig, variable: VariableConfig) -> str:
+        """Endpoint REST ThingsBoard v1"""
+        token = device.token or "default"
+        if variable.var_type == VariableType.ATTRIBUTE:
+            return f"/api/v1/{token}/attributes"
+        return f"/api/v1/{token}/telemetry"
+
+    def get_coap_path_segments(self, device: DeviceConfig, variable: VariableConfig) -> list[str]:
+        """Segments URI RFC 7252 ThingsBoard CoAP v1"""
+        token = device.token or "default"
+        action = "attributes" if variable.var_type == VariableType.ATTRIBUTE else "telemetry"
+        return ["api", "v1", token, action]
+
     def format_message(
         self,
         device: DeviceConfig,

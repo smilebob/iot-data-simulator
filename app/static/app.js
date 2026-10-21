@@ -277,6 +277,25 @@ function renderEquipmentGroups() {
       </span>`;
     }
 
+    // Détermination du badge protocole
+    let protocolBadgeHtml = "";
+    const proto = (device.protocol || "mqtt").toLowerCase();
+    if (device.platform === "thingsboard") {
+      if (proto === "http") {
+        protocolBadgeHtml = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-700/70 flex items-center gap-1" title="Protocole: ThingsBoard HTTP REST v1 (Port 443 / Cloudflare OK)">
+          <i data-lucide="globe" class="w-3 h-3 text-emerald-400"></i> HTTP
+        </span>`;
+      } else if (proto === "coap") {
+        protocolBadgeHtml = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-950 text-purple-300 border border-purple-700/70 flex items-center gap-1" title="Protocole: ThingsBoard CoAP UDP (RFC 7252 / Port 5683)">
+          <i data-lucide="zap" class="w-3 h-3 text-purple-400"></i> CoAP
+        </span>`;
+      } else {
+        protocolBadgeHtml = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-950 text-sky-300 border border-sky-700/70 flex items-center gap-1" title="Protocole: Standard MQTT">
+          <i data-lucide="radio" class="w-3 h-3 text-sky-400"></i> MQTT
+        </span>`;
+      }
+    }
+
     // Bloc de Section d'Équipement
     const section = document.createElement("section");
     section.className = "device-group-card shadow-2xl overflow-hidden";
@@ -299,6 +318,7 @@ function renderEquipmentGroups() {
             </div>
             <div class="flex items-center gap-2 mt-1">
               ${platformBadgeHtml}
+              ${protocolBadgeHtml}
               ${device.token ? `
                 <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#12151B] text-slate-300 border border-[#2B3342] flex items-center gap-1" title="Token: ${escapeHtml(device.token)}">
                   <i data-lucide="key" class="w-3 h-3 text-amber-400"></i> Token: &bull;&bull;&bull;&bull;&bull;&bull;
@@ -311,11 +331,15 @@ function renderEquipmentGroups() {
           </div>
         </div>
 
-        <!-- Actions sur l'Équipement (Ajout Variable, Édition, Suppression) -->
+        <!-- Actions sur l'Équipement (Ajout Variable, Tester, Édition, Suppression) -->
         <div class="flex items-center gap-2">
           <button onclick="openVariableModalForDevice('${device.id}')" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
             <i data-lucide="plus" class="w-3.5 h-3.5"></i>
             <span>Ajouter une Variable</span>
+          </button>
+          <button onclick="testDeviceById('${device.id}')" title="Tester la communication avec ThingsBoard" class="p-2 text-amber-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
+            <i data-lucide="activity" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>Tester</span>
           </button>
           <button onclick="editDevice('${device.id}')" title="Modifier cet équipement" class="p-2 text-slate-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
             <i data-lucide="edit-3" class="w-3.5 h-3.5 text-slate-400"></i>
@@ -564,24 +588,177 @@ function openDeviceModal(devToEdit = null) {
   const idEl = document.getElementById("dev-id");
   const nameEl = document.getElementById("dev-name");
   const platformEl = document.getElementById("dev-platform");
+  const protoEl = document.getElementById("dev-protocol");
   const tokenEl = document.getElementById("dev-token");
+  const customHostEl = document.getElementById("dev-custom-host");
+  const customPortEl = document.getElementById("dev-custom-port");
+  const useTlsEl = document.getElementById("dev-use-tls");
   const enabledEl = document.getElementById("dev-enabled");
 
   if (devToEdit) {
     if (idEl) { idEl.value = devToEdit.id; idEl.disabled = true; }
     if (nameEl) nameEl.value = devToEdit.name;
     if (platformEl) platformEl.value = devToEdit.platform;
+    if (protoEl) protoEl.value = devToEdit.protocol || "mqtt";
     if (tokenEl) tokenEl.value = devToEdit.token || "";
+    if (customHostEl) customHostEl.value = devToEdit.custom_host || "";
+    if (customPortEl) customPortEl.value = devToEdit.custom_port || "";
+    if (useTlsEl) useTlsEl.checked = devToEdit.use_tls === true;
     if (enabledEl) enabledEl.checked = devToEdit.enabled !== false;
   } else {
     if (idEl) { idEl.value = ""; idEl.disabled = false; }
     if (nameEl) nameEl.value = "";
     if (platformEl) platformEl.value = "thingsboard";
+    if (protoEl) protoEl.value = "http"; // HTTP par défaut pour ThingsBoard (recommandé port 443 / Cloudflare)
     if (tokenEl) tokenEl.value = "";
+    if (customHostEl) customHostEl.value = "";
+    if (customPortEl) customPortEl.value = "";
+    if (useTlsEl) useTlsEl.checked = true;
     if (enabledEl) enabledEl.checked = true;
   }
 
+  onDevicePlatformChange();
+  onDeviceProtocolChange();
+
+  const testResultBox = document.getElementById("dev-test-result");
+  if (testResultBox) {
+    testResultBox.classList.add("hidden");
+    testResultBox.innerHTML = "";
+  }
+
   openModal("modal-device");
+}
+
+function onDevicePlatformChange() {
+  const platform = document.getElementById("dev-platform").value;
+  const protoContainer = document.getElementById("dev-protocol-container");
+  if (protoContainer) {
+    if (platform === "thingsboard") {
+      protoContainer.classList.remove("hidden");
+    } else {
+      protoContainer.classList.add("hidden");
+    }
+  }
+}
+
+function onDeviceProtocolChange() {
+  const proto = document.getElementById("dev-protocol") ? document.getElementById("dev-protocol").value : "mqtt";
+  const hint = document.getElementById("dev-protocol-hint");
+  const tlsEl = document.getElementById("dev-use-tls");
+  if (proto === "http") {
+    if (hint) hint.innerHTML = `<span class="text-emerald-400 font-semibold">Mode HTTP REST</span> : Envoi par requêtes HTTPS POST (port 443) directement vers l'API ThingsBoard (/api/v1/{token}/telemetry). <strong class="text-white">Idéal si votre ThingsBoard est derrière Cloudflare ou un reverse proxy bloquant le port 1883.</strong>`;
+    if (tlsEl && !tlsEl.checked) tlsEl.checked = true;
+  } else if (proto === "coap") {
+    if (hint) hint.innerHTML = `<span class="text-purple-400 font-semibold">Mode CoAP UDP (RFC 7252)</span> : Trames légères sur port UDP 5683 sans overhead de session TCP.`;
+  } else {
+    if (hint) hint.innerHTML = `Mode MQTT standard : Session TCP persistante sur le broker (ports 1883, 8883 ou WebSockets).`;
+  }
+}
+
+function toggleDeviceAdvancedNetwork() {
+  const adv = document.getElementById("dev-network-advanced");
+  const txt = document.getElementById("dev-advanced-toggle-text");
+  if (adv) {
+    adv.classList.toggle("hidden");
+    if (txt) {
+      txt.textContent = adv.classList.contains("hidden") ? "Afficher" : "Masquer";
+    }
+  }
+}
+
+async function testCurrentDeviceConfig() {
+  const btn = document.getElementById("btn-test-dev");
+  const label = document.getElementById("btn-test-dev-label");
+  const resultBox = document.getElementById("dev-test-result");
+  if (!resultBox) return;
+
+  const customPortVal = document.getElementById("dev-custom-port").value;
+  const payload = {
+    id: document.getElementById("dev-id").value.trim() || "test_device",
+    name: document.getElementById("dev-name").value.trim() || "Test",
+    platform: document.getElementById("dev-platform").value,
+    protocol: document.getElementById("dev-protocol") ? document.getElementById("dev-protocol").value : "mqtt",
+    token: document.getElementById("dev-token").value.trim() || null,
+    custom_host: document.getElementById("dev-custom-host").value.trim() || null,
+    custom_port: customPortVal ? parseInt(customPortVal) : null,
+    use_tls: document.getElementById("dev-use-tls").checked,
+    enabled: true,
+  };
+
+  if (btn) btn.disabled = true;
+  if (label) label.textContent = "Test en cours...";
+  resultBox.classList.remove("hidden");
+  resultBox.className = "p-2.5 rounded-lg text-xs border bg-[#12151B] border-[#2B3342] text-slate-300 flex items-center gap-2";
+  resultBox.innerHTML = `<span class="animate-spin inline-block w-3.5 h-3.5 border-2 border-amber-400 border-t-transparent rounded-full"></span> <span>Test ${payload.protocol.toUpperCase()} vers ThingsBoard...</span>`;
+
+  try {
+    const res = await fetch("/api/devices/test-custom", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if (btn) btn.disabled = false;
+    if (label) label.textContent = "Tester la communication";
+
+    let html = "";
+    if (data.success) {
+      resultBox.className = "p-2.5 rounded-lg text-xs border bg-emerald-950/40 border-emerald-700/60 text-emerald-200 space-y-1";
+      html += `<div class="flex items-center gap-2 font-bold text-emerald-400">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Communication validée (${data.latency_ms || 0} ms)
+      </div>`;
+    } else {
+      resultBox.className = "p-2.5 rounded-lg text-xs border bg-red-950/40 border-red-700/60 text-red-200 space-y-1";
+      html += `<div class="flex items-center gap-2 font-bold text-[#E2001A]">
+        <i data-lucide="alert-triangle" class="w-4 h-4 text-[#E2001A]"></i> Échec : ${escapeHtml(data.message || data.status_code || "Erreur de transmission")}
+      </div>`;
+    }
+
+    if (data.recommendations && data.recommendations.length > 0) {
+      html += `<ul class="list-disc list-inside text-[11px] text-slate-300 space-y-0.5 pt-1 border-t border-slate-700/50">
+        ${data.recommendations.map(r => `<li>${escapeHtml(r)}</li>`).join("")}
+      </ul>`;
+    }
+
+    resultBox.innerHTML = html;
+    safeCreateIcons();
+  } catch (err) {
+    if (btn) btn.disabled = false;
+    if (label) label.textContent = "Tester la communication";
+    resultBox.className = "p-2.5 rounded-lg text-xs border bg-red-950/40 border-red-700/60 text-red-200";
+    resultBox.innerHTML = `Erreur technique lors du test : ${escapeHtml(err.message)}`;
+  }
+}
+
+async function testDeviceById(devId) {
+  const dev = state.devices.find(d => d.id === devId);
+  if (!dev) return;
+
+  const btn = window.event?.currentTarget;
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `<span class="animate-spin inline-block w-3 h-3 border-2 border-amber-400 border-t-transparent rounded-full mr-1"></span><span>Test...</span>`;
+  }
+
+  try {
+    const res = await fetch(`/api/devices/${devId}/test`, { method: "POST" });
+    const data = await res.json();
+    if (data.success) {
+      alert(`✅ Communication validée pour "${dev.name}" !\n\nProtocole : ${(dev.protocol || 'mqtt').toUpperCase()}\nLatence : ${data.latency_ms || 0} ms\nStatut : ${data.message || data.status_code || 'OK'}`);
+    } else {
+      let recs = (data.recommendations || []).join("\n- ");
+      alert(`❌ Échec de communication pour "${dev.name}"\n\nProtocole : ${(dev.protocol || 'mqtt').toUpperCase()}\nMessage : ${data.message || data.status_code || 'Inconnu'}\n\nRecommandations :\n- ${recs}`);
+    }
+  } catch (err) {
+    alert(`Erreur technique : ${err.message}`);
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = `<i data-lucide="activity" class="w-3.5 h-3.5 text-amber-400"></i><span>Tester</span>`;
+      safeCreateIcons();
+    }
+  }
 }
 
 function editDevice(devId) {
@@ -608,11 +785,16 @@ async function deleteDevice(devId) {
 
 async function saveDeviceForm(e) {
   e.preventDefault();
+  const customPortVal = document.getElementById("dev-custom-port").value;
   const devPayload = {
     id: document.getElementById("dev-id").value.trim(),
     name: document.getElementById("dev-name").value.trim(),
     platform: document.getElementById("dev-platform").value,
+    protocol: document.getElementById("dev-protocol") ? document.getElementById("dev-protocol").value : "mqtt",
     token: document.getElementById("dev-token").value.trim() || null,
+    custom_host: document.getElementById("dev-custom-host").value.trim() || null,
+    custom_port: customPortVal ? parseInt(customPortVal) : null,
+    use_tls: document.getElementById("dev-use-tls").checked,
     enabled: document.getElementById("dev-enabled").checked,
   };
 

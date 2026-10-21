@@ -22,12 +22,14 @@ logging.basicConfig(
 logger = logging.getLogger("iot_sim")
 
 # Version officielle de l'application
-APP_VERSION = "1.2.0"
+APP_VERSION = "1.3.0"
 
 # Initialisation des instances globales
 repository = StorageRepository(file_path="data/simulator_state.json")
 mqtt_manager = MqttManager(repository.get_broker())
-engine = SimulationEngine(repository, mqtt_manager)
+from app.transports.manager import TransportManager
+transport_manager = TransportManager(repository, mqtt_manager)
+engine = SimulationEngine(repository, mqtt_manager, transport_manager)
 ws_manager = WebSocketManager()
 
 # Connexion de la boucle de simulation au WebSocket
