@@ -86,4 +86,19 @@ Deux types de trames JSON sont diffusées en temps réel :
   }
 }
 ```
+### Catalogue des Modèles d'Équipements Métiers (`/api/presets`)
+
+* `GET /api/presets/catalog` : Retourne l'ensemble des 16 modèles d'équipements pré-paramétrés classés par axe métier (Industrie, Tertiaire, Infrastructures, Villes & Télécoms) avec toutes leurs variables et formules mathématiques associées. Accès : Tous rôles (`viewer`, `operator`, `admin`).
+* `POST /api/presets/instantiate` : Instancie un équipement métier choisi dans la simulation en créant automatiquement l'équipement et l'ensemble de ses télémétries et attributs. Accès : `operator`, `admin`.
+  * Corps de requête :
+    ```json
+    {
+      "preset_id": "ind_compressor",
+      "name": "Mon Compresseur Atelier",
+      "device_id": "ind_comp_01",
+      "protocol": "mqtt",
+      "token": "tb_device_token_xyz"
+    }
+    ```
+
 Ce flux permet le rafraîchissement sans rechargement de page, l'affichage instantané des alertes d'erreurs et la consultation de la console de logs intégrée sans avoir à ouvrir de terminal Docker.

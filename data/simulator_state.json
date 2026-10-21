@@ -82,8 +82,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 23.411,
-      "last_published": 1792588188.7037091
+      "current_value": 27.027,
+      "last_published": 1792588951.9476247
     },
     {
       "id": "humidity",
@@ -120,8 +120,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 35.172,
-      "last_published": 1792588196.8379455
+      "current_value": 64.989,
+      "last_published": 1792588951.9476247
     },
     {
       "id": "powerMode",
@@ -159,7 +159,7 @@
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
       "current_value": "SOLAR_OPTIMIZED",
-      "last_published": 1792588211.5929418
+      "last_published": 1792588951.9476247
     },
     {
       "id": "vitesse_rpm",
@@ -216,8 +216,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 2816,
-      "last_published": 1792588236.9122286
+      "current_value": 1004,
+      "last_published": 1792588973.5939376
     },
     {
       "id": "pression_bar",
@@ -254,8 +254,84 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": 8.166,
-      "last_published": 1792588212.2600534
+      "current_value": 6.964,
+      "last_published": 1792588973.5939376
+    },
+    {
+      "id": "co2",
+      "name": "CO2",
+      "device_id": "qualite_air",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "ppm",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 30.0,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 10.0,
+        "max_val": 90.0,
+        "period": 6000.0,
+        "offset": 0.0,
+        "noise_percent": 1.0,
+        "step": 1.0,
+        "constant_val": ""
+      },
+      "points_config": {
+        "points": [
+          {
+            "offset_seconds": 0.0,
+            "value": "0"
+          }
+        ],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "temperature_00",
+      "name": "Température",
+      "device_id": "qualite_air",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 60.0,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 10.018,
+        "max_val": 25.0,
+        "period": 3600.0,
+        "offset": 0.0,
+        "noise_percent": 1.0,
+        "step": 1.0,
+        "constant_val": ""
+      },
+      "points_config": {
+        "points": [
+          {
+            "offset_seconds": 0.0,
+            "value": "0"
+          }
+        ],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": 23.906,
+      "last_published": 1792588982.3800433
     }
   ]
 }

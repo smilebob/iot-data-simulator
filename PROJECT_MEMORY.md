@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.4.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8
+> **Dernière MAJ** : 2026-10-21 | **Version** : 1.5.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8
 
 ---
 
@@ -65,6 +65,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Protection des secrets selon les directives du CIS Benchmark (hachage Scrypt RFC 7914, JWT HttpOnly, droits 0600)
 - [x] Compte administrateur par défaut initialisé au boot (`admin` / `Admin_123456!`) avec invite de modification
 - [x] IHM de gestion des comptes, réinitialisation et changement autonome de mot de passe
+- [x] Catalogue de 16 Modèles d'Équipements Métiers pré-configurés couvrant les 4 grands axes (Industrie, Tertiaire/Smart Building, Infrastructures/Énergie, Villes & Télécoms) avec instanciation en 1 clic dans l'IHM (`/api/presets`)
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

@@ -13,6 +13,12 @@ from app.core.logger import log_handler
 from app.mqtt.diagnostics import test_broker_connectivity
 from app.api.auth import require_role
 from app.models.user import UserRole
+from app.core.equipment_catalog import (
+    get_equipment_catalog,
+    EquipmentPreset,
+    InstantiatePresetRequest,
+    instantiate_preset,
+)
 
 # Groupes de rôles RBAC
 ROLE_ANY = [UserRole.ADMIN, UserRole.OPERATOR, UserRole.VIEWER]
@@ -243,3 +249,29 @@ def import_scenario(
     repo.import_scenario(data)
     mqtt.update_global_config(repo.get_broker())
     return {"status": "imported", "devices": len(repo.get_devices()), "variables": len(repo.get_variables())}
+
+# --- Catalogue des Modèles d'Équipements Métiers ---
+@router.get("/presets/catalog", response_model=List[EquipmentPreset], dependencies=[Depends(require_role(ROLE_ANY))])
+def get_presets_catalog():
+    """Retourne la bibliothèque des modèles d'équipements par axe métier."""
+    return get_equipment_catalog()
+
+@router.post("/presets/instantiate", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+def instantiate_equipment_preset(
+    req: InstantiatePresetRequest,
+    repo: StorageRepository = Depends(get_repo),
+):
+    """Instancie un équipement métier avec toutes ses grandeurs et formules associées."""
+    try:
+        device, variables = instantiate_preset(req, repo)
+        return {
+            "status": "created",
+            "device": device,
+            "variables_count": len(variables),
+            "variables": variables,
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la création du modèle : {e}")
+

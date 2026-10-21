@@ -1442,6 +1442,7 @@ function updateUserSessionUI() {
   const brokerBtn = document.getElementById("btn-broker-settings");
   const importLabel = document.getElementById("lbl-import-scenario");
   const newDevBtn = document.getElementById("btn-new-device");
+  const catalogBtn = document.getElementById("btn-catalog");
   const engineBtn = document.getElementById("btn-toggle-engine");
 
   if (nameEl) nameEl.textContent = state.currentUser.full_name || state.currentUser.username;
@@ -1478,6 +1479,11 @@ function updateUserSessionUI() {
   if (newDevBtn) {
     if (canOperate) newDevBtn.classList.remove("hidden");
     else newDevBtn.classList.add("hidden");
+  }
+
+  if (catalogBtn) {
+    if (canOperate) catalogBtn.classList.remove("hidden");
+    else catalogBtn.classList.add("hidden");
   }
 
   if (engineBtn) {
@@ -1793,3 +1799,225 @@ async function submitChangePassword(e) {
     }
   }
 }
+
+// =========================================================================
+// CATALOGUE DE MODÈLES D'ÉQUIPEMENTS MÉTIERS (PRESETS)
+// =========================================================================
+
+let catalogPresets = [];
+let currentCatalogCategory = "all";
+let currentCatalogSearch = "";
+
+async function openCatalogModal() {
+  try {
+    const res = await fetch("/api/presets/catalog");
+    if (!res.ok) throw new Error("Impossible de charger le catalogue.");
+    catalogPresets = await res.json();
+    renderCatalogCards();
+    openModal("modal-catalog");
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    alert("Erreur lors de la récupération des modèles : " + err.message);
+  }
+}
+
+function filterCatalogCategory(category) {
+  currentCatalogCategory = category;
+  const tabs = [
+    { id: "cat-tab-all", cat: "all" },
+    { id: "cat-tab-industry", cat: "industry" },
+    { id: "cat-tab-building", cat: "building" },
+    { id: "cat-tab-infrastructure", cat: "infrastructure" },
+    { id: "cat-tab-smart_city", cat: "smart_city" }
+  ];
+  tabs.forEach(tab => {
+    const el = document.getElementById(tab.id);
+    if (!el) return;
+    if (tab.cat === category) {
+      el.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#E2001A] text-white transition";
+    } else {
+      el.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#12151B] text-slate-300 hover:text-white hover:bg-[#202531] border border-[#2B3342] transition";
+    }
+  });
+  renderCatalogCards();
+}
+
+function onCatalogSearch(query) {
+  currentCatalogSearch = (query || "").toLowerCase().trim();
+  renderCatalogCards();
+}
+
+function renderCatalogCards() {
+  const container = document.getElementById("catalog-presets-grid");
+  if (!container) return;
+
+  const filtered = catalogPresets.filter(p => {
+    const matchCat = (currentCatalogCategory === "all" || p.category === currentCatalogCategory);
+    const matchSearch = !currentCatalogSearch ||
+      p.name.toLowerCase().includes(currentCatalogSearch) ||
+      p.description.toLowerCase().includes(currentCatalogSearch) ||
+      p.category_label.toLowerCase().includes(currentCatalogSearch) ||
+      p.variables.some(v => v.name.toLowerCase().includes(currentCatalogSearch) || v.id.toLowerCase().includes(currentCatalogSearch));
+    return matchCat && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full text-center py-12 text-slate-400">
+        <i data-lucide="search-x" class="w-8 h-8 mx-auto mb-2 text-slate-500"></i>
+        <p class="text-xs font-medium">Aucun modèle ne correspond à votre recherche.</p>
+      </div>
+    `;
+    if (window.lucide) lucide.createIcons();
+    return;
+  }
+
+  container.innerHTML = filtered.map(p => {
+    // Category color tag
+    let catColor = "bg-slate-800 text-slate-300 border-slate-700";
+    if (p.category === "industry") catColor = "bg-amber-950/70 text-amber-300 border-amber-800/60";
+    else if (p.category === "building") catColor = "bg-sky-950/70 text-sky-300 border-sky-800/60";
+    else if (p.category === "infrastructure") catColor = "bg-emerald-950/70 text-emerald-300 border-emerald-800/60";
+    else if (p.category === "smart_city") catColor = "bg-purple-950/70 text-purple-300 border-purple-800/60";
+
+    // Protocol badge
+    const protoBadge = (p.default_protocol || "mqtt").toUpperCase();
+
+    // Variables preview tags
+    const varTags = p.variables.slice(0, 4).map(v => `
+      <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-[#12151B] text-slate-300 border border-[#2B3342]">
+        ${escapeHtml(v.name)} ${v.unit ? `<span class="text-slate-500 ml-0.5">(${escapeHtml(v.unit)})</span>` : ""}
+      </span>
+    `).join("");
+
+    const moreVars = p.variables.length > 4 
+      ? `<span class="text-[10px] text-slate-500 font-semibold self-center">+${p.variables.length - 4} autre(s)</span>`
+      : "";
+
+    return `
+      <div class="bg-[#12151B] hover:bg-[#151922] border border-[#2B3342] hover:border-slate-600 rounded-xl p-4 flex flex-col justify-between transition group shadow-sm">
+        <div class="space-y-3">
+          <!-- En-tête de la carte -->
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-lg bg-[#181D26] border border-[#2B3342] group-hover:border-slate-500 flex items-center justify-center text-[#E2001A] shrink-0">
+                <i data-lucide="${p.icon || 'cpu'}" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-white group-hover:text-red-400 transition leading-snug">${escapeHtml(p.name)}</h4>
+                <span class="inline-block text-[10px] font-medium px-1.5 py-0.2 rounded border ${catColor} mt-0.5">
+                  ${escapeHtml(p.category_label)}
+                </span>
+              </div>
+            </div>
+            <span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-slate-800 text-slate-300 border border-slate-700 font-mono shrink-0">
+              ${protoBadge}
+            </span>
+          </div>
+
+          <!-- Description -->
+          <p class="text-[11px] text-slate-400 leading-relaxed line-clamp-2">
+            ${escapeHtml(p.description)}
+          </p>
+
+          <!-- Télémétries incluses -->
+          <div>
+            <span class="text-[10px] font-semibold text-slate-500 block mb-1">Grandeurs configurées (${p.variables.length}) :</span>
+            <div class="flex flex-wrap gap-1">
+              ${varTags}
+              ${moreVars}
+            </div>
+          </div>
+        </div>
+
+        <!-- Bouton d'action -->
+        <div class="pt-3.5 mt-3 border-t border-[#202531]">
+          <button onclick="prepareInstantiatePreset('${p.id}')" class="w-full flex items-center justify-center gap-1.5 bg-[#1F2532] hover:bg-[#E2001A] text-slate-200 hover:text-white border border-[#2B3342] hover:border-red-600 text-xs font-semibold py-1.5 px-3 rounded-lg transition shadow-sm">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Utiliser ce modèle</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  if (window.lucide) lucide.createIcons();
+}
+
+function prepareInstantiatePreset(presetId) {
+  const preset = catalogPresets.find(p => p.id === presetId);
+  if (!preset) return;
+
+  closeModal("modal-catalog");
+
+  const subtitle = document.getElementById("instantiate-modal-subtitle");
+  if (subtitle) subtitle.textContent = `Modèle : ${preset.name} (${preset.category_label})`;
+
+  document.getElementById("instantiate-preset-id").value = preset.id;
+  document.getElementById("instantiate-name").value = preset.name;
+  document.getElementById("instantiate-device-id").value = "";
+  document.getElementById("instantiate-device-id").placeholder = `Ex: ${preset.id}_01`;
+  document.getElementById("instantiate-protocol").value = preset.default_protocol || "mqtt";
+  document.getElementById("instantiate-token").value = "";
+
+  const errBox = document.getElementById("instantiate-error");
+  if (errBox) errBox.classList.add("hidden");
+
+  // Rendu des badges de prévisualisation des variables
+  const previewBox = document.getElementById("instantiate-vars-preview");
+  if (previewBox) {
+    previewBox.innerHTML = preset.variables.map(v => `
+      <span class="px-2 py-1 rounded bg-[#181D26] text-slate-300 border border-[#2B3342] text-[10px] font-medium flex items-center gap-1">
+        <span class="w-1.5 h-1.5 rounded-full ${v.var_type === 'telemetry' ? 'bg-emerald-400' : 'bg-sky-400'}"></span>
+        ${escapeHtml(v.name)} ${v.unit ? `<span class="text-slate-500 font-mono">(${escapeHtml(v.unit)})</span>` : ''}
+      </span>
+    `).join("");
+  }
+
+  openModal("modal-instantiate-preset");
+}
+
+async function submitInstantiatePreset(e) {
+  e.preventDefault();
+  const presetId = document.getElementById("instantiate-preset-id").value;
+  const name = document.getElementById("instantiate-name").value.trim();
+  const deviceId = document.getElementById("instantiate-device-id").value.trim();
+  const protocol = document.getElementById("instantiate-protocol").value;
+  const token = document.getElementById("instantiate-token").value.trim();
+  const errBox = document.getElementById("instantiate-error");
+
+  const payload = {
+    preset_id: presetId,
+    name: name || undefined,
+    device_id: deviceId || undefined,
+    protocol: protocol || undefined,
+    token: token || undefined
+  };
+
+  try {
+    const res = await fetch("/api/presets/instantiate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      if (errBox) {
+        errBox.textContent = data.detail || "Erreur lors de la création du modèle.";
+        errBox.classList.remove("hidden");
+      }
+      return;
+    }
+
+    closeModal("modal-instantiate-preset");
+    await loadAllData();
+    alert(`✅ L'équipement '${data.device.name}' et ses ${data.variables_count} variables ont été ajoutés avec succès !`);
+  } catch (err) {
+    if (errBox) {
+      errBox.textContent = `Erreur : ${err.message}`;
+      errBox.classList.remove("hidden");
+    }
+  }
+}
+
