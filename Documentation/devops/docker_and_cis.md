@@ -10,7 +10,7 @@ Ce document détaille les mesures techniques mises en œuvre pour assurer la con
 | :--- | :--- | :--- |
 | **Rule 4.1** | *Ensure a user for the container has been created* | L'image crée explicitement l'utilisateur `appuser` (`UID 10001`, `GID 10001`) avec `USER appuser`. L'application ne tourne **jamais** en `root`. |
 | **Rule 4.3** | *Ensure unnecessary packages are not installed in image* | Utilisation d'un **Multi-stage build** : les outils d'installation (`pip`) et compilateurs restent dans l'étape `builder` ; l'image `runner` ne contient que le runtime minimal Debian Slim. |
-| **Rule 4.4** | *Ensure images are scanned and free of vulnerabilities* | Base `python:3.11-slim-bookworm` à jour, zéro dépendance superflue. |
+| **Rule 4.4** | *Ensure images are scanned and free of vulnerabilities* | Base `python:3.11-slim-bookworm` avec `apt-get upgrade -y` systématique pour intégrer les derniers correctifs de failles CVE Debian (libssl, libc). Dépendances Python épinglées sur versions patchées (Jinja2 >= 3.1.5, python-multipart >= 0.0.31). |
 | **Rule 4.5** | *Ensure Content trust for Docker is enabled / No secrets in image* | Aucun mot de passe, clé privée ou token n'est codé en dur dans le Dockerfile. Tout passe par variables d'environnement (`.env`). |
 | **Rule 4.6** | *Ensure HEALTHCHECK instructions have been added to the container image* | Instruction `HEALTHCHECK` intégrée interrogeant `/healthz` toutes les 20 secondes. |
 | **Rule 5.16** | *Ensure Linux Kernel Capabilities are restricted* | `cap_drop: [ALL]` appliqué dans `docker-compose.yml` : toutes les capacités root du kernel Linux sont révoquées. |

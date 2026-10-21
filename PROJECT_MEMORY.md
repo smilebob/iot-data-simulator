@@ -48,8 +48,9 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Moteur mathématique déterministe (Sinus, Cosinus, Triangle, Carré, Dent de scie, Rampe, Random walk, Gaussien, Constante) sans `eval()`
 - [x] Rejeu temporel avec interpolation linéaire et upload CSV
 - [x] Injection de pannes à la volée (*Spike*, *Drift*, *Freeze*, *Timeout*)
-- [x] Dockerfile multi-stage durci conforme CIS Benchmark (non-root `UID 10001`, `no-new-privileges`, `cap_drop: [ALL]`)
-- [x] Broker Mosquitto local + UI Web d'inspection MQTTX Web
+- [x] Dockerfile multi-stage durci conforme CIS Benchmark (non-root `UID 10001`, `no-new-privileges`, `cap_drop: [ALL]`, `apt-get upgrade` de sécurité)
+- [x] Dépendances durcies contre les CVE récentes (Jinja2 >= 3.1.5, python-multipart >= 0.0.31, FastAPI >= 0.115.6)
+- [x] Broker Mosquitto local (image `eclipse-mosquitto:2`) + UI Web d'inspection MQTTX Web
 - [x] Web GUI responsive avec sparklines temps réel Chart.js et WebSockets
 
 ### 🚧 Évolutions Futures Potentielles

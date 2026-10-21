@@ -27,6 +27,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# Application des mises à jour de sécurité du système d'exploitation Debian
+RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/*
+
 # CIS Benchmark Rule 4.1 : Création d'un utilisateur non-root dédié (UID 10001)
 RUN groupadd -g 10001 appuser && \
     useradd -u 10001 -g appuser -m -d /home/appuser -s /sbin/nologin -c "Application User" appuser && \

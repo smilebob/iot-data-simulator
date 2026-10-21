@@ -1,0 +1,220 @@
+{
+  "broker": {
+    "host": "mosquitto",
+    "port": 1883,
+    "use_tls": false,
+    "ca_cert_path": null,
+    "username": "",
+    "password": "",
+    "client_id_prefix": "iot_sim_",
+    "keepalive": 60
+  },
+  "devices": [
+    {
+      "id": "tb_station_01",
+      "name": "Station Météo Solaire",
+      "platform": "thingsboard",
+      "token": "DEMO_TOKEN_WEATHER",
+      "enabled": true
+    },
+    {
+      "id": "ind_motor_02",
+      "name": "Compresseur Atelier",
+      "platform": "generic",
+      "token": null,
+      "enabled": true
+    }
+  ],
+  "variables": [
+    {
+      "id": "temperature",
+      "name": "Température Ambiante",
+      "device_id": "tb_station_01",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 3.0,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 18.0,
+        "max_val": 29.0,
+        "period": 45.0,
+        "offset": 0.0,
+        "noise_percent": 2.5,
+        "step": 1.0,
+        "constant_val": 0.0
+      },
+      "points_config": {
+        "points": [],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "humidity",
+      "name": "Humidité Relative",
+      "device_id": "tb_station_01",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "%",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 4.0,
+      "sim_mode": "cosine",
+      "math_config": {
+        "min_val": 35.0,
+        "max_val": 75.0,
+        "period": 60.0,
+        "offset": 0.0,
+        "noise_percent": 1.0,
+        "step": 1.0,
+        "constant_val": 0.0
+      },
+      "points_config": {
+        "points": [],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "powerMode",
+      "name": "Mode Économie d'énergie",
+      "device_id": "tb_station_01",
+      "var_type": "attribute",
+      "data_type": "string",
+      "unit": "",
+      "topic": "v1/devices/me/attributes",
+      "publish_interval": 10.0,
+      "sim_mode": "constant",
+      "math_config": {
+        "min_val": 0.0,
+        "max_val": 100.0,
+        "period": 60.0,
+        "offset": 0.0,
+        "noise_percent": 0.0,
+        "step": 1.0,
+        "constant_val": "SOLAR_OPTIMIZED"
+      },
+      "points_config": {
+        "points": [],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "vitesse_rpm",
+      "name": "Vitesse de Rotation",
+      "device_id": "ind_motor_02",
+      "var_type": "telemetry",
+      "data_type": "integer",
+      "unit": "rpm",
+      "topic": "usines/atelier1/compresseur/rpm",
+      "publish_interval": 2.0,
+      "sim_mode": "points_table",
+      "math_config": {
+        "min_val": 0.0,
+        "max_val": 100.0,
+        "period": 60.0,
+        "offset": 0.0,
+        "noise_percent": 0.0,
+        "step": 1.0,
+        "constant_val": 0.0
+      },
+      "points_config": {
+        "points": [
+          {
+            "offset_seconds": 0.0,
+            "value": 0
+          },
+          {
+            "offset_seconds": 10.0,
+            "value": 1200
+          },
+          {
+            "offset_seconds": 25.0,
+            "value": 2800
+          },
+          {
+            "offset_seconds": 40.0,
+            "value": 2850
+          },
+          {
+            "offset_seconds": 50.0,
+            "value": 1000
+          },
+          {
+            "offset_seconds": 60.0,
+            "value": 0
+          }
+        ],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    },
+    {
+      "id": "pression_bar",
+      "name": "Pression Cuve",
+      "device_id": "ind_motor_02",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "bar",
+      "topic": "usines/atelier1/compresseur/pression",
+      "publish_interval": 2.5,
+      "sim_mode": "sawtooth",
+      "math_config": {
+        "min_val": 4.5,
+        "max_val": 8.2,
+        "period": 30.0,
+        "offset": 0.0,
+        "noise_percent": 0.0,
+        "step": 1.0,
+        "constant_val": 0.0
+      },
+      "points_config": {
+        "points": [],
+        "loop": true,
+        "playback_speed": 1.0,
+        "interpolate": true
+      },
+      "enabled": true,
+      "manual_override": false,
+      "manual_value": null,
+      "anomaly": "none",
+      "anomaly_magnitude": 50.0,
+      "current_value": null,
+      "last_published": null
+    }
+  ]
+}
