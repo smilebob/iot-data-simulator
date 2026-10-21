@@ -50,7 +50,7 @@ Le endpoint `/api/status` fournit l'état opérationnel complet :
 
 ---
 
-## 3. Gestion et Centralisation des Logs
+## 3. Gestion, Diagnostic & Centralisation des Logs
 
 ### Format standardisé des logs
 Les logs applicatifs utilisent la journalisation standard Python au format :
@@ -63,5 +63,18 @@ Exemple :
 2026-10-21 12:35:10,145 [INFO] [iot_sim.mqtt]: Connecté au broker MQTT mosquitto:1883
 ```
 
+### Tampon Circulaire en Mémoire Vive (In-Memory Ring Buffer)
+Un gestionnaire de journalisation personnalisé (`InMemoryLogHandler` dans `app/core/logger.py`) capture les 200 derniers événements générés par le moteur et les clients MQTT. 
+- **Diffusion Temps Réel** : Tout log produit est immédiatement retransmis par WebSocket (`type: "log"`) vers le frontend.
+- **Accès API REST** : L'endpoint `GET /api/logs?level=ERROR&limit=100` permet l'interrogation programmatique ou le chargement initial dans l'IHM.
+- **Console d'Administration Intégrée** : Le bouton *Logs* de l'IHM ouvre un terminal visuel avec coloration syntaxique des sévérités (INFO, WARNING, ERROR), recherche/filtrage et compteur d'erreurs non lues.
+
+### Outil de Diagnostic Réseau Direct (`POST /api/broker/test`)
+Pour faciliter le débogage lors du paramétrage d'un broker externe (notamment ThingsBoard Cloud ou serveurs d'entreprise protégés par reverse proxy) :
+- **Résolution DNS** : Valide que le nom d'hôte est résolu en IPv4/IPv6.
+- **Détection de Reverse Proxy CDN (Cloudflare)** : Vérifie si l'adresse IP appartient aux plages Cloudflare (qui bloquent par défaut le TCP brut sur les ports 1883/8883 sans Cloudflare Spectrum).
+- **Test de Socket TCP & Handshake TLS** : Évalue l'ouverture du port et mesure la latence en millisecondes.
+- **Recommandations Dynamiques** : Propose des solutions concrètes (ex: basculer en WebSockets sur le port 443, ouvrir les ports sur le pare-feu ou corriger le certificat).
+
 ### Export vers Stack ELK / Loki / Promtail
-Les conteneurs écrivent sur `stdout` et `stderr`. Le driver standard de Docker (`json-file`) permet l'aspiration automatique par Promtail, Fluentbit ou Logstash sans aucun agent supplémentaire dans le conteneur.
+Les conteneurs écrivent simultanément sur `stdout` et `stderr`. Le driver standard de Docker (`json-file`) permet l'aspiration automatique par Promtail, Fluentbit ou Logstash sans aucun agent supplémentaire dans le conteneur.

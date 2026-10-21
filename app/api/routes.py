@@ -9,6 +9,8 @@ from app.platforms import get_adapter
 from app.storage.repository import StorageRepository
 from app.mqtt.client import MqttManager
 from app.core.engine import SimulationEngine
+from app.core.logger import log_handler
+from app.mqtt.diagnostics import test_broker_connectivity
 
 router = APIRouter(prefix="/api")
 
@@ -31,13 +33,24 @@ def list_devices(repo: StorageRepository = Depends(get_repo)):
     return repo.get_devices()
 
 @router.post("/devices", response_model=DeviceConfig)
-def save_device(device: DeviceConfig, repo: StorageRepository = Depends(get_repo)):
+def save_device(
+    device: DeviceConfig,
+    repo: StorageRepository = Depends(get_repo),
+    mqtt: MqttManager = Depends(get_mqtt),
+):
     repo.save_device(device)
+    # Réinitialiser le client MQTT dédié pour appliquer les nouveaux tokens / paramètres
+    mqtt.remove_device_client(device.id)
     return device
 
 @router.delete("/devices/{device_id}")
-def delete_device(device_id: str, repo: StorageRepository = Depends(get_repo)):
+def delete_device(
+    device_id: str,
+    repo: StorageRepository = Depends(get_repo),
+    mqtt: MqttManager = Depends(get_mqtt),
+):
     repo.delete_device(device_id)
+    mqtt.remove_device_client(device_id)
     return {"status": "deleted", "device_id": device_id}
 
 # --- Variables ---
@@ -89,6 +102,20 @@ def update_broker(
     repo.save_broker(broker)
     mqtt.update_global_config(broker)
     return broker
+
+@router.post("/broker/test")
+def test_broker(broker: BrokerConfig):
+    return test_broker_connectivity(broker)
+
+# --- Logs & Outil de Traçabilité des Erreurs ---
+@router.get("/logs")
+def get_logs(level: Optional[str] = None, limit: int = 100):
+    return log_handler.get_logs(level=level, limit=limit)
+
+@router.delete("/logs")
+def clear_logs():
+    log_handler.clear()
+    return {"status": "cleared"}
 
 # --- Statut & Contrôle du Simulateur ---
 @router.get("/status")

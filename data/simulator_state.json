@@ -1,11 +1,11 @@
 {
   "broker": {
-    "host": "mosquitto",
+    "host": "easythings.app.eiffageenergiesystemes.com",
     "port": 1883,
     "use_tls": false,
     "ca_cert_path": null,
-    "username": "",
-    "password": "",
+    "username": null,
+    "password": null,
     "client_id_prefix": "iot_sim_",
     "keepalive": 60
   },
@@ -14,13 +14,20 @@
       "id": "tb_station_01",
       "name": "Station Météo Solaire",
       "platform": "thingsboard",
-      "token": "DEMO_TOKEN_WEATHER",
+      "token": "r6287o9r1bu3wfvj3gfv",
       "enabled": true
     },
     {
       "id": "ind_motor_02",
       "name": "Compresseur Atelier",
       "platform": "generic",
+      "token": null,
+      "enabled": true
+    },
+    {
+      "id": "xxx",
+      "name": "sss",
+      "platform": "thingsboard",
       "token": null,
       "enabled": true
     }
@@ -56,8 +63,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": null,
-      "last_published": null
+      "current_value": 22.518,
+      "last_published": 1792585643.9862828
     },
     {
       "id": "humidity",
@@ -89,8 +96,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": null,
-      "last_published": null
+      "current_value": 39.191,
+      "last_published": 1792585642.9856565
     },
     {
       "id": "powerMode",
@@ -122,8 +129,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": null,
-      "last_published": null
+      "current_value": "SOLAR_OPTIMIZED",
+      "last_published": 1792585642.9856565
     },
     {
       "id": "vitesse_rpm",
@@ -180,8 +187,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": null,
-      "last_published": null
+      "current_value": 2677,
+      "last_published": 1792585644.9869578
     },
     {
       "id": "pression_bar",
@@ -213,8 +220,8 @@
       "manual_value": null,
       "anomaly": "none",
       "anomaly_magnitude": 50.0,
-      "current_value": null,
-      "last_published": null
+      "current_value": 7.441,
+      "last_published": 1792585645.4870136
     }
   ]
 }

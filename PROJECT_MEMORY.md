@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.1.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8
+> **Dernière MAJ** : 2026-10-21 | **Version** : 1.2.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8
 
 ---
 
@@ -48,6 +48,9 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Fonctions complètes d'édition et de suppression d'équipements avec nettoyage en cascade
 - [x] Architecture modulaire par Adapters (`BasePlatformAdapter`)
 - [x] Support ThingsBoard natif : télémétrie horodatée milliseconde, attributs, tokens par équipement
+- [x] Support des transports MQTT TCP standard et WebSockets (WSS / port 443) pour contourner les proxys CDN Cloudflare
+- [x] Console de Logs & Diagnostics temps réel (tampon circulaire 200 entrées, streaming WebSocket, filtrage par niveau et badge d'erreurs)
+- [x] Outil de diagnostic direct de connectivité broker MQTT (`POST /api/broker/test`) avec détection reverse proxy CDN Cloudflare et calcul de latence
 - [x] Moteur mathématique déterministe (Sinus, Cosinus, Triangle, Carré, Dent de scie, Rampe, Random walk, Gaussien, Constante) sans `eval()`
 - [x] Rejeu temporel avec interpolation linéaire et upload CSV
 - [x] Injection de pannes à la volée (*Spike*, *Drift*, *Freeze*, *Timeout*)
@@ -55,6 +58,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Dépendances durcies contre les CVE récentes (Jinja2 >= 3.1.5, python-multipart >= 0.0.31, FastAPI >= 0.115.6)
 - [x] Broker Mosquitto local (image `eclipse-mosquitto:2`) + UI Web d'inspection MQTTX Web
 - [x] Licence Apache 2.0 (fichier LICENSE et notices légales)
+- [x] Numérotation de version automatique et affichage discret en bas de page (v1.2.0)
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

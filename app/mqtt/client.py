@@ -11,7 +11,7 @@ logger = logging.getLogger("iot_sim.mqtt")
 class MqttConnection:
     """
     Gestionnaire d'une connexion MQTT sécurisée avec reconnexion automatique.
-    Conforme aux standards CIS (chiffrement TLS 1.2/1.3, validation stricte).
+    Supporte les transports TCP standard (1883/8883) et WebSockets (443/9001).
     """
 
     def __init__(
@@ -29,19 +29,28 @@ class MqttConnection:
 
         # Construction du client Paho
         client_id = f"{config.client_id_prefix}{client_id_suffix}_{int(time.time())}"
+        transport_mode = getattr(config, "transport", "tcp").lower()
+
         try:
             # Compatibilité Paho MQTT v2.x
             self.client = mqtt.Client(
                 mqtt.CallbackAPIVersion.VERSION2,
                 client_id=client_id,
+                transport=transport_mode,
                 protocol=mqtt.MQTTv311,
             )
         except AttributeError:
             # Paho MQTT v1.x fallback
             self.client = mqtt.Client(
                 client_id=client_id,
+                transport=transport_mode,
                 protocol=mqtt.MQTTv311,
             )
+
+        if transport_mode == "websockets":
+            ws_path = getattr(config, "ws_path", "/mqtt") or "/mqtt"
+            self.client.ws_set_options(path=ws_path)
+            logger.info(f"Transport WebSockets activé sur le path: {ws_path}")
 
         self.client.on_connect = self._on_connect
         self.client.on_disconnect = self._on_disconnect
@@ -49,16 +58,15 @@ class MqttConnection:
 
         # Configuration Authentification
         if config.username:
-            self.client.username_pw_set(config.username, config.password)
+            self.client.username_pw_set(config.username, config.password or "")
 
-        # Configuration Sécurisée TLS (CIS standard)
-        if config.use_tls or config.port == 8883:
+        # Configuration Sécurisée TLS (CIS standard ou port 8883 / 443)
+        if config.use_tls or config.port in (8883, 443):
             self._configure_tls()
 
     def _configure_tls(self):
         try:
             context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
-            # Recommandation CIS : TLS 1.2 minimum requis
             context.minimum_version = ssl.TLSVersion.TLSv1_2
 
             if self.config.ca_cert_path:
@@ -66,32 +74,45 @@ class MqttConnection:
                 context.verify_mode = ssl.CERT_REQUIRED
                 context.check_hostname = True
             else:
-                # Mode permissif pour les brokers locaux / autosignés en test
                 context.check_hostname = False
                 context.verify_mode = ssl.CERT_NONE
 
             self.client.tls_set_context(context)
-            logger.info("TLS configuré avec succès (TLS 1.2+)")
+            logger.info(f"TLS 1.2+ configuré pour {self.config.host}:{self.config.port}")
         except Exception as e:
-            logger.error(f"Erreur configuration TLS: {e}")
-            self.last_error = str(e)
+            err_msg = f"Erreur configuration TLS sur {self.config.host}: {e}"
+            logger.error(err_msg)
+            self.last_error = err_msg
 
     def _on_connect(self, client, userdata, flags, rc, properties=None):
         rc_code = rc.value if hasattr(rc, "value") else rc
         if rc_code == 0:
             self.is_connected = True
             self.last_error = None
-            logger.info(f"Connecté au broker MQTT {self.config.host}:{self.config.port}")
-            # Souscription automatique aux requêtes RPC ThingsBoard
+            logger.info(f"✓ Connecté avec succès au broker MQTT {self.config.host}:{self.config.port} ({self.config.transport})")
             self.client.subscribe("v1/devices/me/rpc/request/+")
         else:
             self.is_connected = False
-            self.last_error = f"Connexion refusée, code retour: {rc_code}"
-            logger.warning(self.last_error)
+            reasons = {
+                1: "Protocole MQTT non supporté",
+                2: "Identifiant client rejeté",
+                3: "Serveur MQTT indisponible",
+                4: "Nom d'utilisateur ou mot de passe / Token ThingsBoard invalide",
+                5: "Non autorisé",
+            }
+            reason = reasons.get(rc_code, f"Code retour {rc_code}")
+            self.last_error = f"Connexion refusée par {self.config.host}:{self.config.port} ({reason})"
+            logger.error(self.last_error)
 
     def _on_disconnect(self, client, userdata, flags, rc=None, properties=None):
         self.is_connected = False
-        logger.info(f"Déconnecté du broker MQTT ({rc})")
+        rc_code = rc.value if hasattr(rc, "value") else (rc if rc is not None else 0)
+        if rc_code != 0:
+            msg = f"Déconnexion inattendue du broker MQTT {self.config.host}:{self.config.port} (code {rc_code})"
+            self.last_error = msg
+            logger.warning(msg)
+        else:
+            logger.info(f"Déconnecté du broker MQTT {self.config.host}:{self.config.port}")
 
     def _on_message(self, client, userdata, message):
         try:
@@ -105,12 +126,12 @@ class MqttConnection:
 
     def start(self):
         try:
-            logger.info(f"Tentative de connexion à {self.config.host}:{self.config.port}...")
+            logger.info(f"Tentative de connexion MQTT vers {self.config.host}:{self.config.port} (TLS={self.config.use_tls}, transport={self.config.transport})...")
             self.client.connect_async(self.config.host, self.config.port, self.config.keepalive)
             self.client.loop_start()
         except Exception as e:
-            self.last_error = str(e)
-            logger.error(f"Impossible de démarrer le client MQTT: {e}")
+            self.last_error = f"Échec démarrage connexion vers {self.config.host}:{self.config.port}: {e}"
+            logger.error(self.last_error)
 
     def stop(self):
         try:
@@ -130,25 +151,26 @@ class MqttConnection:
                     self.messages_published += 1
                     return True
                 else:
-                    self.last_error = f"Erreur publication: code {res.rc}"
+                    self.last_error = f"Erreur publication sur {topic}: code {res.rc}"
+                    logger.warning(self.last_error)
                     return False
             except Exception as e:
-                self.last_error = str(e)
-                logger.error(f"Exception publication MQTT: {e}")
+                self.last_error = f"Exception publication MQTT: {e}"
+                logger.error(self.last_error)
                 return False
 
 
 class MqttManager:
     """
     Gestionnaire multi-clients : gère le client global ainsi que
-    d'éventuels clients dédiés par équipement (ex: ThingsBoard avec tokens séparés).
+    les clients dédiés par équipement ThingsBoard (avec Tokens distincts).
     """
 
     def __init__(self, global_config: BrokerConfig):
         self.global_config = global_config
         self.default_client: Optional[MqttConnection] = None
         self.device_clients: Dict[str, MqttConnection] = {}
-        self.on_rpc_callback: Optional[Callable[[str, str, str], None]] = None # (device_id, topic, payload)
+        self.on_rpc_callback: Optional[Callable[[str, str, str], None]] = None
 
     def start(self):
         self.default_client = MqttConnection(
@@ -159,16 +181,26 @@ class MqttManager:
         self.default_client.start()
 
     def update_global_config(self, new_config: BrokerConfig):
+        """
+        Applique la nouvelle configuration du broker à CHAUD
+        en arrêtant ET en reconnectant TOUS les clients (global et par équipement).
+        """
+        logger.info(f"🔄 Application de la nouvelle configuration Broker MQTT -> Hôte: {new_config.host}:{new_config.port} (TLS={new_config.use_tls}, Transport={new_config.transport})")
         self.global_config = new_config
-        if self.default_client:
-            self.default_client.stop()
+        self.stop_all()
         self.start()
 
+    def remove_device_client(self, device_id: str):
+        """Arrête et supprime le client dédié d'un équipement (ex: lors d'une modification de token)."""
+        if device_id in self.device_clients:
+            logger.info(f"Arrêt et suppression du client MQTT dédié pour {device_id}")
+            try:
+                self.device_clients[device_id].stop()
+            except Exception:
+                pass
+            del self.device_clients[device_id]
+
     def get_or_create_device_client(self, device_id: str, token: Optional[str]) -> MqttConnection:
-        """
-        Si un équipement a son propre token ThingsBoard, il utilise son client dédié.
-        Sinon, il partage le client global.
-        """
         if not token:
             return self.default_client
 
@@ -176,6 +208,7 @@ class MqttManager:
             dev_conf = self.global_config.model_copy()
             dev_conf.username = token
             dev_conf.password = ""
+            logger.info(f"Création d'un client MQTT dédié pour l'équipement '{device_id}' avec token ThingsBoard sur {dev_conf.host}:{dev_conf.port}")
             client = MqttConnection(
                 dev_conf,
                 on_message_callback=lambda top, pay: self._handle_device_message(device_id, top, pay),
@@ -197,6 +230,9 @@ class MqttManager:
     def stop_all(self):
         if self.default_client:
             self.default_client.stop()
-        for c in self.device_clients.values():
-            c.stop()
+        for dev_id, c in list(self.device_clients.items()):
+            try:
+                c.stop()
+            except Exception:
+                pass
         self.device_clients.clear()

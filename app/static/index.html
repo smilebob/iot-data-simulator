@@ -54,6 +54,11 @@
 
         <!-- Menu Réglages / Export -->
         <div class="flex items-center gap-1.5 border-l border-[#2B3342] pl-3">
+          <button onclick="openLogsModal()" title="Logs & Diagnostics en direct" class="relative flex items-center gap-1.5 p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
+            <i data-lucide="terminal" class="w-4 h-4 text-amber-400"></i>
+            <span class="text-xs hidden md:inline font-medium">Logs</span>
+            <span id="log-error-badge" class="hidden absolute -top-1.5 -right-1.5 bg-[#E2001A] text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">0</span>
+          </button>
           <button onclick="openBrokerModal()" title="Paramètres Broker MQTT" class="p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
             <i data-lucide="settings" class="w-4 h-4"></i>
           </button>
@@ -315,8 +320,8 @@
   </div>
 
   <!-- Modal Configuration Broker MQTT -->
-  <div id="modal-broker" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
-    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+  <div id="modal-broker" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4 overflow-y-auto">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-base font-bold text-white flex items-center gap-2">
           <i data-lucide="server" class="w-5 h-5 text-[#E2001A]"></i> Paramètres du Broker MQTT
@@ -327,7 +332,7 @@
       <form id="form-broker" onsubmit="saveBrokerForm(event)" class="space-y-4 text-xs">
         <div class="grid grid-cols-3 gap-3">
           <div class="col-span-2">
-            <label class="block font-medium text-slate-300 mb-1">Hôte (Host / IP)</label>
+            <label class="block font-medium text-slate-300 mb-1">Hôte (Host / IP / Domaine)</label>
             <input type="text" id="broker-host" required class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
           <div>
@@ -336,20 +341,46 @@
           </div>
         </div>
 
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-medium text-slate-300 mb-1">Protocole Transport</label>
+            <select id="broker-transport" onchange="toggleTransportFields()" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+              <option value="tcp">TCP Standard (ports 1883 / 8883)</option>
+              <option value="websockets">WebSockets (WSS / port 443)</option>
+            </select>
+          </div>
+          <div id="ws-path-container" class="hidden">
+            <label class="block font-medium text-slate-300 mb-1">Chemin WebSockets</label>
+            <input type="text" id="broker-ws-path" value="/mqtt" placeholder="/mqtt" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+          </div>
+        </div>
+
         <div class="flex items-center gap-2 p-2.5 bg-[#0F1218] border border-[#2B3342] rounded-lg">
           <input type="checkbox" id="broker-tls" class="rounded border-[#2B3342] text-[#E2001A]">
-          <label for="broker-tls" class="font-medium text-slate-300 cursor-pointer">Activer le chiffrement TLS / MQTTS (Port 8883 / Certificat CA)</label>
+          <label for="broker-tls" class="font-medium text-slate-300 cursor-pointer">Activer le chiffrement TLS / SSL (Port 8883 ou HTTPS/WSS 443)</label>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-medium text-slate-300 mb-1">Nom d'utilisateur</label>
+            <label class="block font-medium text-slate-300 mb-1">Nom d'utilisateur (si requis)</label>
             <input type="text" id="broker-user" placeholder="Optionnel" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
           <div>
-            <label class="block font-medium text-slate-300 mb-1">Mot de passe</label>
+            <label class="block font-medium text-slate-300 mb-1">Mot de passe (si requis)</label>
             <input type="password" id="broker-pass" placeholder="Optionnel" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
           </div>
+        </div>
+
+        <!-- Outil de test & diagnostic de connectivité -->
+        <div class="pt-2 border-t border-[#2B3342]/70 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] text-slate-400 font-medium">Diagnostic réseau direct :</span>
+            <button type="button" id="btn-test-broker" onclick="testBrokerConfig()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#202531] hover:bg-[#2B3342] text-amber-300 border border-amber-500/30 transition">
+              <i data-lucide="activity" class="w-3.5 h-3.5 text-amber-400"></i>
+              <span id="btn-test-broker-label">Tester la connectivité</span>
+            </button>
+          </div>
+          <div id="broker-test-result" class="hidden p-3 rounded-lg text-xs border"></div>
         </div>
 
         <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
@@ -357,6 +388,68 @@
           <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Appliquer & Reconnecter</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal Logs & Diagnostics -->
+  <div id="modal-logs" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4">
+    <div class="bg-[#12151B] border border-[#2B3342] rounded-2xl max-w-4xl w-full h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+      <!-- Header -->
+      <div class="flex items-center justify-between px-5 py-3.5 bg-[#181D26] border-b border-[#2B3342]">
+        <div class="flex items-center gap-2.5">
+          <div class="p-1.5 bg-amber-500/10 text-amber-400 rounded-lg border border-amber-500/30">
+            <i data-lucide="terminal" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              Console de Logs & Diagnostics
+              <span id="log-count-badge" class="text-[10px] bg-[#202531] text-slate-300 px-2 py-0.5 rounded font-mono">0 lignes</span>
+            </h3>
+            <p class="text-[10px] text-slate-400">Flux d'événements du simulateur et connexions MQTT en direct</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <!-- Filtres -->
+          <div class="flex items-center gap-1 bg-[#0F1218] p-1 rounded-lg border border-[#2B3342] text-xs">
+            <button type="button" onclick="setLogLevelFilter('ALL')" id="log-filter-ALL" class="px-2 py-1 rounded text-[11px] font-semibold bg-[#202531] text-white">Tous</button>
+            <button type="button" onclick="setLogLevelFilter('INFO')" id="log-filter-INFO" class="px-2 py-1 rounded text-[11px] font-semibold text-slate-400 hover:text-white">INFO</button>
+            <button type="button" onclick="setLogLevelFilter('WARNING')" id="log-filter-WARNING" class="px-2 py-1 rounded text-[11px] font-semibold text-slate-400 hover:text-white">WARN</button>
+            <button type="button" onclick="setLogLevelFilter('ERROR')" id="log-filter-ERROR" class="px-2 py-1 rounded text-[11px] font-semibold text-slate-400 hover:text-white">ERROR</button>
+          </div>
+          
+          <button type="button" onclick="fetchLogs()" title="Rafraîchir les logs" class="p-2 text-slate-400 hover:text-white bg-[#0F1218] hover:bg-[#202531] rounded-lg border border-[#2B3342]">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+          </button>
+          
+          <button type="button" onclick="clearLogs()" title="Effacer l'historique des logs" class="p-2 text-slate-400 hover:text-red-400 bg-[#0F1218] hover:bg-[#202531] rounded-lg border border-[#2B3342]">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          </button>
+          
+          <button type="button" onclick="closeModal('modal-logs')" class="text-slate-400 hover:text-white ml-2">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Corps de la console -->
+      <div id="log-terminal" class="flex-1 p-4 font-mono text-xs overflow-y-auto space-y-1 bg-[#0B0D11] text-slate-300 selection:bg-red-950">
+        <div class="text-slate-500 italic text-[11px]">En attente de logs...</div>
+      </div>
+
+      <!-- Pied de console -->
+      <div class="px-4 py-2 bg-[#181D26] border-t border-[#2B3342] flex items-center justify-between text-[11px] text-slate-400">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Écoute en temps réel via WebSocket</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <label class="flex items-center gap-1.5 cursor-pointer">
+            <input type="checkbox" id="log-autoscroll" checked class="rounded border-[#2B3342] text-[#E2001A]">
+            <span>Défilement automatique</span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -368,7 +461,7 @@
         <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
       </div>
       <div class="text-[10px] font-mono text-slate-500 tracking-wider">
-        v<span id="app-version-badge">1.1.0</span>
+        v<span id="app-version-badge">1.2.0</span>
       </div>
     </div>
   </footer>

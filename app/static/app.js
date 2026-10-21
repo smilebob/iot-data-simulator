@@ -124,6 +124,8 @@ function setupWebSocket() {
       const msg = JSON.parse(event.data);
       if (msg.type === "telemetry") {
         handleLiveTelemetry(msg.data);
+      } else if (msg.type === "log") {
+        handleLiveLog(msg.data);
       }
     } catch (e) {
       console.warn("Message WS non JSON:", event.data);
@@ -805,10 +807,38 @@ async function deleteVariable(varId) {
 function openBrokerModal() {
   document.getElementById("broker-host").value = state.broker.host || "mosquitto";
   document.getElementById("broker-port").value = state.broker.port || 1883;
+  
+  const transportEl = document.getElementById("broker-transport");
+  if (transportEl) transportEl.value = state.broker.transport || "tcp";
+  
+  const wsPathEl = document.getElementById("broker-ws-path");
+  if (wsPathEl) wsPathEl.value = state.broker.ws_path || "/mqtt";
+  
   document.getElementById("broker-tls").checked = state.broker.use_tls || false;
   document.getElementById("broker-user").value = state.broker.username || "";
   document.getElementById("broker-pass").value = state.broker.password || "";
+
+  toggleTransportFields();
+
+  const testResultBox = document.getElementById("broker-test-result");
+  if (testResultBox) {
+    testResultBox.classList.add("hidden");
+    testResultBox.innerHTML = "";
+  }
+
   openModal("modal-broker");
+}
+
+function toggleTransportFields() {
+  const transportEl = document.getElementById("broker-transport");
+  const wsContainer = document.getElementById("ws-path-container");
+  if (transportEl && wsContainer) {
+    if (transportEl.value === "websockets") {
+      wsContainer.classList.remove("hidden");
+    } else {
+      wsContainer.classList.add("hidden");
+    }
+  }
 }
 
 async function saveBrokerForm(e) {
@@ -816,19 +846,258 @@ async function saveBrokerForm(e) {
   const brokerPayload = {
     host: document.getElementById("broker-host").value.trim(),
     port: parseInt(document.getElementById("broker-port").value),
+    transport: document.getElementById("broker-transport") ? document.getElementById("broker-transport").value : "tcp",
+    ws_path: document.getElementById("broker-ws-path") ? document.getElementById("broker-ws-path").value.trim() : "/mqtt",
     use_tls: document.getElementById("broker-tls").checked,
     username: document.getElementById("broker-user").value.trim() || null,
     password: document.getElementById("broker-pass").value.trim() || null,
   };
 
-  await fetch("/api/broker", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(brokerPayload)
-  });
+  try {
+    const res = await fetch("/api/broker", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(brokerPayload)
+    });
+    if (res.ok) {
+      state.broker = await res.json();
+    }
+  } catch (err) {
+    console.error("Erreur enregistrement broker:", err);
+  }
 
   closeModal("modal-broker");
   await refreshStatus();
+}
+
+async function testBrokerConfig() {
+  const btn = document.getElementById("btn-test-broker");
+  const label = document.getElementById("btn-test-broker-label");
+  const resultBox = document.getElementById("broker-test-result");
+  if (!resultBox) return;
+
+  const payload = {
+    host: document.getElementById("broker-host").value.trim(),
+    port: parseInt(document.getElementById("broker-port").value) || 1883,
+    transport: document.getElementById("broker-transport") ? document.getElementById("broker-transport").value : "tcp",
+    ws_path: document.getElementById("broker-ws-path") ? document.getElementById("broker-ws-path").value.trim() : "/mqtt",
+    use_tls: document.getElementById("broker-tls").checked,
+    username: document.getElementById("broker-user").value.trim() || null,
+    password: document.getElementById("broker-pass").value.trim() || null,
+  };
+
+  if (btn) btn.disabled = true;
+  if (label) label.textContent = "Test en cours...";
+  resultBox.classList.remove("hidden");
+  resultBox.className = "p-3 rounded-lg text-xs border bg-[#12151B] border-[#2B3342] text-slate-300 flex items-center gap-2";
+  resultBox.innerHTML = `<span class="animate-spin inline-block w-3.5 h-3.5 border-2 border-amber-400 border-t-transparent rounded-full"></span> <span>Analyse de connectivité vers ${escapeHtml(payload.host)}:${payload.port}...</span>`;
+
+  try {
+    const res = await fetch("/api/broker/test", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if (btn) btn.disabled = false;
+    if (label) label.textContent = "Tester la connectivité";
+
+    let html = "";
+    if (data.success) {
+      resultBox.className = "p-3 rounded-lg text-xs border bg-emerald-950/40 border-emerald-700/60 text-emerald-200 space-y-1.5";
+      html += `<div class="flex items-center gap-2 font-bold text-emerald-400">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i> Connexion réussie (${data.latency_ms} ms)
+      </div>`;
+    } else {
+      resultBox.className = "p-3 rounded-lg text-xs border bg-red-950/40 border-red-700/60 text-red-200 space-y-1.5";
+      html += `<div class="flex items-center gap-2 font-bold text-[#E2001A]">
+        <i data-lucide="alert-triangle" class="w-4 h-4 text-[#E2001A]"></i> Échec du test : ${escapeHtml(data.message)}
+      </div>`;
+    }
+
+    if (data.details) {
+      html += `<div class="text-[11px] text-slate-300 font-mono space-y-0.5 pt-1 border-t border-slate-700/50">`;
+      if (data.details.resolved_ip) {
+        html += `<div>IP résolue: <span class="text-white">${escapeHtml(data.details.resolved_ip)}</span></div>`;
+      }
+      if (data.details.is_cloudflare) {
+        html += `<div class="text-amber-400 font-semibold flex items-center gap-1.5 mt-1">
+          <i data-lucide="shield-alert" class="w-3.5 h-3.5 shrink-0 text-amber-400"></i>
+          <span>Reverse Proxy Cloudflare CDN détecté ! Les flux TCP bruts (ports 1883/8883) sont généralement bloqués par le proxy CDN.</span>
+        </div>`;
+      }
+      if (data.details.error) {
+        html += `<div class="text-red-400">Détail technique: ${escapeHtml(data.details.error)}</div>`;
+      }
+      html += `</div>`;
+    }
+
+    if (data.recommendations && data.recommendations.length > 0) {
+      html += `<div class="pt-1.5 border-t border-slate-700/50">
+        <span class="font-semibold text-slate-200">Recommandations :</span>
+        <ul class="list-disc list-inside text-[11px] text-slate-300 space-y-0.5 mt-1">
+          ${data.recommendations.map(r => `<li>${escapeHtml(r)}</li>`).join("")}
+        </ul>
+      </div>`;
+    }
+
+    resultBox.innerHTML = html;
+    safeCreateIcons();
+  } catch (err) {
+    if (btn) btn.disabled = false;
+    if (label) label.textContent = "Tester la connectivité";
+    resultBox.className = "p-3 rounded-lg text-xs border bg-red-950/40 border-red-700/60 text-red-200";
+    resultBox.innerHTML = `<span class="font-bold">Erreur de communication :</span> Impossible d'exécuter le test (${escapeHtml(err.message)})`;
+  }
+}
+
+// -------------------------------------------------------------
+// Module Gestion Console de Logs & Diagnostics
+// -------------------------------------------------------------
+const logState = {
+  logs: [],
+  activeFilter: 'ALL',
+  unreadErrors: 0,
+};
+
+function handleLiveLog(logEntry) {
+  logState.logs.push(logEntry);
+  if (logState.logs.length > 300) {
+    logState.logs.shift();
+  }
+
+  if (logEntry.level === "ERROR") {
+    logState.unreadErrors++;
+    updateErrorBadge();
+  }
+
+  const modalLogs = document.getElementById("modal-logs");
+  const terminal = document.getElementById("log-terminal");
+  if (modalLogs && terminal && !modalLogs.classList.contains("hidden")) {
+    if (logState.activeFilter === "ALL" || logEntry.level === logState.activeFilter) {
+      if (terminal.querySelector(".italic")) {
+        terminal.innerHTML = "";
+      }
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = formatLogLineHtml(logEntry);
+      terminal.appendChild(wrapper.firstElementChild);
+
+      const autoscroll = document.getElementById("log-autoscroll");
+      if (autoscroll && autoscroll.checked) {
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+      updateLogCountBadge();
+    }
+  }
+}
+
+function updateErrorBadge() {
+  const badge = document.getElementById("log-error-badge");
+  if (!badge) return;
+  if (logState.unreadErrors > 0) {
+    badge.textContent = logState.unreadErrors > 99 ? "99+" : logState.unreadErrors;
+    badge.classList.remove("hidden");
+  } else {
+    badge.classList.add("hidden");
+  }
+}
+
+function updateLogCountBadge() {
+  const badge = document.getElementById("log-count-badge");
+  if (badge) {
+    badge.textContent = `${logState.logs.length} ligne(s)`;
+  }
+}
+
+function formatLogLineHtml(log) {
+  let levelClass = "text-slate-400 bg-slate-800 border-slate-700";
+  if (log.level === "ERROR") {
+    levelClass = "text-red-400 bg-red-950/80 border-red-700/60";
+  } else if (log.level === "WARNING") {
+    levelClass = "text-amber-400 bg-amber-950/80 border-amber-700/60";
+  } else if (log.level === "INFO") {
+    levelClass = "text-sky-400 bg-sky-950/80 border-sky-700/60";
+  }
+
+  const timeStr = log.timestamp ? (log.timestamp.includes("T") ? log.timestamp.split("T")[1].slice(0, 8) : log.timestamp) : "";
+
+  return `<div class="flex items-start gap-2 py-0.5 hover:bg-white/5 rounded px-1 transition text-[11px] leading-relaxed">
+    <span class="text-slate-500 font-mono shrink-0 select-none">${escapeHtml(timeStr)}</span>
+    <span class="px-1.5 py-0.2 text-[10px] font-bold rounded border ${levelClass} shrink-0 select-none">${escapeHtml(log.level)}</span>
+    <span class="text-slate-400 font-mono shrink-0 select-none">[${escapeHtml(log.name)}]</span>
+    <span class="text-slate-200 break-all">${escapeHtml(log.message)}</span>
+  </div>`;
+}
+
+function renderLogsTerminal() {
+  const terminal = document.getElementById("log-terminal");
+  if (!terminal) return;
+
+  const filtered = logState.logs.filter(l => {
+    if (logState.activeFilter === "ALL") return true;
+    return l.level === logState.activeFilter;
+  });
+
+  if (filtered.length === 0) {
+    terminal.innerHTML = `<div class="text-slate-500 italic text-[11px]">Aucun journal d'événement disponible pour ce filtre.</div>`;
+    updateLogCountBadge();
+    return;
+  }
+
+  terminal.innerHTML = filtered.map(l => formatLogLineHtml(l)).join("");
+  updateLogCountBadge();
+
+  const autoscroll = document.getElementById("log-autoscroll");
+  if (autoscroll && autoscroll.checked) {
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+}
+
+async function openLogsModal() {
+  logState.unreadErrors = 0;
+  updateErrorBadge();
+  openModal("modal-logs");
+  await fetchLogs();
+}
+
+async function fetchLogs() {
+  try {
+    const res = await fetch("/api/logs?limit=200");
+    if (res.ok) {
+      logState.logs = await res.json();
+      renderLogsTerminal();
+    }
+  } catch (err) {
+    console.error("Erreur récupération logs:", err);
+  }
+}
+
+async function clearLogs() {
+  try {
+    await fetch("/api/logs", { method: "DELETE" });
+    logState.logs = [];
+    logState.unreadErrors = 0;
+    updateErrorBadge();
+    renderLogsTerminal();
+  } catch (err) {
+    console.error("Erreur suppression logs:", err);
+  }
+}
+
+function setLogLevelFilter(level) {
+  logState.activeFilter = level;
+  ['ALL', 'INFO', 'WARNING', 'ERROR'].forEach(lvl => {
+    const btn = document.getElementById(`log-filter-${lvl}`);
+    if (btn) {
+      if (lvl === level) {
+        btn.className = "px-2 py-1 rounded text-[11px] font-semibold bg-[#202531] text-white";
+      } else {
+        btn.className = "px-2 py-1 rounded text-[11px] font-semibold text-slate-400 hover:text-white";
+      }
+    }
+  });
+  renderLogsTerminal();
 }
 
 function openModal(id) {

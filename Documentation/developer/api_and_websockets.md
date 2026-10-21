@@ -24,12 +24,17 @@ Tous les endpoints sont préfixés par `/api`. Les requêtes et réponses utilis
   * Upload Multipart d'un fichier CSV pour alimenter la table de points.
 
 ### 4. État du Simulateur & Broker
-* **`GET /api/status`** : Retourne l'état du moteur (`engine_running`), l'état de connexion MQTT (`mqtt_connected`), et le compteur de messages publiés.
+* **`GET /api/status`** : Retourne l'état du moteur (`engine_running`), l'état de connexion MQTT (`mqtt_connected`), le compteur de messages publiés et le numéro de version de l'application.
 * **`POST /api/simulation/start`** : Démarre la boucle de simulation.
 * **`POST /api/simulation/stop`** : Met en pause la boucle de simulation.
-* **`GET /api/broker`** / **`POST /api/broker`** : Lecture et modification à chaud de la configuration du broker MQTT.
+* **`GET /api/broker`** / **`POST /api/broker`** : Lecture et modification à chaud de la configuration du broker MQTT (hôte, port, transport `tcp`/`websockets`, `ws_path`, TLS, identifiants).
+* **`POST /api/broker/test`** : Teste la connectivité directe vers le broker spécifié (résolution DNS, détection CDN Cloudflare, socket TCP/TLS ou WebSockets, calcul de latence et recommandations).
 
-### 5. Export / Import de Scénario
+### 5. Journaux & Diagnostics
+* **`GET /api/logs`** : Récupère les entrées de logs applicatifs récentes conservées en mémoire vive (tampon circulaire de 200 lignes, filtrable par `?level=...` et `?limit=...`).
+* **`DELETE /api/logs`** : Purge la file de journaux en mémoire vive.
+
+### 6. Export / Import de Scénario
 * **`GET /api/scenario/export`** : Télécharge l'état complet du simulateur en JSON.
 * **`POST /api/scenario/import`** : Restaure un scénario complet et applique la configuration broker à chaud.
 
@@ -38,8 +43,9 @@ Tous les endpoints sont préfixés par `/api`. Les requêtes et réponses utilis
 ## ⚡ Streaming WebSockets (`/ws/live`)
 
 Le frontend établit une connexion WebSocket permanente sur `/ws/live`.
-Dès qu'une variable calcule une nouvelle valeur et publie sur MQTT, un événement JSON est diffusé à tous les clients connectés :
+Deux types de trames JSON sont diffusées en temps réel :
 
+1. **Événements de Télémétrie (`type: "telemetry"`)** :
 ```json
 {
   "type": "telemetry",
@@ -55,4 +61,17 @@ Dès qu'une variable calcule une nouvelle valeur et publie sur MQTT, un événem
   }
 }
 ```
-Ce flux permet le rafraîchissement sans rechargement de page, l'animation du flash visuel et l'alimentation en direct des graphiques sparklines.
+
+2. **Événements de Journalisation (`type: "log"`)** :
+```json
+{
+  "type": "log",
+  "data": {
+    "timestamp": "2026-10-21T14:30:00.123456",
+    "level": "ERROR",
+    "name": "iot_sim.mqtt",
+    "message": "Erreur de connexion broker mosquitto:1883 : Connection refused"
+  }
+}
+```
+Ce flux permet le rafraîchissement sans rechargement de page, l'affichage instantané des alertes d'erreurs et la consultation de la console de logs intégrée sans avoir à ouvrir de terminal Docker.

@@ -12,6 +12,7 @@ from app.api.websocket import WebSocketManager
 from app.core.engine import SimulationEngine
 from app.mqtt.client import MqttManager
 from app.storage.repository import StorageRepository
+from app.core.logger import log_handler
 
 # Configuration du Logging standard
 logging.basicConfig(
@@ -21,7 +22,7 @@ logging.basicConfig(
 logger = logging.getLogger("iot_sim")
 
 # Version officielle de l'application
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.2.0"
 
 # Initialisation des instances globales
 repository = StorageRepository(file_path="data/simulator_state.json")
@@ -34,6 +35,7 @@ def ws_broadcaster(msg: dict):
     asyncio.create_task(ws_manager.broadcast_json(msg))
 
 engine.register_ws_broadcast(ws_broadcaster)
+log_handler.set_broadcast_callback(ws_broadcaster)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
