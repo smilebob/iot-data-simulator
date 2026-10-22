@@ -114,6 +114,14 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **En-têtes Navigateur Standard pour Cloudflare** : Ajout systématique de `User-Agent` (`Mozilla/5.0...`) et `Accept: application/json` dans `ThingsBoardHttpClient` (`post_payload`, `poll_rpc`, `respond_rpc`). Élimine les rejets HTTP 403 Forbidden du pare-feu Cloudflare sur les plateformes ThingsBoard distantes (`easythings.app.eiffageenergiesystemes.com`).
   - **Fiabilisation & Diagnostic du Long-Polling RPC** : Traitement et journalisation explicite des erreurs HTTP 401 (token ThingsBoard invalide) et 403 (blocage WAF) dans la boucle `_poll_http_rpc_worker`.
   - **Acquittement Bidirectionnel Garanti** : Validation immédiate de l'interrupteur *Round Switch* via réponse synchrone `POST /api/v1/{token}/rpc/{id}` au format ThingsBoard `{status: "SUCCESS", value: ...}` et synchronisation d'attribut `CLIENT_SCOPE`.
+- [x] Contrôle Bidirectionnel par Attributs Partagés & Version Majeure 2.0.0 (v2.0.0) :
+  - **Diagnostic Root Cause ThingsBoard** : Identification de l'absence du nœud `TbSendRPCRequestNode` dans la chaîne de traitement racine ThingsBoard (Root Rule Chain), envoyant les ordres RPC dans `Log RPC from Device` et provoquant un 504 Gateway Timeout systématique sur l'API `/api/rpc/oneway`.
+  - **Standardisation Option B (Attributs Partagés)** : Basculement sur l'écriture directe dans `SHARED_SCOPE` via Action Widgets ThingsBoard (`action: SET_ATTRIBUTE`). Écriture immédiate en base en < 50ms, éliminant tout risque de timeout.
+  - **Écoute Long-Polling des Attributs Partagés HTTP** : Implémentation dans `ThingsBoardHttpClient` de `poll_attribute_updates()` (`GET /api/v1/{token}/attributes/updates?timeout=20000`) et `get_shared_attributes()`, synchronisés en continu par `SimulationEngine._poll_http_attributes_worker`.
+  - **Nouveaux Widgets Single Switch sur 32 Dashboards** : Remplacement des widgets `round_switch` par `system.single_switch` dans `dashboard_generator.py` et régénération complète des 32 dashboards dans `dashboards/thingsboard/`.
+  - **Mise à jour en direct ThingsBoard** : Reconfiguration automatique du widget de contrôle sur le tableau de bord actif de l'utilisateur via l'API REST.
+  - **Résolution Boucle d'Événements Asyncio** : Conversion des routes de démarrage/arrêt de simulation en `async def` dans `app/api/routes.py`, évitant l'erreur `RuntimeError: no running event loop`.
+  - **Sonde Healthz Enrichie & Logs Docker** : Sortie stdout directe pour `docker logs` et exposition des écouteurs RPC et Attributs dans `/healthz`.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles

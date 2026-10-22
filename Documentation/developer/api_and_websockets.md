@@ -36,9 +36,10 @@ Tous les endpoints sont préfixés par `/api`. Les requêtes et réponses utilis
   * Upload Multipart d'un fichier CSV pour alimenter la table de points.
 
 ### 4. État du Simulateur & Broker
+* **`GET /healthz`** : Sonde de santé CIS Rule 4.6 (version, statut moteur/MQTT, liste des équipements, écouteurs HTTP RPC et Attributs Partagés actifs, 10 derniers logs).
 * **`GET /api/status`** : Retourne l'état du moteur (`engine_running`), l'état de connexion MQTT (`mqtt_connected`), le compteur de messages publiés et le numéro de version de l'application.
-* **`POST /api/simulation/start`** : Démarre la boucle de simulation.
-* **`POST /api/simulation/stop`** : Met en pause la boucle de simulation.
+* **`POST /api/simulation/start`** : Démarre la boucle de simulation (`async def`).
+* **`POST /api/simulation/stop`** : Met en pause la boucle de simulation (`async def`).
 * **`GET /api/broker`** / **`POST /api/broker`** : Lecture et modification à chaud de la configuration du broker MQTT (hôte, port, transport `tcp`/`websockets`, `ws_path`, TLS, identifiants).
 * **`POST /api/broker/test`** : Teste la connectivité directe vers le broker spécifié (résolution DNS, détection CDN Cloudflare, socket TCP/TLS ou WebSockets, calcul de latence et recommandations).
 
@@ -88,7 +89,7 @@ Deux types de trames JSON sont diffusées en temps réel :
 ```
 ### Catalogue des Modèles d'Équipements Métiers (`/api/presets`)
 
-* `GET /api/presets/catalog` : Retourne l'ensemble des 16 modèles d'équipements pré-paramétrés classés par axe métier (Industrie, Tertiaire, Infrastructures, Villes & Télécoms) avec toutes leurs variables et formules mathématiques associées. Accès : Tous rôles (`viewer`, `operator`, `admin`).
+* `GET /api/presets/catalog` : Retourne l'ensemble des 32 modèles d'équipements pré-paramétrés classés par axe métier (Industrie, Tertiaire, Infrastructures, Villes & Télécoms) avec toutes leurs variables et formules mathématiques associées. Accès : Tous rôles (`viewer`, `operator`, `admin`).
 * `POST /api/presets/instantiate` : Instancie un équipement métier choisi dans la simulation en créant automatiquement l'équipement et l'ensemble de ses télémétries et attributs. Accès : `operator`, `admin`.
   * Corps de requête :
     ```json

@@ -152,13 +152,13 @@ Chaque tableau de bord intègre désormais des composants de **pilotage interact
 +-----------------------------------------------------------------------------------+
 ```
 
-### 5.1 Interrupteurs de Commande (*Round Switch Controls*)
-- **Fonctionnement** : Pour chaque variable booléenne d'état ou de consigne (ex: *Mode Chaud* pour la pompe à chaleur, *État de Marche* pour le compresseur, *Ouverture Électrovanne* pour l'arrosage, *Contact Porte* pour la chambre froide), un interrupteur circulaire à LED d'état est positionné sur le tableau de bord.
+### 5.1 Interrupteurs de Commande (*Single Switch Controls* sur Attributs Partagés)
+- **Fonctionnement** : Pour chaque variable booléenne d'état ou de consigne (ex: *Mode Chaud* pour la pompe à chaleur, *État de Marche* pour le compresseur, *Ouverture Électrovanne* pour l'arrosage, *Contact Porte* pour la chambre froide, *Alerte Congestion* pour le trafic), un commutateur moderne **`system.single_switch`** (Action Widget) est positionné sur le tableau de bord.
 - **Action Opérateur** : Un simple clic sur l'interrupteur bascule l'état (ON ↔ OFF).
-- **Boucle de rétroaction en direct** :
-  1. ThingsBoard émet une commande RPC vers le broker (`v1/devices/me/rpc/request/{id}`).
-  2. Le simulateur IoT intercepte l'ordre, met à jour la variable locale, acquitte la commande auprès de ThingsBoard (`v1/devices/me/rpc/response/{id}`) et synchronise l'attribut partagé.
-  3. L'interrupteur reste stabilisé sur sa nouvelle position, le synoptique SCADA vectoriel s'actualise, et l'interface web locale du simulateur reflète instantanément le changement sans rechargement de page.
+- **Boucle de rétroaction en direct (Attributs Partagés `SHARED_SCOPE`)** :
+  1. ThingsBoard écrit directement la modification dans les Attributs Partagés (`SHARED_SCOPE` via `SET_ATTRIBUTE`). Cette opération est instantanée en base (< 50 ms) et ne dépend pas du routage de la Root Rule Chain, éliminant tout risque d'erreur *504 Gateway Timeout*.
+  2. Le simulateur IoT, à l'écoute en continu (soit via le topic MQTT `v1/devices/me/attributes`, soit via le Long-Polling HTTP `GET /api/v1/{token}/attributes/updates?timeout=20000`), intercepte la modification en temps réel.
+  3. Le simulateur applique la nouvelle consigne avec forçage manuel (`manual_override = True`), acquitte l'attribut client de confirmation sur ThingsBoard et propage la mise à jour par WebSocket sur l'IHM locale sans rechargement de page.
 
 ### 5.2 Formulaires de Consignes & Paramètres (*Input Widgets*)
 - Pour les grandeurs continues ou énumérées (ex: *Ouverture Registre Air Neuf %* sur la CTA, *Position Aiguillage* ferroviaire, *Statut Prise IRVE*), un widget de saisie permet de modifier la consigne et de l'appliquer via le bouton **`Valider`**.
