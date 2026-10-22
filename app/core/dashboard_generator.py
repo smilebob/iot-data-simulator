@@ -462,6 +462,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                                 "attributeScope": "CLIENT_SCOPE",
                                 "setValueMethod": f"set_{clean_key}",
                                 "getValueMethod": f"get_{clean_key}",
+                                "requestTimeout": 10000,
                                 "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
                                 "convertValueFunction": "return value;"
                             },

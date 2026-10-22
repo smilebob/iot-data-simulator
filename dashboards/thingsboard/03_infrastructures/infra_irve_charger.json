@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Borne de Recharge IRVE' (ID: infra_irve_charger). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "d6e68556-4403-48f2-9388-ba9803ac33c4": {
-        "id": "d6e68556-4403-48f2-9388-ba9803ac33c4",
+      "2773e161-18d0-45c7-923a-36be45f92fd1": {
+        "id": "2773e161-18d0-45c7-923a-36be45f92fd1",
         "alias": "Borne de Recharge IRVE",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "35f9a3b1-44e2-4c43-a3c2-c73077cde509": {
+      "cb9b30d7-e22c-466e-aeed-8e27d30af879": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "35f9a3b1-44e2-4c43-a3c2-c73077cde509"
+        "id": "cb9b30d7-e22c-466e-aeed-8e27d30af879"
       },
-      "2670ddc1-6edd-4e4d-aada-795e4e1d94bf": {
+      "981e63bb-be31-4d76-88b6-4e26c76287fc": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d6e68556-4403-48f2-9388-ba9803ac33c4",
+              "entityAliasId": "2773e161-18d0-45c7-923a-36be45f92fd1",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "2670ddc1-6edd-4e4d-aada-795e4e1d94bf"
+        "id": "981e63bb-be31-4d76-88b6-4e26c76287fc"
       },
-      "1f182f83-ac66-4375-aee0-16df5619b027": {
+      "8f06bbcc-f6cf-4241-a20c-e84d20e194e4": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d6e68556-4403-48f2-9388-ba9803ac33c4",
+              "entityAliasId": "2773e161-18d0-45c7-923a-36be45f92fd1",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "1f182f83-ac66-4375-aee0-16df5619b027"
+        "id": "8f06bbcc-f6cf-4241-a20c-e84d20e194e4"
       },
-      "3d28f8d6-b41b-404d-9b76-fa67c46ad617": {
+      "5b008deb-db46-4181-a83d-ed7ac39cfc31": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d6e68556-4403-48f2-9388-ba9803ac33c4",
+              "entityAliasId": "2773e161-18d0-45c7-923a-36be45f92fd1",
               "dataKeys": [
                 {
                   "name": "energie_session_kwh",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "3d28f8d6-b41b-404d-9b76-fa67c46ad617"
+        "id": "5b008deb-db46-4181-a83d-ed7ac39cfc31"
       },
-      "6f5370b0-d32a-4d91-96ac-ff6714be557d": {
+      "cbeb2f16-3a1d-437f-86d1-d3d5832e7913": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d6e68556-4403-48f2-9388-ba9803ac33c4",
+              "entityAliasId": "2773e161-18d0-45c7-923a-36be45f92fd1",
               "dataKeys": [
                 {
                   "name": "courant_charge_a",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "6f5370b0-d32a-4d91-96ac-ff6714be557d"
+        "id": "cbeb2f16-3a1d-437f-86d1-d3d5832e7913"
       },
-      "07db45f8-5f12-4030-bf15-a5e540ac4778": {
+      "982a2cd6-241d-4ad3-b1ad-48f68073c48c": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d6e68556-4403-48f2-9388-ba9803ac33c4",
+              "entityAliasId": "2773e161-18d0-45c7-923a-36be45f92fd1",
               "dataKeys": [
                 {
                   "name": "puissance_charge_kw",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "07db45f8-5f12-4030-bf15-a5e540ac4778"
+        "id": "982a2cd6-241d-4ad3-b1ad-48f68073c48c"
       },
-      "511b20b4-9663-408b-8f2a-8f4868c3329f": {
+      "1898fd5e-0de6-46cb-bf52-409945a5db2c": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -428,7 +428,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d6e68556-4403-48f2-9388-ba9803ac33c4",
+              "entityAliasId": "2773e161-18d0-45c7-923a-36be45f92fd1",
               "dataKeys": [
                 {
                   "name": "statut_connecteur",
@@ -461,9 +461,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "511b20b4-9663-408b-8f2a-8f4868c3329f"
+        "id": "1898fd5e-0de6-46cb-bf52-409945a5db2c"
       },
-      "23be9f08-bd99-4c09-9bc6-d50cf1dbd934": {
+      "057eea26-6a66-4cb0-bb67-ce345b555bef": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -476,7 +476,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d6e68556-4403-48f2-9388-ba9803ac33c4",
+              "entityAliasId": "2773e161-18d0-45c7-923a-36be45f92fd1",
               "dataKeys": [
                 {
                   "name": "statut_connecteur",
@@ -508,7 +508,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "23be9f08-bd99-4c09-9bc6-d50cf1dbd934"
+        "id": "057eea26-6a66-4cb0-bb67-ce345b555bef"
       }
     },
     "states": {
@@ -518,49 +518,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "35f9a3b1-44e2-4c43-a3c2-c73077cde509": {
+              "cb9b30d7-e22c-466e-aeed-8e27d30af879": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "2670ddc1-6edd-4e4d-aada-795e4e1d94bf": {
+              "981e63bb-be31-4d76-88b6-4e26c76287fc": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "1f182f83-ac66-4375-aee0-16df5619b027": {
+              "8f06bbcc-f6cf-4241-a20c-e84d20e194e4": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3d28f8d6-b41b-404d-9b76-fa67c46ad617": {
+              "5b008deb-db46-4181-a83d-ed7ac39cfc31": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "6f5370b0-d32a-4d91-96ac-ff6714be557d": {
+              "cbeb2f16-3a1d-437f-86d1-d3d5832e7913": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "07db45f8-5f12-4030-bf15-a5e540ac4778": {
+              "982a2cd6-241d-4ad3-b1ad-48f68073c48c": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "511b20b4-9663-408b-8f2a-8f4868c3329f": {
+              "1898fd5e-0de6-46cb-bf52-409945a5db2c": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "23be9f08-bd99-4c09-9bc6-d50cf1dbd934": {
+              "057eea26-6a66-4cb0-bb67-ce345b555bef": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

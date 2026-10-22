@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale Sécurité Incendie (SSI)' (ID: bldg_fire_ssi). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb": {
-        "id": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+      "4f7ee43f-88c8-435b-81c1-65fc729fe4fc": {
+        "id": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
         "alias": "Centrale Sécurité Incendie (SSI)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "aae2bf20-f0cf-4324-a074-e617d1bee1fd": {
+      "485c022e-e111-44a7-938e-e7471ac75f3e": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "aae2bf20-f0cf-4324-a074-e617d1bee1fd"
+        "id": "485c022e-e111-44a7-938e-e7471ac75f3e"
       },
-      "48184b7a-c849-40b0-bbfc-9c156b3f4f4c": {
+      "99f6167e-2562-45f0-9067-6ab8f1f1dab6": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "48184b7a-c849-40b0-bbfc-9c156b3f4f4c"
+        "id": "99f6167e-2562-45f0-9067-6ab8f1f1dab6"
       },
-      "ee993609-2f15-4c31-95ed-7f89fcb1d87e": {
+      "5cb9c918-fae6-4ce8-b148-733d086298aa": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "ee993609-2f15-4c31-95ed-7f89fcb1d87e"
+        "id": "5cb9c918-fae6-4ce8-b148-733d086298aa"
       },
-      "f1a0a251-b4f4-4f7f-a7d8-a475ddf36395": {
+      "3ad78fd5-1f7d-4f85-8384-3860b670ddcc": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
               "dataKeys": [
                 {
                   "name": "debit_desenfumage_m3h",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "f1a0a251-b4f4-4f7f-a7d8-a475ddf36395"
+        "id": "3ad78fd5-1f7d-4f85-8384-3860b670ddcc"
       },
-      "ef9915ed-578a-4bfa-a451-50bc78f28641": {
+      "278bc65a-7a08-4561-87c9-33398f0d3701": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
               "dataKeys": [
                 {
                   "name": "tension_alim_secours",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "ef9915ed-578a-4bfa-a451-50bc78f28641"
+        "id": "278bc65a-7a08-4561-87c9-33398f0d3701"
       },
-      "f0534c56-e183-45cd-b406-edce1ea4c16c": {
+      "83390f40-72e1-484e-aa50-ffa44e0ecbca": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -422,9 +422,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "f0534c56-e183-45cd-b406-edce1ea4c16c"
+        "id": "83390f40-72e1-484e-aa50-ffa44e0ecbca"
       },
-      "d0eda17e-6724-4b87-b62b-fc29ed2c70be": {
+      "b3a4c0be-f62a-4cf9-a3a0-31c3e62d30ae": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -436,12 +436,12 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb"
+            "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
               "dataKeys": [
                 {
                   "name": "declencheur_manuel",
@@ -468,6 +468,7 @@
             "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_declencheur_manuel",
             "getValueMethod": "get_declencheur_manuel",
+            "requestTimeout": 10000,
             "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
@@ -480,9 +481,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "d0eda17e-6724-4b87-b62b-fc29ed2c70be"
+        "id": "b3a4c0be-f62a-4cf9-a3a0-31c3e62d30ae"
       },
-      "2cc9786d-1837-4b65-9eba-837ba1f82ff4": {
+      "0cf7559d-2e45-4e46-b97a-7683332ff2c1": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -495,7 +496,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
               "dataKeys": [
                 {
                   "name": "statut_clapets_coupe_feu",
@@ -528,9 +529,9 @@
         },
         "row": 16,
         "col": 20,
-        "id": "2cc9786d-1837-4b65-9eba-837ba1f82ff4"
+        "id": "0cf7559d-2e45-4e46-b97a-7683332ff2c1"
       },
-      "f7f405a2-d63e-40da-a2af-fbf2854fa66c": {
+      "a5770035-7eb4-43b3-a44b-33e311cbe62a": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -543,7 +544,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ac7ba01d-eca1-45e6-9a05-93f0e2b0babb",
+              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
               "dataKeys": [
                 {
                   "name": "declencheur_manuel",
@@ -582,7 +583,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "f7f405a2-d63e-40da-a2af-fbf2854fa66c"
+        "id": "a5770035-7eb4-43b3-a44b-33e311cbe62a"
       }
     },
     "states": {
@@ -592,55 +593,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "aae2bf20-f0cf-4324-a074-e617d1bee1fd": {
+              "485c022e-e111-44a7-938e-e7471ac75f3e": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "48184b7a-c849-40b0-bbfc-9c156b3f4f4c": {
+              "99f6167e-2562-45f0-9067-6ab8f1f1dab6": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "ee993609-2f15-4c31-95ed-7f89fcb1d87e": {
+              "5cb9c918-fae6-4ce8-b148-733d086298aa": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "f1a0a251-b4f4-4f7f-a7d8-a475ddf36395": {
+              "3ad78fd5-1f7d-4f85-8384-3860b670ddcc": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "ef9915ed-578a-4bfa-a451-50bc78f28641": {
+              "278bc65a-7a08-4561-87c9-33398f0d3701": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "f0534c56-e183-45cd-b406-edce1ea4c16c": {
+              "83390f40-72e1-484e-aa50-ffa44e0ecbca": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "d0eda17e-6724-4b87-b62b-fc29ed2c70be": {
+              "b3a4c0be-f62a-4cf9-a3a0-31c3e62d30ae": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "2cc9786d-1837-4b65-9eba-837ba1f82ff4": {
+              "0cf7559d-2e45-4e46-b97a-7683332ff2c1": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "f7f405a2-d63e-40da-a2af-fbf2854fa66c": {
+              "a5770035-7eb4-43b3-a44b-33e311cbe62a": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Groupe Froid Industriel' (ID: ind_chiller). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "2a3dc690-e9d6-41cc-8912-450f0bfb0764": {
-        "id": "2a3dc690-e9d6-41cc-8912-450f0bfb0764",
+      "1da26983-7053-478e-8e37-015519fa39d4": {
+        "id": "1da26983-7053-478e-8e37-015519fa39d4",
         "alias": "Groupe Froid Industriel",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "69b6d144-208b-432e-bd4c-d3704a06f2f7": {
+      "d4a6a8f1-9a67-48df-8279-65831ac44af8": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "69b6d144-208b-432e-bd4c-d3704a06f2f7"
+        "id": "d4a6a8f1-9a67-48df-8279-65831ac44af8"
       },
-      "a8956636-320d-4321-ae5b-61fd1b981317": {
+      "634ae378-ce12-4213-b2c7-243dc9cd0ed3": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2a3dc690-e9d6-41cc-8912-450f0bfb0764",
+              "entityAliasId": "1da26983-7053-478e-8e37-015519fa39d4",
               "dataKeys": [
                 {
                   "name": "temp_eau_depart",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a8956636-320d-4321-ae5b-61fd1b981317"
+        "id": "634ae378-ce12-4213-b2c7-243dc9cd0ed3"
       },
-      "d0b02079-fdda-4870-82a2-e3c459065787": {
+      "173eb5bf-2315-4aa8-85c3-0a3e35fce0dd": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2a3dc690-e9d6-41cc-8912-450f0bfb0764",
+              "entityAliasId": "1da26983-7053-478e-8e37-015519fa39d4",
               "dataKeys": [
                 {
                   "name": "temp_eau_depart",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "d0b02079-fdda-4870-82a2-e3c459065787"
+        "id": "173eb5bf-2315-4aa8-85c3-0a3e35fce0dd"
       },
-      "24b2b075-f661-4c71-ab26-823532d53003": {
+      "04c8078b-145f-4c72-99dd-011eaeab5d32": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2a3dc690-e9d6-41cc-8912-450f0bfb0764",
+              "entityAliasId": "1da26983-7053-478e-8e37-015519fa39d4",
               "dataKeys": [
                 {
                   "name": "temp_eau_retour",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "24b2b075-f661-4c71-ab26-823532d53003"
+        "id": "04c8078b-145f-4c72-99dd-011eaeab5d32"
       },
-      "9a58a2c3-1229-42a3-9053-e6ad841f1d43": {
+      "f16ae5ba-416d-4041-90ce-70db7ecadc9c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2a3dc690-e9d6-41cc-8912-450f0bfb0764",
+              "entityAliasId": "1da26983-7053-478e-8e37-015519fa39d4",
               "dataKeys": [
                 {
                   "name": "pression_hp",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "9a58a2c3-1229-42a3-9053-e6ad841f1d43"
+        "id": "f16ae5ba-416d-4041-90ce-70db7ecadc9c"
       },
-      "53b54e1b-dbad-4e83-b961-d6dfca52a65b": {
+      "3628ab57-f5c2-4603-bac1-785d505016de": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2a3dc690-e9d6-41cc-8912-450f0bfb0764",
+              "entityAliasId": "1da26983-7053-478e-8e37-015519fa39d4",
               "dataKeys": [
                 {
                   "name": "cop_instantane",
@@ -360,9 +360,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "53b54e1b-dbad-4e83-b961-d6dfca52a65b"
+        "id": "3628ab57-f5c2-4603-bac1-785d505016de"
       },
-      "1dadb488-4af6-4c80-8250-1059f4972a8e": {
+      "8e98f308-eb30-47fb-a46a-7fc682db62a4": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -375,7 +375,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2a3dc690-e9d6-41cc-8912-450f0bfb0764",
+              "entityAliasId": "1da26983-7053-478e-8e37-015519fa39d4",
               "dataKeys": [
                 {
                   "name": "temp_eau_depart",
@@ -487,7 +487,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "1dadb488-4af6-4c80-8250-1059f4972a8e"
+        "id": "8e98f308-eb30-47fb-a46a-7fc682db62a4"
       }
     },
     "states": {
@@ -497,43 +497,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "69b6d144-208b-432e-bd4c-d3704a06f2f7": {
+              "d4a6a8f1-9a67-48df-8279-65831ac44af8": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a8956636-320d-4321-ae5b-61fd1b981317": {
+              "634ae378-ce12-4213-b2c7-243dc9cd0ed3": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "d0b02079-fdda-4870-82a2-e3c459065787": {
+              "173eb5bf-2315-4aa8-85c3-0a3e35fce0dd": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "24b2b075-f661-4c71-ab26-823532d53003": {
+              "04c8078b-145f-4c72-99dd-011eaeab5d32": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "9a58a2c3-1229-42a3-9053-e6ad841f1d43": {
+              "f16ae5ba-416d-4041-90ce-70db7ecadc9c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "53b54e1b-dbad-4e83-b961-d6dfca52a65b": {
+              "3628ab57-f5c2-4603-bac1-785d505016de": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "1dadb488-4af6-4c80-8250-1059f4972a8e": {
+              "8e98f308-eb30-47fb-a46a-7fc682db62a4": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

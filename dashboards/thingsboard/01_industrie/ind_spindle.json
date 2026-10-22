@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Broche d'Usinage & Moteur' (ID: ind_spindle). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "ba23cc75-180e-406d-b965-cb05d2850baf": {
-        "id": "ba23cc75-180e-406d-b965-cb05d2850baf",
+      "1f21c02a-664e-4ec7-8130-fa3762c6c105": {
+        "id": "1f21c02a-664e-4ec7-8130-fa3762c6c105",
         "alias": "Broche d'Usinage & Moteur",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "af8dfac0-68c1-4264-9ab2-54e07480b551": {
+      "9ef690da-ed90-4982-9673-eb3b2f1542cb": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "af8dfac0-68c1-4264-9ab2-54e07480b551"
+        "id": "9ef690da-ed90-4982-9673-eb3b2f1542cb"
       },
-      "3c38e926-d329-49b8-8381-b59e65c90c53": {
+      "15fe76f1-9d13-44e3-98db-b52d252bad0b": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba23cc75-180e-406d-b965-cb05d2850baf",
+              "entityAliasId": "1f21c02a-664e-4ec7-8130-fa3762c6c105",
               "dataKeys": [
                 {
                   "name": "vitesse_rotation",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "3c38e926-d329-49b8-8381-b59e65c90c53"
+        "id": "15fe76f1-9d13-44e3-98db-b52d252bad0b"
       },
-      "80d66c0d-ecfe-45a8-9e67-6e799c2ee962": {
+      "8efa2258-9a5c-4c2b-8031-48f565086a0e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba23cc75-180e-406d-b965-cb05d2850baf",
+              "entityAliasId": "1f21c02a-664e-4ec7-8130-fa3762c6c105",
               "dataKeys": [
                 {
                   "name": "vitesse_rotation",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "80d66c0d-ecfe-45a8-9e67-6e799c2ee962"
+        "id": "8efa2258-9a5c-4c2b-8031-48f565086a0e"
       },
-      "3c68dfd5-8412-41e5-81af-4064ad98c8d0": {
+      "8f8c9c69-aacf-4379-aeb9-4ed57d28d78f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba23cc75-180e-406d-b965-cb05d2850baf",
+              "entityAliasId": "1f21c02a-664e-4ec7-8130-fa3762c6c105",
               "dataKeys": [
                 {
                   "name": "vibration_rms",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "3c68dfd5-8412-41e5-81af-4064ad98c8d0"
+        "id": "8f8c9c69-aacf-4379-aeb9-4ed57d28d78f"
       },
-      "3b2f7e08-d66f-4a23-bb12-0416057ae5c3": {
+      "a294fb43-1a9d-4da2-89ca-5461d9c4e2bd": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba23cc75-180e-406d-b965-cb05d2850baf",
+              "entityAliasId": "1f21c02a-664e-4ec7-8130-fa3762c6c105",
               "dataKeys": [
                 {
                   "name": "temp_palier",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "3b2f7e08-d66f-4a23-bb12-0416057ae5c3"
+        "id": "a294fb43-1a9d-4da2-89ca-5461d9c4e2bd"
       },
-      "8f238fd2-4f82-4d78-98ad-995b2ebb0fd4": {
+      "bbf9784e-352b-4409-bdf2-39c8da90d9b8": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba23cc75-180e-406d-b965-cb05d2850baf",
+              "entityAliasId": "1f21c02a-664e-4ec7-8130-fa3762c6c105",
               "dataKeys": [
                 {
                   "name": "courant_moteur",
@@ -360,9 +360,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "8f238fd2-4f82-4d78-98ad-995b2ebb0fd4"
+        "id": "bbf9784e-352b-4409-bdf2-39c8da90d9b8"
       },
-      "321ca72a-bd3e-4147-92c7-fe75deadd038": {
+      "217a711a-2ce0-4716-a0a6-4373c52ed4af": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -375,7 +375,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "ba23cc75-180e-406d-b965-cb05d2850baf",
+              "entityAliasId": "1f21c02a-664e-4ec7-8130-fa3762c6c105",
               "dataKeys": [
                 {
                   "name": "vitesse_rotation",
@@ -487,7 +487,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "321ca72a-bd3e-4147-92c7-fe75deadd038"
+        "id": "217a711a-2ce0-4716-a0a6-4373c52ed4af"
       }
     },
     "states": {
@@ -497,43 +497,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "af8dfac0-68c1-4264-9ab2-54e07480b551": {
+              "9ef690da-ed90-4982-9673-eb3b2f1542cb": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "3c38e926-d329-49b8-8381-b59e65c90c53": {
+              "15fe76f1-9d13-44e3-98db-b52d252bad0b": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "80d66c0d-ecfe-45a8-9e67-6e799c2ee962": {
+              "8efa2258-9a5c-4c2b-8031-48f565086a0e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3c68dfd5-8412-41e5-81af-4064ad98c8d0": {
+              "8f8c9c69-aacf-4379-aeb9-4ed57d28d78f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "3b2f7e08-d66f-4a23-bb12-0416057ae5c3": {
+              "a294fb43-1a9d-4da2-89ca-5461d9c4e2bd": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "8f238fd2-4f82-4d78-98ad-995b2ebb0fd4": {
+              "bbf9784e-352b-4409-bdf2-39c8da90d9b8": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "321ca72a-bd3e-4147-92c7-fe75deadd038": {
+              "217a711a-2ce0-4716-a0a6-4373c52ed4af": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

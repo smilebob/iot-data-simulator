@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Poste de Relevage Assainissement' (ID: infra_water_pump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "798cf651-f6fb-4566-bc1b-436f31ce9d84": {
-        "id": "798cf651-f6fb-4566-bc1b-436f31ce9d84",
+      "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93": {
+        "id": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
         "alias": "Poste de Relevage Assainissement",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "4d1a479d-8c1f-4789-aa01-cf4e449c37ed": {
+      "1ad84fc9-dfe0-4956-95cb-edfb487a7ad0": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "4d1a479d-8c1f-4789-aa01-cf4e449c37ed"
+        "id": "1ad84fc9-dfe0-4956-95cb-edfb487a7ad0"
       },
-      "a0f599e3-c71a-47d2-8a2d-81eb964a1f71": {
+      "aa5e31cd-900f-4cb6-9715-1fe917dbddc5": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "798cf651-f6fb-4566-bc1b-436f31ce9d84",
+              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a0f599e3-c71a-47d2-8a2d-81eb964a1f71"
+        "id": "aa5e31cd-900f-4cb6-9715-1fe917dbddc5"
       },
-      "8c5b4447-37f2-47bf-bed5-c2e3fe69eb69": {
+      "48284637-5523-4533-8f9d-d002726d6db2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "798cf651-f6fb-4566-bc1b-436f31ce9d84",
+              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "8c5b4447-37f2-47bf-bed5-c2e3fe69eb69"
+        "id": "48284637-5523-4533-8f9d-d002726d6db2"
       },
-      "739558fe-c7f1-40bb-8a03-a916e9a3c37c": {
+      "7d6a0f8e-1613-4ce5-a46b-9c2520bd1b1f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "798cf651-f6fb-4566-bc1b-436f31ce9d84",
+              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
               "dataKeys": [
                 {
                   "name": "debit_refoulement",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "739558fe-c7f1-40bb-8a03-a916e9a3c37c"
+        "id": "7d6a0f8e-1613-4ce5-a46b-9c2520bd1b1f"
       },
-      "0451c793-4c1d-46c5-8c79-89b8ad6d7636": {
+      "4b75f25a-ffc8-4927-a886-a07337a70893": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "798cf651-f6fb-4566-bc1b-436f31ce9d84",
+              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
               "dataKeys": [
                 {
                   "name": "conso_pompe_kw",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "0451c793-4c1d-46c5-8c79-89b8ad6d7636"
+        "id": "4b75f25a-ffc8-4927-a886-a07337a70893"
       },
-      "c2f01489-559e-436d-a9ab-90bfbbad754f": {
+      "1e5dd4b6-155c-40a3-a305-a80c33f7e54b": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "798cf651-f6fb-4566-bc1b-436f31ce9d84",
+              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "c2f01489-559e-436d-a9ab-90bfbbad754f"
+        "id": "1e5dd4b6-155c-40a3-a305-a80c33f7e54b"
       },
-      "9a95e338-3157-437f-8f8e-239dddeb8024": {
+      "5d2c6be5-4bfc-46ae-bebd-44ac640f3949": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -427,12 +427,12 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "798cf651-f6fb-4566-bc1b-436f31ce9d84"
+            "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "798cf651-f6fb-4566-bc1b-436f31ce9d84",
+              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
               "dataKeys": [
                 {
                   "name": "alarme_debordement",
@@ -459,6 +459,7 @@
             "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_alarme_debordement",
             "getValueMethod": "get_alarme_debordement",
+            "requestTimeout": 10000,
             "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
@@ -471,9 +472,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "9a95e338-3157-437f-8f8e-239dddeb8024"
+        "id": "5d2c6be5-4bfc-46ae-bebd-44ac640f3949"
       },
-      "cbdc7bd5-fdb1-4e0d-aa93-8420431bc95b": {
+      "66170abd-e59c-43ad-8b89-64ed7319a31d": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -486,7 +487,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "798cf651-f6fb-4566-bc1b-436f31ce9d84",
+              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
               "dataKeys": [
                 {
                   "name": "alarme_debordement",
@@ -518,7 +519,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "cbdc7bd5-fdb1-4e0d-aa93-8420431bc95b"
+        "id": "66170abd-e59c-43ad-8b89-64ed7319a31d"
       }
     },
     "states": {
@@ -528,49 +529,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "4d1a479d-8c1f-4789-aa01-cf4e449c37ed": {
+              "1ad84fc9-dfe0-4956-95cb-edfb487a7ad0": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a0f599e3-c71a-47d2-8a2d-81eb964a1f71": {
+              "aa5e31cd-900f-4cb6-9715-1fe917dbddc5": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "8c5b4447-37f2-47bf-bed5-c2e3fe69eb69": {
+              "48284637-5523-4533-8f9d-d002726d6db2": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "739558fe-c7f1-40bb-8a03-a916e9a3c37c": {
+              "7d6a0f8e-1613-4ce5-a46b-9c2520bd1b1f": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "0451c793-4c1d-46c5-8c79-89b8ad6d7636": {
+              "4b75f25a-ffc8-4927-a886-a07337a70893": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "c2f01489-559e-436d-a9ab-90bfbbad754f": {
+              "1e5dd4b6-155c-40a3-a305-a80c33f7e54b": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "9a95e338-3157-437f-8f8e-239dddeb8024": {
+              "5d2c6be5-4bfc-46ae-bebd-44ac640f3949": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "cbdc7bd5-fdb1-4e0d-aa93-8420431bc95b": {
+              "66170abd-e59c-43ad-8b89-64ed7319a31d": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

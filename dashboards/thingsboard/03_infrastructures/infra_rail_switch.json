@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb": {
-        "id": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+      "d8c94a82-c0c7-4923-b522-c913d15c3ace": {
+        "id": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
         "alias": "Aiguillage & Signalisation Ferroviaire",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "23a07d72-abc4-4808-b6d1-41974ddb1572": {
+      "7532db31-9394-4e20-8c16-0822cde8d5ad": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "23a07d72-abc4-4808-b6d1-41974ddb1572"
+        "id": "7532db31-9394-4e20-8c16-0822cde8d5ad"
       },
-      "3043a965-b177-4284-bd49-5932166cb82d": {
+      "a611ff1a-94c2-4f3b-8ec1-e500e477bc70": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "3043a965-b177-4284-bd49-5932166cb82d"
+        "id": "a611ff1a-94c2-4f3b-8ec1-e500e477bc70"
       },
-      "c4c3cee5-cda0-4890-8a60-5469993fb166": {
+      "da9730bd-4906-4d39-97e6-fc9a63a9e5d2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "c4c3cee5-cda0-4890-8a60-5469993fb166"
+        "id": "da9730bd-4906-4d39-97e6-fc9a63a9e5d2"
       },
-      "775d45ba-bedb-4483-a3c9-a71e593cd80f": {
+      "112e15e0-db3c-4789-b8bf-3f7b65cba893": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
               "dataKeys": [
                 {
                   "name": "temps_manoeuvre_ms",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "775d45ba-bedb-4483-a3c9-a71e593cd80f"
+        "id": "112e15e0-db3c-4789-b8bf-3f7b65cba893"
       },
-      "37bae15b-38ce-4370-a5d5-8984ed1315e7": {
+      "2080ba65-fcbd-4d99-a1e0-1a7d5198ff2a": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
               "dataKeys": [
                 {
                   "name": "temp_rail_rechauffage",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "37bae15b-38ce-4370-a5d5-8984ed1315e7"
+        "id": "2080ba65-fcbd-4d99-a1e0-1a7d5198ff2a"
       },
-      "a73651a9-d3a1-455b-b377-95a1d6b107e9": {
+      "7ab0f564-4fd3-495e-8e1e-a85d042a9fb2": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -422,9 +422,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "a73651a9-d3a1-455b-b377-95a1d6b107e9"
+        "id": "7ab0f564-4fd3-495e-8e1e-a85d042a9fb2"
       },
-      "cdcf5582-ce60-4f01-8548-8ab6e66b90c3": {
+      "dceacb4b-9a4a-4a06-968b-95a3d30373eb": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -436,12 +436,12 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb"
+            "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -468,6 +468,7 @@
             "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_presence_essieu",
             "getValueMethod": "get_presence_essieu",
+            "requestTimeout": 10000,
             "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
@@ -480,9 +481,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "cdcf5582-ce60-4f01-8548-8ab6e66b90c3"
+        "id": "dceacb4b-9a4a-4a06-968b-95a3d30373eb"
       },
-      "9d022b56-f6a1-4ac5-9620-9009c845eadb": {
+      "e76051d9-59a3-45c0-966a-1caee000c3cf": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -495,7 +496,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
               "dataKeys": [
                 {
                   "name": "position_aiguille",
@@ -528,9 +529,9 @@
         },
         "row": 16,
         "col": 20,
-        "id": "9d022b56-f6a1-4ac5-9620-9009c845eadb"
+        "id": "e76051d9-59a3-45c0-966a-1caee000c3cf"
       },
-      "5a9efdd0-411b-4211-b6a4-eed87e628f33": {
+      "f934f8ef-548d-4e91-ba0e-4f3620df5dfe": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -543,7 +544,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f5ba7a6b-b928-4128-9cf0-a1d6745c9cfb",
+              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -582,7 +583,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "5a9efdd0-411b-4211-b6a4-eed87e628f33"
+        "id": "f934f8ef-548d-4e91-ba0e-4f3620df5dfe"
       }
     },
     "states": {
@@ -592,55 +593,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "23a07d72-abc4-4808-b6d1-41974ddb1572": {
+              "7532db31-9394-4e20-8c16-0822cde8d5ad": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "3043a965-b177-4284-bd49-5932166cb82d": {
+              "a611ff1a-94c2-4f3b-8ec1-e500e477bc70": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "c4c3cee5-cda0-4890-8a60-5469993fb166": {
+              "da9730bd-4906-4d39-97e6-fc9a63a9e5d2": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "775d45ba-bedb-4483-a3c9-a71e593cd80f": {
+              "112e15e0-db3c-4789-b8bf-3f7b65cba893": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "37bae15b-38ce-4370-a5d5-8984ed1315e7": {
+              "2080ba65-fcbd-4d99-a1e0-1a7d5198ff2a": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "a73651a9-d3a1-455b-b377-95a1d6b107e9": {
+              "7ab0f564-4fd3-495e-8e1e-a85d042a9fb2": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "cdcf5582-ce60-4f01-8548-8ab6e66b90c3": {
+              "dceacb4b-9a4a-4a06-968b-95a3d30373eb": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "9d022b56-f6a1-4ac5-9620-9009c845eadb": {
+              "e76051d9-59a3-45c0-966a-1caee000c3cf": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "5a9efdd0-411b-4211-b6a4-eed87e628f33": {
+              "f934f8ef-548d-4e91-ba0e-4f3620df5dfe": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

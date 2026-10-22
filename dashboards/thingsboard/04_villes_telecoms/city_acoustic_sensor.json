@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Sonde Acoustique & Nuisances Sonores' (ID: city_acoustic_sensor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "3c379dad-6d50-4f40-9db7-f3d2abfca90c": {
-        "id": "3c379dad-6d50-4f40-9db7-f3d2abfca90c",
+      "b13820e2-7155-49c5-804e-ed1b52c46e17": {
+        "id": "b13820e2-7155-49c5-804e-ed1b52c46e17",
         "alias": "Sonde Acoustique & Nuisances Sonores",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "710c3f1b-b760-4f5d-b43d-d3b50b3f0291": {
+      "20291f7d-f176-4321-90e5-b218839b7b0a": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "710c3f1b-b760-4f5d-b43d-d3b50b3f0291"
+        "id": "20291f7d-f176-4321-90e5-b218839b7b0a"
       },
-      "2adec1af-b97e-4a4e-ab86-d209e8d6331e": {
+      "f1f3362d-5085-48b4-a56c-a897345e436a": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3c379dad-6d50-4f40-9db7-f3d2abfca90c",
+              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "2adec1af-b97e-4a4e-ab86-d209e8d6331e"
+        "id": "f1f3362d-5085-48b4-a56c-a897345e436a"
       },
-      "241ac120-e623-4601-9c41-96a2e3df7fd6": {
+      "b30c90dc-e787-49f5-8d23-c30842ef1649": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3c379dad-6d50-4f40-9db7-f3d2abfca90c",
+              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "241ac120-e623-4601-9c41-96a2e3df7fd6"
+        "id": "b30c90dc-e787-49f5-8d23-c30842ef1649"
       },
-      "8b7e648d-b471-4148-a10f-7498902e453c": {
+      "ad315000-02a7-41d5-a434-7ee831f21f24": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3c379dad-6d50-4f40-9db7-f3d2abfca90c",
+              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
               "dataKeys": [
                 {
                   "name": "niveau_lcpeak_dbc",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "8b7e648d-b471-4148-a10f-7498902e453c"
+        "id": "ad315000-02a7-41d5-a434-7ee831f21f24"
       },
-      "e325b380-d7b8-48ee-bd33-2689e9da275a": {
+      "2a36c1dd-a43a-4a99-84c2-c1c86ac67b00": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3c379dad-6d50-4f40-9db7-f3d2abfca90c",
+              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
               "dataKeys": [
                 {
                   "name": "batterie_solaire_v",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "e325b380-d7b8-48ee-bd33-2689e9da275a"
+        "id": "2a36c1dd-a43a-4a99-84c2-c1c86ac67b00"
       },
-      "54310366-77da-4851-acda-6995fd4ded32": {
+      "9408fb8d-fb00-4185-8004-64b925da3868": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3c379dad-6d50-4f40-9db7-f3d2abfca90c",
+              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "54310366-77da-4851-acda-6995fd4ded32"
+        "id": "9408fb8d-fb00-4185-8004-64b925da3868"
       },
-      "ca3068a4-7a02-477b-8018-da9034880a3c": {
+      "dbbb7c1c-63fa-479e-83f5-4d79cae1ac59": {
         "typeFullFqn": "system.control_widgets.round_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -427,12 +427,12 @@
         "config": {
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "3c379dad-6d50-4f40-9db7-f3d2abfca90c"
+            "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17"
           },
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3c379dad-6d50-4f40-9db7-f3d2abfca90c",
+              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
               "dataKeys": [
                 {
                   "name": "depassement_seuil_nocturne",
@@ -459,6 +459,7 @@
             "attributeScope": "CLIENT_SCOPE",
             "setValueMethod": "set_depassement_seuil_nocturne",
             "getValueMethod": "get_depassement_seuil_nocturne",
+            "requestTimeout": 10000,
             "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
             "convertValueFunction": "return value;"
           },
@@ -471,9 +472,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "ca3068a4-7a02-477b-8018-da9034880a3c"
+        "id": "dbbb7c1c-63fa-479e-83f5-4d79cae1ac59"
       },
-      "e98da39b-68c7-45ee-8559-08b53fe797ee": {
+      "67e1e097-7685-43b5-a7cf-57765dd08fe5": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -486,7 +487,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "3c379dad-6d50-4f40-9db7-f3d2abfca90c",
+              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
               "dataKeys": [
                 {
                   "name": "depassement_seuil_nocturne",
@@ -518,7 +519,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "e98da39b-68c7-45ee-8559-08b53fe797ee"
+        "id": "67e1e097-7685-43b5-a7cf-57765dd08fe5"
       }
     },
     "states": {
@@ -528,49 +529,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "710c3f1b-b760-4f5d-b43d-d3b50b3f0291": {
+              "20291f7d-f176-4321-90e5-b218839b7b0a": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "2adec1af-b97e-4a4e-ab86-d209e8d6331e": {
+              "f1f3362d-5085-48b4-a56c-a897345e436a": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "241ac120-e623-4601-9c41-96a2e3df7fd6": {
+              "b30c90dc-e787-49f5-8d23-c30842ef1649": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "8b7e648d-b471-4148-a10f-7498902e453c": {
+              "ad315000-02a7-41d5-a434-7ee831f21f24": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "e325b380-d7b8-48ee-bd33-2689e9da275a": {
+              "2a36c1dd-a43a-4a99-84c2-c1c86ac67b00": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "54310366-77da-4851-acda-6995fd4ded32": {
+              "9408fb8d-fb00-4185-8004-64b925da3868": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "ca3068a4-7a02-477b-8018-da9034880a3c": {
+              "dbbb7c1c-63fa-479e-83f5-4d79cae1ac59": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "e98da39b-68c7-45ee-8559-08b53fe797ee": {
+              "67e1e097-7685-43b5-a7cf-57765dd08fe5": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

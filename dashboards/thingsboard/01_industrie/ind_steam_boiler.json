@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Chaudière Industrielle Vapeur' (ID: ind_steam_boiler). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "9ee7b390-ef23-441a-a357-52c4ce53f3f6": {
-        "id": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
+      "998237a2-4154-422b-ad37-d975d2aa69d1": {
+        "id": "998237a2-4154-422b-ad37-d975d2aa69d1",
         "alias": "Chaudière Industrielle Vapeur",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "1dcbdf60-5d20-4690-83e8-03deb1a4542d": {
+      "ea242bc4-105a-4d9a-9b39-2e70ef136df5": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "1dcbdf60-5d20-4690-83e8-03deb1a4542d"
+        "id": "ea242bc4-105a-4d9a-9b39-2e70ef136df5"
       },
-      "48d986f8-c710-45b1-8296-d366404da79e": {
+      "fe42b16b-1076-4139-b6b8-6576149d0a0d": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
+              "entityAliasId": "998237a2-4154-422b-ad37-d975d2aa69d1",
               "dataKeys": [
                 {
                   "name": "pression_vapeur_bar",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "48d986f8-c710-45b1-8296-d366404da79e"
+        "id": "fe42b16b-1076-4139-b6b8-6576149d0a0d"
       },
-      "94ef28da-568a-4e64-be11-4e30b09310d6": {
+      "f1b45674-b337-4a5f-80d8-fa276d8ff9af": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
+              "entityAliasId": "998237a2-4154-422b-ad37-d975d2aa69d1",
               "dataKeys": [
                 {
                   "name": "pression_vapeur_bar",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "94ef28da-568a-4e64-be11-4e30b09310d6"
+        "id": "f1b45674-b337-4a5f-80d8-fa276d8ff9af"
       },
-      "9da6aae2-a17e-41d7-b4c7-4c282d3bf40f": {
+      "d2f4fd6a-1f5e-47ab-8ab7-3c6a26b811ae": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
+              "entityAliasId": "998237a2-4154-422b-ad37-d975d2aa69d1",
               "dataKeys": [
                 {
                   "name": "debit_vapeur_th",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "9da6aae2-a17e-41d7-b4c7-4c282d3bf40f"
+        "id": "d2f4fd6a-1f5e-47ab-8ab7-3c6a26b811ae"
       },
-      "e50815ef-b04b-4820-b10e-5eddbd7e2674": {
+      "700bb5e1-af3b-48a4-950a-c2c8a57a1423": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
+              "entityAliasId": "998237a2-4154-422b-ad37-d975d2aa69d1",
               "dataKeys": [
                 {
                   "name": "temp_fumees",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "e50815ef-b04b-4820-b10e-5eddbd7e2674"
+        "id": "700bb5e1-af3b-48a4-950a-c2c8a57a1423"
       },
-      "035f7070-5c4e-4a94-a49a-71296761386b": {
+      "146bdec2-5811-4214-9fd6-5a89c16d77bb": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
+              "entityAliasId": "998237a2-4154-422b-ad37-d975d2aa69d1",
               "dataKeys": [
                 {
                   "name": "rendement_combustion_pct",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "035f7070-5c4e-4a94-a49a-71296761386b"
+        "id": "146bdec2-5811-4214-9fd6-5a89c16d77bb"
       },
-      "cd9bb9bf-88be-48cd-9da8-13a11cd25698": {
+      "657965cb-79b3-44d2-bbf9-93fb051a339d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
+              "entityAliasId": "998237a2-4154-422b-ad37-d975d2aa69d1",
               "dataKeys": [
                 {
                   "name": "taux_o2_residuel",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "cd9bb9bf-88be-48cd-9da8-13a11cd25698"
+        "id": "657965cb-79b3-44d2-bbf9-93fb051a339d"
       },
-      "e9330ca4-a5ba-434d-a2a2-903da8de6b2a": {
+      "7811c85d-75cf-4ee3-b635-b9b68e9b2a06": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9ee7b390-ef23-441a-a357-52c4ce53f3f6",
+              "entityAliasId": "998237a2-4154-422b-ad37-d975d2aa69d1",
               "dataKeys": [
                 {
                   "name": "pression_vapeur_bar",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "e9330ca4-a5ba-434d-a2a2-903da8de6b2a"
+        "id": "7811c85d-75cf-4ee3-b635-b9b68e9b2a06"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "1dcbdf60-5d20-4690-83e8-03deb1a4542d": {
+              "ea242bc4-105a-4d9a-9b39-2e70ef136df5": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "48d986f8-c710-45b1-8296-d366404da79e": {
+              "fe42b16b-1076-4139-b6b8-6576149d0a0d": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "94ef28da-568a-4e64-be11-4e30b09310d6": {
+              "f1b45674-b337-4a5f-80d8-fa276d8ff9af": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "9da6aae2-a17e-41d7-b4c7-4c282d3bf40f": {
+              "d2f4fd6a-1f5e-47ab-8ab7-3c6a26b811ae": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "e50815ef-b04b-4820-b10e-5eddbd7e2674": {
+              "700bb5e1-af3b-48a4-950a-c2c8a57a1423": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "035f7070-5c4e-4a94-a49a-71296761386b": {
+              "146bdec2-5811-4214-9fd6-5a89c16d77bb": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "cd9bb9bf-88be-48cd-9da8-13a11cd25698": {
+              "657965cb-79b3-44d2-bbf9-93fb051a339d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "e9330ca4-a5ba-434d-a2a2-903da8de6b2a": {
+              "7811c85d-75cf-4ee3-b635-b9b68e9b2a06": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,
