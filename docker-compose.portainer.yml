@@ -38,7 +38,7 @@ services:
     container_name: iot-sim-app
     restart: unless-stopped
     ports:
-      - "${SIMULATOR_PORT:-8000}:8000"
+      - "${SIMULATOR_PORT:-8032}:8000"
     environment:
       # Configuration Broker MQTT (laisser 'mosquitto' pour le broker embarqué ou pointer vers ThingsBoard)
       - MQTT_BROKER_HOST=${MQTT_BROKER_HOST:-mosquitto}
