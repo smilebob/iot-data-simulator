@@ -115,7 +115,45 @@ Lorsque vous avez créé un équipement virtuel dans le simulateur (par exemple 
 
 ---
 
-## 4. Procédure d'Importation dans ThingsBoard (3 Étapes)
+## 4. Importation Automatisée des Équipements via CSV (*Bulk Provisioning*)
+
+Le simulateur vous permet d'exporter vos équipements préconfigurés directement au format CSV d'import ThingsBoard :
+- **Export unitaire** : Cliquez sur le bouton vert **`CSV TB`** sur la carte de l'équipement concerné (`tb_device_<id>.csv`).
+- **Export global** : Cliquez sur le bouton **`Export CSV TB`** dans la barre d'outils supérieure pour exporter l'ensemble de votre parc en un seul fichier (`thingsboard_devices_all_<date>.csv`).
+
+### Format conforme ThingsBoard
+Le fichier CSV respecte scrupuleusement la spécification de l'assistant d'importation ThingsBoard :
+```csv
+name,type,label,access_token
+"Pompe à Chaleur Réversible (PAC)","default","bldg_heatpump_4004","c548cizzuynuke4c9ycm"
+```
+
+> [!IMPORTANT]
+> **Pourquoi `access_token` et non `accessToken` ?**  
+> L'assistant ThingsBoard compare les en-têtes du CSV à ses énumérations internes (`ImportEntityColumnType.ACCESS_TOKEN`). L'en-tête `access_token` permet à ThingsBoard de pré-sélectionner **automatiquement** le type de colonne sur **`Access token`** (Jeton d'accès).  
+> À l'inverse, si l'en-tête était nommé `accessToken`, ThingsBoard ne le reconnaissait pas et basculait la colonne en simple *Attribut Serveur*, générant un nouveau token aléatoire et écrasant vos identifiants.
+
+### Procédure d'Importation Pas-à-Pas dans ThingsBoard 4.3
+
+1. Rendez-vous dans le menu **Entités (Entities)** > **Équipements (Devices)**.
+2. Cliquez sur l'icône **`+`** en haut à droite, puis sélectionnez **Importer des équipements (Import devices)**.
+3. **Étape 1 - Sélection du fichier** : Déposez votre fichier `.csv`.
+4. **Étape 2 - Configuration CSV** :
+   - Délimiteur : **, (Virgule)**.
+   - Cochez **La première ligne contient les noms des colonnes**.
+   - Cochez **Mettre à jour les entités existantes** (si vos appareils existent déjà et que vous souhaitez aligner leur Access Token).
+5. **Étape 3 - Affectation des colonnes** :
+   ThingsBoard mappe automatiquement les 4 colonnes :
+   - `name` ➔ **Nom**
+   - `type` ➔ **Type**
+   - `label` ➔ **Étiquette**
+   - `access_token` ➔ **Jeton d'accès** (groupe *Identifiants*)
+6. Cliquez sur **Suivant** puis **Importer**.
+7. ThingsBoard crée ou met à jour vos équipements avec **exactement le token du simulateur**.
+
+---
+
+## 5. Procédure d'Importation des Tableaux de Bord (Dashboards JSON)
 
 ```mermaid
 flowchart TD

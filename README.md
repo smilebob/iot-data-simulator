@@ -1,6 +1,6 @@
 # ⚡ IoT Data Simulator (ThingsBoard, Home Assistant, Datacake & Multi-Platform)
 
-[![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)](https://github.com/smilebob/iot-data-simulator)
+[![Version](https://img.shields.io/badge/version-2.1.1-blue.svg)](https://github.com/smilebob/iot-data-simulator)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 [![CIS Docker](https://img.shields.io/badge/security-CIS%20Benchmark%20Passed-success.svg)](Documentation/devops/docker_and_cis.md)
 [![ThingsBoard](https://img.shields.io/badge/ThingsBoard-4.3%20Ready-orange.svg)](Documentation/user/thingsboard_dashboards.md)

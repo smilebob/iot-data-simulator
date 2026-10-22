@@ -1057,7 +1057,7 @@ function escapeCsvValue(val) {
 function downloadDeviceCsv(deviceId) {
   const device = state.devices.find(d => d.id === deviceId);
   if (!device) return;
-  const header = "name,type,label,accessToken";
+  const header = "name,type,label,access_token";
   const row = [
     escapeCsvValue(device.name),
     escapeCsvValue("default"),
@@ -1065,7 +1065,7 @@ function downloadDeviceCsv(deviceId) {
     escapeCsvValue(device.token || "")
   ].join(",");
 
-  const csvContent = "\uFEFF" + header + "\r\n" + row + "\r\n";
+  const csvContent = header + "\r\n" + row + "\r\n";
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -1083,7 +1083,7 @@ function exportAllDevicesCsv() {
     alert("Aucun équipement à exporter.");
     return;
   }
-  const header = "name,type,label,accessToken";
+  const header = "name,type,label,access_token";
   const rows = state.devices.map(device => [
     escapeCsvValue(device.name),
     escapeCsvValue("default"),
@@ -1091,7 +1091,7 @@ function exportAllDevicesCsv() {
     escapeCsvValue(device.token || "")
   ].join(","));
 
-  const csvContent = "\uFEFF" + [header, ...rows].join("\r\n") + "\r\n";
+  const csvContent = [header, ...rows].join("\r\n") + "\r\n";
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
