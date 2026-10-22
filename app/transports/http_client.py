@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 import json
 import logging
 import time
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger("iot_sim.http")
 
