@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale Sécurité Incendie (SSI)' (ID: bldg_fire_ssi). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "4f7ee43f-88c8-435b-81c1-65fc729fe4fc": {
-        "id": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
+      "e704c690-6e01-45d3-b3c5-e0cc9872b281": {
+        "id": "e704c690-6e01-45d3-b3c5-e0cc9872b281",
         "alias": "Centrale Sécurité Incendie (SSI)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "485c022e-e111-44a7-938e-e7471ac75f3e": {
+      "b8f8e406-6f48-451d-a941-4e0090c6db54": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "485c022e-e111-44a7-938e-e7471ac75f3e"
+        "id": "b8f8e406-6f48-451d-a941-4e0090c6db54"
       },
-      "99f6167e-2562-45f0-9067-6ab8f1f1dab6": {
+      "3d647c69-92e6-4a05-ae26-b457208f5b4d": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
+              "entityAliasId": "e704c690-6e01-45d3-b3c5-e0cc9872b281",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "99f6167e-2562-45f0-9067-6ab8f1f1dab6"
+        "id": "3d647c69-92e6-4a05-ae26-b457208f5b4d"
       },
-      "5cb9c918-fae6-4ce8-b148-733d086298aa": {
+      "75690f78-0f98-417c-ad6c-45331f4281f8": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
+              "entityAliasId": "e704c690-6e01-45d3-b3c5-e0cc9872b281",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "5cb9c918-fae6-4ce8-b148-733d086298aa"
+        "id": "75690f78-0f98-417c-ad6c-45331f4281f8"
       },
-      "3ad78fd5-1f7d-4f85-8384-3860b670ddcc": {
+      "74869f4a-99cc-41dc-b827-42b3e604f858": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
+              "entityAliasId": "e704c690-6e01-45d3-b3c5-e0cc9872b281",
               "dataKeys": [
                 {
                   "name": "debit_desenfumage_m3h",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "3ad78fd5-1f7d-4f85-8384-3860b670ddcc"
+        "id": "74869f4a-99cc-41dc-b827-42b3e604f858"
       },
-      "278bc65a-7a08-4561-87c9-33398f0d3701": {
+      "6fd916bd-8270-46c7-b657-4612cc5e1b52": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
+              "entityAliasId": "e704c690-6e01-45d3-b3c5-e0cc9872b281",
               "dataKeys": [
                 {
                   "name": "tension_alim_secours",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "278bc65a-7a08-4561-87c9-33398f0d3701"
+        "id": "6fd916bd-8270-46c7-b657-4612cc5e1b52"
       },
-      "83390f40-72e1-484e-aa50-ffa44e0ecbca": {
+      "e167408c-2fff-4f4e-a653-66acd1066bb2": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
+              "entityAliasId": "e704c690-6e01-45d3-b3c5-e0cc9872b281",
               "dataKeys": [
                 {
                   "name": "opacite_fumee_obsm",
@@ -422,68 +422,113 @@
         },
         "row": 16,
         "col": 0,
-        "id": "83390f40-72e1-484e-aa50-ffa44e0ecbca"
+        "id": "e167408c-2fff-4f4e-a653-66acd1066bb2"
       },
-      "b3a4c0be-f62a-4cf9-a3a0-31c3e62d30ae": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "36fe92fb-b21a-491c-9c7d-62601d82f6b3": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Déclencheur Manuel Enclenché",
         "sizeX": 4,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
-              "dataKeys": [
-                {
-                  "name": "declencheur_manuel",
-                  "type": "attribute",
-                  "label": "declencheur_manuel",
-                  "color": "#10B981",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Déclencheur Manuel Enclenché",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Déclencheur Manuel Enclenché",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "declencheur_manuel",
-            "valueAttribute": "declencheur_manuel",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_declencheur_manuel",
-            "getValueMethod": "get_declencheur_manuel",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "e704c690-6e01-45d3-b3c5-e0cc9872b281"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "declencheur_manuel"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "declencheur_manuel",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "declencheur_manuel",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Déclencheur Manuel Enclenché",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#10B981",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#10B981",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 16,
-        "id": "b3a4c0be-f62a-4cf9-a3a0-31c3e62d30ae"
+        "id": "36fe92fb-b21a-491c-9c7d-62601d82f6b3"
       },
-      "0cf7559d-2e45-4e46-b97a-7683332ff2c1": {
+      "199b2b13-1814-4e6b-976a-331cc32de6a8": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -496,7 +541,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
+              "entityAliasId": "e704c690-6e01-45d3-b3c5-e0cc9872b281",
               "dataKeys": [
                 {
                   "name": "statut_clapets_coupe_feu",
@@ -529,9 +574,9 @@
         },
         "row": 16,
         "col": 20,
-        "id": "0cf7559d-2e45-4e46-b97a-7683332ff2c1"
+        "id": "199b2b13-1814-4e6b-976a-331cc32de6a8"
       },
-      "a5770035-7eb4-43b3-a44b-33e311cbe62a": {
+      "4c72370d-25d4-455c-8bcd-9f8a0373b192": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -544,7 +589,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "4f7ee43f-88c8-435b-81c1-65fc729fe4fc",
+              "entityAliasId": "e704c690-6e01-45d3-b3c5-e0cc9872b281",
               "dataKeys": [
                 {
                   "name": "declencheur_manuel",
@@ -583,7 +628,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "a5770035-7eb4-43b3-a44b-33e311cbe62a"
+        "id": "4c72370d-25d4-455c-8bcd-9f8a0373b192"
       }
     },
     "states": {
@@ -593,55 +638,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "485c022e-e111-44a7-938e-e7471ac75f3e": {
+              "b8f8e406-6f48-451d-a941-4e0090c6db54": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "99f6167e-2562-45f0-9067-6ab8f1f1dab6": {
+              "3d647c69-92e6-4a05-ae26-b457208f5b4d": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "5cb9c918-fae6-4ce8-b148-733d086298aa": {
+              "75690f78-0f98-417c-ad6c-45331f4281f8": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3ad78fd5-1f7d-4f85-8384-3860b670ddcc": {
+              "74869f4a-99cc-41dc-b827-42b3e604f858": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "278bc65a-7a08-4561-87c9-33398f0d3701": {
+              "6fd916bd-8270-46c7-b657-4612cc5e1b52": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "83390f40-72e1-484e-aa50-ffa44e0ecbca": {
+              "e167408c-2fff-4f4e-a653-66acd1066bb2": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "b3a4c0be-f62a-4cf9-a3a0-31c3e62d30ae": {
+              "36fe92fb-b21a-491c-9c7d-62601d82f6b3": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "0cf7559d-2e45-4e46-b97a-7683332ff2c1": {
+              "199b2b13-1814-4e6b-976a-331cc32de6a8": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "a5770035-7eb4-43b3-a44b-33e311cbe62a": {
+              "4c72370d-25d4-455c-8bcd-9f8a0373b192": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

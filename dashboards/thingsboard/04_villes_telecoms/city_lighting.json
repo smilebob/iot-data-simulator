@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Armoire d'Éclairage Public' (ID: city_lighting). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "1150317c-b9ef-4746-8cbe-5a3361e52b7e": {
-        "id": "1150317c-b9ef-4746-8cbe-5a3361e52b7e",
+      "d97faa76-9349-413a-a15b-e0a8ff35fea6": {
+        "id": "d97faa76-9349-413a-a15b-e0a8ff35fea6",
         "alias": "Armoire d'Éclairage Public",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "dcafbd36-3ac1-4939-8362-12531ce42e2b": {
+      "9deba577-63cb-4c6d-8a49-24a91b6e93a7": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "dcafbd36-3ac1-4939-8362-12531ce42e2b"
+        "id": "9deba577-63cb-4c6d-8a49-24a91b6e93a7"
       },
-      "63fe6eac-c7ae-4d7c-af72-6c737885f59f": {
+      "0a01a0b1-56ba-4346-b197-51c501cfb350": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1150317c-b9ef-4746-8cbe-5a3361e52b7e",
+              "entityAliasId": "d97faa76-9349-413a-a15b-e0a8ff35fea6",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "63fe6eac-c7ae-4d7c-af72-6c737885f59f"
+        "id": "0a01a0b1-56ba-4346-b197-51c501cfb350"
       },
-      "86b1ab02-7705-443b-ac8e-5de385ebf38e": {
+      "289295b5-b89e-438b-9b7a-baa6ae744e8e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1150317c-b9ef-4746-8cbe-5a3361e52b7e",
+              "entityAliasId": "d97faa76-9349-413a-a15b-e0a8ff35fea6",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "86b1ab02-7705-443b-ac8e-5de385ebf38e"
+        "id": "289295b5-b89e-438b-9b7a-baa6ae744e8e"
       },
-      "ab133261-1477-4e59-aaef-ee81b7b8bd58": {
+      "ebbe4b8e-fd53-4111-9cc4-d02fd8a621da": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1150317c-b9ef-4746-8cbe-5a3361e52b7e",
+              "entityAliasId": "d97faa76-9349-413a-a15b-e0a8ff35fea6",
               "dataKeys": [
                 {
                   "name": "niveau_gradation_pct",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "ab133261-1477-4e59-aaef-ee81b7b8bd58"
+        "id": "ebbe4b8e-fd53-4111-9cc4-d02fd8a621da"
       },
-      "dfe9fcb0-bff9-448d-9ea5-4d8aa66e31a4": {
+      "7a4b865a-4f48-4657-96ff-65aeb061285d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1150317c-b9ef-4746-8cbe-5a3361e52b7e",
+              "entityAliasId": "d97faa76-9349-413a-a15b-e0a8ff35fea6",
               "dataKeys": [
                 {
                   "name": "courant_fuite_ma",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "dfe9fcb0-bff9-448d-9ea5-4d8aa66e31a4"
+        "id": "7a4b865a-4f48-4657-96ff-65aeb061285d"
       },
-      "6f01348e-393c-40d8-8676-49d5d9e6a15d": {
+      "a98bd432-0070-4053-95bd-9927ee8b9518": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1150317c-b9ef-4746-8cbe-5a3361e52b7e",
+              "entityAliasId": "d97faa76-9349-413a-a15b-e0a8ff35fea6",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -413,68 +413,113 @@
         },
         "row": 16,
         "col": 0,
-        "id": "6f01348e-393c-40d8-8676-49d5d9e6a15d"
+        "id": "a98bd432-0070-4053-95bd-9927ee8b9518"
       },
-      "83ab65a3-f014-46ef-937d-817173c14460": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "00a201a4-3440-4e3a-b0e5-9bd42e1f8747": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Contact d'Ouverture Porte",
         "sizeX": 8,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "1150317c-b9ef-4746-8cbe-5a3361e52b7e"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "1150317c-b9ef-4746-8cbe-5a3361e52b7e",
-              "dataKeys": [
-                {
-                  "name": "alerte_porte_ouverte",
-                  "type": "attribute",
-                  "label": "alerte_porte_ouverte",
-                  "color": "#10B981",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Contact d'Ouverture Porte",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Contact d'Ouverture Porte",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "alerte_porte_ouverte",
-            "valueAttribute": "alerte_porte_ouverte",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_alerte_porte_ouverte",
-            "getValueMethod": "get_alerte_porte_ouverte",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "d97faa76-9349-413a-a15b-e0a8ff35fea6"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "alerte_porte_ouverte"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "alerte_porte_ouverte",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "alerte_porte_ouverte",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Contact d'Ouverture Porte",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#10B981",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#10B981",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 16,
-        "id": "83ab65a3-f014-46ef-937d-817173c14460"
+        "id": "00a201a4-3440-4e3a-b0e5-9bd42e1f8747"
       },
-      "17014cfe-0e7c-4368-8dbd-86ff7604a5b0": {
+      "05442bf4-ab60-4f1c-bb85-136128bb72eb": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -487,7 +532,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "1150317c-b9ef-4746-8cbe-5a3361e52b7e",
+              "entityAliasId": "d97faa76-9349-413a-a15b-e0a8ff35fea6",
               "dataKeys": [
                 {
                   "name": "alerte_porte_ouverte",
@@ -519,7 +564,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "17014cfe-0e7c-4368-8dbd-86ff7604a5b0"
+        "id": "05442bf4-ab60-4f1c-bb85-136128bb72eb"
       }
     },
     "states": {
@@ -529,49 +574,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "dcafbd36-3ac1-4939-8362-12531ce42e2b": {
+              "9deba577-63cb-4c6d-8a49-24a91b6e93a7": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "63fe6eac-c7ae-4d7c-af72-6c737885f59f": {
+              "0a01a0b1-56ba-4346-b197-51c501cfb350": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "86b1ab02-7705-443b-ac8e-5de385ebf38e": {
+              "289295b5-b89e-438b-9b7a-baa6ae744e8e": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "ab133261-1477-4e59-aaef-ee81b7b8bd58": {
+              "ebbe4b8e-fd53-4111-9cc4-d02fd8a621da": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "dfe9fcb0-bff9-448d-9ea5-4d8aa66e31a4": {
+              "7a4b865a-4f48-4657-96ff-65aeb061285d": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "6f01348e-393c-40d8-8676-49d5d9e6a15d": {
+              "a98bd432-0070-4053-95bd-9927ee8b9518": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "83ab65a3-f014-46ef-937d-817173c14460": {
+              "00a201a4-3440-4e3a-b0e5-9bd42e1f8747": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "17014cfe-0e7c-4368-8dbd-86ff7604a5b0": {
+              "05442bf4-ab60-4f1c-bb85-136128bb72eb": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

@@ -419,58 +419,103 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                 if var.data_type == DataType.BOOLEAN:
                     initial_val = bool(var.math_config.constant_val if var.math_config and var.math_config.constant_val is not None else False)
                     widgets[ctrl_id] = {
-                        "typeFullFqn": "system.control_widgets.round_switch",
+                        "typeFullFqn": "system.single_switch",
                         "isSystemType": True,
                         "bundleAlias": "control_widgets",
-                        "typeAlias": "round_switch",
+                        "typeAlias": "single_switch",
                         "type": "rpc",
                         "title": f"Pilotage - {var.name}",
                         "sizeX": ctrl_width,
                         "sizeY": ctrl_height,
                         "config": {
-                            "targetDevice": {
-                                "type": "entity",
-                                "entityAliasId": alias_id
-                            },
-                            "datasources": [
-                                {
-                                    "type": "entity",
-                                    "entityAliasId": alias_id,
-                                    "dataKeys": [
-                                        {
-                                            "name": clean_key,
-                                            "type": "attribute",
-                                            "label": clean_key,
-                                            "color": color,
-                                            "settings": {
-                                                "dataKeyType": "client"
-                                            }
-                                        }
-                                    ]
-                                }
-                            ],
-                            "showTitle": True,
-                            "title": f"Pilotage - {var.name}",
+                            "showTitle": False,
+                            "backgroundColor": "#FFFFFF",
+                            "color": "rgba(0, 0, 0, 0.87)",
+                            "padding": "8px",
                             "dropShadow": True,
                             "enableFullscreen": False,
-                            "settings": {
-                                "title": f"Pilotage - {var.name}",
-                                "initialValue": initial_val,
-                                "retrieveValueMethod": "attribute",
-                                "valueKey": clean_key,
-                                "valueAttribute": clean_key,
-                                "attributeScope": "CLIENT_SCOPE",
-                                "setValueMethod": f"set_{clean_key}",
-                                "getValueMethod": f"get_{clean_key}",
-                                "requestTimeout": 10000,
-                                "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-                                "convertValueFunction": "return value;"
-                            },
                             "widgetStyle": {
                                 "backgroundColor": "#FFFFFF",
                                 "borderRadius": "12px",
                                 "border": "1px solid #CBD5E1",
                                 "color": "#0F172A"
+                            },
+                            "targetDevice": {
+                                "type": "entity",
+                                "entityAliasId": alias_id
+                            },
+                            "datasources": [],
+                            "settings": {
+                                "initialState": {
+                                    "action": "GET_ATTRIBUTE",
+                                    "defaultValue": initial_val,
+                                    "getAttribute": {
+                                        "scope": "SHARED_SCOPE",
+                                        "key": clean_key
+                                    },
+                                    "dataToValue": {
+                                        "type": "NONE",
+                                        "compareToValue": True,
+                                        "dataToValueFunction": "return Boolean(data);"
+                                    }
+                                },
+                                "onUpdateState": {
+                                    "action": "SET_ATTRIBUTE",
+                                    "setAttribute": {
+                                        "key": clean_key,
+                                        "scope": "SHARED_SCOPE"
+                                    },
+                                    "valueToData": {
+                                        "type": "CONSTANT",
+                                        "constantValue": True
+                                    }
+                                },
+                                "offUpdateState": {
+                                    "action": "SET_ATTRIBUTE",
+                                    "setAttribute": {
+                                        "key": clean_key,
+                                        "scope": "SHARED_SCOPE"
+                                    },
+                                    "valueToData": {
+                                        "type": "CONSTANT",
+                                        "constantValue": False
+                                    }
+                                },
+                                "disabledState": {
+                                    "action": "DO_NOTHING",
+                                    "defaultValue": False
+                                },
+                                "layout": "right",
+                                "autoScale": True,
+                                "showLabel": True,
+                                "label": var.name,
+                                "labelFont": {
+                                    "family": "Roboto",
+                                    "size": 13,
+                                    "sizeUnit": "px",
+                                    "style": "normal",
+                                    "weight": "500",
+                                    "lineHeight": "18px"
+                                },
+                                "labelColor": "#0F172A",
+                                "showIcon": False,
+                                "switchColorOn": color,
+                                "switchColorOff": "#94A3B8",
+                                "tumblerColorOn": "#FFFFFF",
+                                "tumblerColorOff": "#FFFFFF",
+                                "showOnLabel": True,
+                                "onLabel": "ON",
+                                "onLabelColor": color,
+                                "showOffLabel": True,
+                                "offLabel": "OFF",
+                                "offLabelColor": "#64748B",
+                                "background": {
+                                    "type": "color",
+                                    "color": "#FFFFFF",
+                                    "overlay": {
+                                        "enabled": False
+                                    }
+                                }
                             }
                         },
                         "row": current_row,

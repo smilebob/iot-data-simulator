@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Onduleur Solaire Photovoltaïque' (ID: infra_solar_pv). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "95abd07c-3843-49d3-a865-77001bb6cd08": {
-        "id": "95abd07c-3843-49d3-a865-77001bb6cd08",
+      "c3107736-c1f9-4bfb-9071-3256ec1c29b6": {
+        "id": "c3107736-c1f9-4bfb-9071-3256ec1c29b6",
         "alias": "Onduleur Solaire Photovoltaïque",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "025b1cf1-1e85-4f45-bfa1-4fcc5dcd37af": {
+      "cb1f2684-0a3a-404d-9ec7-c366ddab162a": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "025b1cf1-1e85-4f45-bfa1-4fcc5dcd37af"
+        "id": "cb1f2684-0a3a-404d-9ec7-c366ddab162a"
       },
-      "a80fa767-939f-42e9-970a-f54a437ce264": {
+      "85cebc9f-f727-4f45-a694-92e6e2c1e55f": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "95abd07c-3843-49d3-a865-77001bb6cd08",
+              "entityAliasId": "c3107736-c1f9-4bfb-9071-3256ec1c29b6",
               "dataKeys": [
                 {
                   "name": "ensoleillement",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a80fa767-939f-42e9-970a-f54a437ce264"
+        "id": "85cebc9f-f727-4f45-a694-92e6e2c1e55f"
       },
-      "378e82b1-b824-45b4-adbd-b009906097bd": {
+      "c75a9e50-537a-4614-9b8a-54504a357b79": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "95abd07c-3843-49d3-a865-77001bb6cd08",
+              "entityAliasId": "c3107736-c1f9-4bfb-9071-3256ec1c29b6",
               "dataKeys": [
                 {
                   "name": "ensoleillement",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "378e82b1-b824-45b4-adbd-b009906097bd"
+        "id": "c75a9e50-537a-4614-9b8a-54504a357b79"
       },
-      "97787a08-3d9c-4c55-b6fc-ae0c7b98dac7": {
+      "df58dc12-d547-4a4e-a030-b9de595d7793": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "95abd07c-3843-49d3-a865-77001bb6cd08",
+              "entityAliasId": "c3107736-c1f9-4bfb-9071-3256ec1c29b6",
               "dataKeys": [
                 {
                   "name": "rendement_onduleur",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "97787a08-3d9c-4c55-b6fc-ae0c7b98dac7"
+        "id": "df58dc12-d547-4a4e-a030-b9de595d7793"
       },
-      "2d91c24a-973a-4a6c-a3c3-4c2057ea386b": {
+      "8a167282-ba07-459d-ac6a-2bffc3b6c611": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "95abd07c-3843-49d3-a865-77001bb6cd08",
+              "entityAliasId": "c3107736-c1f9-4bfb-9071-3256ec1c29b6",
               "dataKeys": [
                 {
                   "name": "puissance_injection_kw",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "2d91c24a-973a-4a6c-a3c3-4c2057ea386b"
+        "id": "8a167282-ba07-459d-ac6a-2bffc3b6c611"
       },
-      "cbd69ccd-a04d-49ef-ba0d-be24fc980218": {
+      "d3aff4c5-e381-42f8-8bc0-db338c32b5dc": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "95abd07c-3843-49d3-a865-77001bb6cd08",
+              "entityAliasId": "c3107736-c1f9-4bfb-9071-3256ec1c29b6",
               "dataKeys": [
                 {
                   "name": "tension_dc_string",
@@ -360,9 +360,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "cbd69ccd-a04d-49ef-ba0d-be24fc980218"
+        "id": "d3aff4c5-e381-42f8-8bc0-db338c32b5dc"
       },
-      "13274c84-4c88-4054-affd-a2c856ed8ea3": {
+      "c194cee3-596d-40fd-8893-72b0f8e2b75b": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -375,7 +375,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "95abd07c-3843-49d3-a865-77001bb6cd08",
+              "entityAliasId": "c3107736-c1f9-4bfb-9071-3256ec1c29b6",
               "dataKeys": [
                 {
                   "name": "ensoleillement",
@@ -487,7 +487,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "13274c84-4c88-4054-affd-a2c856ed8ea3"
+        "id": "c194cee3-596d-40fd-8893-72b0f8e2b75b"
       }
     },
     "states": {
@@ -497,43 +497,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "025b1cf1-1e85-4f45-bfa1-4fcc5dcd37af": {
+              "cb1f2684-0a3a-404d-9ec7-c366ddab162a": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a80fa767-939f-42e9-970a-f54a437ce264": {
+              "85cebc9f-f727-4f45-a694-92e6e2c1e55f": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "378e82b1-b824-45b4-adbd-b009906097bd": {
+              "c75a9e50-537a-4614-9b8a-54504a357b79": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "97787a08-3d9c-4c55-b6fc-ae0c7b98dac7": {
+              "df58dc12-d547-4a4e-a030-b9de595d7793": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "2d91c24a-973a-4a6c-a3c3-4c2057ea386b": {
+              "8a167282-ba07-459d-ac6a-2bffc3b6c611": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "cbd69ccd-a04d-49ef-ba0d-be24fc980218": {
+              "d3aff4c5-e381-42f8-8bc0-db338c32b5dc": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "13274c84-4c88-4054-affd-a2c856ed8ea3": {
+              "c194cee3-596d-40fd-8893-72b0f8e2b75b": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

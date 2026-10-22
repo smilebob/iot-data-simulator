@@ -40,6 +40,7 @@ class SimulationEngine:
         self._integrator_accumulators: Dict[str, float] = {}
         self._last_tick_time: float = time.time()
         self._http_rpc_tasks: Dict[str, asyncio.Task] = {}
+        self._http_attr_tasks: Dict[str, asyncio.Task] = {}
         self._last_rpc_modified_key: Optional[str] = None
         self._loop: Optional[asyncio.AbstractEventLoop] = None
 
@@ -78,10 +79,14 @@ class SimulationEngine:
             if not t.done():
                 t.cancel()
         self._http_rpc_tasks.clear()
+        for dev_id, t in list(self._http_attr_tasks.items()):
+            if not t.done():
+                t.cancel()
+        self._http_attr_tasks.clear()
         logger.info("Moteur de simulation arrêté.")
 
     def _sync_device_listeners(self, devices_map: Dict[str, DeviceConfig]):
-        """Synchronise les abonnements de contrôle bidirectionnel (MQTT et Long-Polling HTTP)."""
+        """Synchronise les abonnements de contrôle bidirectionnel (MQTT, Long-Polling RPC HTTP et Attributs Partagés HTTP)."""
         active_http_ids = set()
         for dev_id, dev in devices_map.items():
             try:
@@ -91,9 +96,15 @@ class SimulationEngine:
                     proto_str = getattr(dev.protocol, "value", str(dev.protocol)).lower()
                     if proto_str == TransportProtocol.HTTP.value:
                         active_http_ids.add(dev_id)
+                        # 1. Listener RPC descendant (One-way / Two-way)
                         if dev_id not in self._http_rpc_tasks or self._http_rpc_tasks[dev_id].done():
                             self._http_rpc_tasks[dev_id] = asyncio.create_task(
                                 self._poll_http_rpc_worker(dev)
+                            )
+                        # 2. Listener Attributs Partagés (Shared Attributes)
+                        if dev_id not in self._http_attr_tasks or self._http_attr_tasks[dev_id].done():
+                            self._http_attr_tasks[dev_id] = asyncio.create_task(
+                                self._poll_http_attributes_worker(dev)
                             )
                     elif proto_str == TransportProtocol.MQTT.value:
                         # Pré-connexion du client MQTT pour écouter les ordres dès le démarrage
@@ -105,6 +116,11 @@ class SimulationEngine:
         for old_id in list(self._http_rpc_tasks.keys()):
             if old_id not in active_http_ids:
                 task = self._http_rpc_tasks.pop(old_id, None)
+                if task and not task.done():
+                    task.cancel()
+        for old_id in list(self._http_attr_tasks.keys()):
+            if old_id not in active_http_ids:
+                task = self._http_attr_tasks.pop(old_id, None)
                 if task and not task.done():
                     task.cancel()
 
@@ -187,6 +203,71 @@ class SimulationEngine:
                 break
             except Exception as e:
                 logger.debug(f"Tick polling RPC HTTP pour '{device.id}': {e}")
+                await asyncio.sleep(2.0)
+
+    async def _poll_http_attributes_worker(self, device: DeviceConfig):
+        """Boucle de Long-Polling HTTP pour recevoir les modifications d'Attributs Partagés ThingsBoard."""
+        token = device.token
+        if not token:
+            return
+
+        global_broker = self.repo.get_broker()
+        host = (device.custom_host or global_broker.host or "localhost").strip()
+        if device.use_tls is not None:
+            use_tls = device.use_tls
+        elif device.custom_port == 443:
+            use_tls = True
+        elif device.custom_port == 80:
+            use_tls = False
+        else:
+            is_local = host.lower().replace("http://", "").replace("https://", "").split(":")[0] in ("localhost", "127.0.0.1", "mosquitto", "thingsboard")
+            use_tls = False if is_local else True
+        port = device.custom_port or (443 if use_tls else 80)
+
+        logger.info(f"✓ Listener Attributs Partagés HTTP activé pour '{device.id}' ({host}:{port}, token: {token[:4]}***)")
+
+        # 1. Lecture ponctuelle des attributs partagés au démarrage
+        try:
+            initial_shared = await self.transports.http.get_shared_attributes(host, port, token, use_tls=use_tls)
+            if initial_shared and isinstance(initial_shared, dict) and len(initial_shared) > 0:
+                logger.info(f"📋 Attributs partagés initiaux synchronisés pour '{device.id}' : {initial_shared}")
+                self._handle_rpc(device.id, "v1/devices/me/attributes", json.dumps(initial_shared))
+        except Exception as e:
+            logger.debug(f"Initial get_shared_attributes pour '{device.id}': {e}")
+
+        # 2. Boucle de Long-Polling continu (/api/v1/{token}/attributes/updates)
+        while self.is_running and device.enabled:
+            try:
+                t0 = time.time()
+                attr_data = await self.transports.http.poll_attribute_updates(
+                    host=host,
+                    port=port,
+                    token=token,
+                    timeout_sec=20,
+                    use_tls=use_tls,
+                )
+                if attr_data and isinstance(attr_data, dict) and len(attr_data) > 0:
+                    logger.info(f"📥 Mise à jour d'Attribut Partagé HTTP reçue pour '{device.id}' : {attr_data}")
+                    self._handle_rpc(device.id, "v1/devices/me/attributes", json.dumps(attr_data))
+
+                    # Confirmation en retour sur l'attribut client ThingsBoard
+                    try:
+                        await self.transports.http.post_payload(
+                            host=host,
+                            port=port,
+                            endpoint=f"/api/v1/{token}/attributes",
+                            payload=json.dumps(attr_data),
+                            use_tls=use_tls,
+                        )
+                    except Exception as pe:
+                        logger.debug(f"Erreur sync attribut client en retour: {pe}")
+                else:
+                    if (time.time() - t0) < 1.0:
+                        await asyncio.sleep(1.0)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.debug(f"Tick polling Attributs HTTP pour '{device.id}': {e}")
                 await asyncio.sleep(2.0)
 
     async def _run_loop(self):

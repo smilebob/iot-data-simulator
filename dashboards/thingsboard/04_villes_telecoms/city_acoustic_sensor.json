@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Sonde Acoustique & Nuisances Sonores' (ID: city_acoustic_sensor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "b13820e2-7155-49c5-804e-ed1b52c46e17": {
-        "id": "b13820e2-7155-49c5-804e-ed1b52c46e17",
+      "9e74b15f-f3fa-4414-81bc-79572a6c9386": {
+        "id": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
         "alias": "Sonde Acoustique & Nuisances Sonores",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "20291f7d-f176-4321-90e5-b218839b7b0a": {
+      "1d381e4c-feac-4bfa-a796-06e63b3a473a": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "20291f7d-f176-4321-90e5-b218839b7b0a"
+        "id": "1d381e4c-feac-4bfa-a796-06e63b3a473a"
       },
-      "f1f3362d-5085-48b4-a56c-a897345e436a": {
+      "efc65f55-86fa-4767-b57b-41cdc22995a2": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
+              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "f1f3362d-5085-48b4-a56c-a897345e436a"
+        "id": "efc65f55-86fa-4767-b57b-41cdc22995a2"
       },
-      "b30c90dc-e787-49f5-8d23-c30842ef1649": {
+      "c5d43db0-857e-426b-8f98-93cfe704e586": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
+              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "b30c90dc-e787-49f5-8d23-c30842ef1649"
+        "id": "c5d43db0-857e-426b-8f98-93cfe704e586"
       },
-      "ad315000-02a7-41d5-a434-7ee831f21f24": {
+      "a45ce4b9-0289-43c3-88ec-8e39d442d9af": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
+              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
               "dataKeys": [
                 {
                   "name": "niveau_lcpeak_dbc",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "ad315000-02a7-41d5-a434-7ee831f21f24"
+        "id": "a45ce4b9-0289-43c3-88ec-8e39d442d9af"
       },
-      "2a36c1dd-a43a-4a99-84c2-c1c86ac67b00": {
+      "edcf0519-dcfe-4729-857d-2547765a9aca": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
+              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
               "dataKeys": [
                 {
                   "name": "batterie_solaire_v",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "2a36c1dd-a43a-4a99-84c2-c1c86ac67b00"
+        "id": "edcf0519-dcfe-4729-857d-2547765a9aca"
       },
-      "9408fb8d-fb00-4185-8004-64b925da3868": {
+      "92d6636f-b86e-4377-95b8-d02a6ef87eb8": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
+              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
@@ -413,68 +413,113 @@
         },
         "row": 16,
         "col": 0,
-        "id": "9408fb8d-fb00-4185-8004-64b925da3868"
+        "id": "92d6636f-b86e-4377-95b8-d02a6ef87eb8"
       },
-      "dbbb7c1c-63fa-479e-83f5-4d79cae1ac59": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "cf0a6b39-fff6-4b7d-9bc0-e8d7fc918c8e": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Alerte Dépassement Seuil Bruit",
         "sizeX": 8,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
-              "dataKeys": [
-                {
-                  "name": "depassement_seuil_nocturne",
-                  "type": "attribute",
-                  "label": "depassement_seuil_nocturne",
-                  "color": "#10B981",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Alerte Dépassement Seuil Bruit",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Alerte Dépassement Seuil Bruit",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "depassement_seuil_nocturne",
-            "valueAttribute": "depassement_seuil_nocturne",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_depassement_seuil_nocturne",
-            "getValueMethod": "get_depassement_seuil_nocturne",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "depassement_seuil_nocturne"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "depassement_seuil_nocturne",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "depassement_seuil_nocturne",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Alerte Dépassement Seuil Bruit",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#10B981",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#10B981",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 16,
-        "id": "dbbb7c1c-63fa-479e-83f5-4d79cae1ac59"
+        "id": "cf0a6b39-fff6-4b7d-9bc0-e8d7fc918c8e"
       },
-      "67e1e097-7685-43b5-a7cf-57765dd08fe5": {
+      "f97ba356-67e9-4816-8e13-5312db802534": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -487,7 +532,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b13820e2-7155-49c5-804e-ed1b52c46e17",
+              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
               "dataKeys": [
                 {
                   "name": "depassement_seuil_nocturne",
@@ -519,7 +564,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "67e1e097-7685-43b5-a7cf-57765dd08fe5"
+        "id": "f97ba356-67e9-4816-8e13-5312db802534"
       }
     },
     "states": {
@@ -529,49 +574,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "20291f7d-f176-4321-90e5-b218839b7b0a": {
+              "1d381e4c-feac-4bfa-a796-06e63b3a473a": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "f1f3362d-5085-48b4-a56c-a897345e436a": {
+              "efc65f55-86fa-4767-b57b-41cdc22995a2": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "b30c90dc-e787-49f5-8d23-c30842ef1649": {
+              "c5d43db0-857e-426b-8f98-93cfe704e586": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "ad315000-02a7-41d5-a434-7ee831f21f24": {
+              "a45ce4b9-0289-43c3-88ec-8e39d442d9af": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "2a36c1dd-a43a-4a99-84c2-c1c86ac67b00": {
+              "edcf0519-dcfe-4729-857d-2547765a9aca": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "9408fb8d-fb00-4185-8004-64b925da3868": {
+              "92d6636f-b86e-4377-95b8-d02a6ef87eb8": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "dbbb7c1c-63fa-479e-83f5-4d79cae1ac59": {
+              "cf0a6b39-fff6-4b7d-9bc0-e8d7fc918c8e": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "67e1e097-7685-43b5-a7cf-57765dd08fe5": {
+              "f97ba356-67e9-4816-8e13-5312db802534": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

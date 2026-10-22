@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aérogénérateur / Éolienne MW' (ID: infra_wind_turbine). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "5be7b2b6-b321-4017-8d10-b9261958031a": {
-        "id": "5be7b2b6-b321-4017-8d10-b9261958031a",
+      "d3582391-8bc8-4b72-b36f-b2d1ddf98d17": {
+        "id": "d3582391-8bc8-4b72-b36f-b2d1ddf98d17",
         "alias": "Aérogénérateur / Éolienne MW",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "2c308da3-1ab0-425b-b385-084db8ace9e5": {
+      "5af01859-930a-401a-b5f4-ad0027bd1754": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "2c308da3-1ab0-425b-b385-084db8ace9e5"
+        "id": "5af01859-930a-401a-b5f4-ad0027bd1754"
       },
-      "a51f0fcf-3e24-4aa4-a6c1-a4134d986eec": {
+      "2316e693-bf6b-4253-83b5-6b4ebd87faf6": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5be7b2b6-b321-4017-8d10-b9261958031a",
+              "entityAliasId": "d3582391-8bc8-4b72-b36f-b2d1ddf98d17",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a51f0fcf-3e24-4aa4-a6c1-a4134d986eec"
+        "id": "2316e693-bf6b-4253-83b5-6b4ebd87faf6"
       },
-      "89548d71-bc5e-4b0e-b95a-ca375f7cad29": {
+      "b4d1e544-84a5-46ea-b126-d5bbd53272c3": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5be7b2b6-b321-4017-8d10-b9261958031a",
+              "entityAliasId": "d3582391-8bc8-4b72-b36f-b2d1ddf98d17",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "89548d71-bc5e-4b0e-b95a-ca375f7cad29"
+        "id": "b4d1e544-84a5-46ea-b126-d5bbd53272c3"
       },
-      "305f656b-300f-43c5-8add-3a5c51ad133f": {
+      "6b7cc68b-a5c8-40bc-bc74-350a02acb935": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5be7b2b6-b321-4017-8d10-b9261958031a",
+              "entityAliasId": "d3582391-8bc8-4b72-b36f-b2d1ddf98d17",
               "dataKeys": [
                 {
                   "name": "vitesse_rotor_rpm",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "305f656b-300f-43c5-8add-3a5c51ad133f"
+        "id": "6b7cc68b-a5c8-40bc-bc74-350a02acb935"
       },
-      "8ebbfda0-8cd4-4327-aaaa-4cdee694f151": {
+      "0194449a-f3ec-40d1-bc38-467583bcf1fd": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5be7b2b6-b321-4017-8d10-b9261958031a",
+              "entityAliasId": "d3582391-8bc8-4b72-b36f-b2d1ddf98d17",
               "dataKeys": [
                 {
                   "name": "puissance_active_mw",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "8ebbfda0-8cd4-4327-aaaa-4cdee694f151"
+        "id": "0194449a-f3ec-40d1-bc38-467583bcf1fd"
       },
-      "bbff09a2-325e-447d-948c-58bc6b0b0608": {
+      "9a21b565-5055-4901-aa9f-f8608a499151": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5be7b2b6-b321-4017-8d10-b9261958031a",
+              "entityAliasId": "d3582391-8bc8-4b72-b36f-b2d1ddf98d17",
               "dataKeys": [
                 {
                   "name": "angle_nacelle_yaw_deg",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "bbff09a2-325e-447d-948c-58bc6b0b0608"
+        "id": "9a21b565-5055-4901-aa9f-f8608a499151"
       },
-      "fb77622e-c45c-4f6e-9388-a92de694b2a2": {
+      "52ea1d42-0475-4343-88b4-5421752704c8": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5be7b2b6-b321-4017-8d10-b9261958031a",
+              "entityAliasId": "d3582391-8bc8-4b72-b36f-b2d1ddf98d17",
               "dataKeys": [
                 {
                   "name": "temp_generatrice",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "fb77622e-c45c-4f6e-9388-a92de694b2a2"
+        "id": "52ea1d42-0475-4343-88b4-5421752704c8"
       },
-      "7dec23cc-1dd8-4e75-9eac-be08078ff38c": {
+      "4b9aeb1c-6d91-4384-8930-49c32fc815e2": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5be7b2b6-b321-4017-8d10-b9261958031a",
+              "entityAliasId": "d3582391-8bc8-4b72-b36f-b2d1ddf98d17",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_ms",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "7dec23cc-1dd8-4e75-9eac-be08078ff38c"
+        "id": "4b9aeb1c-6d91-4384-8930-49c32fc815e2"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "2c308da3-1ab0-425b-b385-084db8ace9e5": {
+              "5af01859-930a-401a-b5f4-ad0027bd1754": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a51f0fcf-3e24-4aa4-a6c1-a4134d986eec": {
+              "2316e693-bf6b-4253-83b5-6b4ebd87faf6": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "89548d71-bc5e-4b0e-b95a-ca375f7cad29": {
+              "b4d1e544-84a5-46ea-b126-d5bbd53272c3": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "305f656b-300f-43c5-8add-3a5c51ad133f": {
+              "6b7cc68b-a5c8-40bc-bc74-350a02acb935": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "8ebbfda0-8cd4-4327-aaaa-4cdee694f151": {
+              "0194449a-f3ec-40d1-bc38-467583bcf1fd": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "bbff09a2-325e-447d-948c-58bc6b0b0608": {
+              "9a21b565-5055-4901-aa9f-f8608a499151": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "fb77622e-c45c-4f6e-9388-a92de694b2a2": {
+              "52ea1d42-0475-4343-88b4-5421752704c8": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "7dec23cc-1dd8-4e75-9eac-be08078ff38c": {
+              "4b9aeb1c-6d91-4384-8930-49c32fc815e2": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Conteneur Déchets & PAV Connecté' (ID: city_waste_bin). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "5d0cc24f-4120-461b-bab9-b01cb095e9b7": {
-        "id": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
+      "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e": {
+        "id": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e",
         "alias": "Conteneur Déchets & PAV Connecté",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "e78533cf-a1e0-49b1-870e-bb5bb455659d": {
+      "5b27da88-87ba-404e-b723-0f12df7f41f4": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "e78533cf-a1e0-49b1-870e-bb5bb455659d"
+        "id": "5b27da88-87ba-404e-b723-0f12df7f41f4"
       },
-      "38ed7268-43e4-4732-9870-0407cc4b95d7": {
+      "2d37ad31-18be-40bb-8cbe-909153903022": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
+              "entityAliasId": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "38ed7268-43e4-4732-9870-0407cc4b95d7"
+        "id": "2d37ad31-18be-40bb-8cbe-909153903022"
       },
-      "208dc0dd-9bc2-4913-bdc0-faf77c56b4d5": {
+      "b2974ddd-1c25-4194-bb0e-494ed4419238": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
+              "entityAliasId": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "208dc0dd-9bc2-4913-bdc0-faf77c56b4d5"
+        "id": "b2974ddd-1c25-4194-bb0e-494ed4419238"
       },
-      "1a7f3198-81b7-46fc-acf5-cf718aa9432a": {
+      "db8eccb6-42b0-482e-9733-be252e555da8": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
+              "entityAliasId": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e",
               "dataKeys": [
                 {
                   "name": "temp_interne_cuve",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "1a7f3198-81b7-46fc-acf5-cf718aa9432a"
+        "id": "db8eccb6-42b0-482e-9733-be252e555da8"
       },
-      "768b1fb3-db34-42bf-bafd-89404dd76124": {
+      "1b2bbf00-5982-4448-af41-893102762d5b": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
+              "entityAliasId": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e",
               "dataKeys": [
                 {
                   "name": "batterie_autonomie_pct",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "768b1fb3-db34-42bf-bafd-89404dd76124"
+        "id": "1b2bbf00-5982-4448-af41-893102762d5b"
       },
-      "8e21dc5c-d1e5-4f23-b7dd-6df81639930e": {
+      "7764421b-eb9b-48d6-8c80-b3dbfc998da9": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
+              "entityAliasId": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e",
               "dataKeys": [
                 {
                   "name": "taux_remplissage_pct",
@@ -422,127 +422,217 @@
         },
         "row": 16,
         "col": 0,
-        "id": "8e21dc5c-d1e5-4f23-b7dd-6df81639930e"
+        "id": "7764421b-eb9b-48d6-8c80-b3dbfc998da9"
       },
-      "12764f94-4111-4df1-94ab-17f916d294d9": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "d794a329-8f99-43c5-8480-a8e653e2b340": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Détection Fumée / Feu Bac",
         "sizeX": 4,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
-              "dataKeys": [
-                {
-                  "name": "alerte_incendie",
-                  "type": "attribute",
-                  "label": "alerte_incendie",
-                  "color": "#10B981",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Détection Fumée / Feu Bac",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Détection Fumée / Feu Bac",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "alerte_incendie",
-            "valueAttribute": "alerte_incendie",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_alerte_incendie",
-            "getValueMethod": "get_alerte_incendie",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "alerte_incendie"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "alerte_incendie",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "alerte_incendie",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Détection Fumée / Feu Bac",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#10B981",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#10B981",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 16,
-        "id": "12764f94-4111-4df1-94ab-17f916d294d9"
+        "id": "d794a329-8f99-43c5-8480-a8e653e2b340"
       },
-      "39061254-dba8-4775-829a-6616c155989a": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "3603bf67-c2bb-4b28-8ffb-c567744db249": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Capteur Choc / Basculement",
         "sizeX": 4,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
-              "dataKeys": [
-                {
-                  "name": "alerte_basculement",
-                  "type": "attribute",
-                  "label": "alerte_basculement",
-                  "color": "#F59E0B",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Capteur Choc / Basculement",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Capteur Choc / Basculement",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "alerte_basculement",
-            "valueAttribute": "alerte_basculement",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_alerte_basculement",
-            "getValueMethod": "get_alerte_basculement",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "alerte_basculement"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "alerte_basculement",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "alerte_basculement",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Capteur Choc / Basculement",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#F59E0B",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#F59E0B",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 20,
-        "id": "39061254-dba8-4775-829a-6616c155989a"
+        "id": "3603bf67-c2bb-4b28-8ffb-c567744db249"
       },
-      "2dffbb58-decb-4e73-9f34-e0dfe4b628d3": {
+      "ea03a9bd-be12-4483-9155-a7cd09af6c8a": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -555,7 +645,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "5d0cc24f-4120-461b-bab9-b01cb095e9b7",
+              "entityAliasId": "ee30705b-6bd1-4026-ab59-cf8f2b8fb08e",
               "dataKeys": [
                 {
                   "name": "alerte_incendie",
@@ -594,7 +684,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "2dffbb58-decb-4e73-9f34-e0dfe4b628d3"
+        "id": "ea03a9bd-be12-4483-9155-a7cd09af6c8a"
       }
     },
     "states": {
@@ -604,55 +694,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "e78533cf-a1e0-49b1-870e-bb5bb455659d": {
+              "5b27da88-87ba-404e-b723-0f12df7f41f4": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "38ed7268-43e4-4732-9870-0407cc4b95d7": {
+              "2d37ad31-18be-40bb-8cbe-909153903022": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "208dc0dd-9bc2-4913-bdc0-faf77c56b4d5": {
+              "b2974ddd-1c25-4194-bb0e-494ed4419238": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "1a7f3198-81b7-46fc-acf5-cf718aa9432a": {
+              "db8eccb6-42b0-482e-9733-be252e555da8": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "768b1fb3-db34-42bf-bafd-89404dd76124": {
+              "1b2bbf00-5982-4448-af41-893102762d5b": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "8e21dc5c-d1e5-4f23-b7dd-6df81639930e": {
+              "7764421b-eb9b-48d6-8c80-b3dbfc998da9": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "12764f94-4111-4df1-94ab-17f916d294d9": {
+              "d794a329-8f99-43c5-8480-a8e653e2b340": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "39061254-dba8-4775-829a-6616c155989a": {
+              "3603bf67-c2bb-4b28-8ffb-c567744db249": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "2dffbb58-decb-4e73-9f34-e0dfe4b628d3": {
+              "ea03a9bd-be12-4483-9155-a7cd09af6c8a": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

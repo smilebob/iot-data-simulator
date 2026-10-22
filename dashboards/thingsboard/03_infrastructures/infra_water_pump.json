@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Poste de Relevage Assainissement' (ID: infra_water_pump). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: COAP.",
     "entityAliases": {
-      "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93": {
-        "id": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
+      "24db1926-0258-4f85-8c55-17f0d4fff9f4": {
+        "id": "24db1926-0258-4f85-8c55-17f0d4fff9f4",
         "alias": "Poste de Relevage Assainissement",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "1ad84fc9-dfe0-4956-95cb-edfb487a7ad0": {
+      "f1de5766-dbf4-46e5-95f1-54b145a00535": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "1ad84fc9-dfe0-4956-95cb-edfb487a7ad0"
+        "id": "f1de5766-dbf4-46e5-95f1-54b145a00535"
       },
-      "aa5e31cd-900f-4cb6-9715-1fe917dbddc5": {
+      "07d09ae3-ca6f-4cdf-899d-2f127fdeffe0": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
+              "entityAliasId": "24db1926-0258-4f85-8c55-17f0d4fff9f4",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "aa5e31cd-900f-4cb6-9715-1fe917dbddc5"
+        "id": "07d09ae3-ca6f-4cdf-899d-2f127fdeffe0"
       },
-      "48284637-5523-4533-8f9d-d002726d6db2": {
+      "7a9b7d66-2ee1-42a2-9213-e3569a5a7aa2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
+              "entityAliasId": "24db1926-0258-4f85-8c55-17f0d4fff9f4",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "48284637-5523-4533-8f9d-d002726d6db2"
+        "id": "7a9b7d66-2ee1-42a2-9213-e3569a5a7aa2"
       },
-      "7d6a0f8e-1613-4ce5-a46b-9c2520bd1b1f": {
+      "05afe556-eb0e-46ab-88f6-b951f3d834e8": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
+              "entityAliasId": "24db1926-0258-4f85-8c55-17f0d4fff9f4",
               "dataKeys": [
                 {
                   "name": "debit_refoulement",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "7d6a0f8e-1613-4ce5-a46b-9c2520bd1b1f"
+        "id": "05afe556-eb0e-46ab-88f6-b951f3d834e8"
       },
-      "4b75f25a-ffc8-4927-a886-a07337a70893": {
+      "3ab31898-e756-41fa-ad5f-6e164683b585": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
+              "entityAliasId": "24db1926-0258-4f85-8c55-17f0d4fff9f4",
               "dataKeys": [
                 {
                   "name": "conso_pompe_kw",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "4b75f25a-ffc8-4927-a886-a07337a70893"
+        "id": "3ab31898-e756-41fa-ad5f-6e164683b585"
       },
-      "1e5dd4b6-155c-40a3-a305-a80c33f7e54b": {
+      "2b3e58ff-6e47-4298-949b-894057164b97": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
+              "entityAliasId": "24db1926-0258-4f85-8c55-17f0d4fff9f4",
               "dataKeys": [
                 {
                   "name": "niveau_bache_m",
@@ -413,68 +413,113 @@
         },
         "row": 16,
         "col": 0,
-        "id": "1e5dd4b6-155c-40a3-a305-a80c33f7e54b"
+        "id": "2b3e58ff-6e47-4298-949b-894057164b97"
       },
-      "5d2c6be5-4bfc-46ae-bebd-44ac640f3949": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "0584dc8e-974c-4de9-9ca1-82d231676171": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Alerte Trop-Plein / Débordement",
         "sizeX": 8,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
-              "dataKeys": [
-                {
-                  "name": "alarme_debordement",
-                  "type": "attribute",
-                  "label": "alarme_debordement",
-                  "color": "#10B981",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Alerte Trop-Plein / Débordement",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Alerte Trop-Plein / Débordement",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "alarme_debordement",
-            "valueAttribute": "alarme_debordement",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_alarme_debordement",
-            "getValueMethod": "get_alarme_debordement",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "24db1926-0258-4f85-8c55-17f0d4fff9f4"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "alarme_debordement"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "alarme_debordement",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "alarme_debordement",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Alerte Trop-Plein / Débordement",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#10B981",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#10B981",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 16,
-        "id": "5d2c6be5-4bfc-46ae-bebd-44ac640f3949"
+        "id": "0584dc8e-974c-4de9-9ca1-82d231676171"
       },
-      "66170abd-e59c-43ad-8b89-64ed7319a31d": {
+      "248924c2-5472-4f65-b9e8-d46896fd4db1": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -487,7 +532,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "19ee8a4b-a14f-466e-bd5c-5e5b35b66a93",
+              "entityAliasId": "24db1926-0258-4f85-8c55-17f0d4fff9f4",
               "dataKeys": [
                 {
                   "name": "alarme_debordement",
@@ -519,7 +564,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "66170abd-e59c-43ad-8b89-64ed7319a31d"
+        "id": "248924c2-5472-4f65-b9e8-d46896fd4db1"
       }
     },
     "states": {
@@ -529,49 +574,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "1ad84fc9-dfe0-4956-95cb-edfb487a7ad0": {
+              "f1de5766-dbf4-46e5-95f1-54b145a00535": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "aa5e31cd-900f-4cb6-9715-1fe917dbddc5": {
+              "07d09ae3-ca6f-4cdf-899d-2f127fdeffe0": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "48284637-5523-4533-8f9d-d002726d6db2": {
+              "7a9b7d66-2ee1-42a2-9213-e3569a5a7aa2": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "7d6a0f8e-1613-4ce5-a46b-9c2520bd1b1f": {
+              "05afe556-eb0e-46ab-88f6-b951f3d834e8": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "4b75f25a-ffc8-4927-a886-a07337a70893": {
+              "3ab31898-e756-41fa-ad5f-6e164683b585": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "1e5dd4b6-155c-40a3-a305-a80c33f7e54b": {
+              "2b3e58ff-6e47-4298-949b-894057164b97": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "5d2c6be5-4bfc-46ae-bebd-44ac640f3949": {
+              "0584dc8e-974c-4de9-9ca1-82d231676171": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "66170abd-e59c-43ad-8b89-64ed7319a31d": {
+              "248924c2-5472-4f65-b9e8-d46896fd4db1": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

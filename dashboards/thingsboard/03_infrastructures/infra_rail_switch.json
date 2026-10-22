@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Aiguillage & Signalisation Ferroviaire' (ID: infra_rail_switch). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
     "entityAliases": {
-      "d8c94a82-c0c7-4923-b522-c913d15c3ace": {
-        "id": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
+      "32d3c5cf-31ba-430a-8cdd-5424fa82cf18": {
+        "id": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18",
         "alias": "Aiguillage & Signalisation Ferroviaire",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "7532db31-9394-4e20-8c16-0822cde8d5ad": {
+      "1a2d0ea5-a532-41c3-8c62-55bd3f76e277": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "7532db31-9394-4e20-8c16-0822cde8d5ad"
+        "id": "1a2d0ea5-a532-41c3-8c62-55bd3f76e277"
       },
-      "a611ff1a-94c2-4f3b-8ec1-e500e477bc70": {
+      "dd6a1194-d7b4-4ea2-9d9e-920410430883": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
+              "entityAliasId": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "a611ff1a-94c2-4f3b-8ec1-e500e477bc70"
+        "id": "dd6a1194-d7b4-4ea2-9d9e-920410430883"
       },
-      "da9730bd-4906-4d39-97e6-fc9a63a9e5d2": {
+      "f932e474-267a-4d49-ac15-120dad53a8ec": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
+              "entityAliasId": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "da9730bd-4906-4d39-97e6-fc9a63a9e5d2"
+        "id": "f932e474-267a-4d49-ac15-120dad53a8ec"
       },
-      "112e15e0-db3c-4789-b8bf-3f7b65cba893": {
+      "a9b9aba3-aa99-4eb2-8165-2a9ac2d18987": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
+              "entityAliasId": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18",
               "dataKeys": [
                 {
                   "name": "temps_manoeuvre_ms",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "112e15e0-db3c-4789-b8bf-3f7b65cba893"
+        "id": "a9b9aba3-aa99-4eb2-8165-2a9ac2d18987"
       },
-      "2080ba65-fcbd-4d99-a1e0-1a7d5198ff2a": {
+      "9185f4e3-a22c-47f7-9695-2b993f519b83": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
+              "entityAliasId": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18",
               "dataKeys": [
                 {
                   "name": "temp_rail_rechauffage",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "2080ba65-fcbd-4d99-a1e0-1a7d5198ff2a"
+        "id": "9185f4e3-a22c-47f7-9695-2b993f519b83"
       },
-      "7ab0f564-4fd3-495e-8e1e-a85d042a9fb2": {
+      "d1aa8f92-aebc-4406-a9ec-29a5a5767edb": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
+              "entityAliasId": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18",
               "dataKeys": [
                 {
                   "name": "courant_moteur_aiguille_a",
@@ -422,68 +422,113 @@
         },
         "row": 16,
         "col": 0,
-        "id": "7ab0f564-4fd3-495e-8e1e-a85d042a9fb2"
+        "id": "d1aa8f92-aebc-4406-a9ec-29a5a5767edb"
       },
-      "dceacb4b-9a4a-4a06-968b-95a3d30373eb": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "a33ea40d-b5e3-4e53-9d48-99c9c01256e9": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Pédale Détection Essieu",
         "sizeX": 4,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
-              "dataKeys": [
-                {
-                  "name": "presence_essieu",
-                  "type": "attribute",
-                  "label": "presence_essieu",
-                  "color": "#10B981",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Pédale Détection Essieu",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Pédale Détection Essieu",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "presence_essieu",
-            "valueAttribute": "presence_essieu",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_presence_essieu",
-            "getValueMethod": "get_presence_essieu",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "presence_essieu"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "presence_essieu",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "presence_essieu",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Pédale Détection Essieu",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#10B981",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#10B981",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 16,
-        "id": "dceacb4b-9a4a-4a06-968b-95a3d30373eb"
+        "id": "a33ea40d-b5e3-4e53-9d48-99c9c01256e9"
       },
-      "e76051d9-59a3-45c0-966a-1caee000c3cf": {
+      "6914ef7a-8611-487a-9574-b1c6f426b26c": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -496,7 +541,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
+              "entityAliasId": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18",
               "dataKeys": [
                 {
                   "name": "position_aiguille",
@@ -529,9 +574,9 @@
         },
         "row": 16,
         "col": 20,
-        "id": "e76051d9-59a3-45c0-966a-1caee000c3cf"
+        "id": "6914ef7a-8611-487a-9574-b1c6f426b26c"
       },
-      "f934f8ef-548d-4e91-ba0e-4f3620df5dfe": {
+      "c17182c2-9fe7-446c-9826-30f9e933e7df": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -544,7 +589,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d8c94a82-c0c7-4923-b522-c913d15c3ace",
+              "entityAliasId": "32d3c5cf-31ba-430a-8cdd-5424fa82cf18",
               "dataKeys": [
                 {
                   "name": "presence_essieu",
@@ -583,7 +628,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "f934f8ef-548d-4e91-ba0e-4f3620df5dfe"
+        "id": "c17182c2-9fe7-446c-9826-30f9e933e7df"
       }
     },
     "states": {
@@ -593,55 +638,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "7532db31-9394-4e20-8c16-0822cde8d5ad": {
+              "1a2d0ea5-a532-41c3-8c62-55bd3f76e277": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "a611ff1a-94c2-4f3b-8ec1-e500e477bc70": {
+              "dd6a1194-d7b4-4ea2-9d9e-920410430883": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "da9730bd-4906-4d39-97e6-fc9a63a9e5d2": {
+              "f932e474-267a-4d49-ac15-120dad53a8ec": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "112e15e0-db3c-4789-b8bf-3f7b65cba893": {
+              "a9b9aba3-aa99-4eb2-8165-2a9ac2d18987": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "2080ba65-fcbd-4d99-a1e0-1a7d5198ff2a": {
+              "9185f4e3-a22c-47f7-9695-2b993f519b83": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "7ab0f564-4fd3-495e-8e1e-a85d042a9fb2": {
+              "d1aa8f92-aebc-4406-a9ec-29a5a5767edb": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "dceacb4b-9a4a-4a06-968b-95a3d30373eb": {
+              "a33ea40d-b5e3-4e53-9d48-99c9c01256e9": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "e76051d9-59a3-45c0-966a-1caee000c3cf": {
+              "6914ef7a-8611-487a-9574-b1c6f426b26c": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "f934f8ef-548d-4e91-ba0e-4f3620df5dfe": {
+              "c17182c2-9fe7-446c-9826-30f9e933e7df": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

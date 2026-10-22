@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Centrale d'Air Comprimé' (ID: ind_compressor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "2005bc64-cc3f-4674-b488-fe3df21bd54a": {
-        "id": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
+      "b480e173-9d20-4bf8-b9f7-90594160dec0": {
+        "id": "b480e173-9d20-4bf8-b9f7-90594160dec0",
         "alias": "Centrale d'Air Comprimé",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "da70ec20-84c0-4727-b237-09fa9bed34b8": {
+      "035fad4c-b212-4b91-9acb-7dc0d9845d51": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "da70ec20-84c0-4727-b237-09fa9bed34b8"
+        "id": "035fad4c-b212-4b91-9acb-7dc0d9845d51"
       },
-      "506f3cd5-c034-4785-a8cb-2de1d99d20d1": {
+      "472f4451-0c68-4b67-8173-156a2f674e27": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
+              "entityAliasId": "b480e173-9d20-4bf8-b9f7-90594160dec0",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "506f3cd5-c034-4785-a8cb-2de1d99d20d1"
+        "id": "472f4451-0c68-4b67-8173-156a2f674e27"
       },
-      "8347c579-d1bf-4fc2-baee-78fb5225e0e5": {
+      "413833cb-482c-4c94-83cb-2ffef53de388": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
+              "entityAliasId": "b480e173-9d20-4bf8-b9f7-90594160dec0",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "8347c579-d1bf-4fc2-baee-78fb5225e0e5"
+        "id": "413833cb-482c-4c94-83cb-2ffef53de388"
       },
-      "6afbecf1-4c6a-4862-9e84-1705cd9915a4": {
+      "9087b78b-904f-47b5-8ec8-f20f62df1279": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
+              "entityAliasId": "b480e173-9d20-4bf8-b9f7-90594160dec0",
               "dataKeys": [
                 {
                   "name": "temp_vis_huile",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "6afbecf1-4c6a-4862-9e84-1705cd9915a4"
+        "id": "9087b78b-904f-47b5-8ec8-f20f62df1279"
       },
-      "afaaa17e-5655-47f1-a7a1-f89fe072a719": {
+      "ac0833ba-830a-4f63-ab65-e1e5a1a67bf5": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
+              "entityAliasId": "b480e173-9d20-4bf8-b9f7-90594160dec0",
               "dataKeys": [
                 {
                   "name": "debit_air",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "afaaa17e-5655-47f1-a7a1-f89fe072a719"
+        "id": "ac0833ba-830a-4f63-ab65-e1e5a1a67bf5"
       },
-      "7976b10a-78cd-43ad-a640-3b47423a3e7e": {
+      "030cf24c-382d-4bcc-bd7e-bc85c66656da": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
+              "entityAliasId": "b480e173-9d20-4bf8-b9f7-90594160dec0",
               "dataKeys": [
                 {
                   "name": "puissance_active",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "7976b10a-78cd-43ad-a640-3b47423a3e7e"
+        "id": "030cf24c-382d-4bcc-bd7e-bc85c66656da"
       },
-      "fcfd795a-ef68-4fd8-8329-80286769c487": {
+      "8a145787-15da-4d73-adea-db51d3262ba0": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
+              "entityAliasId": "b480e173-9d20-4bf8-b9f7-90594160dec0",
               "dataKeys": [
                 {
                   "name": "pression_reseau",
@@ -496,68 +496,113 @@
         },
         "row": 16,
         "col": 0,
-        "id": "fcfd795a-ef68-4fd8-8329-80286769c487"
+        "id": "8a145787-15da-4d73-adea-db51d3262ba0"
       },
-      "3973827f-3834-4d0f-a629-bc1750a87725": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "d5d5e62a-6bf7-4751-ab39-07bbfd6efc31": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - État de Fonctionnement",
         "sizeX": 8,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
-              "dataKeys": [
-                {
-                  "name": "etat_marche",
-                  "type": "attribute",
-                  "label": "etat_marche",
-                  "color": "#10B981",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - État de Fonctionnement",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - État de Fonctionnement",
-            "initialValue": true,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "etat_marche",
-            "valueAttribute": "etat_marche",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_etat_marche",
-            "getValueMethod": "get_etat_marche",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "b480e173-9d20-4bf8-b9f7-90594160dec0"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": true,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "etat_marche"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "etat_marche",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "etat_marche",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "État de Fonctionnement",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#10B981",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#10B981",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 16,
-        "id": "3973827f-3834-4d0f-a629-bc1750a87725"
+        "id": "d5d5e62a-6bf7-4751-ab39-07bbfd6efc31"
       },
-      "37761f2c-4066-472e-a067-dda99f8841b7": {
+      "ef05def2-e5e5-435a-8a88-da701a9a2604": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -570,7 +615,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "2005bc64-cc3f-4674-b488-fe3df21bd54a",
+              "entityAliasId": "b480e173-9d20-4bf8-b9f7-90594160dec0",
               "dataKeys": [
                 {
                   "name": "etat_marche",
@@ -602,7 +647,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "37761f2c-4066-472e-a067-dda99f8841b7"
+        "id": "ef05def2-e5e5-435a-8a88-da701a9a2604"
       }
     },
     "states": {
@@ -612,55 +657,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "da70ec20-84c0-4727-b237-09fa9bed34b8": {
+              "035fad4c-b212-4b91-9acb-7dc0d9845d51": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "506f3cd5-c034-4785-a8cb-2de1d99d20d1": {
+              "472f4451-0c68-4b67-8173-156a2f674e27": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "8347c579-d1bf-4fc2-baee-78fb5225e0e5": {
+              "413833cb-482c-4c94-83cb-2ffef53de388": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "6afbecf1-4c6a-4862-9e84-1705cd9915a4": {
+              "9087b78b-904f-47b5-8ec8-f20f62df1279": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "afaaa17e-5655-47f1-a7a1-f89fe072a719": {
+              "ac0833ba-830a-4f63-ab65-e1e5a1a67bf5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "7976b10a-78cd-43ad-a640-3b47423a3e7e": {
+              "030cf24c-382d-4bcc-bd7e-bc85c66656da": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "fcfd795a-ef68-4fd8-8329-80286769c487": {
+              "8a145787-15da-4d73-adea-db51d3262ba0": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "3973827f-3834-4d0f-a629-bc1750a87725": {
+              "d5d5e62a-6bf7-4751-ab39-07bbfd6efc31": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "37761f2c-4066-472e-a067-dda99f8841b7": {
+              "ef05def2-e5e5-435a-8a88-da701a9a2604": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

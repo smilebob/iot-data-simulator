@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Chambre Froide Négative' (ID: ind_cold_room). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "36816d91-87b4-495e-b935-68f25ffbd7ed": {
-        "id": "36816d91-87b4-495e-b935-68f25ffbd7ed",
+      "00558573-f25b-449b-bcde-a2d30919fd73": {
+        "id": "00558573-f25b-449b-bcde-a2d30919fd73",
         "alias": "Chambre Froide Négative",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "dd199eea-c659-4381-9899-4a6cd12958b8": {
+      "030e53ca-36c6-4d1c-89f8-8e28256efed6": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "dd199eea-c659-4381-9899-4a6cd12958b8"
+        "id": "030e53ca-36c6-4d1c-89f8-8e28256efed6"
       },
-      "d9d868af-25a4-48de-aace-dabac1d83705": {
+      "41653891-3f17-4406-8517-3eb5f472f6b4": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed",
+              "entityAliasId": "00558573-f25b-449b-bcde-a2d30919fd73",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "d9d868af-25a4-48de-aace-dabac1d83705"
+        "id": "41653891-3f17-4406-8517-3eb5f472f6b4"
       },
-      "f90e750e-6de5-49db-9225-14b956b71223": {
+      "a7632da7-010d-479c-9dfd-7a6c3e103836": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed",
+              "entityAliasId": "00558573-f25b-449b-bcde-a2d30919fd73",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "f90e750e-6de5-49db-9225-14b956b71223"
+        "id": "a7632da7-010d-479c-9dfd-7a6c3e103836"
       },
-      "1261a8ef-50ea-4084-8249-d08667f82a02": {
+      "e96a8219-8bf1-4641-833e-675097e489a2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed",
+              "entityAliasId": "00558573-f25b-449b-bcde-a2d30919fd73",
               "dataKeys": [
                 {
                   "name": "temp_evaporateur",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "1261a8ef-50ea-4084-8249-d08667f82a02"
+        "id": "e96a8219-8bf1-4641-833e-675097e489a2"
       },
-      "fff0aa06-38a2-4884-b9ee-0ab8c33ea155": {
+      "77d32360-443c-462b-9c4a-8dfdeb774a6c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed",
+              "entityAliasId": "00558573-f25b-449b-bcde-a2d30919fd73",
               "dataKeys": [
                 {
                   "name": "puissance_groupe_kw",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "fff0aa06-38a2-4884-b9ee-0ab8c33ea155"
+        "id": "77d32360-443c-462b-9c4a-8dfdeb774a6c"
       },
-      "e4572341-2a06-4cf2-b0b3-833285cbb75c": {
+      "2f5aec8a-aa8d-469f-8189-fe2f9f540c7e": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed",
+              "entityAliasId": "00558573-f25b-449b-bcde-a2d30919fd73",
               "dataKeys": [
                 {
                   "name": "temp_chambre_froide",
@@ -422,127 +422,217 @@
         },
         "row": 16,
         "col": 0,
-        "id": "e4572341-2a06-4cf2-b0b3-833285cbb75c"
+        "id": "2f5aec8a-aa8d-469f-8189-fe2f9f540c7e"
       },
-      "21fe2f10-1508-4d61-8315-a0d46d1112c0": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "7a3f5dd2-4cfe-4dcf-9d6c-fc43f614ffa9": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Alerte Porte Ouverte",
         "sizeX": 4,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed",
-              "dataKeys": [
-                {
-                  "name": "porte_ouverte",
-                  "type": "attribute",
-                  "label": "porte_ouverte",
-                  "color": "#10B981",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Alerte Porte Ouverte",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Alerte Porte Ouverte",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "porte_ouverte",
-            "valueAttribute": "porte_ouverte",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_porte_ouverte",
-            "getValueMethod": "get_porte_ouverte",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "00558573-f25b-449b-bcde-a2d30919fd73"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "porte_ouverte"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "porte_ouverte",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "porte_ouverte",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Alerte Porte Ouverte",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#10B981",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#10B981",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 16,
-        "id": "21fe2f10-1508-4d61-8315-a0d46d1112c0"
+        "id": "7a3f5dd2-4cfe-4dcf-9d6c-fc43f614ffa9"
       },
-      "83d07fb2-8286-49d2-ad19-fd83b576fc94": {
-        "typeFullFqn": "system.control_widgets.round_switch",
+      "d8731224-b672-42c4-a440-b9448a09ff71": {
+        "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
-        "typeAlias": "round_switch",
+        "typeAlias": "single_switch",
         "type": "rpc",
         "title": "Pilotage - Cycle Dégivrage Actif",
         "sizeX": 4,
         "sizeY": 4,
         "config": {
-          "targetDevice": {
-            "type": "entity",
-            "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed"
-          },
-          "datasources": [
-            {
-              "type": "entity",
-              "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed",
-              "dataKeys": [
-                {
-                  "name": "statut_degivrage",
-                  "type": "attribute",
-                  "label": "statut_degivrage",
-                  "color": "#F59E0B",
-                  "settings": {
-                    "dataKeyType": "client"
-                  }
-                }
-              ]
-            }
-          ],
-          "showTitle": true,
-          "title": "Pilotage - Cycle Dégivrage Actif",
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
           "dropShadow": true,
           "enableFullscreen": false,
-          "settings": {
-            "title": "Pilotage - Cycle Dégivrage Actif",
-            "initialValue": false,
-            "retrieveValueMethod": "attribute",
-            "valueKey": "statut_degivrage",
-            "valueAttribute": "statut_degivrage",
-            "attributeScope": "CLIENT_SCOPE",
-            "setValueMethod": "set_statut_degivrage",
-            "getValueMethod": "get_statut_degivrage",
-            "requestTimeout": 10000,
-            "parseValueFunction": "if (data === null || data === undefined) return false;\nif (typeof data === 'object') {\n    if (data.value !== undefined) return Boolean(data.value);\n    if (data.params !== undefined) return Boolean(data.params);\n    return false;\n}\nreturn Boolean(data);",
-            "convertValueFunction": "return value;"
-          },
           "widgetStyle": {
             "backgroundColor": "#FFFFFF",
             "borderRadius": "12px",
             "border": "1px solid #CBD5E1",
             "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "00558573-f25b-449b-bcde-a2d30919fd73"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": false,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "statut_degivrage"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "statut_degivrage",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "statut_degivrage",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Cycle Dégivrage Actif",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#F59E0B",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#F59E0B",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
           }
         },
         "row": 16,
         "col": 20,
-        "id": "83d07fb2-8286-49d2-ad19-fd83b576fc94"
+        "id": "d8731224-b672-42c4-a440-b9448a09ff71"
       },
-      "3c1d23e2-f7db-4b86-a3c2-ffee9c9829de": {
+      "74c5077d-d01a-4368-b11c-df45217f1985": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -555,7 +645,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "36816d91-87b4-495e-b935-68f25ffbd7ed",
+              "entityAliasId": "00558573-f25b-449b-bcde-a2d30919fd73",
               "dataKeys": [
                 {
                   "name": "porte_ouverte",
@@ -594,7 +684,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "3c1d23e2-f7db-4b86-a3c2-ffee9c9829de"
+        "id": "74c5077d-d01a-4368-b11c-df45217f1985"
       }
     },
     "states": {
@@ -604,55 +694,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "dd199eea-c659-4381-9899-4a6cd12958b8": {
+              "030e53ca-36c6-4d1c-89f8-8e28256efed6": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "d9d868af-25a4-48de-aace-dabac1d83705": {
+              "41653891-3f17-4406-8517-3eb5f472f6b4": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "f90e750e-6de5-49db-9225-14b956b71223": {
+              "a7632da7-010d-479c-9dfd-7a6c3e103836": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "1261a8ef-50ea-4084-8249-d08667f82a02": {
+              "e96a8219-8bf1-4641-833e-675097e489a2": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "fff0aa06-38a2-4884-b9ee-0ab8c33ea155": {
+              "77d32360-443c-462b-9c4a-8dfdeb774a6c": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "e4572341-2a06-4cf2-b0b3-833285cbb75c": {
+              "2f5aec8a-aa8d-469f-8189-fe2f9f540c7e": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "21fe2f10-1508-4d61-8315-a0d46d1112c0": {
+              "7a3f5dd2-4cfe-4dcf-9d6c-fc43f614ffa9": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "83d07fb2-8286-49d2-ad19-fd83b576fc94": {
+              "d8731224-b672-42c4-a440-b9448a09ff71": {
                 "sizeX": 4,
                 "sizeY": 4,
                 "row": 16,
                 "col": 20
               },
-              "3c1d23e2-f7db-4b86-a3c2-ffee9c9829de": {
+              "74c5077d-d01a-4368-b11c-df45217f1985": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

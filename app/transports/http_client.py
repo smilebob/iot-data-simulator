@@ -195,6 +195,116 @@ class ThingsBoardHttpClient:
             logger.debug(f"[HTTP RPC] Erreur inattendue poll_rpc : {e}")
             return None
 
+    async def poll_attribute_updates(
+        self,
+        host: str,
+        port: int,
+        token: str,
+        timeout_sec: int = 20,
+        use_tls: bool = True,
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Interroge ThingsBoard en Long-Polling HTTP pour recevoir les mises à jour des Attributs Partagés.
+        GET /api/v1/{token}/attributes/updates?timeout={timeout_ms}
+        """
+        endpoint = f"/api/v1/{token}/attributes/updates?timeout={int(timeout_sec * 1000)}"
+        url, use_tls = self.build_url(host, port, endpoint, use_tls)
+        req_headers = dict(DEFAULT_HEADERS)
+
+        try:
+            try:
+                import httpx
+                async with httpx.AsyncClient(verify=False, timeout=timeout_sec + 5.0) as client:
+                    resp = await client.get(url, headers=req_headers)
+                    if resp.status_code == 200 and resp.text.strip():
+                        return resp.json()
+                    elif resp.status_code == 401:
+                        logger.error(f"❌ [HTTP Attributes] HTTP 401 Non Autorisé sur {url} : Token '{token[:4]}***' rejeté")
+                    elif resp.status_code == 403:
+                        logger.error(f"❌ [HTTP Attributes] HTTP 403 Interdit sur {url} (Rejeté par Cloudflare / WAF)")
+                    return None
+            except ImportError:
+                import asyncio
+                import ssl
+                import urllib.error
+                import urllib.request
+
+                def _sync_get():
+                    ctx = ssl.create_default_context()
+                    ctx.check_hostname = False
+                    ctx.verify_mode = ssl.CERT_NONE
+                    req = urllib.request.Request(url, headers=req_headers, method="GET")
+                    try:
+                        with urllib.request.urlopen(req, timeout=timeout_sec + 5.0, context=ctx if use_tls else None) as resp:
+                            if resp.status == 200:
+                                body = resp.read().decode("utf-8")
+                                if body.strip():
+                                    return json.loads(body)
+                    except urllib.error.HTTPError as he:
+                        if he.code == 401:
+                            logger.error(f"❌ [HTTP Attributes] HTTP 401 sur {url}")
+                        elif he.code in (408, 504):
+                            pass  # Timeout normal du Long-Polling
+                    except Exception:
+                        pass
+                    return None
+
+                return await asyncio.to_thread(_sync_get)
+        except Exception as e:
+            logger.debug(f"[HTTP Attributes] Erreur poll_attribute_updates : {e}")
+            return None
+
+    async def get_shared_attributes(
+        self,
+        host: str,
+        port: int,
+        token: str,
+        shared_keys: Optional[List[str]] = None,
+        use_tls: bool = True,
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Récupère les valeurs actuelles des attributs partagés sur ThingsBoard.
+        GET /api/v1/{token}/attributes?sharedKeys=key1,key2
+        """
+        query = f"?sharedKeys={','.join(shared_keys)}" if shared_keys else ""
+        endpoint = f"/api/v1/{token}/attributes{query}"
+        url, use_tls = self.build_url(host, port, endpoint, use_tls)
+        req_headers = dict(DEFAULT_HEADERS)
+
+        try:
+            try:
+                import httpx
+                async with httpx.AsyncClient(verify=False, timeout=10.0) as client:
+                    resp = await client.get(url, headers=req_headers)
+                    if resp.status_code == 200 and resp.text.strip():
+                        res_json = resp.json()
+                        return res_json.get("shared", res_json)
+                    return None
+            except ImportError:
+                import asyncio
+                import ssl
+                import urllib.error
+                import urllib.request
+
+                def _sync_get():
+                    ctx = ssl.create_default_context()
+                    ctx.check_hostname = False
+                    ctx.verify_mode = ssl.CERT_NONE
+                    req = urllib.request.Request(url, headers=req_headers, method="GET")
+                    try:
+                        with urllib.request.urlopen(req, timeout=10.0, context=ctx if use_tls else None) as resp:
+                            if resp.status == 200:
+                                res_json = json.loads(resp.read().decode("utf-8"))
+                                return res_json.get("shared", res_json)
+                    except Exception:
+                        pass
+                    return None
+
+                return await asyncio.to_thread(_sync_get)
+        except Exception as e:
+            logger.debug(f"[HTTP Attributes] Erreur get_shared_attributes : {e}")
+            return None
+
     async def respond_rpc(
         self,
         host: str,

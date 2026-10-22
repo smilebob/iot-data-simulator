@@ -22,7 +22,7 @@ logging.basicConfig(
 logger = logging.getLogger("iot_sim")
 
 # Version officielle de l'application
-APP_VERSION = "1.9.9"
+APP_VERSION = "2.0.0"
 
 # Initialisation des instances globales
 repository = StorageRepository(file_path="data/simulator_state.json")
@@ -104,6 +104,7 @@ def healthcheck():
         "mqtt_connected": mqtt_manager.default_client.is_connected if mqtt_manager.default_client else False,
         "devices": devs,
         "http_rpc_listeners": list(engine._http_rpc_tasks.keys()),
+        "http_attribute_listeners": list(engine._http_attr_tasks.keys()),
         "recent_logs": [entry["message"] for entry in log_handler.get_logs(limit=10)],
     }
 

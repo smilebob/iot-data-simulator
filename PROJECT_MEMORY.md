@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-21 | **Version** : 1.9.8 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-10-22 | **Version** : 2.0.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 

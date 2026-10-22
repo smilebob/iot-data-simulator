@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'TGBT & Compteur Multi-Fluides' (ID: bldg_tgbt). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "8988fc94-2e5b-4c8a-9225-452d067ff950": {
-        "id": "8988fc94-2e5b-4c8a-9225-452d067ff950",
+      "d2031ee9-ac91-43c0-b5ba-3d1325ef7a4d": {
+        "id": "d2031ee9-ac91-43c0-b5ba-3d1325ef7a4d",
         "alias": "TGBT & Compteur Multi-Fluides",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "dcaded36-2700-4dac-9577-b6d3afbd4443": {
+      "b8609be8-f314-4e86-9144-d2c29bba9539": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "dcaded36-2700-4dac-9577-b6d3afbd4443"
+        "id": "b8609be8-f314-4e86-9144-d2c29bba9539"
       },
-      "8e96813d-7c5d-4d33-8b2a-9eea70e564d3": {
+      "a05cf36c-b618-4746-a6a2-1c291da08b6d": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8988fc94-2e5b-4c8a-9225-452d067ff950",
+              "entityAliasId": "d2031ee9-ac91-43c0-b5ba-3d1325ef7a4d",
               "dataKeys": [
                 {
                   "name": "puissance_totale_kw",
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "8e96813d-7c5d-4d33-8b2a-9eea70e564d3"
+        "id": "a05cf36c-b618-4746-a6a2-1c291da08b6d"
       },
-      "e47a14bf-1eba-4460-8005-4c2d77bfec84": {
+      "e3e52945-4017-4d07-91de-58a8adf6ca45": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8988fc94-2e5b-4c8a-9225-452d067ff950",
+              "entityAliasId": "d2031ee9-ac91-43c0-b5ba-3d1325ef7a4d",
               "dataKeys": [
                 {
                   "name": "puissance_totale_kw",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "e47a14bf-1eba-4460-8005-4c2d77bfec84"
+        "id": "e3e52945-4017-4d07-91de-58a8adf6ca45"
       },
-      "2007c7f7-6661-4e8c-ab2b-b0a0bd532f92": {
+      "fc7fe07b-2ecb-4d61-b0ac-dc6545c870b5": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8988fc94-2e5b-4c8a-9225-452d067ff950",
+              "entityAliasId": "d2031ee9-ac91-43c0-b5ba-3d1325ef7a4d",
               "dataKeys": [
                 {
                   "name": "facteur_puissance",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "2007c7f7-6661-4e8c-ab2b-b0a0bd532f92"
+        "id": "fc7fe07b-2ecb-4d61-b0ac-dc6545c870b5"
       },
-      "dc28f7b0-73a1-4a58-b0f9-b41549294c73": {
+      "6e1b9f6d-a317-48fc-beb7-a4b09118a90d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8988fc94-2e5b-4c8a-9225-452d067ff950",
+              "entityAliasId": "d2031ee9-ac91-43c0-b5ba-3d1325ef7a4d",
               "dataKeys": [
                 {
                   "name": "tension_l1_l2",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "dc28f7b0-73a1-4a58-b0f9-b41549294c73"
+        "id": "6e1b9f6d-a317-48fc-beb7-a4b09118a90d"
       },
-      "dc8767e6-001a-4c14-a27d-8df8ef61f71e": {
+      "3ff9122e-df09-4f4c-a35e-b8ca06b4dbca": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8988fc94-2e5b-4c8a-9225-452d067ff950",
+              "entityAliasId": "d2031ee9-ac91-43c0-b5ba-3d1325ef7a4d",
               "dataKeys": [
                 {
                   "name": "debit_eau_general",
@@ -360,9 +360,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "dc8767e6-001a-4c14-a27d-8df8ef61f71e"
+        "id": "3ff9122e-df09-4f4c-a35e-b8ca06b4dbca"
       },
-      "6b5df3b4-0466-4367-a00b-73b9e757c82b": {
+      "591f0f51-b3f3-4f84-8daa-980289cdb983": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -375,7 +375,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "8988fc94-2e5b-4c8a-9225-452d067ff950",
+              "entityAliasId": "d2031ee9-ac91-43c0-b5ba-3d1325ef7a4d",
               "dataKeys": [
                 {
                   "name": "puissance_totale_kw",
@@ -487,7 +487,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "6b5df3b4-0466-4367-a00b-73b9e757c82b"
+        "id": "591f0f51-b3f3-4f84-8daa-980289cdb983"
       }
     },
     "states": {
@@ -497,43 +497,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "dcaded36-2700-4dac-9577-b6d3afbd4443": {
+              "b8609be8-f314-4e86-9144-d2c29bba9539": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "8e96813d-7c5d-4d33-8b2a-9eea70e564d3": {
+              "a05cf36c-b618-4746-a6a2-1c291da08b6d": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "e47a14bf-1eba-4460-8005-4c2d77bfec84": {
+              "e3e52945-4017-4d07-91de-58a8adf6ca45": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "2007c7f7-6661-4e8c-ab2b-b0a0bd532f92": {
+              "fc7fe07b-2ecb-4d61-b0ac-dc6545c870b5": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "dc28f7b0-73a1-4a58-b0f9-b41549294c73": {
+              "6e1b9f6d-a317-48fc-beb7-a4b09118a90d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "dc8767e6-001a-4c14-a27d-8df8ef61f71e": {
+              "3ff9122e-df09-4f4c-a35e-b8ca06b4dbca": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "6b5df3b4-0466-4367-a00b-73b9e757c82b": {
+              "591f0f51-b3f3-4f84-8daa-980289cdb983": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

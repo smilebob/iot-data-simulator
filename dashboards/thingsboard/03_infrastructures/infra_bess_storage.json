@@ -4,8 +4,8 @@
   "configuration": {
     "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Système Stockage Batteries (BESS)' (ID: infra_bess_storage). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
     "entityAliases": {
-      "04694bf2-3d7f-49ef-8c90-f5822409a1b4": {
-        "id": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+      "c5aa1ee9-26ce-4e8c-8923-ca94325d9895": {
+        "id": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
         "alias": "Système Stockage Batteries (BESS)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "eea43542-29b2-4c16-b489-2ff504f26e3f": {
+      "27924ebd-8d30-40a4-987b-c12138ecfe7f": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "eea43542-29b2-4c16-b489-2ff504f26e3f"
+        "id": "27924ebd-8d30-40a4-987b-c12138ecfe7f"
       },
-      "8940a4f0-4d65-4a04-8232-02de2761cab9": {
+      "21bccf74-45a8-40fd-a711-688f4b8c0b36": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+              "entityAliasId": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "8940a4f0-4d65-4a04-8232-02de2761cab9"
+        "id": "21bccf74-45a8-40fd-a711-688f4b8c0b36"
       },
-      "29d94c91-4912-457b-9e78-4f5aec5bde06": {
+      "d15a6ef3-d679-4ea1-a817-44f9c3f6c702": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+              "entityAliasId": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "29d94c91-4912-457b-9e78-4f5aec5bde06"
+        "id": "d15a6ef3-d679-4ea1-a817-44f9c3f6c702"
       },
-      "34362b5f-5488-40b7-b114-9d8ecdf28dba": {
+      "c22900d4-0847-426e-b7c6-08843cb81a24": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+              "entityAliasId": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
               "dataKeys": [
                 {
                   "name": "tension_pack_v",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "34362b5f-5488-40b7-b114-9d8ecdf28dba"
+        "id": "c22900d4-0847-426e-b7c6-08843cb81a24"
       },
-      "01afba98-e2c2-468f-a5d3-05bc2cc1a4e1": {
+      "98325f5c-d69c-4376-9ff2-6f9cf72b1bd2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+              "entityAliasId": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
               "dataKeys": [
                 {
                   "name": "courant_charge_decharge_a",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "01afba98-e2c2-468f-a5d3-05bc2cc1a4e1"
+        "id": "98325f5c-d69c-4376-9ff2-6f9cf72b1bd2"
       },
-      "0b8f8bf0-770c-4ca6-9bbb-e7662c9b8b34": {
+      "71ad8df4-4e70-4571-9990-ea5de57c615d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+              "entityAliasId": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
               "dataKeys": [
                 {
                   "name": "temp_max_cellule",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "0b8f8bf0-770c-4ca6-9bbb-e7662c9b8b34"
+        "id": "71ad8df4-4e70-4571-9990-ea5de57c615d"
       },
-      "65006d38-aed9-4ece-9242-7fa81453f5e6": {
+      "482b3776-cffe-4da7-87dc-f0a18393ec36": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+              "entityAliasId": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
               "dataKeys": [
                 {
                   "name": "soc_pct",
@@ -496,9 +496,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "65006d38-aed9-4ece-9242-7fa81453f5e6"
+        "id": "482b3776-cffe-4da7-87dc-f0a18393ec36"
       },
-      "05396af9-90d9-47ab-b4d4-b4064f8f0b6e": {
+      "3a2c097b-0b59-4ef8-b9c8-4b65bd37ba51": {
         "typeFullFqn": "system.input_widgets.update_multiple_attributes",
         "isSystemType": true,
         "bundleAlias": "input_widgets",
@@ -511,7 +511,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+              "entityAliasId": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
               "dataKeys": [
                 {
                   "name": "soh_pct",
@@ -544,9 +544,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "05396af9-90d9-47ab-b4d4-b4064f8f0b6e"
+        "id": "3a2c097b-0b59-4ef8-b9c8-4b65bd37ba51"
       },
-      "12f02f29-dd5c-47ae-89bd-545121e1e09c": {
+      "8946020e-787c-436e-8c7b-e5263e746523": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -559,7 +559,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "04694bf2-3d7f-49ef-8c90-f5822409a1b4",
+              "entityAliasId": "c5aa1ee9-26ce-4e8c-8923-ca94325d9895",
               "dataKeys": [
                 {
                   "name": "soh_pct",
@@ -591,7 +591,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "12f02f29-dd5c-47ae-89bd-545121e1e09c"
+        "id": "8946020e-787c-436e-8c7b-e5263e746523"
       }
     },
     "states": {
@@ -601,55 +601,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "eea43542-29b2-4c16-b489-2ff504f26e3f": {
+              "27924ebd-8d30-40a4-987b-c12138ecfe7f": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "8940a4f0-4d65-4a04-8232-02de2761cab9": {
+              "21bccf74-45a8-40fd-a711-688f4b8c0b36": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "29d94c91-4912-457b-9e78-4f5aec5bde06": {
+              "d15a6ef3-d679-4ea1-a817-44f9c3f6c702": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "34362b5f-5488-40b7-b114-9d8ecdf28dba": {
+              "c22900d4-0847-426e-b7c6-08843cb81a24": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "01afba98-e2c2-468f-a5d3-05bc2cc1a4e1": {
+              "98325f5c-d69c-4376-9ff2-6f9cf72b1bd2": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "0b8f8bf0-770c-4ca6-9bbb-e7662c9b8b34": {
+              "71ad8df4-4e70-4571-9990-ea5de57c615d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "65006d38-aed9-4ece-9242-7fa81453f5e6": {
+              "482b3776-cffe-4da7-87dc-f0a18393ec36": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "05396af9-90d9-47ab-b4d4-b4064f8f0b6e": {
+              "3a2c097b-0b59-4ef8-b9c8-4b65bd37ba51": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "12f02f29-dd5c-47ae-89bd-545121e1e09c": {
+              "8946020e-787c-436e-8c7b-e5263e746523": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,
