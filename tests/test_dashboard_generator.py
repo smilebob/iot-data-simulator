@@ -174,7 +174,7 @@ def test_thingsboard_dashboard_generation():
     assert input_form_w.get("bundleAlias") == "input_widgets"
     assert "Consigne - État Brûleur" in input_form_w.get("title", "")
 
-    # Vérification de la carte d'attributs (entities_table)
+    # Vérification de la carte d'attributs (entities_table) et absence de chevauchement de layout
     attr_w = next(w for w in widgets.values() if w.get("typeAlias") == "entities_table")
     assert attr_w.get("typeFullFqn") == "system.cards.entities_table"
     assert attr_w.get("bundleAlias") == "cards"
@@ -182,6 +182,13 @@ def test_thingsboard_dashboard_generation():
     attr_keys = [dk["name"] for dk in attr_ds["dataKeys"]]
     assert "v_burner_status" in attr_keys
     assert "v_pump_enable" in attr_keys
+
+    # Vérification stricte du positionnement de layout (aucun chevauchement entre switch et table)
+    layout = dashboard["configuration"]["states"]["default"]["layouts"]["main"]["widgets"]
+    switch_layout = layout[switch_w["id"]]
+    attr_layout = layout[attr_w["id"]]
+    assert attr_layout["row"] == switch_layout["row"] + switch_layout["sizeY"], "La table d'attributs doit être positionnée sous les widgets de contrôle sans chevauchement !"
+    assert attr_layout["sizeY"] == 4, "La hauteur de la table d'attributs doit être ajustée à 4 lorsqu'il y a des contrôles !"
 
     # Vérification de la sérialisation JSON valide
     serialized = json.dumps(dashboard)

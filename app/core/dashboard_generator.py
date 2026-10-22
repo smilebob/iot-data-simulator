@@ -603,8 +603,8 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
             }
             layout_widgets[attr_table_id] = {
                 "sizeX": 8,
-                "sizeY": chart_height,
-                "row": current_row,
+                "sizeY": attr_table_height,
+                "row": attr_table_row,
                 "col": chart_width
             }
 
