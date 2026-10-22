@@ -41,6 +41,7 @@ class SimulationEngine:
         self._last_tick_time: float = time.time()
         self._http_rpc_tasks: Dict[str, asyncio.Task] = {}
         self._last_rpc_modified_key: Optional[str] = None
+        self._loop: Optional[asyncio.AbstractEventLoop] = None
 
         # Enregistrement du callback RPC Thingsboard
         self.mqtt.on_rpc_callback = self._handle_rpc
@@ -48,17 +49,31 @@ class SimulationEngine:
     def register_ws_broadcast(self, callback: Callable[[Dict[str, Any]], None]):
         self._ws_broadcast_callback = callback
 
-    def start(self):
+    def start(self, loop: Optional[asyncio.AbstractEventLoop] = None):
         if not self.is_running:
             self.is_running = True
             self._start_time = time.time()
-            self._task = asyncio.create_task(self._run_loop())
+            try:
+                active_loop = loop or asyncio.get_running_loop()
+                self._loop = active_loop
+                self._task = active_loop.create_task(self._run_loop())
+            except RuntimeError:
+                if hasattr(self, "_loop") and self._loop and self._loop.is_running():
+                    self._task = asyncio.run_coroutine_threadsafe(self._run_loop(), self._loop)
+                else:
+                    logger.error("Impossible de démarrer la simulation : aucune boucle d'événements active.")
+                    self.is_running = False
+                    return
             logger.info("Moteur de simulation démarré.")
 
     def stop(self):
         self.is_running = False
-        if self._task and not self._task.done():
-            self._task.cancel()
+        if self._task:
+            if hasattr(self._task, "cancel"):
+                try:
+                    self._task.cancel()
+                except Exception:
+                    pass
         for dev_id, t in list(self._http_rpc_tasks.items()):
             if not t.done():
                 t.cancel()

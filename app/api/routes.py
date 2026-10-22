@@ -199,12 +199,12 @@ def get_status(
     }
 
 @router.post("/simulation/start", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
-def start_simulation(engine: SimulationEngine = Depends(get_engine)):
+async def start_simulation(engine: SimulationEngine = Depends(get_engine)):
     engine.start()
     return {"status": "running"}
 
 @router.post("/simulation/stop", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
-def stop_simulation(engine: SimulationEngine = Depends(get_engine)):
+async def stop_simulation(engine: SimulationEngine = Depends(get_engine)):
     engine.stop()
     return {"status": "stopped"}
 

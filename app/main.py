@@ -47,7 +47,7 @@ async def lifespan(app: FastAPI):
     # Démarrage
     logger.info(f"Démarrage de la stack IoT Data Simulator (v{APP_VERSION})...")
     mqtt_manager.start()
-    engine.start()
+    engine.start(loop=asyncio.get_running_loop())
     yield
     # Arrêt propre
     logger.info("Arrêt des services...")
