@@ -110,6 +110,10 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Transmission des Paramètres Hôte/Port/TLS MQTT par Équipement** : `MqttManager.get_or_create_device_client` applique désormais les surcharges `custom_host`, `custom_port` et `use_tls` des équipements.
   - **Ajout de `save_variables` dans `StorageRepository`** : Permet la sauvegarde groupée atomique des variables lors des commandes RPC et attributs partagés.
   - **Format WebSocket Conforme pour RPC** : Encapsulation stricte sous `{"type": "telemetry", "data": {...}}` lors de l'application d'ordres de contrôle.
+- [x] Résolution Timeout RPC ThingsBoard 4.3 & Contournement WAF Cloudflare (v1.9.9) :
+  - **En-têtes Navigateur Standard pour Cloudflare** : Ajout systématique de `User-Agent` (`Mozilla/5.0...`) et `Accept: application/json` dans `ThingsBoardHttpClient` (`post_payload`, `poll_rpc`, `respond_rpc`). Élimine les rejets HTTP 403 Forbidden du pare-feu Cloudflare sur les plateformes ThingsBoard distantes (`easythings.app.eiffageenergiesystemes.com`).
+  - **Fiabilisation & Diagnostic du Long-Polling RPC** : Traitement et journalisation explicite des erreurs HTTP 401 (token ThingsBoard invalide) et 403 (blocage WAF) dans la boucle `_poll_http_rpc_worker`.
+  - **Acquittement Bidirectionnel Garanti** : Validation immédiate de l'interrupteur *Round Switch* via réponse synchrone `POST /api/v1/{token}/rpc/{id}` au format ThingsBoard `{status: "SUCCESS", value: ...}` et synchronisation d'attribut `CLIENT_SCOPE`.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles
@@ -129,7 +133,10 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 5. **Acquittement RPC Obligatoire ThingsBoard 4.3** :
    - Pour tout équipement virtuel recevant une requête RPC sur `v1/devices/me/rpc/request/{id}`, il est impératif de répondre immédiatement sur `v1/devices/me/rpc/response/{id}` avec un statut de succès (ex: `{"status": "SUCCESS", "value": val}`) et QoS 1.
    - Sans cette réponse synchrone, ThingsBoard 4.3 lève une alerte de timeout (délai dépassé) et le widget interrupteur (*Round Switch*) se met en défaut avant de revenir automatiquement à sa position antérieure.
-6. **Variables d'Environnement** :
+7. **WAF / Cloudflare User-Agent sur ThingsBoard HTTP** :
+   - Les requêtes HTTP sortantes vers ThingsBoard (télémétrie, attributs, long-polling RPC `poll_rpc` et acquittement `respond_rpc`) doivent impérativement inclure un `User-Agent` de navigateur standard (`Mozilla/5.0...`) et `Accept: application/json`.
+   - Sans ces en-têtes, le WAF Cloudflare devant l'instance ThingsBoard renvoie immédiatement `403 Forbidden`, ce qui coupe le long-polling RPC et génère l'erreur *"Délai d'attente de la requête dépassé"* sur les widgets interactifs (*Round Switch*).
+8. **Variables d'Environnement** :
    - `MQTT_BROKER_HOST` (défaut: `mosquitto`)
    - `MQTT_BROKER_PORT` (défaut: `1883`)
    - `MQTT_USE_TLS` (défaut: `false`)

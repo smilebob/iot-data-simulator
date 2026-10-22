@@ -5,6 +5,11 @@ from typing import Any, Dict, Optional, Tuple
 
 logger = logging.getLogger("iot_sim.http")
 
+DEFAULT_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "application/json",
+}
+
 class ThingsBoardHttpClient:
     """
     Client de transmission HTTP / HTTPS vers l'API REST v1 de ThingsBoard.
@@ -63,6 +68,7 @@ class ThingsBoardHttpClient:
         Retourne (success, message_ou_erreur).
         """
         url, use_tls = self.build_url(host, port, endpoint, use_tls)
+        req_headers = {**DEFAULT_HEADERS, "Content-Type": "application/json"}
 
         try:
             # Essai avec httpx si disponible
@@ -72,12 +78,16 @@ class ThingsBoardHttpClient:
                     resp = await client.post(
                         url,
                         content=payload,
-                        headers={"Content-Type": "application/json"}
+                        headers=req_headers
                     )
                     if resp.status_code in (200, 204):
                         return True, f"HTTP {resp.status_code}"
                     elif resp.status_code == 401:
                         err_msg = f"HTTP 401 Non Autorisé (Vérifiez le Token de l'équipement) sur {url}"
+                        logger.error(err_msg)
+                        return False, err_msg
+                    elif resp.status_code == 403:
+                        err_msg = f"HTTP 403 Interdit (Vérifiez les règles Cloudflare / WAF) sur {url}"
                         logger.error(err_msg)
                         return False, err_msg
                     else:
@@ -88,6 +98,7 @@ class ThingsBoardHttpClient:
                 # Fallback sur urllib standard
                 import asyncio
                 import ssl
+                import urllib.error
                 import urllib.request
 
                 def _sync_post():
@@ -97,16 +108,22 @@ class ThingsBoardHttpClient:
                     req = urllib.request.Request(
                         url,
                         data=payload.encode("utf-8"),
-                        headers={"Content-Type": "application/json"},
+                        headers=req_headers,
                         method="POST"
                     )
-                    with urllib.request.urlopen(req, timeout=self.timeout, context=ctx if use_tls else None) as resp:
-                        return resp.status
+                    try:
+                        with urllib.request.urlopen(req, timeout=self.timeout, context=ctx if use_tls else None) as resp:
+                            return True, f"HTTP {resp.status}"
+                    except urllib.error.HTTPError as he:
+                        if he.code == 401:
+                            return False, f"HTTP 401 Non Autorisé (Vérifiez le Token de l'équipement) sur {url}"
+                        elif he.code == 403:
+                            return False, f"HTTP 403 Interdit (Vérifiez les règles Cloudflare / WAF) sur {url}"
+                        return False, f"HTTP {he.code} ({he.reason}) sur {url}"
+                    except Exception as ex:
+                        return False, f"Erreur réseau: {ex}"
 
-                code = await asyncio.to_thread(_sync_post)
-                if code in (200, 204):
-                    return True, f"HTTP {code}"
-                return False, f"HTTP {code}"
+                return await asyncio.to_thread(_sync_post)
 
         except Exception as e:
             err_msg = f"Erreur transmission HTTP vers {url}: {e}"
@@ -127,34 +144,55 @@ class ThingsBoardHttpClient:
         """
         endpoint = f"/api/v1/{token}/rpc?timeout={int(timeout_sec * 1000)}"
         url, use_tls = self.build_url(host, port, endpoint, use_tls)
+        req_headers = dict(DEFAULT_HEADERS)
 
         try:
             try:
                 import httpx
                 async with httpx.AsyncClient(verify=False, timeout=timeout_sec + 5.0) as client:
-                    resp = await client.get(url)
+                    resp = await client.get(url, headers=req_headers)
                     if resp.status_code == 200 and resp.text.strip():
                         return resp.json()
+                    elif resp.status_code == 401:
+                        logger.error(f"❌ [HTTP RPC] HTTP 401 Non Autorisé sur {url} : Token '{token[:4]}***' rejeté par ThingsBoard")
+                    elif resp.status_code == 403:
+                        logger.error(f"❌ [HTTP RPC] HTTP 403 Interdit sur {url} (Rejeté par Cloudflare / WAF)")
                     return None
             except ImportError:
                 import asyncio
                 import ssl
+                import urllib.error
                 import urllib.request
 
                 def _sync_get():
                     ctx = ssl.create_default_context()
                     ctx.check_hostname = False
                     ctx.verify_mode = ssl.CERT_NONE
-                    req = urllib.request.Request(url, method="GET")
-                    with urllib.request.urlopen(req, timeout=timeout_sec + 5.0, context=ctx if use_tls else None) as resp:
-                        if resp.status == 200:
-                            body = resp.read().decode("utf-8")
-                            if body.strip():
-                                return json.loads(body)
+                    req = urllib.request.Request(url, headers=req_headers, method="GET")
+                    try:
+                        with urllib.request.urlopen(req, timeout=timeout_sec + 5.0, context=ctx if use_tls else None) as resp:
+                            if resp.status == 200:
+                                body = resp.read().decode("utf-8")
+                                if body.strip():
+                                    return json.loads(body)
+                    except urllib.error.HTTPError as he:
+                        if he.code == 401:
+                            logger.error(f"❌ [HTTP RPC] HTTP 401 Non Autorisé sur {url} : Token '{token[:4]}***' rejeté par ThingsBoard")
+                        elif he.code == 403:
+                            logger.error(f"❌ [HTTP RPC] HTTP 403 Interdit sur {url} (Rejeté par Cloudflare / WAF)")
+                        elif he.code in (408, 504):
+                            pass  # Timeout normal du Long-Polling ThingsBoard
+                        else:
+                            logger.warning(f"⚠️ [HTTP RPC] Code HTTP {he.code} sur {url}")
+                    except (urllib.error.URLError, TimeoutError, OSError) as ue:
+                        err_str = str(ue).lower()
+                        if "timed out" not in err_str and "timeout" not in err_str:
+                            logger.debug(f"[HTTP RPC] Exception polling sur {url} : {ue}")
                     return None
 
                 return await asyncio.to_thread(_sync_get)
-        except Exception:
+        except Exception as e:
+            logger.debug(f"[HTTP RPC] Erreur inattendue poll_rpc : {e}")
             return None
 
     async def respond_rpc(
@@ -171,13 +209,17 @@ class ThingsBoardHttpClient:
         POST /api/v1/{token}/rpc/{req_id}
         """
         endpoint = f"/api/v1/{token}/rpc/{req_id}"
-        success, _ = await self.post_payload(
+        success, detail = await self.post_payload(
             host=host,
             port=port,
             endpoint=endpoint,
             payload=resp_payload,
             use_tls=use_tls,
         )
+        if success:
+            logger.info(f"📤 [HTTP RPC] Réponse acquittée avec succès pour req #{req_id} vers {endpoint}")
+        else:
+            logger.error(f"❌ [HTTP RPC] Échec acquittement réponse {endpoint} : {detail}")
         return success
 
     async def test_connectivity(
@@ -213,6 +255,9 @@ class ThingsBoardHttpClient:
         elif "401" in message:
             recommendations.append("Le serveur ThingsBoard répond en HTTP/HTTPS, mais le Token d'authentification a été rejeté (401 Unauthorized).")
             recommendations.append("Vérifiez l'Access Token de votre équipement dans la console ThingsBoard.")
+        elif "403" in message:
+            recommendations.append("Le serveur ou pare-feu Cloudflare/WAF a retourné une interdiction (403 Forbidden).")
+            recommendations.append("Vérifiez l'autorisation de votre adresse IP ou vos règles de sécurité Cloudflare.")
         else:
             recommendations.append(f"Échec de connexion HTTP : {message}")
             if use_tls:

@@ -26,7 +26,40 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-from app.transports.http_client import ThingsBoardHttpClient
+from app.transports.http_client import ThingsBoardHttpClient, DEFAULT_HEADERS
+
+
+def test_headers_and_rpc():
+    print("Testing DEFAULT_HEADERS and RPC headers...")
+    assert "User-Agent" in DEFAULT_HEADERS
+    assert "Mozilla" in DEFAULT_HEADERS["User-Agent"]
+    assert DEFAULT_HEADERS.get("Accept") == "application/json"
+
+    client = ThingsBoardHttpClient()
+
+    async def _test():
+        # Test respond_rpc calls post_payload with correct endpoint and format
+        with patch.object(client, 'post_payload', new_callable=AsyncMock) as mock_post:
+            mock_post.return_value = (True, "HTTP 200")
+            success = await client.respond_rpc(
+                host="easythings.app.eiffageenergiesystemes.com",
+                port=443,
+                token="pac_tok_123",
+                req_id=7,
+                resp_payload='{"status": "SUCCESS", "value": false}',
+                use_tls=True
+            )
+            assert success is True
+            mock_post.assert_called_once_with(
+                host="easythings.app.eiffageenergiesystemes.com",
+                port=443,
+                endpoint="/api/v1/pac_tok_123/rpc/7",
+                payload='{"status": "SUCCESS", "value": false}',
+                use_tls=True
+            )
+
+    asyncio.run(_test())
+    print("✓ Headers & RPC response formatting validated successfully!")
 
 
 def test_build_url_sanitization():
@@ -86,6 +119,7 @@ def test_connectivity_diagnostic():
 
 
 if __name__ == "__main__":
+    test_headers_and_rpc()
     test_build_url_sanitization()
     test_connectivity_diagnostic()
     print("\n🎉 ALL THINGSBOARD HTTP TESTS PASSED!")

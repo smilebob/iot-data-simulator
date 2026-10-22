@@ -40,6 +40,7 @@ class SimulationEngine:
         self._integrator_accumulators: Dict[str, float] = {}
         self._last_tick_time: float = time.time()
         self._http_rpc_tasks: Dict[str, asyncio.Task] = {}
+        self._last_rpc_modified_key: Optional[str] = None
 
         # Enregistrement du callback RPC Thingsboard
         self.mqtt.on_rpc_callback = self._handle_rpc
@@ -111,6 +112,14 @@ class SimulationEngine:
             use_tls = False if is_local else True
         port = device.custom_port or (443 if use_tls else 80)
 
+        clean_host_part = host.lower().replace("http://", "").replace("https://", "").split(":")[0]
+        if clean_host_part in ("mosquitto", "localhost", "127.0.0.1") and "eiffage" not in host:
+            logger.warning(
+                f"⚠️ [HTTP RPC] L'équipement '{device.id}' cible '{host}:{port}'. "
+                f"Si ThingsBoard est distant (ex: easythings.app.eiffageenergiesystemes.com), "
+                f"configurez l'Hôte dans les paramètres de l'équipement ou du broker."
+            )
+
         logger.info(f"✓ Listener RPC HTTP activé pour '{device.id}' ({host}:{port}, token: {token[:4]}***)")
 
         while self.is_running and device.enabled:
@@ -128,6 +137,7 @@ class SimulationEngine:
                     logger.info(f"📥 Commande RPC HTTP reçue pour '{device.id}' (ID #{req_id}) : {rpc_data}")
 
                     # 1. Traitement de la commande par la logique commune
+                    self._last_rpc_modified_key = None
                     resp_val = self._handle_rpc(device.id, f"v1/devices/me/rpc/request/{req_id}", json.dumps(rpc_data))
 
                     # 2. Réponse synchrone HTTP POST /api/v1/{token}/rpc/{req_id}
@@ -144,7 +154,7 @@ class SimulationEngine:
 
                     # 3. Synchronisation immédiate de l'attribut client sur ThingsBoard
                     method_name = rpc_data.get("method", "")
-                    clean_name = method_name.replace("set_", "").replace("toggle_", "")
+                    clean_name = self._last_rpc_modified_key or method_name.replace("set_", "").replace("toggle_", "")
                     if clean_name and resp_val is not None:
                         attr_payload = json.dumps({clean_name: resp_val})
                         await self.transports.http.post_payload(
@@ -482,7 +492,14 @@ class SimulationEngine:
             # 1. Recherche par correspondance de nom de variable dans la méthode
             for var in dev_vars:
                 ck = get_clean_key(var).lower()
-                if norm_method in (f"set_{ck}", f"set{ck}", ck, f"toggle_{ck}", f"toggle{ck}"):
+                var_id_low = var.id.lower()
+                var_name_low = var.name.lower().replace(" ", "_")
+                candidates = {
+                    f"set_{ck}", f"set{ck}", ck, f"toggle_{ck}", f"toggle{ck}",
+                    f"set_{var_id_low}", f"set{var_id_low}", var_id_low,
+                    f"set_{var_name_low}", f"set{var_name_low}", var_name_low,
+                }
+                if norm_method in candidates:
                     target_var = var
                     break
 
@@ -522,6 +539,7 @@ class SimulationEngine:
                 return cur_val
 
             if target_var:
+                self._last_rpc_modified_key = get_clean_key(target_var)
                 if norm_method.startswith("toggle"):
                     # Bascule booléenne
                     cur = bool(target_var.current_value)
