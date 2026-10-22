@@ -22,7 +22,7 @@ flowchart TD
     subgraph Portainer["Portainer Stack Engine"]
         WH -->|Déclenchement Pull & Up| ENGINE["Orchestrateur Portainer"]
         GHCR -->|Pull Image Précompilée| ENGINE
-        ENGINE --> C1["Conteneur iot-sim-app\nFastAPI Engine (:8000)"]
+        ENGINE --> C1["Conteneur iot-sim-app\nFastAPI Engine (:8032)"]
         ENGINE --> C2["Conteneur iot-sim-mosquitto\nBroker MQTT (:1883 / :9001)"]
         ENGINE --> C3["Conteneur iot-sim-mqttx\nMQTTX Web UI (:8080)"]
     end
@@ -38,7 +38,7 @@ flowchart TD
 
 | Conteneur | Service | Port Hôte par défaut | Rôle & Fonctionnalités |
 | :--- | :--- | :---: | :--- |
-| `iot-sim-app` | **Simulateur Web & API** | `8000` | Interface utilisateur, API REST, WebSocket, moteur de simulation et calculs télémétriques. |
+| `iot-sim-app` | **Simulateur Web & API** | `8032` | Interface utilisateur, API REST, WebSocket, moteur de simulation et calculs télémétriques. |
 | `iot-sim-mosquitto` | **Broker MQTT Mosquitto** | `1883` | Ingestion et distribution télémétrique MQTT (TCP standard). |
 | `iot-sim-mosquitto` | **Mosquitto WebSockets** | `9001` | Flux MQTT via WebSockets pour synoptiques et dashboards web en direct. |
 | `iot-sim-mqttx` | **MQTTX Web Inspector** | `8080` | Interface web d'inspection, abonnement et publication interactive des payloads MQTT. |
@@ -50,8 +50,7 @@ flowchart TD
 Avant de commencer le déploiement dans Portainer, assurez-vous de disposer des éléments suivants :
 
 1. **Instance Portainer active** : Portainer CE ou BE version 2.16 ou supérieure installée sur votre serveur (Linux, Raspberry Pi 4/5, machine virtuelle ou Cloud).
-2. **Ports réseau disponibles** : Vérifiez que les ports `8000`, `1883`, `9001` et `8080` ne sont pas déjà occupés sur la machine hôte.  
-   *(Si un port est déjà pris, vous pourrez le modifier facilement via les variables d'environnement Portainer).*
+2. **Ports réseau disponibles** : Vérifiez que les ports `8032`, `1883`, `9001` et `8080` ne sont pas déjà occupés sur la machine hôte. *(Le port hôte `8032` est configuré par défaut pour éviter tout conflit avec l'agent Portainer Edge qui occupe traditionnellement le port `8000`)*.
 3. **Accès réseau sortant** : Le serveur hébergeant Portainer doit pouvoir joindre :
    - `ghcr.io` et `pkg-containers.githubusercontent.com` (téléchargement de l'image de simulation).
    - `docker.io` / Docker Hub (téléchargement de Mosquitto et MQTTX).
@@ -114,7 +113,7 @@ Faites défiler jusqu'à la section **Environment variables**. Si vous souhaitez
 
 | Nom de Variable (Key) | Valeur par défaut | Description |
 | :--- | :---: | :--- |
-| `SIMULATOR_PORT` | `8000` | Port HTTP de l'interface web du simulateur sur votre hôte. |
+| `SIMULATOR_PORT` | `8032` | Port HTTP de l'interface web du simulateur sur votre hôte. |
 | `MQTT_BROKER_HOST` | `mosquitto` | Nom d'hôte du broker (le conteneur Mosquitto dans le réseau Docker interne). |
 | `MQTT_BROKER_PORT` | `1883` | Port interne du broker MQTT. |
 | `MQTT_USE_TLS` | `false` | Activer le chiffrement TLS pour le broker distant si applicable. |
@@ -195,7 +194,7 @@ services:
     container_name: iot-sim-app
     restart: unless-stopped
     ports:
-      - "${SIMULATOR_PORT:-8000}:8000"
+      - "${SIMULATOR_PORT:-8032}:8000"
     environment:
       - MQTT_BROKER_HOST=${MQTT_BROKER_HOST:-mosquitto}
       - MQTT_BROKER_PORT=${MQTT_BROKER_PORT:-1883}
@@ -307,7 +306,7 @@ Une fois la stack déployée, suivez ces vérifications pour vous assurer de son
 
 Depuis votre terminal ou votre navigateur :
 ```bash
-curl -I http://<IP_DE_VOTRE_SERVEUR>:8000/healthz
+curl -I http://<IP_DE_VOTRE_SERVEUR>:8032/healthz
 ```
 Réponse attendue :
 ```http
@@ -317,7 +316,7 @@ content-type: application/json
 
 ### Étape 7.4 : Accéder à l'Interface et Première Connexion
 
-1. Ouvrez votre navigateur sur `http://<IP_DE_VOTRE_SERVEUR>:8000`.
+1. Ouvrez votre navigateur sur `http://<IP_DE_VOTRE_SERVEUR>:8032`.
 2. Connectez-vous avec les identifiants d'initialisation par défaut :
    - **Identifiant** : `admin`
    - **Mot de passe initial** : `Admin_123456!`
@@ -330,7 +329,7 @@ content-type: application/json
 ### Problème 1 : Conflit de Port hôte (`bind: address already in use`)
 
 - **Symptôme** : Le conteneur refuse de démarrer avec l'erreur `driver failed programming external connectivity on endpoint ... bind: address already in use`.
-- **Cause** : Un service existant sur la machine hôte écoute déjà sur le port `8000` (ex: autre serveur web) ou `1883` (autre broker MQTT).
+- **Cause** : Un service existant sur la machine hôte écoute déjà sur le port `8032` (ex: autre service) ou `1883` (autre broker MQTT).
 - **Résolution dans Portainer** :
   1. Ouvrez la stack **`iot-simulator`**.
   2. Allez dans l'onglet **`Editor`** ou **`Environment variables`**.
@@ -382,5 +381,5 @@ content-type: application/json
 ## 9. Synthèse des Bonnes Pratiques de Production
 
 1. **Ne pas exposer le port 1883 Mosquitto publiquement sans authentification** : Si votre serveur possède une adresse IP publique, filtrez l'accès au port 1883 via votre pare-feu (UFW / Security Group) pour n'autoriser que vos équipements IoT ou utilisez une connexion chiffrée MQTTS (voir [Guide de Durcissement Mosquitto](mosquitto_hardening.md)).
-2. **Utiliser un Reverse Proxy HTTPS pour l'interface Web** : Pour la production, placez Traefik, Nginx Proxy Manager ou Caddy devant le port 8000 pour bénéficier d'un certificat SSL Let's Encrypt automatique (voir [Guide Reverse Proxy](remote_deployment.md)).
+2. **Utiliser un Reverse Proxy HTTPS pour l'interface Web** : Pour la production, placez Traefik, Nginx Proxy Manager ou Caddy devant le port 8032 pour bénéficier d'un certificat SSL Let's Encrypt automatique (voir [Guide Reverse Proxy](remote_deployment.md)).
 3. **Mettre à jour régulièrement** : Grâce à l'image GHCR multi-arch et au webhook Portainer, vos déploiements restent sécurisés et à jour en continu.

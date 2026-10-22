@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-22 | **Version** : 2.0.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-10-22 | **Version** : 2.1.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
@@ -122,6 +122,11 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Mise à jour en direct ThingsBoard** : Reconfiguration automatique du widget de contrôle sur le tableau de bord actif de l'utilisateur via l'API REST.
   - **Résolution Boucle d'Événements Asyncio** : Conversion des routes de démarrage/arrêt de simulation en `async def` dans `app/api/routes.py`, évitant l'erreur `RuntimeError: no running event loop`.
   - **Sonde Healthz Enrichie & Logs Docker** : Sortie stdout directe pour `docker logs` et exposition des écouteurs RPC et Attributs dans `/healthz`.
+- [x] Ergonomie IHM, Générateur Token JWT ThingsBoard & Export CSV d'Importation (v2.0.1) :
+  - **Système Accordéon IHM Équipements** : Possibilité de plier/déplier chaque équipement individuellement avec persistance d'état dans `localStorage` (`collapsedDevices`), contrôles globaux *Tout Déplier* et *Tout Plier*, mise à jour instantanée du DOM sans réinitialisation superflue des graphiques Sparkline.
+  - **Générateur de Token JWT ThingsBoard** : Intégration d'un bouton de génération de jeton JWT conforme RFC 7519 (`HS512`, `scopes: ["DEVICE"]`, `sub/userId: deviceId`, `iss: "thingsboard.io"`, validité 10 ans) dans les fenêtres d'ajout/édition et d'instanciation de modèles métiers.
+  - **Export CSV d'Importation ThingsBoard** : Exportation en 1 clic d'un fichier CSV formaté selon le standard ThingsBoard (`name,type,label,accessToken` avec encodage UTF-8 BOM) disponible par équipement individuel (`CSV TB`) et pour l'ensemble du parc d'équipements (*Export CSV TB* dans la barre d'outils).
+  - **Alignement Portainer Port 8032** : Mise à jour du port hôte par défaut sur `8032` dans `Documentation/devops/portainer_deployment.md` et `templates/portainer-template.json` pour prévenir tout conflit de socket avec l'agent Edge de Portainer.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA : `Documentation/user/thingsboard_dashboards.md`
 
 ### 🚧 Évolutions Futures Potentielles

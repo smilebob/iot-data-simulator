@@ -11,6 +11,20 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="/static/styles.css">
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem("iot_sim_theme") || "dark";
+        if (savedTheme === "light") {
+          document.documentElement.classList.remove("dark");
+          document.documentElement.classList.add("light");
+        } else {
+          document.documentElement.classList.add("dark");
+          document.documentElement.classList.remove("light");
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body class="bg-[#0F1218] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-[#E2001A] selection:text-white">
 
@@ -69,6 +83,10 @@
             <i data-lucide="upload" class="w-4 h-4"></i>
             <input type="file" id="import-scenario-file" accept=".json" class="hidden" onchange="importScenario(event)">
           </label>
+          <button id="btn-theme-toggle" onclick="toggleTheme()" title="Basculer vers le mode clair / sombre" class="flex items-center gap-1.5 p-2 text-slate-400 hover:text-white bg-[#12151B] hover:bg-[#202531] rounded-lg transition border border-[#2B3342]">
+            <i id="theme-icon" data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
+            <span id="theme-text" class="text-xs hidden md:inline font-medium">Clair</span>
+          </button>
         </div>
 
         <!-- Session Utilisateur & RBAC -->
@@ -111,7 +129,21 @@
       </div>
 
       <!-- Actions globales -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex items-center bg-[#12151B] p-1 rounded-lg border border-[#2B3342] gap-1">
+          <button type="button" onclick="expandAllDevices()" title="Tout déplier" class="px-2.5 py-1 text-slate-300 hover:text-white hover:bg-[#202531] rounded text-xs font-medium flex items-center gap-1.5 transition">
+            <i data-lucide="chevrons-down" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span class="hidden sm:inline">Tout Déplier</span>
+          </button>
+          <button type="button" onclick="collapseAllDevices()" title="Tout plier" class="px-2.5 py-1 text-slate-300 hover:text-white hover:bg-[#202531] rounded text-xs font-medium flex items-center gap-1.5 transition">
+            <i data-lucide="chevrons-up" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="hidden sm:inline">Tout Plier</span>
+          </button>
+        </div>
+        <button id="btn-export-all-csv" onclick="exportAllDevicesCsv()" title="Exporter tous les équipements au format CSV compatible avec l'importateur ThingsBoard" class="flex items-center gap-1.5 bg-[#1F2532] hover:bg-[#2B3342] text-slate-200 border border-[#2B3342] hover:border-slate-500 text-xs font-semibold px-3 py-2 rounded-lg transition shadow-sm">
+          <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-400"></i>
+          <span>Export CSV TB</span>
+        </button>
         <button id="btn-catalog" onclick="openCatalogModal()" class="flex items-center gap-1.5 bg-[#1F2532] hover:bg-[#2B3342] text-slate-200 border border-[#2B3342] hover:border-slate-500 text-xs font-semibold px-4 py-2 rounded-lg transition shadow-sm">
           <i data-lucide="boxes" class="w-4 h-4 text-emerald-400"></i>
           <span>Modèles Métiers</span>
@@ -406,9 +438,15 @@
         </div>
 
         <div>
-          <label class="block font-medium text-slate-300 mb-1">Access Token (ThingsBoard / Datacake)</label>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block font-medium text-slate-300">Access Token (ThingsBoard / Datacake)</label>
+            <button type="button" onclick="fillGeneratedJwtToken('dev-token', 'dev-id')" class="text-[11px] text-amber-400 hover:text-amber-300 flex items-center gap-1 font-semibold transition py-0.5 px-2 rounded bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20">
+              <i data-lucide="key" class="w-3 h-3 text-amber-400"></i>
+              <span>Générer Token JWT ThingsBoard</span>
+            </button>
+          </div>
           <input type="text" id="dev-token" placeholder="Token d'authentification de l'équipement" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
-          <p id="dev-protocol-hint" class="text-[11px] text-slate-500 mt-1">Collez ici l'Access Token généré par ThingsBoard lors de la création de l'équipement.</p>
+          <p id="dev-protocol-hint" class="text-[11px] text-slate-500 mt-1">Collez ici l'Access Token ThingsBoard ou cliquez sur "Générer Token JWT ThingsBoard" pour créer un jeton compatible.</p>
         </div>
 
         <div>
@@ -907,9 +945,15 @@
         </div>
 
         <div>
-          <label class="block font-medium text-slate-300 mb-1">Token ThingsBoard d'accès <span class="text-slate-500">(optionnel)</span></label>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block font-medium text-slate-300">Token ThingsBoard d'accès <span class="text-slate-500">(optionnel)</span></label>
+            <button type="button" onclick="fillGeneratedJwtToken('instantiate-token', 'instantiate-id')" class="text-[11px] text-amber-400 hover:text-amber-300 flex items-center gap-1 font-semibold transition py-0.5 px-2 rounded bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20">
+              <i data-lucide="key" class="w-3 h-3 text-amber-400"></i>
+              <span>Générer Token JWT ThingsBoard</span>
+            </button>
+          </div>
           <input type="text" id="instantiate-token" placeholder="Ex: r6287o9r1bu3wfvj3gfv (si ThingsBoard)" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
-          <p class="text-[11px] text-slate-500 mt-1">Si vous laissez vide, l'équipement émettra sur le broker standard ou selon les identifiants globaux.</p>
+          <p class="text-[11px] text-slate-500 mt-1">Si vous laissez vide, l'équipement émettra sur le broker standard ou selon les identifiants globaux. Cliquez sur "Générer Token JWT ThingsBoard" pour créer un jeton dédié.</p>
         </div>
 
         <div>
@@ -954,7 +998,7 @@
         <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
       </div>
       <div class="text-[10px] font-mono text-slate-500 tracking-wider">
-        v<span id="app-version-badge">2.0.0</span>
+        v<span id="app-version-badge">2.1.0</span>
       </div>
     </div>
   </footer>

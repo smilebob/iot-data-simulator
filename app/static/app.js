@@ -7,6 +7,7 @@ let state = {
   broker: {},
   status: {},
   activeFilter: 'all',
+  collapsedDevices: new Set(JSON.parse(localStorage.getItem("iot_sim_collapsed_devices") || "[]")),
   charts: {},
   chartData: {},
   editingVarId: null,
@@ -18,6 +19,7 @@ let statusInterval = null;
 
 // Initialisation au chargement de la page
 document.addEventListener("DOMContentLoaded", async () => {
+  initTheme();
   safeCreateIcons();
   const isAuthenticated = await checkAuthStatus();
   if (isAuthenticated) {
@@ -27,6 +29,51 @@ document.addEventListener("DOMContentLoaded", async () => {
     statusInterval = setInterval(refreshStatus, 3000);
   }
 });
+
+// Initialisation & Gestion du Thème (Clair / Sombre)
+function initTheme() {
+  const savedTheme = localStorage.getItem("iot_sim_theme") || "dark";
+  applyTheme(savedTheme);
+}
+
+function applyTheme(theme) {
+  const root = document.documentElement;
+  const isDark = theme === "dark";
+
+  if (isDark) {
+    root.classList.add("dark");
+    root.classList.remove("light");
+  } else {
+    root.classList.add("light");
+    root.classList.remove("dark");
+  }
+
+  localStorage.setItem("iot_sim_theme", theme);
+  updateThemeToggleUI(theme);
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.classList.contains("dark");
+  const newTheme = isDark ? "light" : "dark";
+  applyTheme(newTheme);
+}
+
+function updateThemeToggleUI(theme) {
+  const icon = document.getElementById("theme-icon");
+  const label = document.getElementById("theme-text");
+  if (!icon) return;
+
+  if (theme === "light") {
+    icon.setAttribute("data-lucide", "moon");
+    icon.className = "w-4 h-4 text-indigo-500";
+    if (label) label.textContent = "Sombre";
+  } else {
+    icon.setAttribute("data-lucide", "sun");
+    icon.className = "w-4 h-4 text-amber-400";
+    if (label) label.textContent = "Clair";
+  }
+  safeCreateIcons();
+}
 
 function safeCreateIcons() {
   if (window.lucide && typeof window.lucide.createIcons === "function") {
@@ -329,7 +376,11 @@ function renderEquipmentGroups() {
     let devActionsHtml = "";
     if (canOperate) {
       devActionsHtml = `
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="downloadDeviceCsv('${device.id}')" title="Télécharger le fichier CSV d'importation ThingsBoard pour cet équipement" class="p-2 text-emerald-400 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1.5 text-xs font-medium">
+            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>CSV TB</span>
+          </button>
           <button onclick="downloadDeviceDashboard('${device.id}')" title="Télécharger le tableau de bord ThingsBoard JSON préconfiguré pour cet équipement (avec token et grandeurs)" class="p-2 text-sky-400 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1.5 text-xs font-medium">
             <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-sky-400"></i>
             <span>Dashboard TB</span>
@@ -354,7 +405,11 @@ function renderEquipmentGroups() {
       `;
     } else {
       devActionsHtml = `
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="downloadDeviceCsv('${device.id}')" title="Télécharger le fichier CSV d'importation ThingsBoard pour cet équipement" class="p-2 text-emerald-400 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1.5 text-xs font-medium">
+            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>CSV TB</span>
+          </button>
           <button onclick="downloadDeviceDashboard('${device.id}')" title="Télécharger le tableau de bord ThingsBoard JSON préconfiguré pour cet équipement" class="p-2 text-sky-400 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1.5 text-xs font-medium">
             <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-sky-400"></i>
             <span>Dashboard TB</span>
@@ -366,6 +421,8 @@ function renderEquipmentGroups() {
       `;
     }
 
+    const isCollapsed = state.collapsedDevices.has(device.id);
+
     // Bloc de Section d'Équipement
     const section = document.createElement("section");
     section.className = "device-group-card shadow-2xl overflow-hidden";
@@ -375,18 +432,24 @@ function renderEquipmentGroups() {
       <!-- Ligne d'accentuation supérieure -->
       <div class="card-accent-line"></div>
 
-      <!-- En-tête de l'Équipement -->
-      <div class="bg-[#181D26] px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-[#2B3342]">
+      <!-- En-tête de l'Équipement (Accordéon cliquable) -->
+      <div class="bg-[#181D26] px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-[#2B3342] cursor-pointer hover:bg-[#1C222D] transition select-none" onclick="toggleDeviceSection('${device.id}', event)">
         <div class="flex items-center gap-3">
+          <button type="button" class="p-1.5 rounded-lg bg-[#202531] border border-[#2B3342] text-slate-300 hover:text-white transition" title="${isCollapsed ? 'Déplier' : 'Plier'} cet équipement">
+            <i data-lucide="${isCollapsed ? 'chevron-right' : 'chevron-down'}" class="w-4 h-4 text-slate-300 device-chevron-${device.id}"></i>
+          </button>
           <div class="p-2.5 bg-[#202531] border border-[#2B3342] rounded-xl text-white">
             <i data-lucide="cpu" class="w-5 h-5 text-[#E2001A]"></i>
           </div>
           <div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
               <h2 class="text-base font-bold text-white tracking-tight">${escapeHtml(device.name)}</h2>
               <span class="text-xs font-mono text-slate-400">(${escapeHtml(device.id)})</span>
+              <span class="device-collapsed-summary-${device.id} ${isCollapsed ? '' : 'hidden'} text-[11px] font-medium px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                Replié (${devVars.length} grandeur${devVars.length > 1 ? 's' : ''})
+              </span>
             </div>
-            <div class="flex items-center gap-2 mt-1">
+            <div class="flex items-center gap-2 mt-1 flex-wrap">
               ${platformBadgeHtml}
               ${protocolBadgeHtml}
               ${cadenceBadgeHtml}
@@ -402,11 +465,13 @@ function renderEquipmentGroups() {
           </div>
         </div>
 
-        ${devActionsHtml}
+        <div onclick="event.stopPropagation()">
+          ${devActionsHtml}
+        </div>
       </div>
 
       <!-- Grille interne des variables de cet équipement -->
-      <div class="p-6 bg-[#12151B]">
+      <div id="vars-container-${device.id}" class="p-6 bg-[#12151B] ${isCollapsed ? 'hidden' : ''}">
         <div id="vars-grid-${device.id}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
       </div>
     `;
@@ -862,6 +927,180 @@ function downloadDeviceDashboard(deviceId) {
 
 function downloadPresetDashboard(presetId) {
   window.location.href = `/api/presets/${encodeURIComponent(presetId)}/thingsboard-dashboard`;
+}
+
+// Sauvegarde de l'état des sections repliées dans localStorage
+function saveCollapsedState() {
+  try {
+    localStorage.setItem("iot_sim_collapsed_devices", JSON.stringify([...state.collapsedDevices]));
+  } catch (e) {
+    console.warn("Erreur sauvegarde collapsedDevices dans localStorage:", e);
+  }
+}
+
+// Basculer l'état plié/déplié d'un équipement
+function toggleDeviceSection(deviceId, event) {
+  if (event && event.target && event.target.closest("button, a, input, select, textarea")) {
+    return;
+  }
+  if (state.collapsedDevices.has(deviceId)) {
+    state.collapsedDevices.delete(deviceId);
+  } else {
+    state.collapsedDevices.add(deviceId);
+  }
+  saveCollapsedState();
+
+  const section = document.getElementById(`device-section-${deviceId}`);
+  if (section) {
+    const isCollapsed = state.collapsedDevices.has(deviceId);
+    const content = section.querySelector(`#vars-container-${deviceId}`);
+    const chevron = section.querySelector(`.device-chevron-${deviceId}`);
+    const summaryBadge = section.querySelector(`.device-collapsed-summary-${deviceId}`);
+
+    if (content) {
+      if (isCollapsed) {
+        content.classList.add("hidden");
+      } else {
+        content.classList.remove("hidden");
+      }
+    }
+    if (chevron) {
+      chevron.setAttribute("data-lucide", isCollapsed ? "chevron-right" : "chevron-down");
+    }
+    if (summaryBadge) {
+      if (isCollapsed) {
+        summaryBadge.classList.remove("hidden");
+      } else {
+        summaryBadge.classList.add("hidden");
+      }
+    }
+    safeCreateIcons();
+  }
+}
+
+// Plier tous les équipements
+function collapseAllDevices() {
+  state.devices.forEach(d => state.collapsedDevices.add(d.id));
+  saveCollapsedState();
+  renderEquipmentGroups();
+}
+
+// Déplier tous les équipements
+function expandAllDevices() {
+  state.collapsedDevices.clear();
+  saveCollapsedState();
+  renderEquipmentGroups();
+}
+
+// Encodage Base64URL conforme RFC 7519
+function base64UrlEncode(str) {
+  return btoa(unescape(encodeURIComponent(str)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+}
+
+// Générateur de token JWT ThingsBoard compatible (HS512 avec claims standard ThingsBoard)
+function generateThingsBoardJwt(deviceId) {
+  const dId = (deviceId && deviceId.trim()) ? deviceId.trim() : ("tb_dev_" + Math.random().toString(36).substring(2, 10));
+  const header = {
+    alg: "HS512",
+    typ: "JWT"
+  };
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    sub: dId,
+    scopes: ["DEVICE"],
+    userId: dId,
+    enabled: true,
+    isPublic: false,
+    iss: "thingsboard.io",
+    iat: now,
+    exp: now + (10 * 365 * 86400) // Validité 10 ans
+  };
+
+  const encodedHeader = base64UrlEncode(JSON.stringify(header));
+  const encodedPayload = base64UrlEncode(JSON.stringify(payload));
+  // Signature factice HS512 (64 octets / 512 bits) encodée en base64url
+  const randomBytes = new Uint8Array(64);
+  (window.crypto || window.msCrypto).getRandomValues(randomBytes);
+  const dummySignature = Array.from(randomBytes).map(b => String.fromCharCode(b)).join('');
+  const encodedSignature = base64UrlEncode(dummySignature);
+
+  return `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
+}
+
+// Remplissage automatique du champ token avec le JWT ThingsBoard généré
+function fillGeneratedJwtToken(targetInputId, deviceIdInputId) {
+  const devIdEl = document.getElementById(deviceIdInputId);
+  const targetEl = document.getElementById(targetInputId);
+  if (!targetEl) return;
+  const devId = devIdEl ? devIdEl.value : "";
+  const token = generateThingsBoardJwt(devId);
+  targetEl.value = token;
+
+  // Feedback visuel élégant sur le champ modifié
+  targetEl.classList.add("ring-2", "ring-emerald-500", "border-emerald-500");
+  setTimeout(() => {
+    targetEl.classList.remove("ring-2", "ring-emerald-500", "border-emerald-500");
+  }, 1500);
+}
+
+// Échappement de valeur CSV avec encadrement guillemets
+function escapeCsvValue(val) {
+  if (val === null || val === undefined) return '""';
+  const str = String(val).replace(/"/g, '""');
+  return `"${str}"`;
+}
+
+// Téléchargement du fichier CSV d'import ThingsBoard pour un équipement donné
+function downloadDeviceCsv(deviceId) {
+  const device = state.devices.find(d => d.id === deviceId);
+  if (!device) return;
+  const header = "name,type,label,accessToken";
+  const row = [
+    escapeCsvValue(device.name),
+    escapeCsvValue("default"),
+    escapeCsvValue(device.id),
+    escapeCsvValue(device.token || "")
+  ].join(",");
+
+  const csvContent = "\uFEFF" + header + "\r\n" + row + "\r\n";
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `tb_device_${device.id}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Téléchargement du fichier CSV d'import ThingsBoard pour l'ensemble des équipements
+function exportAllDevicesCsv() {
+  if (!state.devices || state.devices.length === 0) {
+    alert("Aucun équipement à exporter.");
+    return;
+  }
+  const header = "name,type,label,accessToken";
+  const rows = state.devices.map(device => [
+    escapeCsvValue(device.name),
+    escapeCsvValue("default"),
+    escapeCsvValue(device.id),
+    escapeCsvValue(device.token || "")
+  ].join(","));
+
+  const csvContent = "\uFEFF" + [header, ...rows].join("\r\n") + "\r\n";
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `thingsboard_devices_all_${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 async function saveDeviceForm(e) {

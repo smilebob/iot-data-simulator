@@ -1,20 +1,53 @@
-/* Charte Visuelle Industrielle (Rouge Technique & Slate Sombre) */
+/* ========================================================
+   CHARTE VISUELLE INDUSTRIELLE (Rouge Technique Eiffage & Thèmes)
+   ======================================================== */
 :root {
   --brand-red: #E2001A;
   --brand-red-hover: #C50017;
   --brand-red-dark: #990012;
   --brand-red-light: #FF334B;
+
+  /* Thème Sombre par défaut */
   --surface-bg: #0F1218;
+  --surface-header: #181D26;
   --surface-card: #181D26;
+  --surface-card-sub: #12151B;
   --surface-card-hover: #212733;
   --surface-border: #2B3342;
+  --surface-btn: #1F2532;
+  --surface-btn-hover: #2A3242;
+  --input-bg: #0F1218;
   --text-main: #F8FAFC;
   --text-muted: #94A3B8;
+  --text-sub: #64748B;
+  --modal-backdrop: rgba(0, 0, 0, 0.8);
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+  --surface-bg: #F1F5F9;
+  --surface-header: #FFFFFF;
+  --surface-card: #FFFFFF;
+  --surface-card-sub: #F8FAFC;
+  --surface-card-hover: #F1F5F9;
+  --surface-border: #CBD5E1;
+  --surface-btn: #F1F5F9;
+  --surface-btn-hover: #E2E8F0;
+  --input-bg: #FFFFFF;
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --text-sub: #64748B;
+  --modal-backdrop: rgba(15, 23, 42, 0.65);
 }
 
 body {
   background-color: var(--surface-bg);
   color: var(--text-main);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 /* Animations temps réel */
@@ -27,10 +60,10 @@ body {
   100% { color: inherit; transform: scale(1); }
 }
 
-/* Boutons & Badges */
+/* Boutons & Badges Généraux */
 .btn-primary-red {
   background-color: var(--brand-red);
-  color: #ffffff;
+  color: #ffffff !important;
   transition: all 0.2s ease;
   box-shadow: 0 4px 14px rgba(226, 0, 26, 0.28);
 }
@@ -68,7 +101,7 @@ body {
   background-color: var(--surface-card);
   border: 1px solid var(--surface-border);
   border-radius: 1rem;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .device-group-card:hover {
   border-color: #3B4559;
@@ -81,18 +114,330 @@ body {
   border-radius: 2px 2px 0 0;
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
+/* Custom scrollbars Thème Sombre */
+html.dark ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-::-webkit-scrollbar-track {
+html.dark ::-webkit-scrollbar-track {
   background: #0B0E14;
 }
-::-webkit-scrollbar-thumb {
+html.dark ::-webkit-scrollbar-thumb {
   background: #2B3342;
   border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
+html.dark ::-webkit-scrollbar-thumb:hover {
   background: #3B4559;
+}
+
+/* ========================================================
+   THÈME CLAIR (LIGHT MODE - LISIBILITÉ & HAUT CONTRASTE)
+   ======================================================== */
+html.light body {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+/* Custom scrollbars Thème Clair */
+html.light ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+html.light ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Header & Barre supérieure */
+html.light header {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
+}
+html.light header h1 {
+  color: #0F172A !important;
+}
+html.light header p {
+  color: #64748B !important;
+}
+
+/* Surfaces de base et conteneurs */
+html.light .bg-\[\#181D26\] {
+  background-color: #FFFFFF !important;
+}
+html.light .bg-\[\#181D26\]\/60 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+html.light .bg-\[\#12151B\] {
+  background-color: #F8FAFC !important;
+}
+html.light .bg-\[\#12151B\]\/50 {
+  background-color: #F1F5F9 !important;
+}
+html.light .bg-\[\#0F1218\] {
+  background-color: #FFFFFF !important;
+}
+html.light .bg-\[\#1F2532\],
+html.light .bg-\[\#202531\] {
+  background-color: #F1F5F9 !important;
+}
+html.light .hover\:bg-\[\#202531\]:hover,
+html.light .hover\:bg-\[\#2B3342\]:hover {
+  background-color: #E2E8F0 !important;
+}
+html.light .hover\:bg-\[\#1C222D\]:hover {
+  background-color: #F8FAFC !important;
+}
+html.light .hover\:bg-\[\#151922\]:hover {
+  background-color: #F1F5F9 !important;
+}
+
+/* Bordures & Séparateurs */
+html.light .border-\[\#2B3342\],
+html.light .border-\[\#2B3342\]\/70,
+html.light .border-\[\#2B3342\]\/60 {
+  border-color: #CBD5E1 !important;
+}
+html.light .hover\:border-slate-500:hover,
+html.light .hover\:border-slate-600:hover {
+  border-color: #94A3B8 !important;
+}
+html.light .divide-\[\#2B3342\] {
+  border-color: #CBD5E1 !important;
+}
+html.light .divide-\[\#2B3342\] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #E2E8F0 !important;
+}
+
+/* Typographie & Contraste Textuel */
+html.light .text-white {
+  color: #0F172A !important;
+}
+html.light .text-slate-100 {
+  color: #0F172A !important;
+}
+html.light .text-slate-200 {
+  color: #1E293B !important;
+}
+html.light .text-slate-300 {
+  color: #334155 !important;
+}
+html.light .text-slate-400 {
+  color: #475569 !important;
+}
+html.light .text-slate-500 {
+  color: #64748B !important;
+}
+html.light .text-slate-600 {
+  color: #94A3B8 !important;
+}
+
+/* Exceptions obligatoires pour le texte blanc sur boutons colorés */
+html.light .btn-primary-red,
+html.light .btn-primary-red *,
+html.light .active-filter-tab,
+html.light .active-filter-tab *,
+html.light button.bg-emerald-600,
+html.light button.bg-emerald-600 *,
+html.light button.bg-red-600,
+html.light button.bg-red-600 *,
+html.light .bg-\[\#E2001A\],
+html.light .bg-\[\#E2001A\] *,
+html.light #log-error-badge {
+  color: #FFFFFF !important;
+}
+
+/* Badges Plateformes & Protocoles en Thème Clair */
+html.light .bg-red-950\/80,
+html.light .bg-red-950\/70,
+html.light .bg-red-950 {
+  background-color: #FEE2E2 !important;
+  border-color: #FCA5A5 !important;
+  color: #991B1B !important;
+}
+html.light .text-red-300,
+html.light .text-red-200 {
+  color: #991B1B !important;
+}
+
+html.light .bg-blue-950\/80,
+html.light .bg-blue-950\/70,
+html.light .bg-blue-950 {
+  background-color: #DBEAFE !important;
+  border-color: #93C5FD !important;
+  color: #1E40AF !important;
+}
+html.light .text-blue-300 {
+  color: #1E40AF !important;
+}
+
+html.light .bg-amber-950\/80,
+html.light .bg-amber-950\/70,
+html.light .bg-amber-950 {
+  background-color: #FEF3C7 !important;
+  border-color: #FCD34D !important;
+  color: #92400E !important;
+}
+html.light .text-amber-300 {
+  color: #92400E !important;
+}
+
+html.light .bg-emerald-950\/80,
+html.light .bg-emerald-950\/70,
+html.light .bg-emerald-950 {
+  background-color: #D1FAE5 !important;
+  border-color: #6EE7B7 !important;
+  color: #065F46 !important;
+}
+html.light .text-emerald-300 {
+  color: #065F46 !important;
+}
+
+html.light .bg-purple-950\/80,
+html.light .bg-purple-950\/70,
+html.light .bg-purple-950 {
+  background-color: #F3E8FF !important;
+  border-color: #D8B4FE !important;
+  color: #6B21A8 !important;
+}
+html.light .text-purple-300 {
+  color: #6B21A8 !important;
+}
+
+html.light .bg-sky-950\/80,
+html.light .bg-sky-950\/70,
+html.light .bg-sky-950 {
+  background-color: #E0F2FE !important;
+  border-color: #7DD3FC !important;
+  color: #0369A1 !important;
+}
+html.light .text-sky-300 {
+  color: #0369A1 !important;
+}
+
+html.light .bg-orange-950\/80,
+html.light .bg-orange-950\/70 {
+  background-color: #FFEDD5 !important;
+  border-color: #FDBA74 !important;
+  color: #C2410C !important;
+}
+html.light .text-orange-300 {
+  color: #C2410C !important;
+}
+
+html.light .bg-rose-950\/80,
+html.light .bg-rose-950\/70 {
+  background-color: #FFE4E6 !important;
+  border-color: #FDA4AF !important;
+  color: #BE123C !important;
+}
+html.light .text-rose-300 {
+  color: #BE123C !important;
+}
+
+html.light .bg-slate-800 {
+  background-color: #E2E8F0 !important;
+  border-color: #CBD5E1 !important;
+  color: #334155 !important;
+}
+
+/* Cartes d'Équipements en Thème Clair */
+html.light .device-group-card {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05) !important;
+}
+html.light .device-group-card:hover {
+  border-color: #94A3B8 !important;
+}
+
+/* Cartes de Variables en Thème Clair */
+html.light [id^="card-"] {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+}
+html.light [id^="card-"]:hover {
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Onglets filtres */
+html.light .filter-tab {
+  background-color: #F1F5F9 !important;
+  color: #475569 !important;
+  border-color: #CBD5E1 !important;
+}
+html.light .filter-tab:hover {
+  background-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+/* Formulaires & Contrôles de Saisie */
+html.light input:not([type="checkbox"]):not([type="radio"]),
+html.light select,
+html.light textarea {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+html.light input:not([type="checkbox"]):not([type="radio"]):focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: var(--brand-red) !important;
+  box-shadow: 0 0 0 2px rgba(226, 0, 26, 0.15) !important;
+}
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94A3B8 !important;
+}
+html.light input[type="checkbox"] {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Modales & Boîtes de Dialogue */
+html.light .backdrop-blur-sm.bg-black\/80,
+html.light .backdrop-blur-sm.bg-black\/85,
+html.light .backdrop-blur-md.bg-black\/95 {
+  background-color: rgba(15, 23, 42, 0.6) !important;
+}
+
+html.light #modal-variable > div,
+html.light #modal-device > div,
+html.light #modal-broker > div,
+html.light #modal-catalog > div,
+html.light #modal-instantiate-preset > div,
+html.light #modal-users > div,
+html.light #modal-create-user > div,
+html.light #modal-change-password > div,
+html.light #modal-reset-password > div,
+html.light #modal-login > div,
+html.light #modal-logs > div {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Terminal de logs (dark console préservé pour contraste DevTools) */
+html.light #logs-container {
+  background-color: #0F172A !important;
+  border-color: #334155 !important;
+}
+html.light #logs-container pre {
+  color: #F8FAFC !important;
+}
+
+/* Table Utilisateurs */
+html.light tr.hover\:bg-white\/5:hover {
+  background-color: #F8FAFC !important;
+}
+html.light tr:hover {
+  background-color: #F8FAFC !important;
 }

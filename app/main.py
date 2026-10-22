@@ -22,7 +22,7 @@ logging.basicConfig(
 logger = logging.getLogger("iot_sim")
 
 # Version officielle de l'application
-APP_VERSION = "2.0.0"
+APP_VERSION = "2.1.0"
 
 # Initialisation des instances globales
 repository = StorageRepository(file_path="data/simulator_state.json")
