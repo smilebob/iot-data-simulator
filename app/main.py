@@ -85,11 +85,26 @@ app.add_middleware(
 # Endpoints API & Healthcheck (requis pour le CIS Docker Benchmark Rule 4.6)
 @app.get("/healthz")
 def healthcheck():
+    devs = []
+    for d in repository.get_devices():
+        devs.append({
+            "id": d.id,
+            "name": d.name,
+            "platform": getattr(d.platform, "value", str(d.platform)),
+            "protocol": getattr(d.protocol, "value", str(d.protocol)),
+            "has_token": bool(d.token),
+            "token_preview": (d.token[:4] + "***") if d.token else None,
+            "custom_host": d.custom_host,
+            "enabled": d.enabled,
+        })
     return {
         "status": "healthy",
         "version": APP_VERSION,
         "engine_running": engine.is_running,
         "mqtt_connected": mqtt_manager.default_client.is_connected if mqtt_manager.default_client else False,
+        "devices": devs,
+        "http_rpc_listeners": list(engine._http_rpc_tasks.keys()),
+        "recent_logs": [entry["message"] for entry in log_handler.get_logs(limit=10)],
     }
 
 from app.api.auth import auth_router

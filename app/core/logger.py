@@ -53,10 +53,18 @@ class InMemoryLogHandler(logging.Handler):
     def clear(self):
         self.buffer.clear()
 
+import sys
+
 # Instance globale partagée
 log_handler = InMemoryLogHandler(capacity=200)
 log_handler.setFormatter(logging.Formatter("%(message)s"))
-logging.getLogger().addHandler(log_handler)
-logging.getLogger("iot_sim").addHandler(log_handler)
-logging.getLogger("iot_sim.mqtt").addHandler(log_handler)
-logging.getLogger("iot_sim.engine").addHandler(log_handler)
+
+# Sortie console standard (sys.stdout) pour affichage dans 'docker logs'
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] [%(name)s]: %(message)s"))
+
+for log_name in (None, "iot_sim", "iot_sim.mqtt", "iot_sim.engine", "iot_sim.http"):
+    l = logging.getLogger(log_name)
+    l.addHandler(log_handler)
+    l.addHandler(console_handler)
+    l.setLevel(logging.INFO)
