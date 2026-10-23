@@ -2183,11 +2183,13 @@ async function openCatalogModal() {
     const elBldg = document.getElementById("cat-count-building");
     const elInfra = document.getElementById("cat-count-infrastructure");
     const elCity = document.getElementById("cat-count-smart_city");
+    const elCustom = document.getElementById("cat-count-custom");
     if (elAll) elAll.textContent = catalogPresets.length;
     if (elInd) elInd.textContent = catalogPresets.filter(p => p.category === 'industry').length;
     if (elBldg) elBldg.textContent = catalogPresets.filter(p => p.category === 'building').length;
     if (elInfra) elInfra.textContent = catalogPresets.filter(p => p.category === 'infrastructure').length;
     if (elCity) elCity.textContent = catalogPresets.filter(p => p.category === 'smart_city').length;
+    if (elCustom) elCustom.textContent = catalogPresets.filter(p => p.is_custom).length;
 
     renderCatalogCards();
     openModal("modal-catalog");
@@ -2204,7 +2206,8 @@ function filterCatalogCategory(category) {
     { id: "cat-tab-industry", cat: "industry" },
     { id: "cat-tab-building", cat: "building" },
     { id: "cat-tab-infrastructure", cat: "infrastructure" },
-    { id: "cat-tab-smart_city", cat: "smart_city" }
+    { id: "cat-tab-smart_city", cat: "smart_city" },
+    { id: "cat-tab-custom", cat: "custom" }
   ];
   tabs.forEach(tab => {
     const el = document.getElementById(tab.id);
@@ -2228,7 +2231,8 @@ function renderCatalogCards() {
   if (!container) return;
 
   const filtered = catalogPresets.filter(p => {
-    const matchCat = (currentCatalogCategory === "all" || p.category === currentCatalogCategory);
+    const matchCat = (currentCatalogCategory === "all") ||
+      (currentCatalogCategory === "custom" ? p.is_custom : p.category === currentCatalogCategory);
     const matchSearch = !currentCatalogSearch ||
       p.name.toLowerCase().includes(currentCatalogSearch) ||
       p.description.toLowerCase().includes(currentCatalogSearch) ||
@@ -2251,10 +2255,15 @@ function renderCatalogCards() {
   container.innerHTML = filtered.map(p => {
     // Category color tag
     let catColor = "bg-slate-800 text-slate-300 border-slate-700";
-    if (p.category === "industry") catColor = "bg-amber-950/70 text-amber-300 border-amber-800/60";
+    if (p.is_custom) catColor = "bg-emerald-950/70 text-emerald-300 border-emerald-800/60";
+    else if (p.category === "industry") catColor = "bg-amber-950/70 text-amber-300 border-amber-800/60";
     else if (p.category === "building") catColor = "bg-sky-950/70 text-sky-300 border-sky-800/60";
     else if (p.category === "infrastructure") catColor = "bg-emerald-950/70 text-emerald-300 border-emerald-800/60";
     else if (p.category === "smart_city") catColor = "bg-purple-950/70 text-purple-300 border-purple-800/60";
+
+    const customBadge = p.is_custom
+      ? `<span class="inline-block text-[10px] font-semibold px-1.5 py-0.2 rounded border bg-emerald-950/70 text-emerald-300 border-emerald-800/60 ml-1">Custom</span>`
+      : "";
 
     // Protocol badge
     const protoBadge = (p.default_protocol || "mqtt").toUpperCase();
@@ -2280,7 +2289,10 @@ function renderCatalogCards() {
                 <i data-lucide="${p.icon || 'cpu'}" class="w-4 h-4"></i>
               </div>
               <div>
-                <h4 class="text-xs font-bold text-white group-hover:text-red-400 transition leading-snug">${escapeHtml(p.name)}</h4>
+                <h4 class="text-xs font-bold text-white group-hover:text-red-400 transition leading-snug flex items-center gap-1">
+                  <span>${escapeHtml(p.name)}</span>
+                  ${customBadge}
+                </h4>
                 <span class="inline-block text-[10px] font-medium px-1.5 py-0.2 rounded border ${catColor} mt-0.5">
                   ${escapeHtml(p.category_label)}
                 </span>
@@ -2306,14 +2318,22 @@ function renderCatalogCards() {
           </div>
         </div>
 
-        <!-- Bouton d'action -->
-        <div class="pt-3.5 mt-3 border-t border-[#202531] flex items-center gap-2">
+        <!-- Boutons d'action -->
+        <div class="pt-3.5 mt-3 border-t border-[#202531] flex items-center gap-1.5">
           <button onclick="downloadPresetDashboard('${p.id}')" title="Télécharger le modèle de Dashboard ThingsBoard (.json)" class="p-2 bg-[#181D26] hover:bg-[#202531] text-sky-400 hover:text-white border border-[#2B3342] rounded-lg transition text-xs flex items-center gap-1 shrink-0">
             <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>
           </button>
-          <button onclick="prepareInstantiatePreset('${p.id}')" class="flex-1 flex items-center justify-center gap-1.5 bg-[#1F2532] hover:bg-[#E2001A] text-slate-200 hover:text-white border border-[#2B3342] hover:border-red-600 text-xs font-semibold py-1.5 px-3 rounded-lg transition shadow-sm">
+          <button onclick="exportSinglePreset('${p.id}')" title="Exporter ce cas d'usage complet (.json avec TB Dashboard, CSV, formule)" class="p-2 bg-[#181D26] hover:bg-[#202531] text-emerald-400 hover:text-white border border-[#2B3342] rounded-lg transition text-xs flex items-center gap-1 shrink-0">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          </button>
+          ${p.is_custom ? `
+          <button onclick="deleteCustomPreset('${p.id}')" title="Supprimer ce modèle personnalisé" class="p-2 bg-[#181D26] hover:bg-rose-950/60 text-rose-400 hover:text-rose-200 border border-[#2B3342] hover:border-rose-800 rounded-lg transition text-xs flex items-center gap-1 shrink-0">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          </button>
+          ` : ""}
+          <button onclick="prepareInstantiatePreset('${p.id}')" class="flex-1 flex items-center justify-center gap-1.5 bg-[#1F2532] hover:bg-[#E2001A] text-slate-200 hover:text-white border border-[#2B3342] hover:border-red-600 text-xs font-semibold py-1.5 px-2.5 rounded-lg transition shadow-sm">
             <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-            <span>Utiliser ce modèle</span>
+            <span>Utiliser</span>
           </button>
         </div>
       </div>
@@ -2414,6 +2434,109 @@ async function submitInstantiatePreset(e) {
       errBox.textContent = `Erreur : ${err.message}`;
       errBox.classList.remove("hidden");
     }
+  }
+}
+
+// --- Import / Export des Cas d'Usage Métier (Presets) ---
+
+async function downloadFileFromApi(url, defaultFilename) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      let errText = "Erreur lors du téléchargement.";
+      try {
+        const errJson = await res.json();
+        if (errJson.detail) errText = errJson.detail;
+      } catch (e) {}
+      alert(errText);
+      return;
+    }
+    const blob = await res.blob();
+    const disposition = res.headers.get("content-disposition") || "";
+    let filename = defaultFilename;
+    const match = disposition.match(/filename="?([^";]+)"?/i);
+    if (match && match[1]) filename = match[1];
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  } catch (err) {
+    alert("Erreur réseau lors du téléchargement : " + err.message);
+  }
+}
+
+function exportSinglePreset(presetId) {
+  downloadFileFromApi(`/api/presets/${encodeURIComponent(presetId)}/export`, `preset_export_${presetId}.json`);
+}
+
+function exportAllPresets() {
+  downloadFileFromApi("/api/presets/export/all", "presets_catalog_full_bundle.json");
+}
+
+async function handlePresetFileImport(event) {
+  const input = event.target;
+  if (!input.files || input.files.length === 0) return;
+  const file = input.files[0];
+
+  try {
+    const text = await file.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      alert("Le fichier sélectionné n'est pas un document JSON valide.");
+      input.value = "";
+      return;
+    }
+
+    const res = await fetch("/api/presets/import", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+    if (!res.ok) {
+      alert("Échec de l'importation : " + (result.detail || "Erreur inconnue"));
+      input.value = "";
+      return;
+    }
+
+    alert(result.message || `${result.imported_count || 1} cas d'usage métier(s) importé(s) avec succès !`);
+    input.value = "";
+    // Recharger le catalogue pour rafraîchir les modèles et compteurs
+    await openCatalogModal();
+    // Basculer sur l'onglet personnalisés
+    filterCatalogCategory("custom");
+  } catch (err) {
+    alert("Erreur lors de la lecture du fichier : " + err.message);
+    input.value = "";
+  }
+}
+
+async function deleteCustomPreset(presetId) {
+  if (!confirm(`Êtes-vous sûr de vouloir supprimer le modèle personnalisé "${presetId}" ?`)) {
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/presets/${encodeURIComponent(presetId)}`, {
+      method: "DELETE"
+    });
+    const result = await res.json();
+    if (!res.ok) {
+      alert("Impossible de supprimer le modèle : " + (result.detail || "Erreur"));
+      return;
+    }
+    // Recharger le catalogue
+    await openCatalogModal();
+    filterCatalogCategory(currentCatalogCategory);
+  } catch (err) {
+    alert("Erreur lors de la suppression : " + err.message);
   }
 }
 

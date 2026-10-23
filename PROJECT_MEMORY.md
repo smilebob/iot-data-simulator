@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-22 | **Version** : 2.1.1 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-10-22 | **Version** : 2.2.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
@@ -129,6 +129,16 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Thèmes Clair / Sombre (`Light` & `Dark`)** : Sélecteur de thème dans l'en-tête, charte graphique haute lisibilité, mémorisation dans `localStorage` et script anti-FOUC.
   - **Alignement Portainer Port 8032** : Mise à jour du port hôte par défaut sur `8032` dans `Documentation/devops/portainer_deployment.md` et `templates/portainer-template.json` pour prévenir tout conflit de socket avec l'agent Edge de Portainer.
 - [x] Guide utilisateur d'importation ThingsBoard SCADA & Bulk Provisioning CSV : `Documentation/user/thingsboard_dashboards.md`
+- [x] Import & Export Exhaustif des Cas d'Usage Métier (Presets) (v2.2.0) :
+  - **Export Exhaustif Autonome** : Packages JSON normalisés (`schema_version: "2.1.0"`) contenant les métadonnées de l'équipement, l'intégralité des variables (formules mathématiques, tables de points, dépendances physiques et intégrateurs), le gabarit complet du tableau de bord ThingsBoard 4.3 (synoptiques SCADA P&ID/SLD, jauges JustGage, courbes et interrupteurs de contrôle), les métadonnées CSV ThingsBoard et les spécifications d'instanciation.
+  - **Export Global de la Bibliothèque** : Route `GET /api/presets/export/all` exportant tous les modèles natifs et personnalisés sous forme de bundle unique.
+  - **Import & Validation Pydantic** : Route `POST /api/presets/import` acceptant aussi bien un fichier uploadé (multipart) qu'un payload JSON direct, avec détection automatique unitaire ou bundle, auto-renommage avec suffixe `_custom` en cas de collision avec un ID d'usine natif, et attribution automatique de `is_custom=True`.
+  - **Persistance Dédiée & Résiliente** : Sauvegarde dans `data/custom_presets.json` au sein du volume persistant Docker `simulator_data`, isolée de l'état runtime des équipements et protégée par verrou ré-entrant `RLock`.
+  - **Protection des Modèles Natifs** : Blocage strict de la suppression (`DELETE /api/presets/{preset_id}`) pour tout modèle d'usine d'origine (erreur HTTP 400).
+  - **IHM Évoluée du Catalogue** : Boutons *Importer* et *Exporter tout* dans l'en-tête de la modale, onglet filtre *Personnalisés* avec compteur dynamique, et boutons d'export unitaire et de suppression sur les cartes de modèles.
+  - **Plugin Antigravity Officiel (`iot-preset-designer`)** : Déploiement d'un agent IA (*IoT Preset Architect*) et de la skill *iot-preset-generator* dans `customizations/antigravity/` et `~/.gemini/config/plugins/` pour concevoir interactivement de nouveaux cas d'usage avec validation AST et assemblage de dashboards ThingsBoard 4.3.
+- [x] Guide d'Import/Export & Agent IA : `Documentation/user/preset_import_export_and_agent.md`
+- [x] Guide Développeur Modèles Personnalisés & Plugin : `Documentation/developer/custom_presets_and_plugins.md`
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

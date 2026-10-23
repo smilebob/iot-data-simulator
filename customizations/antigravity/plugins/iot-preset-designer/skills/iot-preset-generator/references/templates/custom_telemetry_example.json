@@ -1,0 +1,79 @@
+{
+  "id": "city_smart_streetlighting",
+  "name": "Mat d'Éclairage Public Adaptatif",
+  "category": "smart_city",
+  "category_label": "Villes Durables & Mobilités",
+  "description": "Lanterne LED communicante avec gradation lumineuse DALI, détection de présence piétons/cyclistes, mesure de luminosité crépusculaire et comptage de consommation.",
+  "icon": "lightbulb",
+  "default_protocol": "mqtt",
+  "default_platform": "thingsboard",
+  "is_custom": true,
+  "variables": [
+    {
+      "id": "luminosite_ambiante",
+      "name": "Luminosité Lux Ambiante",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "lx",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 5.0,
+      "enabled": true,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 2.0,
+        "max_val": 850.0,
+        "period": 300.0,
+        "noise_percent": 1.0
+      }
+    },
+    {
+      "id": "taux_gradation_led",
+      "name": "Consigne Gradation LED",
+      "device_id": "",
+      "var_type": "attribute",
+      "data_type": "integer",
+      "unit": "%",
+      "topic": "v1/devices/me/attributes",
+      "publish_interval": 10.0,
+      "enabled": true,
+      "sim_mode": "constant",
+      "math_config": {
+        "constant_val": 80
+      }
+    },
+    {
+      "id": "puissance_absorbee",
+      "name": "Puissance Électrique Lampe",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "W",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 5.0,
+      "enabled": true,
+      "sim_mode": "derived",
+      "derived_config": {
+        "formula": "(taux_gradation_led / 100) * 120.0",
+        "dependencies": ["taux_gradation_led"]
+      }
+    },
+    {
+      "id": "energie_consommee",
+      "name": "Consommation Électrique Cumulée",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "kWh",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 10.0,
+      "enabled": true,
+      "sim_mode": "integrator",
+      "integrator_config": {
+        "source_variable": "puissance_absorbee",
+        "time_unit": "hours",
+        "initial_val": 128.4
+      }
+    }
+  ]
+}

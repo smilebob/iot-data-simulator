@@ -1,0 +1,193 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IoTSimulatorPresetPackage",
+  "description": "Schéma officiel d'un package d'export/import de cas d'usage métier pour l'IoT Data Simulator (v2.2.0+)",
+  "type": "object",
+  "required": ["schema_version", "export_type", "preset"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["2.1.0", "2.2.0"]
+    },
+    "export_type": {
+      "type": "string",
+      "enum": ["single_preset", "presets_bundle"]
+    },
+    "export_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "generator": {
+      "type": "string"
+    },
+    "preset": {
+      "$ref": "#/definitions/EquipmentPreset"
+    },
+    "dashboard_template": {
+      "type": "object",
+      "description": "Gabarit JSON complet du tableau de bord ThingsBoard 4.3"
+    },
+    "csv_template": {
+      "type": "object",
+      "properties": {
+        "headers": { "type": "string" },
+        "sample_row": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "instantiation_spec": {
+      "type": "object",
+      "properties": {
+        "suggested_device_id_prefix": { "type": "string" },
+        "default_name": { "type": "string" },
+        "default_protocol": { "type": "string", "enum": ["mqtt", "http", "coap"] },
+        "default_platform": { "type": "string", "enum": ["thingsboard"] },
+        "variables_count": { "type": "integer" },
+        "recommended_publish_interval": { "type": "number" }
+      }
+    }
+  },
+  "definitions": {
+    "EquipmentPreset": {
+      "type": "object",
+      "required": ["id", "category", "category_label", "name", "description", "variables"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["industry", "building", "infrastructure", "smart_city"]
+        },
+        "category_label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string",
+          "default": "cpu"
+        },
+        "default_protocol": {
+          "type": "string",
+          "enum": ["mqtt", "http", "coap"],
+          "default": "mqtt"
+        },
+        "default_platform": {
+          "type": "string",
+          "enum": ["thingsboard"],
+          "default": "thingsboard"
+        },
+        "is_custom": {
+          "type": "boolean",
+          "default": true
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VariableConfig"
+          }
+        }
+      }
+    },
+    "VariableConfig": {
+      "type": "object",
+      "required": ["id", "name", "var_type", "data_type", "sim_mode"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "device_id": { "type": "string", "default": "" },
+        "var_type": {
+          "type": "string",
+          "enum": ["telemetry", "attribute"]
+        },
+        "data_type": {
+          "type": "string",
+          "enum": ["float", "integer", "boolean", "string"]
+        },
+        "unit": { "type": "string", "default": "" },
+        "topic": { "type": "string", "default": "" },
+        "publish_interval": { "type": "number", "minimum": 0.1, "default": 2.0 },
+        "enabled": { "type": "boolean", "default": true },
+        "sim_mode": {
+          "type": "string",
+          "enum": [
+            "sine",
+            "cosine",
+            "triangle",
+            "square",
+            "sawtooth",
+            "ramp",
+            "random_walk",
+            "gaussian",
+            "constant",
+            "points_table",
+            "derived",
+            "integrator"
+          ]
+        },
+        "math_config": {
+          "$ref": "#/definitions/MathConfig"
+        },
+        "derived_config": {
+          "$ref": "#/definitions/DerivedConfig"
+        },
+        "integrator_config": {
+          "$ref": "#/definitions/IntegratorConfig"
+        }
+      }
+    },
+    "MathConfig": {
+      "type": "object",
+      "properties": {
+        "min_val": { "type": "number", "default": 0.0 },
+        "max_val": { "type": "number", "default": 100.0 },
+        "period": { "type": "number", "default": 60.0 },
+        "step": { "type": "number", "default": 1.0 },
+        "noise_percent": { "type": "number", "default": 0.0 },
+        "mean": { "type": "number", "default": 50.0 },
+        "std_dev": { "type": "number", "default": 5.0 },
+        "constant_val": { "type": ["string", "number", "boolean", "null"] }
+      }
+    },
+    "DerivedConfig": {
+      "type": "object",
+      "required": ["formula"],
+      "properties": {
+        "formula": {
+          "type": "string",
+          "description": "Expression mathématique Python sans eval (ex: '(pression_cuve * 4.2) + (debit * 1.5)')"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Liste des IDs de variables sources nécessaires au calcul"
+        }
+      }
+    },
+    "IntegratorConfig": {
+      "type": "object",
+      "required": ["source_variable"],
+      "properties": {
+        "source_variable": {
+          "type": "string",
+          "description": "Identifiant de la variable de flux instantané à intégrer"
+        },
+        "time_unit": {
+          "type": "string",
+          "enum": ["seconds", "minutes", "hours", "days"],
+          "default": "hours"
+        },
+        "initial_val": {
+          "type": "number",
+          "default": 0.0
+        }
+      }
+    }
+  }
+}

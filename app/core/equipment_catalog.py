@@ -7,8 +7,13 @@ Couvre les 4 grands domaines sectoriels :
 - Villes Durables, Collectivités & Télécoms
 """
 
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Any
+import json
+import logging
+import os
 import secrets
+import threading
+from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 from app.models.device import DeviceConfig, PlatformType, TransportProtocol
 from app.models.variable import (
@@ -23,6 +28,12 @@ from app.models.variable import (
     IntegratorConfig,
 )
 from app.platforms import get_adapter
+from app.core.dashboard_generator import generate_thingsboard_dashboard
+
+logger = logging.getLogger("iot_sim.catalog")
+
+CUSTOM_PRESETS_FILE = os.getenv("CUSTOM_PRESETS_FILE", "data/custom_presets.json")
+_custom_presets_lock = threading.RLock()
 
 class EquipmentPreset(BaseModel):
     id: str = Field(..., description="Identifiant unique du modèle")
@@ -33,10 +44,11 @@ class EquipmentPreset(BaseModel):
     icon: str = Field(default="fa-microchip", description="Icône FontAwesome")
     default_protocol: TransportProtocol = Field(default=TransportProtocol.MQTT)
     default_platform: PlatformType = Field(default=PlatformType.THINGSBOARD)
+    is_custom: bool = Field(default=False, description="Indique si le modèle est un preset personnalisé importé")
     variables: List[VariableConfig] = Field(default_factory=list)
 
-def get_equipment_catalog() -> List[EquipmentPreset]:
-    """Retourne la liste complète des modèles d'équipements pré-configurés."""
+def _get_builtin_catalog() -> List[EquipmentPreset]:
+    """Génère la liste des 32 modèles d'équipements d'usine natifs."""
     catalog: List[EquipmentPreset] = []
 
     # =========================================================================
@@ -2155,6 +2167,198 @@ def get_equipment_catalog() -> List[EquipmentPreset]:
     ))
 
     return catalog
+
+_BUILTIN_PRESETS_CACHE: Optional[List[EquipmentPreset]] = None
+
+def get_builtin_catalog() -> List[EquipmentPreset]:
+    """Retourne une copie de la liste des modèles natifs en mémoire cache."""
+    global _BUILTIN_PRESETS_CACHE
+    if _BUILTIN_PRESETS_CACHE is None:
+        _BUILTIN_PRESETS_CACHE = _get_builtin_catalog()
+    return [p.model_copy(deep=True) for p in _BUILTIN_PRESETS_CACHE]
+
+def load_custom_presets(file_path: Optional[str] = None) -> List[EquipmentPreset]:
+    """Charge les modèles d'équipements personnalisés depuis le stockage JSON persistant."""
+    target_path = file_path or CUSTOM_PRESETS_FILE
+    if not os.path.exists(target_path):
+        return []
+    with _custom_presets_lock:
+        try:
+            with open(target_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            presets: List[EquipmentPreset] = []
+            for item in data:
+                try:
+                    p = EquipmentPreset.model_validate(item)
+                    p.is_custom = True
+                    presets.append(p)
+                except Exception as ex:
+                    logger.warning(f"Modèle personnalisé invalide ignoré : {ex}")
+            return presets
+        except Exception as e:
+            logger.warning(f"Erreur lors de la lecture des modèles personnalisés ({target_path}): {e}")
+            return []
+
+def save_custom_preset(preset: EquipmentPreset, file_path: Optional[str] = None) -> None:
+    """Enregistre ou met à jour un modèle d'équipement personnalisé."""
+    target_path = file_path or CUSTOM_PRESETS_FILE
+    with _custom_presets_lock:
+        presets = load_custom_presets(target_path)
+        preset.is_custom = True
+        updated = False
+        for i, existing in enumerate(presets):
+            if existing.id == preset.id:
+                presets[i] = preset
+                updated = True
+                break
+        if not updated:
+            presets.append(preset)
+        dir_name = os.path.dirname(target_path) or "."
+        os.makedirs(dir_name, exist_ok=True)
+        tmp_path = f"{target_path}.tmp"
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            json.dump([p.model_dump() for p in presets], f, indent=2, ensure_ascii=False)
+        os.replace(tmp_path, target_path)
+
+def delete_custom_preset(preset_id: str, file_path: Optional[str] = None) -> bool:
+    """Supprime un modèle personnalisé. Lève une ValueError si le modèle est d'usine."""
+    target_path = file_path or CUSTOM_PRESETS_FILE
+    builtin_ids = {p.id for p in get_builtin_catalog()}
+    if preset_id in builtin_ids:
+        raise ValueError(f"Le modèle '{preset_id}' est un modèle natif d'usine et ne peut pas être supprimé.")
+    with _custom_presets_lock:
+        presets = load_custom_presets(target_path)
+        filtered = [p for p in presets if p.id != preset_id]
+        if len(filtered) == len(presets):
+            return False
+        dir_name = os.path.dirname(target_path) or "."
+        os.makedirs(dir_name, exist_ok=True)
+        tmp_path = f"{target_path}.tmp"
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            json.dump([p.model_dump() for p in filtered], f, indent=2, ensure_ascii=False)
+        os.replace(tmp_path, target_path)
+        return True
+
+def get_equipment_catalog(file_path: Optional[str] = None) -> List[EquipmentPreset]:
+    """Retourne la liste complète et unifiée des modèles d'équipements natifs et personnalisés."""
+    builtin = get_builtin_catalog()
+    custom = load_custom_presets(file_path=file_path)
+    return builtin + custom
+
+def build_preset_export_package(preset: EquipmentPreset) -> Dict[str, Any]:
+    """
+    Construit un package d'exportation 100% exhaustif pour un cas d'usage métier :
+    - Définition complète de l'équipement et de ses variables/formules
+    - Modèle ThingsBoard Dashboard prêt à l'emploi (synoptiques SCADA, widgets)
+    - Template CSV ThingsBoard
+    - Spécifications d'instanciation en 1 clic
+    """
+    mock_device = DeviceConfig(
+        id=preset.id,
+        name=preset.name,
+        platform=preset.default_platform,
+        protocol=preset.default_protocol,
+        token="A_RENSEIGNER_DANS_THINGSBOARD",
+        enabled=True
+    )
+    mock_vars: List[VariableConfig] = []
+    for orig in preset.variables:
+        v = orig.model_copy(deep=True)
+        v.device_id = mock_device.id
+        mock_vars.append(v)
+
+    dashboard_data = generate_thingsboard_dashboard(mock_device, mock_vars)
+
+    csv_template = {
+        "headers": "name,type,label,access_token",
+        "sample_row": f"{preset.name},default,{preset.name},${{AUTO_GENERATED_TOKEN}}",
+        "notes": "Format compatible avec l'outil d'import CSV d'appareils de ThingsBoard"
+    }
+
+    instantiation_spec = {
+        "suggested_device_id_prefix": preset.id,
+        "default_name": preset.name,
+        "default_protocol": preset.default_protocol.value if hasattr(preset.default_protocol, "value") else str(preset.default_protocol),
+        "default_platform": preset.default_platform.value if hasattr(preset.default_platform, "value") else str(preset.default_platform),
+        "variables_count": len(preset.variables),
+        "recommended_publish_interval": 2.0
+    }
+
+    return {
+        "schema_version": "2.1.0",
+        "export_type": "single_preset",
+        "export_date": datetime.now(timezone.utc).isoformat(),
+        "generator": "IoT Data Simulator v2.2.0",
+        "preset": preset.model_dump(mode="json"),
+        "dashboard_template": dashboard_data,
+        "csv_template": csv_template,
+        "instantiation_spec": instantiation_spec,
+    }
+
+def build_all_presets_export_package() -> Dict[str, Any]:
+    """Construit un bundle d'exportation contenant l'intégralité du catalogue."""
+    catalog = get_equipment_catalog()
+    packages = [build_preset_export_package(p) for p in catalog]
+    return {
+        "schema_version": "2.1.0",
+        "export_type": "presets_bundle",
+        "export_date": datetime.now(timezone.utc).isoformat(),
+        "generator": "IoT Data Simulator v2.2.0",
+        "total_presets": len(packages),
+        "presets_packages": packages,
+    }
+
+def import_preset_data(data: Any, file_path: Optional[str] = None) -> Tuple[int, List[str]]:
+    """
+    Importe un ou plusieurs cas d'usage métiers depuis un objet JSON.
+    Gère un package unitaire (clé 'preset'), un modèle brut ou un bundle.
+    """
+    imported_ids: List[str] = []
+    builtin_ids = {p.id for p in get_builtin_catalog()}
+
+    items_to_process: List[Dict[str, Any]] = []
+
+    if isinstance(data, dict):
+        if data.get("export_type") == "presets_bundle" and "presets_packages" in data:
+            for pkg in data["presets_packages"]:
+                if isinstance(pkg, dict) and "preset" in pkg:
+                    items_to_process.append(pkg["preset"])
+                elif isinstance(pkg, dict):
+                    items_to_process.append(pkg)
+        elif "preset" in data and isinstance(data["preset"], dict):
+            items_to_process.append(data["preset"])
+        else:
+            items_to_process.append(data)
+    elif isinstance(data, list):
+        for item in data:
+            if isinstance(item, dict) and "preset" in item:
+                items_to_process.append(item["preset"])
+            elif isinstance(item, dict):
+                items_to_process.append(item)
+
+    if not items_to_process:
+        raise ValueError("Aucun modèle d'équipement valide trouvé dans les données fournies.")
+
+    for item in items_to_process:
+        try:
+            # Remplissage par défaut de device_id si manquant dans les variables
+            if "variables" in item and isinstance(item["variables"], list):
+                for v in item["variables"]:
+                    if isinstance(v, dict) and not v.get("device_id"):
+                        v["device_id"] = item.get("id", "")
+
+            preset = EquipmentPreset.model_validate(item)
+            if preset.id in builtin_ids:
+                preset.id = f"{preset.id}_custom"
+                preset.name = f"{preset.name} (Personnalisé)"
+            preset.is_custom = True
+            save_custom_preset(preset, file_path=file_path)
+            imported_ids.append(preset.id)
+        except Exception as e:
+            logger.error(f"Erreur validation du modèle importé : {e}")
+            raise ValueError(f"Erreur de validation du modèle : {e}")
+
+    return len(imported_ids), imported_ids
 
 class InstantiatePresetRequest(BaseModel):
     preset_id: str = Field(..., description="Identifiant du preset choisi")

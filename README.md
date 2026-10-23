@@ -1,13 +1,14 @@
 # ⚡ IoT Data Simulator (ThingsBoard, Home Assistant, Datacake & Multi-Platform)
 
-[![Version](https://img.shields.io/badge/version-2.1.1-blue.svg)](https://github.com/smilebob/iot-data-simulator)
+[![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)](https://github.com/smilebob/iot-data-simulator)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 [![CIS Docker](https://img.shields.io/badge/security-CIS%20Benchmark%20Passed-success.svg)](Documentation/devops/docker_and_cis.md)
 [![ThingsBoard](https://img.shields.io/badge/ThingsBoard-4.3%20Ready-orange.svg)](Documentation/user/thingsboard_dashboards.md)
+[![Antigravity](https://img.shields.io/badge/Antigravity-Plugin%20Ready-purple.svg)](Documentation/user/preset_import_export_and_agent.md)
 
 Simulateur de données IoT industriel développé en Python (FastAPI + Paho-MQTT v2 + WebSockets + HTTP/CoAP), packagé dans une stack Docker durcie (CIS Benchmark non-root) intégrant le broker MQTT Eclipse Mosquitto.
 
-Conçu spécialement pour réaliser des démonstrations dynamiques et réalistes sur **ThingsBoard 4.3** avec **32 synoptiques SCADA animés**, pilotage bidirectionnel interactif par **Attributs Partagés (`SHARED_SCOPE`)** et **RPC**, et compatible nativement avec **Home Assistant**, **Datacake** et tout broker MQTT distant.
+Conçu spécialement pour réaliser des démonstrations dynamiques et réalistes sur **ThingsBoard 4.3** avec **32 synoptiques SCADA animés**, pilotage bidirectionnel interactif par **Attributs Partagés (`SHARED_SCOPE`)** et **RPC**, génération de cas d'usage via l'**Agent IA Antigravity**, et compatible nativement avec **Home Assistant**, **Datacake** et tout broker MQTT distant.
 
 ---
 
@@ -41,6 +42,16 @@ La stack peut être déployée en 1 clic dans **Portainer** (CE ou BE) avec imag
 * **Pilotage par Attributs Partagés (`SHARED_SCOPE`)** : Commutateurs interactifs ThingsBoard (`system.single_switch`) configurés en Action Widgets (`action: SET_ATTRIBUTE`). Exécution immédiate en base en < 50ms sans timeout 504.
 * **Écoute Long-Polling HTTP** : Le simulateur écoute en continu les modifications d'attributs via `/api/v1/{token}/attributes/updates?timeout=20000`, applique les consignes avec forçage manuel en direct et synchronise l'IHM locale par WebSockets.
 * **Support RPC Descendant** : Traitement synchrone des requêtes RPC (`v1/devices/me/rpc/request/+` en MQTT ou `/api/v1/{token}/rpc` en HTTP) avec acquittement instantané.
+
+---
+
+## 📦 Import / Export Exhaustif & Agent IA Antigravity (v2.2.0)
+
+* **Export Exhaustif en 1 Clic** : Téléchargez des packages JSON autonomes (`schema_version: "2.1.0"`) contenant la définition complète d'un cas d'usage, ses formules mathématiques, ses intégrateurs, son tableau de bord ThingsBoard SCADA P&ID vectoriel et son gabarit CSV ThingsBoard.
+* **Export Global Bundle** : Exportez l'intégralité du catalogue d'un clic via l'IHM ou l'API (`GET /api/presets/export/all`).
+* **Import & Persistance Dédiée** : Importez des cas d'usage personnalisés persistés dans le volume Docker (`data/custom_presets.json`), avec protection absolue des 32 modèles natifs d'origine.
+* **Plugin Antigravity Officiel (`iot-preset-designer`)** : Déployé dans `customizations/antigravity/` et `~/.gemini/config/plugins/` ; intègre l'Agent IA *IoT Preset Architect* et la Skill *iot-preset-generator* pour concevoir interactivement de nouveaux équipements industriels avec validation AST autonome.  
+👉 Consultez le [Guide d'Import/Export & Agent IA](Documentation/user/preset_import_export_and_agent.md).
 
 ---
 

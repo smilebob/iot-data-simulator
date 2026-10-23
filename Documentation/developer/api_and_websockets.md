@@ -51,6 +51,15 @@ Tous les endpoints sont préfixés par `/api`. Les requêtes et réponses utilis
 * **`GET /api/scenario/export`** : Télécharge l'état complet du simulateur en JSON.
 * **`POST /api/scenario/import`** : Restaure un scénario complet et applique la configuration broker à chaud.
 
+### 7. Catalogue, Import & Export de Modèles Métiers (`/api/presets`)
+* **`GET /api/presets/catalog`** : Retourne la liste unifiée des modèles d'équipements natifs (32) et personnalisés.
+* **`POST /api/presets/instantiate`** *(Opérateur/Admin)* : Instancie un modèle métier et crée automatiquement l'équipement et toutes ses grandeurs associées.
+* **`GET /api/presets/{preset_id}/thingsboard-dashboard`** : Génère et télécharge le fichier de tableau de bord ThingsBoard 4.3 préconfiguré.
+* **`GET /api/presets/{preset_id}/export`** : Exporte le package complet 100% autonome d'un modèle (définition, formules, dashboard TB 4.3, CSV, specs).
+* **`GET /api/presets/export/all`** : Exporte l'intégralité du catalogue sous forme de bundle unique (`presets_bundle`).
+* **`POST /api/presets/import`** *(Opérateur/Admin)* : Importe un modèle ou un bundle (JSON ou multipart file), avec validation Pydantic et persistance dans `data/custom_presets.json`.
+* **`DELETE /api/presets/{preset_id}`** *(Opérateur/Admin)* : Supprime un modèle personnalisé. Renvoie une erreur HTTP 400 si le modèle est un preset d'usine natif.
+
 ---
 
 ## ⚡ Streaming WebSockets (`/ws/live`)

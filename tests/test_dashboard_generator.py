@@ -161,13 +161,12 @@ def test_thingsboard_dashboard_generation():
     assert "v_flame_temp" in datakeys
 
     # Vérification des widgets de contrôle interactifs ThingsBoard 4.3 (Switch & Input Form)
-    switch_w = next(w for w in widgets.values() if w.get("typeAlias") == "round_switch")
-    assert switch_w.get("typeFullFqn") == "system.control_widgets.round_switch"
+    switch_w = next(w for w in widgets.values() if w.get("typeAlias") in ("single_switch", "round_switch"))
+    assert switch_w.get("typeFullFqn") in ("system.single_switch", "system.control_widgets.round_switch")
     assert switch_w.get("bundleAlias") == "control_widgets"
     assert "Pilotage - Pompe d'Alimentation Active" in switch_w.get("title", "")
-    assert switch_w["config"]["settings"]["setValueMethod"] == "set_v_pump_enable"
-    assert switch_w["config"]["settings"]["attributeScope"] == "CLIENT_SCOPE"
-    assert switch_w["config"]["settings"]["valueKey"] == "v_pump_enable"
+    assert switch_w["config"]["settings"]["onUpdateState"]["setAttribute"]["key"] == "v_pump_enable"
+    assert switch_w["config"]["settings"]["onUpdateState"]["setAttribute"]["scope"] == "SHARED_SCOPE"
 
     input_form_w = next(w for w in widgets.values() if w.get("typeAlias") == "update_multiple_attributes")
     assert input_form_w.get("typeFullFqn") == "system.input_widgets.update_multiple_attributes"

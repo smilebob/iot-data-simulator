@@ -853,7 +853,19 @@
           </h3>
           <p class="text-xs text-slate-400 mt-0.5">Sélectionnez un modèle pré-paramétré pour l'injecter immédiatement avec l'ensemble de ses télémétries et formules industrielles.</p>
         </div>
-        <button onclick="closeModal('modal-catalog')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <div class="flex items-center gap-2">
+          <!-- Input fichier caché pour l'importation de modèles -->
+          <input type="file" id="preset-import-file-input" accept=".json" class="hidden" onchange="handlePresetFileImport(event)">
+          <button onclick="document.getElementById('preset-import-file-input').click()" title="Importer un ou plusieurs cas d'usage métier (.json)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#12151B] hover:bg-[#202531] text-sky-300 hover:text-white border border-[#2B3342] hover:border-sky-500/50 transition shadow-sm">
+            <i data-lucide="upload" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span class="hidden sm:inline">Importer</span>
+          </button>
+          <button onclick="exportAllPresets()" title="Exporter l'ensemble des cas d'usage de la bibliothèque (.json)" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#12151B] hover:bg-[#202531] text-emerald-300 hover:text-white border border-[#2B3342] hover:border-emerald-500/50 transition shadow-sm">
+            <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span class="hidden sm:inline">Exporter tout</span>
+          </button>
+          <button onclick="closeModal('modal-catalog')" class="text-slate-400 hover:text-white ml-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
       </div>
 
       <!-- Filtres par catégorie et Recherche -->
@@ -873,6 +885,9 @@
           </button>
           <button onclick="filterCatalogCategory('smart_city')" id="cat-tab-smart_city" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#12151B] text-slate-300 hover:text-white hover:bg-[#202531] border border-[#2B3342] transition">
             Villes & Télécoms (<span id="cat-count-smart_city">8</span>)
+          </button>
+          <button onclick="filterCatalogCategory('custom')" id="cat-tab-custom" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#12151B] text-slate-300 hover:text-white hover:bg-[#202531] border border-[#2B3342] transition">
+            Personnalisés (<span id="cat-count-custom">0</span>)
           </button>
         </div>
         <div class="relative w-full sm:w-64">

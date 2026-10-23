@@ -1,0 +1,184 @@
+{
+  "schema_version": "2.1.0",
+  "export_type": "single_preset",
+  "export_date": "2026-10-23T08:00:00Z",
+  "generator": "IoT Data Simulator v2.2.0 (IoT Preset Architect)",
+  "preset": {
+    "id": "ind_hydrogen_electrolyzer",
+    "name": "Électrolyseur Hydrogène PEM Haute Pression",
+    "category": "industry",
+    "category_label": "Industrie & Énergies Renouvelables",
+    "description": "Production d'hydrogène décarboné par électrolyse PEM (Proton Exchange Membrane) avec pile d'électrolyse, régulation thermique, déshydratation et compression tampon.",
+    "icon": "zap",
+    "default_protocol": "mqtt",
+    "default_platform": "thingsboard",
+    "is_custom": true,
+    "variables": [
+      {
+        "id": "pression_h2_sortie",
+        "name": "Pression H2 Sortie Stack",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "bar",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 28.5,
+          "max_val": 32.5,
+          "step": 0.08,
+          "noise_percent": 0.5
+        }
+      },
+      {
+        "id": "temp_stack_pem",
+        "name": "Température Pile PEM",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "°C",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 3.0,
+        "enabled": true,
+        "sim_mode": "sine",
+        "math_config": {
+          "min_val": 65.0,
+          "max_val": 78.0,
+          "period": 240.0,
+          "noise_percent": 0.8
+        }
+      },
+      {
+        "id": "courant_cellules",
+        "name": "Intensité Courant DC Cellules",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "A",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 450.0,
+          "max_val": 620.0,
+          "step": 3.5,
+          "noise_percent": 0.5
+        }
+      },
+      {
+        "id": "tension_cellules",
+        "name": "Tension DC Stack",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "V",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 180.0,
+          "max_val": 195.0,
+          "step": 0.2,
+          "noise_percent": 0.2
+        }
+      },
+      {
+        "id": "puissance_electrique",
+        "name": "Puissance DC Instantanée",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kW",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "derived",
+        "derived_config": {
+          "formula": "(tension_cellules * courant_cellules) / 1000",
+          "dependencies": ["tension_cellules", "courant_cellules"]
+        }
+      },
+      {
+        "id": "debit_production_h2",
+        "name": "Débit Massique H2 Produit",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kg/h",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "derived",
+        "derived_config": {
+          "formula": "courant_cellules * 0.0374",
+          "dependencies": ["courant_cellules"]
+        }
+      },
+      {
+        "id": "energie_cumulee",
+        "name": "Énergie Consommée Cumulée",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kWh",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 5.0,
+        "enabled": true,
+        "sim_mode": "integrator",
+        "integrator_config": {
+          "source_variable": "puissance_electrique",
+          "time_unit": "hours",
+          "initial_val": 18450.0
+        }
+      },
+      {
+        "id": "masse_h2_totale",
+        "name": "Production H2 Cumulée",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kg",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 5.0,
+        "enabled": true,
+        "sim_mode": "integrator",
+        "integrator_config": {
+          "source_variable": "debit_production_h2",
+          "time_unit": "hours",
+          "initial_val": 352.0
+        }
+      },
+      {
+        "id": "etat_marche",
+        "name": "Statut Électrolyseur Actif",
+        "device_id": "",
+        "var_type": "attribute",
+        "data_type": "boolean",
+        "topic": "v1/devices/me/attributes",
+        "publish_interval": 15.0,
+        "enabled": true,
+        "sim_mode": "constant",
+        "math_config": {
+          "constant_val": true
+        }
+      }
+    ]
+  },
+  "csv_template": {
+    "headers": "name,type,label,access_token",
+    "sample_row": "Électrolyseur Hydrogène PEM Haute Pression,default,Électrolyseur Hydrogène PEM Haute Pression,${AUTO_GENERATED_TOKEN}",
+    "notes": "Format compatible avec l'outil d'importation CSV de ThingsBoard"
+  },
+  "instantiation_spec": {
+    "suggested_device_id_prefix": "ind_hydrogen_electrolyzer",
+    "default_name": "Électrolyseur Hydrogène PEM",
+    "default_protocol": "mqtt",
+    "default_platform": "thingsboard",
+    "variables_count": 9,
+    "recommended_publish_interval": 2.0
+  }
+}

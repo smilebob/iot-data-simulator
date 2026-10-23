@@ -1,6 +1,6 @@
 import json
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Request
 from fastapi.responses import Response
 from pydantic import BaseModel
 from app.models.broker import BrokerConfig
@@ -21,6 +21,10 @@ from app.core.equipment_catalog import (
     EquipmentPreset,
     InstantiatePresetRequest,
     instantiate_preset,
+    build_preset_export_package,
+    build_all_presets_export_package,
+    import_preset_data,
+    delete_custom_preset,
 )
 
 # Groupes de rôles RBAC
@@ -339,4 +343,88 @@ def download_preset_thingsboard_dashboard(
             "Content-Disposition": f'attachment; filename="{filename}"'
         }
     )
+
+@router.get("/presets/{preset_id}/export", dependencies=[Depends(require_role(ROLE_ANY))])
+def export_single_preset_package(preset_id: str):
+    """Exporte un package complet et exhaustif pour un cas d'usage métier spécifique."""
+    catalog = get_equipment_catalog()
+    preset = next((p for p in catalog if p.id == preset_id), None)
+    if not preset:
+        raise HTTPException(status_code=404, detail=f"Modèle '{preset_id}' introuvable dans le catalogue.")
+
+    package = build_preset_export_package(preset)
+    filename = f"preset_export_{preset.id}.json"
+    content = json.dumps(package, indent=2, ensure_ascii=False)
+    return Response(
+        content=content,
+        media_type="application/json",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+    )
+
+@router.get("/presets/export/all", dependencies=[Depends(require_role(ROLE_ANY))])
+def export_all_presets_package():
+    """Exporte un bundle JSON complet de l'ensemble des cas d'usage métiers du catalogue."""
+    bundle = build_all_presets_export_package()
+    filename = "presets_catalog_full_bundle.json"
+    content = json.dumps(bundle, indent=2, ensure_ascii=False)
+    return Response(
+        content=content,
+        media_type="application/json",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+    )
+
+@router.post("/presets/import", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def import_presets_endpoint(request: Request):
+    """Importe un ou plusieurs cas d'usage métiers depuis un fichier JSON ou payload direct."""
+    content_type = request.headers.get("content-type", "")
+    if "multipart/form-data" in content_type:
+        form = await request.form()
+        file = form.get("file")
+        if not file:
+            raise HTTPException(status_code=400, detail="Aucun fichier fourni dans le formulaire.")
+        raw_bytes = await file.read()
+        try:
+            payload = json.loads(raw_bytes.decode("utf-8"))
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Fichier JSON invalide : {e}")
+    else:
+        try:
+            payload = await request.json()
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Données JSON invalides : {e}")
+
+    try:
+        count, ids = import_preset_data(payload)
+        return {
+            "status": "imported",
+            "imported_count": count,
+            "imported_ids": ids,
+            "message": f"{count} cas d'usage métier(s) importé(s) avec succès."
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur lors de l'importation : {e}")
+
+@router.delete("/presets/{preset_id}", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+def delete_preset_endpoint(preset_id: str):
+    """Supprime un modèle personnalisé du catalogue (les modèles d'usine sont protégés)."""
+    try:
+        deleted = delete_custom_preset(preset_id)
+        if not deleted:
+            raise HTTPException(status_code=404, detail=f"Modèle '{preset_id}' introuvable ou déjà supprimé.")
+        return {
+            "status": "deleted",
+            "preset_id": preset_id,
+            "message": f"Modèle personnalisé '{preset_id}' supprimé avec succès."
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression : {e}")
+
 
