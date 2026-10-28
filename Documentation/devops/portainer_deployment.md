@@ -126,9 +126,12 @@ Faites défiler jusqu'à la section **Environment variables**. Si vous souhaitez
 
 ---
 
-## 4. Configuration CI/CD : Déclencher l'Auto-Déploiement depuis GitHub Actions
+## 4. Configuration CI/CD : Déclencher l'Auto-Déploiement depuis GitHub Actions (Portainer Public)
 
 Le workflow GitHub Actions situé dans [`.github/workflows/docker-build-push.yml`](file:///home/pierre/Projets/iot-data-simulator/.github/workflows/docker-build-push.yml) est préconfiguré pour notifier Portainer via Webhook dès qu'une nouvelle image multi-architecture (`linux/amd64` et `linux/arm64`) est publiée sur GHCR.
+
+> [!NOTE]
+> Cette méthode s'applique si votre Portainer possède un nom de domaine public ou un tunnel (ex: Cloudflare Tunnel, Tailscale Funnel) lui permettant de recevoir des requêtes POST de GitHub Actions. Si votre Portainer est situé sur un **réseau local privé non exposé**, consultez directement la [Section 4.1 ci-dessous](#41-automatisation-sur-réseau-local-privé-sans-ip-publique).
 
 Pour activer cette liaison :
 
@@ -147,6 +150,82 @@ Désormais, à chaque commit poussé sur la branche `main` ou à chaque tag de v
 - Compile les binaires Docker pour architectures x86_64 et ARM64.
 - Pousse l'image sur GitHub Container Registry.
 - Envoie une requête HTTP POST au webhook Portainer pour rafraîchir automatiquement vos conteneurs sans aucune intervention manuelle.
+
+---
+
+## 4.1 Automatisation sur Réseau Local Privé (Sans Exposition Publique)
+
+Lorsque votre serveur Portainer est situé sur un **réseau local privé (LAN, box internet, NAS, homelab Proxmox)** ayant un accès sortant à Internet mais sans port exposé au monde extérieur, GitHub ne peut pas appeler directement votre webhook Portainer.
+
+Deux solutions éprouvées et sécurisées s'offrent à vous :
+
+### Solution A : Le Mode Polling GitOps Natif de Portainer (100% Automatique & Recommandé)
+
+Dans ce mode, c'est **Portainer lui-même** qui prend l'initiative de vérifier périodiquement sur GitHub (via sa connexion Internet sortante) si une nouvelle version est disponible.
+
+1. Dans Portainer, accédez à votre stack **`iot-simulator`**.
+2. Allez dans l'onglet **`Editor`**.
+3. Dans la section **Automatic updates** :
+   - Interrupteur activé sur **`ON`**.
+   - Cochez le mode **`Polling`**.
+   - Définissez l'intervalle d'interrogation, par exemple **`5m`** (toutes les 5 minutes).
+4. *(Recommandé)* Cochez l'option **`Re-pull image`** afin que Portainer télécharge systématiquement la dernière image GHCR associée (`ghcr.io/smilebob/iot-data-simulator:latest`).
+5. Cliquez sur **`Update the stack`**.
+
+```mermaid
+sequenceDiagram
+    participant GH as GitHub / GHCR
+    participant PT as Portainer (LAN Local)
+    participant DK as Docker Engine Local
+
+    Note over PT: Toutes les 5 minutes (Polling)
+    PT->>GH: Vérification des commits sur 'main'
+    alt Nouveau commit ou tag détecté
+        PT->>GH: Pull du repository git
+        PT->>GH: docker pull ghcr.io/smilebob/iot-data-simulator:latest
+        PT->>DK: Redémarrage à chaud de la stack
+        Note over DK: Conteneurs mis à jour (Zéro-clic !)
+    else Aucun changement
+        Note over PT: En attente du prochain cycle
+    end
+```
+
+---
+
+### Solution B : Déploiement en 1 Ligne de Commande via le Script CLI (`scripts/portainer_deploy.py`)
+
+Si vous souhaitez déclencher immédiatement le redéploiement depuis votre machine de travail connectée au même réseau local (sans attendre le cycle de polling de 5 minutes), un script Python dédié est fourni dans le dépôt.
+
+#### 1. Configuration initiale (Fichier local `.env.portainer`)
+Copiez le modèle [`/.env.portainer.example`](file:///home/pierre/Projets/iot-data-simulator/.env.portainer.example) vers `.env.portainer` :
+```bash
+cp .env.portainer.example .env.portainer
+```
+
+Renseignez l'une des deux options :
+- **Via le Webhook local** (le plus rapide) :
+  ```env
+  PORTAINER_WEBHOOK_URL=http://192.168.1.50:9000/api/stacks/webhooks/d0f2a71e-45b1-4f12-a723-8c76391d84f1
+  ```
+- **Ou via l'API REST Portainer avec clé d'API** :
+  ```env
+  PORTAINER_URL=http://192.168.1.50:9000
+  PORTAINER_API_KEY=ptr_votre_cle_api
+  PORTAINER_STACK_NAME=iot-simulator
+  ```
+  *(Pour générer votre clé d'API dans Portainer : cliquez sur votre nom en haut à droite > **`My account`** > section **`Access tokens`** > **`+ Add access token`**)*.
+
+#### 2. Déclencher le déploiement instantané
+Depuis la racine du projet, lancez simplement :
+```bash
+python3 scripts/portainer_deploy.py
+```
+
+Le script :
+- Se connecte à votre Portainer local.
+- Déclenche le redéploiement de la stack.
+- Force le pull de l'image fraîche sur GitHub Container Registry.
+- Confirme la validation et le redémarrage des conteneurs.
 
 ---
 

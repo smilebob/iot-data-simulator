@@ -139,6 +139,10 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Plugin Antigravity Officiel (`iot-preset-designer`)** : Déploiement d'un agent IA (*IoT Preset Architect*) et de la skill *iot-preset-generator* dans `customizations/antigravity/` et `~/.gemini/config/plugins/` pour concevoir interactivement de nouveaux cas d'usage avec validation AST et assemblage de dashboards ThingsBoard 4.3.
 - [x] Guide d'Import/Export & Agent IA : `Documentation/user/preset_import_export_and_agent.md`
 - [x] Guide Développeur Modèles Personnalisés & Plugin : `Documentation/developer/custom_presets_and_plugins.md`
+- [x] Automatisation Déploiement Portainer & Réseau Privé (v2.2.1) :
+  - **Support Réseau Local Privé (LAN / sans IP publique)** : Mécanisme GitOps Polling natif dans Portainer (auto-update à intervalle configurable via accès internet sortant) et script CLI dédié [`scripts/portainer_deploy.py`](file:///home/pierre/Projets/iot-data-simulator/scripts/portainer_deploy.py) pour redéploiement et pull de la dernière image en 1 commande (supporte Webhook local et API REST Portainer avec clé d'API).
+  - **Fiabilisation CI/CD GitHub Actions** : Correction de l'évaluation bash pour `PORTAINER_WEBHOOK_URL` dans `.github/workflows/docker-build-push.yml`.
+  - **Template & Documentation DevOps** : `.env.portainer.example`, section 4.1 dans `Documentation/devops/portainer_deployment.md`.
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

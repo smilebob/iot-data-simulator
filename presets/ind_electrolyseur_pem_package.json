@@ -1,0 +1,489 @@
+{
+  "schema_version": "2.1.0",
+  "export_type": "single_preset",
+  "export_date": "2026-10-23T06:55:04.035150+00:00",
+  "generator": "IoT Data Simulator v2.2.0 (IoT Preset Architect)",
+  "preset": {
+    "id": "ind_electrolyseur_pem",
+    "name": "Électrolyseur Hydrogène PEM Haute Pression",
+    "category": "industry",
+    "category_label": "Industrie & Énergies Renouvelables",
+    "description": "Production d'hydrogène décarboné par électrolyse à membrane échangeuse de protons (PEM) sous haute pression directe (30 bar), avec régulation thermique de la pile, mesure de puissance DC instantanée et intégration continue des kilogrammes de H2 produits.",
+    "icon": "zap",
+    "default_protocol": "mqtt",
+    "default_platform": "thingsboard",
+    "is_custom": true,
+    "variables": [
+      {
+        "id": "pression_h2",
+        "name": "Pression H2 Sortie Stack",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "bar",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 28.5,
+          "max_val": 32.5,
+          "step": 0.08,
+          "noise_percent": 0.5
+        }
+      },
+      {
+        "id": "temperature_stack",
+        "name": "Température Pile PEM",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "°C",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 3.0,
+        "enabled": true,
+        "sim_mode": "sine",
+        "math_config": {
+          "min_val": 65.0,
+          "max_val": 78.0,
+          "period": 240.0,
+          "noise_percent": 0.8
+        }
+      },
+      {
+        "id": "courant_dc",
+        "name": "Intensité Courant DC Cellules",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "A",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 450.0,
+          "max_val": 620.0,
+          "step": 3.5,
+          "noise_percent": 0.5
+        }
+      },
+      {
+        "id": "tension_dc",
+        "name": "Tension DC Stack",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "V",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 180.0,
+          "max_val": 195.0,
+          "step": 0.2,
+          "noise_percent": 0.2
+        }
+      },
+      {
+        "id": "puissance_electrique",
+        "name": "Puissance Électrique DC",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kW",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "derived",
+        "derived_config": {
+          "formula": "(tension_dc * courant_dc) / 1000",
+          "dependencies": [
+            "tension_dc",
+            "courant_dc"
+          ]
+        }
+      },
+      {
+        "id": "debit_h2",
+        "name": "Débit Massique H2 Produit",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kg/h",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "derived",
+        "derived_config": {
+          "formula": "courant_dc * 0.0374",
+          "dependencies": [
+            "courant_dc"
+          ]
+        }
+      },
+      {
+        "id": "consommation_specifique",
+        "name": "Consommation Spécifique",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kWh/kg",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "derived",
+        "derived_config": {
+          "formula": "puissance_electrique / debit_h2",
+          "dependencies": [
+            "puissance_electrique",
+            "debit_h2"
+          ]
+        }
+      },
+      {
+        "id": "production_h2_cumulee",
+        "name": "Production H2 Cumulée",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kg",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 5.0,
+        "enabled": true,
+        "sim_mode": "integrator",
+        "integrator_config": {
+          "source_variable": "debit_h2",
+          "time_unit": "hours",
+          "initial_val": 350.0
+        }
+      },
+      {
+        "id": "energie_cumulee",
+        "name": "Énergie Électrique Cumulée",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kWh",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 5.0,
+        "enabled": true,
+        "sim_mode": "integrator",
+        "integrator_config": {
+          "source_variable": "puissance_electrique",
+          "time_unit": "hours",
+          "initial_val": 18500.0
+        }
+      },
+      {
+        "id": "etat_marche",
+        "name": "Statut Électrolyseur Actif",
+        "device_id": "",
+        "var_type": "attribute",
+        "data_type": "boolean",
+        "topic": "v1/devices/me/attributes",
+        "publish_interval": 15.0,
+        "enabled": true,
+        "sim_mode": "constant",
+        "math_config": {
+          "constant_val": true
+        }
+      }
+    ]
+  },
+  "dashboard_template": {
+    "title": "Supervision SCADA - Électrolyseur Hydrogène PEM Haute Pression",
+    "configuration": {
+      "description": "Tableau de bord de supervision généré pour le cas d'usage Électrolyseur Hydrogène PEM Haute Pression",
+      "entityAliases": {
+        "fd8dfcf9-2e1c-48aa-ba89-5e4e7d7f6c5f": {
+          "id": "fd8dfcf9-2e1c-48aa-ba89-5e4e7d7f6c5f",
+          "alias": "Électrolyseur Hydrogène PEM Haute Pression",
+          "filter": {
+            "type": "singleEntity",
+            "resolveMultiple": false,
+            "singleEntity": {
+              "entityType": "DEVICE",
+              "id": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        }
+      },
+      "widgets": {
+        "c6209780-375e-42ac-9af3-7ca74f38953b": {
+          "typeFullFqn": "system.cards.html_card",
+          "isSystemType": true,
+          "bundleAlias": "cards",
+          "typeAlias": "html_card",
+          "type": "static",
+          "title": "Informations - Électrolyseur Hydrogène PEM Haute Pression",
+          "sizeX": 24,
+          "sizeY": 2,
+          "config": {
+            "datasources": [],
+            "settings": {
+              "cardHtml": "<div style='padding:12px 18px; font-size:16px; font-weight:700; color:#0F172A; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:10px;'>IoT Data Simulator • Électrolyseur Hydrogène PEM Haute Pression <span style='font-size:12px; color:#64748B; font-weight:normal; margin-left:12px;'>ID: ind_electrolyseur_pem | Authentification: Jeton Sécurisé</span></div>",
+              "html": "<div style='padding:12px 18px; font-size:16px; font-weight:700; color:#0F172A; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:10px;'>IoT Data Simulator • Électrolyseur Hydrogène PEM Haute Pression <span style='font-size:12px; color:#64748B; font-weight:normal; margin-left:12px;'>ID: ind_electrolyseur_pem | Authentification: Jeton Sécurisé</span></div>"
+            }
+          }
+        },
+        "30e7c510-7c51-45a6-ba9b-a098126c0e0b": {
+          "typeFullFqn": "system.cards.html_value_card",
+          "isSystemType": true,
+          "bundleAlias": "cards",
+          "typeAlias": "html_value_card",
+          "type": "latest",
+          "title": "Synoptique SCADA - Électrolyseur Hydrogène PEM Haute Pression",
+          "sizeX": 16,
+          "sizeY": 8,
+          "config": {
+            "useDashboardTimewindow": true,
+            "datasources": [
+              {
+                "type": "entity",
+                "entityAliasId": "fd8dfcf9-2e1c-48aa-ba89-5e4e7d7f6c5f",
+                "dataKeys": [
+                  {
+                    "name": "pression_h2",
+                    "label": "pression_h2",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temperature_stack",
+                    "label": "temperature_stack",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "courant_dc",
+                    "label": "courant_dc",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "tension_dc",
+                    "label": "tension_dc",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "puissance_electrique",
+                    "label": "puissance_electrique",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "debit_h2",
+                    "label": "debit_h2",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "consommation_specifique",
+                    "label": "consommation_specifique",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "production_h2_cumulee",
+                    "label": "production_h2_cumulee",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "energie_cumulee",
+                    "label": "energie_cumulee",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  }
+                ]
+              }
+            ],
+            "settings": {
+              "cardHtml": "\n    <div style=\"background:#0F172A; border-radius:12px; padding:18px; color:#F8FAFC; font-family:sans-serif; position:relative; overflow:hidden; border:1px solid #1E293B;\">\n      <div style=\"display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #334155; pb:8px;\">\n        <div style=\"font-size:14px; font-weight:700; color:#38BDF8; letter-spacing:0.5px;\">SYNOPTIQUE INDUSTRIEL SCADA</div>\n        <div style=\"font-size:11px; color:#94A3B8;\">Équipement : <strong style=\"color:#FFF;\">Électrolyseur Hydrogène PEM Haute Pression</strong></div>\n      </div>\n      <svg viewBox=\"0 0 720 380\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\">\n        <defs>\n          <style>\n            @keyframes pipeFlow {\n              0% { stroke-dashoffset: 40; }\n              100% { stroke-dashoffset: 0; }\n            }\n            .scada-flow {\n              stroke-dasharray: 8, 4;\n              animation: pipeFlow 1.2s linear infinite;\n            }\n          </style>\n          <linearGradient id=\"eqGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n            <stop offset=\"0%\" stop-color=\"#1E293B\"/>\n            <stop offset=\"100%\" stop-color=\"#0F172A\"/>\n          </linearGradient>\n        </defs>\n\n        <!-- Tuyauteries de process avec animation de fluide -->\n        <path d=\"M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190\" fill=\"none\" stroke=\"#475569\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n        <path d=\"M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"3\" class=\"scada-flow\"/>\n\n        <!-- Bâtie Machine / Process Tank -->\n        <rect x=\"180\" y=\"90\" width=\"220\" height=\"200\" rx=\"14\" fill=\"url(#eqGrad)\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n        <text x=\"290\" y=\"125\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"800\" text-anchor=\"middle\" letter-spacing=\"1\">UNITÉ DE PROCESS</text>\n        <circle cx=\"290\" cy=\"195\" r=\"45\" fill=\"#182234\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n        <text x=\"290\" y=\"200\" fill=\"#94A3B8\" font-size=\"10\" font-family=\"monospace\" text-anchor=\"middle\">ACTIVE</text>\n\n        <!-- Étiquettes de mesures dynamiques ThingsBoard -->\n        \n        <g transform=\"translate(480, 120)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Pression H2 Sortie Sta</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${pression_h2:1} bar</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 164)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Pile PEM</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temperature_stack:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 208)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Intensité Courant DC C</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${courant_dc:1} A</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 252)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Tension DC Stack</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${tension_dc:1} V</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 296)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Puissance Électrique D</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${puissance_electrique:1} kW</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 340)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Débit Massique H2 Prod</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${debit_h2:1} kg/h</text>\n        </g>\n        \n      </svg>\n    </div>\n    ",
+              "html": "\n    <div style=\"background:#0F172A; border-radius:12px; padding:18px; color:#F8FAFC; font-family:sans-serif; position:relative; overflow:hidden; border:1px solid #1E293B;\">\n      <div style=\"display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #334155; pb:8px;\">\n        <div style=\"font-size:14px; font-weight:700; color:#38BDF8; letter-spacing:0.5px;\">SYNOPTIQUE INDUSTRIEL SCADA</div>\n        <div style=\"font-size:11px; color:#94A3B8;\">Équipement : <strong style=\"color:#FFF;\">Électrolyseur Hydrogène PEM Haute Pression</strong></div>\n      </div>\n      <svg viewBox=\"0 0 720 380\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\">\n        <defs>\n          <style>\n            @keyframes pipeFlow {\n              0% { stroke-dashoffset: 40; }\n              100% { stroke-dashoffset: 0; }\n            }\n            .scada-flow {\n              stroke-dasharray: 8, 4;\n              animation: pipeFlow 1.2s linear infinite;\n            }\n          </style>\n          <linearGradient id=\"eqGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n            <stop offset=\"0%\" stop-color=\"#1E293B\"/>\n            <stop offset=\"100%\" stop-color=\"#0F172A\"/>\n          </linearGradient>\n        </defs>\n\n        <!-- Tuyauteries de process avec animation de fluide -->\n        <path d=\"M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190\" fill=\"none\" stroke=\"#475569\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n        <path d=\"M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"3\" class=\"scada-flow\"/>\n\n        <!-- Bâtie Machine / Process Tank -->\n        <rect x=\"180\" y=\"90\" width=\"220\" height=\"200\" rx=\"14\" fill=\"url(#eqGrad)\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n        <text x=\"290\" y=\"125\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"800\" text-anchor=\"middle\" letter-spacing=\"1\">UNITÉ DE PROCESS</text>\n        <circle cx=\"290\" cy=\"195\" r=\"45\" fill=\"#182234\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n        <text x=\"290\" y=\"200\" fill=\"#94A3B8\" font-size=\"10\" font-family=\"monospace\" text-anchor=\"middle\">ACTIVE</text>\n\n        <!-- Étiquettes de mesures dynamiques ThingsBoard -->\n        \n        <g transform=\"translate(480, 120)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Pression H2 Sortie Sta</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${pression_h2:1} bar</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 164)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Pile PEM</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temperature_stack:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 208)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Intensité Courant DC C</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${courant_dc:1} A</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 252)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Tension DC Stack</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${tension_dc:1} V</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 296)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Puissance Électrique D</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${puissance_electrique:1} kW</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 340)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Débit Massique H2 Prod</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${debit_h2:1} kg/h</text>\n        </g>\n        \n      </svg>\n    </div>\n    ",
+              "cardCss": "",
+              "css": ""
+            }
+          }
+        },
+        "9c195aeb-34f7-4434-a7ef-20e19a8db02d": {
+          "typeFullFqn": "system.single_switch",
+          "isSystemType": true,
+          "bundleAlias": "control_widgets",
+          "typeAlias": "single_switch",
+          "type": "rpc",
+          "title": "Pilotage - Statut Électrolyseur Actif",
+          "sizeX": 8,
+          "sizeY": 2,
+          "config": {
+            "showTitle": true,
+            "targetDevice": {
+              "type": "entity",
+              "entityAliasId": "fd8dfcf9-2e1c-48aa-ba89-5e4e7d7f6c5f"
+            },
+            "settings": {
+              "initialState": {
+                "action": "GET_ATTRIBUTE",
+                "getAttribute": {
+                  "scope": "SHARED_SCOPE",
+                  "key": "etat_marche"
+                }
+              },
+              "onUpdateState": {
+                "action": "SET_ATTRIBUTE",
+                "setAttribute": {
+                  "scope": "SHARED_SCOPE",
+                  "key": "etat_marche"
+                }
+              }
+            }
+          }
+        },
+        "21bd1794-14d3-4a41-a053-882897af638e": {
+          "typeFullFqn": "system.charts.basic_timeseries",
+          "isSystemType": true,
+          "bundleAlias": "charts",
+          "typeAlias": "basic_timeseries",
+          "type": "timeseries",
+          "title": "Télémétries Temps Réel - Électrolyseur Hydrogène PEM Haute Pression",
+          "sizeX": 24,
+          "sizeY": 6,
+          "config": {
+            "datasources": [
+              {
+                "type": "entity",
+                "entityAliasId": "fd8dfcf9-2e1c-48aa-ba89-5e4e7d7f6c5f",
+                "dataKeys": [
+                  {
+                    "name": "pression_h2",
+                    "label": "pression_h2",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temperature_stack",
+                    "label": "temperature_stack",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "courant_dc",
+                    "label": "courant_dc",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "tension_dc",
+                    "label": "tension_dc",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "puissance_electrique",
+                    "label": "puissance_electrique",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "debit_h2",
+                    "label": "debit_h2",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "consommation_specifique",
+                    "label": "consommation_specifique",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "production_h2_cumulee",
+                    "label": "production_h2_cumulee",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  }
+                ]
+              }
+            ],
+            "settings": {}
+          }
+        }
+      },
+      "states": {
+        "default": {
+          "name": "Supervision SCADA - Électrolyseur Hydrogène PEM Haute Pression",
+          "root": true,
+          "layouts": {
+            "main": {
+              "gridAppearance": {
+                "layoutDimension": {
+                  "type": "percentage",
+                  "percentage": 100
+                }
+              },
+              "widgets": {
+                "c6209780-375e-42ac-9af3-7ca74f38953b": {
+                  "sizeX": 24,
+                  "sizeY": 2,
+                  "row": 0,
+                  "col": 0
+                },
+                "30e7c510-7c51-45a6-ba9b-a098126c0e0b": {
+                  "sizeX": 16,
+                  "sizeY": 8,
+                  "row": 2,
+                  "col": 0
+                },
+                "9c195aeb-34f7-4434-a7ef-20e19a8db02d": {
+                  "sizeX": 8,
+                  "sizeY": 2,
+                  "row": 2,
+                  "col": 16
+                },
+                "21bd1794-14d3-4a41-a053-882897af638e": {
+                  "sizeX": 24,
+                  "sizeY": 6,
+                  "row": 10,
+                  "col": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "csv_template": {
+    "headers": "name,type,label,access_token",
+    "sample_row": "Électrolyseur Hydrogène PEM Haute Pression,default,Électrolyseur Hydrogène PEM Haute Pression,${AUTO_GENERATED_TOKEN}",
+    "notes": "Fichier compatible avec l'outil d'import CSV d'appareils de ThingsBoard"
+  },
+  "instantiation_spec": {
+    "suggested_device_id_prefix": "ind_electrolyseur_pem",
+    "default_name": "Électrolyseur Hydrogène PEM Haute Pression",
+    "default_protocol": "mqtt",
+    "default_platform": "thingsboard",
+    "variables_count": 10,
+    "recommended_publish_interval": 2.0
+  }
+}

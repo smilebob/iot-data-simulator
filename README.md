@@ -1,6 +1,6 @@
 # ⚡ IoT Data Simulator (ThingsBoard, Home Assistant, Datacake & Multi-Platform)
 
-[![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)](https://github.com/smilebob/iot-data-simulator)
+[![Version](https://img.shields.io/badge/version-2.2.1-blue.svg)](https://github.com/smilebob/iot-data-simulator)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 [![CIS Docker](https://img.shields.io/badge/security-CIS%20Benchmark%20Passed-success.svg)](Documentation/devops/docker_and_cis.md)
 [![ThingsBoard](https://img.shields.io/badge/ThingsBoard-4.3%20Ready-orange.svg)](Documentation/user/thingsboard_dashboards.md)
@@ -31,7 +31,7 @@ docker compose up -d
 * Le broker Mosquitto écoute sur les ports `1883` (TCP standard) et `9001` (WebSockets).
 
 ### 3. Déploiement via Portainer (Clé en main & CI/CD)
-La stack peut être déployée en 1 clic dans **Portainer** (CE ou BE) avec images précompilées multi-architectures (`amd64` / `arm64`) et mise à jour automatique via Webhook GitHub Actions.  
+La stack peut être déployée en 1 clic dans **Portainer** (CE ou BE) avec images précompilées multi-architectures (`amd64` / `arm64`), mode GitOps Polling pour réseau privé (LAN), script CLI d'automatisation (`scripts/portainer_deploy.py`) et mise à jour automatique via Webhook GitHub Actions.  
 👉 Consultez le [Guide de Déploiement Portainer Pas-à-Pas](Documentation/devops/portainer_deployment.md).
 
 ---

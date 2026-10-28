@@ -1,0 +1,181 @@
+{
+  "id": "ind_electrolyseur_pem",
+  "name": "Électrolyseur Hydrogène PEM Haute Pression",
+  "category": "industry",
+  "category_label": "Industrie & Énergies Renouvelables",
+  "description": "Production d'hydrogène décarboné par électrolyse à membrane échangeuse de protons (PEM) sous haute pression directe (30 bar), avec régulation thermique de la pile, mesure de puissance DC instantanée et intégration continue des kilogrammes de H2 produits.",
+  "icon": "zap",
+  "default_protocol": "mqtt",
+  "default_platform": "thingsboard",
+  "is_custom": true,
+  "variables": [
+    {
+      "id": "pression_h2",
+      "name": "Pression H2 Sortie Stack",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "bar",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 28.5,
+        "max_val": 32.5,
+        "step": 0.08,
+        "noise_percent": 0.5
+      }
+    },
+    {
+      "id": "temperature_stack",
+      "name": "Température Pile PEM",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 3.0,
+      "enabled": true,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 65.0,
+        "max_val": 78.0,
+        "period": 240.0,
+        "noise_percent": 0.8
+      }
+    },
+    {
+      "id": "courant_dc",
+      "name": "Intensité Courant DC Cellules",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "A",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 450.0,
+        "max_val": 620.0,
+        "step": 3.5,
+        "noise_percent": 0.5
+      }
+    },
+    {
+      "id": "tension_dc",
+      "name": "Tension DC Stack",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "V",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 180.0,
+        "max_val": 195.0,
+        "step": 0.2,
+        "noise_percent": 0.2
+      }
+    },
+    {
+      "id": "puissance_electrique",
+      "name": "Puissance Électrique DC",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "kW",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "derived",
+      "derived_config": {
+        "formula": "(tension_dc * courant_dc) / 1000",
+        "dependencies": ["tension_dc", "courant_dc"]
+      }
+    },
+    {
+      "id": "debit_h2",
+      "name": "Débit Massique H2 Produit",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "kg/h",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "derived",
+      "derived_config": {
+        "formula": "courant_dc * 0.0374",
+        "dependencies": ["courant_dc"]
+      }
+    },
+    {
+      "id": "consommation_specifique",
+      "name": "Consommation Spécifique",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "kWh/kg",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "derived",
+      "derived_config": {
+        "formula": "puissance_electrique / debit_h2",
+        "dependencies": ["puissance_electrique", "debit_h2"]
+      }
+    },
+    {
+      "id": "production_h2_cumulee",
+      "name": "Production H2 Cumulée",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "kg",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 5.0,
+      "enabled": true,
+      "sim_mode": "integrator",
+      "integrator_config": {
+        "source_variable": "debit_h2",
+        "time_unit": "hours",
+        "initial_val": 350.0
+      }
+    },
+    {
+      "id": "energie_cumulee",
+      "name": "Énergie Électrique Cumulée",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "kWh",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 5.0,
+      "enabled": true,
+      "sim_mode": "integrator",
+      "integrator_config": {
+        "source_variable": "puissance_electrique",
+        "time_unit": "hours",
+        "initial_val": 18500.0
+      }
+    },
+    {
+      "id": "etat_marche",
+      "name": "Statut Électrolyseur Actif",
+      "device_id": "",
+      "var_type": "attribute",
+      "data_type": "boolean",
+      "topic": "v1/devices/me/attributes",
+      "publish_interval": 15.0,
+      "enabled": true,
+      "sim_mode": "constant",
+      "math_config": {
+        "constant_val": true
+      }
+    }
+  ]
+}

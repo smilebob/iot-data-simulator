@@ -25,6 +25,9 @@ wheels/
 
 # Virtual environments
 .env
+.env.*
+!.env.example
+!.env.portainer.example
 .venv
 
 # Persistent demo data & logs (conserve la structure mais ignore les fichiers volumineux/secrets)
@@ -38,6 +41,7 @@ data/users.json
 data/users_tmp_*
 data/initial_admin_password.txt
 data/simulator_state.json
+data/custom_presets.json
 data/*.bak
 data/*.corrupted.*
 

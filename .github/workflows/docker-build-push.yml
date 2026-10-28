@@ -58,9 +58,20 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Trigger Portainer Stack Auto-Update Webhook (Optional)
-        if: env.PORTAINER_WEBHOOK_URL != ''
         env:
           PORTAINER_WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
         run: |
-          echo "Notification du webhook Portainer pour déploiement automatique..."
-          curl -s -X POST "${{ secrets.PORTAINER_WEBHOOK_URL }}" || echo "Webhook Portainer non configuré ou inaccessible."
+          if [ -n "$PORTAINER_WEBHOOK_URL" ]; then
+            echo "🚀 Notification du webhook Portainer pour déploiement automatique..."
+            RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$PORTAINER_WEBHOOK_URL" || true)
+            HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+            BODY=$(echo "$RESPONSE" | sed '$d')
+            echo "Code HTTP Portainer: $HTTP_CODE"
+            if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "204" ]; then
+              echo "✅ Portainer a validé la mise à jour de la stack !"
+            else
+              echo "⚠️ Portainer a retourné le code $HTTP_CODE: $BODY"
+            fi
+          else
+            echo "ℹ️ Secret PORTAINER_WEBHOOK_URL non configuré (instance Portainer sur réseau privé ou non exposée). Étape ignorée."
+          fi
