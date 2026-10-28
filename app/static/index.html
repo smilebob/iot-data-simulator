@@ -179,7 +179,7 @@
   </main>
 
   <!-- Modal Variable (Création & Édition) -->
-  <div id="modal-variable" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4 overflow-y-auto">
+  <div id="modal-variable" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-4">
         <h3 id="modal-variable-title" class="text-base font-bold text-white flex items-center gap-2">
@@ -394,7 +394,7 @@
   </div>
 
   <!-- Modal Équipement (Création & Édition) -->
-  <div id="modal-device" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4 overflow-y-auto">
+  <div id="modal-device" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 id="modal-device-title" class="text-base font-bold text-white flex items-center gap-2">
@@ -515,7 +515,7 @@
   </div>
 
   <!-- Modal Configuration Broker MQTT -->
-  <div id="modal-broker" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4 overflow-y-auto">
+  <div id="modal-broker" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-base font-bold text-white flex items-center gap-2">
@@ -587,7 +587,7 @@
   </div>
 
   <!-- Modal Logs & Diagnostics -->
-  <div id="modal-logs" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4">
+  <div id="modal-logs" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4">
     <div class="bg-[#12151B] border border-[#2B3342] rounded-2xl max-w-4xl w-full h-[85vh] flex flex-col shadow-2xl overflow-hidden">
       <!-- Header -->
       <div class="flex items-center justify-between px-5 py-3.5 bg-[#181D26] border-b border-[#2B3342]">
@@ -649,7 +649,7 @@
   </div>
 
   <!-- Modal Authentification / Connexion (Incontournable si non connecté) -->
-  <div id="modal-login" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md hidden p-4">
+  <div id="modal-login" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 hidden p-4">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
       <div class="text-center space-y-2">
         <div class="inline-flex p-3 bg-[#E2001A] rounded-xl text-white shadow-lg shadow-red-950/50 mb-1">
@@ -690,7 +690,7 @@
   </div>
 
   <!-- Modal Gestion des Utilisateurs & Rôles RBAC (Admin Only) -->
-  <div id="modal-users" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4 overflow-y-auto">
+  <div id="modal-users" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <div class="flex items-center gap-2.5">
@@ -738,13 +738,13 @@
   </div>
 
   <!-- Modal Création d'Utilisateur -->
-  <div id="modal-create-user" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4">
+  <div id="modal-create-user" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-sm font-bold text-white flex items-center gap-2">
           <i data-lucide="user-plus" class="w-4 h-4 text-[#E2001A]"></i> Ajouter un Utilisateur
         </h3>
-        <button onclick="closeModal('modal-create-user')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button onclick="closeCreateUserModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div id="create-user-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
@@ -752,7 +752,7 @@
       <form id="form-create-user" onsubmit="submitCreateUser(event)" class="space-y-3.5 text-xs">
         <div>
           <label class="block font-medium text-slate-300 mb-1">Identifiant (minuscules, chiffres, tirets)</label>
-          <input type="text" id="create-username" required placeholder="nom_utilisateur" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+          <input type="text" id="create-username" required placeholder="nom_utilisateur" autocomplete="username" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
         </div>
         <div>
           <label class="block font-medium text-slate-300 mb-1">Nom Complet</label>
@@ -760,19 +760,19 @@
         </div>
         <div>
           <label class="block font-medium text-slate-300 mb-1">Rôle RBAC</label>
-          <select id="create-role" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
-            <option value="operator">Opérateur (Simulation, Chaos, Équipements, Variables)</option>
-            <option value="viewer">Observateur (Lecture seule / Monitoring)</option>
-            <option value="admin">Administrateur (Contrôle total + Gestion utilisateurs)</option>
+          <select id="create-role" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A] cursor-pointer">
+            <option value="operator" class="bg-[#181D26] text-slate-100 py-1.5">Opérateur (Simulation, Chaos, Équipements, Variables)</option>
+            <option value="viewer" class="bg-[#181D26] text-slate-100 py-1.5">Observateur (Lecture seule / Monitoring)</option>
+            <option value="admin" class="bg-[#181D26] text-slate-100 py-1.5">Administrateur (Contrôle total + Gestion utilisateurs)</option>
           </select>
         </div>
         <div>
           <label class="block font-medium text-slate-300 mb-1">Mot de passe initial (Min 8 car., Majuscule + Chiffre)</label>
-          <input type="password" id="create-password" required placeholder="••••••••" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
+          <input type="password" id="create-password" required placeholder="••••••••" autocomplete="new-password" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
         </div>
 
         <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
-          <button type="button" onclick="closeModal('modal-create-user')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
+          <button type="button" onclick="closeCreateUserModal()" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
           <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Créer l'utilisateur</button>
         </div>
       </form>
@@ -780,7 +780,7 @@
   </div>
 
   <!-- Modal Changement Mot de Passe Personnel -->
-  <div id="modal-change-password" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4">
+  <div id="modal-change-password" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-sm font-bold text-white flex items-center gap-2">
@@ -814,13 +814,13 @@
   </div>
 
   <!-- Modal Réinitialisation Mot de Passe par Admin -->
-  <div id="modal-reset-password" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm hidden p-4">
+  <div id="modal-reset-password" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-sm font-bold text-white flex items-center gap-2">
           <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i> Réinitialiser Mot de Passe
         </h3>
-        <button onclick="closeModal('modal-reset-password')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button onclick="closeResetPasswordModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div id="reset-pw-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
@@ -834,7 +834,7 @@
         </div>
 
         <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
-          <button type="button" onclick="closeModal('modal-reset-password')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
+          <button type="button" onclick="closeResetPasswordModal()" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
           <button type="submit" class="btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">Réinitialiser</button>
         </div>
       </form>
@@ -842,7 +842,7 @@
   </div>
 
   <!-- Modal Catalogue des Modèles d'Équipements Métiers -->
-  <div id="modal-catalog" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4 overflow-y-auto">
+  <div id="modal-catalog" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-5xl w-full p-6 shadow-2xl space-y-5 my-8 flex flex-col max-h-[90vh]">
       <!-- En-tête -->
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-4">
@@ -909,7 +909,7 @@
   </div>
 
   <!-- Modal Configuration & Instanciation du Modèle Choisi -->
-  <div id="modal-instantiate-preset" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4 overflow-y-auto">
+  <div id="modal-instantiate-preset" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-4">
         <div>
@@ -919,7 +919,7 @@
           </h3>
           <p id="instantiate-modal-subtitle" class="text-xs text-slate-400 mt-0.5">Modèle sélectionné</p>
         </div>
-        <button onclick="closeModal('modal-instantiate-preset')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button onclick="closeInstantiateModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div id="instantiate-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
@@ -995,7 +995,7 @@
         </div>
 
         <div class="flex justify-end gap-3 pt-3 border-t border-[#2B3342]">
-          <button type="button" onclick="closeModal('modal-instantiate-preset')" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
+          <button type="button" onclick="closeInstantiateModal()" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Annuler</button>
           <button type="submit" class="flex items-center gap-1.5 btn-primary-red px-5 py-2 rounded-lg font-medium shadow-md shadow-red-900/40">
             <i data-lucide="check" class="w-4 h-4"></i>
             <span>Instancier l'Équipement</span>

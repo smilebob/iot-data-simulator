@@ -12,6 +12,7 @@ let state = {
   chartData: {},
   editingVarId: null,
   editingDevId: null,
+  activeModal: null,
 };
 
 let ws = null;
@@ -216,9 +217,11 @@ function handleLiveTelemetry(data) {
   const valEl = document.getElementById(`val-${variable_id}`);
   if (valEl) {
     valEl.textContent = value;
-    valEl.classList.remove("flash-update");
-    void valEl.offsetWidth; // Force re-flow CSS
-    valEl.classList.add("flash-update");
+    // N'animer le flash que si aucune modale n'est active pour garantir une fluidité totale de saisie
+    if (!state.activeModal) {
+      valEl.classList.remove("flash-update");
+      requestAnimationFrame(() => valEl.classList.add("flash-update"));
+    }
   }
 
   const topicEl = document.getElementById(`topic-${variable_id}`);
@@ -237,8 +240,8 @@ function handleLiveTelemetry(data) {
     }
   }
 
-  // Mettre à jour le graphique sparkline si présent et numérique
-  if (typeof value === "number" && state.charts && state.charts[variable_id]) {
+  // Mettre à jour le graphique sparkline si présent et numérique (sauté si modale active pour préserver 100% du CPU/GPU)
+  if (!state.activeModal && typeof value === "number" && state.charts && state.charts[variable_id]) {
     try {
       const chart = state.charts[variable_id];
       const dataPoints = state.chartData[variable_id] || [];
@@ -1692,13 +1695,30 @@ function setLogLevelFilter(level) {
 
 function openModal(id) {
   const el = document.getElementById(id);
-  if (el) el.classList.remove("hidden");
-  safeCreateIcons();
+  if (el) {
+    el.classList.remove("hidden");
+    state.activeModal = id;
+  }
+  if (window.lucide && typeof window.lucide.createIcons === "function") {
+    try {
+      if (el) {
+        window.lucide.createIcons({ root: el });
+      } else {
+        window.lucide.createIcons();
+      }
+    } catch (e) {
+      console.warn("Erreur chargement icônes Lucide:", e);
+    }
+  }
 }
 
 function closeModal(id) {
   const el = document.getElementById(id);
   if (el) el.classList.add("hidden");
+  if (state.activeModal === id) {
+    const remainingModal = document.querySelector('[id^="modal-"]:not(.hidden)');
+    state.activeModal = remainingModal ? remainingModal.id : null;
+  }
 }
 
 // Export / Import Scénario
@@ -2019,7 +2039,23 @@ function openCreateUserModal() {
   document.getElementById("create-password").value = "";
   const errBox = document.getElementById("create-user-error");
   if (errBox) errBox.classList.add("hidden");
+
+  // Masquer temporairement la modale parente pour éviter l'empilement d'overlays lourds
+  const usersModal = document.getElementById("modal-users");
+  if (usersModal && !usersModal.classList.contains("hidden")) {
+    usersModal.dataset.wasOpen = "true";
+    usersModal.classList.add("hidden");
+  }
   openModal("modal-create-user");
+}
+
+function closeCreateUserModal() {
+  closeModal("modal-create-user");
+  const usersModal = document.getElementById("modal-users");
+  if (usersModal && usersModal.dataset.wasOpen === "true") {
+    delete usersModal.dataset.wasOpen;
+    openModal("modal-users");
+  }
 }
 
 async function submitCreateUser(e) {
@@ -2049,7 +2085,7 @@ async function submitCreateUser(e) {
       return;
     }
 
-    closeModal("modal-create-user");
+    closeCreateUserModal();
     await fetchUsersList();
     alert(`✅ Utilisateur "${payload.username}" créé avec succès !`);
   } catch (err) {
@@ -2082,7 +2118,23 @@ function openResetPasswordModal(username) {
   document.getElementById("reset-new-password").value = "";
   const errBox = document.getElementById("reset-pw-error");
   if (errBox) errBox.classList.add("hidden");
+
+  // Masquer temporairement la modale parente pour éviter l'empilement d'overlays
+  const usersModal = document.getElementById("modal-users");
+  if (usersModal && !usersModal.classList.contains("hidden")) {
+    usersModal.dataset.wasOpen = "true";
+    usersModal.classList.add("hidden");
+  }
   openModal("modal-reset-password");
+}
+
+function closeResetPasswordModal() {
+  closeModal("modal-reset-password");
+  const usersModal = document.getElementById("modal-users");
+  if (usersModal && usersModal.dataset.wasOpen === "true") {
+    delete usersModal.dataset.wasOpen;
+    openModal("modal-users");
+  }
 }
 
 async function submitResetPassword(e) {
@@ -2105,7 +2157,7 @@ async function submitResetPassword(e) {
       }
       return;
     }
-    closeModal("modal-reset-password");
+    closeResetPasswordModal();
     alert(`✅ Mot de passe réinitialisé pour "${username}".`);
   } catch (err) {
     if (errBox) {
@@ -2378,6 +2430,11 @@ function prepareInstantiatePreset(presetId) {
   }
 
   openModal("modal-instantiate-preset");
+}
+
+function closeInstantiateModal() {
+  closeModal("modal-instantiate-preset");
+  openModal("modal-catalog");
 }
 
 async function submitInstantiatePreset(e) {
