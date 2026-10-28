@@ -1,3 +1,10 @@
+"""
+Unit Tests for ThingsBoard Dashboard Generation
+===============================================
+Validates ThingsBoard 4.3 JSON dashboard descriptors, SCADA P&ID vector synoptic
+integration, interactive control widgets (switches, inputs), and layout grid positioning.
+"""
+
 import json
 import os
 import sys
@@ -5,10 +12,11 @@ import shutil
 import tempfile
 import types
 
-# Mocks minimaux pour exécuter hors conteneur sans dépendances externes
+# Lightweight mock stubs to allow test execution without external pip dependencies
 if 'pydantic' not in sys.modules:
     pyd = types.ModuleType('pydantic')
     class BaseModel:
+        """Mock BaseModel."""
         def __init__(self, **kwargs):
             for k, v in kwargs.items():
                 setattr(self, k, v)
@@ -41,8 +49,10 @@ from app.models.device import DeviceConfig, PlatformType, TransportProtocol
 from app.models.variable import VariableConfig, VariableType, DataType, SimMode, MathConfig
 from app.core.dashboard_generator import generate_thingsboard_dashboard
 
+
 def test_thingsboard_dashboard_generation():
-    # 1. Équipement de test avec Token spécifique
+    """Validates complete ThingsBoard 4.3 JSON dashboard generation and widget layouts."""
+    # 1. Test device with specific token
     dev = DeviceConfig(
         id="test_boiler_01",
         name="Chaudière Test #1",
@@ -100,14 +110,14 @@ def test_thingsboard_dashboard_generation():
         )
     ]
 
-    # Génération du dashboard ThingsBoard
+    # Generate ThingsBoard dashboard
     dashboard = generate_thingsboard_dashboard(dev, vars_list)
 
     assert dashboard["title"] == "Supervision SCADA - Chaudière Test #1"
-    # Sécurité CIS / OWASP : Le token ne doit JAMAIS fuiter dans la description ou les widgets
+    # CIS / OWASP Security: Token must never leak into description or widgets
     assert "TB_TOKEN_SECRET_9876" not in dashboard["configuration"]["description"]
 
-    # Vérification de l'alias d'entité (singleEntity avec ID placeholder pour assistant ThingsBoard)
+    # Verify singleEntity alias placeholder
     aliases = dashboard["configuration"]["entityAliases"]
     assert len(aliases) == 1
     alias = list(aliases.values())[0]
@@ -115,11 +125,11 @@ def test_thingsboard_dashboard_generation():
     assert alias["filter"]["type"] == "singleEntity"
     assert alias["filter"]["singleEntity"]["id"] == "00000000-0000-0000-0000-000000000000"
 
-    # Vérification des widgets
+    # Verify widgets collection
     widgets = dashboard["configuration"]["widgets"]
-    assert len(widgets) >= 4  # Header + Synoptique SCADA + Jauges + Graphique + Carte Attributs
+    assert len(widgets) >= 4  # Header + SCADA Synoptic + Gauges + Chart + Attributes Table
 
-    # Vérification du synoptique SCADA (html_value_card dynamique temps réel sans fuite de token)
+    # Verify SCADA Synoptic widget
     synoptic_w = next(w for w in widgets.values() if "Synoptique SCADA" in w.get("title", ""))
     assert synoptic_w.get("typeFullFqn") == "system.cards.html_value_card"
     assert synoptic_w.get("typeAlias") == "html_value_card"
@@ -133,11 +143,11 @@ def test_thingsboard_dashboard_generation():
     assert "${" in synoptic_w["config"]["settings"]["cardHtml"]
     assert "TB_TOKEN_SECRET_9876" not in synoptic_w["config"]["settings"]["cardHtml"]
 
-    # Compatibilité ThingsBoard 4.3 : Vérification que les labels correspondent exactement aux names (identifiants techniques)
+    # ThingsBoard 4.3 compatibility: dataKey label must match name
     for dk in synoptic_w["config"]["datasources"][0]["dataKeys"]:
-        assert dk["label"] == dk["name"], f"DataKey label '{dk['label']}' doit être égal à name '{dk['name']}' pour ThingsBoard 4.3"
+        assert dk["label"] == dk["name"], f"DataKey label '{dk['label']}' must equal name '{dk['name']}' for ThingsBoard 4.3"
 
-    # Vérification du widget d'en-tête (HTML) sécurisé (Token masqué / protégé)
+    # Verify Header widget
     header_w = next(w for w in widgets.values() if w.get("typeAlias") == "html_card" and "Informations" in w.get("title", ""))
     assert header_w.get("typeFullFqn") == "system.cards.html_card"
     assert "TB_TOKEN_SECRET_9876" not in header_w["config"]["settings"]["cardHtml"]
@@ -146,12 +156,12 @@ def test_thingsboard_dashboard_generation():
     assert "Chaudière Test #1" in header_w["config"]["settings"]["cardHtml"]
     assert "MQTT" in header_w["config"]["settings"]["cardHtml"]
 
-    # Vérification des jauges JustGage FQN
+    # Verify JustGage gauge widgets
     gauge_w = next(w for w in widgets.values() if w.get("typeAlias") == "simple_gauge_justgage")
     assert gauge_w.get("typeFullFqn") == "system.digital_gauges.simple_gauge_justgage"
     assert gauge_w.get("bundleAlias") == "digital_gauges"
 
-    # Vérification du graphique timeseries
+    # Verify timeseries chart widget
     chart_w = next(w for w in widgets.values() if w.get("typeAlias") == "basic_timeseries")
     assert chart_w.get("typeFullFqn") == "system.charts.basic_timeseries"
     assert chart_w.get("bundleAlias") == "charts"
@@ -160,7 +170,7 @@ def test_thingsboard_dashboard_generation():
     assert "v_steam_press" in datakeys
     assert "v_flame_temp" in datakeys
 
-    # Vérification des widgets de contrôle interactifs ThingsBoard 4.3 (Switch & Input Form)
+    # Verify interactive control widgets (Switch & Input Form)
     switch_w = next(w for w in widgets.values() if w.get("typeAlias") in ("single_switch", "round_switch"))
     assert switch_w.get("typeFullFqn") in ("system.single_switch", "system.control_widgets.round_switch")
     assert switch_w.get("bundleAlias") == "control_widgets"
@@ -173,7 +183,7 @@ def test_thingsboard_dashboard_generation():
     assert input_form_w.get("bundleAlias") == "input_widgets"
     assert "Consigne - État Brûleur" in input_form_w.get("title", "")
 
-    # Vérification de la carte d'attributs (entities_table) et absence de chevauchement de layout
+    # Verify attributes table (entities_table) and grid layout alignment
     attr_w = next(w for w in widgets.values() if w.get("typeAlias") == "entities_table")
     assert attr_w.get("typeFullFqn") == "system.cards.entities_table"
     assert attr_w.get("bundleAlias") == "cards"
@@ -182,16 +192,17 @@ def test_thingsboard_dashboard_generation():
     assert "v_burner_status" in attr_keys
     assert "v_pump_enable" in attr_keys
 
-    # Vérification stricte du positionnement de layout (aucun chevauchement entre switch et table)
+    # Layout anti-overlapping assertion
     layout = dashboard["configuration"]["states"]["default"]["layouts"]["main"]["widgets"]
     switch_layout = layout[switch_w["id"]]
     attr_layout = layout[attr_w["id"]]
-    assert attr_layout["row"] == switch_layout["row"] + switch_layout["sizeY"], "La table d'attributs doit être positionnée sous les widgets de contrôle sans chevauchement !"
-    assert attr_layout["sizeY"] == 4, "La hauteur de la table d'attributs doit être ajustée à 4 lorsqu'il y a des contrôles !"
+    assert attr_layout["row"] == switch_layout["row"] + switch_layout["sizeY"], "Attributes table must be positioned below control widgets without overlap!"
+    assert attr_layout["sizeY"] == 4, "Attributes table height must be adjusted to 4 when control widgets exist!"
 
-    # Vérification de la sérialisation JSON valide
+    # Valid JSON serialization check
     serialized = json.dumps(dashboard)
     assert len(serialized) > 1000
+
 
 if __name__ == "__main__":
     test_thingsboard_dashboard_generation()

@@ -1,12 +1,20 @@
+"""
+Unit Tests for ThingsBoard Bidirectional RPC and Shared Attributes
+==================================================================
+Tests RPC method matching, automatic acknowledgement on `v1/devices/me/rpc/response/{id}`,
+shared attributes updates, and manual override state synchronization.
+"""
+
 import json
 import os
 import sys
 import types
 
-# Mocks minimaux pour exécuter hors conteneur sans dépendances externes
+# Lightweight mock stubs to allow execution outside container without external pip packages
 if 'pydantic' not in sys.modules:
     pyd = types.ModuleType('pydantic')
     class BaseModel:
+        """Mock BaseModel."""
         def __init__(self, **kwargs):
             for k, v in kwargs.items(): setattr(self, k, v)
         def model_copy(self, deep=True):
@@ -35,7 +43,9 @@ from app.models.device import DeviceConfig, PlatformType, TransportProtocol
 from app.models.variable import VariableConfig, VariableType, DataType, SimMode, MathConfig
 from app.core.engine import SimulationEngine
 
+
 class MockStorageRepository:
+    """Mock storage repository simulating in-memory state persistence."""
     def __init__(self, devices, variables):
         self.devices = {d.id: d for d in devices}
         self.variables = {v.id: v for v in variables}
@@ -55,7 +65,9 @@ class MockStorageRepository:
         for v in vars_list:
             self.variables[v.id] = v
 
+
 class MockMqttManager:
+    """Mock MQTT manager recording published messages and topic destinations."""
     def __init__(self):
         self.published_messages = []
         self.on_rpc_callback = None
@@ -64,8 +76,10 @@ class MockMqttManager:
         self.published_messages.append((device_id, topic, payload))
         return True
 
+
 def test_rpc_and_shared_attributes():
-    # 1. Équipement PAC (Pompe à Chaleur) avec mode_chaud
+    """Validates full RPC request lifecycle and bidirectional state synchronization."""
+    # 1. Heatpump test device with mode_chaud
     dev = DeviceConfig(
         id="bldg_heatpump_test",
         name="PAC Test",
@@ -93,10 +107,63 @@ def test_rpc_and_shared_attributes():
 
     assert var_mode.current_value is None or var_mode.current_value is True
 
-    # Test 1 : Commande RPC 'set_mode_chaud' avec params = False
+    # Test 1: Specific RPC command 'set_mode_chaud' with params = False
     rpc_topic = "v1/devices/me/rpc/request/101"
     rpc_payload = json.dumps({"method": "set_mode_chaud", "params": False})
     engine._handle_rpc("bldg_heatpump_test", rpc_topic, rpc_payload)
+
+    # Verifications
+    assert var_mode.current_value is False
+    assert var_mode.manual_override is True
+    assert var_mode.manual_value is False
+
+    # Verify RPC response acknowledgement
+    resp_msg = next((msg for msg in mqtt.published_messages if msg[1] == "v1/devices/me/rpc/response/101"), None)
+    assert resp_msg is not None
+    resp_data = json.loads(resp_msg[2])
+    assert resp_data["status"] == "SUCCESS"
+    assert resp_data["value"] is False
+
+    # Verify state attribute confirmation
+    attr_msg = next((msg for msg in mqtt.published_messages if msg[1] == "v1/devices/me/attributes"), None)
+    assert attr_msg is not None
+    assert "mode_chaud" in attr_msg[2]
+
+    # Test 2: Generic RPC command 'setValue' with params = True
+    mqtt.published_messages.clear()
+    rpc_topic2 = "v1/devices/me/rpc/request/102"
+    rpc_payload2 = json.dumps({"method": "setValue", "params": True})
+    engine._handle_rpc("bldg_heatpump_test", rpc_topic2, rpc_payload2)
+
+    assert var_mode.current_value is True
+    resp_msg2 = next((msg for msg in mqtt.published_messages if msg[1] == "v1/devices/me/rpc/response/102"), None)
+    assert resp_msg2 is not None
+    assert json.loads(resp_msg2[2])["value"] is True
+
+    # Test 3: Shared attribute update from ThingsBoard
+    mqtt.published_messages.clear()
+    attr_update_topic = "v1/devices/me/attributes"
+    attr_update_payload = json.dumps({"mode_chaud": False})
+    engine._handle_rpc("bldg_heatpump_test", attr_update_topic, attr_update_payload)
+
+    assert var_mode.current_value is False
+    assert var_mode.manual_override is True
+
+    # Test 4: RPC query 'getValue'
+    mqtt.published_messages.clear()
+    rpc_topic4 = "v1/devices/me/rpc/request/103"
+    rpc_payload4 = json.dumps({"method": "getValue"})
+    engine._handle_rpc("bldg_heatpump_test", rpc_topic4, rpc_payload4)
+
+    resp_msg4 = next((msg for msg in mqtt.published_messages if msg[1] == "v1/devices/me/rpc/response/103"), None)
+    assert resp_msg4 is not None
+    assert json.loads(resp_msg4[2])["value"] is False
+
+    print("✅ test_rpc_and_shared_attributes passed successfully!")
+
+
+if __name__ == "__main__":
+    test_rpc_and_shared_attributes()
 
     # Vérifications
     assert var_mode.current_value is False

@@ -1,3 +1,10 @@
+"""
+Unit Tests for Equipment Preset Import, Export, and Catalog Lifecycle
+======================================================================
+Validates preset packaging, bundle export, custom preset storage isolation,
+and ThingsBoard template resolution.
+"""
+
 import os
 import tempfile
 import pytest
@@ -18,8 +25,9 @@ from app.models.device import TransportProtocol, PlatformType
 from app.models.variable import VariableConfig, VariableType, DataType, SimMode, MathConfig
 from app.storage.repository import StorageRepository
 
+
 def test_builtin_catalog_integrity():
-    """Vérifie que les 32 modèles d'usine sont chargés et intègres avec is_custom=False."""
+    """Verifies that all 32 factory presets are loaded and verified with is_custom=False."""
     builtins = get_builtin_catalog()
     assert len(builtins) == 32
     for p in builtins:
@@ -27,8 +35,9 @@ def test_builtin_catalog_integrity():
         assert len(p.variables) > 0
         assert p.category in ("industry", "building", "infrastructure", "smart_city")
 
+
 def test_build_preset_export_package_exhaustive():
-    """Vérifie que le package d'export unitaire contient l'intégralité des 4 volets requis."""
+    """Verifies that a single preset export package includes all 4 components (preset, dashboard, CSV, spec)."""
     builtins = get_builtin_catalog()
     compressor = next(p for p in builtins if p.id == "ind_compressor")
     
@@ -38,7 +47,7 @@ def test_build_preset_export_package_exhaustive():
     assert "export_date" in pkg
     assert "generator" in pkg
     
-    # 1. Preset complet avec variables et math_config
+    # 1. Preset model with variables and math_config
     preset_data = pkg["preset"]
     assert preset_data["id"] == "ind_compressor"
     assert len(preset_data["variables"]) == len(compressor.variables)
@@ -47,41 +56,43 @@ def test_build_preset_export_package_exhaustive():
     assert press_var["math_config"]["min_val"] == 6.2
     assert press_var["math_config"]["max_val"] == 8.5
     
-    # 2. Modèle Dashboard ThingsBoard complet
+    # 2. ThingsBoard dashboard template
     dash = pkg["dashboard_template"]
     assert "title" in dash
     assert "configuration" in dash
     assert "widgets" in dash["configuration"]
     
-    # 3. Modèle CSV ThingsBoard
+    # 3. ThingsBoard CSV bulk import template
     csv_t = pkg["csv_template"]
     assert csv_t["headers"] == "name,type,label,access_token"
     assert "Centrale d'Air Comprimé" in csv_t["sample_row"]
     
-    # 4. Spécifications d'instanciation
+    # 4. Instantiation specifications
     spec = pkg["instantiation_spec"]
     assert spec["suggested_device_id_prefix"] == "ind_compressor"
     assert spec["default_protocol"] == "mqtt"
     assert spec["variables_count"] == len(compressor.variables)
 
+
 def test_build_all_presets_export_package():
-    """Vérifie que l'export global bundle inclut tous les presets."""
+    """Verifies that the consolidated catalog bundle export contains all presets."""
     bundle = build_all_presets_export_package()
     assert bundle["schema_version"] == "2.1.0"
     assert bundle["export_type"] == "presets_bundle"
     assert bundle["total_presets"] >= 32
     assert len(bundle["presets_packages"]) == bundle["total_presets"]
 
+
 def test_custom_preset_lifecycle_and_isolation():
-    """Vérifie le cycle de vie complet (sauvegarde, chargement, instanciation, suppression) dans un fichier isolé."""
+    """Validates complete custom preset lifecycle (save, load, instantiate, delete) in an isolated store."""
     tmp_dir = tempfile.mkdtemp()
     custom_file = os.path.join(tmp_dir, "custom_presets_test.json")
 
     try:
-        # Initialement vide
+        # Initially empty
         assert load_custom_presets(custom_file) == []
 
-        # Création d'un preset personnalisé
+        # Create a custom equipment preset
         custom_p = EquipmentPreset(
             id="my_custom_oven",
             name="Four Industriel Haute Température",
@@ -108,18 +119,18 @@ def test_custom_preset_lifecycle_and_isolation():
 
         save_custom_preset(custom_p, file_path=custom_file)
 
-        # Vérification chargement
+        # Verify custom store loading
         loaded = load_custom_presets(custom_file)
         assert len(loaded) == 1
         assert loaded[0].id == "my_custom_oven"
         assert loaded[0].is_custom is True
 
-        # Vérification fusion catalogue global
+        # Verify unified catalog merging
         unified_catalog = get_equipment_catalog(file_path=custom_file)
         assert len(unified_catalog) == 33
         assert any(p.id == "my_custom_oven" for p in unified_catalog)
 
-        # Test d'instanciation en 1 clic
+        # Test one-click preset instantiation
         state_file = os.path.join(tmp_dir, "sim_state_test.json")
         repo = StorageRepository(file_path=state_file)
         
@@ -130,7 +141,7 @@ def test_custom_preset_lifecycle_and_isolation():
             token="FOUR_SECRET_TOKEN_123"
         )
         
-        # On mock get_equipment_catalog pour retourner le catalogue contenant notre custom
+        # Mock get_equipment_catalog to return catalog containing custom preset
         import app.core.equipment_catalog as ec
         orig_get_catalog = ec.get_equipment_catalog
         ec.get_equipment_catalog = lambda: unified_catalog
@@ -146,12 +157,12 @@ def test_custom_preset_lifecycle_and_isolation():
         finally:
             ec.get_equipment_catalog = orig_get_catalog
 
-        # Suppression du preset personnalisé
+        # Delete custom preset
         deleted = delete_custom_preset("my_custom_oven", file_path=custom_file)
         assert deleted is True
         assert len(load_custom_presets(custom_file)) == 0
 
-        # Tentative de suppression d'un modèle d'usine natif -> doit lever ValueError
+        # Attempt deleting built-in factory preset -> must raise ValueError
         with pytest.raises(ValueError) as excinfo:
             delete_custom_preset("ind_compressor", file_path=custom_file)
         assert "modèle natif d'usine" in str(excinfo.value)
@@ -160,18 +171,19 @@ def test_custom_preset_lifecycle_and_isolation():
         import shutil
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
+
 def test_import_preset_data_various_formats():
-    """Vérifie l'importation souple : package complet, collision d'ID natif, et bundle."""
+    """Validates flexible preset importing: packaged bundle, built-in ID collision handling, and raw preset."""
     tmp_dir = tempfile.mkdtemp()
     custom_file = os.path.join(tmp_dir, "custom_presets_test.json")
 
     try:
-        # 1. Import d'un package complet issu d'un export
+        # 1. Import complete package from export
         builtins = get_builtin_catalog()
         compressor = next(p for p in builtins if p.id == "ind_compressor")
         pkg = build_preset_export_package(compressor)
         
-        # Le preset importé porte l'id "ind_compressor", il doit être renommé "ind_compressor_custom"
+        # Built-in ID collision must rename to 'ind_compressor_custom'
         count, ids = import_preset_data(pkg, file_path=custom_file)
         assert count == 1
         assert ids == ["ind_compressor_custom"]
@@ -182,10 +194,10 @@ def test_import_preset_data_various_formats():
         assert loaded[0].is_custom is True
         assert "Personnalisé" in loaded[0].name
 
-        # Les modèles d'usine n'ont pas bougé
+        # Factory presets remain unmodified
         assert len(get_builtin_catalog()) == 32
 
-        # 2. Import d'un modèle direct sans enveloppe
+        # 2. Direct preset JSON import without wrapper
         direct_model = {
             "id": "direct_sensor",
             "name": "Capteur LoRaWAN Direct",

@@ -1,3 +1,12 @@
+"""
+Real-Time Asynchronous Simulation Engine.
+
+Orchestrates multi-device physical simulation loops, deterministic mathematical generation,
+3-pass causal dependency evaluation, continuous trapezoidal energy integration, fault injection,
+bidirectional ThingsBoard 4.3 control (MQTT RPC, Shared Attributes, and HTTP Long-Polling),
+and real-time WebSocket GUI streaming.
+"""
+
 import asyncio
 import json
 import logging
@@ -15,10 +24,13 @@ from app.transports.manager import TransportManager
 
 logger = logging.getLogger("iot_sim.engine")
 
+
 class SimulationEngine:
-    """
-    Moteur de simulation asynchrone non-bloquant.
-    Gère le calcul périodique des variables, l'injection de défaillances et la transmission (MQTT, HTTP, CoAP).
+    """Non-blocking asynchronous simulation coordinator.
+
+    Runs periodic evaluation ticks (default: 500ms) calculating metrics, managing
+    device listeners across multiple network protocols (MQTT, HTTP REST v1, CoAP),
+    routing outbound telemetry, and servicing bidirectional inbound RPC commands.
     """
 
     def __init__(
@@ -27,13 +39,20 @@ class SimulationEngine:
         mqtt_manager: MqttManager,
         transport_manager: Optional[TransportManager] = None,
     ):
+        """Initializes the simulation engine with repositories and transport managers.
+
+        Args:
+            repository: Thread-safe persistent configuration and state storage.
+            mqtt_manager: Active Paho-MQTT connection coordinator.
+            transport_manager: Optional unified transport router (MQTT, HTTP, CoAP).
+        """
         self.repo = repository
         self.mqtt = mqtt_manager
         self.transports = transport_manager or TransportManager(repository, mqtt_manager)
         self.is_running = False
         self._task: Optional[asyncio.Task] = None
         self._start_time = time.time()
-        self._tick_interval = 0.5  # 500ms boucle de résolution
+        self._tick_interval = 0.5  # 500ms core resolution loop cadence
         self._ws_broadcast_callback: Optional[Callable[[Dict[str, Any]], None]] = None
         self._anomaly_counters: Dict[str, int] = {}
         self._drift_offsets: Dict[str, float] = {}
@@ -44,13 +63,23 @@ class SimulationEngine:
         self._last_rpc_modified_key: Optional[str] = None
         self._loop: Optional[asyncio.AbstractEventLoop] = None
 
-        # Enregistrement du callback RPC Thingsboard
+        # Register inbound MQTT RPC and shared attribute callback
         self.mqtt.on_rpc_callback = self._handle_rpc
 
     def register_ws_broadcast(self, callback: Callable[[Dict[str, Any]], None]):
+        """Registers a callback handler to receive live telemetry and log packets for WebSockets.
+
+        Args:
+            callback: Callable accepting a JSON-serializable dictionary.
+        """
         self._ws_broadcast_callback = callback
 
     def start(self, loop: Optional[asyncio.AbstractEventLoop] = None):
+        """Starts the asynchronous simulation background loop.
+
+        Args:
+            loop: Optional explicit asyncio event loop to attach background task.
+        """
         if not self.is_running:
             self.is_running = True
             self._start_time = time.time()
@@ -59,15 +88,17 @@ class SimulationEngine:
                 self._loop = active_loop
                 self._task = active_loop.create_task(self._run_loop())
             except RuntimeError:
+                # Handle cases where get_running_loop() is called from another thread
                 if hasattr(self, "_loop") and self._loop and self._loop.is_running():
                     self._task = asyncio.run_coroutine_threadsafe(self._run_loop(), self._loop)
                 else:
-                    logger.error("Impossible de démarrer la simulation : aucune boucle d'événements active.")
+                    logger.error("Unable to start simulation: no active event loop found.")
                     self.is_running = False
                     return
-            logger.info("Moteur de simulation démarré.")
+            logger.info("Simulation engine started successfully.")
 
     def stop(self):
+        """Stops the simulation loop and gracefully cancels all active polling worker tasks."""
         self.is_running = False
         if self._task:
             if hasattr(self._task, "cancel"):
@@ -75,18 +106,30 @@ class SimulationEngine:
                     self._task.cancel()
                 except Exception:
                     pass
+        # Cancel all active HTTP RPC long-polling workers
         for dev_id, t in list(self._http_rpc_tasks.items()):
             if not t.done():
                 t.cancel()
         self._http_rpc_tasks.clear()
+
+        # Cancel all active HTTP Shared Attributes polling workers
         for dev_id, t in list(self._http_attr_tasks.items()):
             if not t.done():
                 t.cancel()
         self._http_attr_tasks.clear()
-        logger.info("Moteur de simulation arrêté.")
+        logger.info("Simulation engine stopped.")
 
     def _sync_device_listeners(self, devices_map: Dict[str, DeviceConfig]):
-        """Synchronise les abonnements de contrôle bidirectionnel (MQTT, Long-Polling RPC HTTP et Attributs Partagés HTTP)."""
+        """Synchronizes bidirectional control listeners for active devices.
+
+        Provisions or cleans up background listeners for:
+        1. ThingsBoard HTTP Downstream RPC Long-Polling (GET /api/v1/{token}/rpc).
+        2. ThingsBoard HTTP Shared Attributes Long-Polling (GET /api/v1/{token}/attributes/updates).
+        3. ThingsBoard MQTT RPC and attribute subscription routing.
+
+        Args:
+            devices_map: Map of device IDs to their corresponding active DeviceConfig objects.
+        """
         active_http_ids = set()
         for dev_id, dev in devices_map.items():
             try:
@@ -96,23 +139,23 @@ class SimulationEngine:
                     proto_str = getattr(dev.protocol, "value", str(dev.protocol)).lower()
                     if proto_str == TransportProtocol.HTTP.value:
                         active_http_ids.add(dev_id)
-                        # 1. Listener RPC descendant (One-way / Two-way)
+                        # 1. Downstream RPC listener (One-way / Two-way control)
                         if dev_id not in self._http_rpc_tasks or self._http_rpc_tasks[dev_id].done():
                             self._http_rpc_tasks[dev_id] = asyncio.create_task(
                                 self._poll_http_rpc_worker(dev)
                             )
-                        # 2. Listener Attributs Partagés (Shared Attributes)
+                        # 2. Downstream Shared Attributes listener
                         if dev_id not in self._http_attr_tasks or self._http_attr_tasks[dev_id].done():
                             self._http_attr_tasks[dev_id] = asyncio.create_task(
                                 self._poll_http_attributes_worker(dev)
                             )
                     elif proto_str == TransportProtocol.MQTT.value:
-                        # Pré-connexion du client MQTT pour écouter les ordres dès le démarrage
+                        # Pre-connect dedicated MQTT client to start listening for control orders immediately
                         self.mqtt.get_or_create_device_client(dev.id, dev.token, dev)
             except Exception as e:
-                logger.error(f"Erreur initialisation listener pour '{dev_id}': {e}")
+                logger.error(f"Error initializing bidirectional listener for '{dev_id}': {e}")
 
-        # Nettoyage des tâches HTTP orphelines
+        # Clean up orphaned HTTP background workers for deleted or disabled devices
         for old_id in list(self._http_rpc_tasks.keys()):
             if old_id not in active_http_ids:
                 task = self._http_rpc_tasks.pop(old_id, None)
@@ -125,7 +168,15 @@ class SimulationEngine:
                     task.cancel()
 
     async def _poll_http_rpc_worker(self, device: DeviceConfig):
-        """Boucle de Long-Polling HTTP pour recevoir les ordres RPC ThingsBoard en continu."""
+        """Long-polling worker coroutine for ThingsBoard HTTP RPC commands.
+
+        Continuously listens on `GET /api/v1/{token}/rpc?timeout=15000`. When a command
+        is received, executes the control action, emits the mandatory synchronous
+        response to `POST /api/v1/{token}/rpc/{id}`, and syncs the client-side attribute.
+
+        Args:
+            device: Target virtual device configuration.
+        """
         token = device.token
         if not token:
             return
@@ -139,19 +190,20 @@ class SimulationEngine:
         elif device.custom_port == 80:
             use_tls = False
         else:
-            is_local = host.lower().replace("http://", "").replace("https://", "").split(":")[0] in ("localhost", "127.0.0.1", "mosquitto", "thingsboard")
+            is_local = host.lower().replace("http://", "").replace("https://", "").split(":")[0] in (
+                "localhost", "127.0.0.1", "mosquitto", "thingsboard"
+            )
             use_tls = False if is_local else True
         port = device.custom_port or (443 if use_tls else 80)
 
         clean_host_part = host.lower().replace("http://", "").replace("https://", "").split(":")[0]
         if clean_host_part in ("mosquitto", "localhost", "127.0.0.1") and "eiffage" not in host:
             logger.warning(
-                f"⚠️ [HTTP RPC] L'équipement '{device.id}' cible '{host}:{port}'. "
-                f"Si ThingsBoard est distant (ex: easythings.app.eiffageenergiesystemes.com), "
-                f"configurez l'Hôte dans les paramètres de l'équipement ou du broker."
+                f"⚠️ [HTTP RPC] Device '{device.id}' targets local '{host}:{port}'. "
+                f"For remote ThingsBoard instances, configure custom host in device settings."
             )
 
-        logger.info(f"✓ Listener RPC HTTP activé pour '{device.id}' ({host}:{port}, token: {token[:4]}***)")
+        logger.info(f"✓ Active HTTP RPC listener for '{device.id}' ({host}:{port}, token: {token[:4]}***)")
 
         while self.is_running and device.enabled:
             try:
@@ -165,13 +217,13 @@ class SimulationEngine:
                 )
                 if rpc_data and isinstance(rpc_data, dict):
                     req_id = rpc_data.get("id")
-                    logger.info(f"📥 Commande RPC HTTP reçue pour '{device.id}' (ID #{req_id}) : {rpc_data}")
+                    logger.info(f"📥 Received HTTP RPC command for '{device.id}' (ID #{req_id}): {rpc_data}")
 
-                    # 1. Traitement de la commande par la logique commune
+                    # 1. Process command through unified simulation control logic
                     self._last_rpc_modified_key = None
                     resp_val = self._handle_rpc(device.id, f"v1/devices/me/rpc/request/{req_id}", json.dumps(rpc_data))
 
-                    # 2. Réponse synchrone HTTP POST /api/v1/{token}/rpc/{req_id}
+                    # 2. Mandatory synchronous response (POST /api/v1/{token}/rpc/{req_id})
                     if req_id is not None:
                         resp_payload = json.dumps({"status": "SUCCESS", "value": resp_val if resp_val is not None else True})
                         await self.transports.http.respond_rpc(
@@ -183,7 +235,7 @@ class SimulationEngine:
                             use_tls=use_tls,
                         )
 
-                    # 3. Synchronisation immédiate de l'attribut client sur ThingsBoard
+                    # 3. Synchronize client-side attribute on ThingsBoard to confirm state toggle
                     method_name = rpc_data.get("method", "")
                     clean_name = self._last_rpc_modified_key or method_name.replace("set_", "").replace("toggle_", "")
                     if clean_name and resp_val is not None:
@@ -196,17 +248,24 @@ class SimulationEngine:
                             use_tls=use_tls,
                         )
                 else:
-                    # Protection anti-boucle rapide en cas d'erreur réseau immédiate (< 1s)
+                    # Guard against tight loop on immediate network failure (< 1s)
                     if (time.time() - t0) < 1.0:
                         await asyncio.sleep(1.0)
             except asyncio.CancelledError:
                 break
             except Exception as e:
-                logger.debug(f"Tick polling RPC HTTP pour '{device.id}': {e}")
+                logger.debug(f"HTTP RPC polling tick error for '{device.id}': {e}")
                 await asyncio.sleep(2.0)
 
     async def _poll_http_attributes_worker(self, device: DeviceConfig):
-        """Boucle de Long-Polling HTTP pour recevoir les modifications d'Attributs Partagés ThingsBoard."""
+        """Long-polling worker coroutine for ThingsBoard Shared Attributes updates.
+
+        Synchronizes initial shared attributes on boot and continuously listens on
+        `GET /api/v1/{token}/attributes/updates?timeout=20000` to apply dashboard switch toggles.
+
+        Args:
+            device: Target virtual device configuration.
+        """
         token = device.token
         if not token:
             return
@@ -220,22 +279,24 @@ class SimulationEngine:
         elif device.custom_port == 80:
             use_tls = False
         else:
-            is_local = host.lower().replace("http://", "").replace("https://", "").split(":")[0] in ("localhost", "127.0.0.1", "mosquitto", "thingsboard")
+            is_local = host.lower().replace("http://", "").replace("https://", "").split(":")[0] in (
+                "localhost", "127.0.0.1", "mosquitto", "thingsboard"
+            )
             use_tls = False if is_local else True
         port = device.custom_port or (443 if use_tls else 80)
 
-        logger.info(f"✓ Listener Attributs Partagés HTTP activé pour '{device.id}' ({host}:{port}, token: {token[:4]}***)")
+        logger.info(f"✓ Active HTTP Shared Attributes listener for '{device.id}' ({host}:{port}, token: {token[:4]}***)")
 
-        # 1. Lecture ponctuelle des attributs partagés au démarrage
+        # 1. Fetch initial shared attributes snapshot upon startup
         try:
             initial_shared = await self.transports.http.get_shared_attributes(host, port, token, use_tls=use_tls)
             if initial_shared and isinstance(initial_shared, dict) and len(initial_shared) > 0:
-                logger.info(f"📋 Attributs partagés initiaux synchronisés pour '{device.id}' : {initial_shared}")
+                logger.info(f"📋 Initial shared attributes synchronized for '{device.id}': {initial_shared}")
                 self._handle_rpc(device.id, "v1/devices/me/attributes", json.dumps(initial_shared))
         except Exception as e:
-            logger.debug(f"Initial get_shared_attributes pour '{device.id}': {e}")
+            logger.debug(f"Initial get_shared_attributes failed for '{device.id}': {e}")
 
-        # 2. Boucle de Long-Polling continu (/api/v1/{token}/attributes/updates)
+        # 2. Continuous long-polling loop (/api/v1/{token}/attributes/updates)
         while self.is_running and device.enabled:
             try:
                 t0 = time.time()
@@ -247,10 +308,10 @@ class SimulationEngine:
                     use_tls=use_tls,
                 )
                 if attr_data and isinstance(attr_data, dict) and len(attr_data) > 0:
-                    logger.info(f"📥 Mise à jour d'Attribut Partagé HTTP reçue pour '{device.id}' : {attr_data}")
+                    logger.info(f"📥 Received Shared Attribute update for '{device.id}': {attr_data}")
                     self._handle_rpc(device.id, "v1/devices/me/attributes", json.dumps(attr_data))
 
-                    # Confirmation en retour sur l'attribut client ThingsBoard
+                    # Acknowledge back as client-side attribute
                     try:
                         await self.transports.http.post_payload(
                             host=host,
@@ -260,17 +321,27 @@ class SimulationEngine:
                             use_tls=use_tls,
                         )
                     except Exception as pe:
-                        logger.debug(f"Erreur sync attribut client en retour: {pe}")
+                        logger.debug(f"Failed to post client attribute echo: {pe}")
                 else:
                     if (time.time() - t0) < 1.0:
                         await asyncio.sleep(1.0)
             except asyncio.CancelledError:
                 break
             except Exception as e:
-                logger.debug(f"Tick polling Attributs HTTP pour '{device.id}': {e}")
+                logger.debug(f"HTTP Attribute polling tick error for '{device.id}': {e}")
                 await asyncio.sleep(2.0)
 
     async def _run_loop(self):
+        """Primary periodic evaluation loop running every tick (500ms).
+
+        Performs:
+        1. Context assembly and 3-pass causal evaluation:
+           - Pass 1: Primary driving signals (math waveforms, replays, constants).
+           - Pass 2: Derived variables via sandboxed AST formulas.
+           - Pass 3: Cumulative energy integrators (Riemann trapezoidal integration).
+        2. Cadence check and telemetry dispatching across protocol transports.
+        3. Real-time WebSocket streaming to frontend UI.
+        """
         while self.is_running:
             try:
                 now = time.time()
@@ -282,12 +353,12 @@ class SimulationEngine:
                 self._sync_device_listeners(devices_map)
                 variables = self.repo.get_variables()
 
-                # 1. Organisation du contexte de calcul par équipement
+                # Group evaluation contexts by device ID
                 device_contexts: Dict[str, Dict[str, Any]] = {}
                 for dev_id in devices_map:
                     device_contexts[dev_id] = {}
 
-                # Séparation des variables en 3 passes d'évaluation causale
+                # Segregate metrics into 3 causal dependency passes
                 primary_vars: List[VariableConfig] = []
                 derived_vars: List[VariableConfig] = []
                 integrator_vars: List[VariableConfig] = []
@@ -302,27 +373,27 @@ class SimulationEngine:
                     else:
                         primary_vars.append(var)
 
-                # Passe 1 : Évaluation des grandeurs motrices indépendantes
+                # Pass 1: Independent driving metrics (sine, square, ramp, replay)
                 for var in primary_vars:
                     val = self._compute_primary_value(var, elapsed)
                     var.current_value = val
                     self._update_context(device_contexts, var, val)
 
-                # Passe 2 : Évaluation des grandeurs dérivées (formules physiques couplées)
+                # Pass 2: Coupled physical formulas (AST evaluation)
                 for var in derived_vars:
                     ctx = device_contexts.get(var.device_id, {})
                     val = self._compute_derived_value(var, ctx)
                     var.current_value = val
                     self._update_context(device_contexts, var, val)
 
-                # Passe 3 : Évaluation des intégrateurs temporels continus (énergie = ∫ P dt)
+                # Pass 3: Continuous time integrators (Energy = ∫ Power dt)
                 for var in integrator_vars:
                     ctx = device_contexts.get(var.device_id, {})
                     val = self._compute_integrator_value(var, dt, ctx)
                     var.current_value = val
                     self._update_context(device_contexts, var, val)
 
-                # 2. Publication et streaming WebSocket pour toutes les variables actives
+                # Transmission and WebSocket emission across all active variables
                 all_active_vars = primary_vars + derived_vars + integrator_vars
                 for var in all_active_vars:
                     device = devices_map.get(var.device_id)
@@ -346,7 +417,7 @@ class SimulationEngine:
                     channel_info = ""
 
                     if should_publish:
-                        # Si anomalie timeout (perte de com), on saute la publication
+                        # Skip publication if TIMEOUT anomaly is active (simulates network outage)
                         if var.anomaly == AnomalyType.TIMEOUT:
                             continue
 
@@ -359,7 +430,7 @@ class SimulationEngine:
                             timestamp_ms=timestamp_ms,
                         )
 
-                        # Transmission unifiée selon le protocole (MQTT, HTTP, CoAP)
+                        # Unified protocol transmission (MQTT, HTTP, CoAP)
                         published, protocol_used, channel_info = await self.transports.publish(
                             device=device,
                             variable=var,
@@ -370,7 +441,7 @@ class SimulationEngine:
 
                         var.last_published = now
 
-                    # 3. Notification WebSocket pour le rafraîchissement temps réel de la GUI
+                    # Stream live update to frontend GUI over WebSockets
                     if self._ws_broadcast_callback:
                         self._ws_broadcast_callback({
                             "type": "telemetry",
@@ -391,22 +462,28 @@ class SimulationEngine:
             except asyncio.CancelledError:
                 break
             except Exception as e:
-                logger.error(f"Erreur boucle simulation: {e}")
+                logger.error(f"Error in simulation loop: {e}")
                 await asyncio.sleep(1.0)
 
     def _update_context(self, device_contexts: Dict[str, Dict[str, Any]], var: VariableConfig, val: Any):
+        """Indexes variable values in multiple identifier formats for convenient formula resolution.
+
+        Maps:
+        - Exact full ID (e.g., 'comp_01_pressure')
+        - Suffix key (e.g., 'pressure')
+        - Human-readable name (e.g., 'Pression Réseau')
+        """
         ctx = device_contexts.setdefault(var.device_id, {})
         ctx[var.id] = val
-        # Clé courte (ex: si var.id == 'comp_01_pression', on enregistre aussi 'pression')
         if "_" in var.id:
             parts = var.id.split("_")
             short_key = "_".join(parts[1:])
             ctx[short_key] = val
-            # Dernière partie comme clé directe (ex: 'pression')
             ctx[parts[-1]] = val
         ctx[var.name] = val
 
     def _compute_primary_value(self, var: VariableConfig, elapsed: float) -> Any:
+        """Evaluates an independent primary metric value."""
         if var.manual_override and var.manual_value is not None:
             return MathSignalGenerator._cast_type(var.manual_value, var.data_type)
 
@@ -426,6 +503,7 @@ class SimulationEngine:
         return self._apply_anomalies(var, val)
 
     def _compute_derived_value(self, var: VariableConfig, context: Dict[str, Any]) -> Any:
+        """Evaluates a physical dependent metric value using AST expression parsing."""
         if var.manual_override and var.manual_value is not None:
             return MathSignalGenerator._cast_type(var.manual_value, var.data_type)
 
@@ -438,6 +516,7 @@ class SimulationEngine:
         return MathSignalGenerator._cast_type(val, var.data_type)
 
     def _compute_integrator_value(self, var: VariableConfig, dt: float, context: Dict[str, Any]) -> Any:
+        """Computes continuous time integration: accumulator += source_rate * dt * scale."""
         if var.manual_override and var.manual_value is not None:
             return MathSignalGenerator._cast_type(var.manual_value, var.data_type)
 
@@ -452,7 +531,7 @@ class SimulationEngine:
             except Exception:
                 pass
         else:
-            # Recherche par suffixe
+            # Fallback search by key suffix
             for k, v in context.items():
                 if k.endswith(f"_{source_id}") or k == source_id:
                     try:
@@ -461,7 +540,7 @@ class SimulationEngine:
                     except Exception:
                         pass
 
-        # Facteur temporel (heures, minutes, secondes)
+        # Temporal scale denominator (hours, minutes, seconds)
         time_unit = getattr(var.integrator_config, "time_unit", "hour").lower()
         if time_unit == "hour":
             dt_unit = dt / 3600.0
@@ -485,7 +564,9 @@ class SimulationEngine:
         return MathSignalGenerator._cast_type(val, var.data_type)
 
     def _apply_anomalies(self, var: VariableConfig, val: Any) -> Any:
+        """Applies configured fault injection (spikes, drift) on an evaluated metric."""
         if var.anomaly == AnomalyType.SPIKE:
+            # Inject abnormal spike for exactly 3 ticks before automatically resetting
             cnt = self._anomaly_counters.get(var.id, 0)
             if cnt < 3:
                 self._anomaly_counters[var.id] = cnt + 1
@@ -496,6 +577,7 @@ class SimulationEngine:
                 self._anomaly_counters[var.id] = 0
 
         elif var.anomaly == AnomalyType.DRIFT:
+            # Progressive linear drift increment
             curr_drift = self._drift_offsets.get(var.id, 0.0)
             curr_drift += (var.anomaly_magnitude / 100.0)
             self._drift_offsets[var.id] = curr_drift
@@ -506,9 +588,14 @@ class SimulationEngine:
 
         return MathSignalGenerator._cast_type(val, var.data_type)
 
-
     def trigger_anomaly(self, var_id: str, anomaly: AnomalyType, magnitude: float = 50.0):
-        """Déclenche une anomalie à la volée (idéal pour déclencher les alertes ThingsBoard)."""
+        """Triggers a real-time fault or chaos injection on a specific variable.
+
+        Args:
+            var_id: Unique variable identifier.
+            anomaly: Fault injection mode (SPIKE, DRIFT, FREEZE, TIMEOUT, or NONE).
+            magnitude: Magnitude amplitude or bias deviation.
+        """
         var = self.repo.get_variable(var_id)
         if var:
             var.anomaly = anomaly
@@ -516,27 +603,42 @@ class SimulationEngine:
             self._anomaly_counters[var_id] = 0
             if anomaly == AnomalyType.NONE:
                 self._drift_offsets[var_id] = 0.0
-            logger.info(f"Anomalie '{anomaly.value}' appliquée sur la variable {var_id}")
+            logger.info(f"Anomaly '{anomaly.value}' triggered on variable '{var_id}' (magnitude={magnitude})")
 
     def _handle_rpc(self, device_id: str, topic: str, payload: str):
-        """Gestion bidirectionnelle des requêtes ThingsBoard / MQTT entrantes (RPC et Shared Attributes)."""
-        logger.info(f"Message de contrôle reçu pour '{device_id}' sur {topic}: {payload}")
+        """Dispatches bidirectional control orders from ThingsBoard (MQTT RPC and Shared Attributes).
+
+        Supports:
+        - ThingsBoard Shared Attributes updates on `v1/devices/me/attributes`.
+        - ThingsBoard Two-way / One-way RPC requests on `v1/devices/me/rpc/request/{id}`.
+        - Direct method bindings (`setValue`, `toggle`, `set_<variable_name>`).
+        - Immediate synchronous response and attribute acknowledgment.
+
+        Args:
+            device_id: Target device identifier.
+            topic: Inbound destination topic.
+            payload: Raw JSON string received from broker or long-poll HTTP.
+
+        Returns:
+            Any: Result value applied or returned to caller.
+        """
+        logger.info(f"Control command received for '{device_id}' on {topic}: {payload}")
         try:
             data = json.loads(payload) if payload else {}
         except Exception as e:
-            logger.warning(f"Payload de contrôle non JSON reçu sur {topic}: {payload} ({e})")
+            logger.warning(f"Non-JSON control payload received on {topic}: {payload} ({e})")
             return
 
         variables = self.repo.get_variables()
         dev_vars = [v for v in variables if v.device_id == device_id or device_id == "global"]
 
         def get_clean_key(v: VariableConfig) -> str:
+            """Strips device ID prefix to resolve short metric identifier."""
             if v.device_id and v.id.startswith(f"{v.device_id}_"):
                 return v.id[len(v.device_id) + 1:]
             return v.id
 
-        # CAS 1 : Mise à jour d'Attributs Partagés (Shared Attributes)
-        # ThingsBoard publie directement les modifications sur 'v1/devices/me/attributes'
+        # Case 1: ThingsBoard Shared Attributes updates
         if topic == "v1/devices/me/attributes" or "attributes" in topic:
             if isinstance(data, dict):
                 modified = False
@@ -551,7 +653,7 @@ class SimulationEngine:
                             if var.math_config and var.sim_mode == SimMode.CONSTANT:
                                 var.math_config.constant_val = cast_val
                             modified = True
-                            logger.info(f"✓ Attribut partagé ThingsBoard appliqué pour '{device_id}' : {ck} = {cast_val}")
+                            logger.info(f"✓ ThingsBoard shared attribute applied for '{device_id}': {ck} = {cast_val}")
                 if modified:
                     self.repo.save_variables(variables)
                     if self._ws_broadcast_callback:
@@ -572,8 +674,7 @@ class SimulationEngine:
                             })
             return
 
-        # CAS 2 : Requête RPC ThingsBoard (Boutons, Switches, Sliders)
-        # Topic format : v1/devices/me/rpc/request/{request_id}
+        # Case 2: ThingsBoard RPC request (round switches, buttons, sliders)
         if "rpc/request/" in topic:
             req_id = topic.split("/")[-1]
             method = data.get("method", "")
@@ -582,10 +683,10 @@ class SimulationEngine:
             target_var: Optional[VariableConfig] = None
             new_val: Any = None
 
-            # Normalisation de la méthode RPC
+            # Normalize method name for fuzzy matching
             norm_method = method.lower().replace("-", "_").replace(" ", "_")
 
-            # 1. Recherche par correspondance de nom de variable dans la méthode
+            # 1. Direct variable name match in method name
             for var in dev_vars:
                 ck = get_clean_key(var).lower()
                 var_id_low = var.id.lower()
@@ -599,10 +700,10 @@ class SimulationEngine:
                     target_var = var
                     break
 
-            # 2. Si la méthode est générique (ex: 'setValue', 'set', 'toggle', 'write')
+            # 2. Generic control methods (e.g. 'setValue', 'set', 'toggle', 'write')
             if not target_var and norm_method in ("setvalue", "set", "toggle", "write"):
                 if isinstance(params, dict):
-                    # params contient un dictionnaire clé/valeur ex: {"mode_chaud": false}
+                    # Key-value dictionary passed in params (e.g., {"heater_mode": false})
                     for k, v in params.items():
                         for var in dev_vars:
                             if get_clean_key(var).lower() == k.lower():
@@ -614,12 +715,12 @@ class SimulationEngine:
                 elif len(dev_vars) == 1:
                     target_var = dev_vars[0]
                 else:
-                    # Préférer la première variable de type ATTRIBUTE de l'équipement
+                    # Prefer first ATTRIBUTE type metric
                     attr_vars = [v for v in dev_vars if v.var_type.value == "attribute"]
                     if attr_vars:
                         target_var = attr_vars[0]
 
-            # 3. Si la méthode est une lecture d'état ('getValue', 'get_<key>')
+            # 3. Getter read queries ('getValue', 'get_<key>')
             if norm_method.startswith("get"):
                 read_var = target_var
                 if not read_var:
@@ -631,13 +732,13 @@ class SimulationEngine:
                 cur_val = read_var.current_value if read_var else True
                 resp = json.dumps({"value": cur_val, "status": "SUCCESS"})
                 self.mqtt.publish_device_message(device_id, f"v1/devices/me/rpc/response/{req_id}", resp)
-                logger.info(f"✓ Réponse RPC GET émise pour '{device_id}' (req #{req_id}) : {resp}")
+                logger.info(f"✓ Emitted RPC GET response for '{device_id}' (req #{req_id}): {resp}")
                 return cur_val
 
             if target_var:
                 self._last_rpc_modified_key = get_clean_key(target_var)
                 if norm_method.startswith("toggle"):
-                    # Bascule booléenne
+                    # Boolean flip
                     cur = bool(target_var.current_value)
                     new_val = not cur
                 elif params is not None:
@@ -652,17 +753,17 @@ class SimulationEngine:
                     target_var.math_config.constant_val = new_val
 
                 self.repo.save_variables(variables)
-                logger.info(f"✓ Commande RPC exécutée avec succès pour '{device_id}' : {get_clean_key(target_var)} = {new_val}")
+                logger.info(f"✓ Executed RPC command for '{device_id}': {get_clean_key(target_var)} = {new_val}")
 
-                # Réponse RPC obligatoire pour valider la bascule du switch ThingsBoard
+                # Mandatory synchronous response preventing ThingsBoard switch timeout
                 resp_payload = json.dumps({"status": "SUCCESS", "value": new_val})
                 self.mqtt.publish_device_message(device_id, f"v1/devices/me/rpc/response/{req_id}", resp_payload)
 
-                # Synchronisation d'attribut retour pour acquitter ThingsBoard
+                # Client-side attribute echo to finalize UI toggle state
                 clean_name = get_clean_key(target_var)
                 self.mqtt.publish_device_message(device_id, "v1/devices/me/attributes", json.dumps({clean_name: new_val}))
 
-                # Actualisation immédiate du dashboard web local du simulateur
+                # Immediately notify local simulator frontend via WebSocket
                 if self._ws_broadcast_callback:
                     self._ws_broadcast_callback({
                         "type": "telemetry",
@@ -680,7 +781,7 @@ class SimulationEngine:
                     })
                 return new_val
             else:
-                # Répondre tout de même pour éviter le timeout de ThingsBoard
+                # Emit NOT_FOUND response to prevent client hang
                 self.mqtt.publish_device_message(device_id, f"v1/devices/me/rpc/response/{req_id}", json.dumps({"status": "NOT_FOUND"}))
-                logger.warning(f"Commande RPC ignorée : aucune variable correspondante pour {method} sur '{device_id}'")
+                logger.warning(f"Ignored RPC command: no matching variable for method '{method}' on '{device_id}'")
                 return None

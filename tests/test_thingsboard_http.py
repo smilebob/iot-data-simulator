@@ -1,3 +1,10 @@
+"""
+Unit Tests for ThingsBoard HTTP Client and REST Diagnostics
+===========================================================
+Validates browser-compliant User-Agent header generation, URL prefix sanitization,
+RPC response endpoints, and connectivity diagnostics.
+"""
+
 import sys
 import os
 import types
@@ -8,6 +15,7 @@ from unittest.mock import MagicMock, AsyncMock, patch
 if 'pydantic' not in sys.modules:
     pyd = types.ModuleType('pydantic')
     class BaseModel:
+        """Mock BaseModel."""
         def __init__(self, **kwargs):
             for k, v in kwargs.items(): setattr(self, k, v)
     pyd.BaseModel = BaseModel
@@ -30,6 +38,7 @@ from app.transports.http_client import ThingsBoardHttpClient, DEFAULT_HEADERS
 
 
 def test_headers_and_rpc():
+    """Validates HTTP headers and RPC response formatting."""
     print("Testing DEFAULT_HEADERS and RPC headers...")
     assert "User-Agent" in DEFAULT_HEADERS
     assert "Mozilla" in DEFAULT_HEADERS["User-Agent"]
@@ -63,23 +72,24 @@ def test_headers_and_rpc():
 
 
 def test_build_url_sanitization():
+    """Validates host URI sanitization across protocols and port overrides."""
     print("Testing ThingsBoardHttpClient.build_url sanitization...")
-    # 1. Hôte avec https://
+    # 1. Host with https://
     url, tls = ThingsBoardHttpClient.build_url("https://easythings.app.eiffageenergiesystemes.com", 443, "/api/v1/tok123/telemetry", use_tls=False)
     assert url == "https://easythings.app.eiffageenergiesystemes.com/api/v1/tok123/telemetry"
     assert tls is True
 
-    # 2. Hôte avec http:// et port personnalisé
+    # 2. Host with http:// and custom port
     url, tls = ThingsBoardHttpClient.build_url("http://192.168.1.50:8080", 8080, "api/v1/tok123/telemetry", use_tls=True)
     assert url == "http://192.168.1.50:8080/api/v1/tok123/telemetry"
     assert tls is False
 
-    # 3. Hôte standard cloud avec port 443
+    # 3. Standard Cloud host on port 443
     url, tls = ThingsBoardHttpClient.build_url("thingsboard.cloud", 443, "/api/v1/tok123/attributes", use_tls=True)
     assert url == "https://thingsboard.cloud/api/v1/tok123/attributes"
     assert tls is True
 
-    # 4. Hôte local standard port 80
+    # 4. Standard local host on port 80
     url, tls = ThingsBoardHttpClient.build_url("localhost", 80, "/api/v1/tok123/telemetry", use_tls=False)
     assert url == "http://localhost/api/v1/tok123/telemetry"
     assert tls is False
@@ -87,6 +97,7 @@ def test_build_url_sanitization():
 
 
 def test_connectivity_diagnostic():
+    """Validates HTTP diagnostic responses (200 OK vs 401 Unauthorized vs network error)."""
     print("Testing test_connectivity responses (200 OK vs 401 Unauthorized)...")
     client = ThingsBoardHttpClient()
 
@@ -103,11 +114,11 @@ def test_connectivity_diagnostic():
         with patch.object(client, 'post_payload', new_callable=AsyncMock) as mock_post:
             mock_post.return_value = (False, "HTTP 401 Non Autorisé")
             diag = await client.test_connectivity("easythings.app.eiffageenergiesystemes.com", 443, "bad_token", use_tls=True)
-            assert diag["success"] is True       # Le serveur est bien joignable
-            assert diag["token_valid"] is False  # Mais le token est invalide
+            assert diag["success"] is True       # Host is reachable
+            assert diag["token_valid"] is False  # Token rejected
             assert "rejeté" in diag["recommendations"][0]
 
-        # Simulation Panne Réseau
+        # Simulation Network Outage
         with patch.object(client, 'post_payload', new_callable=AsyncMock) as mock_post:
             mock_post.return_value = (False, "Connection refused")
             diag = await client.test_connectivity("offline.host", 443, "token", use_tls=True)

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
-Mise à jour exhaustive des 32 fiches documentaires de cas d'usage métiers
-(Documentation/use_cases/*/*.md) avec les spécifications du pilotage bidirectionnel,
-des widgets de contrôle ThingsBoard 4.3 et des synoptiques SCADA P&ID vectoriels.
+Industrial Use Case Documentation Batch Synchronizer
+===================================================
+Synchronizes all 32 industrial equipment documentation files
+(`Documentation/use_cases/*/*.md`) with bidirectional control specifications,
+ThingsBoard 4.3 interactive control widgets, and vector SCADA P&ID synoptics.
 """
 
 import os
@@ -10,22 +12,31 @@ import sys
 import glob
 import types
 
-# Mocks minimaux pour exécution sans dépendances externes
+# Lightweight mock stubs for execution outside container environments
 pyd = types.ModuleType('pydantic')
 class BaseModel:
+    """Mock Pydantic BaseModel for standalone CLI execution."""
     def __init__(self, **kwargs):
-        for k, v in kwargs.items(): setattr(self, k, v)
+        for k, v in kwargs.items():
+            setattr(self, k, v)
     def model_copy(self, deep=True):
-        import copy; return copy.deepcopy(self)
-    def model_dump(self): return self.__dict__
+        import copy
+        return copy.deepcopy(self)
+    def model_dump(self):
+        return self.__dict__
+
 def Field(default=None, default_factory=None, **kwargs):
-    if default_factory: return default_factory()
+    """Mock Pydantic Field."""
+    if default_factory:
+        return default_factory()
     return default
+
 pyd.BaseModel = BaseModel
 pyd.Field = Field
 pyd.field_validator = lambda *a, **k: (lambda f: f)
 sys.modules['pydantic'] = pyd
 
+# Mock transport and networking dependencies
 for mod in ['paho', 'paho.mqtt', 'paho.mqtt.client', 'fastapi', 'fastapi.responses', 'aiocoap', 'httpx']:
     m = types.ModuleType(mod)
     m.Client = lambda *a, **k: None
@@ -46,16 +57,33 @@ CAT_DIR_MAP = {
 }
 
 def clean_key(var_id: str) -> str:
+    """Sanitizes variable identifier replacing hyphens with underscores.
+
+    Args:
+        var_id: Raw variable identifier string.
+
+    Returns:
+        Cleaned telemetry key string.
+    """
     return var_id.replace('-', '_')
 
-def generate_section_6(eq, rel_dir):
+def generate_section_6(eq, rel_dir: str) -> str:
+    """Generates Markdown content for Section 6 (ThingsBoard 4.3 Interactive Dashboards & SCADA).
+
+    Args:
+        eq: Equipment preset model.
+        rel_dir: Relative subfolder directory name.
+
+    Returns:
+        Formatted Markdown text for Section 6.
+    """
     dash_rel = f"dashboards/thingsboard/{rel_dir}/{eq.id}.json"
     dash_link = f"[`{dash_rel}`](file://{BASE_DIR}/{dash_rel})"
     
     telemetries = [v for v in eq.variables if v.var_type == VariableType.TELEMETRY]
     attributes = [v for v in eq.variables if v.var_type == VariableType.ATTRIBUTE]
 
-    # Description jauges
+    # Gauges list description
     jauges_list = ", ".join([f"{v.name} ({v.unit})" if v.unit else v.name for v in telemetries[:3]])
 
     sec6 = f"## 6. Pilotage Interactif & Tableaux de Bord ThingsBoard 4.3\n\n"
@@ -78,7 +106,15 @@ def generate_section_6(eq, rel_dir):
 
     return sec6
 
-def enhance_section_4_2(eq):
+def enhance_section_4_2(eq) -> str:
+    """Generates Markdown content for Section 4.2 (State Attributes & RPC Commands).
+
+    Args:
+        eq: Equipment preset model.
+
+    Returns:
+        Formatted Markdown text for Section 4.2.
+    """
     attributes = [v for v in eq.variables if v.var_type == VariableType.ATTRIBUTE]
     
     sec4_2 = "### 4.2 Attributs d'État Partagés, Client & RPC ThingsBoard\n\n"
@@ -118,12 +154,18 @@ def enhance_section_4_2(eq):
     
     return sec4_2
 
-def update_doc_file(doc_path, eq, rel_dir):
+def update_doc_file(doc_path: str, eq, rel_dir: str):
+    """Updates an existing use case documentation file in place.
+
+    Args:
+        doc_path: File system path to the target .md file.
+        eq: Equipment preset model.
+        rel_dir: Relative subfolder directory name.
+    """
     with open(doc_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     # 1. Update Section 4.2
-    # Find ### 4.2 up to ## 5.
     idx_4_2 = content.find('### 4.2')
     idx_5 = content.find('## 5.')
     if idx_4_2 != -1 and idx_5 != -1:
@@ -131,7 +173,6 @@ def update_doc_file(doc_path, eq, rel_dir):
         content = content[:idx_4_2] + new_4_2 + "\n---\n\n" + content[idx_5:]
 
     # 2. Update Section 6
-    # Find ## 6.
     idx_6 = content.find('## 6.')
     if idx_6 != -1:
         new_6 = generate_section_6(eq, rel_dir)
@@ -144,6 +185,7 @@ def update_doc_file(doc_path, eq, rel_dir):
         f.write(content)
 
 def main():
+    """CLI entrypoint scanning and updating all 32 use case documentation sheets."""
     catalog = {eq.id: eq for eq in get_equipment_catalog()}
     docs = sorted(glob.glob(os.path.join(BASE_DIR, 'Documentation/use_cases/*/*.md')))
     updated_count = 0

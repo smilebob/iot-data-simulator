@@ -1,3 +1,21 @@
+"""
+ThingsBoard HTTP / HTTPS REST API Client with Long-Polling and Dual Fallback.
+
+This module implements an asynchronous HTTP client optimized for ThingsBoard's
+REST v1 device gateway API:
+- Telemetry: `POST /api/v1/{token}/telemetry`
+- Client Attributes: `POST /api/v1/{token}/attributes`
+- Shared Attribute Polling: `GET /api/v1/{token}/attributes/updates?timeout={ms}`
+- Bidirectional RPC Polling: `GET /api/v1/{token}/rpc?timeout={ms}`
+- RPC Response: `POST /api/v1/{token}/rpc/{id}`
+
+Execution Engine & Fault Tolerance:
+- Uses `httpx.AsyncClient` with non-blocking async sockets when available.
+- Seamlessly falls back to `asyncio.to_thread` wrapping standard library `urllib.request`
+  if `httpx` is not installed, eliminating external dependencies.
+- Handles Cloudflare / WAF security challenges, TLS verification bypass, and HTTP 401/403 diagnostics.
+"""
+
 from __future__ import annotations
 
 import json
@@ -14,21 +32,40 @@ DEFAULT_HEADERS = {
 
 class ThingsBoardHttpClient:
     """
-    Client de transmission HTTP / HTTPS vers l'API REST v1 de ThingsBoard.
-    Supporte :
-    - Télémétrie : POST /api/v1/{token}/telemetry
-    - Attributs : POST /api/v1/{token}/attributes
-    - Fallback transparent (httpx si présent, urllib natif standard en alternative)
+    HTTP/HTTPS communication client for ThingsBoard v1 REST API.
+
+    Supports one-way telemetry publishing, bidirectional RPC execution,
+    and long-polling for real-time shared attribute updates.
+
+    Attributes:
+        timeout: Request timeout duration in seconds.
     """
 
-    def __init__(self, timeout: float = 5.0):
-        self.timeout = timeout
+    def __init__(self, timeout: float = 5.0) -> None:
+        """
+        Initializes the HTTP client.
+
+        Args:
+            timeout: Connection and read timeout in seconds. Defaults to 5.0.
+        """
+        self.timeout: float = timeout
 
     @staticmethod
     def build_url(host: str, port: int, endpoint: str, use_tls: bool) -> Tuple[str, bool]:
         """
-        Assainit l'hôte, déduit le schéma TLS et construit l'URL absolue sans duplication.
-        Tolère les préfixes 'http://', 'https://' ou les suffixes de chemin saisis par l'utilisateur.
+        Sanitizes hostname inputs, resolves scheme, and constructs an absolute URL.
+
+        Gracefully strips accidental protocol prefixes ('http://', 'https://'),
+        inline port numbers, or trailing slashes in user-provided host strings.
+
+        Args:
+            host: Target hostname or IP address.
+            port: Target port number.
+            endpoint: URL path endpoint (e.g., '/api/v1/{token}/telemetry').
+            use_tls: Flag requesting HTTPS encryption.
+
+        Returns:
+            Tuple[str, bool]: Canonical URL and effective TLS boolean state.
         """
         h = (host or "localhost").strip()
         actual_tls = use_tls
@@ -39,7 +76,7 @@ class ThingsBoardHttpClient:
             h = h[7:]
             actual_tls = False
 
-        # Supprimer tout port ou chemin résiduel dans le champ host
+        # Strip lingering port or path parts from the host string
         h = h.split("/")[0].strip()
         if ":" in h:
             parts = h.split(":")
@@ -66,14 +103,25 @@ class ThingsBoardHttpClient:
         use_tls: bool = True,
     ) -> Tuple[bool, str]:
         """
-        Transmet un payload JSON vers l'endpoint ThingsBoard spécifié.
-        Retourne (success, message_ou_erreur).
+        Transmits a JSON payload to a specified ThingsBoard REST endpoint.
+
+        Attempts execution via `httpx` first; falls back to standard `urllib` on ImportError.
+
+        Args:
+            host: Target server host.
+            port: Target port.
+            endpoint: Relative path endpoint.
+            payload: Serialized JSON payload string.
+            use_tls: Whether to use HTTPS. Defaults to True.
+
+        Returns:
+            Tuple[bool, str]: Success boolean and HTTP status or error description.
         """
         url, use_tls = self.build_url(host, port, endpoint, use_tls)
         req_headers = {**DEFAULT_HEADERS, "Content-Type": "application/json"}
 
         try:
-            # Essai avec httpx si disponible
+            # Attempt with httpx if installed
             try:
                 import httpx
                 async with httpx.AsyncClient(verify=False, timeout=self.timeout) as client:
@@ -85,19 +133,19 @@ class ThingsBoardHttpClient:
                     if resp.status_code in (200, 204):
                         return True, f"HTTP {resp.status_code}"
                     elif resp.status_code == 401:
-                        err_msg = f"HTTP 401 Non Autorisé (Vérifiez le Token de l'équipement) sur {url}"
+                        err_msg = f"HTTP 401 Unauthorized (Check Device Access Token) on {url}"
                         logger.error(err_msg)
                         return False, err_msg
                     elif resp.status_code == 403:
-                        err_msg = f"HTTP 403 Interdit (Vérifiez les règles Cloudflare / WAF) sur {url}"
+                        err_msg = f"HTTP 403 Forbidden (Check Cloudflare / WAF rules) on {url}"
                         logger.error(err_msg)
                         return False, err_msg
                     else:
-                        err_msg = f"HTTP {resp.status_code} ({resp.text[:100]}) sur {url}"
+                        err_msg = f"HTTP {resp.status_code} ({resp.text[:100]}) on {url}"
                         logger.warning(err_msg)
                         return False, err_msg
             except ImportError:
-                # Fallback sur urllib standard
+                # Fallback to standard library urllib
                 import asyncio
                 import ssl
                 import urllib.error
@@ -118,17 +166,17 @@ class ThingsBoardHttpClient:
                             return True, f"HTTP {resp.status}"
                     except urllib.error.HTTPError as he:
                         if he.code == 401:
-                            return False, f"HTTP 401 Non Autorisé (Vérifiez le Token de l'équipement) sur {url}"
+                            return False, f"HTTP 401 Unauthorized (Check Device Access Token) on {url}"
                         elif he.code == 403:
-                            return False, f"HTTP 403 Interdit (Vérifiez les règles Cloudflare / WAF) sur {url}"
-                        return False, f"HTTP {he.code} ({he.reason}) sur {url}"
+                            return False, f"HTTP 403 Forbidden (Check Cloudflare / WAF rules) on {url}"
+                        return False, f"HTTP {he.code} ({he.reason}) on {url}"
                     except Exception as ex:
-                        return False, f"Erreur réseau: {ex}"
+                        return False, f"Network error: {ex}"
 
                 return await asyncio.to_thread(_sync_post)
 
         except Exception as e:
-            err_msg = f"Erreur transmission HTTP vers {url}: {e}"
+            err_msg = f"HTTP transmission error to {url}: {e}"
             logger.error(err_msg)
             return False, str(e)
 
@@ -141,8 +189,19 @@ class ThingsBoardHttpClient:
         use_tls: bool = True,
     ) -> Optional[Dict[str, Any]]:
         """
-        Interroge ThingsBoard en Long-Polling HTTP pour recevoir les commandes RPC descendantes.
-        GET /api/v1/{token}/rpc?timeout={timeout_ms}
+        Polls ThingsBoard via HTTP Long-Polling for pending downstream RPC commands.
+
+        Issues a GET request to `/api/v1/{token}/rpc?timeout={timeout_ms}`.
+
+        Args:
+            host: ThingsBoard server hostname.
+            port: ThingsBoard server port.
+            token: Device access token.
+            timeout_sec: Long-polling hold duration in seconds. Defaults to 15.
+            use_tls: HTTPS encryption flag. Defaults to True.
+
+        Returns:
+            Optional[Dict[str, Any]]: Deserialized RPC request dictionary if received, else None.
         """
         endpoint = f"/api/v1/{token}/rpc?timeout={int(timeout_sec * 1000)}"
         url, use_tls = self.build_url(host, port, endpoint, use_tls)
@@ -156,9 +215,9 @@ class ThingsBoardHttpClient:
                     if resp.status_code == 200 and resp.text.strip():
                         return resp.json()
                     elif resp.status_code == 401:
-                        logger.error(f"❌ [HTTP RPC] HTTP 401 Non Autorisé sur {url} : Token '{token[:4]}***' rejeté par ThingsBoard")
+                        logger.error(f"❌ [HTTP RPC] HTTP 401 Unauthorized on {url}: Token '{token[:4]}***' rejected by ThingsBoard")
                     elif resp.status_code == 403:
-                        logger.error(f"❌ [HTTP RPC] HTTP 403 Interdit sur {url} (Rejeté par Cloudflare / WAF)")
+                        logger.error(f"❌ [HTTP RPC] HTTP 403 Forbidden on {url} (Blocked by Cloudflare / WAF)")
                     return None
             except ImportError:
                 import asyncio
@@ -179,22 +238,22 @@ class ThingsBoardHttpClient:
                                     return json.loads(body)
                     except urllib.error.HTTPError as he:
                         if he.code == 401:
-                            logger.error(f"❌ [HTTP RPC] HTTP 401 Non Autorisé sur {url} : Token '{token[:4]}***' rejeté par ThingsBoard")
+                            logger.error(f"❌ [HTTP RPC] HTTP 401 Unauthorized on {url}: Token '{token[:4]}***' rejected by ThingsBoard")
                         elif he.code == 403:
-                            logger.error(f"❌ [HTTP RPC] HTTP 403 Interdit sur {url} (Rejeté par Cloudflare / WAF)")
+                            logger.error(f"❌ [HTTP RPC] HTTP 403 Forbidden on {url} (Blocked by Cloudflare / WAF)")
                         elif he.code in (408, 504):
-                            pass  # Timeout normal du Long-Polling ThingsBoard
+                            pass  # Standard ThingsBoard long-polling timeout
                         else:
-                            logger.warning(f"⚠️ [HTTP RPC] Code HTTP {he.code} sur {url}")
+                            logger.warning(f"⚠️ [HTTP RPC] HTTP status code {he.code} on {url}")
                     except (urllib.error.URLError, TimeoutError, OSError) as ue:
                         err_str = str(ue).lower()
                         if "timed out" not in err_str and "timeout" not in err_str:
-                            logger.debug(f"[HTTP RPC] Exception polling sur {url} : {ue}")
+                            logger.debug(f"[HTTP RPC] Polling exception on {url}: {ue}")
                     return None
 
                 return await asyncio.to_thread(_sync_get)
         except Exception as e:
-            logger.debug(f"[HTTP RPC] Erreur inattendue poll_rpc : {e}")
+            logger.debug(f"[HTTP RPC] Unexpected poll_rpc error: {e}")
             return None
 
     async def poll_attribute_updates(
@@ -206,8 +265,19 @@ class ThingsBoardHttpClient:
         use_tls: bool = True,
     ) -> Optional[Dict[str, Any]]:
         """
-        Interroge ThingsBoard en Long-Polling HTTP pour recevoir les mises à jour des Attributs Partagés.
-        GET /api/v1/{token}/attributes/updates?timeout={timeout_ms}
+        Polls ThingsBoard via HTTP Long-Polling for updates to Shared Attributes.
+
+        Issues a GET request to `/api/v1/{token}/attributes/updates?timeout={timeout_ms}`.
+
+        Args:
+            host: ThingsBoard server hostname.
+            port: ThingsBoard server port.
+            token: Device access token.
+            timeout_sec: Long-polling hold duration in seconds. Defaults to 20.
+            use_tls: HTTPS encryption flag. Defaults to True.
+
+        Returns:
+            Optional[Dict[str, Any]]: Dictionary of updated shared attributes, or None if timed out.
         """
         endpoint = f"/api/v1/{token}/attributes/updates?timeout={int(timeout_sec * 1000)}"
         url, use_tls = self.build_url(host, port, endpoint, use_tls)
@@ -221,9 +291,9 @@ class ThingsBoardHttpClient:
                     if resp.status_code == 200 and resp.text.strip():
                         return resp.json()
                     elif resp.status_code == 401:
-                        logger.error(f"❌ [HTTP Attributes] HTTP 401 Non Autorisé sur {url} : Token '{token[:4]}***' rejeté")
+                        logger.error(f"❌ [HTTP Attributes] HTTP 401 Unauthorized on {url}: Token '{token[:4]}***' rejected")
                     elif resp.status_code == 403:
-                        logger.error(f"❌ [HTTP Attributes] HTTP 403 Interdit sur {url} (Rejeté par Cloudflare / WAF)")
+                        logger.error(f"❌ [HTTP Attributes] HTTP 403 Forbidden on {url} (Blocked by Cloudflare / WAF)")
                     return None
             except ImportError:
                 import asyncio
@@ -244,16 +314,16 @@ class ThingsBoardHttpClient:
                                     return json.loads(body)
                     except urllib.error.HTTPError as he:
                         if he.code == 401:
-                            logger.error(f"❌ [HTTP Attributes] HTTP 401 sur {url}")
+                            logger.error(f"❌ [HTTP Attributes] HTTP 401 on {url}")
                         elif he.code in (408, 504):
-                            pass  # Timeout normal du Long-Polling
+                            pass  # Standard long-polling timeout
                     except Exception:
                         pass
                     return None
 
                 return await asyncio.to_thread(_sync_get)
         except Exception as e:
-            logger.debug(f"[HTTP Attributes] Erreur poll_attribute_updates : {e}")
+            logger.debug(f"[HTTP Attributes] Error poll_attribute_updates: {e}")
             return None
 
     async def get_shared_attributes(
@@ -265,8 +335,19 @@ class ThingsBoardHttpClient:
         use_tls: bool = True,
     ) -> Optional[Dict[str, Any]]:
         """
-        Récupère les valeurs actuelles des attributs partagés sur ThingsBoard.
-        GET /api/v1/{token}/attributes?sharedKeys=key1,key2
+        Fetches current values of shared attributes from ThingsBoard.
+
+        Issues a GET request to `/api/v1/{token}/attributes?sharedKeys=key1,key2`.
+
+        Args:
+            host: ThingsBoard server hostname.
+            port: ThingsBoard server port.
+            token: Device access token.
+            shared_keys: Optional list of attribute keys to retrieve.
+            use_tls: HTTPS encryption flag. Defaults to True.
+
+        Returns:
+            Optional[Dict[str, Any]]: Key-value dictionary of shared attributes, or None on failure.
         """
         query = f"?sharedKeys={','.join(shared_keys)}" if shared_keys else ""
         endpoint = f"/api/v1/{token}/attributes{query}"
@@ -304,7 +385,7 @@ class ThingsBoardHttpClient:
 
                 return await asyncio.to_thread(_sync_get)
         except Exception as e:
-            logger.debug(f"[HTTP Attributes] Erreur get_shared_attributes : {e}")
+            logger.debug(f"[HTTP Attributes] Error get_shared_attributes: {e}")
             return None
 
     async def respond_rpc(
@@ -317,8 +398,20 @@ class ThingsBoardHttpClient:
         use_tls: bool = True,
     ) -> bool:
         """
-        Répond à une commande RPC bidirectionnelle ThingsBoard sur l'API HTTP.
-        POST /api/v1/{token}/rpc/{req_id}
+        Sends an acknowledgement and result for a bidirectional ThingsBoard RPC request.
+
+        Issues a POST request to `/api/v1/{token}/rpc/{req_id}`.
+
+        Args:
+            host: ThingsBoard server hostname.
+            port: ThingsBoard server port.
+            token: Device access token.
+            req_id: Unique RPC request ID issued by ThingsBoard.
+            resp_payload: Serialized JSON response string.
+            use_tls: HTTPS encryption flag. Defaults to True.
+
+        Returns:
+            bool: True if response was accepted by ThingsBoard, False otherwise.
         """
         endpoint = f"/api/v1/{token}/rpc/{req_id}"
         success, detail = await self.post_payload(
@@ -329,9 +422,9 @@ class ThingsBoardHttpClient:
             use_tls=use_tls,
         )
         if success:
-            logger.info(f"📤 [HTTP RPC] Réponse acquittée avec succès pour req #{req_id} vers {endpoint}")
+            logger.info(f"📤 [HTTP RPC] Successfully acknowledged response for req #{req_id} to {endpoint}")
         else:
-            logger.error(f"❌ [HTTP RPC] Échec acquittement réponse {endpoint} : {detail}")
+            logger.error(f"❌ [HTTP RPC] Failed acknowledging response to {endpoint}: {detail}")
         return success
 
     async def test_connectivity(
@@ -342,7 +435,19 @@ class ThingsBoardHttpClient:
         use_tls: bool = True,
     ) -> Dict[str, Any]:
         """
-        Diagnostic de connectivité HTTP vers ThingsBoard.
+        Performs a full connectivity and authentication diagnostic to ThingsBoard REST API.
+
+        Sends a probe ping to the telemetry endpoint to evaluate round-trip latency,
+        WAF/firewall blocks, TLS handshake, and token validity.
+
+        Args:
+            host: Target server host.
+            port: Target port.
+            token: Optional device access token.
+            use_tls: Whether HTTPS is expected.
+
+        Returns:
+            Dict[str, Any]: Diagnostic report with latency, validity flags, and guidance recommendations.
         """
         token_str = token.strip() if token and token.strip() else "test_token"
         endpoint = f"/api/v1/{token_str}/telemetry"

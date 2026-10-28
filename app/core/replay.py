@@ -1,13 +1,23 @@
+"""
+Time-Series Points Replay and Interpolation Engine.
+
+Provides evaluation of pre-recorded time-series profiles with support for looping,
+playback speed scaling, linear interpolation, and CSV profile parsing.
+"""
+
 import csv
 import io
 from typing import Any, List
 from app.models.variable import PointsTableConfig, TimestampedPoint, DataType
 from app.core.generators import MathSignalGenerator
 
+
 class ReplayEngine:
-    """
-    Moteur de rejeu de tables de points horodatés et séries temporelles.
-    Supporte la répétition (boucle), l'interpolation et le multiplicateur de vitesse.
+    """Evaluates discrete time-series profiles with optional continuous interpolation.
+
+    Calculates simulated values by finding the temporal interval bounding the current
+    elapsed simulation time, scaling by playback speed, and linearly interpolating
+    between the adjacent points.
     """
 
     @staticmethod
@@ -16,18 +26,34 @@ class ReplayEngine:
         elapsed_seconds: float,
         data_type: DataType = DataType.FLOAT,
     ) -> Any:
+        """Evaluates the instantaneous value of a time-series replay profile.
+
+        Args:
+            config: Points sequence settings (points list, loop flag, speed, interpolation).
+            elapsed_seconds: Total elapsed simulation time in seconds.
+            data_type: Target data type for output casting.
+
+        Returns:
+            Any: Interpolated or discrete point value cast to the requested DataType.
+
+        Example:
+            >>> pts = [TimestampedPoint(offset_seconds=0, value=10), TimestampedPoint(offset_seconds=10, value=20)]
+            >>> cfg = PointsTableConfig(points=pts, loop=True, interpolate=True)
+            >>> ReplayEngine.evaluate(cfg, 5.0)
+            15.0
+        """
         points = config.points
         if not points:
             return 0.0
 
-        # Tri des points par offset_seconds
+        # Ensure points are strictly sorted by chronological offset
         sorted_points = sorted(points, key=lambda p: p.offset_seconds)
         total_duration = sorted_points[-1].offset_seconds
 
         if total_duration <= 0:
             return MathSignalGenerator._cast_type(sorted_points[0].value, data_type)
 
-        # Application du multiplicateur de vitesse
+        # Apply playback acceleration or deceleration multiplier
         effective_time = elapsed_seconds * max(config.playback_speed, 0.01)
 
         if config.loop:
@@ -35,7 +61,7 @@ class ReplayEngine:
         else:
             t = min(effective_time, total_duration)
 
-        # Trouver les deux points encadrants
+        # Locate the bounding interval [p_prev, p_next]
         p_prev = sorted_points[0]
         p_next = sorted_points[-1]
 
@@ -45,10 +71,11 @@ class ReplayEngine:
                 p_next = sorted_points[i + 1]
                 break
 
+        # Step evaluation if interpolation is disabled or data type is discrete
         if not config.interpolate or data_type in (DataType.BOOLEAN, DataType.STRING):
             return MathSignalGenerator._cast_type(p_prev.value, data_type)
 
-        # Interpolation linéaire
+        # Continuous linear interpolation: y = y0 + α * (y1 - y0) where α = (t - t0) / dt
         dt = p_next.offset_seconds - p_prev.offset_seconds
         if dt <= 1e-6:
             return MathSignalGenerator._cast_type(p_prev.value, data_type)
@@ -64,8 +91,16 @@ class ReplayEngine:
 
     @staticmethod
     def parse_csv_points(content: str) -> List[TimestampedPoint]:
-        """
-        Analyse sécurisée d'un flux CSV (colonnes offset_seconds, value ou time, value)
+        """Parses a CSV string into a validated list of TimestampedPoints.
+
+        Accepts two-column CSV formats (e.g., 'offset_seconds,value' or 'time,temperature').
+        Automatically detects and skips header rows.
+
+        Args:
+            content: Raw CSV text string.
+
+        Returns:
+            List[TimestampedPoint]: Chronologically ordered list of parsed points.
         """
         points: List[TimestampedPoint] = []
         reader = csv.reader(io.StringIO(content.strip()))
@@ -76,11 +111,11 @@ class ReplayEngine:
                 continue
             if first_row:
                 first_row = False
-                # Vérifier si c'est un en-tête
+                # Detect and skip non-numeric header row
                 try:
                     float(row[0])
                 except ValueError:
-                    continue  # C'est un en-tête (ex: 'time,val')
+                    continue
 
             try:
                 offset_sec = float(row[0].strip())

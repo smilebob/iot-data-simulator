@@ -1,4 +1,25 @@
-// Application Web Frontend - IoT Data Simulator
+/**
+ * @file app.js
+ * @description Frontend Application Controller for IoT Data Simulator.
+ * Provides real-time WebSocket telemetry streaming, Chart.js sparklines,
+ * dynamic responsive modals, ThingsBoard token generators, and RBAC UI controls.
+ */
+
+/**
+ * @typedef {Object} AppState
+ * @property {Object|null} currentUser Active user profile or null if unauthenticated.
+ * @property {Array<Object>} devices List of registered DeviceConfig objects.
+ * @property {Array<Object>} variables List of active VariableConfig objects.
+ * @property {Object} broker Current broker configuration.
+ * @property {Object} status Current simulation engine and connection status.
+ * @property {string} activeFilter Filter query or device ID filter ('all' for all devices).
+ * @property {Set<string>} collapsedDevices Set of device IDs whose accordion cards are collapsed.
+ * @property {Object<string, Object>} charts Active Chart.js sparkline instances.
+ * @property {Object<string, Array<number>>} chartData Historical sliding window data for sparklines.
+ * @property {string|null} editingVarId Variable ID being edited in modal.
+ * @property {string|null} editingDevId Device ID being edited in modal.
+ * @property {string|null} activeModal Identifier of currently open modal window.
+ */
 
 let state = {
   currentUser: null,
@@ -18,7 +39,7 @@ let state = {
 let ws = null;
 let statusInterval = null;
 
-// Initialisation au chargement de la page
+// Page initialization lifecycle
 document.addEventListener("DOMContentLoaded", async () => {
   initTheme();
   safeCreateIcons();
@@ -31,12 +52,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// Initialisation & Gestion du Thème (Clair / Sombre)
+/**
+ * Initializes visual theme from localStorage or defaults to dark mode.
+ * @returns {void}
+ */
 function initTheme() {
   const savedTheme = localStorage.getItem("iot_sim_theme") || "dark";
   applyTheme(savedTheme);
 }
 
+/**
+ * Applies a visual theme ('dark' or 'light') to the document root element.
+ * @param {'dark'|'light'} theme Target theme name.
+ * @returns {void}
+ */
 function applyTheme(theme) {
   const root = document.documentElement;
   const isDark = theme === "dark";
@@ -53,12 +82,21 @@ function applyTheme(theme) {
   updateThemeToggleUI(theme);
 }
 
+/**
+ * Toggles theme between dark and light modes.
+ * @returns {void}
+ */
 function toggleTheme() {
   const isDark = document.documentElement.classList.contains("dark");
   const newTheme = isDark ? "light" : "dark";
   applyTheme(newTheme);
 }
 
+/**
+ * Updates the theme toggle icon and tooltip text based on active theme.
+ * @param {'dark'|'light'} theme Active theme name.
+ * @returns {void}
+ */
 function updateThemeToggleUI(theme) {
   const icon = document.getElementById("theme-icon");
   const label = document.getElementById("theme-text");
@@ -76,16 +114,25 @@ function updateThemeToggleUI(theme) {
   safeCreateIcons();
 }
 
+/**
+ * Safely triggers Lucide icon generation without throwing on missing elements.
+ * @returns {void}
+ */
 function safeCreateIcons() {
   if (window.lucide && typeof window.lucide.createIcons === "function") {
     try {
       window.lucide.createIcons();
     } catch (e) {
-      console.warn("Erreur chargement icônes Lucide:", e);
+      console.warn("Error creating Lucide icons:", e);
     }
   }
 }
 
+/**
+ * Loads all initial datasets (devices, variables, broker, status) in parallel via REST API.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function loadAllData() {
   try {
     const [devRes, varRes, brokerRes, statusRes] = await Promise.all([
@@ -120,7 +167,11 @@ async function loadAllData() {
   }
 }
 
-// Rafraîchissement périodique de l'état
+/**
+ * Periodically polls the /api/status endpoint to synchronize engine and broker states.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function refreshStatus() {
   try {
     const res = await fetch("/api/status");
@@ -133,6 +184,10 @@ async function refreshStatus() {
   }
 }
 
+/**
+ * Updates DOM header elements, connection status badges, and engine action buttons.
+ * @returns {void}
+ */
 function updateStatusUI() {
   const dot = document.getElementById("broker-status-dot");
   const text = document.getElementById("broker-status-text");
@@ -168,7 +223,10 @@ function updateStatusUI() {
   }
 }
 
-// Connexion WebSocket pour le streaming télémétrique en direct
+/**
+ * Establishes an authenticated WebSocket connection to /ws/live with automatic reconnection.
+ * @returns {void}
+ */
 function setupWebSocket() {
   const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
   const wsUrl = `${proto}//${window.location.host}/ws/live`;
@@ -203,7 +261,12 @@ function setupWebSocket() {
   };
 }
 
-// Mise à jour visuelle d'une variable lors de l'arrivée d'une valeur
+/**
+ * Updates variable cards in real time upon receiving telemetry from WebSocket.
+ * Freezes sparklines and flash highlights if a modal is open to preserve UI interactivity.
+ * @param {Object} data Telemetry packet containing variable_id, value, published flag, and anomaly.
+ * @returns {void}
+ */
 function handleLiveTelemetry(data) {
   const { variable_id, value, timestamp, published, topic, anomaly } = data;
   
@@ -258,7 +321,10 @@ function handleLiveTelemetry(data) {
   }
 }
 
-// Rendu des filtres d'équipements
+/**
+ * Renders device filter pills and total variable counts in the top filter bar.
+ * @returns {void}
+ */
 function renderDeviceFilters() {
   const filterBar = document.getElementById("devices-filter-bar");
   const countSpan = document.getElementById("total-vars-count");
@@ -278,6 +344,11 @@ function renderDeviceFilters() {
   });
 }
 
+/**
+ * Activates a device filter and re-renders visible equipment cards.
+ * @param {string} filter 'all' or specific device identifier.
+ * @returns {void}
+ */
 function selectDeviceFilter(filter) {
   state.activeFilter = filter;
   const allBtn = document.getElementById("filter-dev-all");
@@ -288,7 +359,10 @@ function selectDeviceFilter(filter) {
   renderEquipmentGroups();
 }
 
-// Nettoyage sécurisé des instances Chart.js
+/**
+ * Destroys all Chart.js instances to avoid memory leaks.
+ * @returns {void}
+ */
 function destroyAllCharts() {
   for (const varId in state.charts) {
     try {
@@ -300,7 +374,10 @@ function destroyAllCharts() {
   state.charts = {};
 }
 
-// Rendu STRUCTURÉ : Regroupement CLAIR des variables par Équipement
+/**
+ * Renders hierarchical equipment cards with accordion headers and child variable grids.
+ * @returns {void}
+ */
 function renderEquipmentGroups() {
   const container = document.getElementById("equipment-groups-container") || document.getElementById("variables-grid");
   const emptyState = document.getElementById("empty-state");
@@ -509,7 +586,12 @@ function renderEquipmentGroups() {
   safeCreateIcons();
 }
 
-// Création d'une carte de variable
+/**
+ * Creates a DOM element representing a variable telemetry/attribute card.
+ * @param {Object} variable VariableConfig object.
+ * @param {Object} device Parent DeviceConfig object.
+ * @returns {HTMLElement} Card container element.
+ */
 function createVariableCard(variable, device) {
   const card = document.createElement("div");
   card.className = "bg-[#181D26] border border-[#2B3342] rounded-xl p-5 shadow-lg flex flex-col justify-between hover:border-slate-600 transition space-y-4";
@@ -616,14 +698,18 @@ function createVariableCard(variable, device) {
   return card;
 }
 
-// Initialisation sparkline Chart.js sécurisée avec protection try/catch
+/**
+ * Initializes a lightweight Chart.js line sparkline for numeric variables.
+ * @param {string} varId Variable identifier.
+ * @returns {void}
+ */
 function initSparkline(varId) {
   try {
     const ctx = document.getElementById(`chart-${varId}`);
     if (!ctx) return;
 
     if (typeof Chart === "undefined") {
-      return; // Chart.js indisponible, pas de blocage du rendu
+      return; // Chart.js not loaded, avoid blocking render
     }
 
     if (state.charts[varId]) {
@@ -665,14 +751,24 @@ function initSparkline(varId) {
   }
 }
 
-// Contrôle Global de la Simulation
+/**
+ * Starts or stops the background simulation engine.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function toggleEngine() {
   const endpoint = state.status.engine_running ? "/api/simulation/stop" : "/api/simulation/start";
   await fetch(endpoint, { method: "POST" });
   await refreshStatus();
 }
 
-// Injection d'Anomalie
+/**
+ * Injects a transient physical anomaly pattern onto a variable.
+ * @async
+ * @param {string} varId Variable identifier.
+ * @param {'spike'|'drift'|'freeze'|'timeout'|'none'} anomalyType Anomaly pattern.
+ * @returns {Promise<void>}
+ */
 async function injectAnomaly(varId, anomalyType) {
   await fetch(`/api/variables/${varId}/anomaly`, {
     method: "POST",
@@ -681,7 +777,13 @@ async function injectAnomaly(varId, anomalyType) {
   });
 }
 
-// Forçage Manuel
+/**
+ * Enables or disables manual value overriding on a variable.
+ * @async
+ * @param {string} varId Variable identifier.
+ * @param {boolean} enabled Whether override is active.
+ * @returns {Promise<void>}
+ */
 async function toggleManualOverride(varId, enabled) {
   const inputEl = document.getElementById(`manual-input-${varId}`);
   const val = inputEl ? inputEl.value : "";
@@ -694,6 +796,13 @@ async function toggleManualOverride(varId, enabled) {
   if (v) v.manual_override = enabled;
 }
 
+/**
+ * Updates the forced value for an overridden variable.
+ * @async
+ * @param {string} varId Variable identifier.
+ * @param {string|number} val Forced value.
+ * @returns {Promise<void>}
+ */
 async function updateManualValue(varId, val) {
   await fetch(`/api/variables/${varId}/override`, {
     method: "POST",
@@ -708,9 +817,14 @@ async function updateManualValue(varId, val) {
 }
 
 // ==========================================
-// GESTION DES ÉQUIPEMENTS (Création, Édition, Suppression)
+// EQUIPMENT MANAGEMENT (Creation, Edition, Deletion)
 // ==========================================
 
+/**
+ * Opens the device creation or edition modal, pre-populating fields if editing.
+ * @param {Object|null} [devToEdit=null] Optional device model to edit.
+ * @returns {void}
+ */
 function openDeviceModal(devToEdit = null) {
   state.editingDevId = devToEdit ? devToEdit.id : null;
   const isEditEl = document.getElementById("dev-is-edit");
@@ -749,7 +863,7 @@ function openDeviceModal(devToEdit = null) {
     if (idEl) { idEl.value = ""; idEl.disabled = false; }
     if (nameEl) nameEl.value = "";
     if (platformEl) platformEl.value = "thingsboard";
-    if (protoEl) protoEl.value = "http"; // HTTP par défaut pour ThingsBoard (recommandé port 443 / Cloudflare)
+    if (protoEl) protoEl.value = "http"; // HTTP by default for ThingsBoard (recommended port 443 / Cloudflare)
     if (tokenEl) tokenEl.value = "";
     if (publishIntervalEl) publishIntervalEl.value = "";
     if (customHostEl) customHostEl.value = "";
@@ -770,6 +884,10 @@ function openDeviceModal(devToEdit = null) {
   openModal("modal-device");
 }
 
+/**
+ * Handles target platform dropdown changes to toggle protocol options.
+ * @returns {void}
+ */
 function onDevicePlatformChange() {
   const platform = document.getElementById("dev-platform").value;
   const protoContainer = document.getElementById("dev-protocol-container");
@@ -782,6 +900,10 @@ function onDevicePlatformChange() {
   }
 }
 
+/**
+ * Handles communication protocol dropdown changes (MQTT / HTTP / CoAP).
+ * @returns {void}
+ */
 function onDeviceProtocolChange() {
   const proto = document.getElementById("dev-protocol") ? document.getElementById("dev-protocol").value : "mqtt";
   const hint = document.getElementById("dev-protocol-hint");
@@ -796,6 +918,10 @@ function onDeviceProtocolChange() {
   }
 }
 
+/**
+ * Toggles the visibility of advanced network override fields in device modal.
+ * @returns {void}
+ */
 function toggleDeviceAdvancedNetwork() {
   const adv = document.getElementById("dev-network-advanced");
   const txt = document.getElementById("dev-advanced-toggle-text");
@@ -807,6 +933,11 @@ function toggleDeviceAdvancedNetwork() {
   }
 }
 
+/**
+ * Tests connectivity using the currently entered device modal configuration without saving.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function testCurrentDeviceConfig() {
   const btn = document.getElementById("btn-test-dev");
   const label = document.getElementById("btn-test-dev-label");
@@ -872,6 +1003,12 @@ async function testCurrentDeviceConfig() {
   }
 }
 
+/**
+ * Tests connectivity for an existing saved device by ID.
+ * @async
+ * @param {string} devId Device identifier.
+ * @returns {Promise<void>}
+ */
 async function testDeviceById(devId) {
   const dev = state.devices.find(d => d.id === devId);
   if (!dev) return;
@@ -902,6 +1039,11 @@ async function testDeviceById(devId) {
   }
 }
 
+/**
+ * Triggers modal opening in edit mode for a given device ID.
+ * @param {string} devId Device identifier.
+ * @returns {void}
+ */
 function editDevice(devId) {
   const dev = state.devices.find(d => d.id === devId);
   if (dev) {
@@ -909,6 +1051,12 @@ function editDevice(devId) {
   }
 }
 
+/**
+ * Prompts confirmation and deletes a device and its associated variables.
+ * @async
+ * @param {string} devId Device identifier.
+ * @returns {Promise<void>}
+ */
 async function deleteDevice(devId) {
   const dev = state.devices.find(d => d.id === devId);
   const name = dev ? dev.name : devId;
@@ -924,15 +1072,28 @@ async function deleteDevice(devId) {
   }
 }
 
+/**
+ * Downloads a complete ThingsBoard 4.3 JSON dashboard tailored for an active device.
+ * @param {string} deviceId Device identifier.
+ * @returns {void}
+ */
 function downloadDeviceDashboard(deviceId) {
   window.location.href = `/api/devices/${encodeURIComponent(deviceId)}/thingsboard-dashboard`;
 }
 
+/**
+ * Downloads a complete ThingsBoard 4.3 JSON dashboard tailored for a catalog preset.
+ * @param {string} presetId Preset identifier.
+ * @returns {void}
+ */
 function downloadPresetDashboard(presetId) {
   window.location.href = `/api/presets/${encodeURIComponent(presetId)}/thingsboard-dashboard`;
 }
 
-// Sauvegarde de l'état des sections repliées dans localStorage
+/**
+ * Persists the set of collapsed device card section IDs to localStorage.
+ * @returns {void}
+ */
 function saveCollapsedState() {
   try {
     localStorage.setItem("iot_sim_collapsed_devices", JSON.stringify([...state.collapsedDevices]));
@@ -941,7 +1102,12 @@ function saveCollapsedState() {
   }
 }
 
-// Basculer l'état plié/déplié d'un équipement
+/**
+ * Toggles the collapsed/expanded view of an equipment section in the UI.
+ * @param {string} deviceId Device identifier.
+ * @param {Event} [event] Click event to prevent collapsing when clicking action buttons.
+ * @returns {void}
+ */
 function toggleDeviceSection(deviceId, event) {
   if (event && event.target && event.target.closest("button, a, input, select, textarea")) {
     return;
@@ -981,21 +1147,31 @@ function toggleDeviceSection(deviceId, event) {
   }
 }
 
-// Plier tous les équipements
+/**
+ * Collapses all device sections on screen.
+ * @returns {void}
+ */
 function collapseAllDevices() {
   state.devices.forEach(d => state.collapsedDevices.add(d.id));
   saveCollapsedState();
   renderEquipmentGroups();
 }
 
-// Déplier tous les équipements
+/**
+ * Expands all device sections on screen.
+ * @returns {void}
+ */
 function expandAllDevices() {
   state.collapsedDevices.clear();
   saveCollapsedState();
   renderEquipmentGroups();
 }
 
-// Encodage Base64URL conforme RFC 7519
+/**
+ * Base64URL encoder conforming to RFC 7519 specifications.
+ * @param {string} str Input ASCII/UTF-8 string.
+ * @returns {string} URL-safe Base64 string without padding.
+ */
 function base64UrlEncode(str) {
   return btoa(unescape(encodeURIComponent(str)))
     .replace(/\+/g, '-')
@@ -1003,7 +1179,11 @@ function base64UrlEncode(str) {
     .replace(/=+$/, '');
 }
 
-// Générateur de token JWT ThingsBoard compatible (HS512 avec claims standard ThingsBoard)
+/**
+ * Generates a ThingsBoard-compatible HS512 device JWT authentication token.
+ * @param {string} deviceId Device identifier claim.
+ * @returns {string} Encoded JWT token string.
+ */
 function generateThingsBoardJwt(deviceId) {
   const dId = (deviceId && deviceId.trim()) ? deviceId.trim() : ("tb_dev_" + Math.random().toString(36).substring(2, 10));
   const header = {
@@ -1019,12 +1199,12 @@ function generateThingsBoardJwt(deviceId) {
     isPublic: false,
     iss: "thingsboard.io",
     iat: now,
-    exp: now + (10 * 365 * 86400) // Validité 10 ans
+    exp: now + (10 * 365 * 86400) // 10 years validity
   };
 
   const encodedHeader = base64UrlEncode(JSON.stringify(header));
   const encodedPayload = base64UrlEncode(JSON.stringify(payload));
-  // Signature factice HS512 (64 octets / 512 bits) encodée en base64url
+  // Dummy HS512 signature (64 bytes / 512 bits) base64url encoded
   const randomBytes = new Uint8Array(64);
   (window.crypto || window.msCrypto).getRandomValues(randomBytes);
   const dummySignature = Array.from(randomBytes).map(b => String.fromCharCode(b)).join('');
@@ -1033,7 +1213,12 @@ function generateThingsBoardJwt(deviceId) {
   return `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
 }
 
-// Remplissage automatique du champ token avec le JWT ThingsBoard généré
+/**
+ * Generates and auto-fills a ThingsBoard device JWT into the targeted input field.
+ * @param {string} targetInputId Target DOM input identifier.
+ * @param {string} deviceIdInputId Device ID DOM input identifier.
+ * @returns {void}
+ */
 function fillGeneratedJwtToken(targetInputId, deviceIdInputId) {
   const devIdEl = document.getElementById(deviceIdInputId);
   const targetEl = document.getElementById(targetInputId);
@@ -1042,21 +1227,29 @@ function fillGeneratedJwtToken(targetInputId, deviceIdInputId) {
   const token = generateThingsBoardJwt(devId);
   targetEl.value = token;
 
-  // Feedback visuel élégant sur le champ modifié
+  // Visual feedback animation
   targetEl.classList.add("ring-2", "ring-emerald-500", "border-emerald-500");
   setTimeout(() => {
     targetEl.classList.remove("ring-2", "ring-emerald-500", "border-emerald-500");
   }, 1500);
 }
 
-// Échappement de valeur CSV avec encadrement guillemets
+/**
+ * Escapes and quotes a string value for safe CSV inclusion.
+ * @param {*} val Raw cell value.
+ * @returns {string} Quoted and escaped CSV string.
+ */
 function escapeCsvValue(val) {
   if (val === null || val === undefined) return '""';
   const str = String(val).replace(/"/g, '""');
   return `"${str}"`;
 }
 
-// Téléchargement du fichier CSV d'import ThingsBoard pour un équipement donné
+/**
+ * Downloads a ThingsBoard bulk import CSV template for a single device.
+ * @param {string} deviceId Device identifier.
+ * @returns {void}
+ */
 function downloadDeviceCsv(deviceId) {
   const device = state.devices.find(d => d.id === deviceId);
   if (!device) return;
@@ -1080,7 +1273,10 @@ function downloadDeviceCsv(deviceId) {
   URL.revokeObjectURL(url);
 }
 
-// Téléchargement du fichier CSV d'import ThingsBoard pour l'ensemble des équipements
+/**
+ * Exports all registered devices into a unified ThingsBoard bulk import CSV file.
+ * @returns {void}
+ */
 function exportAllDevicesCsv() {
   if (!state.devices || state.devices.length === 0) {
     alert("Aucun équipement à exporter.");
@@ -1106,6 +1302,12 @@ function exportAllDevicesCsv() {
   URL.revokeObjectURL(url);
 }
 
+/**
+ * Submits the device modal form to persist a new or updated device.
+ * @async
+ * @param {Event} e Form submission event.
+ * @returns {Promise<void>}
+ */
 async function saveDeviceForm(e) {
   e.preventDefault();
   const customPortVal = document.getElementById("dev-custom-port").value;
@@ -1134,13 +1336,24 @@ async function saveDeviceForm(e) {
 }
 
 // ==========================================
-// GESTION DES VARIABLES
+// VARIABLE MANAGEMENT (Creation, Edition, Deletion)
 // ==========================================
 
+/**
+ * Opens the variable creation modal pre-selecting a specific device.
+ * @param {string} deviceId Target device identifier.
+ * @returns {void}
+ */
 function openVariableModalForDevice(deviceId) {
   openVariableModal(null, deviceId);
 }
 
+/**
+ * Opens the variable creation or edition modal and populates contextual fields.
+ * @param {Object|null} [varToEdit=null] Optional variable model to edit.
+ * @param {string|null} [preselectedDeviceId=null] Optional pre-selected device ID.
+ * @returns {void}
+ */
 function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
   state.editingVarId = varToEdit ? varToEdit.id : null;
   const isEditEl = document.getElementById("var-is-edit");
@@ -1212,7 +1425,7 @@ function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
     if (unitEl) unitEl.value = "";
     if (topicEl) topicEl.value = "";
     
-    // Cadence par défaut héritée de l'équipement si configurée, sinon 3.0s
+    // Cadence default inherited from parent device if set, else 3.0s
     const activeDevId = (devSelect && devSelect.value) || preselectedDeviceId;
     const parentDev = state.devices.find(d => d.id === activeDevId);
     if (intervalEl) {
@@ -1234,7 +1447,7 @@ function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
     renderPointsTable([]);
   }
 
-  // Peuplement des aides contextuelles pour formules et intégrateurs
+  // Populate contextual chips for derived variables and integrators
   const targetDevId = varToEdit ? varToEdit.device_id : (devSelect ? devSelect.value : "");
   const devVars = state.variables.filter(v => v.device_id === targetDevId && (!varToEdit || v.id !== varToEdit.id));
   
@@ -1267,6 +1480,10 @@ function openVariableModal(varToEdit = null, preselectedDeviceId = null) {
   openModal("modal-variable");
 }
 
+/**
+ * Toggles visibility of simulation mode configuration sub-sections.
+ * @returns {void}
+ */
 function toggleSimModeSections() {
   const mode = document.getElementById("var-sim-mode").value;
   const mathSec = document.getElementById("section-math-params");
@@ -1296,6 +1513,11 @@ function toggleSimModeSections() {
   }
 }
 
+/**
+ * Appends a variable identifier into the derived mathematical formula input.
+ * @param {string} varId Variable identifier.
+ * @returns {void}
+ */
 function insertFormulaVariable(varId) {
   const input = document.getElementById("derived-formula");
   if (!input) return;
@@ -1303,6 +1525,11 @@ function insertFormulaVariable(varId) {
   input.focus();
 }
 
+/**
+ * Renders the points profile table inside the variable modal.
+ * @param {Array<{offset_seconds: number, value: *}>} points List of point objects.
+ * @returns {void}
+ */
 function renderPointsTable(points) {
   const tbody = document.getElementById("points-table-body");
   if (!tbody) return;
@@ -1314,6 +1541,12 @@ function renderPointsTable(points) {
   points.forEach(p => addPointRow(p.offset_seconds, p.value));
 }
 
+/**
+ * Adds an interactive table row for a discrete profile point.
+ * @param {number} [offset=0] Offset in seconds from start.
+ * @param {*} [val=0] Value at offset.
+ * @returns {void}
+ */
 function addPointRow(offset = 0, val = 0) {
   const tbody = document.getElementById("points-table-body");
   if (!tbody) return;
@@ -1328,6 +1561,12 @@ function addPointRow(offset = 0, val = 0) {
   safeCreateIcons();
 }
 
+/**
+ * Submits the variable modal form to persist a new or modified variable.
+ * @async
+ * @param {Event} e Form submission event.
+ * @returns {Promise<void>}
+ */
 async function saveVariableForm(e) {
   e.preventDefault();
   const simMode = document.getElementById("var-sim-mode").value;
@@ -1384,11 +1623,22 @@ async function saveVariableForm(e) {
   await loadAllData();
 }
 
+/**
+ * Triggers modal opening in edit mode for a given variable ID.
+ * @param {string} varId Variable identifier.
+ * @returns {void}
+ */
 function editVariable(varId) {
   const v = state.variables.find(item => item.id === varId);
   if (v) openVariableModal(v);
 }
 
+/**
+ * Prompts confirmation and deletes a variable.
+ * @async
+ * @param {string} varId Variable identifier.
+ * @returns {Promise<void>}
+ */
 async function deleteVariable(varId) {
   if (confirm(`Confirmez-vous la suppression de la variable '${varId}' ?`)) {
     await fetch(`/api/variables/${varId}`, { method: "DELETE" });
@@ -1396,7 +1646,14 @@ async function deleteVariable(varId) {
   }
 }
 
-// Modal Broker MQTT
+// ==========================================
+// MQTT BROKER SETTINGS & DIAGNOSTICS
+// ==========================================
+
+/**
+ * Opens the global MQTT broker settings modal and populates configuration fields.
+ * @returns {void}
+ */
 function openBrokerModal() {
   document.getElementById("broker-host").value = state.broker.host || "mosquitto";
   document.getElementById("broker-port").value = state.broker.port || 1883;
@@ -1422,6 +1679,10 @@ function openBrokerModal() {
   openModal("modal-broker");
 }
 
+/**
+ * Toggles visibility of WebSocket path input depending on selected transport.
+ * @returns {void}
+ */
 function toggleTransportFields() {
   const transportEl = document.getElementById("broker-transport");
   const wsContainer = document.getElementById("ws-path-container");
@@ -1434,6 +1695,12 @@ function toggleTransportFields() {
   }
 }
 
+/**
+ * Submits the broker modal form to persist global MQTT broker configuration.
+ * @async
+ * @param {Event} e Form submission event.
+ * @returns {Promise<void>}
+ */
 async function saveBrokerForm(e) {
   e.preventDefault();
   const brokerPayload = {
@@ -1463,6 +1730,11 @@ async function saveBrokerForm(e) {
   await refreshStatus();
 }
 
+/**
+ * Executes live DNS and socket connectivity diagnostics against the entered broker configuration.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function testBrokerConfig() {
   const btn = document.getElementById("btn-test-broker");
   const label = document.getElementById("btn-test-broker-label");
@@ -1545,15 +1817,24 @@ async function testBrokerConfig() {
   }
 }
 
-// -------------------------------------------------------------
-// Module Gestion Console de Logs & Diagnostics
-// -------------------------------------------------------------
+// =============================================================
+// LOG CONSOLE & SYSTEM DIAGNOSTICS MODULE
+// =============================================================
+
+/**
+ * Internal state for log buffering and active level filtering.
+ */
 const logState = {
   logs: [],
   activeFilter: 'ALL',
   unreadErrors: 0,
 };
 
+/**
+ * Handles incoming real-time log records from WebSocket broadcast.
+ * @param {Object} logEntry Log record with timestamp, level, name, and message.
+ * @returns {void}
+ */
 function handleLiveLog(logEntry) {
   logState.logs.push(logEntry);
   if (logState.logs.length > 300) {
@@ -1585,6 +1866,10 @@ function handleLiveLog(logEntry) {
   }
 }
 
+/**
+ * Updates the error badge counter in the top bar.
+ * @returns {void}
+ */
 function updateErrorBadge() {
   const badge = document.getElementById("log-error-badge");
   if (!badge) return;
@@ -1596,6 +1881,10 @@ function updateErrorBadge() {
   }
 }
 
+/**
+ * Updates the total logs counter in the log modal terminal header.
+ * @returns {void}
+ */
 function updateLogCountBadge() {
   const badge = document.getElementById("log-count-badge");
   if (badge) {
@@ -1603,6 +1892,11 @@ function updateLogCountBadge() {
   }
 }
 
+/**
+ * Generates styled HTML representation of a single log record.
+ * @param {Object} log Log entry.
+ * @returns {string} Formatted HTML snippet.
+ */
 function formatLogLineHtml(log) {
   let levelClass = "text-slate-400 bg-slate-800 border-slate-700";
   if (log.level === "ERROR") {
@@ -1623,6 +1917,10 @@ function formatLogLineHtml(log) {
   </div>`;
 }
 
+/**
+ * Re-renders all buffered log entries matching the active log level filter.
+ * @returns {void}
+ */
 function renderLogsTerminal() {
   const terminal = document.getElementById("log-terminal");
   if (!terminal) return;
@@ -1647,6 +1945,11 @@ function renderLogsTerminal() {
   }
 }
 
+/**
+ * Opens the logs modal, clears unread errors counter, and fetches historical logs.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function openLogsModal() {
   logState.unreadErrors = 0;
   updateErrorBadge();
@@ -1654,6 +1957,11 @@ async function openLogsModal() {
   await fetchLogs();
 }
 
+/**
+ * Fetches recent application logs from backend REST endpoint.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function fetchLogs() {
   try {
     const res = await fetch("/api/logs?limit=200");
@@ -1666,6 +1974,11 @@ async function fetchLogs() {
   }
 }
 
+/**
+ * Flushes all recorded logs in the backend ring buffer and UI.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function clearLogs() {
   try {
     await fetch("/api/logs", { method: "DELETE" });
@@ -1678,6 +1991,11 @@ async function clearLogs() {
   }
 }
 
+/**
+ * Updates the active log severity filter and triggers terminal re-rendering.
+ * @param {string} level Filter name ('ALL', 'INFO', 'WARNING', 'ERROR').
+ * @returns {void}
+ */
 function setLogLevelFilter(level) {
   logState.activeFilter = level;
   ['ALL', 'INFO', 'WARNING', 'ERROR'].forEach(lvl => {
@@ -1693,6 +2011,12 @@ function setLogLevelFilter(level) {
   renderLogsTerminal();
 }
 
+/**
+ * Displays a modal dialog by removing the hidden utility class.
+ * Sets state.activeModal to freeze sparkline renders and prevent lag.
+ * @param {string} id DOM element ID of the modal dialog.
+ * @returns {void}
+ */
 function openModal(id) {
   const el = document.getElementById(id);
   if (el) {
@@ -1712,6 +2036,12 @@ function openModal(id) {
   }
 }
 
+/**
+ * Closes a modal dialog by restoring the hidden utility class.
+ * Unfreezes sparkline rendering when all modals are closed.
+ * @param {string} id DOM element ID of the modal dialog.
+ * @returns {void}
+ */
 function closeModal(id) {
   const el = document.getElementById(id);
   if (el) el.classList.add("hidden");
@@ -1721,7 +2051,11 @@ function closeModal(id) {
   }
 }
 
-// Export / Import Scénario
+/**
+ * Exports the complete simulator scenario configuration as a downloadable JSON file.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function exportScenario() {
   const res = await fetch("/api/scenario/export");
   const data = await res.json();
@@ -1733,6 +2067,12 @@ async function exportScenario() {
   a.click();
 }
 
+/**
+ * Imports a scenario configuration from a user-uploaded JSON file.
+ * @async
+ * @param {Event} event File input change event.
+ * @returns {Promise<void>}
+ */
 async function importScenario(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -1754,7 +2094,12 @@ async function importScenario(event) {
   reader.readAsText(file);
 }
 
-// Upload CSV pour Points Table
+/**
+ * Parses and loads discrete curve points from an uploaded CSV file.
+ * @async
+ * @param {Event} event File input change event.
+ * @returns {Promise<void>}
+ */
 async function uploadPointsCSV(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -1783,6 +2128,11 @@ async function uploadPointsCSV(event) {
   reader.readAsText(file);
 }
 
+/**
+ * Escapes special HTML characters to prevent XSS vulnerabilities.
+ * @param {string|null|undefined} str Raw text string.
+ * @returns {string} Sanitized HTML-safe string.
+ */
 function escapeHtml(str) {
   if (str === null || str === undefined) return "";
   return String(str)
@@ -1794,9 +2144,15 @@ function escapeHtml(str) {
 }
 
 // =============================================================
-// MODULE GESTION DES UTILISATEURS & AUTHENTIFICATION (RBAC / CIS)
+// USER MANAGEMENT & AUTHENTICATION MODULE (RBAC / CIS)
 // =============================================================
 
+/**
+ * Checks current session authentication status via `/api/auth/me`.
+ * Directs to the login modal if unauthenticated or initializes session UI if logged in.
+ * @async
+ * @returns {Promise<boolean>} True if authenticated, false otherwise.
+ */
 async function checkAuthStatus() {
   try {
     const res = await fetch("/api/auth/me");
@@ -1817,6 +2173,10 @@ async function checkAuthStatus() {
   }
 }
 
+/**
+ * Updates UI action buttons and access badges based on current user's role (admin/operator/viewer).
+ * @returns {void}
+ */
 function updateUserSessionUI() {
   if (!state.currentUser) return;
   const nameEl = document.getElementById("user-display-name");
@@ -1881,6 +2241,12 @@ function updateUserSessionUI() {
   }
 }
 
+/**
+ * Handles credentials submission, authenticates the user, and initializes WebSocket telemetry stream.
+ * @async
+ * @param {Event} e Form submission event.
+ * @returns {Promise<void>}
+ */
 async function submitLogin(e) {
   e.preventDefault();
   const btn = document.getElementById("btn-login-submit");
@@ -1917,14 +2283,14 @@ async function submitLogin(e) {
     updateUserSessionUI();
     closeModal("modal-login");
 
-    // Chargement initial des données et ouverture du WebSocket
+    // Initial data loading and WebSocket activation
     await loadAllData();
     setupWebSocket();
 
     if (statusInterval) clearInterval(statusInterval);
     statusInterval = setInterval(refreshStatus, 3000);
 
-    // Alerte si mot de passe par défaut
+    // Warning alert if using factory default password
     if (data.user.must_change_password) {
       alert("⚠️ Sécurité : Vous utilisez le mot de passe initial par défaut. Veuillez le modifier via le menu de votre profil.");
     }
@@ -1938,6 +2304,11 @@ async function submitLogin(e) {
   }
 }
 
+/**
+ * Terminates user session, clears polling intervals and WebSocket, then opens login modal.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function logout() {
   if (confirm("Confirmez-vous votre déconnexion ?")) {
     try {
@@ -1959,14 +2330,24 @@ async function logout() {
 }
 
 // -------------------------------------------------------------
-// Gestion des Utilisateurs (Admin Only)
+// User Management Operations (Admin Only)
 // -------------------------------------------------------------
 
+/**
+ * Opens user administration modal and fetches the list of registered users.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function openUsersModal() {
   openModal("modal-users");
   await fetchUsersList();
 }
 
+/**
+ * Fetches all registered users from `/api/users` and renders the administrative table.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function fetchUsersList() {
   const tbody = document.getElementById("users-table-body");
   const countEl = document.getElementById("users-count");
@@ -2032,6 +2413,10 @@ async function fetchUsersList() {
   }
 }
 
+/**
+ * Opens user creation modal while cleanly hiding the background users list modal.
+ * @returns {void}
+ */
 function openCreateUserModal() {
   document.getElementById("create-username").value = "";
   document.getElementById("create-fullname").value = "";
@@ -2040,7 +2425,7 @@ function openCreateUserModal() {
   const errBox = document.getElementById("create-user-error");
   if (errBox) errBox.classList.add("hidden");
 
-  // Masquer temporairement la modale parente pour éviter l'empilement d'overlays lourds
+  // Temporarily hide parent modal to avoid heavy stacked overlays
   const usersModal = document.getElementById("modal-users");
   if (usersModal && !usersModal.classList.contains("hidden")) {
     usersModal.dataset.wasOpen = "true";
@@ -2049,6 +2434,10 @@ function openCreateUserModal() {
   openModal("modal-create-user");
 }
 
+/**
+ * Closes the create user modal and restores the parent users list modal.
+ * @returns {void}
+ */
 function closeCreateUserModal() {
   closeModal("modal-create-user");
   const usersModal = document.getElementById("modal-users");
@@ -2058,6 +2447,12 @@ function closeCreateUserModal() {
   }
 }
 
+/**
+ * Submits new user account creation with validated RBAC role and password.
+ * @async
+ * @param {Event} e Form submission event.
+ * @returns {Promise<void>}
+ */
 async function submitCreateUser(e) {
   e.preventDefault();
   const errBox = document.getElementById("create-user-error");
@@ -2096,6 +2491,12 @@ async function submitCreateUser(e) {
   }
 }
 
+/**
+ * Prompts confirmation and deletes a user account if not the last admin.
+ * @async
+ * @param {string} username Username to delete.
+ * @returns {Promise<void>}
+ */
 async function deleteUser(username) {
   if (confirm(`Confirmez-vous la suppression définitive du compte "${username}" ?`)) {
     try {
@@ -2112,6 +2513,11 @@ async function deleteUser(username) {
   }
 }
 
+/**
+ * Opens the administrator password reset dialog for a target user account.
+ * @param {string} username Target username.
+ * @returns {void}
+ */
 function openResetPasswordModal(username) {
   document.getElementById("reset-target-username").value = username;
   document.getElementById("reset-target-display").textContent = username;
@@ -2119,7 +2525,7 @@ function openResetPasswordModal(username) {
   const errBox = document.getElementById("reset-pw-error");
   if (errBox) errBox.classList.add("hidden");
 
-  // Masquer temporairement la modale parente pour éviter l'empilement d'overlays
+  // Temporarily hide parent modal to avoid heavy stacked overlays
   const usersModal = document.getElementById("modal-users");
   if (usersModal && !usersModal.classList.contains("hidden")) {
     usersModal.dataset.wasOpen = "true";
@@ -2128,6 +2534,10 @@ function openResetPasswordModal(username) {
   openModal("modal-reset-password");
 }
 
+/**
+ * Closes the reset password modal and restores the parent users modal.
+ * @returns {void}
+ */
 function closeResetPasswordModal() {
   closeModal("modal-reset-password");
   const usersModal = document.getElementById("modal-users");
@@ -2137,6 +2547,12 @@ function closeResetPasswordModal() {
   }
 }
 
+/**
+ * Submits administrative password reset for a target user account.
+ * @async
+ * @param {Event} e Form submission event.
+ * @returns {Promise<void>}
+ */
 async function submitResetPassword(e) {
   e.preventDefault();
   const username = document.getElementById("reset-target-username").value;
@@ -2167,6 +2583,10 @@ async function submitResetPassword(e) {
   }
 }
 
+/**
+ * Opens self-service password change modal for currently logged-in user.
+ * @returns {void}
+ */
 function openChangePasswordModal() {
   document.getElementById("pw-current").value = "";
   document.getElementById("pw-new").value = "";
@@ -2176,6 +2596,12 @@ function openChangePasswordModal() {
   openModal("modal-change-password");
 }
 
+/**
+ * Submits self-service password update validating current password and confirmation.
+ * @async
+ * @param {Event} e Form submission event.
+ * @returns {Promise<void>}
+ */
 async function submitChangePassword(e) {
   e.preventDefault();
   const currentPassword = document.getElementById("pw-current").value;
@@ -2216,20 +2642,39 @@ async function submitChangePassword(e) {
 }
 
 // =========================================================================
-// CATALOGUE DE MODÈLES D'ÉQUIPEMENTS MÉTIERS (PRESETS)
+// INDUSTRIAL EQUIPMENT PRESET CATALOG (PRESETS & USE CASES)
 // =========================================================================
 
+/**
+ * Cached preset models from catalog endpoint.
+ * @type {Array<Object>}
+ */
 let catalogPresets = [];
+
+/**
+ * Active category filter in catalog modal.
+ * @type {string}
+ */
 let currentCatalogCategory = "all";
+
+/**
+ * Active search query in catalog modal.
+ * @type {string}
+ */
 let currentCatalogSearch = "";
 
+/**
+ * Loads equipment presets from `/api/presets/catalog`, updates category counters, and opens modal.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function openCatalogModal() {
   try {
     const res = await fetch("/api/presets/catalog");
     if (!res.ok) throw new Error("Impossible de charger le catalogue.");
     catalogPresets = await res.json();
     
-    // Mise à jour des compteurs de catégories
+    // Update category badge counters
     const elAll = document.getElementById("cat-count-all");
     const elInd = document.getElementById("cat-count-industry");
     const elBldg = document.getElementById("cat-count-building");
@@ -2251,6 +2696,11 @@ async function openCatalogModal() {
   }
 }
 
+/**
+ * Filters catalog display cards by industrial category tab.
+ * @param {string} category Category name ('all', 'industry', 'building', 'infrastructure', 'smart_city', 'custom').
+ * @returns {void}
+ */
 function filterCatalogCategory(category) {
   currentCatalogCategory = category;
   const tabs = [
@@ -2273,11 +2723,20 @@ function filterCatalogCategory(category) {
   renderCatalogCards();
 }
 
+/**
+ * Filters catalog display cards by user text search keyword.
+ * @param {string} query Search input string.
+ * @returns {void}
+ */
 function onCatalogSearch(query) {
   currentCatalogSearch = (query || "").toLowerCase().trim();
   renderCatalogCards();
 }
 
+/**
+ * Renders equipment preset cards in grid conforming to active filters and search query.
+ * @returns {void}
+ */
 function renderCatalogCards() {
   const container = document.getElementById("catalog-presets-grid");
   if (!container) return;
@@ -2334,7 +2793,7 @@ function renderCatalogCards() {
     return `
       <div class="bg-[#12151B] hover:bg-[#151922] border border-[#2B3342] hover:border-slate-600 rounded-xl p-4 flex flex-col justify-between transition group shadow-sm">
         <div class="space-y-3">
-          <!-- En-tête de la carte -->
+          <!-- Card Header -->
           <div class="flex items-start justify-between gap-2">
             <div class="flex items-center gap-2.5">
               <div class="w-9 h-9 rounded-lg bg-[#181D26] border border-[#2B3342] group-hover:border-slate-500 flex items-center justify-center text-[#E2001A] shrink-0">
@@ -2360,7 +2819,7 @@ function renderCatalogCards() {
             ${escapeHtml(p.description)}
           </p>
 
-          <!-- Télémétries incluses -->
+          <!-- Included Telemetries -->
           <div>
             <span class="text-[10px] font-semibold text-slate-500 block mb-1">Grandeurs configurées (${p.variables.length}) :</span>
             <div class="flex flex-wrap gap-1">
@@ -2370,7 +2829,7 @@ function renderCatalogCards() {
           </div>
         </div>
 
-        <!-- Boutons d'action -->
+        <!-- Action Buttons -->
         <div class="pt-3.5 mt-3 border-t border-[#202531] flex items-center gap-1.5">
           <button onclick="downloadPresetDashboard('${p.id}')" title="Télécharger le modèle de Dashboard ThingsBoard (.json)" class="p-2 bg-[#181D26] hover:bg-[#202531] text-sky-400 hover:text-white border border-[#2B3342] rounded-lg transition text-xs flex items-center gap-1 shrink-0">
             <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>
@@ -2395,6 +2854,11 @@ function renderCatalogCards() {
   if (window.lucide) lucide.createIcons();
 }
 
+/**
+ * Prepares and opens the instantiation modal for a selected equipment preset.
+ * @param {string} presetId Target preset identifier.
+ * @returns {void}
+ */
 function prepareInstantiatePreset(presetId) {
   const preset = catalogPresets.find(p => p.id === presetId);
   if (!preset) return;
@@ -2418,7 +2882,7 @@ function prepareInstantiatePreset(presetId) {
   const errBox = document.getElementById("instantiate-error");
   if (errBox) errBox.classList.add("hidden");
 
-  // Rendu des badges de prévisualisation des variables
+  // Render variables preview badges
   const previewBox = document.getElementById("instantiate-vars-preview");
   if (previewBox) {
     previewBox.innerHTML = preset.variables.map(v => `
@@ -2432,11 +2896,21 @@ function prepareInstantiatePreset(presetId) {
   openModal("modal-instantiate-preset");
 }
 
+/**
+ * Closes the instantiation modal and navigates back to the catalog browser.
+ * @returns {void}
+ */
 function closeInstantiateModal() {
   closeModal("modal-instantiate-preset");
   openModal("modal-catalog");
 }
 
+/**
+ * Submits equipment instantiation from the selected preset template.
+ * @async
+ * @param {Event} e Form submission event.
+ * @returns {Promise<void>}
+ */
 async function submitInstantiatePreset(e) {
   e.preventDefault();
   const presetId = document.getElementById("instantiate-preset-id").value;
@@ -2494,8 +2968,17 @@ async function submitInstantiatePreset(e) {
   }
 }
 
-// --- Import / Export des Cas d'Usage Métier (Presets) ---
+// -------------------------------------------------------------
+// Preset Import / Export Operations
+// -------------------------------------------------------------
 
+/**
+ * Triggers a browser file download from an API endpoint with Content-Disposition header handling.
+ * @async
+ * @param {string} url Target API URL.
+ * @param {string} defaultFilename Fallback file name.
+ * @returns {Promise<void>}
+ */
 async function downloadFileFromApi(url, defaultFilename) {
   try {
     const res = await fetch(url);
@@ -2526,14 +3009,29 @@ async function downloadFileFromApi(url, defaultFilename) {
   }
 }
 
+/**
+ * Exports a single equipment preset bundle as a downloadable JSON file.
+ * @param {string} presetId Target preset identifier.
+ * @returns {void}
+ */
 function exportSinglePreset(presetId) {
   downloadFileFromApi(`/api/presets/${encodeURIComponent(presetId)}/export`, `preset_export_${presetId}.json`);
 }
 
+/**
+ * Exports the complete preset catalog as a consolidated JSON bundle.
+ * @returns {void}
+ */
 function exportAllPresets() {
   downloadFileFromApi("/api/presets/export/all", "presets_catalog_full_bundle.json");
 }
 
+/**
+ * Handles preset bundle file upload, sends payload to `/api/presets/import`, and refreshes catalog.
+ * @async
+ * @param {Event} event File input change event.
+ * @returns {Promise<void>}
+ */
 async function handlePresetFileImport(event) {
   const input = event.target;
   if (!input.files || input.files.length === 0) return;
@@ -2565,9 +3063,9 @@ async function handlePresetFileImport(event) {
 
     alert(result.message || `${result.imported_count || 1} cas d'usage métier(s) importé(s) avec succès !`);
     input.value = "";
-    // Recharger le catalogue pour rafraîchir les modèles et compteurs
+    // Refresh catalog modal and counts
     await openCatalogModal();
-    // Basculer sur l'onglet personnalisés
+    // Switch to custom presets tab
     filterCatalogCategory("custom");
   } catch (err) {
     alert("Erreur lors de la lecture du fichier : " + err.message);
@@ -2575,6 +3073,12 @@ async function handlePresetFileImport(event) {
   }
 }
 
+/**
+ * Prompts confirmation and deletes a user-defined custom equipment preset.
+ * @async
+ * @param {string} presetId Target preset identifier.
+ * @returns {Promise<void>}
+ */
 async function deleteCustomPreset(presetId) {
   if (!confirm(`Êtes-vous sûr de vouloir supprimer le modèle personnalisé "${presetId}" ?`)) {
     return;
@@ -2589,7 +3093,7 @@ async function deleteCustomPreset(presetId) {
       alert("Impossible de supprimer le modèle : " + (result.detail || "Erreur"));
       return;
     }
-    // Recharger le catalogue
+    // Refresh catalog modal
     await openCatalogModal();
     filterCatalogCategory(currentCatalogCategory);
   } catch (err) {

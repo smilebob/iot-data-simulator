@@ -1,10 +1,19 @@
 """
-Catalogue des équipements métiers et modèles pré-configurés pour l'IoT Simulator.
-Couvre les 4 grands domaines sectoriels :
-- Industrie & Automatismes
-- Tertiaire & Bâtiment Intelligent (Smart Building / GTB)
-- Infrastructures, Réseaux d'Énergie & Mobilité
-- Villes Durables, Collectivités & Télécoms
+Industrial Equipment Catalog and Pre-configured Presets for IoT Data Simulator.
+
+This module defines standard off-the-shelf equipment profiles across four primary
+industrial and infrastructure domains:
+1. Industry & Automation (compressors, CNC machines, injection molding, electrolysis, etc.)
+2. Tertiary & Smart Building (HVAC AHU, chillers, elevators, fire suppression, etc.)
+3. Infrastructure, Energy Networks & Mobility (solar inverters, EV chargers, wind turbines, etc.)
+4. Sustainable Cities, Utilities & Telecoms (water pumping, street lighting, waste management, etc.)
+
+It provides utilities for:
+- Retrieving built-in factory presets (in-memory cached deep copies).
+- Persisting and mutating custom user-defined presets in JSON storage with thread safety (`threading.RLock`).
+- Exporting complete standalone or bundle packages including ThingsBoard 4.3 dashboard layouts and CSV templates.
+- Importing validated preset packages.
+- Instantiating ready-to-run devices and variables directly into the active simulation repository.
 """
 
 from typing import Dict, List, Optional, Tuple, Any
@@ -36,19 +45,39 @@ CUSTOM_PRESETS_FILE = os.getenv("CUSTOM_PRESETS_FILE", "data/custom_presets.json
 _custom_presets_lock = threading.RLock()
 
 class EquipmentPreset(BaseModel):
-    id: str = Field(..., description="Identifiant unique du modèle")
-    category: str = Field(..., description="Code secteur : industry, building, infrastructure, smart_city")
-    category_label: str = Field(..., description="Libellé du secteur")
-    name: str = Field(..., description="Nom de l'équipement")
-    description: str = Field(..., description="Description technique et cas d'usage")
-    icon: str = Field(default="fa-microchip", description="Icône FontAwesome")
+    """
+    Template definition for an industrial IoT equipment model.
+
+    Attributes:
+        id: Unique identifier for the preset (e.g., 'compressor', 'chiller_centrifugal').
+        category: Industrial sector code ('industry', 'building', 'infrastructure', 'smart_city').
+        category_label: Human-readable sector name.
+        name: Equipment model display name.
+        description: Technical overview and intended operational use cases.
+        icon: Lucide/FontAwesome icon identifier for UI rendering.
+        default_protocol: Recommended default communication protocol (MQTT, HTTP, CoAP).
+        default_platform: Target IoT platform adapter (e.g., THINGSBOARD).
+        is_custom: True if the preset was created/imported by the user, False for built-ins.
+        variables: List of default telemetry and attribute variable configurations.
+    """
+    id: str = Field(..., description="Unique model identifier")
+    category: str = Field(..., description="Sector category code: industry, building, infrastructure, smart_city")
+    category_label: str = Field(..., description="Human-readable sector title")
+    name: str = Field(..., description="Equipment name")
+    description: str = Field(..., description="Technical description and use case")
+    icon: str = Field(default="fa-microchip", description="FontAwesome / Lucide icon identifier")
     default_protocol: TransportProtocol = Field(default=TransportProtocol.MQTT)
     default_platform: PlatformType = Field(default=PlatformType.THINGSBOARD)
-    is_custom: bool = Field(default=False, description="Indique si le modèle est un preset personnalisé importé")
+    is_custom: bool = Field(default=False, description="Flag indicating whether this model is custom/imported")
     variables: List[VariableConfig] = Field(default_factory=list)
 
 def _get_builtin_catalog() -> List[EquipmentPreset]:
-    """Génère la liste des 32 modèles d'équipements d'usine natifs."""
+    """
+    Constructs the exhaustive list of 32 native factory equipment presets.
+
+    Returns:
+        List[EquipmentPreset]: Built-in preset definitions covering all industrial sectors.
+    """
     catalog: List[EquipmentPreset] = []
 
     # =========================================================================
@@ -2171,14 +2200,33 @@ def _get_builtin_catalog() -> List[EquipmentPreset]:
 _BUILTIN_PRESETS_CACHE: Optional[List[EquipmentPreset]] = None
 
 def get_builtin_catalog() -> List[EquipmentPreset]:
-    """Retourne une copie de la liste des modèles natifs en mémoire cache."""
+    """
+    Retrieves deep copies of all built-in factory presets from cache.
+
+    Populates `_BUILTIN_PRESETS_CACHE` on first invocation, ensuring subsequent
+    calls avoid re-evaluating static definitions while isolating mutations.
+
+    Returns:
+        List[EquipmentPreset]: Cloned list of built-in presets.
+    """
     global _BUILTIN_PRESETS_CACHE
     if _BUILTIN_PRESETS_CACHE is None:
         _BUILTIN_PRESETS_CACHE = _get_builtin_catalog()
     return [p.model_copy(deep=True) for p in _BUILTIN_PRESETS_CACHE]
 
 def load_custom_presets(file_path: Optional[str] = None) -> List[EquipmentPreset]:
-    """Charge les modèles d'équipements personnalisés depuis le stockage JSON persistant."""
+    """
+    Loads custom user presets from persistent JSON storage.
+
+    Thread-safe operation protected by `_custom_presets_lock`. Invalid items
+    are logged and skipped without corrupting remaining entries.
+
+    Args:
+        file_path: Optional path to custom presets file. Defaults to `CUSTOM_PRESETS_FILE`.
+
+    Returns:
+        List[EquipmentPreset]: Deserialized custom presets marked with `is_custom=True`.
+    """
     target_path = file_path or CUSTOM_PRESETS_FILE
     if not os.path.exists(target_path):
         return []
@@ -2193,14 +2241,23 @@ def load_custom_presets(file_path: Optional[str] = None) -> List[EquipmentPreset
                     p.is_custom = True
                     presets.append(p)
                 except Exception as ex:
-                    logger.warning(f"Modèle personnalisé invalide ignoré : {ex}")
+                    logger.warning(f"Invalid custom preset skipped: {ex}")
             return presets
         except Exception as e:
-            logger.warning(f"Erreur lors de la lecture des modèles personnalisés ({target_path}): {e}")
+            logger.warning(f"Error reading custom presets file ({target_path}): {e}")
             return []
 
 def save_custom_preset(preset: EquipmentPreset, file_path: Optional[str] = None) -> None:
-    """Enregistre ou met à jour un modèle d'équipement personnalisé."""
+    """
+    Saves or updates a custom equipment preset in persistent JSON storage.
+
+    Performs an atomic write via a temporary file (`.tmp`) under `_custom_presets_lock`
+    to guarantee atomic persistence and prevent corruption during crashes.
+
+    Args:
+        preset: EquipmentPreset instance to persist.
+        file_path: Optional custom destination file path.
+    """
     target_path = file_path or CUSTOM_PRESETS_FILE
     with _custom_presets_lock:
         presets = load_custom_presets(target_path)
@@ -2221,11 +2278,25 @@ def save_custom_preset(preset: EquipmentPreset, file_path: Optional[str] = None)
         os.replace(tmp_path, target_path)
 
 def delete_custom_preset(preset_id: str, file_path: Optional[str] = None) -> bool:
-    """Supprime un modèle personnalisé. Lève une ValueError si le modèle est d'usine."""
+    """
+    Deletes a custom equipment preset from JSON storage.
+
+    Built-in factory presets are protected and cannot be deleted.
+
+    Args:
+        preset_id: Identifier of the preset to delete.
+        file_path: Optional custom presets storage path.
+
+    Returns:
+        bool: True if preset was found and deleted, False if not found.
+
+    Raises:
+        ValueError: If `preset_id` matches a built-in factory preset.
+    """
     target_path = file_path or CUSTOM_PRESETS_FILE
     builtin_ids = {p.id for p in get_builtin_catalog()}
     if preset_id in builtin_ids:
-        raise ValueError(f"Le modèle '{preset_id}' est un modèle natif d'usine et ne peut pas être supprimé.")
+        raise ValueError(f"Le modèle '{preset_id}' est un modèle natif d'usine et ne peut pas être supprimé (Built-in factory preset cannot be deleted).")
     with _custom_presets_lock:
         presets = load_custom_presets(target_path)
         filtered = [p for p in presets if p.id != preset_id]
@@ -2240,18 +2311,34 @@ def delete_custom_preset(preset_id: str, file_path: Optional[str] = None) -> boo
         return True
 
 def get_equipment_catalog(file_path: Optional[str] = None) -> List[EquipmentPreset]:
-    """Retourne la liste complète et unifiée des modèles d'équipements natifs et personnalisés."""
+    """
+    Retrieves the complete unified equipment catalog (built-ins + custom).
+
+    Args:
+        file_path: Optional custom presets storage path.
+
+    Returns:
+        List[EquipmentPreset]: Aggregated preset list.
+    """
     builtin = get_builtin_catalog()
     custom = load_custom_presets(file_path=file_path)
     return builtin + custom
 
 def build_preset_export_package(preset: EquipmentPreset) -> Dict[str, Any]:
     """
-    Construit un package d'exportation 100% exhaustif pour un cas d'usage métier :
-    - Définition complète de l'équipement et de ses variables/formules
-    - Modèle ThingsBoard Dashboard prêt à l'emploi (synoptiques SCADA, widgets)
-    - Template CSV ThingsBoard
-    - Spécifications d'instanciation en 1 clic
+    Constructs an exhaustive export package for an equipment preset.
+
+    The bundle package contains:
+    1. Complete equipment model definition with telemetry/attribute formulas.
+    2. Ready-to-import ThingsBoard 4.3 dashboard template with SCADA synoptics.
+    3. Device CSV template formatted for ThingsBoard Device Import.
+    4. Suggested instantiation parameters and metadata.
+
+    Args:
+        preset: EquipmentPreset to export.
+
+    Returns:
+        Dict[str, Any]: Complete self-contained preset export payload.
     """
     mock_device = DeviceConfig(
         id=preset.id,
@@ -2272,7 +2359,7 @@ def build_preset_export_package(preset: EquipmentPreset) -> Dict[str, Any]:
     csv_template = {
         "headers": "name,type,label,access_token",
         "sample_row": f"{preset.name},default,{preset.name},${{AUTO_GENERATED_TOKEN}}",
-        "notes": "Format compatible avec l'outil d'import CSV d'appareils de ThingsBoard"
+        "notes": "Format compatible with ThingsBoard Device CSV import tool"
     }
 
     instantiation_spec = {
@@ -2296,7 +2383,12 @@ def build_preset_export_package(preset: EquipmentPreset) -> Dict[str, Any]:
     }
 
 def build_all_presets_export_package() -> Dict[str, Any]:
-    """Construit un bundle d'exportation contenant l'intégralité du catalogue."""
+    """
+    Builds a bulk export bundle containing all equipment presets in the catalog.
+
+    Returns:
+        Dict[str, Any]: Multi-preset bundle payload with schema versioning.
+    """
     catalog = get_equipment_catalog()
     packages = [build_preset_export_package(p) for p in catalog]
     return {
@@ -2310,8 +2402,21 @@ def build_all_presets_export_package() -> Dict[str, Any]:
 
 def import_preset_data(data: Any, file_path: Optional[str] = None) -> Tuple[int, List[str]]:
     """
-    Importe un ou plusieurs cas d'usage métiers depuis un objet JSON.
-    Gère un package unitaire (clé 'preset'), un modèle brut ou un bundle.
+    Imports one or multiple equipment presets from a raw JSON payload or bundle.
+
+    Handles single preset packages, presets bundle exports, or raw JSON lists.
+    If a preset ID collides with a native built-in preset, it is appended with
+    `_custom` to prevent modifying immutable factory models.
+
+    Args:
+        data: Deserialized JSON object or list representing exported presets.
+        file_path: Optional custom presets storage path.
+
+    Returns:
+        Tuple[int, List[str]]: Number of successfully imported presets and their IDs.
+
+    Raises:
+        ValueError: If the payload is empty or validation fails.
     """
     imported_ids: List[str] = []
     builtin_ids = {p.id for p in get_builtin_catalog()}
@@ -2337,11 +2442,11 @@ def import_preset_data(data: Any, file_path: Optional[str] = None) -> Tuple[int,
                 items_to_process.append(item)
 
     if not items_to_process:
-        raise ValueError("Aucun modèle d'équipement valide trouvé dans les données fournies.")
+        raise ValueError("No valid equipment preset data found in provided payload.")
 
     for item in items_to_process:
         try:
-            # Remplissage par défaut de device_id si manquant dans les variables
+            # Backfill missing device_id in variable configurations if absent
             if "variables" in item and isinstance(item["variables"], list):
                 for v in item["variables"]:
                     if isinstance(v, dict) and not v.get("device_id"):
@@ -2355,37 +2460,65 @@ def import_preset_data(data: Any, file_path: Optional[str] = None) -> Tuple[int,
             save_custom_preset(preset, file_path=file_path)
             imported_ids.append(preset.id)
         except Exception as e:
-            logger.error(f"Erreur validation du modèle importé : {e}")
-            raise ValueError(f"Erreur de validation du modèle : {e}")
+            logger.error(f"Validation error on imported preset: {e}")
+            raise ValueError(f"Preset validation error: {e}")
 
     return len(imported_ids), imported_ids
 
 class InstantiatePresetRequest(BaseModel):
-    preset_id: str = Field(..., description="Identifiant du preset choisi")
-    device_id: Optional[str] = Field(default=None, description="Identifiant unique pour l'équipement créé")
-    name: Optional[str] = Field(default=None, description="Nom d'affichage de l'équipement")
-    token: Optional[str] = Field(default=None, description="Token d'authentification Thingsboard")
-    protocol: Optional[TransportProtocol] = Field(default=None, description="Protocole (MQTT, HTTP, CoAP)")
-    custom_host: Optional[str] = Field(default=None, description="Hôte spécifique")
-    custom_port: Optional[int] = Field(default=None, description="Port spécifique")
-    use_tls: Optional[bool] = Field(default=None, description="Chiffrement TLS")
-    publish_interval: Optional[float] = Field(default=None, description="Intervalle d'envoi global (sec)")
+    """
+    Request model for instantiating an equipment preset into the active simulator.
+
+    Attributes:
+        preset_id: Identifier of the catalog preset to instantiate.
+        device_id: Unique identifier for created device (auto-generated if omitted).
+        name: Human-friendly display name (auto-assigned if omitted).
+        token: Optional IoT platform credential or ThingsBoard access token.
+        protocol: Communication protocol override (MQTT, HTTP, CoAP).
+        custom_host: Custom broker/server address.
+        custom_port: Custom port number.
+        use_tls: Explicit TLS toggle (defaults to True for HTTP).
+        publish_interval: Global publishing interval override in seconds.
+    """
+    preset_id: str = Field(..., description="Target preset identifier from catalog")
+    device_id: Optional[str] = Field(default=None, description="Unique identifier for created device")
+    name: Optional[str] = Field(default=None, description="Display name for created device")
+    token: Optional[str] = Field(default=None, description="ThingsBoard or platform access token")
+    protocol: Optional[TransportProtocol] = Field(default=None, description="Protocol override (MQTT, HTTP, CoAP)")
+    custom_host: Optional[str] = Field(default=None, description="Custom target host/broker")
+    custom_port: Optional[int] = Field(default=None, description="Custom target port")
+    use_tls: Optional[bool] = Field(default=None, description="TLS encryption toggle")
+    publish_interval: Optional[float] = Field(default=None, description="Global telemetry publish interval (seconds)")
 
 def instantiate_preset(
     req: InstantiatePresetRequest,
     repo,
 ) -> Tuple[DeviceConfig, List[VariableConfig]]:
     """
-    Instancie un modèle d'équipement et crée automatiquement toutes ses variables associées.
+    Instantiates an equipment preset into a runnable DeviceConfig and VariableConfigs.
+
+    Creates and saves the device and its child variables into the active simulation repository.
+    Handles unique ID collision avoidance, default topic generation based on platform adapter,
+    and optional interval overrides.
+
+    Args:
+        req: InstantiatePresetRequest parameters.
+        repo: Repository instance managing devices and variables.
+
+    Returns:
+        Tuple[DeviceConfig, List[VariableConfig]]: Created device and variable configurations.
+
+    Raises:
+        ValueError: If `req.preset_id` is not present in the catalog.
     """
     catalog = get_equipment_catalog()
     preset = next((p for p in catalog if p.id == req.preset_id), None)
     if not preset:
-        raise ValueError(f"Modèle d'équipement '{req.preset_id}' introuvable dans le catalogue.")
+        raise ValueError(f"Equipment preset '{req.preset_id}' not found in catalog.")
 
     existing_devices = {d.id for d in repo.get_devices()}
 
-    # Génération d'un ID unique si non spécifié
+    # Generate unique device ID if omitted
     device_id = (req.device_id or "").strip()
     if not device_id:
         suffix = secrets.token_hex(2)
@@ -2394,7 +2527,7 @@ def instantiate_preset(
             suffix = secrets.token_hex(2)
             device_id = f"{preset.id}_{suffix}"
 
-    # Détermination du nom lisible
+    # Determine display name
     device_name = (req.name or "").strip()
     if not device_name:
         count = sum(1 for d in repo.get_devices() if d.id.startswith(preset.id))
@@ -2405,7 +2538,7 @@ def instantiate_preset(
     if target_use_tls is None and target_protocol == TransportProtocol.HTTP:
         target_use_tls = True
 
-    # Création et sauvegarde de l'équipement
+    # Build and persist device configuration
     device = DeviceConfig(
         id=device_id,
         name=device_name,
@@ -2420,7 +2553,7 @@ def instantiate_preset(
     )
     repo.save_device(device)
 
-    # Création des variables associées avec topic par défaut
+    # Instantiate child variables with platform default topics
     adapter = get_adapter(device.platform)
     created_variables: List[VariableConfig] = []
     for orig_var in preset.variables:

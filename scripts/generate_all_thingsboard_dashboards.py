@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 """
-Générateur automatisé des 32 tableaux de bord ThingsBoard (JSON)
-pour l'ensemble des cas d'usage métiers du simulateur IoT.
+ThingsBoard Dashboard Automated Batch Generator
+===============================================
+Generates standalone, compliant ThingsBoard 4.3 JSON dashboard descriptors
+for all 32 industrial equipment catalog presets.
+
+Organizes exports into sector directories:
+- `01_industrie/` (Industrial Automation & Machinery)
+- `02_tertiaire/` (Smart Buildings & HVAC)
+- `03_infrastructures/` (Energy Grids & Pumping Networks)
+- `04_villes_telecoms/` (Smart Cities, Logistics & Telecoms)
 """
 
 import os
@@ -9,9 +17,10 @@ import sys
 import json
 import types
 
-# Mocks minimaux pour exécuter hors conteneur sans dépendances externes
+# Lightweight mock stubs to allow execution outside container runtime without external pip packages
 pyd = types.ModuleType('pydantic')
 class BaseModel:
+    """Mock Pydantic BaseModel for standalone CLI execution."""
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -20,15 +29,19 @@ class BaseModel:
         return copy.deepcopy(self)
     def model_dump(self):
         return self.__dict__
+
 def Field(default=None, default_factory=None, description=None, **kwargs):
+    """Mock Pydantic Field."""
     if default_factory:
         return default_factory()
     return default
+
 pyd.BaseModel = BaseModel
 pyd.Field = Field
 pyd.field_validator = lambda *a, **k: (lambda f: f)
 sys.modules['pydantic'] = pyd
 
+# Mock transport and networking dependencies
 for mod in ['paho', 'paho.mqtt', 'paho.mqtt.client', 'fastapi', 'fastapi.responses', 'aiocoap', 'httpx']:
     m = types.ModuleType(mod)
     m.Client = lambda *a, **k: None
@@ -50,6 +63,7 @@ CATEGORY_DIR_MAP = {
 }
 
 def main():
+    """Generates all ThingsBoard dashboards and creates directory index README.md."""
     target_base = os.path.join(BASE_DIR, "dashboards", "thingsboard")
     os.makedirs(target_base, exist_ok=True)
 
@@ -62,7 +76,7 @@ def main():
         cat_dir = os.path.join(target_base, subfolder)
         os.makedirs(cat_dir, exist_ok=True)
 
-        # Création d'un équipement modèle avec token indicatif
+        # Create model device configuration with sample token
         device = DeviceConfig(
             id=preset.id,
             name=preset.name,
@@ -73,7 +87,7 @@ def main():
             enabled=True
         )
 
-        # Cloner les variables avec le device_id
+        # Deep clone variables with target device ID binding
         vars_copy = []
         for orig in preset.variables:
             v = orig.model_copy(deep=True)
@@ -90,9 +104,9 @@ def main():
 
         generated_count += 1
         catalog_summary.setdefault(subfolder, []).append((preset.id, preset.name, len(preset.variables), filename))
-        print(f"[{subfolder}] Généré : {filename} ({preset.name})")
+        print(f"[{subfolder}] Generated: {filename} ({preset.name})")
 
-    # Génération du README du dossier dashboards/thingsboard/
+    # Generate index README inside dashboards/thingsboard/
     readme_path = os.path.join(target_base, "README.md")
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write("# Bibliothèque des Tableaux de Bord ThingsBoard (JSON Export)\n\n")
@@ -131,7 +145,10 @@ def main():
                 f.write(f"| **{pname}** | [`{fname}`]({subfolder}/{fname}) | {var_count} grandeurs (Jauges + Télémétries + Attributs) |\n")
             f.write("\n")
 
-    print(f"\n✅ Total : {generated_count} tableaux de bord ThingsBoard générés avec succès dans '{target_base}' !")
+    print(f"\n✅ Total: {generated_count} ThingsBoard dashboards successfully generated in '{target_base}'!")
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()

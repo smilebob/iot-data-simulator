@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """
-Générateur de package complet de cas d'usage métier pour l'IoT Data Simulator.
-Prend en entrée une définition de preset brut et produit un package 100% autonome et exhaustif
-incluant le tableau de bord ThingsBoard 4.3 (synoptique P&ID animé, jauges, switches) et le template CSV.
+IoT Equipment Preset Full Package Builder
+========================================
+Takes a raw equipment preset definition and bundles it into an autonomous,
+100% compliant export package including:
+- Equipment definition model
+- ThingsBoard 4.3 JSON dashboard descriptor (animated SCADA P&ID vector synoptic, gauges, switches)
+- ThingsBoard bulk CSV import template
+- Instantiation specifications
 """
 
 import argparse
@@ -13,11 +18,20 @@ import uuid
 from datetime import datetime, timezone
 from typing import Dict, Any, List
 
+
 def generate_svg_synoptic(preset_name: str, variables: List[Dict[str, Any]]) -> str:
-    """Génère un synoptique vectoriel SVG industriel animé avec tags de télémétrie ${cle}."""
+    """Generates an animated industrial SVG SCADA synoptic with live `${key:1}` data tags.
+
+    Args:
+        preset_name: Human-readable equipment preset name.
+        variables: List of telemetry and attribute variable dictionaries.
+
+    Returns:
+        Formatted HTML wrapper string containing embedded SVG with CSS animations.
+    """
     telemetries = [v for v in variables if v.get("var_type") == "telemetry"]
     
-    # Construction des étiquettes de mesure
+    # Build telemetry measurement tags
     tags_svg = []
     y_pos = 120
     for idx, t in enumerate(telemetries[:6]):
@@ -60,24 +74,32 @@ def generate_svg_synoptic(preset_name: str, variables: List[Dict[str, Any]]) -> 
           </linearGradient>
         </defs>
 
-        <!-- Tuyauteries de process avec animation de fluide -->
+        <!-- Process piping with animated fluid flow -->
         <path d="M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190" fill="none" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
         <path d="M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190" fill="none" stroke="#38BDF8" stroke-width="3" class="scada-flow"/>
 
-        <!-- Bâtie Machine / Process Tank -->
+        <!-- Process tank and machine core -->
         <rect x="180" y="90" width="220" height="200" rx="14" fill="url(#eqGrad)" stroke="#0284C7" stroke-width="2.5"/>
         <text x="290" y="125" fill="#38BDF8" font-size="13" font-weight="800" text-anchor="middle" letter-spacing="1">UNITÉ DE PROCESS</text>
         <circle cx="290" cy="195" r="45" fill="#182234" stroke="#0284C7" stroke-width="1.5"/>
         <text x="290" y="200" fill="#94A3B8" font-size="10" font-family="monospace" text-anchor="middle">ACTIVE</text>
 
-        <!-- Étiquettes de mesures dynamiques ThingsBoard -->
+        <!-- Live ThingsBoard telemetry badges -->
         {tags_joined}
       </svg>
     </div>
     """
 
+
 def generate_tb43_dashboard(preset: Dict[str, Any]) -> Dict[str, Any]:
-    """Génère un modèle ThingsBoard 4.3 complet compatible Community & Pro."""
+    """Generates a complete ThingsBoard 4.3 JSON dashboard compatible with Community and Professional Editions.
+
+    Args:
+        preset: Equipment preset dictionary.
+
+    Returns:
+        Structured ThingsBoard dashboard dictionary.
+    """
     alias_id = str(uuid.uuid4())
     p_name = preset.get("name", "Équipement")
     p_id = preset.get("id", "equip")

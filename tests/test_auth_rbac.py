@@ -1,3 +1,9 @@
+"""
+Unit Tests for Authentication and Role-Based Access Control (RBAC)
+==================================================================
+Tests Scrypt password hashing, JWT creation/validation, and UserRepository CRUD.
+"""
+
 import os
 import shutil
 import tempfile
@@ -5,14 +11,18 @@ from app.core.security import hash_password, verify_password, create_jwt_token, 
 from app.models.user import UserCreate, UserRole
 from app.storage.user_repository import UserRepository
 
+
 def test_password_hashing():
+    """Validates Scrypt password hashing and cryptographic verification."""
     pw = "Admin_123456!"
     h = hash_password(pw)
     assert h.startswith("$scrypt$")
     assert verify_password(pw, h) is True
     assert verify_password("WrongPassword!", h) is False
 
+
 def test_jwt_tokens():
+    """Validates JWT HS256 creation, claims extraction, expiration, and secret protection."""
     secret = "test-secret-key-that-is-at-least-32-chars-long"
     payload = {"sub": "admin", "role": "admin", "name": "Admin"}
     token = create_jwt_token(payload, expires_in_seconds=3600, secret_key=secret)
@@ -23,14 +33,16 @@ def test_jwt_tokens():
     assert decoded["sub"] == "admin"
     assert decoded["role"] == "admin"
 
-    # Mauvais secret
+    # Reject on signature mismatch with wrong secret
     assert decode_jwt_token(token, secret_key="wrong-secret-key-at-least-32-chars-long") is None
 
-    # Token expiré
+    # Reject on expired token
     expired_token = create_jwt_token(payload, expires_in_seconds=-10, secret_key=secret)
     assert decode_jwt_token(expired_token, secret_key=secret) is None
 
+
 def test_user_repository():
+    """Validates UserRepository initialization, user creation, duplicates, and last admin protection."""
     tmp_dir = tempfile.mkdtemp()
     tmp_file = os.path.join(tmp_dir, "users_test.json")
     try:
@@ -61,7 +73,7 @@ def test_user_repository():
         # Duplicate check
         try:
             repo.create_user(op_create)
-            assert False, "Devrait lever une ValueError"
+            assert False, "Should raise ValueError on duplicate user"
         except ValueError:
             pass
 
@@ -73,7 +85,7 @@ def test_user_repository():
         # Last admin protection
         try:
             repo.delete_user("admin")
-            assert False, "Ne doit pas autoriser la suppression du dernier admin"
+            assert False, "Should prevent deleting the last admin"
         except ValueError:
             pass
 
@@ -83,6 +95,7 @@ def test_user_repository():
         assert len(repo.list_users()) == 1
     finally:
         shutil.rmtree(tmp_dir)
+
 
 if __name__ == "__main__":
     print("Running test_password_hashing...")

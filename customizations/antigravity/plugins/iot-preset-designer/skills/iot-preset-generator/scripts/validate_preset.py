@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
-Script de validation formelle de conformité pour les modèles d'équipements IoT (Presets).
-Vérifie la syntaxe, la complétude, la validité des formules causales AST et l'absence de cycles.
-Exécutable de manière autonome avec Python 3 standard (zéro dépendance externe).
+Formal Compliance Validator for IoT Equipment Presets
+=====================================================
+Validates schema syntax, physical completeness, mathematical AST expressions,
+integrator chains, and cycle detection in derived causal topologies.
+Runs standalone with zero external dependencies (Python 3 standard library only).
 """
 
 import ast
@@ -27,44 +29,66 @@ ALLOWED_AST_NODES = (
 )
 ALLOWED_FUNCTIONS = {"abs", "min", "max", "round", "sqrt", "sin", "cos"}
 
+
 class ValidationError(Exception):
+    """Custom exception raised when preset validation fails."""
     pass
 
+
 def validate_formula_ast(formula: str, available_vars: Set[str]) -> List[str]:
-    """Valide qu'une formule mathématique est saine et ne référence que des variables existantes."""
+    """Validates that a mathematical formula is structurally safe and references valid variables.
+
+    Args:
+        formula: Mathematical formula string.
+        available_vars: Set of valid variable identifiers defined in the preset.
+
+    Returns:
+        List of referenced variable identifiers.
+
+    Raises:
+        ValidationError: If syntax is invalid or references unauthorized nodes/functions.
+    """
     try:
         tree = ast.parse(formula, mode='eval')
     except SyntaxError as e:
-        raise ValidationError(f"Erreur de syntaxe dans la formule '{formula}': {e}")
+        raise ValidationError(f"Syntax error in formula '{formula}': {e}")
 
     referenced_vars: List[str] = []
     for node in ast.walk(tree):
         if not isinstance(node, ALLOWED_AST_NODES):
             raise ValidationError(
-                f"Opération interdite '{type(node).__name__}' dans la formule '{formula}'. "
-                f"Seules les opérations arithmétiques pures et les fonctions {ALLOWED_FUNCTIONS} sont autorisées."
+                f"Unauthorized AST node '{type(node).__name__}' in formula '{formula}'. "
+                f"Only pure arithmetic operations and mathematical functions {ALLOWED_FUNCTIONS} are permitted."
             )
         if isinstance(node, ast.Call):
             if not isinstance(node.func, ast.Name) or node.func.id not in ALLOWED_FUNCTIONS:
-                func_name = getattr(node.func, "id", "inconnue")
+                func_name = getattr(node.func, "id", "unknown")
                 raise ValidationError(
-                    f"Fonction non autorisée '{func_name}()' dans la formule '{formula}'. "
-                    f"Fonctions autorisées : {sorted(ALLOWED_FUNCTIONS)}."
+                    f"Unauthorized function '{func_name}()' in formula '{formula}'. "
+                    f"Permitted functions: {sorted(ALLOWED_FUNCTIONS)}."
                 )
         elif isinstance(node, ast.Name):
             var_name = node.id
             if var_name not in ALLOWED_FUNCTIONS:
                 if var_name not in available_vars:
                     raise ValidationError(
-                        f"La variable '{var_name}' référencée dans la formule '{formula}' "
-                        f"n'existe pas dans le modèle. Variables disponibles : {sorted(available_vars)}"
+                        f"Variable '{var_name}' referenced in formula '{formula}' "
+                        f"does not exist in preset. Available variables: {sorted(available_vars)}"
                     )
                 referenced_vars.append(var_name)
 
     return referenced_vars
 
+
 def check_cycles(dep_graph: Dict[str, List[str]]):
-    """Détecte les éventuelles dépendances circulaires entre variables dérivées."""
+    """Detects cyclic dependencies in derived variable topological dependency graphs.
+
+    Args:
+        dep_graph: Directed graph mapping variable IDs to their dependency lists.
+
+    Raises:
+        ValidationError: If a circular causal loop is detected.
+    """
     visited: Set[str] = set()
     stack: Set[str] = set()
 
@@ -74,7 +98,7 @@ def check_cycles(dep_graph: Dict[str, List[str]]):
         for neighbor in dep_graph.get(node, []):
             if neighbor in stack:
                 cycle_str = " -> ".join(path + [neighbor])
-                raise ValidationError(f"Dépendance circulaire détectée : {cycle_str}")
+                raise ValidationError(f"Circular dependency detected: {cycle_str}")
             if neighbor not in visited:
                 visit(neighbor, path + [neighbor])
         stack.remove(node)
@@ -83,30 +107,41 @@ def check_cycles(dep_graph: Dict[str, List[str]]):
         if n not in visited:
             visit(n, [n])
 
+
 def validate_preset_dict(preset: Dict[str, Any]) -> Tuple[bool, List[str]]:
-    """Valide l'objet EquipmentPreset."""
+    """Validates an EquipmentPreset dictionary against schema and physical constraints.
+
+    Args:
+        preset: Preset dictionary to validate.
+
+    Returns:
+        Tuple of (is_valid, warnings_list).
+
+    Raises:
+        ValidationError: If any mandatory schema or semantic validation fails.
+    """
     warnings: List[str] = []
 
-    # 1. Champs obligatoires
+    # 1. Mandatory fields
     for req in ("id", "name", "category", "category_label", "variables"):
         if req not in preset or preset[req] is None:
-            raise ValidationError(f"Champ obligatoire manquant dans le preset : '{req}'")
+            raise ValidationError(f"Missing mandatory field in preset: '{req}'")
 
-    # 2. Format de l'ID
+    # 2. Identifier format
     if not re.match(r"^[a-z0-9_]+$", preset["id"]):
-        raise ValidationError(f"L'ID du preset '{preset['id']}' doit être en minuscules avec chiffres et tirets bas uniquement.")
+        raise ValidationError(f"Preset ID '{preset['id']}' must contain only lowercase letters, digits, and underscores.")
 
-    # 3. Catégorie
+    # 3. Category
     if preset["category"] not in VALID_CATEGORIES:
         raise ValidationError(
-            f"Catégorie invalide '{preset['category']}'. "
-            f"Valeurs autorisées : {sorted(VALID_CATEGORIES)}"
+            f"Invalid category '{preset['category']}'. "
+            f"Allowed values: {sorted(VALID_CATEGORIES)}"
         )
 
-    # 4. Variables
+    # 4. Variables list
     variables = preset.get("variables", [])
     if not isinstance(variables, list) or len(variables) == 0:
-        raise ValidationError("Le modèle doit contenir au moins une variable dans 'variables'.")
+        raise ValidationError("Preset must contain at least one variable in 'variables'.")
 
     var_ids: Set[str] = set()
     dep_graph: Dict[str, List[str]] = {}

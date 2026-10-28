@@ -1,15 +1,16 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-22 | **Version** : 2.2.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark & PEP 8 | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-10-28 | **Version** : 2.2.1 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark, PEP 8, Google Docstrings & JSDoc | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
 ## 🎯 Vue d'Ensemble & Objectif
 - **Description** : Simulateur de données IoT industriel pour démonstrations dynamiques sur **ThingsBoard 4.3** et plateformes compatibles MQTT (**Home Assistant**, **Datacake**, etc.). Permet la génération de signaux mathématiques purs paramétrables, le rejeu de séries temporelles (points/CSV), l'injection d'anomalies en direct (*Chaos Button*) et le forçage manuel.
-- **Stack Technique** : Python 3.11+ (FastAPI, asyncio, Paho-MQTT v2, Pydantic v2), Eclipse Mosquitto 2.0, MQTTX Web, Docker Compose multi-stage non-root.
+- **Stack Technique** : Python 3.11+ / 3.13 (FastAPI, asyncio, Paho-MQTT v2, Pydantic v2), Eclipse Mosquitto 2.0, MQTTX Web, Docker Compose multi-stage non-root.
+- **Documentation du Code** : 100% du code source backend (Google Style docstrings), scripts DevOps (en-têtes POSIX), IHM JS (JSDoc exhaustif) et tests unitaires documentés en anglais standard de qualité professionnelle.
 - **Point d'Entrée Principal** : [`app/main.py`](file:///home/pierre/Projets/iot-data-simulator/app/main.py)
 - **Ports Exposés** :
-  - `8000` : Web GUI & API REST
+  - `8000` / `8032` : Web GUI & API REST
   - `8080` : MQTTX Web Inspector
   - `1883` : Broker MQTT Mosquitto TCP
   - `9001` : Mosquitto WebSockets
@@ -137,6 +138,13 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Protection des Modèles Natifs** : Blocage strict de la suppression (`DELETE /api/presets/{preset_id}`) pour tout modèle d'usine d'origine (erreur HTTP 400).
   - **IHM Évoluée du Catalogue** : Boutons *Importer* et *Exporter tout* dans l'en-tête de la modale, onglet filtre *Personnalisés* avec compteur dynamique, et boutons d'export unitaire et de suppression sur les cartes de modèles.
   - **Plugin Antigravity Officiel (`iot-preset-designer`)** : Déploiement d'un agent IA (*IoT Preset Architect*) et de la skill *iot-preset-generator* dans `customizations/antigravity/` et `~/.gemini/config/plugins/` pour concevoir interactivement de nouveaux cas d'usage avec validation AST et assemblage de dashboards ThingsBoard 4.3.
+- [x] Documentation Intégrale Professionnelle du Code Source (v2.2.1) :
+  - **Standard Google Docstrings** : Couverture exhaustive à 100% de l'ensemble des modules, classes, méthodes et fonctions Python (`app/models/`, `app/core/`, `app/transports/`, `app/mqtt/`, `app/platforms/`, `app/storage/`, `app/api/`, `app/main.py`).
+  - **Standard JSDoc & CSS Tokens** : Documentation intégrale de l'application frontend (`app/static/app.js` et `app/static/styles.css`) avec annotations `@param`, `@returns`, `@async`, `@typedef`.
+  - **Scripts DevOps & Outils** : En-têtes POSIX normalisés et blocs d'usage pour [`scripts/portainer_deploy.py`](file:///home/pierre/Projets/iot-data-simulator/scripts/portainer_deploy.py), [`scripts/remote_update.sh`](file:///home/pierre/Projets/iot-data-simulator/scripts/remote_update.sh), [`scripts/generate_all_thingsboard_dashboards.py`](file:///home/pierre/Projets/iot-data-simulator/scripts/generate_all_thingsboard_dashboards.py) et [`scripts/update_usecase_docs.py`](file:///home/pierre/Projets/iot-data-simulator/scripts/update_usecase_docs.py).
+  - **Suite de Tests Unitaires & Plugin Antigravity** : Documentation de l'intégralité des 9 suites de tests (`tests/test_*.py`) et des scripts du plugin [`iot-preset-designer`](file:///home/pierre/Projets/iot-data-simulator/customizations/antigravity/plugins/iot-preset-designer/).
+  - **Résolution des Dépréciations Python 3.13** : Remplacement de `datetime.utcnow()` par `datetime.now(timezone.utc)` (zéro warning pytest).
+  - **Validation Qualité** : 100% de la suite de tests unitaire exécutée avec succès (23/23 tests passés en 1.55s).
 - [x] Guide d'Import/Export & Agent IA : `Documentation/user/preset_import_export_and_agent.md`
 - [x] Guide Développeur Modèles Personnalisés & Plugin : `Documentation/developer/custom_presets_and_plugins.md`
 - [x] Automatisation Déploiement Portainer & Réseau Privé (v2.2.1) :

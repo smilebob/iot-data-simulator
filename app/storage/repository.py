@@ -1,3 +1,22 @@
+"""
+Thread-Safe Persistent JSON Storage Repository for Devices and Variables.
+
+This module provides atomic, thread-safe JSON persistence for simulation models:
+- Broker connection configuration (`BrokerConfig`).
+- Device entities (`DeviceConfig`).
+- Telemetry and attribute variables (`VariableConfig`).
+
+Fault Tolerance & Resilience Architecture:
+- Thread Safety: Mutex lock (`threading.Lock`) protects all reads, mutations, and serialization.
+- Atomic Persistence: Writes to a temporary staging file (`.tmp`) before calling `os.replace`
+  to guarantee zero partial/corrupted writes during unexpected power cuts or container crashes.
+- Dual Automatic Backup: Updates a secondary `.bak` mirror on every valid save.
+  Restores automatically from `.bak` if the main file is missing or corrupted.
+- Quarantine: Corrupted files are safely preserved as `.corrupted.<timestamp>` for post-mortem analysis.
+- Resilient Deserialization: Validates with Pydantic; falls back to `model_construct` to preserve
+  user-defined data even across schema migrations.
+"""
+
 import json
 import logging
 import os
@@ -19,32 +38,49 @@ logger = logging.getLogger("iot_sim.storage")
 
 class StorageRepository:
     """
-    Gestionnaire de persistance thread-safe pour les équipements, variables et configuration broker.
-    Enregistre les données sous forme de fichier JSON dans le volume persistant.
+    Thread-safe persistent storage repository managing devices, variables, and broker configuration.
+
+    Attributes:
+        file_path: Filesystem path to primary JSON storage file.
+        broker_config: Current active BrokerConfig instance.
+        devices: In-memory dictionary mapping device IDs to DeviceConfig instances.
+        variables: In-memory dictionary mapping variable IDs to VariableConfig instances.
     """
 
-    def __init__(self, file_path: str = "data/simulator_state.json"):
-        self.file_path = file_path
-        self._lock = threading.Lock()
-        self.broker_config = BrokerConfig()
+    def __init__(self, file_path: str = "data/simulator_state.json") -> None:
+        """
+        Initializes the storage repository and loads existing data from disk.
+
+        Args:
+            file_path: Path to target JSON state file. Defaults to 'data/simulator_state.json'.
+        """
+        self.file_path: str = file_path
+        self._lock: threading.Lock = threading.Lock()
+        self.broker_config: BrokerConfig = BrokerConfig()
         self.devices: Dict[str, DeviceConfig] = {}
         self.variables: Dict[str, VariableConfig] = {}
         self.load()
 
-    def load(self):
+    def load(self) -> None:
+        """
+        Loads and validates simulation state from the persistent JSON file.
+
+        Features automated recovery from `.bak` backup if the main file is missing or corrupted.
+        Bootstraps initial demo devices if no configuration exists.
+        """
         with self._lock:
             if not os.path.exists(self.file_path):
-                # Vérifier si un backup automatique existe
+                # Check for automatic backup
                 bak_path = f"{self.file_path}.bak"
                 if os.path.exists(bak_path):
-                    logger.warning(f"Fichier principal {self.file_path} absent, tentative de restauration depuis {bak_path}")
+                    logger.warning(f"Primary file {self.file_path} missing; attempting restoration from {bak_path}")
                     try:
                         import shutil
                         shutil.copy2(bak_path, self.file_path)
                     except Exception as e:
-                        logger.error(f"Erreur copie backup: {e}")
+                        logger.error(f"Error copying backup file: {e}")
                 else:
-                    logger.info(f"Fichier de configuration inexistant ({self.file_path}), initialisation des démos par défaut.")
+                    logger.info(f"State file does not exist ({self.file_path}); initializing default demonstration scenarios.")
                     self._init_defaults()
                     self._save_unsafe()
                     return
@@ -57,7 +93,7 @@ class StorageRepository:
                     try:
                         self.broker_config = BrokerConfig.model_validate(data["broker"])
                     except Exception as e:
-                        logger.warning(f"Configuration broker invalide, conservation défaut: {e}")
+                        logger.warning(f"Invalid broker configuration; retaining defaults: {e}")
 
                 self.devices.clear()
                 for d in data.get("devices", []):
@@ -65,7 +101,7 @@ class StorageRepository:
                         dev = DeviceConfig.model_validate(d)
                         self.devices[dev.id] = dev
                     except Exception as e:
-                        logger.warning(f"Validation stricte échouée pour équipement {d.get('id', 'inconnu')}: {e}. Chargement résilient sans validation pour préserver vos données.")
+                        logger.warning(f"Strict validation failed for device {d.get('id', 'unknown')}: {e}. Loading resiliently.")
                         try:
                             self.devices[d["id"]] = DeviceConfig.model_construct(**d)
                         except Exception:
@@ -77,15 +113,15 @@ class StorageRepository:
                         var = VariableConfig.model_validate(v)
                         self.variables[var.id] = var
                     except Exception as e:
-                        logger.warning(f"Validation stricte échouée pour variable {v.get('id', 'inconnue')}: {e}. Chargement résilient sans validation.")
+                        logger.warning(f"Strict validation failed for variable {v.get('id', 'unknown')}: {e}. Loading resiliently.")
                         try:
                             self.variables[v["id"]] = VariableConfig.model_construct(**v)
                         except Exception:
                             pass
 
-                logger.info(f"✓ Chargé {len(self.devices)} équipement(s) et {len(self.variables)} variable(s) depuis {self.file_path}")
+                logger.info(f"✓ Loaded {len(self.devices)} device(s) and {len(self.variables)} variable(s) from {self.file_path}")
 
-                # Actualisation du backup sécurisé
+                # Refresh secure backup
                 try:
                     import shutil
                     shutil.copy2(self.file_path, f"{self.file_path}.bak")
@@ -93,20 +129,20 @@ class StorageRepository:
                     pass
 
             except Exception as e:
-                logger.error(f"Erreur critique lors de la lecture de {self.file_path}: {e}")
+                logger.error(f"Critical error reading {self.file_path}: {e}")
                 import time
                 try:
                     import shutil
                     corrupt_path = f"{self.file_path}.corrupted.{int(time.time())}"
                     shutil.copy2(self.file_path, corrupt_path)
-                    logger.warning(f"Copie du fichier d'origine préservée dans {corrupt_path}")
+                    logger.warning(f"Original corrupted file preserved at {corrupt_path}")
                 except Exception:
                     pass
 
-                # Tenter de restaurer depuis le backup .bak
+                # Attempt recovery from .bak
                 bak_path = f"{self.file_path}.bak"
                 if os.path.exists(bak_path):
-                    logger.warning(f"Restauration automatique d'urgence depuis le backup {bak_path}")
+                    logger.warning(f"Attempting emergency automatic restoration from backup {bak_path}")
                     try:
                         with open(bak_path, "r", encoding="utf-8") as f:
                             data = json.load(f)
@@ -118,14 +154,14 @@ class StorageRepository:
                             self.variables[v["id"]] = VariableConfig.model_construct(**v)
                         return
                     except Exception as be:
-                        logger.error(f"Échec restauration backup: {be}")
+                        logger.error(f"Backup restoration failed: {be}")
 
-                logger.error("Restauration impossible, initialisation des valeurs par défaut.")
+                logger.error("Restoration impossible; initializing default demonstration data.")
                 self._init_defaults()
                 self._save_unsafe()
 
-    def _init_defaults(self):
-        """Initialise des équipements et variables de démonstration réalistes pour ThingsBoard et d'autres plateformes."""
+    def _init_defaults(self) -> None:
+        """Initializes realistic demonstration devices and variables for ThingsBoard and generic MQTT."""
         self.broker_config = BrokerConfig(
             host=os.getenv("MQTT_BROKER_HOST", "mosquitto"),
             port=int(os.getenv("MQTT_BROKER_PORT", "1883")),
@@ -134,7 +170,7 @@ class StorageRepository:
             password=os.getenv("MQTT_PASSWORD", None),
         )
 
-        # 1. Équipement ThingsBoard de démo
+        # 1. ThingsBoard Solar Weather Station
         dev1 = DeviceConfig(
             id="tb_station_01",
             name="Station Météo Solaire",
@@ -184,7 +220,7 @@ class StorageRepository:
         self.variables[var_hum.id] = var_hum
         self.variables[var_status.id] = var_status
 
-        # 2. Équipement Industriel (Table de points / Rejeu)
+        # 2. Workshop Air Compressor
         dev2 = DeviceConfig(
             id="ind_motor_02",
             name="Compresseur Atelier",
@@ -232,7 +268,8 @@ class StorageRepository:
         self.variables[var_rpm.id] = var_rpm
         self.variables[var_pressure.id] = var_pressure
 
-    def _save_unsafe(self):
+    def _save_unsafe(self) -> None:
+        """Performs atomic file write to .tmp staging file before renaming."""
         try:
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
             data = {
@@ -245,85 +282,168 @@ class StorageRepository:
                 json.dump(data, f, indent=2, ensure_ascii=False)
             os.replace(temp_path, self.file_path)
 
-            # Mise à jour du backup persistant
+            # Update persistent backup
             try:
                 import shutil
                 shutil.copy2(self.file_path, f"{self.file_path}.bak")
             except Exception:
                 pass
         except Exception as e:
-            logger.error(f"Erreur sauvegarde fichier: {e}")
+            logger.error(f"Error saving state file: {e}")
 
-    def save(self):
+    def save(self) -> None:
+        """Thread-safe state persistence."""
         with self._lock:
             self._save_unsafe()
 
-    # --- Accès Méthodes CRUD ---
+    # --- CRUD Access Methods ---
     def get_devices(self) -> List[DeviceConfig]:
+        """
+        Retrieves all registered devices.
+
+        Returns:
+            List[DeviceConfig]: List of device configurations.
+        """
         with self._lock:
             return list(self.devices.values())
 
     def get_device(self, device_id: str) -> Optional[DeviceConfig]:
+        """
+        Retrieves a device by ID.
+
+        Args:
+            device_id: Device identifier.
+
+        Returns:
+            Optional[DeviceConfig]: DeviceConfig if found, else None.
+        """
         with self._lock:
             return self.devices.get(device_id)
 
-    def save_device(self, device: DeviceConfig):
+    def save_device(self, device: DeviceConfig) -> None:
+        """
+        Saves or updates a device configuration.
+
+        If `publish_interval` is set on the device, synchronizes it across all its variables.
+
+        Args:
+            device: DeviceConfig instance to persist.
+        """
         with self._lock:
             self.devices[device.id] = device
-            # Si un intervalle d'envoi global est configuré, écraser l'intervalle de toutes ses variables
             if device.publish_interval is not None and device.publish_interval > 0:
                 for v in self.variables.values():
                     if v.device_id == device.id:
                         v.publish_interval = device.publish_interval
             self._save_unsafe()
 
-    def delete_device(self, device_id: str):
+    def delete_device(self, device_id: str) -> None:
+        """
+        Deletes a device and cascades deletion to all associated variables.
+
+        Args:
+            device_id: Identifier of device to remove.
+        """
         with self._lock:
             if device_id in self.devices:
                 del self.devices[device_id]
-            # Supprimer aussi les variables associées
+            # Cascade deletion to associated variables
             to_del = [vid for vid, v in self.variables.items() if v.device_id == device_id]
             for vid in to_del:
                 del self.variables[vid]
             self._save_unsafe()
 
     def get_variables(self, device_id: Optional[str] = None) -> List[VariableConfig]:
+        """
+        Retrieves all variables, optionally filtered by parent device.
+
+        Args:
+            device_id: Optional device identifier filter.
+
+        Returns:
+            List[VariableConfig]: Filtered or complete list of variables.
+        """
         with self._lock:
             if device_id:
                 return [v for v in self.variables.values() if v.device_id == device_id]
             return list(self.variables.values())
 
     def get_variable(self, var_id: str) -> Optional[VariableConfig]:
+        """
+        Retrieves a single variable configuration by ID.
+
+        Args:
+            var_id: Variable identifier.
+
+        Returns:
+            Optional[VariableConfig]: Variable configuration or None.
+        """
         with self._lock:
             return self.variables.get(var_id)
 
-    def save_variable(self, variable: VariableConfig):
+    def save_variable(self, variable: VariableConfig) -> None:
+        """
+        Saves or updates a single variable configuration.
+
+        Args:
+            variable: VariableConfig instance to persist.
+        """
         with self._lock:
             self.variables[variable.id] = variable
             self._save_unsafe()
 
-    def save_variables(self, variables: List[VariableConfig]):
+    def save_variables(self, variables: List[VariableConfig]) -> None:
+        """
+        Performs a batch save of multiple variables in a single atomic transaction.
+
+        Args:
+            variables: List of VariableConfig instances to save.
+        """
         with self._lock:
             for v in variables:
                 self.variables[v.id] = v
             self._save_unsafe()
 
-    def delete_variable(self, var_id: str):
+    def delete_variable(self, var_id: str) -> None:
+        """
+        Deletes a variable configuration by ID.
+
+        Args:
+            var_id: Variable identifier to remove.
+        """
         with self._lock:
             if var_id in self.variables:
                 del self.variables[var_id]
                 self._save_unsafe()
 
     def get_broker(self) -> BrokerConfig:
+        """
+        Retrieves current global MQTT broker configuration.
+
+        Returns:
+            BrokerConfig: Active broker configuration.
+        """
         with self._lock:
             return self.broker_config
 
-    def save_broker(self, broker: BrokerConfig):
+    def save_broker(self, broker: BrokerConfig) -> None:
+        """
+        Updates and persists global broker configuration.
+
+        Args:
+            broker: Updated BrokerConfig instance.
+        """
         with self._lock:
             self.broker_config = broker
             self._save_unsafe()
 
     def export_scenario(self) -> dict:
+        """
+        Exports the entire simulation scenario (broker, devices, variables) as a serializable dict.
+
+        Returns:
+            dict: Complete simulation snapshot.
+        """
         with self._lock:
             return {
                 "broker": self.broker_config.model_dump(),
@@ -331,7 +451,13 @@ class StorageRepository:
                 "variables": [v.model_dump() for v in self.variables.values()],
             }
 
-    def import_scenario(self, data: dict):
+    def import_scenario(self, data: dict) -> None:
+        """
+        Restores a complete simulation scenario from an exported dictionary snapshot.
+
+        Args:
+            data: Dictionary containing 'broker', 'devices', and 'variables'.
+        """
         with self._lock:
             if "broker" in data:
                 self.broker_config = BrokerConfig.model_validate(data["broker"])

@@ -1,3 +1,10 @@
+"""
+Unit Tests for Device-Level Cadence Cascading
+=============================================
+Validates propagation of device `publish_interval` updates to associated variables,
+variable-specific overrides, and disk persistence in StorageRepository.
+"""
+
 import os
 import sys
 import shutil
@@ -7,6 +14,7 @@ import types
 if 'pydantic' not in sys.modules:
     pyd = types.ModuleType('pydantic')
     class BaseModel:
+        """Mock BaseModel."""
         def __init__(self, **kwargs):
             for k, v in kwargs.items():
                 setattr(self, k, v)
@@ -54,13 +62,15 @@ from app.models.device import DeviceConfig, PlatformType, TransportProtocol
 from app.models.variable import VariableConfig, VariableType, DataType, SimMode, MathConfig
 from app.storage.repository import StorageRepository
 
+
 def test_device_publish_interval_cascade():
+    """Validates cascading cadence changes from parent device to associated variables."""
     tmp_dir = tempfile.mkdtemp()
     tmp_file = os.path.join(tmp_dir, "test_simulator_state.json")
     try:
         repo = StorageRepository(file_path=tmp_file)
 
-        # 1. Créer un équipement sans publish_interval global
+        # 1. Create a device without global publish_interval
         dev1 = DeviceConfig(id="pump_01", name="Pompe Primaire", platform=PlatformType.GENERIC)
         repo.save_device(dev1)
 
@@ -87,35 +97,35 @@ def test_device_publish_interval_cascade():
         repo.save_variable(v1)
         repo.save_variable(v2)
 
-        # Vérifier intervalles initiaux
+        # Verify initial intervals
         assert repo.get_variable("p1_flow").publish_interval == 5.0
         assert repo.get_variable("p1_pressure").publish_interval == 10.0
 
-        # 2. Mettre à jour l'équipement avec un publish_interval global de 2.5s
+        # 2. Update device with global publish_interval of 2.5s
         dev1.publish_interval = 2.5
         repo.save_device(dev1)
 
-        # Les deux variables doivent avoir été écrasées à 2.5s
+        # Both variables should now cascade to 2.5s
         flow_var = repo.get_variable("p1_flow")
         press_var = repo.get_variable("p1_pressure")
         assert flow_var.publish_interval == 2.5
         assert press_var.publish_interval == 2.5
 
-        # 3. Modification individuelle d'une variable (cadence par variable)
+        # 3. Individual variable override
         flow_var.publish_interval = 0.5
         repo.save_variable(flow_var)
 
         assert repo.get_variable("p1_flow").publish_interval == 0.5
         assert repo.get_variable("p1_pressure").publish_interval == 2.5
 
-        # 4. Écrasement subséquent au niveau de l'équipement
+        # 4. Subsequent device-level override
         dev1.publish_interval = 1.0
         repo.save_device(dev1)
 
         assert repo.get_variable("p1_flow").publish_interval == 1.0
         assert repo.get_variable("p1_pressure").publish_interval == 1.0
 
-        # 5. Équipement différent non affecté
+        # 5. Unrelated device isolation
         dev2 = DeviceConfig(id="meter_01", name="Compteur", platform=PlatformType.GENERIC, publish_interval=15.0)
         repo.save_device(dev2)
         v_meter = VariableConfig(
@@ -134,10 +144,10 @@ def test_device_publish_interval_cascade():
         dev2.publish_interval = 12.0
         repo.save_device(dev2)
         assert repo.get_variable("m1_index").publish_interval == 12.0
-        # pump_01 n'est pas touché
+        # pump_01 remains unaffected
         assert repo.get_variable("p1_flow").publish_interval == 1.0
 
-        # 6. Vérifier persistance après rechargement depuis le fichier
+        # 6. Verify file reload persistence
         repo_reloaded = StorageRepository(file_path=tmp_file)
         assert repo_reloaded.get_device("pump_01").publish_interval == 1.0
         assert repo_reloaded.get_variable("p1_flow").publish_interval == 1.0
@@ -145,6 +155,7 @@ def test_device_publish_interval_cascade():
 
     finally:
         shutil.rmtree(tmp_dir, ignore_errors=True)
+
 
 if __name__ == "__main__":
     test_device_publish_interval_cascade()

@@ -1,3 +1,18 @@
+"""
+MQTT Client Connection and Multi-Tenant Lifecycle Manager.
+
+This module manages industrial MQTT connections via the Eclipse Paho library.
+Features:
+- Dual protocol transport support: Raw TCP (ports 1883/8883) and WebSockets (ports 9001/443).
+- Automated TLS 1.2+ encryption configuration (CIS Benchmark compliance).
+- Multi-client tenant architecture: A primary root client plus dedicated per-device clients
+  authenticated with individual ThingsBoard device access tokens.
+- Hot re-configuration (`update_global_config`) that tears down and reconnects all active
+  broker connections without restarting the Python process.
+- Bidirectional subscriptions for RPC commands (`v1/devices/me/rpc/request/+`) and
+  shared attribute synchronization (`v1/devices/me/attributes`).
+"""
+
 import logging
 import ssl
 import threading
@@ -10,8 +25,17 @@ logger = logging.getLogger("iot_sim.mqtt")
 
 class MqttConnection:
     """
-    Gestionnaire d'une connexion MQTT sécurisée avec reconnexion automatique.
-    Supporte les transports TCP standard (1883/8883) et WebSockets (443/9001).
+    Manages a single robust MQTT connection with automatic reconnection.
+
+    Handles connection lifecycle, TLS negotiation, and asynchronous event callbacks
+    using Paho MQTT Client (v1.x and v2.x compatible).
+
+    Attributes:
+        config: Broker configuration specification.
+        on_message_callback: Callback triggered when a message arrives on subscribed topics.
+        is_connected: Boolean flag indicating current network connection state.
+        last_error: Descriptive error message from the most recent failure, if any.
+        messages_published: Total count of successfully published messages.
     """
 
     def __init__(
@@ -19,20 +43,28 @@ class MqttConnection:
         config: BrokerConfig,
         on_message_callback: Optional[Callable[[str, str], None]] = None,
         client_id_suffix: str = "",
-    ):
-        self.config = config
-        self.on_message_callback = on_message_callback
-        self.is_connected = False
-        self.last_error: Optional[str] = None
-        self.messages_published = 0
-        self._lock = threading.Lock()
+    ) -> None:
+        """
+        Initializes an MQTT connection instance.
 
-        # Construction du client Paho
+        Args:
+            config: BrokerConfig instance specifying host, port, credentials, and TLS flags.
+            on_message_callback: Function accepting `(topic: str, payload: str)`.
+            client_id_suffix: Suffix appended to the MQTT client identifier for uniqueness.
+        """
+        self.config: BrokerConfig = config
+        self.on_message_callback: Optional[Callable[[str, str], None]] = on_message_callback
+        self.is_connected: bool = False
+        self.last_error: Optional[str] = None
+        self.messages_published: int = 0
+        self._lock: threading.Lock = threading.Lock()
+
+        # Build unique Paho client ID
         client_id = f"{config.client_id_prefix}{client_id_suffix}_{int(time.time())}"
         transport_mode = getattr(config, "transport", "tcp").lower()
 
         try:
-            # Compatibilité Paho MQTT v2.x
+            # Paho MQTT v2.x API
             self.client = mqtt.Client(
                 mqtt.CallbackAPIVersion.VERSION2,
                 client_id=client_id,
@@ -50,21 +82,22 @@ class MqttConnection:
         if transport_mode == "websockets":
             ws_path = getattr(config, "ws_path", "/mqtt") or "/mqtt"
             self.client.ws_set_options(path=ws_path)
-            logger.info(f"Transport WebSockets activé sur le path: {ws_path}")
+            logger.info(f"WebSockets transport active on path: {ws_path}")
 
         self.client.on_connect = self._on_connect
         self.client.on_disconnect = self._on_disconnect
         self.client.on_message = self._on_message
 
-        # Configuration Authentification
+        # Configure Authentication
         if config.username:
             self.client.username_pw_set(config.username, config.password or "")
 
-        # Configuration Sécurisée TLS (CIS standard ou port 8883 / 443)
+        # Configure Secure TLS (CIS benchmark compliant, minimum TLS 1.2)
         if config.use_tls or config.port in (8883, 443):
             self._configure_tls()
 
-    def _configure_tls(self):
+    def _configure_tls(self) -> None:
+        """Configures SSL context with TLS 1.2+ minimum version requirements."""
         try:
             context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
             context.minimum_version = ssl.TLSVersion.TLSv1_2
@@ -78,19 +111,20 @@ class MqttConnection:
                 context.verify_mode = ssl.CERT_NONE
 
             self.client.tls_set_context(context)
-            logger.info(f"TLS 1.2+ configuré pour {self.config.host}:{self.config.port}")
+            logger.info(f"TLS 1.2+ configured for {self.config.host}:{self.config.port}")
         except Exception as e:
-            err_msg = f"Erreur configuration TLS sur {self.config.host}: {e}"
+            err_msg = f"TLS configuration error on {self.config.host}: {e}"
             logger.error(err_msg)
             self.last_error = err_msg
 
-    def _on_connect(self, client, userdata, flags, rc, properties=None):
+    def _on_connect(self, client: Any, userdata: Any, flags: Any, rc: Any, properties: Any = None) -> None:
+        """Paho on_connect callback handler."""
         rc_code = rc.value if hasattr(rc, "value") else rc
         if rc_code == 0:
             self.is_connected = True
             self.last_error = None
-            logger.info(f"✓ Connecté avec succès au broker MQTT {self.config.host}:{self.config.port} ({self.config.transport})")
-            # Souscription bidirectionnelle ThingsBoard : RPC et Attributs partagés (Shared Attributes)
+            logger.info(f"✓ Successfully connected to MQTT broker {self.config.host}:{self.config.port} ({self.config.transport})")
+            # Subscribe to ThingsBoard bidirectional topics: RPC and Shared Attributes
             self.client.subscribe([
                 ("v1/devices/me/rpc/request/+", 1),
                 ("v1/devices/me/attributes", 1),
@@ -99,54 +133,70 @@ class MqttConnection:
         else:
             self.is_connected = False
             reasons = {
-                1: "Protocole MQTT non supporté",
-                2: "Identifiant client rejeté",
-                3: "Serveur MQTT indisponible",
-                4: "Nom d'utilisateur ou mot de passe / Token ThingsBoard invalide",
-                5: "Non autorisé",
+                1: "Unsupported MQTT protocol version",
+                2: "Client identifier rejected",
+                3: "MQTT broker unavailable",
+                4: "Invalid username, password, or ThingsBoard access token",
+                5: "Not authorized",
             }
-            reason = reasons.get(rc_code, f"Code retour {rc_code}")
-            self.last_error = f"Connexion refusée par {self.config.host}:{self.config.port} ({reason})"
+            reason = reasons.get(rc_code, f"Return code {rc_code}")
+            self.last_error = f"Connection refused by {self.config.host}:{self.config.port} ({reason})"
             logger.error(self.last_error)
 
-    def _on_disconnect(self, client, userdata, flags, rc=None, properties=None):
+    def _on_disconnect(self, client: Any, userdata: Any, flags: Any, rc: Any = None, properties: Any = None) -> None:
+        """Paho on_disconnect callback handler."""
         self.is_connected = False
         rc_code = rc.value if hasattr(rc, "value") else (rc if rc is not None else 0)
         if rc_code != 0:
-            msg = f"Déconnexion inattendue du broker MQTT {self.config.host}:{self.config.port} (code {rc_code})"
+            msg = f"Unexpected disconnection from MQTT broker {self.config.host}:{self.config.port} (code {rc_code})"
             self.last_error = msg
             logger.warning(msg)
         else:
-            logger.info(f"Déconnecté du broker MQTT {self.config.host}:{self.config.port}")
+            logger.info(f"Disconnected from MQTT broker {self.config.host}:{self.config.port}")
 
-    def _on_message(self, client, userdata, message):
+    def _on_message(self, client: Any, userdata: Any, message: Any) -> None:
+        """Paho on_message callback handler."""
         try:
             topic = message.topic
             payload = message.payload.decode("utf-8", errors="replace")
-            logger.debug(f"Message reçu sur {topic}: {payload}")
+            logger.debug(f"Message received on {topic}: {payload}")
             if self.on_message_callback:
                 self.on_message_callback(topic, payload)
         except Exception as e:
-            logger.error(f"Erreur réception message: {e}")
+            logger.error(f"Error handling incoming message: {e}")
 
-    def start(self):
+    def start(self) -> None:
+        """Initiates asynchronous non-blocking connection loop in background thread."""
         try:
-            logger.info(f"Tentative de connexion MQTT vers {self.config.host}:{self.config.port} (TLS={self.config.use_tls}, transport={self.config.transport})...")
+            logger.info(f"Attempting MQTT connection to {self.config.host}:{self.config.port} (TLS={self.config.use_tls}, transport={self.config.transport})...")
             self.client.connect_async(self.config.host, self.config.port, self.config.keepalive)
             self.client.loop_start()
         except Exception as e:
-            self.last_error = f"Échec démarrage connexion vers {self.config.host}:{self.config.port}: {e}"
+            self.last_error = f"Failed starting MQTT connection to {self.config.host}:{self.config.port}: {e}"
             logger.error(self.last_error)
 
-    def stop(self):
+    def stop(self) -> None:
+        """Stops background network loop and disconnects from the broker."""
         try:
             self.client.loop_stop()
             self.client.disconnect()
             self.is_connected = False
         except Exception as e:
-            logger.debug(f"Erreur arrêt client: {e}")
+            logger.debug(f"Error stopping MQTT client: {e}")
 
     def publish(self, topic: str, payload: str, qos: int = 1, retain: bool = False) -> bool:
+        """
+        Publishes a payload to an MQTT topic with thread-safe locking.
+
+        Args:
+            topic: Destination MQTT topic.
+            payload: Message body.
+            qos: Quality of Service level (0, 1, or 2). Defaults to 1.
+            retain: Retain flag. Defaults to False.
+
+        Returns:
+            bool: True if message was successfully published to network buffer, False otherwise.
+        """
         if not self.is_connected:
             return False
         with self._lock:
@@ -156,28 +206,43 @@ class MqttConnection:
                     self.messages_published += 1
                     return True
                 else:
-                    self.last_error = f"Erreur publication sur {topic}: code {res.rc}"
+                    self.last_error = f"Publish error on {topic}: code {res.rc}"
                     logger.warning(self.last_error)
                     return False
             except Exception as e:
-                self.last_error = f"Exception publication MQTT: {e}"
+                self.last_error = f"MQTT publish exception: {e}"
                 logger.error(self.last_error)
                 return False
 
 
 class MqttManager:
     """
-    Gestionnaire multi-clients : gère le client global ainsi que
-    les clients dédiés par équipement ThingsBoard (avec Tokens distincts).
+    Multi-client manager for global and device-specific MQTT connections.
+
+    Manages a default root client (for generic MQTT or global simulations)
+    along with isolated dedicated clients per ThingsBoard device token.
+
+    Attributes:
+        global_config: Primary BrokerConfig specification.
+        default_client: Fallback MqttConnection instance.
+        device_clients: Dictionary mapping device IDs to dedicated MqttConnection instances.
+        on_rpc_callback: Handler for received downstream RPC messages.
     """
 
-    def __init__(self, global_config: BrokerConfig):
-        self.global_config = global_config
+    def __init__(self, global_config: BrokerConfig) -> None:
+        """
+        Initializes the multi-client manager.
+
+        Args:
+            global_config: Primary broker configuration.
+        """
+        self.global_config: BrokerConfig = global_config
         self.default_client: Optional[MqttConnection] = None
         self.device_clients: Dict[str, MqttConnection] = {}
         self.on_rpc_callback: Optional[Callable[[str, str, str], None]] = None
 
-    def start(self):
+    def start(self) -> None:
+        """Starts the default root MQTT client."""
         self.default_client = MqttConnection(
             self.global_config,
             on_message_callback=self._handle_global_message,
@@ -185,20 +250,29 @@ class MqttManager:
         )
         self.default_client.start()
 
-    def update_global_config(self, new_config: BrokerConfig):
+    def update_global_config(self, new_config: BrokerConfig) -> None:
         """
-        Applique la nouvelle configuration du broker à CHAUD
-        en arrêtant ET en reconnectant TOUS les clients (global et par équipement).
+        Applies a new broker configuration dynamically without application restart.
+
+        Gracefully terminates all active connections and reconnects with new settings.
+
+        Args:
+            new_config: Updated BrokerConfig instance.
         """
-        logger.info(f"🔄 Application de la nouvelle configuration Broker MQTT -> Hôte: {new_config.host}:{new_config.port} (TLS={new_config.use_tls}, Transport={new_config.transport})")
+        logger.info(f"🔄 Applying new MQTT Broker configuration -> Host: {new_config.host}:{new_config.port} (TLS={new_config.use_tls}, Transport={new_config.transport})")
         self.global_config = new_config
         self.stop_all()
         self.start()
 
-    def remove_device_client(self, device_id: str):
-        """Arrête et supprime le client dédié d'un équipement (ex: lors d'une modification de token)."""
+    def remove_device_client(self, device_id: str) -> None:
+        """
+        Disconnects and cleans up a device's dedicated MQTT connection.
+
+        Args:
+            device_id: Identifier of the device whose connection should be removed.
+        """
         if device_id in self.device_clients:
-            logger.info(f"Arrêt et suppression du client MQTT dédié pour {device_id}")
+            logger.info(f"Stopping and removing dedicated MQTT client for {device_id}")
             try:
                 self.device_clients[device_id].stop()
             except Exception:
@@ -211,6 +285,19 @@ class MqttManager:
         token: Optional[str],
         device: Optional[Any] = None,
     ) -> MqttConnection:
+        """
+        Retrieves an existing connection or instantiates a new dedicated client for a device.
+
+        Uses the device's unique ThingsBoard access token as the MQTT username.
+
+        Args:
+            device_id: Unique device identifier.
+            token: Optional device access token.
+            device: Optional DeviceConfig object providing host/port/TLS overrides.
+
+        Returns:
+            MqttConnection: Active MQTT connection assigned to this device.
+        """
         if not token:
             return self.default_client
 
@@ -225,7 +312,7 @@ class MqttManager:
                     dev_conf.port = int(device.custom_port)
                 if getattr(device, "use_tls", None) is not None:
                     dev_conf.use_tls = bool(device.use_tls)
-            logger.info(f"Création d'un client MQTT dédié pour l'équipement '{device_id}' avec token ThingsBoard sur {dev_conf.host}:{dev_conf.port}")
+            logger.info(f"Creating dedicated MQTT client for device '{device_id}' with ThingsBoard token on {dev_conf.host}:{dev_conf.port}")
             client = MqttConnection(
                 dev_conf,
                 on_message_callback=lambda top, pay: self._handle_device_message(device_id, top, pay),
@@ -236,22 +323,36 @@ class MqttManager:
 
         return self.device_clients[device_id]
 
-    def _handle_global_message(self, topic: str, payload: str):
+    def _handle_global_message(self, topic: str, payload: str) -> None:
+        """Internal callback dispatch for messages received on the default client."""
         if self.on_rpc_callback:
             self.on_rpc_callback("global", topic, payload)
 
-    def _handle_device_message(self, device_id: str, topic: str, payload: str):
+    def _handle_device_message(self, device_id: str, topic: str, payload: str) -> None:
+        """Internal callback dispatch for messages received on a device-specific client."""
         if self.on_rpc_callback:
             self.on_rpc_callback(device_id, topic, payload)
 
     def publish_device_message(self, device_id: str, topic: str, payload: str, qos: int = 1) -> bool:
-        """Publie un message (ex: acquittement RPC ou synchronisation d'attribut) sur le client MQTT de l'équipement."""
+        """
+        Publishes a message through a specific device's client connection.
+
+        Args:
+            device_id: Target device identifier.
+            topic: Destination MQTT topic.
+            payload: Payload string.
+            qos: QoS level (default 1).
+
+        Returns:
+            bool: True if publish succeeded, False otherwise.
+        """
         client = self.device_clients.get(device_id) or self.default_client
         if client:
             return client.publish(topic, payload, qos=qos)
         return False
 
-    def stop_all(self):
+    def stop_all(self) -> None:
+        """Gracefully disconnects and stops all active MQTT clients."""
         if self.default_client:
             self.default_client.stop()
         for dev_id, c in list(self.device_clients.items()):

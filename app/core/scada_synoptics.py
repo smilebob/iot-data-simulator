@@ -1,8 +1,15 @@
 """
-Générateur de Schémas Synoptiques SCADA Industriels (SVG / HMI ISA-101) - Thème Light Eiffage.
-Fournit des représentations graphiques vectorielles authentiques, animées et adaptées aux règles
-des métiers de l'Industrie, du Bâtiment (GTB/GTC), des Réseaux d'Infrastructures et des Villes Intelligentes.
-Chacun des 32 cas d'usage dispose de son propre synoptique vectoriel dédié et cohérent.
+SCADA Synoptic Mimic Generator for Industrial IoT (SVG / HMI ISA-101) - Clean Light Theme.
+
+This module provides vector SVG schematic mimics for the simulator's built-in industrial
+and infrastructure use cases. The mimics adhere to ISA-101 ergonomic standards:
+- High-contrast visual hierarchy (light theme with crisp borders and status callouts).
+- Dynamic CSS/SVG animations for mechanical rotations, fluid/pipe flow, and live status pulses.
+- Seamless ThingsBoard template binding using `${clean_key}` placeholders resolved in real-time
+  by ThingsBoard's `html_value_card` widget.
+
+Every single one of the 32 equipment presets in the industrial catalog has a dedicated vector
+schematic builder, backed by a comprehensive dispatch table with exact and fuzzy matching.
 """
 
 from typing import Dict, Any, List, Optional
@@ -10,15 +17,35 @@ from app.models.device import DeviceConfig
 from app.models.variable import VariableConfig
 
 def get_clean_var_key(variable: VariableConfig) -> str:
-    """Extrait la clé métrique sans le préfixe unique équipement interne du simulateur."""
+    """
+    Strips internal simulator device prefixes from variable identifiers.
+
+    Args:
+        variable: Variable configuration to inspect.
+
+    Returns:
+        str: Metric identifier suitable for ThingsBoard placeholder `${key}` substitution.
+    """
     if variable.device_id and variable.id.startswith(f"{variable.device_id}_"):
         return variable.id[len(variable.device_id) + 1:]
     return variable.id
 
 def get_scada_synoptic_html(device: DeviceConfig, variables: List[VariableConfig], preset_id: Optional[str] = None) -> str:
     """
-    Retourne le code HTML/SVG complet du synoptique SCADA correspondant au cas d'usage métier.
-    Garantit l'adéquation exacte entre l'équipement et son synoptique SCADA.
+    Generates the complete HTML/SVG SCADA synoptic snippet for an equipment instance.
+
+    Looks up the dedicated builder via:
+    1. Exact preset ID match in `SYNOPTIC_BUILDERS`.
+    2. Longest substring keyword match on `preset_id` or `device.id`.
+    3. Fallback to `build_generic_scada_synoptic`.
+
+    Args:
+        device: Device configuration containing identity, name, protocol, and tokens.
+        variables: List of active telemetry and attribute variables for dynamic binding.
+        preset_id: Optional catalog preset identifier override.
+
+    Returns:
+        str: Ready-to-render HTML string containing embedded SVG with CSS animations.
     """
     dev_id = (preset_id or device.id or "").lower()
     dev_name = device.name or device.id
@@ -125,7 +152,21 @@ SCADA_CSS = """
 """
 
 def scada_wrapper(title: str, token: str, proto: str, svg_content: str) -> str:
-    """Enveloppe le contenu SVG dans le conteneur SCADA Light normalisé (sans fuite de secret)."""
+    """
+    Wraps raw SVG content inside a standardized ISA-101 responsive SCADA container.
+
+    Renders a live status pulse, technical title banner, protocol indicator,
+    and injects component CSS animations without leaking sensitive credentials.
+
+    Args:
+        title: Descriptive human-readable process title.
+        token: Device access token (kept isolated/omitted for security).
+        proto: Communication transport protocol (e.g., 'MQTT', 'HTTP').
+        svg_content: Raw SVG vector drawing string.
+
+    Returns:
+        str: Encapsulated HTML/CSS/SVG markup.
+    """
     return f"""{SCADA_CSS}
 <div class="scada-container">
   <div class="scada-header">
@@ -143,7 +184,21 @@ def scada_wrapper(title: str, token: str, proto: str, svg_content: str) -> str:
 """
 
 def make_callout(x: int, y: int, label: str, value_expr: str, accent: str = "#0284C7", width: int = 155, height: int = 40) -> str:
-    """Génère un bloc indicateur de métrique SCADA haute lisibilité en thème Light."""
+    """
+    Generates a high-contrast SCADA metric callout box in vector SVG.
+
+    Args:
+        x: X-coordinate for placement inside the SVG canvas.
+        y: Y-coordinate for placement inside the SVG canvas.
+        label: Metric title or sensor description.
+        value_expr: Real-time placeholder expression (e.g., '${pressure:2} bar').
+        accent: Hex color code for the left indicator bar. Defaults to #0284C7.
+        width: Box width in SVG user units. Defaults to 155.
+        height: Box height in SVG user units. Defaults to 40.
+
+    Returns:
+        str: SVG group element (`<g>`) rendering the metric callout.
+    """
     return f"""
     <g transform="translate({x}, {y})">
       <rect width="{width}" height="{height}" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>

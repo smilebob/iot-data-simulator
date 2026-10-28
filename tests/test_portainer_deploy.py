@@ -1,5 +1,7 @@
 """
-Tests unitaires pour le script de déploiement automatisé Portainer (scripts/portainer_deploy.py).
+Unit Tests for Portainer Deployment Automation
+==============================================
+Validates environment file parsing, webhook triggering, and REST API redeployment.
 """
 
 import os
@@ -9,14 +11,15 @@ import pytest
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 
-# Importer le module de déploiement
+# Import deployment automation module
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import portainer_deploy
 
 
 def test_load_env_file(tmp_path):
+    """Verifies that .env configuration files are parsed without external dependencies."""
     env_content = """
-    # Commentaire à ignorer
+    # Comment to ignore
     PORTAINER_WEBHOOK_URL=http://localhost:9000/api/stacks/webhooks/test-uuid
     PORTAINER_URL="https://portainer.lan:9443"
     PORTAINER_API_KEY='ptr_123456789'
@@ -35,6 +38,7 @@ def test_load_env_file(tmp_path):
 
 
 def test_trigger_webhook_success():
+    """Tests successful Portainer webhook invocation handling HTTP 204 No Content."""
     with patch("portainer_deploy.make_request") as mock_req:
         mock_req.return_value = {
             "success": True,
@@ -48,6 +52,7 @@ def test_trigger_webhook_success():
 
 
 def test_trigger_webhook_failure():
+    """Tests webhook invocation error handling on HTTP 404 Not Found."""
     with patch("portainer_deploy.make_request") as mock_req:
         mock_req.return_value = {
             "success": False,
@@ -61,10 +66,11 @@ def test_trigger_webhook_failure():
 
 
 def test_redeploy_via_api_git_stack():
+    """Tests the full API redeployment sequence against a Git-backed Portainer stack."""
     with patch("portainer_deploy.make_request") as mock_req:
-        # 1er appel: GET /api/endpoints
-        # 2e appel: GET /api/stacks
-        # 3e appel: PUT /api/stacks/42/git/redeploy
+        # Call 1: GET /api/endpoints
+        # Call 2: GET /api/stacks
+        # Call 3: PUT /api/stacks/42/git/redeploy
         def side_effect(url, method="GET", **kwargs):
             if "/api/endpoints" in url:
                 return {

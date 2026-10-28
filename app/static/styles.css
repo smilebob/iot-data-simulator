@@ -1,5 +1,11 @@
 /* ========================================================
-   CHARTE VISUELLE INDUSTRIELLE (Rouge Technique Eiffage & Thèmes)
+   INDUSTRIAL VISUAL SYSTEM (Technical Red & Dual Themes)
+   ========================================================
+   - Design Tokens: CSS variables defining surface backgrounds, text colors,
+     borders, and brand accent hues.
+   - Dual-Theme System: Root classes (.dark and .light) controlling color schemes.
+   - Real-Time Telemetry Animation: .flash-update keyframes for data ingestion pulses.
+   - High-Contrast Light Theme: Overrides for strict WCAG AA contrast compliance.
    ======================================================== */
 :root {
   --brand-red: #E2001A;
@@ -7,7 +13,7 @@
   --brand-red-dark: #990012;
   --brand-red-light: #FF334B;
 
-  /* Thème Sombre par défaut */
+  /* Default Dark Theme Tokens */
   --surface-bg: #0F1218;
   --surface-header: #181D26;
   --surface-card: #181D26;

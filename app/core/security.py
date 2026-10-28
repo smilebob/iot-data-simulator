@@ -1,3 +1,12 @@
+"""
+Cryptographic Security, Password Hashing, and JWT Session Management.
+
+Implements CIS Docker Benchmark and OWASP-compliant security mechanisms:
+- Scrypt password hashing (RFC 7914) with constant-time equality checks.
+- Native HMAC-SHA256 JSON Web Token (JWT RFC 7519) generation and decoding without external dependencies.
+- Persistent file-backed 256-bit signing key with restricted Unix file permissions (0600).
+"""
+
 import base64
 import hashlib
 import hmac
@@ -11,24 +20,54 @@ from typing import Any, Dict, Optional
 
 logger = logging.getLogger("iot_sim.security")
 
-# Configuration de l'algorithme Scrypt conforme OWASP & CIS Benchmark
-SCRYPT_N = 16384  # Coût CPU/mémoire (2^14)
-SCRYPT_R = 8      # Taille de bloc
-SCRYPT_P = 1      # Parallélisation
+# Scrypt configuration parameters conforming to OWASP recommendations:
+# N=16384 (CPU/memory cost 2^14), r=8 (RAM block size 1024 bytes), p=1 (parallelization)
+SCRYPT_N = 16384
+SCRYPT_R = 8
+SCRYPT_P = 1
+
 
 def _b64url_encode(data: bytes) -> str:
-    """Encode en base64url sans padding pour conformité RFC 7515."""
+    """Encodes binary bytes to base64url string without trailing padding (RFC 7515).
+
+    Args:
+        data: Raw binary byte sequence.
+
+    Returns:
+        str: URL-safe base64 encoded ASCII string.
+    """
     return base64.urlsafe_b64encode(data).decode("utf-8").rstrip("=")
 
+
 def _b64url_decode(s: str) -> bytes:
-    """Décode du base64url en restaurant le padding requis."""
+    """Decodes a base64url string after restoring standard '=' padding.
+
+    Args:
+        s: Base64url encoded ASCII string.
+
+    Returns:
+        bytes: Decoded raw binary byte sequence.
+    """
     padding = "=" * (4 - (len(s) % 4)) if (len(s) % 4) != 0 else ""
     return base64.urlsafe_b64decode(s + padding)
 
+
 def hash_password(password: str) -> str:
-    """
-    Calcule une empreinte Scrypt renforcée avec sel cryptographique de 16 octets.
-    Format de stockage : $scrypt$N$r$p$sel_b64$cle_b64
+    """Computes a salted Scrypt cryptographic password hash.
+
+    Generates a cryptographically random 16-byte salt and derives a 64-byte key
+    using RFC 7914 Scrypt.
+
+    Args:
+        password: Plain-text password to hash.
+
+    Returns:
+        str: Serialized hash formatted as '$scrypt$N$r$p$salt_b64$key_b64'.
+
+    Example:
+        >>> h = hash_password("SuperSecret123!")
+        >>> h.startswith("$scrypt$16384$8$1$")
+        True
     """
     salt = secrets.token_bytes(16)
     key = hashlib.scrypt(
@@ -40,9 +79,18 @@ def hash_password(password: str) -> str:
     )
     return f"$scrypt${SCRYPT_N}${SCRYPT_R}${SCRYPT_P}${_b64url_encode(salt)}${_b64url_encode(key)}"
 
+
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """
-    Vérifie un mot de passe contre une empreinte Scrypt en temps constant (anti-timing attack).
+    """Verifies a plain-text password against a stored Scrypt hash in constant time.
+
+    Protects against timing side-channel attacks using `secrets.compare_digest`.
+
+    Args:
+        plain_password: Input password provided by user.
+        hashed_password: Stored Scrypt hash string from user repository.
+
+    Returns:
+        bool: True if password matches hash, False otherwise.
     """
     try:
         parts = hashed_password.split("$")
@@ -64,18 +112,30 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
         )
         return secrets.compare_digest(computed_key, expected_key)
     except Exception as e:
-        logger.warning(f"Erreur lors de la vérification du mot de passe: {e}")
+        logger.warning(f"Error during password verification: {e}")
         return False
 
+
 def get_or_create_jwt_secret(secret_file_path: str = "data/.jwt_secret") -> str:
+    """Retrieves or provisions the 256-bit cryptographic HMAC signing key.
+
+    Priority resolution:
+    1. Environment variable `JWT_SECRET_KEY` (if set and >= 32 characters).
+    2. File on persistent volume with strict POSIX permissions `0600` (read/write user only).
+    3. Freshly generated 256-bit hex token securely persisted to disk.
+
+    Args:
+        secret_file_path: Path where the secret file is stored.
+
+    Returns:
+        str: Hex-encoded 256-bit secret signing key.
     """
-    Récupère la clé secrète de signature JWT depuis l'environnement
-    ou depuis un fichier protégé (chmod 0600) dans le volume persistant.
-    """
+    # 1. Check environment variable override
     env_secret = os.getenv("JWT_SECRET_KEY")
     if env_secret and len(env_secret.strip()) >= 32:
         return env_secret.strip()
 
+    # 2. Check existing file on disk
     if os.path.exists(secret_file_path):
         try:
             with open(secret_file_path, "r", encoding="utf-8") as f:
@@ -83,13 +143,13 @@ def get_or_create_jwt_secret(secret_file_path: str = "data/.jwt_secret") -> str:
                 if len(content) >= 32:
                     return content
         except Exception as e:
-            logger.warning(f"Impossible de lire le secret JWT existant: {e}")
+            logger.warning(f"Unable to read existing JWT secret file: {e}")
 
-    # Génération d'une nouvelle clé cryptographiquement sécurisée (256 bits)
+    # 3. Generate a new cryptographically secure 256-bit random key
     new_secret = secrets.token_hex(32)
     try:
         os.makedirs(os.path.dirname(secret_file_path), exist_ok=True)
-        # Écriture avec permissions restreintes 0600 (lecture/écriture propriétaire seul)
+        # Create file with strict 0600 permissions (owner read/write only, CIS benchmark rule)
         fd = os.open(
             secret_file_path,
             os.O_WRONLY | os.O_CREAT | os.O_TRUNC,
@@ -97,22 +157,31 @@ def get_or_create_jwt_secret(secret_file_path: str = "data/.jwt_secret") -> str:
         )
         with open(fd, "w", encoding="utf-8") as f:
             f.write(new_secret)
-        logger.info(f"Clé de signature JWT générée et sécurisée dans {secret_file_path} (0600)")
+        logger.info(f"Generated new JWT signing secret persisted to {secret_file_path} (mode 0600)")
     except Exception as e:
-        logger.warning(f"Impossible de persister le secret JWT sur disque: {e}")
+        logger.warning(f"Failed to persist JWT secret to disk: {e}")
 
     return new_secret
 
-# Clé de signature initialisée pour le processus
+
+# Initialize application-wide JWT signing secret at import
 JWT_SECRET = get_or_create_jwt_secret()
+
 
 def create_jwt_token(
     payload: Dict[str, Any],
-    expires_in_seconds: int = 28800,  # 8 heures par défaut
+    expires_in_seconds: int = 28800,  # 8 hours default session expiration
     secret_key: Optional[str] = None,
 ) -> str:
-    """
-    Crée un jeton JWT HMAC-SHA256 (RFC 7519) conforme et autonome.
+    """Creates a signed HMAC-SHA256 JSON Web Token (JWT RFC 7519).
+
+    Args:
+        payload: Dictionary containing user claims ('sub', 'role', 'name').
+        expires_in_seconds: Lifetime duration of the token in seconds.
+        secret_key: Optional custom HMAC signing key (defaults to global JWT_SECRET).
+
+    Returns:
+        str: Compact three-part JWT token formatted as 'header.payload.signature'.
     """
     key = secret_key or JWT_SECRET
     now = int(time.time())
@@ -132,13 +201,20 @@ def create_jwt_token(
 
     return f"{h_b64}.{p_b64}.{sig_b64}"
 
+
 def decode_jwt_token(
     token: str,
     secret_key: Optional[str] = None,
 ) -> Optional[Dict[str, Any]]:
-    """
-    Valide la signature et l'expiration d'un jeton JWT.
-    Retourne le dictionnaire de payload ou None en cas d'altération ou d'expiration.
+    """Validates the cryptographic signature and expiration of a JWT token.
+
+    Args:
+        token: Compact three-part JWT string to verify.
+        secret_key: Optional custom HMAC key (defaults to global JWT_SECRET).
+
+    Returns:
+        Optional[Dict[str, Any]]: Decoded payload claims dictionary if valid and unexpired;
+            None if signature is invalid, token is malformed, or expired.
     """
     key = secret_key or JWT_SECRET
     try:
@@ -151,13 +227,14 @@ def decode_jwt_token(
         expected_sig = hmac.new(key.encode("utf-8"), signing_input, hashlib.sha256).digest()
         actual_sig = _b64url_decode(sig_b64)
 
+        # Constant-time comparison prevents timing analysis
         if not secrets.compare_digest(expected_sig, actual_sig):
             return None
 
         payload_bytes = _b64url_decode(p_b64)
         payload = json.loads(payload_bytes.decode("utf-8"))
 
-        # Vérification expiration
+        # Enforce temporal expiration timestamp claim
         if payload.get("exp", 0) < time.time():
             return None
 

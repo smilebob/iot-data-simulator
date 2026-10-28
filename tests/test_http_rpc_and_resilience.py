@@ -1,3 +1,10 @@
+"""
+Unit Tests for HTTP RPC Long-Polling and Storage Resilience
+===========================================================
+Validates automatic recovery from corrupted storage via `.bak` backups
+and bidirectional ThingsBoard HTTP RPC execution (setters and toggles).
+"""
+
 import json
 import os
 import sys
@@ -5,10 +12,11 @@ import types
 import asyncio
 from unittest.mock import MagicMock, AsyncMock
 
-# Mocks minimaux pour test hors conteneur
+# Lightweight mock stubs for standalone testing outside container environment
 if 'pydantic' not in sys.modules:
     pyd = types.ModuleType('pydantic')
     class BaseModel:
+        """Mock BaseModel."""
         def __init__(self, **kwargs):
             for k, v in kwargs.items(): setattr(self, k, v)
         def model_copy(self, deep=True):
@@ -56,13 +64,15 @@ from app.models.variable import VariableConfig, VariableType, DataType, SimMode,
 from app.core.engine import SimulationEngine
 from app.storage.repository import StorageRepository
 
+
 def test_storage_resilience():
+    """Validates that storage automatically recovers from .bak backup when state file is corrupted."""
     print("Testing StorageRepository resilience & backup mechanism...")
     test_file = "/tmp/test_simulator_state.json"
     if os.path.exists(test_file): os.remove(test_file)
     if os.path.exists(f"{test_file}.bak"): os.remove(f"{test_file}.bak")
 
-    # 1. Sauvegarde d'un état avec un équipement métier
+    # 1. Save state with a custom device and attribute
     repo = StorageRepository(file_path=test_file)
     dev = DeviceConfig(
         id="pac_test_01",
@@ -86,26 +96,28 @@ def test_storage_resilience():
     assert os.path.exists(test_file)
     assert os.path.exists(f"{test_file}.bak")
 
-    # 2. Rechargement normal
+    # 2. Normal reload
     repo2 = StorageRepository(file_path=test_file)
     assert "pac_test_01" in repo2.devices
     assert "pac_test_01_mode_chaud" in repo2.variables
 
-    # 3. Simulation de corruption du fichier principal (ex: coupure de courant)
+    # 3. Simulate file corruption (e.g. sudden power failure during write)
     with open(test_file, "w") as f:
         f.write("{ INVALID JSON CONTENT !!!")
 
-    # Le rechargement doit restaurer automatiquement depuis .bak sans perte de données !
+    # Reload must automatically restore from .bak backup without losing state
     repo3 = StorageRepository(file_path=test_file)
     assert "pac_test_01" in repo3.devices
     assert "pac_test_01_mode_chaud" in repo3.variables
     print("✓ Storage resilience validated: Corrupted file automatically recovered from .bak without losing user devices!")
 
-    # Nettoyage
+    # Cleanup
     for p in [test_file, f"{test_file}.bak"]:
         if os.path.exists(p): os.remove(p)
 
+
 def test_http_rpc_and_control():
+    """Validates HTTP RPC handler for ThingsBoard interactive widgets (setters and toggles)."""
     print("Testing HTTP RPC Long-Polling and bidirectional switch response...")
     dev = DeviceConfig(
         id="bldg_heatpump_3e2c",
@@ -154,18 +166,23 @@ def test_http_rpc_and_control():
 
     engine = SimulationEngine(repo, mqtt, transports)
 
-    # Test direct de la méthode _handle_rpc
+    # Test direct RPC method dispatch
     ret = engine._handle_rpc("bldg_heatpump_3e2c", "v1/devices/me/rpc/request/42", '{"method": "set_mode_chaud", "params": true}')
     assert ret is True
     assert var.current_value is True
     assert var.manual_override is True
 
-    # Test de bascule (toggle)
+    # Test toggle dispatch
     ret_toggle = engine._handle_rpc("bldg_heatpump_3e2c", "v1/devices/me/rpc/request/43", '{"method": "toggle_mode_chaud"}')
     assert ret_toggle is False
     assert var.current_value is False
 
     print("✓ HTTP RPC & bidirectional switch control test passed successfully!")
+
+
+if __name__ == "__main__":
+    test_storage_resilience()
+    test_http_rpc_and_control()
 
 if __name__ == "__main__":
     test_storage_resilience()

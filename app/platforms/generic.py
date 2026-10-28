@@ -1,3 +1,11 @@
+"""
+Generic Universal MQTT Adapter.
+
+This adapter serves as the fallback standard MQTT connector.
+Publishes structured JSON dictionaries containing device ID, variable ID, value,
+unit of measurement, and millisecond timestamps to user-defined topics or `{device_id}/{variable_id}`.
+"""
+
 import json
 from typing import Any, Tuple
 from app.models.device import DeviceConfig
@@ -6,11 +14,20 @@ from app.platforms.base import BasePlatformAdapter
 
 class GenericMqttAdapter(BasePlatformAdapter):
     """
-    Connecteur MQTT générique et universel.
-    Publie sur le topic personnalisé configuré ou un topic hiérarchique {device_id}/{variable_id}.
+    Universal generic MQTT adapter formatting messages into standard JSON objects.
     """
 
     def get_default_topic(self, device: DeviceConfig, variable: VariableConfig) -> str:
+        """
+        Returns hierarchical default topic `{device_id}/{variable_id}`.
+
+        Args:
+            device: Source device.
+            variable: Telemetry/attribute variable.
+
+        Returns:
+            str: Default topic string.
+        """
         return f"{device.id}/{variable.id}"
 
     def format_message(
@@ -20,9 +37,20 @@ class GenericMqttAdapter(BasePlatformAdapter):
         value: Any,
         timestamp_ms: int,
     ) -> Tuple[str, str]:
+        """
+        Formats universal JSON telemetry message.
+
+        Args:
+            device: Source device.
+            variable: Telemetry variable.
+            value: Telemetry value.
+            timestamp_ms: Millisecond epoch timestamp.
+
+        Returns:
+            Tuple[str, str]: (Target topic, structured JSON payload).
+        """
         topic = variable.topic.strip() if variable.topic and variable.topic.strip() else self.get_default_topic(device, variable)
         
-        # Envoi en format JSON structuré par défaut
         payload = json.dumps({
             "device": device.id,
             "variable": variable.id,
@@ -31,3 +59,4 @@ class GenericMqttAdapter(BasePlatformAdapter):
             "timestamp": timestamp_ms
         })
         return topic, payload
+
