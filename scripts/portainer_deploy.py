@@ -7,10 +7,10 @@ of the IoT Data Simulator stack on a Portainer instance (local, edge, or remote)
 
 Supported deployment modes:
 1. Portainer Stack Webhook Trigger (local private LAN or public URL):
-   python3 scripts/portainer_deploy.py --webhook "http://192.168.1.50:9000/api/stacks/webhooks/xxxx"
+   python3 scripts/portainer_deploy.py --webhook "http://<PORTAINER_HOST>:9000/api/stacks/webhooks/xxxx"
 
 2. Portainer REST API Automation (using API access token):
-   python3 scripts/portainer_deploy.py --url "http://192.168.1.50:9000" --api-key "ptr_xxx" --stack "iot-simulator" --pull
+   python3 scripts/portainer_deploy.py --url "http://<PORTAINER_HOST>:9000" --api-key "ptr_xxx" --stack "iot-simulator" --pull
 
 3. Automated configuration detection via local environment file (.env.portainer):
    python3 scripts/portainer_deploy.py
@@ -256,7 +256,7 @@ def main():
         description="Automated deployment and rolling update CLI for IoT Data Simulator on Portainer."
     )
     parser.add_argument("--webhook", help="Portainer Stack Webhook URL")
-    parser.add_argument("--url", help="Base URL of Portainer (e.g., http://192.168.1.50:9000 or https://portainer.local:9443)")
+    parser.add_argument("--url", help="Base URL of Portainer (e.g., http://<PORTAINER_HOST>:9000 or https://portainer.example.com:9443)")
     parser.add_argument("--api-key", help="Portainer API Access Token (X-API-Key generated in User Profile > Access Tokens)")
     parser.add_argument("--stack", default="iot-simulator", help="Target Portainer stack name (default: iot-simulator)")
     parser.add_argument("--endpoint-id", type=int, help="Docker environment ID in Portainer (default: auto-detected)")
@@ -282,6 +282,37 @@ def main():
         except ValueError:
             pass
 
+    # Interactive prompt fallback if running in a terminal without parameters
+    if not webhook_url and not (portainer_url and api_key):
+        if sys.stdin.isatty():
+            print("\n🚀 Aucun paramètre de déploiement Portainer détecté. Mode interactif :")
+            print("1. Déclenchement par Webhook de stack Portainer")
+            print("2. Déclenchement par API REST Portainer (Token d'accès)")
+            print("Q. Quitter")
+            try:
+                choice = input("\nChoisissez une option [1/2/Q] : ").strip()
+            except (EOFError, KeyboardInterrupt):
+                print("\nAnnulé par l'utilisateur.")
+                sys.exit(1)
+
+            if choice == "1":
+                try:
+                    webhook_url = input("Entrez l'URL du Webhook Portainer : ").strip()
+                except (EOFError, KeyboardInterrupt):
+                    sys.exit(1)
+            elif choice == "2":
+                try:
+                    portainer_url = input("Entrez l'URL de Portainer (ex: http://192.168.1.100:9000) : ").strip()
+                    api_key = input("Entrez la clé d'API Portainer (X-API-Key) : ").strip()
+                    custom_stack = input(f"Nom de la stack Portainer [{stack_name}] : ").strip()
+                    if custom_stack:
+                        stack_name = custom_stack
+                except (EOFError, KeyboardInterrupt):
+                    sys.exit(1)
+            else:
+                print("Annulation.")
+                sys.exit(0)
+
     # Option 1: Trigger via Webhook
     if webhook_url:
         success = trigger_webhook(webhook_url, insecure=args.insecure)
@@ -303,17 +334,13 @@ def main():
     print("❌ No Portainer deployment parameters detected.")
     print("\n💡 Instructions to configure automated deployment:")
     print("   1. Option A (Local Stack Webhook):")
-    print("      python3 scripts/portainer_deploy.py --webhook 'http://<IP>:9000/api/stacks/webhooks/<TOKEN>'")
+    print("      python3 scripts/portainer_deploy.py --webhook 'http://<PORTAINER_HOST>:9000/api/stacks/webhooks/<TOKEN>'")
     print("\n   2. Option B (Portainer REST API):")
-    print("      python3 scripts/portainer_deploy.py --url 'http://<IP>:9000' --api-key 'ptr_xxx'")
+    print("      python3 scripts/portainer_deploy.py --url 'http://<PORTAINER_HOST>:9000' --api-key 'ptr_xxx'")
     print("\n   3. Option C (Configuration file):")
     print("      Create a '.env.portainer' file based on '.env.portainer.example'.")
     print("\n   Refer to 'Documentation/devops/portainer_deployment.md' for complete setup details.")
     sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
 
 
 if __name__ == "__main__":

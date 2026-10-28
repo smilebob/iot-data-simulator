@@ -46,9 +46,9 @@ def test_trigger_webhook_success():
             "data": None,
             "raw": ""
         }
-        ok = portainer_deploy.trigger_webhook("http://192.168.1.50:9000/api/stacks/webhooks/dummy")
+        ok = portainer_deploy.trigger_webhook("http://portainer.example.com:9000/api/stacks/webhooks/dummy")
         assert ok is True
-        mock_req.assert_called_once_with("http://192.168.1.50:9000/api/stacks/webhooks/dummy", method="POST", insecure=False)
+        mock_req.assert_called_once_with("http://portainer.example.com:9000/api/stacks/webhooks/dummy", method="POST", insecure=False)
 
 
 def test_trigger_webhook_failure():
@@ -61,7 +61,7 @@ def test_trigger_webhook_failure():
             "raw": "Stack not found",
             "error": "HTTP Error 404"
         }
-        ok = portainer_deploy.trigger_webhook("http://192.168.1.50:9000/api/stacks/webhooks/dummy")
+        ok = portainer_deploy.trigger_webhook("http://portainer.example.com:9000/api/stacks/webhooks/dummy")
         assert ok is False
 
 
@@ -100,7 +100,7 @@ def test_redeploy_via_api_git_stack():
         mock_req.side_effect = side_effect
 
         ok = portainer_deploy.redeploy_via_api(
-            base_url="http://192.168.1.50:9000",
+            base_url="http://portainer.example.com:9000",
             api_key="ptr_secret_test",
             stack_name="iot-simulator",
             pull_image=True

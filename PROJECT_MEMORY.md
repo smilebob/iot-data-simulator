@@ -112,7 +112,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Ajout de `save_variables` dans `StorageRepository`** : Permet la sauvegarde groupée atomique des variables lors des commandes RPC et attributs partagés.
   - **Format WebSocket Conforme pour RPC** : Encapsulation stricte sous `{"type": "telemetry", "data": {...}}` lors de l'application d'ordres de contrôle.
 - [x] Résolution Timeout RPC ThingsBoard 4.3 & Contournement WAF Cloudflare (v1.9.9) :
-  - **En-têtes Navigateur Standard pour Cloudflare** : Ajout systématique de `User-Agent` (`Mozilla/5.0...`) et `Accept: application/json` dans `ThingsBoardHttpClient` (`post_payload`, `poll_rpc`, `respond_rpc`). Élimine les rejets HTTP 403 Forbidden du pare-feu Cloudflare sur les plateformes ThingsBoard distantes (`easythings.app.eiffageenergiesystemes.com`).
+  - **En-têtes Navigateur Standard pour Cloudflare** : Ajout systématique de `User-Agent` (`Mozilla/5.0...`) et `Accept: application/json` dans `ThingsBoardHttpClient` (`post_payload`, `poll_rpc`, `respond_rpc`). Élimine les rejets HTTP 403 Forbidden des WAF / reverse-proxies (comme Cloudflare) sur les plateformes ThingsBoard distantes (ex: `thingsboard.example.com`).
   - **Fiabilisation & Diagnostic du Long-Polling RPC** : Traitement et journalisation explicite des erreurs HTTP 401 (token ThingsBoard invalide) et 403 (blocage WAF) dans la boucle `_poll_http_rpc_worker`.
   - **Acquittement Bidirectionnel Garanti** : Validation immédiate de l'interrupteur *Round Switch* via réponse synchrone `POST /api/v1/{token}/rpc/{id}` au format ThingsBoard `{status: "SUCCESS", value: ...}` et synchronisation d'attribut `CLIENT_SCOPE`.
 - [x] Contrôle Bidirectionnel par Attributs Partagés & Version Majeure 2.0.0 (v2.0.0) :

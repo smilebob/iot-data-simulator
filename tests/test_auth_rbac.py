@@ -62,7 +62,7 @@ def test_user_repository():
         # Create operator
         op_create = UserCreate(
             username="operator1",
-            full_name="Pierre Opérateur",
+            full_name="Operator User",
             role=UserRole.OPERATOR,
             password="Operator_123456!"
         )

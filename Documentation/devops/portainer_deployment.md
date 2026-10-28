@@ -205,11 +205,11 @@ cp .env.portainer.example .env.portainer
 Renseignez l'une des deux options :
 - **Via le Webhook local** (le plus rapide) :
   ```env
-  PORTAINER_WEBHOOK_URL=http://192.168.1.50:9000/api/stacks/webhooks/d0f2a71e-45b1-4f12-a723-8c76391d84f1
+  PORTAINER_WEBHOOK_URL=http://<PORTAINER_HOST>:9000/api/stacks/webhooks/<WEBHOOK_UUID>
   ```
 - **Ou via l'API REST Portainer avec clé d'API** :
   ```env
-  PORTAINER_URL=http://192.168.1.50:9000
+  PORTAINER_URL=http://<PORTAINER_HOST>:9000
   PORTAINER_API_KEY=ptr_votre_cle_api
   PORTAINER_STACK_NAME=iot-simulator
   ```
@@ -222,7 +222,7 @@ python3 scripts/portainer_deploy.py
 ```
 
 Le script :
-- Se connecte à votre Portainer local.
+- Se connecte à votre Portainer local (ou vous invite interactivement à saisir vos identifiants si aucun fichier n'est configuré).
 - Déclenche le redéploiement de la stack.
 - Force le pull de l'image fraîche sur GitHub Container Registry.
 - Confirme la validation et le redémarrage des conteneurs.
@@ -231,10 +231,14 @@ Le script :
 
 ### Solution C : Mise à Jour Directe par SSH (`scripts/remote_update.sh`)
 
-Si vous disposez d'un accès SSH à l'hôte hébergeant Portainer (ex: `proth@192.168.10.114`), vous pouvez synchroniser le code et mettre à jour le conteneur applicatif en une seule commande depuis votre poste :
+Si vous disposez d'un accès SSH à l'hôte hébergeant l'application (ex: `user@<HOST_IP>`), vous pouvez synchroniser le code et mettre à jour le conteneur applicatif en une seule commande depuis votre poste :
 
 ```bash
-./scripts/remote_update.sh proth@192.168.10.114 8032
+# Saisie interactive des paramètres :
+./scripts/remote_update.sh
+
+# Ou en passant la cible et le port en arguments :
+./scripts/remote_update.sh user@<HOST_IP> 8032
 ```
 
 Le script réalise en 4 secondes :

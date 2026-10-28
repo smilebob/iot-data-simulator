@@ -197,7 +197,7 @@ class SimulationEngine:
         port = device.custom_port or (443 if use_tls else 80)
 
         clean_host_part = host.lower().replace("http://", "").replace("https://", "").split(":")[0]
-        if clean_host_part in ("mosquitto", "localhost", "127.0.0.1") and "eiffage" not in host:
+        if clean_host_part in ("mosquitto", "localhost", "127.0.0.1"):
             logger.warning(
                 f"⚠️ [HTTP RPC] Device '{device.id}' targets local '{host}:{port}'. "
                 f"For remote ThingsBoard instances, configure custom host in device settings."

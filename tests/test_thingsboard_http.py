@@ -51,7 +51,7 @@ def test_headers_and_rpc():
         with patch.object(client, 'post_payload', new_callable=AsyncMock) as mock_post:
             mock_post.return_value = (True, "HTTP 200")
             success = await client.respond_rpc(
-                host="easythings.app.eiffageenergiesystemes.com",
+                host="thingsboard.example.com",
                 port=443,
                 token="pac_tok_123",
                 req_id=7,
@@ -60,7 +60,7 @@ def test_headers_and_rpc():
             )
             assert success is True
             mock_post.assert_called_once_with(
-                host="easythings.app.eiffageenergiesystemes.com",
+                host="thingsboard.example.com",
                 port=443,
                 endpoint="/api/v1/pac_tok_123/rpc/7",
                 payload='{"status": "SUCCESS", "value": false}',
@@ -75,13 +75,13 @@ def test_build_url_sanitization():
     """Validates host URI sanitization across protocols and port overrides."""
     print("Testing ThingsBoardHttpClient.build_url sanitization...")
     # 1. Host with https://
-    url, tls = ThingsBoardHttpClient.build_url("https://easythings.app.eiffageenergiesystemes.com", 443, "/api/v1/tok123/telemetry", use_tls=False)
-    assert url == "https://easythings.app.eiffageenergiesystemes.com/api/v1/tok123/telemetry"
+    url, tls = ThingsBoardHttpClient.build_url("https://thingsboard.example.com", 443, "/api/v1/tok123/telemetry", use_tls=False)
+    assert url == "https://thingsboard.example.com/api/v1/tok123/telemetry"
     assert tls is True
 
     # 2. Host with http:// and custom port
-    url, tls = ThingsBoardHttpClient.build_url("http://192.168.1.50:8080", 8080, "api/v1/tok123/telemetry", use_tls=True)
-    assert url == "http://192.168.1.50:8080/api/v1/tok123/telemetry"
+    url, tls = ThingsBoardHttpClient.build_url("http://thingsboard.example.com:8080", 8080, "api/v1/tok123/telemetry", use_tls=True)
+    assert url == "http://thingsboard.example.com:8080/api/v1/tok123/telemetry"
     assert tls is False
 
     # 3. Standard Cloud host on port 443
@@ -105,7 +105,7 @@ def test_connectivity_diagnostic():
         # Simulation 200 OK
         with patch.object(client, 'post_payload', new_callable=AsyncMock) as mock_post:
             mock_post.return_value = (True, "HTTP 200")
-            diag = await client.test_connectivity("easythings.app.eiffageenergiesystemes.com", 443, "valid_token", use_tls=True)
+            diag = await client.test_connectivity("thingsboard.example.com", 443, "valid_token", use_tls=True)
             assert diag["success"] is True
             assert diag["token_valid"] is True
             assert "validé avec succès" in diag["recommendations"][0]
@@ -113,7 +113,7 @@ def test_connectivity_diagnostic():
         # Simulation 401 Unauthorized
         with patch.object(client, 'post_payload', new_callable=AsyncMock) as mock_post:
             mock_post.return_value = (False, "HTTP 401 Non Autorisé")
-            diag = await client.test_connectivity("easythings.app.eiffageenergiesystemes.com", 443, "bad_token", use_tls=True)
+            diag = await client.test_connectivity("thingsboard.example.com", 443, "bad_token", use_tls=True)
             assert diag["success"] is True       # Host is reachable
             assert diag["token_valid"] is False  # Token rejected
             assert "rejeté" in diag["recommendations"][0]

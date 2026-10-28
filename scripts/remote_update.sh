@@ -6,22 +6,19 @@
 # builds the container image remotely, and performs hot-reloading with zero MQTT
 # broker downtime.
 #
+# If target host/user parameters are not provided as CLI arguments or environment
+# variables, the script prompts the user interactively at runtime.
+#
 # Usage:
 #   ./scripts/remote_update.sh [USER@HOST] [HTTP_PORT]
 #
 # Examples:
 #   ./scripts/remote_update.sh
-#   ./scripts/remote_update.sh proth@192.168.10.114
-#   ./scripts/remote_update.sh proth@192.168.10.114 8032
+#   ./scripts/remote_update.sh user@192.168.1.100
+#   ./scripts/remote_update.sh user@192.168.1.100 8032
 # ==============================================================================
 
 set -euo pipefail
-
-# Default deployment target parameters
-TARGET="${1:-${REMOTE_TARGET:-proth@192.168.10.114}}"
-REMOTE_DIR="${REMOTE_DIR:-/home/proth/iot-data-simulator}"
-HOST_IP="${TARGET#*@}"
-APP_PORT="${2:-${SIMULATOR_PORT:-8032}}"
 
 # Terminal color tokens
 GREEN='\033[0;32m'
@@ -29,6 +26,52 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
+
+# 1. Resolve Target (CLI argument > Environment variable > Interactive prompt)
+TARGET="${1:-${REMOTE_TARGET:-}}"
+if [ -z "${TARGET}" ]; then
+    echo -e "${YELLOW}Remote SSH target not specified.${NC}"
+    read -rp "Enter remote SSH target (e.g. user@hostname_or_ip): " TARGET
+    if [ -z "${TARGET}" ]; then
+        echo -e "${RED}❌ Error: Remote target is required. Exiting.${NC}"
+        exit 1
+    fi
+fi
+
+# Extract host part (IP or hostname) and user part
+if [[ "${TARGET}" == *"@"* ]]; then
+    HOST_IP="${TARGET#*@}"
+    REMOTE_USER="${TARGET%@*}"
+else
+    HOST_IP="${TARGET}"
+    REMOTE_USER="$(whoami)"
+fi
+
+# 2. Resolve Remote Directory
+DEFAULT_REMOTE_DIR="~/iot-data-simulator"
+if [ -z "${REMOTE_DIR:-}" ]; then
+    if [ -t 0 ] && [ $# -lt 1 ]; then
+        read -rp "Enter remote directory [${DEFAULT_REMOTE_DIR}]: " USER_REMOTE_DIR
+        REMOTE_DIR="${USER_REMOTE_DIR:-$DEFAULT_REMOTE_DIR}"
+    else
+        REMOTE_DIR="${DEFAULT_REMOTE_DIR}"
+    fi
+fi
+
+# 3. Resolve HTTP Port
+DEFAULT_APP_PORT="8032"
+if [ -n "${2:-}" ]; then
+    APP_PORT="${2}"
+elif [ -n "${SIMULATOR_PORT:-}" ]; then
+    APP_PORT="${SIMULATOR_PORT}"
+else
+    if [ -t 0 ] && [ $# -lt 2 ]; then
+        read -rp "Enter remote HTTP port [${DEFAULT_APP_PORT}]: " USER_APP_PORT
+        APP_PORT="${USER_APP_PORT:-$DEFAULT_APP_PORT}"
+    else
+        APP_PORT="${DEFAULT_APP_PORT}"
+    fi
+fi
 
 echo -e "${BLUE}======================================================${NC}"
 echo -e "${BLUE}  IoT Data Simulator - Remote SSH Hot-Reload Update   ${NC}"
@@ -38,7 +81,7 @@ echo -e "Remote directory    : ${YELLOW}${REMOTE_DIR}${NC}"
 echo -e "Expected HTTP port  : ${YELLOW}${APP_PORT}${NC}"
 echo ""
 
-# 1. SSH Connectivity pre-flight check
+# 4. SSH Connectivity pre-flight check
 echo -e "${BLUE}[1/4] Checking SSH connectivity...${NC}"
 if ! ssh -o BatchMode=yes -o ConnectTimeout=5 "${TARGET}" "echo 'SSH OK'" >/dev/null 2>&1; then
     echo -e "${RED}❌ Unable to establish SSH connection to ${TARGET}.${NC}"
