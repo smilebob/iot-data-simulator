@@ -229,6 +229,22 @@ Le script :
 
 ---
 
+### Solution C : Mise à Jour Directe par SSH (`scripts/remote_update.sh`)
+
+Si vous disposez d'un accès SSH à l'hôte hébergeant Portainer (ex: `proth@192.168.10.114`), vous pouvez synchroniser le code et mettre à jour le conteneur applicatif en une seule commande depuis votre poste :
+
+```bash
+./scripts/remote_update.sh proth@192.168.10.114 8032
+```
+
+Le script réalise en 4 secondes :
+1. La vérification de la connexion SSH.
+2. Le transfert compressé et sécurisé des modifications vers l'hôte distant.
+3. La recompilation instantanée avec cache Docker (`docker compose build`) et le redémarrage à chaud sans couper Mosquitto.
+4. La validation du healthcheck HTTP (`/healthz`) avec affichage de la version active.
+
+---
+
 ## 5. Méthode 2 : Déploiement par l'Éditeur Web Portainer (Web Editor)
 
 Si vous préférez déployer la stack immédiatement sans lier de dépôt Git :

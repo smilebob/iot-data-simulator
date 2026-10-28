@@ -142,6 +142,7 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 - [x] Automatisation Déploiement Portainer & Réseau Privé (v2.2.1) :
   - **Support Réseau Local Privé (LAN / sans IP publique)** : Mécanisme GitOps Polling natif dans Portainer (auto-update à intervalle configurable via accès internet sortant) et script CLI dédié [`scripts/portainer_deploy.py`](file:///home/pierre/Projets/iot-data-simulator/scripts/portainer_deploy.py) pour redéploiement et pull de la dernière image en 1 commande (supporte Webhook local et API REST Portainer avec clé d'API).
   - **Fiabilisation CI/CD GitHub Actions** : Correction de l'évaluation bash pour `PORTAINER_WEBHOOK_URL` dans `.github/workflows/docker-build-push.yml`.
+  - **Script de Mise à Jour Directe SSH** : [`scripts/remote_update.sh`](file:///home/pierre/Projets/iot-data-simulator/scripts/remote_update.sh) pour synchroniser le code et relancer à chaud le conteneur applicatif en 4 secondes avec validation healthcheck.
   - **Template & Documentation DevOps** : `.env.portainer.example`, section 4.1 dans `Documentation/devops/portainer_deployment.md`.
 
 ### 🚧 Évolutions Futures Potentielles
