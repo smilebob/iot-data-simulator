@@ -195,13 +195,13 @@
   </main>
 
   <!-- Modal Variable (Création & Édition) -->
-  <div id="modal-variable" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
+  <div id="modal-variable" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-5 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-4">
         <h3 id="modal-variable-title" class="text-base font-bold text-white flex items-center gap-2">
           <i data-lucide="sliders" class="w-5 h-5 text-[#E2001A]"></i> Configurer la Variable
         </h3>
-        <button onclick="closeModal('modal-variable')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeModal('modal-variable')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <form id="form-variable" onsubmit="saveVariableForm(event)" class="space-y-4 text-xs">
@@ -410,13 +410,13 @@
   </div>
 
   <!-- Modal Équipement (Création & Édition) -->
-  <div id="modal-device" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
+  <div id="modal-device" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 id="modal-device-title" class="text-base font-bold text-white flex items-center gap-2">
           <i data-lucide="cpu" class="w-5 h-5 text-[#E2001A]"></i> Équipement Virtuel
         </h3>
-        <button onclick="closeModal('modal-device')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeModal('modal-device')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <form id="form-device" onsubmit="saveDeviceForm(event)" class="space-y-4 text-xs">
@@ -531,13 +531,13 @@
   </div>
 
   <!-- Modal Configuration Broker MQTT -->
-  <div id="modal-broker" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
+  <div id="modal-broker" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-base font-bold text-white flex items-center gap-2">
           <i data-lucide="server" class="w-5 h-5 text-[#E2001A]"></i> Paramètres du Broker MQTT
         </h3>
-        <button onclick="closeModal('modal-broker')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeModal('modal-broker')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <form id="form-broker" onsubmit="saveBrokerForm(event)" class="space-y-4 text-xs">
@@ -603,7 +603,7 @@
   </div>
 
   <!-- Modal Logs & Diagnostics -->
-  <div id="modal-logs" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4">
+  <div id="modal-logs" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4" role="dialog" aria-modal="true">
     <div class="bg-[#12151B] border border-[#2B3342] rounded-2xl max-w-4xl w-full h-[85vh] flex flex-col shadow-2xl overflow-hidden">
       <!-- Header -->
       <div class="flex items-center justify-between px-5 py-3.5 bg-[#181D26] border-b border-[#2B3342]">
@@ -637,7 +637,7 @@
             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
           </button>
           
-          <button type="button" onclick="closeModal('modal-logs')" class="text-slate-400 hover:text-white ml-2">
+          <button aria-label="Fermer" type="button" onclick="closeModal('modal-logs')" class="text-slate-400 hover:text-white ml-2">
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
@@ -665,7 +665,7 @@
   </div>
 
   <!-- Modal Authentification / Connexion (Incontournable si non connecté) -->
-  <div id="modal-login" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 hidden p-4">
+  <div id="modal-login" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 hidden p-4" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
       <div class="text-center space-y-2">
         <div class="inline-flex p-3 bg-[#E2001A] rounded-xl text-white shadow-lg shadow-red-950/50 mb-1">
@@ -706,7 +706,7 @@
   </div>
 
   <!-- Modal Gestion des Utilisateurs & Rôles RBAC (Admin Only) -->
-  <div id="modal-users" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
+  <div id="modal-users" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <div class="flex items-center gap-2.5">
@@ -718,7 +718,7 @@
             <p class="text-xs text-slate-400">Contrôle des comptes d'accès et des privilèges système</p>
           </div>
         </div>
-        <button onclick="closeModal('modal-users')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeModal('modal-users')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div class="flex items-center justify-between">
@@ -754,13 +754,13 @@
   </div>
 
   <!-- Modal Création d'Utilisateur -->
-  <div id="modal-create-user" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4">
+  <div id="modal-create-user" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-sm font-bold text-white flex items-center gap-2">
           <i data-lucide="user-plus" class="w-4 h-4 text-[#E2001A]"></i> Ajouter un Utilisateur
         </h3>
-        <button onclick="closeCreateUserModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeCreateUserModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div id="create-user-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
@@ -796,13 +796,13 @@
   </div>
 
   <!-- Modal Changement Mot de Passe Personnel -->
-  <div id="modal-change-password" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4">
+  <div id="modal-change-password" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-sm font-bold text-white flex items-center gap-2">
           <i data-lucide="key" class="w-4 h-4 text-amber-400"></i> Modifier mon Mot de Passe
         </h3>
-        <button onclick="closeModal('modal-change-password')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeModal('modal-change-password')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div id="change-pw-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
@@ -830,13 +830,13 @@
   </div>
 
   <!-- Modal Réinitialisation Mot de Passe par Admin -->
-  <div id="modal-reset-password" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4">
+  <div id="modal-reset-password" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-3">
         <h3 class="text-sm font-bold text-white flex items-center gap-2">
           <i data-lucide="lock" class="w-4 h-4 text-amber-400"></i> Réinitialiser Mot de Passe
         </h3>
-        <button onclick="closeResetPasswordModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeResetPasswordModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div id="reset-pw-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
@@ -858,7 +858,7 @@
   </div>
 
   <!-- Modal Catalogue des Modèles d'Équipements Métiers -->
-  <div id="modal-catalog" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
+  <div id="modal-catalog" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-5xl w-full p-6 shadow-2xl space-y-5 my-8 flex flex-col max-h-[90vh]">
       <!-- En-tête -->
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-4">
@@ -880,7 +880,7 @@
             <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
             <span class="hidden sm:inline">Exporter tout</span>
           </button>
-          <button onclick="closeModal('modal-catalog')" class="text-slate-400 hover:text-white ml-2"><i data-lucide="x" class="w-5 h-5"></i></button>
+          <button aria-label="Fermer" onclick="closeModal('modal-catalog')" class="text-slate-400 hover:text-white ml-2"><i data-lucide="x" class="w-5 h-5"></i></button>
         </div>
       </div>
 
@@ -925,7 +925,7 @@
   </div>
 
   <!-- Modal Configuration & Instanciation du Modèle Choisi -->
-  <div id="modal-instantiate-preset" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto">
+  <div id="modal-instantiate-preset" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 hidden p-4 overflow-y-auto" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-8">
       <div class="flex items-center justify-between border-b border-[#2B3342] pb-4">
         <div>
@@ -935,7 +935,7 @@
           </h3>
           <p id="instantiate-modal-subtitle" class="text-xs text-slate-400 mt-0.5">Modèle sélectionné</p>
         </div>
-        <button onclick="closeInstantiateModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeInstantiateModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div id="instantiate-error" class="hidden p-2.5 rounded-lg text-xs bg-red-950/80 border border-red-800 text-red-200"></div>
@@ -1022,7 +1022,7 @@
   </div>
 
   <!-- Modale Calculateur de Dimensionnement & Volumétrie IoT (Offres Numériques) -->
-  <div id="modal-sizing" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+  <div id="modal-sizing" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-3xl shadow-2xl overflow-hidden animate-fade-in">
       <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
         <div class="flex items-center gap-2.5">
@@ -1032,7 +1032,7 @@
             <p class="text-[11px] text-slate-400">Estimation débit, bande passante 4G, stockage TimescaleDB & gabarit ThingsBoard pour vos mémoires techniques</p>
           </div>
         </div>
-        <button onclick="closeSizingModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeSizingModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div class="p-6 space-y-5 max-h-[82vh] overflow-y-auto">
@@ -1115,7 +1115,7 @@
   </div>
 
   <!-- Modale Sites Multi-Équipements & Storyboards Soutenance Live -->
-  <div id="modal-sites-demo" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+  <div id="modal-sites-demo" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden animate-fade-in">
       <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
         <div class="flex items-center gap-2.5">
@@ -1125,7 +1125,7 @@
             <p class="text-[11px] text-slate-400">Instanciez une architecture multi-équipements en 1 clic et pilotez des scénarios de démonstration live</p>
           </div>
         </div>
-        <button onclick="closeSitesDemoModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeSitesDemoModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div class="p-6 space-y-6 max-h-[82vh] overflow-y-auto">
@@ -1170,7 +1170,7 @@
   </div>
 
   <!-- Modale Livrables Offres Techniques -->
-  <div id="modal-deliverables" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+  <div id="modal-deliverables" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-fade-in">
       <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
         <div class="flex items-center gap-2.5">
@@ -1180,7 +1180,7 @@
             <p class="text-[11px] text-slate-400">Documents techniques générés depuis vos équipements actifs</p>
           </div>
         </div>
-        <button onclick="closeDeliverablesModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeDeliverablesModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="p-6 space-y-4">
         <a href="/api/deliverables/io-list" class="flex items-center justify-between p-4 bg-[#11151D] hover:bg-[#1C222D] border border-[#2B3342] hover:border-purple-500/60 rounded-xl transition">
@@ -1202,7 +1202,7 @@
   </div>
 
   <!-- Modale Push ThingsBoard 1-Clic (Éphémère & Multi-Tenant/Client) -->
-  <div id="modal-tb-push" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+  <div id="modal-tb-push" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
     <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden animate-fade-in">
       <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
         <div class="flex items-center gap-2.5">
@@ -1212,7 +1212,7 @@
             <p class="text-[11px] text-slate-400">Identifiants utilisés uniquement en mémoire (jamais sauvegardés). Sélection Tenant &amp; Client incluse.</p>
           </div>
         </div>
-        <button onclick="closeTbPushModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button aria-label="Fermer" onclick="closeTbPushModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div class="p-6 space-y-5 max-h-[82vh] overflow-y-auto">

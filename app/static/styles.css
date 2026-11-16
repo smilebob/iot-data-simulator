@@ -33,6 +33,24 @@ html.dark {
   color-scheme: dark;
 }
 
+/* Accessibilité Clavier (WCAG AA) : Anneau de focus visible */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #38BDF8 !important;
+  outline-offset: 2px;
+}
+
+/* Contraste WCAG AA renforcé en Thème Sombre */
+html.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+html.dark .text-slate-600 {
+  color: #94A3B8 !important;
+}
+
 html.light {
   color-scheme: light;
   --surface-bg: #F1F5F9;
@@ -180,17 +198,22 @@ html.light .bg-\[\#181D26\] {
 html.light .bg-\[\#181D26\]\/60 {
   background-color: rgba(255, 255, 255, 0.9) !important;
 }
-html.light .bg-\[\#12151B\] {
+html.light .bg-\[\#12151B\],
+html.light .bg-\[\#11151D\],
+html.light .bg-\[\#131720\],
+html.light .bg-\[\#151922\] {
   background-color: #F8FAFC !important;
 }
 html.light .bg-\[\#12151B\]\/50 {
   background-color: #F1F5F9 !important;
 }
-html.light .bg-\[\#0F1218\] {
+html.light .bg-\[\#0F1218\],
+html.light .bg-\[\#1C222D\] {
   background-color: #FFFFFF !important;
 }
 html.light .bg-\[\#1F2532\],
-html.light .bg-\[\#202531\] {
+html.light .bg-\[\#202531\],
+html.light .bg-\[\#2B3342\] {
   background-color: #F1F5F9 !important;
 }
 html.light .hover\:bg-\[\#202531\]:hover,
@@ -238,10 +261,28 @@ html.light .text-slate-400 {
   color: #475569 !important;
 }
 html.light .text-slate-500 {
-  color: #64748B !important;
+  color: #475569 !important;
 }
 html.light .text-slate-600 {
-  color: #94A3B8 !important;
+  color: #475569 !important;
+}
+html.light .text-emerald-400 {
+  color: #047857 !important;
+}
+html.light .text-sky-400 {
+  color: #0369A1 !important;
+}
+html.light .text-amber-400 {
+  color: #B45309 !important;
+}
+html.light .text-purple-400 {
+  color: #6D28D9 !important;
+}
+html.light .text-red-400 {
+  color: #B91C1C !important;
+}
+html.light .text-emerald-200 {
+  color: #065F46 !important;
 }
 
 /* Exceptions obligatoires pour le texte blanc sur boutons colorés */
@@ -251,6 +292,12 @@ html.light .active-filter-tab,
 html.light .active-filter-tab *,
 html.light button.bg-emerald-600,
 html.light button.bg-emerald-600 *,
+html.light button.bg-sky-600,
+html.light button.bg-sky-600 *,
+html.light button.bg-amber-600,
+html.light button.bg-amber-600 *,
+html.light button.bg-purple-600,
+html.light button.bg-purple-600 *,
 html.light button.bg-red-600,
 html.light button.bg-red-600 *,
 html.light .bg-\[\#E2001A\],
@@ -296,6 +343,8 @@ html.light .text-amber-300 {
 
 html.light .bg-emerald-950\/80,
 html.light .bg-emerald-950\/70,
+html.light .bg-emerald-950\/30,
+html.light .bg-emerald-950\/25,
 html.light .bg-emerald-950 {
   background-color: #D1FAE5 !important;
   border-color: #6EE7B7 !important;
@@ -318,6 +367,7 @@ html.light .text-purple-300 {
 
 html.light .bg-sky-950\/80,
 html.light .bg-sky-950\/70,
+html.light .bg-sky-950\/25,
 html.light .bg-sky-950 {
   background-color: #E0F2FE !important;
   border-color: #7DD3FC !important;
@@ -409,6 +459,7 @@ html.light input[type="checkbox"] {
 }
 
 /* Modales & Boîtes de Dialogue */
+html.light .bg-black\/75,
 html.light .bg-black\/80,
 html.light .bg-black\/85,
 html.light .bg-black\/95 {
@@ -425,7 +476,11 @@ html.light #modal-create-user > div,
 html.light #modal-change-password > div,
 html.light #modal-reset-password > div,
 html.light #modal-login > div,
-html.light #modal-logs > div {
+html.light #modal-logs > div,
+html.light #modal-sizing > div,
+html.light #modal-sites-demo > div,
+html.light #modal-deliverables > div,
+html.light #modal-tb-push > div {
   background-color: #FFFFFF !important;
   border-color: #E2E8F0 !important;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;

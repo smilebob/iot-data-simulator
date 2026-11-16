@@ -100,13 +100,13 @@ tar --exclude="__pycache__" \
     --exclude=".pytest_cache" \
     --exclude="venv" \
     --exclude=".venv" \
-    --exclude="mosquitto/data/*" \
-    --exclude="mosquitto/log/*" \
+    --exclude="mosquitto/data" \
+    --exclude="mosquitto/log" \
     --exclude="data/simulator_state.json" \
     --exclude="data/users.json" \
     --exclude="data/*.bak" \
     --exclude=".env" \
-    -czf - . | ssh "${TARGET}" "mkdir -p ${REMOTE_DIR} && tar -xzf - -C ${REMOTE_DIR}"
+    -czf - . | ssh "${TARGET}" "mkdir -p ${REMOTE_DIR} && tar --no-overwrite-dir -xzf - -C ${REMOTE_DIR}"
 
 echo -e "${GREEN}✓ Source tree synchronized live.${NC}"
 

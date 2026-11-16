@@ -3501,3 +3501,20 @@ async function executeTbProvision() {
     alert("Erreur réseau : " + err.message);
   }
 }
+
+// =========================================================================
+// Keyboard Accessibility (Escape to close active modals)
+// =========================================================================
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  const openModals = Array.from(document.querySelectorAll('[id^="modal-"]')).filter(
+    (m) => !m.classList.contains("hidden") && m.id !== "modal-login"
+  );
+  if (openModals.length === 0) return;
+  const topModal = openModals[openModals.length - 1];
+  topModal.classList.add("hidden");
+  if (topModal.id === "modal-sites-demo" && typeof storyboardPollTimer !== "undefined" && storyboardPollTimer) {
+    clearInterval(storyboardPollTimer);
+    storyboardPollTimer = null;
+  }
+});
