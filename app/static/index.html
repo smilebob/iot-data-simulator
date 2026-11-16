@@ -152,6 +152,14 @@
           <i data-lucide="building-2" class="w-4 h-4 text-amber-400"></i>
           <span>Sites &amp; Démo Live</span>
         </button>
+        <button id="btn-deliverables" onclick="openDeliverablesModal()" title="Exporter l'IO List Excel et le Dossier Technique d'Architecture" class="flex items-center gap-1.5 bg-[#1F2532] hover:bg-[#2B3342] text-slate-200 border border-[#2B3342] hover:border-purple-500 text-xs font-semibold px-3 py-2 rounded-lg transition shadow-sm">
+          <i data-lucide="file-text" class="w-4 h-4 text-purple-400"></i>
+          <span>Livrables Offre</span>
+        </button>
+        <button id="btn-tb-push" onclick="openTbPushModal()" title="Provisionner Devices, Tokens et Dashboards directement dans ThingsBoard (identifiants éphémères)" class="flex items-center gap-1.5 bg-[#1F2532] hover:bg-[#2B3342] text-slate-200 border border-[#2B3342] hover:border-emerald-500 text-xs font-semibold px-3 py-2 rounded-lg transition shadow-sm">
+          <i data-lucide="send" class="w-4 h-4 text-emerald-400"></i>
+          <span>Push ThingsBoard</span>
+        </button>
         <button id="btn-catalog" onclick="openCatalogModal()" class="flex items-center gap-1.5 bg-[#1F2532] hover:bg-[#2B3342] text-slate-200 border border-[#2B3342] hover:border-slate-500 text-xs font-semibold px-4 py-2 rounded-lg transition shadow-sm">
           <i data-lucide="boxes" class="w-4 h-4 text-emerald-400"></i>
           <span>Modèles Métiers</span>
@@ -1157,6 +1165,125 @@
         <div class="flex justify-end pt-2 border-t border-[#2B3342]">
           <button onclick="closeSitesDemoModal()" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg text-xs font-medium">Fermer</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale Livrables Offres Techniques -->
+  <div id="modal-deliverables" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-fade-in">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="file-text" class="w-5 h-5 text-purple-400"></i>
+          <div>
+            <h3 class="text-sm font-bold text-white">Générateur de Livrables d'Offres</h3>
+            <p class="text-[11px] text-slate-400">Documents techniques générés depuis vos équipements actifs</p>
+          </div>
+        </div>
+        <button onclick="closeDeliverablesModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="p-6 space-y-4">
+        <a href="/api/deliverables/io-list" class="flex items-center justify-between p-4 bg-[#11151D] hover:bg-[#1C222D] border border-[#2B3342] hover:border-purple-500/60 rounded-xl transition">
+          <div>
+            <div class="text-xs font-bold text-white">Liste de Points GTB / IoT (IO List CSV)</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Format Excel FR (UTF-8 BOM, `;`) avec plages, unités, cadences et seuils d'alarmes</div>
+          </div>
+          <i data-lucide="download" class="w-4 h-4 text-purple-400"></i>
+        </a>
+        <a href="/api/deliverables/dossier" class="flex items-center justify-between p-4 bg-[#11151D] hover:bg-[#1C222D] border border-[#2B3342] hover:border-sky-500/60 rounded-xl transition">
+          <div>
+            <div class="text-xs font-bold text-white">Dossier Technique d'Architecture (Markdown)</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Schéma de flux Mermaid, inventaire des équipements, KPIs ROI &amp; dimensionnement</div>
+          </div>
+          <i data-lucide="download" class="w-4 h-4 text-sky-400"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale Push ThingsBoard 1-Clic (Éphémère & Multi-Tenant/Client) -->
+  <div id="modal-tb-push" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden animate-fade-in">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="send" class="w-5 h-5 text-emerald-400"></i>
+          <div>
+            <h3 class="text-sm font-bold text-white">Provisioning Direct ThingsBoard 4.3 (Éphémère)</h3>
+            <p class="text-[11px] text-slate-400">Identifiants utilisés uniquement en mémoire (jamais sauvegardés). Sélection Tenant &amp; Client incluse.</p>
+          </div>
+        </div>
+        <button onclick="closeTbPushModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="p-6 space-y-5 max-h-[82vh] overflow-y-auto">
+        <!-- Étape 1 : Connexion Éphémère -->
+        <div class="bg-[#11151D] border border-[#2B3342] rounded-xl p-4 space-y-3">
+          <div class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">1. Connexion Éphémère ThingsBoard</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">URL ThingsBoard</label>
+              <input type="text" id="tb-push-url" placeholder="https://tb.example.com" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-emerald-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Utilisateur (Email)</label>
+              <input type="text" id="tb-push-user" autocomplete="off" placeholder="admin@tenant.com" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-emerald-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400 mb-1">Mot de passe</label>
+              <input type="password" id="tb-push-pass" autocomplete="new-password" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-emerald-500 focus:outline-none">
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <label class="inline-flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer">
+              <input type="checkbox" id="tb-push-insecure" class="rounded bg-[#1C222D] border-[#2B3342]">
+              <span>Ignorer erreurs SSL auto-signées</span>
+            </label>
+            <button onclick="connectTbEphemeral()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition">Se connecter &amp; Inspecter</button>
+          </div>
+        </div>
+
+        <!-- Étape 2 : Sélection Tenant (si SYS_ADMIN) & Client (Customer) -->
+        <div id="tb-push-step2" class="hidden bg-[#11151D] border border-[#2B3342] rounded-xl p-4 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="text-[11px] font-bold text-sky-400 uppercase tracking-wider">2. Affectation Tenant &amp; Client (Customer)</div>
+            <span id="tb-push-role-badge" class="text-[10px] font-mono bg-sky-950 text-sky-300 px-2 py-0.5 rounded border border-sky-500/30">-</span>
+          </div>
+
+          <!-- Bloc Tenant (affiché uniquement si SYS_ADMIN) -->
+          <div id="tb-push-tenant-box" class="hidden space-y-2 pb-3 border-b border-[#2B3342]">
+            <label class="block text-[11px] font-semibold text-slate-300">Tenant Cible</label>
+            <div class="flex gap-2">
+              <select id="tb-push-tenant-select" onchange="switchTbTenantContext()" class="flex-1 bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-sky-500 focus:outline-none">
+                <option value="">-- Sélectionner un Tenant --</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Bloc Customer -->
+          <div class="space-y-2">
+            <label class="block text-[11px] font-semibold text-slate-300">Client (Customer) propriétaire des cas d'usage</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <select id="tb-push-customer-select" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-sky-500 focus:outline-none">
+                  <option value="">(Aucun — Niveau Tenant)</option>
+                </select>
+              </div>
+              <div>
+                <input type="text" id="tb-push-new-customer" placeholder="Ou créer un nouveau Client..." class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-sky-500 focus:outline-none">
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <label class="inline-flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+              <input type="checkbox" id="tb-push-dashboards" checked class="rounded bg-[#1C222D] border-[#2B3342]">
+              <span>Créer et lier automatiquement les Tableaux de Bord</span>
+            </label>
+            <button onclick="executeTbProvision()" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-5 py-2 rounded-lg transition">Provisionner &amp; Sync Tokens</button>
+          </div>
+        </div>
+
+        <div id="tb-push-result" class="hidden bg-emerald-950/25 border border-emerald-500/40 rounded-xl p-4 text-xs text-emerald-200 space-y-1.5"></div>
       </div>
     </div>
   </div>

@@ -44,6 +44,18 @@ from app.core.site_blueprints import (
     generate_site_hypervision_dashboard,
 )
 from app.core.storyboard_engine import get_storyboards, storyboard_manager
+from app.core.bid_deliverables import (
+    generate_io_list_csv,
+    generate_architecture_dossier_md,
+)
+from app.core.tb_provisioner import (
+    TbCredentialsRequest,
+    TbTenantContextRequest,
+    TbProvisionRequest,
+    tb_inspect_context,
+    tb_switch_tenant_context,
+    tb_provision_stack,
+)
 from app.core.equipment_catalog import (
     get_equipment_catalog,
     EquipmentPreset,
@@ -751,6 +763,75 @@ async def start_storyboard(req: StartStoryboardRequest):
 async def stop_storyboard():
     """Arrête le storyboard en cours et restaure l'état nominal."""
     return await storyboard_manager.stop()
+
+
+# ---------------------------------------------------------------------------
+# Bid Deliverables (IO List CSV + Technical Architecture Dossier)
+# ---------------------------------------------------------------------------
+
+@router.get("/deliverables/io-list", dependencies=[Depends(require_role(ROLE_ANY))])
+def export_io_list_csv():
+    """Exporte la Liste de Points (IO List) au format CSV UTF-8 BOM compatible Excel FR."""
+    repo = StorageRepository()
+    csv_content = generate_io_list_csv(repo.get_devices(), repo.get_variables())
+    return Response(
+        content=csv_content.encode("utf-8"),
+        media_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": 'attachment; filename="io_list_offre.csv"'},
+    )
+
+
+@router.get("/deliverables/dossier", dependencies=[Depends(require_role(ROLE_ANY))])
+def export_architecture_dossier_md():
+    """Exporte le Dossier Technique d'Architecture Markdown prêt pour mémoire technique."""
+    repo = StorageRepository()
+    devices = repo.get_devices()
+    variables = repo.get_variables()
+    sizing = calculate_sizing_from_active_devices(devices, variables)
+    md_content = generate_architecture_dossier_md(devices, variables, sizing)
+    return Response(
+        content=md_content.encode("utf-8"),
+        media_type="text/markdown; charset=utf-8",
+        headers={"Content-Disposition": 'attachment; filename="dossier_technique_offre.md"'},
+    )
+
+
+# ---------------------------------------------------------------------------
+# Ephemeral Multi-Tenant & Customer ThingsBoard 4.3 Provisioner
+# ---------------------------------------------------------------------------
+
+@router.post("/tb/inspect", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def tb_inspect_endpoint(req: TbCredentialsRequest):
+    """Connexion éphémère à ThingsBoard pour détecter le rôle et lister Tenants/Clients."""
+    try:
+        return await tb_inspect_context(req)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Erreur réseau ThingsBoard : {e}")
+
+
+@router.post("/tb/tenant-context", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def tb_tenant_context_endpoint(req: TbTenantContextRequest):
+    """Bascule un compte SYS_ADMIN vers un Tenant cible (ou crée un Tenant) et liste ses Clients."""
+    try:
+        return await tb_switch_tenant_context(req)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Erreur ThingsBoard : {e}")
+
+
+@router.post("/tb/provision", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def tb_provision_endpoint(req: TbProvisionRequest):
+    """Provisionne Devices + Access Tokens + Dashboards liés dans le Tenant/Client ThingsBoard."""
+    try:
+        return await tb_provision_stack(req)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Erreur lors du provisioning ThingsBoard : {e}")
+
 
 
 

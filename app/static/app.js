@@ -3338,3 +3338,166 @@ async function pollStoryboardStatus() {
     // Silent poll failure
   }
 }
+
+// =========================================================================
+// Bid Deliverables & Ephemeral Multi-Tenant/Customer ThingsBoard Provisioning
+// =========================================================================
+
+let tbEphemeralToken = null;
+let tbSysAdminToken = null;
+
+function openDeliverablesModal() {
+  const modal = document.getElementById("modal-deliverables");
+  if (modal) {
+    modal.classList.remove("hidden");
+    if (typeof lucide !== "undefined") lucide.createIcons();
+  }
+}
+
+function closeDeliverablesModal() {
+  const modal = document.getElementById("modal-deliverables");
+  if (modal) modal.classList.add("hidden");
+}
+
+function openTbPushModal() {
+  const modal = document.getElementById("modal-tb-push");
+  if (!modal) return;
+  tbEphemeralToken = null;
+  tbSysAdminToken = null;
+  document.getElementById("tb-push-pass").value = "";
+  document.getElementById("tb-push-step2").classList.add("hidden");
+  document.getElementById("tb-push-result").classList.add("hidden");
+  modal.classList.remove("hidden");
+  if (typeof lucide !== "undefined") lucide.createIcons();
+}
+
+function closeTbPushModal() {
+  tbEphemeralToken = null;
+  tbSysAdminToken = null;
+  const passEl = document.getElementById("tb-push-pass");
+  if (passEl) passEl.value = "";
+  const modal = document.getElementById("modal-tb-push");
+  if (modal) modal.classList.add("hidden");
+}
+
+function _populateCustomerSelect(customers) {
+  const sel = document.getElementById("tb-push-customer-select");
+  if (!sel) return;
+  sel.innerHTML = '<option value="">(Aucun — Niveau Tenant)</option>' +
+    customers.map(c => `<option value="${c.id}">${c.title}</option>`).join("");
+}
+
+async function connectTbEphemeral() {
+  const tb_url = (document.getElementById("tb-push-url")?.value || "").trim();
+  const username = (document.getElementById("tb-push-user")?.value || "").trim();
+  const password = document.getElementById("tb-push-pass")?.value || "";
+  const insecure = Boolean(document.getElementById("tb-push-insecure")?.checked);
+
+  if (!tb_url || !username || !password) {
+    alert("Veuillez renseigner l'URL, l'utilisateur et le mot de passe ThingsBoard.");
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/tb/inspect", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tb_url, username, password, insecure })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert("Connexion refusée : " + (data.detail || "Erreur ThingsBoard"));
+      return;
+    }
+
+    document.getElementById("tb-push-step2").classList.remove("hidden");
+    document.getElementById("tb-push-role-badge").textContent = data.authority;
+
+    const tenantBox = document.getElementById("tb-push-tenant-box");
+    const tenantSel = document.getElementById("tb-push-tenant-select");
+
+    if (data.authority === "SYS_ADMIN") {
+      tbSysAdminToken = data.access_token;
+      tbEphemeralToken = null;
+      tenantBox.classList.remove("hidden");
+      tenantSel.innerHTML = '<option value="">-- Sélectionner un Tenant --</option>' +
+        data.tenants.map(t => `<option value="${t.id}">${t.title}</option>`).join("");
+      _populateCustomerSelect([]);
+    } else {
+      tbSysAdminToken = null;
+      tbEphemeralToken = data.access_token;
+      tenantBox.classList.add("hidden");
+      _populateCustomerSelect(data.customers || []);
+    }
+  } catch (err) {
+    alert("Erreur réseau : " + err.message);
+  }
+}
+
+async function switchTbTenantContext() {
+  const tb_url = (document.getElementById("tb-push-url")?.value || "").trim();
+  const tenant_id = document.getElementById("tb-push-tenant-select")?.value;
+  const insecure = Boolean(document.getElementById("tb-push-insecure")?.checked);
+  if (!tenant_id || !tbSysAdminToken) return;
+
+  try {
+    const res = await fetch("/api/tb/tenant-context", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tb_url, sysadmin_token: tbSysAdminToken, tenant_id, insecure })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert("Erreur changement de Tenant : " + (data.detail || "Erreur"));
+      return;
+    }
+    tbEphemeralToken = data.tenant_token;
+    _populateCustomerSelect(data.customers || []);
+  } catch (err) {
+    alert("Erreur réseau : " + err.message);
+  }
+}
+
+async function executeTbProvision() {
+  const tb_url = (document.getElementById("tb-push-url")?.value || "").trim();
+  const customer_id = document.getElementById("tb-push-customer-select")?.value || null;
+  const new_customer_title = (document.getElementById("tb-push-new-customer")?.value || "").trim() || null;
+  const push_dashboards = Boolean(document.getElementById("tb-push-dashboards")?.checked);
+  const insecure = Boolean(document.getElementById("tb-push-insecure")?.checked);
+
+  if (!tbEphemeralToken) {
+    alert("Veuillez d'abord sélectionner un Tenant ou vous connecter avec un compte Tenant Admin.");
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/tb/provision", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tb_url,
+        access_token: tbEphemeralToken,
+        customer_id,
+        new_customer_title,
+        push_dashboards,
+        insecure
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert("Échec provisioning : " + (data.detail || "Erreur"));
+      return;
+    }
+
+    const resBox = document.getElementById("tb-push-result");
+    resBox.classList.remove("hidden");
+    resBox.innerHTML = `
+      <div class="font-bold text-emerald-300">✅ Provisioning ThingsBoard réussi !</div>
+      <div>${data.devices_count} équipement(s) créés/synchronisés avec leur vrai Token d'accès dans le simulateur.</div>
+      ${data.dashboards.map(d => `<div>📊 Dashboard : <a href="${d.url}" target="_blank" class="underline text-sky-300">${d.title}</a></div>`).join("")}
+    `;
+    if (typeof refreshAll === "function") await refreshAll();
+  } catch (err) {
+    alert("Erreur réseau : " + err.message);
+  }
+}
