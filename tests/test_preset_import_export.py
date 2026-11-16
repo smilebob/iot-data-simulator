@@ -27,9 +27,9 @@ from app.storage.repository import StorageRepository
 
 
 def test_builtin_catalog_integrity():
-    """Verifies that all 32 factory presets are loaded and verified with is_custom=False."""
+    """Verifies that all 35 factory presets are loaded and verified with is_custom=False."""
     builtins = get_builtin_catalog()
-    assert len(builtins) == 32
+    assert len(builtins) == 35
     for p in builtins:
         assert p.is_custom is False
         assert len(p.variables) > 0
@@ -127,7 +127,7 @@ def test_custom_preset_lifecycle_and_isolation():
 
         # Verify unified catalog merging
         unified_catalog = get_equipment_catalog(file_path=custom_file)
-        assert len(unified_catalog) == 33
+        assert len(unified_catalog) == 36
         assert any(p.id == "my_custom_oven" for p in unified_catalog)
 
         # Test one-click preset instantiation
@@ -195,7 +195,7 @@ def test_import_preset_data_various_formats():
         assert "Personnalisé" in loaded[0].name
 
         # Factory presets remain unmodified
-        assert len(get_builtin_catalog()) == 32
+        assert len(get_builtin_catalog()) == 35
 
         # 2. Direct preset JSON import without wrapper
         direct_model = {

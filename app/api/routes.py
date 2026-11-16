@@ -31,6 +31,19 @@ from app.mqtt.diagnostics import test_broker_connectivity
 from app.api.auth import require_role
 from app.models.user import UserRole
 from app.core.dashboard_generator import generate_thingsboard_dashboard
+from app.core.sizing_calculator import (
+    SizingRequest,
+    SizingResult,
+    calculate_sizing,
+    calculate_sizing_from_active_devices,
+)
+from app.core.site_blueprints import (
+    InstantiateSiteRequest,
+    get_site_blueprints,
+    instantiate_site_blueprint,
+    generate_site_hypervision_dashboard,
+)
+from app.core.storyboard_engine import get_storyboards, storyboard_manager
 from app.core.equipment_catalog import (
     get_equipment_catalog,
     EquipmentPreset,
@@ -464,6 +477,10 @@ def delete_preset_endpoint(preset_id: str) -> dict:
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression : {e}")
 
+
+@router.post("/variables/{var_id}/csv", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def upload_variable_csv(
+    var_id: str,
     file: UploadFile = File(...),
     repo: StorageRepository = Depends(get_repo),
 ):
@@ -642,5 +659,99 @@ def delete_preset_endpoint(preset_id: str):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur lors de la suppression : {e}")
+
+
+# ---------------------------------------------------------------------------
+# Architecture & Sizing Calculator (Pre-Sales / Bid Support)
+# ---------------------------------------------------------------------------
+
+@router.get("/sizing/current", response_model=SizingResult, dependencies=[Depends(require_role(ROLE_ANY))])
+def get_current_sizing(scale: int = 1, retention: int = 3):
+    """Calcule le dimensionnement IoT/ThingsBoard sur la base des équipements actifs du simulateur."""
+    repo = StorageRepository()
+    devices = repo.get_devices()
+    variables = repo.get_variables()
+    return calculate_sizing_from_active_devices(
+        devices=devices,
+        variables=variables,
+        scale_multiplier=max(1, scale),
+        retention_years=max(1, min(15, retention)),
+    )
+
+
+@router.post("/sizing/calculate", response_model=SizingResult, dependencies=[Depends(require_role(ROLE_ANY))])
+def compute_custom_sizing(req: SizingRequest):
+    """Calcule le dimensionnement IoT/ThingsBoard pour une projection d'architecture client sur mesure."""
+    return calculate_sizing(req)
+
+
+# ---------------------------------------------------------------------------
+# Site Blueprints (Multi-Equipment 1-Click Client Sites)
+# ---------------------------------------------------------------------------
+
+@router.get("/sites/blueprints", dependencies=[Depends(require_role(ROLE_ANY))])
+def list_site_blueprints():
+    """Retourne les modèles de sites multi-équipements complets."""
+    return [bp.model_dump() for bp in get_site_blueprints()]
+
+
+@router.post("/sites/instantiate", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+def instantiate_site_endpoint(req: InstantiateSiteRequest):
+    """Instancie en 1 clic tous les équipements d'un site client complet."""
+    try:
+        return instantiate_site_blueprint(req)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
+@router.get("/sites/{blueprint_id}/dashboard", dependencies=[Depends(require_role(ROLE_ANY))])
+def export_site_hypervision_dashboard(blueprint_id: str, site_prefix: str = "site_demo"):
+    """Exporte le tableau de bord ThingsBoard 4.3 Master Hypervision Site."""
+    try:
+        dash = generate_site_hypervision_dashboard(blueprint_id, site_prefix=site_prefix)
+        return Response(
+            content=json.dumps(dash, indent=2, ensure_ascii=False),
+            media_type="application/json",
+            headers={"Content-Disposition": f'attachment; filename="tb_hypervision_{blueprint_id}.json"'},
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
+# ---------------------------------------------------------------------------
+# Live Pre-Sales Storyboards ("Soutenance Live")
+# ---------------------------------------------------------------------------
+
+class StartStoryboardRequest(BaseModel):
+    storyboard_id: str
+
+
+@router.get("/storyboards", dependencies=[Depends(require_role(ROLE_ANY))])
+def list_storyboards():
+    """Liste les scénarios de soutenance live disponibles."""
+    return [sb.model_dump() for sb in get_storyboards()]
+
+
+@router.get("/storyboards/status", dependencies=[Depends(require_role(ROLE_ANY))])
+def get_storyboard_status():
+    """Retourne l'état d'avancement en direct du storyboard en cours."""
+    return storyboard_manager.status()
+
+
+@router.post("/storyboards/start", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def start_storyboard(req: StartStoryboardRequest):
+    """Démarre l'exécution minutée d'un storyboard de démonstration client."""
+    try:
+        return await storyboard_manager.start(req.storyboard_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+
+@router.post("/storyboards/stop", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def stop_storyboard():
+    """Arrête le storyboard en cours et restaure l'état nominal."""
+    return await storyboard_manager.stop()
+
+
 
 

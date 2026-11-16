@@ -144,6 +144,14 @@
           <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-400"></i>
           <span>Export CSV TB</span>
         </button>
+        <button id="btn-sizing" onclick="openSizingModal()" title="Calculateur de dimensionnement & volumétrie IoT pour vos offres" class="flex items-center gap-1.5 bg-[#1F2532] hover:bg-[#2B3342] text-slate-200 border border-[#2B3342] hover:border-sky-500 text-xs font-semibold px-3 py-2 rounded-lg transition shadow-sm">
+          <i data-lucide="calculator" class="w-4 h-4 text-sky-400"></i>
+          <span>Dimensionnement Offre</span>
+        </button>
+        <button id="btn-sites-demo" onclick="openSitesDemoModal()" title="Déployer un site client complet en 1 clic ou lancer un storyboard de soutenance" class="flex items-center gap-1.5 bg-[#1F2532] hover:bg-[#2B3342] text-slate-200 border border-[#2B3342] hover:border-amber-500 text-xs font-semibold px-3 py-2 rounded-lg transition shadow-sm">
+          <i data-lucide="building-2" class="w-4 h-4 text-amber-400"></i>
+          <span>Sites &amp; Démo Live</span>
+        </button>
         <button id="btn-catalog" onclick="openCatalogModal()" class="flex items-center gap-1.5 bg-[#1F2532] hover:bg-[#2B3342] text-slate-200 border border-[#2B3342] hover:border-slate-500 text-xs font-semibold px-4 py-2 rounded-lg transition shadow-sm">
           <i data-lucide="boxes" class="w-4 h-4 text-emerald-400"></i>
           <span>Modèles Métiers</span>
@@ -1002,6 +1010,154 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- Modale Calculateur de Dimensionnement & Volumétrie IoT (Offres Numériques) -->
+  <div id="modal-sizing" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-3xl shadow-2xl overflow-hidden animate-fade-in">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="calculator" class="w-5 h-5 text-sky-400"></i>
+          <div>
+            <h3 class="text-sm font-bold text-white">Calculateur de Dimensionnement & Volumétrie IoT</h3>
+            <p class="text-[11px] text-slate-400">Estimation débit, bande passante 4G, stockage TimescaleDB & gabarit ThingsBoard pour vos mémoires techniques</p>
+          </div>
+        </div>
+        <button onclick="closeSizingModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="p-6 space-y-5 max-h-[82vh] overflow-y-auto">
+        <!-- Paramètres de projection -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 bg-[#11151D] p-4 rounded-xl border border-[#2B3342]">
+          <div>
+            <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Équipements</label>
+            <input type="number" id="sz-devices" value="10" min="1" max="100000" oninput="computeSizing()" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Points / Équip.</label>
+            <input type="number" id="sz-vars" value="8" min="1" max="500" oninput="computeSizing()" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Cadence (sec)</label>
+            <input type="number" id="sz-interval" value="10" min="0.1" step="0.5" oninput="computeSizing()" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-sky-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Protocole</label>
+            <select id="sz-protocol" onchange="computeSizing()" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2 py-1.5 text-xs text-white focus:border-sky-500 focus:outline-none">
+              <option value="mqtt">MQTT (TLS)</option>
+              <option value="http">HTTP REST</option>
+              <option value="coap">CoAP</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Rétention (ans)</label>
+            <input type="number" id="sz-retention" value="3" min="1" max="15" oninput="computeSizing()" class="w-full bg-[#1C222D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-sky-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button onclick="loadSizingFromActiveDevices()" class="inline-flex items-center gap-1.5 text-xs text-sky-400 hover:text-sky-300 font-medium">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            <span>Importer depuis mes équipements actifs</span>
+          </button>
+          <span class="text-[11px] text-slate-500">Compression TimescaleDB estimée : 5:1</span>
+        </div>
+
+        <!-- Résultats KPI -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-[#131720] border border-[#2B3342] rounded-xl p-3">
+            <div class="text-[10px] text-slate-400 uppercase">Débit Messages</div>
+            <div id="sz-res-msgs" class="text-lg font-bold text-white mt-0.5">-</div>
+            <div id="sz-res-msgs-day" class="text-[10px] text-slate-500">-</div>
+          </div>
+          <div class="bg-[#131720] border border-[#2B3342] rounded-xl p-3">
+            <div class="text-[10px] text-slate-400 uppercase">Trafic Réseau / 4G</div>
+            <div id="sz-res-traffic" class="text-lg font-bold text-sky-400 mt-0.5">-</div>
+            <div id="sz-res-bw" class="text-[10px] text-slate-500">-</div>
+          </div>
+          <div class="bg-[#131720] border border-[#2B3342] rounded-xl p-3">
+            <div class="text-[10px] text-slate-400 uppercase">Stockage Base</div>
+            <div id="sz-res-storage" class="text-lg font-bold text-emerald-400 mt-0.5">-</div>
+            <div id="sz-res-storage-raw" class="text-[10px] text-slate-500">-</div>
+          </div>
+          <div class="bg-[#131720] border border-[#2B3342] rounded-xl p-3">
+            <div class="text-[10px] text-slate-400 uppercase">Points / Jour</div>
+            <div id="sz-res-dps" class="text-lg font-bold text-amber-400 mt-0.5">-</div>
+            <div id="sz-res-total-vars" class="text-[10px] text-slate-500">-</div>
+          </div>
+        </div>
+
+        <!-- Recommandation Infrastructure ThingsBoard -->
+        <div class="bg-sky-950/25 border border-sky-500/30 rounded-xl p-4">
+          <div class="text-[11px] font-bold text-sky-400 uppercase tracking-wider mb-1">Gabarit Serveur ThingsBoard Recommandé</div>
+          <div id="sz-res-tier" class="text-sm font-bold text-white">-</div>
+          <div id="sz-res-specs" class="text-xs text-slate-300 mt-0.5">-</div>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-2 border-t border-[#2B3342]">
+          <button onclick="closeSizingModal()" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg text-xs font-medium">Fermer</button>
+          <button onclick="copySizingMarkdown()" class="flex items-center gap-1.5 bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span>Copier Fiche Technique (Markdown)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale Sites Multi-Équipements & Storyboards Soutenance Live -->
+  <div id="modal-sites-demo" class="hidden fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden animate-fade-in">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="building-2" class="w-5 h-5 text-amber-400"></i>
+          <div>
+            <h3 class="text-sm font-bold text-white">Sites Clients Express &amp; Storyboards de Soutenance</h3>
+            <p class="text-[11px] text-slate-400">Instanciez une architecture multi-équipements en 1 clic et pilotez des scénarios de démonstration live</p>
+          </div>
+        </div>
+        <button onclick="closeSitesDemoModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="p-6 space-y-6 max-h-[82vh] overflow-y-auto">
+        <!-- Section 1: Site Blueprints -->
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">1. Déployer un Site Complet (Site Blueprints)</h4>
+            <div class="flex items-center gap-2 text-xs">
+              <label class="text-slate-400">Préfixe site :</label>
+              <input type="text" id="site-prefix-input" value="site_client" class="bg-[#11151D] border border-[#2B3342] rounded-lg px-2.5 py-1 text-xs text-white w-32 focus:border-amber-500 focus:outline-none">
+              <label class="inline-flex items-center gap-1.5 text-slate-400 ml-2 cursor-pointer">
+                <input type="checkbox" id="site-clear-existing" class="rounded bg-[#11151D] border-[#2B3342]">
+                <span>Remplacer les équipements actuels</span>
+              </label>
+            </div>
+          </div>
+          <div id="site-blueprints-list" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <!-- Rempli par JS -->
+          </div>
+        </div>
+
+        <!-- Section 2: Storyboards Live -->
+        <div class="border-t border-[#2B3342] pt-5">
+          <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-3">2. Storyboards de Soutenance Live (Scénarios Minutés)</h4>
+          <div id="storyboard-live-banner" class="hidden mb-3 bg-emerald-950/30 border border-emerald-500/40 rounded-xl p-3 flex items-center justify-between">
+            <div>
+              <div id="sb-active-title" class="text-xs font-bold text-emerald-300">-</div>
+              <div id="sb-active-phase" class="text-[11px] text-slate-300 mt-0.5">-</div>
+            </div>
+            <button onclick="stopLiveStoryboard()" class="bg-red-600 hover:bg-red-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition">Arrêter</button>
+          </div>
+          <div id="storyboards-list" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <!-- Rempli par JS -->
+          </div>
+        </div>
+
+        <div class="flex justify-end pt-2 border-t border-[#2B3342]">
+          <button onclick="closeSitesDemoModal()" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg text-xs font-medium">Fermer</button>
+        </div>
+      </div>
     </div>
   </div>
 

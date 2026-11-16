@@ -3101,3 +3101,240 @@ async function deleteCustomPreset(presetId) {
   }
 }
 
+
+// =========================================================================
+// Architecture & Sizing Calculator (Pre-Sales / Bid Support)
+// =========================================================================
+
+let lastSizingMarkdown = "";
+
+function openSizingModal() {
+  const modal = document.getElementById("modal-sizing");
+  if (!modal) return;
+  modal.classList.remove("hidden");
+  if (typeof lucide !== "undefined") lucide.createIcons();
+  loadSizingFromActiveDevices();
+}
+
+function closeSizingModal() {
+  const modal = document.getElementById("modal-sizing");
+  if (modal) modal.classList.add("hidden");
+}
+
+function renderSizingResult(data) {
+  lastSizingMarkdown = data.markdown_report || "";
+  document.getElementById("sz-res-msgs").textContent = `${data.messages_per_second} msg/s`;
+  document.getElementById("sz-res-msgs-day").textContent = `${Number(data.messages_per_day).toLocaleString("fr-FR")} msg/jour`;
+  document.getElementById("sz-res-traffic").textContent = `${data.monthly_traffic_gb} Go/mois`;
+  document.getElementById("sz-res-bw").textContent = `${data.bandwidth_kbps} kbps`;
+  document.getElementById("sz-res-storage").textContent = `${data.storage_compressed_gb_total} Go`;
+  document.getElementById("sz-res-storage-raw").textContent = `${data.storage_raw_gb_total} Go bruts (${data.retention_years} ans)`;
+  document.getElementById("sz-res-dps").textContent = Number(data.data_points_per_day).toLocaleString("fr-FR");
+  document.getElementById("sz-res-total-vars").textContent = `${data.total_variables} points totaux`;
+  document.getElementById("sz-res-tier").textContent = data.recommended_tb_tier;
+  document.getElementById("sz-res-specs").textContent = data.recommended_specs;
+}
+
+async function computeSizing() {
+  const device_count = Math.max(1, parseInt(document.getElementById("sz-devices").value || "10", 10));
+  const variables_per_device = Math.max(1, parseInt(document.getElementById("sz-vars").value || "8", 10));
+  const publish_interval_sec = Math.max(0.1, parseFloat(document.getElementById("sz-interval").value || "10"));
+  const protocol = document.getElementById("sz-protocol").value || "mqtt";
+  const retention_years = Math.max(1, parseInt(document.getElementById("sz-retention").value || "3", 10));
+
+  try {
+    const res = await fetch("/api/sizing/calculate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        device_count,
+        variables_per_device,
+        publish_interval_sec,
+        protocol,
+        use_tls: protocol === "mqtt" || protocol === "http",
+        retention_years
+      })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      renderSizingResult(data);
+    }
+  } catch (err) {
+    console.error("Sizing calculation error:", err);
+  }
+}
+
+async function loadSizingFromActiveDevices() {
+  try {
+    const retention = Math.max(1, parseInt(document.getElementById("sz-retention").value || "3", 10));
+    const res = await fetch(`/api/sizing/current?scale=1&retention=${retention}`);
+    if (res.ok) {
+      const data = await res.json();
+      document.getElementById("sz-devices").value = data.device_count;
+      document.getElementById("sz-vars").value = Math.max(1, Math.round(data.total_variables / Math.max(1, data.device_count)));
+      renderSizingResult(data);
+    }
+  } catch (err) {
+    console.error("Active sizing error:", err);
+  }
+}
+
+async function copySizingMarkdown() {
+  if (!lastSizingMarkdown) return;
+  try {
+    await navigator.clipboard.writeText(lastSizingMarkdown);
+    if (typeof showToast === "function") {
+      showToast("Fiche de dimensionnement Markdown copiée !", "success");
+    } else {
+      alert("Fiche technique Markdown copiée dans le presse-papiers !");
+    }
+  } catch (err) {
+    prompt("Copiez la fiche technique Markdown ci-dessous :", lastSizingMarkdown);
+  }
+}
+
+// =========================================================================
+// Site Blueprints & Live Storyboards ("Sites & Démo Live")
+// =========================================================================
+
+let storyboardPollTimer = null;
+
+async function openSitesDemoModal() {
+  const modal = document.getElementById("modal-sites-demo");
+  if (!modal) return;
+  modal.classList.remove("hidden");
+  if (typeof lucide !== "undefined") lucide.createIcons();
+  await Promise.all([loadSiteBlueprints(), loadStoryboards(), pollStoryboardStatus()]);
+  if (!storyboardPollTimer) {
+    storyboardPollTimer = setInterval(pollStoryboardStatus, 2000);
+  }
+}
+
+function closeSitesDemoModal() {
+  const modal = document.getElementById("modal-sites-demo");
+  if (modal) modal.classList.add("hidden");
+  if (storyboardPollTimer) {
+    clearInterval(storyboardPollTimer);
+    storyboardPollTimer = null;
+  }
+}
+
+async function loadSiteBlueprints() {
+  const container = document.getElementById("site-blueprints-list");
+  if (!container) return;
+  try {
+    const res = await fetch("/api/sites/blueprints");
+    const blueprints = await res.json();
+    container.innerHTML = blueprints.map(bp => `
+      <div class="bg-[#11151D] border border-[#2B3342] rounded-xl p-4 flex flex-col justify-between">
+        <div>
+          <div class="text-[10px] font-semibold text-amber-400 uppercase">${bp.sector}</div>
+          <div class="text-xs font-bold text-white mt-0.5">${bp.name}</div>
+          <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed">${bp.description}</p>
+          <div class="flex flex-wrap gap-1 mt-2.5">
+            ${bp.equipments.map(e => `<span class="text-[10px] bg-[#1C222D] text-slate-300 px-1.5 py-0.5 rounded border border-[#2B3342]">${e.display_name}</span>`).join("")}
+          </div>
+        </div>
+        <div class="flex items-center gap-2 mt-4 pt-3 border-t border-[#2B3342]">
+          <button onclick="instantiateSite('${bp.id}')" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white text-[11px] font-semibold py-1.5 px-2.5 rounded-lg transition">Instancier Site</button>
+          <button onclick="downloadSiteDashboard('${bp.id}')" title="Télécharger Dashboard ThingsBoard Hypervision Site" class="bg-[#1F2532] hover:bg-[#2B3342] text-sky-400 border border-[#2B3342] text-[11px] font-semibold py-1.5 px-2.5 rounded-lg transition">TB JSON</button>
+        </div>
+      </div>
+    `).join("");
+  } catch (err) {
+    container.innerHTML = `<div class="text-xs text-red-400">Erreur chargement sites : ${err.message}</div>`;
+  }
+}
+
+async function instantiateSite(blueprintId) {
+  const site_prefix = (document.getElementById("site-prefix-input")?.value || "site_client").trim();
+  const clear_existing = Boolean(document.getElementById("site-clear-existing")?.checked);
+  try {
+    const res = await fetch("/api/sites/instantiate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ blueprint_id: blueprintId, site_prefix, clear_existing })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert("Erreur : " + (data.detail || "Impossible d'instancier le site"));
+      return;
+    }
+    if (typeof showToast === "function") {
+      showToast(`Site instancié : ${data.devices_created} équipements (${data.total_variables} variables)`, "success");
+    }
+    closeSitesDemoModal();
+    if (typeof refreshAll === "function") await refreshAll();
+  } catch (err) {
+    alert("Erreur réseau : " + err.message);
+  }
+}
+
+function downloadSiteDashboard(blueprintId) {
+  const site_prefix = encodeURIComponent((document.getElementById("site-prefix-input")?.value || "site_client").trim());
+  window.location.href = `/api/sites/${encodeURIComponent(blueprintId)}/dashboard?site_prefix=${site_prefix}`;
+}
+
+async function loadStoryboards() {
+  const container = document.getElementById("storyboards-list");
+  if (!container) return;
+  try {
+    const res = await fetch("/api/storyboards");
+    const boards = await res.json();
+    container.innerHTML = boards.map(sb => `
+      <div class="bg-[#11151D] border border-[#2B3342] rounded-xl p-4 flex flex-col justify-between">
+        <div>
+          <div class="text-xs font-bold text-white">${sb.name}</div>
+          <p class="text-[11px] text-slate-400 mt-1">${sb.description}</p>
+          <div class="mt-2 space-y-1">
+            ${sb.phases.map(p => `<div class="text-[10px] text-slate-300"><span class="text-emerald-400 font-semibold">Phase ${p.phase_number}:</span> ${p.title} (${p.duration_sec}s)</div>`).join("")}
+          </div>
+        </div>
+        <button onclick="startLiveStoryboard('${sb.id}')" class="mt-3 w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold py-1.5 rounded-lg transition">Lancer Démo Live (${sb.total_duration_sec}s)</button>
+      </div>
+    `).join("");
+  } catch (err) {
+    container.innerHTML = `<div class="text-xs text-red-400">Erreur chargement storyboards : ${err.message}</div>`;
+  }
+}
+
+async function startLiveStoryboard(storyboardId) {
+  try {
+    const res = await fetch("/api/storyboards/start", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ storyboard_id: storyboardId })
+    });
+    if (res.ok) await pollStoryboardStatus();
+  } catch (err) {
+    alert("Erreur lancement storyboard : " + err.message);
+  }
+}
+
+async function stopLiveStoryboard() {
+  try {
+    await fetch("/api/storyboards/stop", { method: "POST" });
+    await pollStoryboardStatus();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function pollStoryboardStatus() {
+  const banner = document.getElementById("storyboard-live-banner");
+  if (!banner) return;
+  try {
+    const res = await fetch("/api/storyboards/status");
+    if (!res.ok) return;
+    const st = await res.json();
+    if (st.running) {
+      banner.classList.remove("hidden");
+      document.getElementById("sb-active-title").textContent = `${st.storyboard_name} (${st.elapsed_sec}s)`;
+      document.getElementById("sb-active-phase").textContent = `Phase ${st.current_phase}/${st.total_phases} : ${st.phase_title} — ${st.phase_description}`;
+    } else {
+      banner.classList.add("hidden");
+    }
+  } catch (err) {
+    // Silent poll failure
+  }
+}
