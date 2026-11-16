@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-10-28 | **Version** : 2.2.1 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark, PEP 8, Google Docstrings & JSDoc | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-11-16 | **Version** : 2.3.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark, PEP 8, Google Docstrings & JSDoc | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
@@ -39,8 +39,9 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
 | `app/mqtt/` | Client Paho-MQTT v2, reconnexion, sessions TLS 1.2+ et multi-tokens | [app/mqtt/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/mqtt/MEMORY.md) |
 | `app/storage/` | Persistance atomique JSON (`data/simulator_state.json`) et bootstrapping démo | [app/storage/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/storage/MEMORY.md) |
 | `app/api/` | Routes FastAPI REST, WebSocket streaming (`/ws/live`), import CSV | [app/api/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/api/MEMORY.md) |
+| `app/static/` | Interface Web SPA Tailwind/Lucide, modales Avant-Vente, thèmes Clair/Sombre | [app/static/MEMORY.md](file:///home/pierre/Projets/iot-data-simulator/app/static/MEMORY.md) |
 | `Documentation/` | Documentation exhaustive structurée (Développeur, DevOps, Utilisateur) | [Documentation/](file:///home/pierre/Projets/iot-data-simulator/Documentation/) |
-| `Documentation/use_cases/` | Fiches techniques complètes des 32 cas d'usage métiers pré-configurés | [Documentation/use_cases/](file:///home/pierre/Projets/iot-data-simulator/Documentation/use_cases/) |
+| `Documentation/use_cases/` | Fiches techniques complètes des 35 cas d'usage métiers pré-configurés | [Documentation/use_cases/](file:///home/pierre/Projets/iot-data-simulator/Documentation/use_cases/) |
 
 ---
 
@@ -152,6 +153,12 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Fiabilisation CI/CD GitHub Actions** : Correction de l'évaluation bash pour `PORTAINER_WEBHOOK_URL` dans `.github/workflows/docker-build-push.yml`.
   - **Script de Mise à Jour Directe SSH** : [`scripts/remote_update.sh`](file:///home/pierre/Projets/iot-data-simulator/scripts/remote_update.sh) pour synchroniser le code et relancer à chaud le conteneur applicatif en 4 secondes avec validation healthcheck.
   - **Template & Documentation DevOps** : `.env.portainer.example`, section 4.1 dans `Documentation/devops/portainer_deployment.md`.
+- [x] Suite Avant-Vente & Offres Numériques (v2.3.0) :
+  - **Calculateur de Dimensionnement IoT** (`app/core/sizing_calculator.py`, `/api/sizing/*`) : débit msg/s, trafic 4G, stockage TimescaleDB, gabarit serveur ThingsBoard & export Markdown.
+  - **35 Modèles Métiers (+3 Réglementaires ROI)** : Ajout de `bldg_bacs_class_a` (Décret BACS), `infra_district_heating` (RCU) et `ind_iso50001_multifluid` (ISO 50001) avec calculs natifs IPE, CO2 et €/h.
+  - **Site Blueprints & Storyboards Live** (`app/core/site_blueprints.py`, `app/core/storyboard_engine.py`) : instanciation en 1 clic de sites multi-équipements + Dashboard Master Hypervision Site + scénarios minutés 4 phases.
+  - **Livrables Offres & Push ThingsBoard Éphémère** (`app/core/bid_deliverables.py`, `app/core/tb_provisioner.py`) : IO List CSV Excel FR (`;`), Dossier Architecture Markdown (Mermaid), et provisioning 1-clic multi-Tenant/Customer sans persistance des identifiants.
+  - **Guide Avant-Vente** : `Documentation/user/presales_and_bid_suite.md` (31/31 tests unitaires passés).
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

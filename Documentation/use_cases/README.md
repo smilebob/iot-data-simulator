@@ -1,6 +1,6 @@
 # 📚 Catalogue Exhaustif des Cas d'Usages Métiers IoT
 
-Ce dossier rassemble la documentation technique intégrale des **32 modèles d'équipements virtuels pré-configurés** intégrés dans l'application **IoT Data Simulator** (version 1.9.6).
+Ce dossier rassemble la documentation technique intégrale des **35 modèles d'équipements virtuels pré-configurés** intégrés dans l'application **IoT Data Simulator** (version 2.3.0).
 
 Chaque fiche détaille le contexte physique, l'architecture de communication, le dictionnaire de grandeurs, les schémas de payload JSON ThingsBoard (télémétries, attributs partagés et RPC descendante), les scénarios d'anomalies, le synoptique vectoriel SCADA P&ID animé et les composants de pilotage interactif (switches & formulaires).
 
@@ -11,7 +11,7 @@ Chaque fiche détaille le contexte physique, l'architecture de communication, le
 
 ---
 
-## 🏭 1. Industrie & Automatismes (8 Cas d'Usage)
+## 🏭 1. Industrie & Automatismes (9 Cas d'Usage)
 
 | ID Modèle | Équipement | Protocole | Fiche Technique | Résumé du Cas d'Usage |
 |---|---|:---:|---|---|
@@ -23,10 +23,11 @@ Chaque fiche détaille le contexte physique, l'architecture de communication, le
 | `ind_steam_boiler` | **Chaudière Industrielle Vapeur & Cogénération** | `HTTP` | [06_ind_steam_boiler.md](./01_industrie/06_ind_steam_boiler.md) | Centrale thermo-énergétique industrielle générant de la vapeur saturée pour les ... |
 | `ind_cleanroom_cta` | **Salle Blanche & CTA Stérile (ISO 5 à 8)** | `COAP` | [07_ind_cleanroom_cta.md](./01_industrie/07_ind_cleanroom_cta.md) | Environnements à contamination contrôlée (laboratoires pharmaceutiques P3/P4, sa... |
 | `ind_thermal_furnace` | **Four de Traitement Thermique Métallurgique** | `MQTT` | [08_ind_thermal_furnace.md](./01_industrie/08_ind_thermal_furnace.md) | Fours continus ou sous vide pour recuit, cémentation et stabilisation métallurgi... |
+| `ind_iso50001_multifluid` | **Comptage Multi-Fluides ISO 50001** | `MQTT` | [09_ind_iso50001_multifluid.md](./01_industrie/09_ind_iso50001_multifluid.md) | Plan de comptage énergétique multi-fluides (Élec, Gaz, Eau), coût €/h et IPE... |
 
 ---
 
-## 🏢 2. Tertiaire & Smart Building (8 Cas d'Usage)
+## 🏢 2. Tertiaire & Smart Building (9 Cas d'Usage)
 
 | ID Modèle | Équipement | Protocole | Fiche Technique | Résumé du Cas d'Usage |
 |---|---|:---:|---|---|
@@ -38,10 +39,11 @@ Chaque fiche détaille le contexte physique, l'architecture de communication, le
 | `bldg_dali_lighting` | **Gestion d'Éclairage DALI & Détection Présence** | `HTTP` | [06_bldg_dali_lighting.md](./02_tertiaire/06_bldg_dali_lighting.md) | Télégestion et régulation de l'éclairage de bureaux selon la norme DALI-2 et EN ... |
 | `bldg_thermal_meter` | **Compteur d'Énergie Thermique (Calories)** | `COAP` | [07_bldg_thermal_meter.md](./02_tertiaire/07_bldg_thermal_meter.md) | Sous-comptage calorifique MID pour audits énergétiques (bâtiments tertiaires, cl... |
 | `bldg_access_flow` | **Contrôle d'Accès & Flux Bâtiment** | `HTTP` | [08_bldg_access_flow.md](./02_tertiaire/08_bldg_access_flow.md) | Hypervision des accès, badges RFID et jauges de sécurité pour sièges sociaux et ... |
+| `bldg_bacs_class_a` | **GTB Classe A (Décret BACS / Tertiaire)** | `MQTT` | [09_bldg_bacs_class_a.md](./02_tertiaire/09_bldg_bacs_class_a.md) | Régulation CVC & DALI Classe A, IPE surfacique, CO2 et gain énergétique BACS... |
 
 ---
 
-## ⚡ 3. Infrastructures d'Énergie & Mobilité (8 Cas d'Usage)
+## ⚡ 3. Infrastructures d'Énergie & Mobilité (9 Cas d'Usage)
 
 | ID Modèle | Équipement | Protocole | Fiche Technique | Résumé du Cas d'Usage |
 |---|---|:---:|---|---|
@@ -53,6 +55,7 @@ Chaque fiche détaille le contexte physique, l'architecture de communication, le
 | `infra_bess_storage` | **Système de Stockage d'Énergie par Batteries (BESS)** | `MQTT` | [06_infra_bess_storage.md](./03_infrastructures/06_infra_bess_storage.md) | Conteneur de batteries lithium stationnaire (1 à 10 MWh) pour régulation de fréq... |
 | `infra_rail_switch` | **Aiguillage & Signalisation Ferroviaire** | `HTTP` | [07_infra_rail_switch.md](./03_infrastructures/07_infra_rail_switch.md) | Appareils de voie (ADV) pour réseaux ferrés, métros et tramways. Détection prédi... |
 | `infra_water_treatment` | **Bassin d'Aération & Traitement STEP** | `COAP` | [08_infra_water_treatment.md](./03_infrastructures/08_infra_water_treatment.md) | Station d'épuration municipale et industrielle (boues activées). Contrôle de la ... |
+| `infra_district_heating` | **Sous-Station Réseau de Chaleur (RCU)** | `MQTT` | [09_infra_district_heating.md](./03_infrastructures/09_infra_district_heating.md) | Échangeur primaire/secondaire, suivi Delta T, MWh thermiques et CO2 évité... |
 
 ---
 

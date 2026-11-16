@@ -98,7 +98,7 @@ Deux types de trames JSON sont diffusées en temps réel :
 ```
 ### Catalogue des Modèles d'Équipements Métiers (`/api/presets`)
 
-* `GET /api/presets/catalog` : Retourne l'ensemble des 32 modèles d'équipements pré-paramétrés classés par axe métier (Industrie, Tertiaire, Infrastructures, Villes & Télécoms) avec toutes leurs variables et formules mathématiques associées. Accès : Tous rôles (`viewer`, `operator`, `admin`).
+* `GET /api/presets/catalog` : Retourne l'ensemble des 35 modèles d'équipements pré-paramétrés (dont les 3 modèles réglementaires ROI : BACS, RCU, ISO 50001) + les modèles personnalisés. Accès : Tous rôles (`viewer`, `operator`, `admin`).
 * `POST /api/presets/instantiate` : Instancie un équipement métier choisi dans la simulation en créant automatiquement l'équipement et l'ensemble de ses télémétries et attributs. Accès : `operator`, `admin`.
   * Corps de requête :
     ```json
@@ -110,5 +110,24 @@ Deux types de trames JSON sont diffusées en temps réel :
       "token": "tb_device_token_xyz"
     }
     ```
+
+### 6. Suite Avant-Vente & Offres Numériques (v2.3.0)
+* **Dimensionnement IoT** :
+  * `GET /api/sizing/current?scale=1&retention=3` : Calcule le dimensionnement basé sur les équipements actifs.
+  * `POST /api/sizing/calculate` : Calcule une projection (`device_count`, `variables_per_device`, `publish_interval_sec`, `protocol`, `use_tls`, `retention_years`).
+* **Site Blueprints (Multi-Équipements)** :
+  * `GET /api/sites/blueprints` : Liste les sites complets disponibles (`site_tertiaire_bacs`, `site_usine_decarbonee`, `site_microgrid_energie`).
+  * `POST /api/sites/instantiate` : Instancie tous les équipements du site en 1 clic.
+  * `GET /api/sites/{blueprint_id}/dashboard` : Exporte le Dashboard Master Hypervision Site ThingsBoard 4.3.
+* **Storyboards de Soutenance Live** :
+  * `GET /api/storyboards` & `GET /api/storyboards/status` : Liste et état en direct des démos minutées.
+  * `POST /api/storyboards/start` & `POST /api/storyboards/stop` : Pilote un scénario en 4 phases (`operator`, `admin`).
+* **Livrables d'Offres** :
+  * `GET /api/deliverables/io-list` : Télécharge l'IO List au format CSV UTF-8 BOM (`;`) pour Excel FR.
+  * `GET /api/deliverables/dossier` : Télécharge le Dossier Technique d'Architecture Markdown.
+* **Provisioning ThingsBoard Éphémère Multi-Tenant / Client** (`operator`, `admin`) :
+  * `POST /api/tb/inspect` : Connexion éphémère, auto-détection `SYS_ADMIN` / `TENANT_ADMIN`, liste Tenants ou Customers.
+  * `POST /api/tb/tenant-context` : Bascule un compte `SYS_ADMIN` vers un Tenant cible et liste ses Customers.
+  * `POST /api/tb/provision` : Crée les Devices, récupère les Access Tokens dans le simulateur, importe les Dashboards liés aux UUIDs réels et assigne le tout au Customer.
 
 Ce flux permet le rafraîchissement sans rechargement de page, l'affichage instantané des alertes d'erreurs et la consultation de la console de logs intégrée sans avoir à ouvrir de terminal Docker.
