@@ -28,18 +28,16 @@ from app.models.device import DeviceConfig, TransportProtocol
 from app.models.variable import VariableConfig, VariableType, DataType, SimMode
 from app.core.scada_synoptics import get_scada_synoptic_html
 
-# Technical palette with high contrast against light/dark themes
+# ISA-101 High-Performance HMI desaturated palette (Color by Exception)
 PALETTE_COLORS = [
-    "#E2001A",  # Primary technical red
-    "#3B82F6",  # Bright blue
-    "#10B981",  # Emerald green
-    "#F59E0B",  # Amber warning
-    "#8B5CF6",  # Vivid purple
-    "#06B6D4",  # Cyan process
-    "#EC4899",  # Magenta
-    "#84CC16",  # Lime status
-    "#F97316",  # Industrial orange
-    "#14B8A6",  # Deep teal
+    "#334155",  # Primary dark slate
+    "#0369A1",  # Steel blue
+    "#475569",  # Medium slate
+    "#0F766E",  # Muted teal
+    "#1E40AF",  # Deep navy blue
+    "#64748B",  # Neutral steel gray
+    "#374151",  # Charcoal slate
+    "#1D4ED8",  # Cobalt slate
 ]
 
 def get_clean_var_key(variable: VariableConfig) -> str:
@@ -307,7 +305,7 @@ def generate_thingsboard_dashboard(device: DeviceConfig, variables: List[Variabl
                         "gaugeWidthScale": 0.8,
                         "gaugeColor": "#E2E8F0",
                         "colorCounter": "#0F172A",
-                        "levelColors": ["#059669", "#D97706", color]
+                        "levelColors": ["#475569", "#D97706", "#DC2626"]
                     },
                     "showTitle": True,
                     "title": var.name,

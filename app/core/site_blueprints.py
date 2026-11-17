@@ -166,10 +166,10 @@ def generate_site_hypervision_dashboard(blueprint_id: str, site_prefix: str = "s
             "datasources": [],
             "settings": {
                 "cardHtml": (
-                    f"<div style='padding:14px 20px; background:#0F172A; color:#F8FAFC; border-radius:10px; border:1px solid #1E293B; display:flex; justify-content:space-between; align-items:center;'>"
-                    f"<div><strong style='font-size:16px; color:#38BDF8;'>HYPERVISION SITE • {bp.name}</strong>"
-                    f"<div style='font-size:11px; color:#94A3B8; margin-top:2px;'>{bp.description}</div></div>"
-                    f"<div style='font-size:12px; background:#1E293B; padding:6px 12px; border-radius:6px; color:#10B981; font-weight:700;'>{len(bp.equipments)} Équipements Connectés</div>"
+                    f"<div style='padding:14px 20px; background:#E5E7EB; color:#0F172A; border-radius:8px; border:1px solid #CBD5E1; display:flex; justify-content:space-between; align-items:center;'>"
+                    f"<div><strong style='font-size:15px; color:#0F172A;'>HYPERVISION SITE • {bp.name}</strong>"
+                    f"<div style='font-size:11px; color:#475569; margin-top:2px;'>{bp.description}</div></div>"
+                    f"<div style='font-size:12px; background:#CBD5E1; padding:6px 12px; border-radius:6px; color:#1E293B; font-weight:700;'>{len(bp.equipments)} Équipements Connectés</div>"
                     f"</div>"
                 )
             },
@@ -178,8 +178,8 @@ def generate_site_hypervision_dashboard(blueprint_id: str, site_prefix: str = "s
     layout_widgets[header_id] = {"sizeX": 24, "sizeY": 2, "row": 0, "col": 0}
     current_row = 2
 
-    # 2. One Timeseries Card + Key Metrics per Equipment in the Site
-    colors = ["#38BDF8", "#10B981", "#F59E0B", "#E2001A", "#8B5CF6", "#06B6D4"]
+    # 2. One Timeseries Card + Key Metrics per Equipment in the Site (ISA-101 palette)
+    colors = ["#334155", "#0369A1", "#475569", "#0F766E", "#1E40AF", "#64748B"]
     for idx, eq in enumerate(bp.equipments):
         alias_id = str(uuid.uuid4())
         entity_aliases[alias_id] = {

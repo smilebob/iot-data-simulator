@@ -2,10 +2,10 @@
   "title": "Supervision SCADA - Surveillance Ouvrage d'Art (SHM)",
   "name": "Supervision SCADA - Surveillance Ouvrage d'Art (SHM)",
   "configuration": {
-    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Surveillance Ouvrage d'Art (SHM)' (ID: city_structure_shm). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Surveillance Ouvrage d'Art (SHM)' (ID: city_structure_shm). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: MQTT.",
     "entityAliases": {
-      "bca5c825-003e-47df-abf7-4e243d6c4153": {
-        "id": "bca5c825-003e-47df-abf7-4e243d6c4153",
+      "0e65665f-aecf-4416-b20c-aa0b584f85c2": {
+        "id": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
         "alias": "Surveillance Ouvrage d'Art (SHM)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "d75eb42e-88a7-4ec1-8912-42652cae3523": {
+      "1f4cf473-61fa-424e-875b-989f0a8209ac": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "d75eb42e-88a7-4ec1-8912-42652cae3523"
+        "id": "1f4cf473-61fa-424e-875b-989f0a8209ac"
       },
-      "f1ba999a-f9ee-44c8-9417-891f72598da0": {
+      "05014cb9-dc06-4943-a41c-7990a2b74f9a": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,13 +59,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bca5c825-003e-47df-abf7-4e243d6c4153",
+              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
                   "type": "timeseries",
                   "label": "inclinometrie_mrad",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "mrad",
                   "decimals": 2,
                   "settings": {}
@@ -74,7 +74,7 @@
                   "name": "ecartement_fissure_mm",
                   "type": "timeseries",
                   "label": "ecartement_fissure_mm",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "mm",
                   "decimals": 2,
                   "settings": {}
@@ -83,7 +83,7 @@
                   "name": "deformation_microstrain",
                   "type": "timeseries",
                   "label": "deformation_microstrain",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "µε",
                   "decimals": 2,
                   "settings": {}
@@ -92,7 +92,7 @@
                   "name": "frequence_propre_hz",
                   "type": "timeseries",
                   "label": "frequence_propre_hz",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "Hz",
                   "decimals": 2,
                   "settings": {}
@@ -101,7 +101,7 @@
                   "name": "temp_acier_beton",
                   "type": "timeseries",
                   "label": "temp_acier_beton",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {}
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SHM Ouvrage d'Art SCADA : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Tablier de Pont en Béton Précontraint / Ouvrage d'Art -->\n    <rect x=\"60\" y=\"75\" width=\"560\" height=\"45\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <text x=\"340\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TABLIER OUVRAGE D'ART / PILE BÉTON PRÉCONTRAINT (SHM)</text>\n\n    <!-- Piles de Pont -->\n    <rect x=\"140\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"490\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n\n    <!-- Inclinomètre MEMS Biaxial Haute Précision -->\n    <g transform=\"translate(165, 60)\">\n      <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-8\" y1=\"0\" x2=\"8\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-16\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">INCLINOMÈTRE</text>\n    </g>\n\n    <!-- Fissuromètre Électronique Corde Vibrante -->\n    <g transform=\"translate(340, 130)\">\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#E2001A\" stroke-width=\"3\"/>\n      <circle cx=\"-25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <circle cx=\"25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"18\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">FISSUROMÈTRE (mm)</text>\n    </g>\n\n    <!-- Jauges de Déformation (Extensométrie Fibre Optique) -->\n    <line x1=\"240\" y1=\"115\" x2=\"440\" y2=\"115\" stroke=\"#059669\" stroke-width=\"3\" stroke-dasharray=\"6,3\"/>\n    <text x=\"340\" y=\"70\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CORDE VIBRANTE / FIBRE BRAGG</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INCLINOMÉTRIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${inclinometrie_mrad:2} mrad</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCARTEMENT FISSURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ecartement_fissure_mm:3} mm</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉFORMATION (STRAIN)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${deformation_microstrain:1} µε</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FRÉQUENCE PROPRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${frequence_propre_hz:2} Hz</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SHM Ouvrage d'Art SCADA : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Tablier de Pont en Béton Précontraint / Ouvrage d'Art -->\n    <rect x=\"60\" y=\"75\" width=\"560\" height=\"45\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <text x=\"340\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TABLIER OUVRAGE D'ART / PILE BÉTON PRÉCONTRAINT (SHM)</text>\n\n    <!-- Piles de Pont -->\n    <rect x=\"140\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"490\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n\n    <!-- Inclinomètre MEMS Biaxial Haute Précision -->\n    <g transform=\"translate(165, 60)\">\n      <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-8\" y1=\"0\" x2=\"8\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-16\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">INCLINOMÈTRE</text>\n    </g>\n\n    <!-- Fissuromètre Électronique Corde Vibrante -->\n    <g transform=\"translate(340, 130)\">\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#E2001A\" stroke-width=\"3\"/>\n      <circle cx=\"-25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <circle cx=\"25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"18\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">FISSUROMÈTRE (mm)</text>\n    </g>\n\n    <!-- Jauges de Déformation (Extensométrie Fibre Optique) -->\n    <line x1=\"240\" y1=\"115\" x2=\"440\" y2=\"115\" stroke=\"#059669\" stroke-width=\"3\" stroke-dasharray=\"6,3\"/>\n    <text x=\"340\" y=\"70\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CORDE VIBRANTE / FIBRE BRAGG</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INCLINOMÉTRIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${inclinometrie_mrad:2} mrad</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCARTEMENT FISSURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ecartement_fissure_mm:3} mm</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉFORMATION (STRAIN)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${deformation_microstrain:1} µε</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FRÉQUENCE PROPRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${frequence_propre_hz:2} Hz</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SHM Ouvrage d'Art SCADA : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Tablier de Pont en Béton Précontraint / Ouvrage d'Art -->\n    <rect x=\"60\" y=\"75\" width=\"560\" height=\"45\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <text x=\"340\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TABLIER OUVRAGE D'ART / PILE BÉTON PRÉCONTRAINT (SHM)</text>\n\n    <!-- Piles de Pont -->\n    <rect x=\"140\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"490\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n\n    <!-- Inclinomètre MEMS Biaxial Haute Précision -->\n    <g transform=\"translate(165, 60)\">\n      <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-8\" y1=\"0\" x2=\"8\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-16\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">INCLINOMÈTRE</text>\n    </g>\n\n    <!-- Fissuromètre Électronique Corde Vibrante -->\n    <g transform=\"translate(340, 130)\">\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#E2001A\" stroke-width=\"3\"/>\n      <circle cx=\"-25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <circle cx=\"25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"18\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">FISSUROMÈTRE (mm)</text>\n    </g>\n\n    <!-- Jauges de Déformation (Extensométrie Fibre Optique) -->\n    <line x1=\"240\" y1=\"115\" x2=\"440\" y2=\"115\" stroke=\"#059669\" stroke-width=\"3\" stroke-dasharray=\"6,3\"/>\n    <text x=\"340\" y=\"70\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CORDE VIBRANTE / FIBRE BRAGG</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INCLINOMÉTRIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${inclinometrie_mrad:2} mrad</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCARTEMENT FISSURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ecartement_fissure_mm:3} mm</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉFORMATION (STRAIN)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${deformation_microstrain:1} µε</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FRÉQUENCE PROPRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${frequence_propre_hz:2} Hz</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SHM Ouvrage d'Art SCADA : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Tablier de Pont en Béton Précontraint / Ouvrage d'Art -->\n    <rect x=\"60\" y=\"75\" width=\"560\" height=\"45\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <text x=\"340\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TABLIER OUVRAGE D'ART / PILE BÉTON PRÉCONTRAINT (SHM)</text>\n\n    <!-- Piles de Pont -->\n    <rect x=\"140\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"490\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n\n    <!-- Inclinomètre MEMS Biaxial Haute Précision -->\n    <g transform=\"translate(165, 60)\">\n      <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-8\" y1=\"0\" x2=\"8\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-16\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">INCLINOMÈTRE</text>\n    </g>\n\n    <!-- Fissuromètre Électronique Corde Vibrante -->\n    <g transform=\"translate(340, 130)\">\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#E2001A\" stroke-width=\"3\"/>\n      <circle cx=\"-25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <circle cx=\"25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"18\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">FISSUROMÈTRE (mm)</text>\n    </g>\n\n    <!-- Jauges de Déformation (Extensométrie Fibre Optique) -->\n    <line x1=\"240\" y1=\"115\" x2=\"440\" y2=\"115\" stroke=\"#059669\" stroke-width=\"3\" stroke-dasharray=\"6,3\"/>\n    <text x=\"340\" y=\"70\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CORDE VIBRANTE / FIBRE BRAGG</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INCLINOMÉTRIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${inclinometrie_mrad:2} mrad</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCARTEMENT FISSURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ecartement_fissure_mm:3} mm</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉFORMATION (STRAIN)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${deformation_microstrain:1} µε</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FRÉQUENCE PROPRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${frequence_propre_hz:2} Hz</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "f1ba999a-f9ee-44c8-9417-891f72598da0"
+        "id": "05014cb9-dc06-4943-a41c-7990a2b74f9a"
       },
-      "57ba9cc2-010f-447d-bcef-41d1ac1fb337": {
+      "532c0f15-6c5a-4165-83e3-4d2173ea6635": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,13 +144,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bca5c825-003e-47df-abf7-4e243d6c4153",
+              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
                   "type": "timeseries",
                   "label": "Inclinaison Piles / Tablier",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "mrad",
                   "decimals": 2,
                   "settings": {}
@@ -170,9 +170,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#E2001A"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "57ba9cc2-010f-447d-bcef-41d1ac1fb337"
+        "id": "532c0f15-6c5a-4165-83e3-4d2173ea6635"
       },
-      "9c8a4876-28d3-482a-8f7c-3e774274ef7e": {
+      "4b2a0dc5-587e-4a09-9fbd-92771186a037": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,13 +204,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bca5c825-003e-47df-abf7-4e243d6c4153",
+              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
               "dataKeys": [
                 {
                   "name": "ecartement_fissure_mm",
                   "type": "timeseries",
                   "label": "Écartement Fissuromètre",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "mm",
                   "decimals": 2,
                   "settings": {}
@@ -230,9 +230,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#3B82F6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "9c8a4876-28d3-482a-8f7c-3e774274ef7e"
+        "id": "4b2a0dc5-587e-4a09-9fbd-92771186a037"
       },
-      "ddd4e9df-3b47-4edc-b147-4a417e181c7f": {
+      "c570d41b-24de-47a3-b543-38b1cf38c9c2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,13 +264,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bca5c825-003e-47df-abf7-4e243d6c4153",
+              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
               "dataKeys": [
                 {
                   "name": "deformation_microstrain",
                   "type": "timeseries",
                   "label": "Contrainte Déformation (Jauge)",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "µε",
                   "decimals": 2,
                   "settings": {}
@@ -290,9 +290,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#10B981"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "ddd4e9df-3b47-4edc-b147-4a417e181c7f"
+        "id": "c570d41b-24de-47a3-b543-38b1cf38c9c2"
       },
-      "833c9089-8629-4cd3-b2e3-f51de02e15e3": {
+      "89fa0175-7d0f-421b-9035-c41eed1f57d1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,13 +324,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bca5c825-003e-47df-abf7-4e243d6c4153",
+              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
               "dataKeys": [
                 {
                   "name": "frequence_propre_hz",
                   "type": "timeseries",
                   "label": "Fréquence Fondamentale Propre",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "Hz",
                   "decimals": 2,
                   "settings": {}
@@ -350,9 +350,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#F59E0B"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "833c9089-8629-4cd3-b2e3-f51de02e15e3"
+        "id": "89fa0175-7d0f-421b-9035-c41eed1f57d1"
       },
-      "ceddcf49-690e-4ecc-afa2-bb5e6c33f345": {
+      "f770dd1a-5d89-466b-b9d0-db50f48ab834": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,13 +384,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bca5c825-003e-47df-abf7-4e243d6c4153",
+              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
               "dataKeys": [
                 {
                   "name": "temp_acier_beton",
                   "type": "timeseries",
                   "label": "Température Interne Béton/Acier",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {}
@@ -410,9 +410,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#8B5CF6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -429,28 +429,28 @@
         },
         "row": 16,
         "col": 0,
-        "id": "ceddcf49-690e-4ecc-afa2-bb5e6c33f345"
+        "id": "f770dd1a-5d89-466b-b9d0-db50f48ab834"
       },
-      "36855510-b211-4f1d-8ea3-114da102a33c": {
+      "0d1e069c-ecdb-4850-b700-2c1504cedcee": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "basic_timeseries",
         "type": "timeseries",
-        "title": "Télémétries en Temps Réel - Surveillance Ouvrage d'Art (SHM)",
+        "title": "Real-Time Telemetry - Surveillance Ouvrage d'Art (SHM)",
         "sizeX": 24,
         "sizeY": 8,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bca5c825-003e-47df-abf7-4e243d6c4153",
+              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
                   "type": "timeseries",
                   "label": "Inclinaison Piles / Tablier (mrad)",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "mrad",
                   "decimals": 2,
                   "settings": {
@@ -464,7 +464,7 @@
                   "name": "ecartement_fissure_mm",
                   "type": "timeseries",
                   "label": "Écartement Fissuromètre (mm)",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "mm",
                   "decimals": 2,
                   "settings": {
@@ -478,7 +478,7 @@
                   "name": "deformation_microstrain",
                   "type": "timeseries",
                   "label": "Contrainte Déformation (Jauge) (µε)",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "µε",
                   "decimals": 2,
                   "settings": {
@@ -492,7 +492,7 @@
                   "name": "frequence_propre_hz",
                   "type": "timeseries",
                   "label": "Fréquence Fondamentale Propre (Hz)",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "Hz",
                   "decimals": 2,
                   "settings": {
@@ -506,7 +506,7 @@
                   "name": "temp_acier_beton",
                   "type": "timeseries",
                   "label": "Température Interne Béton/Acier (°C)",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {
@@ -557,7 +557,7 @@
             }
           },
           "showTitle": true,
-          "title": "Évolution Télémétrique (5 grandeurs)",
+          "title": "Telemetry Trends (5 variables)",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "36855510-b211-4f1d-8ea3-114da102a33c"
+        "id": "0d1e069c-ecdb-4850-b700-2c1504cedcee"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "d75eb42e-88a7-4ec1-8912-42652cae3523": {
+              "1f4cf473-61fa-424e-875b-989f0a8209ac": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "f1ba999a-f9ee-44c8-9417-891f72598da0": {
+              "05014cb9-dc06-4943-a41c-7990a2b74f9a": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "57ba9cc2-010f-447d-bcef-41d1ac1fb337": {
+              "532c0f15-6c5a-4165-83e3-4d2173ea6635": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "9c8a4876-28d3-482a-8f7c-3e774274ef7e": {
+              "4b2a0dc5-587e-4a09-9fbd-92771186a037": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "ddd4e9df-3b47-4edc-b147-4a417e181c7f": {
+              "c570d41b-24de-47a3-b543-38b1cf38c9c2": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "833c9089-8629-4cd3-b2e3-f51de02e15e3": {
+              "89fa0175-7d0f-421b-9035-c41eed1f57d1": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "ceddcf49-690e-4ecc-afa2-bb5e6c33f345": {
+              "f770dd1a-5d89-466b-b9d0-db50f48ab834": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "36855510-b211-4f1d-8ea3-114da102a33c": {
+              "0d1e069c-ecdb-4850-b700-2c1504cedcee": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

@@ -56,6 +56,11 @@ from app.core.tb_provisioner import (
     tb_switch_tenant_context,
     tb_provision_stack,
 )
+from app.core.svg_components import (
+    get_svg_components_catalog,
+    generate_thingsboard_widget_bundle,
+    generate_individual_widget_type,
+)
 from app.core.equipment_catalog import (
     get_equipment_catalog,
     EquipmentPreset,
@@ -831,6 +836,42 @@ async def tb_provision_endpoint(req: TbProvisionRequest):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"Erreur lors du provisioning ThingsBoard : {e}")
+
+
+# ---------------------------------------------------------------------------
+# ThingsBoard 4.3 Modular SCADA SVG Widget Bundle & Individual Widgets
+# ---------------------------------------------------------------------------
+
+@router.get("/widgets/thingsboard/components", dependencies=[Depends(require_role(ROLE_ANY))])
+def list_svg_scada_components():
+    """Liste les 30 composants SVG modulaires SCADA disponibles."""
+    return [c.model_dump() for c in get_svg_components_catalog()]
+
+
+@router.get("/widgets/thingsboard/bundle", dependencies=[Depends(require_role(ROLE_ANY))])
+def export_thingsboard_widget_bundle():
+    """Exporte le Widget Bundle ThingsBoard 4.3 complet (30 widgets SCADA mappables)."""
+    bundle = generate_thingsboard_widget_bundle()
+    return Response(
+        content=json.dumps(bundle, indent=2, ensure_ascii=False),
+        media_type="application/json",
+        headers={"Content-Disposition": 'attachment; filename="tb43_scada_widgets_bundle.json"'},
+    )
+
+
+@router.get("/widgets/thingsboard/{component_id}", dependencies=[Depends(require_role(ROLE_ANY))])
+def export_individual_tb_widget(component_id: str):
+    """Exporte un widget ThingsBoard 4.3 individuel pour un composant SVG spécifique."""
+    try:
+        wt = generate_individual_widget_type(component_id)
+        return Response(
+            content=json.dumps(wt, indent=2, ensure_ascii=False),
+            media_type="application/json",
+            headers={"Content-Disposition": f'attachment; filename="tb43_widget_{component_id}.json"'},
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
 
 
 

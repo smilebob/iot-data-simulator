@@ -2,10 +2,10 @@
   "title": "Supervision SCADA - Arrosage Intelligent Espaces Verts",
   "name": "Supervision SCADA - Arrosage Intelligent Espaces Verts",
   "configuration": {
-    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Arrosage Intelligent Espaces Verts' (ID: city_smart_irrigation). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Arrosage Intelligent Espaces Verts' (ID: city_smart_irrigation). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: HTTP.",
     "entityAliases": {
-      "bcd98732-5c12-4193-99b0-b5fe1141da0a": {
-        "id": "bcd98732-5c12-4193-99b0-b5fe1141da0a",
+      "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba": {
+        "id": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba",
         "alias": "Arrosage Intelligent Espaces Verts",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "42d4d4ac-14ff-40f7-ab01-66cdea43b23c": {
+      "ab5466a7-7b52-4126-8890-44e01b16e377": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "42d4d4ac-14ff-40f7-ab01-66cdea43b23c"
+        "id": "ab5466a7-7b52-4126-8890-44e01b16e377"
       },
-      "11d8baff-523b-4f6c-8699-78296c574b88": {
+      "b1fcaafa-696e-4d89-a0ab-f3953bbb5699": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,13 +59,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bcd98732-5c12-4193-99b0-b5fe1141da0a",
+              "entityAliasId": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba",
               "dataKeys": [
                 {
                   "name": "tension_matricielle_sol_cbar",
                   "type": "timeseries",
                   "label": "tension_matricielle_sol_cbar",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "cbar",
                   "decimals": 2,
                   "settings": {}
@@ -74,7 +74,7 @@
                   "name": "temp_sol_10cm",
                   "type": "timeseries",
                   "label": "temp_sol_10cm",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {}
@@ -83,7 +83,7 @@
                   "name": "debit_arrosage_lmin",
                   "type": "timeseries",
                   "label": "debit_arrosage_lmin",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "l/min",
                   "decimals": 2,
                   "settings": {}
@@ -92,7 +92,7 @@
                   "name": "conso_eau_session_m3",
                   "type": "timeseries",
                   "label": "conso_eau_session_m3",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "m³",
                   "decimals": 2,
                   "settings": {}
@@ -101,7 +101,7 @@
                   "name": "vanne_secteur_ouverte",
                   "type": "attribute",
                   "label": "vanne_secteur_ouverte",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "",
                   "decimals": 0,
                   "settings": {}
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Smart Irrigation SCADA : Arrosage Intelligent Espaces Verts\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Sol Végétalisé / Gazon urbain -->\n    <rect x=\"60\" y=\"80\" width=\"560\" height=\"140\" rx=\"8\" fill=\"#DCFCE7\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"80\" y=\"105\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">ESPACE VERT / GESTION RAISONNÉE DE L'EAU (TENSIOMÉTRIE)</text>\n\n    <!-- Sonde Tensiométrique dans le Sol -->\n    <g transform=\"translate(180, 110)\">\n      <rect x=\"-8\" y=\"0\" width=\"16\" height=\"70\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE SOL -10cm</text>\n    </g>\n\n    <!-- Électrovanne d'Arrosage Motorisée 24V -->\n    <g transform=\"translate(360, 130)\">\n      <polygon points=\"-20,-15 0,0 -20,15\" fill=\"#059669\"/>\n      <polygon points=\"20,-15 0,0 20,15\" fill=\"#059669\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"-22\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">ÉLECTROVANNE 24V</text>\n    </g>\n\n    <!-- Tuyère d'Arrosage Déployée -->\n    <g transform=\"translate(510, 110)\">\n      <line x1=\"0\" y1=\"30\" x2=\"0\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n      <path d=\"M 0 0 Q -25 -20 -40 -10 M 0 0 Q 25 -20 40 -10\" stroke=\"#0284C7\" stroke-width=\"2\" stroke-dasharray=\"3,2\"/>\n      <text x=\"0\" y=\"-15\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">TUYÈRE</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION MATRICIELLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_matricielle_sol_cbar:1} cbar</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DU SOL</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_sol_10cm:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT D'ARROSAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_arrosage_lmin:1} L/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CONSO EAU SESSION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${conso_eau_session_m3:2} m³</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Smart Irrigation SCADA : Arrosage Intelligent Espaces Verts\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Sol Végétalisé / Gazon urbain -->\n    <rect x=\"60\" y=\"80\" width=\"560\" height=\"140\" rx=\"8\" fill=\"#DCFCE7\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"80\" y=\"105\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">ESPACE VERT / GESTION RAISONNÉE DE L'EAU (TENSIOMÉTRIE)</text>\n\n    <!-- Sonde Tensiométrique dans le Sol -->\n    <g transform=\"translate(180, 110)\">\n      <rect x=\"-8\" y=\"0\" width=\"16\" height=\"70\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE SOL -10cm</text>\n    </g>\n\n    <!-- Électrovanne d'Arrosage Motorisée 24V -->\n    <g transform=\"translate(360, 130)\">\n      <polygon points=\"-20,-15 0,0 -20,15\" fill=\"#059669\"/>\n      <polygon points=\"20,-15 0,0 20,15\" fill=\"#059669\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"-22\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">ÉLECTROVANNE 24V</text>\n    </g>\n\n    <!-- Tuyère d'Arrosage Déployée -->\n    <g transform=\"translate(510, 110)\">\n      <line x1=\"0\" y1=\"30\" x2=\"0\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n      <path d=\"M 0 0 Q -25 -20 -40 -10 M 0 0 Q 25 -20 40 -10\" stroke=\"#0284C7\" stroke-width=\"2\" stroke-dasharray=\"3,2\"/>\n      <text x=\"0\" y=\"-15\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">TUYÈRE</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION MATRICIELLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_matricielle_sol_cbar:1} cbar</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DU SOL</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_sol_10cm:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT D'ARROSAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_arrosage_lmin:1} L/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CONSO EAU SESSION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${conso_eau_session_m3:2} m³</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Smart Irrigation SCADA : Arrosage Intelligent Espaces Verts\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Sol Végétalisé / Gazon urbain -->\n    <rect x=\"60\" y=\"80\" width=\"560\" height=\"140\" rx=\"8\" fill=\"#DCFCE7\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"80\" y=\"105\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">ESPACE VERT / GESTION RAISONNÉE DE L'EAU (TENSIOMÉTRIE)</text>\n\n    <!-- Sonde Tensiométrique dans le Sol -->\n    <g transform=\"translate(180, 110)\">\n      <rect x=\"-8\" y=\"0\" width=\"16\" height=\"70\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE SOL -10cm</text>\n    </g>\n\n    <!-- Électrovanne d'Arrosage Motorisée 24V -->\n    <g transform=\"translate(360, 130)\">\n      <polygon points=\"-20,-15 0,0 -20,15\" fill=\"#059669\"/>\n      <polygon points=\"20,-15 0,0 20,15\" fill=\"#059669\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"-22\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">ÉLECTROVANNE 24V</text>\n    </g>\n\n    <!-- Tuyère d'Arrosage Déployée -->\n    <g transform=\"translate(510, 110)\">\n      <line x1=\"0\" y1=\"30\" x2=\"0\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n      <path d=\"M 0 0 Q -25 -20 -40 -10 M 0 0 Q 25 -20 40 -10\" stroke=\"#0284C7\" stroke-width=\"2\" stroke-dasharray=\"3,2\"/>\n      <text x=\"0\" y=\"-15\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">TUYÈRE</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION MATRICIELLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_matricielle_sol_cbar:1} cbar</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DU SOL</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_sol_10cm:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT D'ARROSAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_arrosage_lmin:1} L/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CONSO EAU SESSION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${conso_eau_session_m3:2} m³</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Smart Irrigation SCADA : Arrosage Intelligent Espaces Verts\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Sol Végétalisé / Gazon urbain -->\n    <rect x=\"60\" y=\"80\" width=\"560\" height=\"140\" rx=\"8\" fill=\"#DCFCE7\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"80\" y=\"105\" fill=\"#065F46\" font-size=\"11\" font-weight=\"bold\">ESPACE VERT / GESTION RAISONNÉE DE L'EAU (TENSIOMÉTRIE)</text>\n\n    <!-- Sonde Tensiométrique dans le Sol -->\n    <g transform=\"translate(180, 110)\">\n      <rect x=\"-8\" y=\"0\" width=\"16\" height=\"70\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-8\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">SONDE SOL -10cm</text>\n    </g>\n\n    <!-- Électrovanne d'Arrosage Motorisée 24V -->\n    <g transform=\"translate(360, 130)\">\n      <polygon points=\"-20,-15 0,0 -20,15\" fill=\"#059669\"/>\n      <polygon points=\"20,-15 0,0 20,15\" fill=\"#059669\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"6\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"-22\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">ÉLECTROVANNE 24V</text>\n    </g>\n\n    <!-- Tuyère d'Arrosage Déployée -->\n    <g transform=\"translate(510, 110)\">\n      <line x1=\"0\" y1=\"30\" x2=\"0\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n      <path d=\"M 0 0 Q -25 -20 -40 -10 M 0 0 Q 25 -20 40 -10\" stroke=\"#0284C7\" stroke-width=\"2\" stroke-dasharray=\"3,2\"/>\n      <text x=\"0\" y=\"-15\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">TUYÈRE</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TENSION MATRICIELLE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tension_matricielle_sol_cbar:1} cbar</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. DU SOL</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_sol_10cm:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉBIT D'ARROSAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_arrosage_lmin:1} L/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CONSO EAU SESSION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${conso_eau_session_m3:2} m³</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "11d8baff-523b-4f6c-8699-78296c574b88"
+        "id": "b1fcaafa-696e-4d89-a0ab-f3953bbb5699"
       },
-      "d40013e4-3dc1-4d80-a75f-2f1aa3d3dace": {
+      "63919a97-1f9c-4903-9856-b3225ab6cf87": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,13 +144,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bcd98732-5c12-4193-99b0-b5fe1141da0a",
+              "entityAliasId": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba",
               "dataKeys": [
                 {
                   "name": "tension_matricielle_sol_cbar",
                   "type": "timeseries",
                   "label": "Tension Hydrique Sol (Tensiomètre)",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "cbar",
                   "decimals": 2,
                   "settings": {}
@@ -170,9 +170,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#E2001A"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "d40013e4-3dc1-4d80-a75f-2f1aa3d3dace"
+        "id": "63919a97-1f9c-4903-9856-b3225ab6cf87"
       },
-      "a9d7223c-793f-4add-bbd0-cc3ebe5a5a95": {
+      "c87e1322-3ef5-4560-af31-dfaf6cd9eb2f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,13 +204,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bcd98732-5c12-4193-99b0-b5fe1141da0a",
+              "entityAliasId": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba",
               "dataKeys": [
                 {
                   "name": "temp_sol_10cm",
                   "type": "timeseries",
                   "label": "Température Sol (-10cm)",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {}
@@ -230,9 +230,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#3B82F6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "a9d7223c-793f-4add-bbd0-cc3ebe5a5a95"
+        "id": "c87e1322-3ef5-4560-af31-dfaf6cd9eb2f"
       },
-      "54b6bf94-693d-4a71-b020-36c30e68f32c": {
+      "de01988a-f21a-4679-bbb4-4f3af3deac93": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,13 +264,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bcd98732-5c12-4193-99b0-b5fe1141da0a",
+              "entityAliasId": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba",
               "dataKeys": [
                 {
                   "name": "debit_arrosage_lmin",
                   "type": "timeseries",
                   "label": "Débit Injecté Électrovanne",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "l/min",
                   "decimals": 2,
                   "settings": {}
@@ -290,9 +290,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#10B981"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "54b6bf94-693d-4a71-b020-36c30e68f32c"
+        "id": "de01988a-f21a-4679-bbb4-4f3af3deac93"
       },
-      "7e496c73-9882-43f8-8a47-cc313ebd7117": {
+      "cb318d23-af30-4a2d-95cd-381a471f0201": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,13 +324,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bcd98732-5c12-4193-99b0-b5fe1141da0a",
+              "entityAliasId": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba",
               "dataKeys": [
                 {
                   "name": "conso_eau_session_m3",
                   "type": "timeseries",
                   "label": "Volume Arrosage Session",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "m³",
                   "decimals": 2,
                   "settings": {}
@@ -350,9 +350,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#F59E0B"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -369,28 +369,28 @@
         },
         "row": 11,
         "col": 18,
-        "id": "7e496c73-9882-43f8-8a47-cc313ebd7117"
+        "id": "cb318d23-af30-4a2d-95cd-381a471f0201"
       },
-      "3bc01077-1789-47e3-a978-00fceef30d06": {
+      "60f1c3da-0f21-4d78-9c81-9709a5426f3b": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "basic_timeseries",
         "type": "timeseries",
-        "title": "Télémétries en Temps Réel - Arrosage Intelligent Espaces Verts",
+        "title": "Real-Time Telemetry - Arrosage Intelligent Espaces Verts",
         "sizeX": 16,
         "sizeY": 8,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bcd98732-5c12-4193-99b0-b5fe1141da0a",
+              "entityAliasId": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba",
               "dataKeys": [
                 {
                   "name": "tension_matricielle_sol_cbar",
                   "type": "timeseries",
                   "label": "Tension Hydrique Sol (Tensiomètre) (cbar)",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "cbar",
                   "decimals": 2,
                   "settings": {
@@ -404,7 +404,7 @@
                   "name": "temp_sol_10cm",
                   "type": "timeseries",
                   "label": "Température Sol (-10cm) (°C)",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {
@@ -418,7 +418,7 @@
                   "name": "debit_arrosage_lmin",
                   "type": "timeseries",
                   "label": "Débit Injecté Électrovanne (l/min)",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "l/min",
                   "decimals": 2,
                   "settings": {
@@ -432,7 +432,7 @@
                   "name": "conso_eau_session_m3",
                   "type": "timeseries",
                   "label": "Volume Arrosage Session (m³)",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "m³",
                   "decimals": 2,
                   "settings": {
@@ -483,7 +483,7 @@
             }
           },
           "showTitle": true,
-          "title": "Évolution Télémétrique (4 grandeurs)",
+          "title": "Telemetry Trends (4 variables)",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -496,9 +496,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "3bc01077-1789-47e3-a978-00fceef30d06"
+        "id": "60f1c3da-0f21-4d78-9c81-9709a5426f3b"
       },
-      "8975b0d6-1a10-4dee-a2f6-55236f7cd574": {
+      "8a5780fb-81e6-4beb-9939-cf092171b42e": {
         "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -522,7 +522,7 @@
           },
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "bcd98732-5c12-4193-99b0-b5fe1141da0a"
+            "entityAliasId": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba"
           },
           "datasources": [],
           "settings": {
@@ -579,13 +579,13 @@
             },
             "labelColor": "#0F172A",
             "showIcon": false,
-            "switchColorOn": "#10B981",
+            "switchColorOn": "#475569",
             "switchColorOff": "#94A3B8",
             "tumblerColorOn": "#FFFFFF",
             "tumblerColorOff": "#FFFFFF",
             "showOnLabel": true,
             "onLabel": "ON",
-            "onLabelColor": "#10B981",
+            "onLabelColor": "#475569",
             "showOffLabel": true,
             "offLabel": "OFF",
             "offLabelColor": "#64748B",
@@ -600,22 +600,22 @@
         },
         "row": 16,
         "col": 16,
-        "id": "8975b0d6-1a10-4dee-a2f6-55236f7cd574"
+        "id": "8a5780fb-81e6-4beb-9939-cf092171b42e"
       },
-      "bf279d8d-a00c-4772-a4d8-07b899c22f80": {
+      "5b220666-b533-4bc8-9eb2-5e3ceb2c1c9e": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "entities_table",
         "type": "latest",
-        "title": "Attributs & États Opérationnels",
+        "title": "Attributes & Operational States",
         "sizeX": 8,
         "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "bcd98732-5c12-4193-99b0-b5fe1141da0a",
+              "entityAliasId": "5e3db8d4-2ee1-427d-a5ef-0c57f58e4fba",
               "dataKeys": [
                 {
                   "name": "vanne_secteur_ouverte",
@@ -628,13 +628,13 @@
             }
           ],
           "settings": {
-            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "entitiesTableWidgetTitle": "Attributes & Operational States",
             "enableSearch": false,
             "displayPagination": false,
             "defaultPageSize": 10
           },
           "showTitle": true,
-          "title": "Attributs & États Opérationnels",
+          "title": "Attributes & Operational States",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -647,7 +647,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "bf279d8d-a00c-4772-a4d8-07b899c22f80"
+        "id": "5b220666-b533-4bc8-9eb2-5e3ceb2c1c9e"
       }
     },
     "states": {
@@ -657,55 +657,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "42d4d4ac-14ff-40f7-ab01-66cdea43b23c": {
+              "ab5466a7-7b52-4126-8890-44e01b16e377": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "11d8baff-523b-4f6c-8699-78296c574b88": {
+              "b1fcaafa-696e-4d89-a0ab-f3953bbb5699": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "d40013e4-3dc1-4d80-a75f-2f1aa3d3dace": {
+              "63919a97-1f9c-4903-9856-b3225ab6cf87": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "a9d7223c-793f-4add-bbd0-cc3ebe5a5a95": {
+              "c87e1322-3ef5-4560-af31-dfaf6cd9eb2f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "54b6bf94-693d-4a71-b020-36c30e68f32c": {
+              "de01988a-f21a-4679-bbb4-4f3af3deac93": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "7e496c73-9882-43f8-8a47-cc313ebd7117": {
+              "cb318d23-af30-4a2d-95cd-381a471f0201": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "3bc01077-1789-47e3-a978-00fceef30d06": {
+              "60f1c3da-0f21-4d78-9c81-9709a5426f3b": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "8975b0d6-1a10-4dee-a2f6-55236f7cd574": {
+              "8a5780fb-81e6-4beb-9939-cf092171b42e": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "bf279d8d-a00c-4772-a4d8-07b899c22f80": {
+              "5b220666-b533-4bc8-9eb2-5e3ceb2c1c9e": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

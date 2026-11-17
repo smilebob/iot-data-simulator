@@ -2,10 +2,10 @@
   "title": "Supervision SCADA - Gestion d'Éclairage DALI & Présence",
   "name": "Supervision SCADA - Gestion d'Éclairage DALI & Présence",
   "configuration": {
-    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Gestion d'Éclairage DALI & Présence' (ID: bldg_dali_lighting). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Gestion d'Éclairage DALI & Présence' (ID: bldg_dali_lighting). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: HTTP.",
     "entityAliases": {
-      "959c30a3-c276-431f-81cc-4557f3f23829": {
-        "id": "959c30a3-c276-431f-81cc-4557f3f23829",
+      "507054aa-cebe-4ae9-bb91-0e578c3971f9": {
+        "id": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
         "alias": "Gestion d'Éclairage DALI & Présence",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "0dd5ba98-e16a-49fe-aff0-34e39b1a84fe": {
+      "a3e73029-c426-430a-9fa7-853c4b076451": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "0dd5ba98-e16a-49fe-aff0-34e39b1a84fe"
+        "id": "a3e73029-c426-430a-9fa7-853c4b076451"
       },
-      "987e710d-a044-4e46-9530-9380a383cd4d": {
+      "dd73410a-f381-4d1d-b85c-538fa66392b3": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,13 +59,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "959c30a3-c276-431f-81cc-4557f3f23829",
+              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
                   "type": "timeseries",
                   "label": "eclairement_lux",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "lux",
                   "decimals": 2,
                   "settings": {}
@@ -74,7 +74,7 @@
                   "name": "taux_presence_zone_pct",
                   "type": "timeseries",
                   "label": "taux_presence_zone_pct",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "%",
                   "decimals": 0,
                   "settings": {}
@@ -83,7 +83,7 @@
                   "name": "gradation_dali_pct",
                   "type": "timeseries",
                   "label": "gradation_dali_pct",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "%",
                   "decimals": 0,
                   "settings": {}
@@ -92,7 +92,7 @@
                   "name": "puissance_eclairage_w",
                   "type": "timeseries",
                   "label": "puissance_eclairage_w",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "W",
                   "decimals": 2,
                   "settings": {}
@@ -101,7 +101,7 @@
                   "name": "heures_fonctionnement_h",
                   "type": "timeseries",
                   "label": "heures_fonctionnement_h",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "h",
                   "decimals": 2,
                   "settings": {}
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Éclairage DALI SCADA : Gestion d'Éclairage DALI & Présence\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Contrôleur DALI Passerelle IP/BACnet -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">GESTION ÉCLAIRAGE ARCHITECTURAL DALI-2 / DÉTECTION PIR MULTI-CAPTEURS</text>\n\n    <!-- Bus 2 Fils DALI -->\n    <line x1=\"90\" y1=\"120\" x2=\"580\" y2=\"120\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"8,4\"/>\n    <text x=\"90\" y=\"110\" fill=\"#D97706\" font-size=\"9\" font-weight=\"bold\">BUS DALI-2 (64 ADRESSES)</text>\n\n    <!-- Luminaires LED DALI Adressables -->\n    <g transform=\"translate(180, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #01</text>\n    </g>\n    <g transform=\"translate(340, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #02</text>\n    </g>\n\n    <!-- Capteur PIR Présence + Luxmètre -->\n    <g transform=\"translate(500, 120)\">\n      <circle cx=\"0\" cy=\"0\" r=\"22\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"4\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PIR + LUX</text>\n      <text x=\"0\" y=\"-28\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DÉTECTEUR</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCLAIREMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${eclairement_lux:0} lux</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX PRÉSENCE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_presence_zone_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">GRADATION DALI</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${gradation_dali_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ÉCLAIRAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_eclairage_w:0} W</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Éclairage DALI SCADA : Gestion d'Éclairage DALI & Présence\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Contrôleur DALI Passerelle IP/BACnet -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">GESTION ÉCLAIRAGE ARCHITECTURAL DALI-2 / DÉTECTION PIR MULTI-CAPTEURS</text>\n\n    <!-- Bus 2 Fils DALI -->\n    <line x1=\"90\" y1=\"120\" x2=\"580\" y2=\"120\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"8,4\"/>\n    <text x=\"90\" y=\"110\" fill=\"#D97706\" font-size=\"9\" font-weight=\"bold\">BUS DALI-2 (64 ADRESSES)</text>\n\n    <!-- Luminaires LED DALI Adressables -->\n    <g transform=\"translate(180, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #01</text>\n    </g>\n    <g transform=\"translate(340, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #02</text>\n    </g>\n\n    <!-- Capteur PIR Présence + Luxmètre -->\n    <g transform=\"translate(500, 120)\">\n      <circle cx=\"0\" cy=\"0\" r=\"22\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"4\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PIR + LUX</text>\n      <text x=\"0\" y=\"-28\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DÉTECTEUR</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCLAIREMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${eclairement_lux:0} lux</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX PRÉSENCE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_presence_zone_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">GRADATION DALI</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${gradation_dali_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ÉCLAIRAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_eclairage_w:0} W</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Éclairage DALI SCADA : Gestion d'Éclairage DALI & Présence\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Contrôleur DALI Passerelle IP/BACnet -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">GESTION ÉCLAIRAGE ARCHITECTURAL DALI-2 / DÉTECTION PIR MULTI-CAPTEURS</text>\n\n    <!-- Bus 2 Fils DALI -->\n    <line x1=\"90\" y1=\"120\" x2=\"580\" y2=\"120\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"8,4\"/>\n    <text x=\"90\" y=\"110\" fill=\"#D97706\" font-size=\"9\" font-weight=\"bold\">BUS DALI-2 (64 ADRESSES)</text>\n\n    <!-- Luminaires LED DALI Adressables -->\n    <g transform=\"translate(180, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #01</text>\n    </g>\n    <g transform=\"translate(340, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #02</text>\n    </g>\n\n    <!-- Capteur PIR Présence + Luxmètre -->\n    <g transform=\"translate(500, 120)\">\n      <circle cx=\"0\" cy=\"0\" r=\"22\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"4\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PIR + LUX</text>\n      <text x=\"0\" y=\"-28\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DÉTECTEUR</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCLAIREMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${eclairement_lux:0} lux</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX PRÉSENCE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_presence_zone_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">GRADATION DALI</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${gradation_dali_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ÉCLAIRAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_eclairage_w:0} W</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Éclairage DALI SCADA : Gestion d'Éclairage DALI & Présence\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Contrôleur DALI Passerelle IP/BACnet -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">GESTION ÉCLAIRAGE ARCHITECTURAL DALI-2 / DÉTECTION PIR MULTI-CAPTEURS</text>\n\n    <!-- Bus 2 Fils DALI -->\n    <line x1=\"90\" y1=\"120\" x2=\"580\" y2=\"120\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"8,4\"/>\n    <text x=\"90\" y=\"110\" fill=\"#D97706\" font-size=\"9\" font-weight=\"bold\">BUS DALI-2 (64 ADRESSES)</text>\n\n    <!-- Luminaires LED DALI Adressables -->\n    <g transform=\"translate(180, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #01</text>\n    </g>\n    <g transform=\"translate(340, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #02</text>\n    </g>\n\n    <!-- Capteur PIR Présence + Luxmètre -->\n    <g transform=\"translate(500, 120)\">\n      <circle cx=\"0\" cy=\"0\" r=\"22\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"4\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PIR + LUX</text>\n      <text x=\"0\" y=\"-28\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DÉTECTEUR</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCLAIREMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${eclairement_lux:0} lux</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX PRÉSENCE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_presence_zone_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">GRADATION DALI</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${gradation_dali_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ÉCLAIRAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_eclairage_w:0} W</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "987e710d-a044-4e46-9530-9380a383cd4d"
+        "id": "dd73410a-f381-4d1d-b85c-538fa66392b3"
       },
-      "0c83bd5a-f7b9-45ab-aa3a-6600bbbd0dbe": {
+      "fc48e9aa-dc1e-468c-a354-b67af541f9ba": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,13 +144,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "959c30a3-c276-431f-81cc-4557f3f23829",
+              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
                   "type": "timeseries",
                   "label": "Éclairement Mesuré Plan Travail",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "lux",
                   "decimals": 2,
                   "settings": {}
@@ -170,9 +170,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#E2001A"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "0c83bd5a-f7b9-45ab-aa3a-6600bbbd0dbe"
+        "id": "fc48e9aa-dc1e-468c-a354-b67af541f9ba"
       },
-      "22d12486-4900-4043-8c50-3838216235b4": {
+      "41ddb28f-6a2f-406d-957a-17e9ab514e22": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,13 +204,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "959c30a3-c276-431f-81cc-4557f3f23829",
+              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
               "dataKeys": [
                 {
                   "name": "taux_presence_zone_pct",
                   "type": "timeseries",
                   "label": "Taux d'Occupation de Zone",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "%",
                   "decimals": 0,
                   "settings": {}
@@ -230,9 +230,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#3B82F6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "22d12486-4900-4043-8c50-3838216235b4"
+        "id": "41ddb28f-6a2f-406d-957a-17e9ab514e22"
       },
-      "299a37cd-011d-49a8-aa0a-4318f9687a30": {
+      "037a27c5-76b3-40e8-be57-2d5d35713751": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,13 +264,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "959c30a3-c276-431f-81cc-4557f3f23829",
+              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
               "dataKeys": [
                 {
                   "name": "gradation_dali_pct",
                   "type": "timeseries",
                   "label": "Gradation Sortie Ballast DALI",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "%",
                   "decimals": 0,
                   "settings": {}
@@ -290,9 +290,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#10B981"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "299a37cd-011d-49a8-aa0a-4318f9687a30"
+        "id": "037a27c5-76b3-40e8-be57-2d5d35713751"
       },
-      "3cb0d9a7-4412-4cc3-9d82-527b2d559824": {
+      "4e541083-b464-4dc7-84e1-84121863722b": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,13 +324,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "959c30a3-c276-431f-81cc-4557f3f23829",
+              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_w",
                   "type": "timeseries",
                   "label": "Puissance Électrique Circuit",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "W",
                   "decimals": 2,
                   "settings": {}
@@ -350,9 +350,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#F59E0B"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "3cb0d9a7-4412-4cc3-9d82-527b2d559824"
+        "id": "4e541083-b464-4dc7-84e1-84121863722b"
       },
-      "4b860c1f-f8e2-423c-bd71-2b090d231b35": {
+      "83233548-259e-49ee-8f7d-b494d43e39a3": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,13 +384,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "959c30a3-c276-431f-81cc-4557f3f23829",
+              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
               "dataKeys": [
                 {
                   "name": "heures_fonctionnement_h",
                   "type": "timeseries",
                   "label": "Heures d'Allumage Cumulées",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "h",
                   "decimals": 2,
                   "settings": {}
@@ -410,9 +410,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#8B5CF6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -429,28 +429,28 @@
         },
         "row": 16,
         "col": 0,
-        "id": "4b860c1f-f8e2-423c-bd71-2b090d231b35"
+        "id": "83233548-259e-49ee-8f7d-b494d43e39a3"
       },
-      "1bd00952-8f9f-43bb-8ff2-fc71677fcf49": {
+      "ff63f2ba-9dac-4710-8fa0-2737a57ffa84": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "basic_timeseries",
         "type": "timeseries",
-        "title": "Télémétries en Temps Réel - Gestion d'Éclairage DALI & Présence",
+        "title": "Real-Time Telemetry - Gestion d'Éclairage DALI & Présence",
         "sizeX": 24,
         "sizeY": 8,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "959c30a3-c276-431f-81cc-4557f3f23829",
+              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
                   "type": "timeseries",
                   "label": "Éclairement Mesuré Plan Travail (lux)",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "lux",
                   "decimals": 2,
                   "settings": {
@@ -464,7 +464,7 @@
                   "name": "taux_presence_zone_pct",
                   "type": "timeseries",
                   "label": "Taux d'Occupation de Zone (%)",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "%",
                   "decimals": 0,
                   "settings": {
@@ -478,7 +478,7 @@
                   "name": "gradation_dali_pct",
                   "type": "timeseries",
                   "label": "Gradation Sortie Ballast DALI (%)",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "%",
                   "decimals": 0,
                   "settings": {
@@ -492,7 +492,7 @@
                   "name": "puissance_eclairage_w",
                   "type": "timeseries",
                   "label": "Puissance Électrique Circuit (W)",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "W",
                   "decimals": 2,
                   "settings": {
@@ -506,7 +506,7 @@
                   "name": "heures_fonctionnement_h",
                   "type": "timeseries",
                   "label": "Heures d'Allumage Cumulées (h)",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "h",
                   "decimals": 2,
                   "settings": {
@@ -557,7 +557,7 @@
             }
           },
           "showTitle": true,
-          "title": "Évolution Télémétrique (5 grandeurs)",
+          "title": "Telemetry Trends (5 variables)",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "1bd00952-8f9f-43bb-8ff2-fc71677fcf49"
+        "id": "ff63f2ba-9dac-4710-8fa0-2737a57ffa84"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "0dd5ba98-e16a-49fe-aff0-34e39b1a84fe": {
+              "a3e73029-c426-430a-9fa7-853c4b076451": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "987e710d-a044-4e46-9530-9380a383cd4d": {
+              "dd73410a-f381-4d1d-b85c-538fa66392b3": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "0c83bd5a-f7b9-45ab-aa3a-6600bbbd0dbe": {
+              "fc48e9aa-dc1e-468c-a354-b67af541f9ba": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "22d12486-4900-4043-8c50-3838216235b4": {
+              "41ddb28f-6a2f-406d-957a-17e9ab514e22": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "299a37cd-011d-49a8-aa0a-4318f9687a30": {
+              "037a27c5-76b3-40e8-be57-2d5d35713751": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "3cb0d9a7-4412-4cc3-9d82-527b2d559824": {
+              "4e541083-b464-4dc7-84e1-84121863722b": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "4b860c1f-f8e2-423c-bd71-2b090d231b35": {
+              "83233548-259e-49ee-8f7d-b494d43e39a3": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "1bd00952-8f9f-43bb-8ff2-fc71677fcf49": {
+              "ff63f2ba-9dac-4710-8fa0-2737a57ffa84": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

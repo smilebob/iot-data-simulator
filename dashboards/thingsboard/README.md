@@ -43,6 +43,7 @@ Vous pouvez également télécharger un tableau de bord contenant **directement 
 | **Chaudière Industrielle Vapeur** | [`ind_steam_boiler.json`](01_industrie/ind_steam_boiler.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
 | **Salle Blanche & CTA Stérile (ISO)** | [`ind_cleanroom_cta.json`](01_industrie/ind_cleanroom_cta.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
 | **Four de Traitement Thermique** | [`ind_thermal_furnace.json`](01_industrie/ind_thermal_furnace.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
+| **Comptage Multi-Fluides ISO 50001** | [`ind_iso50001_multifluid.json`](01_industrie/ind_iso50001_multifluid.json) | 8 grandeurs (Jauges + Télémétries + Attributs) |
 
 ### Bâtiments Intelligents & Tertiaire (`02_tertiaire/`)
 
@@ -56,6 +57,7 @@ Vous pouvez également télécharger un tableau de bord contenant **directement 
 | **Gestion d'Éclairage DALI & Présence** | [`bldg_dali_lighting.json`](02_tertiaire/bldg_dali_lighting.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
 | **Compteur d'Énergie Thermique (Calories)** | [`bldg_thermal_meter.json`](02_tertiaire/bldg_thermal_meter.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
 | **Contrôle d'Accès & Flux Bâtiment** | [`bldg_access_flow.json`](02_tertiaire/bldg_access_flow.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
+| **GTB Classe A (Décret BACS / Tertiaire)** | [`bldg_bacs_class_a.json`](02_tertiaire/bldg_bacs_class_a.json) | 9 grandeurs (Jauges + Télémétries + Attributs) |
 
 ### Infrastructures Énergétiques & Réseaux (`03_infrastructures/`)
 
@@ -69,6 +71,7 @@ Vous pouvez également télécharger un tableau de bord contenant **directement 
 | **Système Stockage Batteries (BESS)** | [`infra_bess_storage.json`](03_infrastructures/infra_bess_storage.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
 | **Aiguillage & Signalisation Ferroviaire** | [`infra_rail_switch.json`](03_infrastructures/infra_rail_switch.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
 | **Bassin d'Aération & Traitement STEP** | [`infra_water_treatment.json`](03_infrastructures/infra_water_treatment.json) | 5 grandeurs (Jauges + Télémétries + Attributs) |
+| **Sous-Station Réseau de Chaleur (RCU)** | [`infra_district_heating.json`](03_infrastructures/infra_district_heating.json) | 8 grandeurs (Jauges + Télémétries + Attributs) |
 
 ### Villes Intelligentes & Télécoms (`04_villes_telecoms/`)
 

@@ -2,10 +2,10 @@
   "title": "Supervision SCADA - Broche d'Usinage & Moteur",
   "name": "Supervision SCADA - Broche d'Usinage & Moteur",
   "configuration": {
-    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Broche d'Usinage & Moteur' (ID: ind_spindle). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Broche d'Usinage & Moteur' (ID: ind_spindle). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: MQTT.",
     "entityAliases": {
-      "f3ff613a-764a-4aa5-98e1-709cbd4823f9": {
-        "id": "f3ff613a-764a-4aa5-98e1-709cbd4823f9",
+      "e3e3b1b8-b893-4359-b08c-95d433503858": {
+        "id": "e3e3b1b8-b893-4359-b08c-95d433503858",
         "alias": "Broche d'Usinage & Moteur",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "a2d2214c-3407-40d8-a527-9e8b928beb0d": {
+      "704fe183-6f27-484d-b1b4-0c1f8bb9a842": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "a2d2214c-3407-40d8-a527-9e8b928beb0d"
+        "id": "704fe183-6f27-484d-b1b4-0c1f8bb9a842"
       },
-      "732809c1-6471-4a1b-9245-af146173cf67": {
+      "db98496b-586e-43ee-a270-c148bdb1c0ef": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,13 +59,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f3ff613a-764a-4aa5-98e1-709cbd4823f9",
+              "entityAliasId": "e3e3b1b8-b893-4359-b08c-95d433503858",
               "dataKeys": [
                 {
                   "name": "vitesse_rotation",
                   "type": "timeseries",
                   "label": "vitesse_rotation",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "rpm",
                   "decimals": 0,
                   "settings": {}
@@ -74,7 +74,7 @@
                   "name": "vibration_rms",
                   "type": "timeseries",
                   "label": "vibration_rms",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "mm/s",
                   "decimals": 2,
                   "settings": {}
@@ -83,7 +83,7 @@
                   "name": "temp_palier",
                   "type": "timeseries",
                   "label": "temp_palier",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {}
@@ -92,7 +92,7 @@
                   "name": "courant_moteur",
                   "type": "timeseries",
                   "label": "courant_moteur",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "A",
                   "decimals": 2,
                   "settings": {}
@@ -101,8 +101,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Broche CNC SCADA : Broche d'Usinage & Moteur\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bâti Machine Outil -->\n    <rect x=\"50\" y=\"40\" width=\"620\" height=\"180\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <text x=\"70\" y=\"65\" fill=\"#334155\" font-size=\"11\" font-weight=\"bold\">CARTOUCHE DE BROCHE D'USINAGE (HSK-63)</text>\n\n    <!-- Corps de broche & Chemise de refroidissement -->\n    <rect x=\"90\" y=\"80\" width=\"360\" height=\"100\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"90\" y=\"85\" width=\"360\" height=\"15\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <rect x=\"90\" y=\"160\" width=\"360\" height=\"15\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <text x=\"270\" y=\"97\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\">CHEMISE DE REFROIDISSEMENT LIQUIDE</text>\n\n    <!-- Roulements Céramique Avant / Arrière -->\n    <g transform=\"translate(140, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"24\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PALIER AVANT</text>\n    </g>\n    <g transform=\"translate(390, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"24\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PALIER ARRIÈRE</text>\n    </g>\n\n    <!-- Arbre Tournant Rotor -->\n    <rect x=\"70\" y=\"123\" width=\"450\" height=\"14\" fill=\"#475569\" stroke=\"#0F172A\" stroke-width=\"1.5\"/>\n    <!-- Outil Fraise HSK -->\n    <polygon points=\"50,115 70,123 70,137 50,145\" fill=\"#E2001A\"/>\n    <text x=\"60\" y=\"165\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">OUTIL HSK</text>\n\n    <!-- Moteur Synchrone Intégré -->\n    <rect x=\"200\" y=\"105\" width=\"140\" height=\"50\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n    <text x=\"270\" y=\"134\" fill=\"#0F172A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">STATOR 24kW</text>\n\n    <!-- Capteur Accéléromètre Piézoélectrique (Vibrations) -->\n    <g transform=\"translate(140, 65)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"15\" fill=\"#E2001A\" rx=\"2\"/>\n      <line x1=\"0\" y1=\"15\" x2=\"0\" y2=\"30\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-4\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">VIBRATIONS RMS</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(710, 35)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE BROCHE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_rotation:0} RPM</text>\n    </g>\n    \n    <g transform=\"translate(710, 85)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VIBRATION PALIER</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vibration_rms:2} mm/s</text>\n    </g>\n    \n    <g transform=\"translate(710, 135)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. PALIER</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_palier:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(710, 185)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT STATOR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_moteur:1} A</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Broche CNC SCADA : Broche d'Usinage & Moteur\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bâti Machine Outil -->\n    <rect x=\"50\" y=\"40\" width=\"620\" height=\"180\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <text x=\"70\" y=\"65\" fill=\"#334155\" font-size=\"11\" font-weight=\"bold\">CARTOUCHE DE BROCHE D'USINAGE (HSK-63)</text>\n\n    <!-- Corps de broche & Chemise de refroidissement -->\n    <rect x=\"90\" y=\"80\" width=\"360\" height=\"100\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"90\" y=\"85\" width=\"360\" height=\"15\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <rect x=\"90\" y=\"160\" width=\"360\" height=\"15\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <text x=\"270\" y=\"97\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\">CHEMISE DE REFROIDISSEMENT LIQUIDE</text>\n\n    <!-- Roulements Céramique Avant / Arrière -->\n    <g transform=\"translate(140, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"24\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PALIER AVANT</text>\n    </g>\n    <g transform=\"translate(390, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"24\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PALIER ARRIÈRE</text>\n    </g>\n\n    <!-- Arbre Tournant Rotor -->\n    <rect x=\"70\" y=\"123\" width=\"450\" height=\"14\" fill=\"#475569\" stroke=\"#0F172A\" stroke-width=\"1.5\"/>\n    <!-- Outil Fraise HSK -->\n    <polygon points=\"50,115 70,123 70,137 50,145\" fill=\"#E2001A\"/>\n    <text x=\"60\" y=\"165\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">OUTIL HSK</text>\n\n    <!-- Moteur Synchrone Intégré -->\n    <rect x=\"200\" y=\"105\" width=\"140\" height=\"50\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n    <text x=\"270\" y=\"134\" fill=\"#0F172A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">STATOR 24kW</text>\n\n    <!-- Capteur Accéléromètre Piézoélectrique (Vibrations) -->\n    <g transform=\"translate(140, 65)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"15\" fill=\"#E2001A\" rx=\"2\"/>\n      <line x1=\"0\" y1=\"15\" x2=\"0\" y2=\"30\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-4\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">VIBRATIONS RMS</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(710, 35)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE BROCHE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_rotation:0} RPM</text>\n    </g>\n    \n    <g transform=\"translate(710, 85)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VIBRATION PALIER</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vibration_rms:2} mm/s</text>\n    </g>\n    \n    <g transform=\"translate(710, 135)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. PALIER</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_palier:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(710, 185)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT STATOR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_moteur:1} A</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Broche CNC SCADA : Broche d'Usinage & Moteur\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bâti Machine Outil -->\n    <rect x=\"50\" y=\"40\" width=\"620\" height=\"180\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <text x=\"70\" y=\"65\" fill=\"#334155\" font-size=\"11\" font-weight=\"bold\">CARTOUCHE DE BROCHE D'USINAGE (HSK-63)</text>\n\n    <!-- Corps de broche & Chemise de refroidissement -->\n    <rect x=\"90\" y=\"80\" width=\"360\" height=\"100\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"90\" y=\"85\" width=\"360\" height=\"15\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <rect x=\"90\" y=\"160\" width=\"360\" height=\"15\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <text x=\"270\" y=\"97\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\">CHEMISE DE REFROIDISSEMENT LIQUIDE</text>\n\n    <!-- Roulements Céramique Avant / Arrière -->\n    <g transform=\"translate(140, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"24\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PALIER AVANT</text>\n    </g>\n    <g transform=\"translate(390, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"24\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PALIER ARRIÈRE</text>\n    </g>\n\n    <!-- Arbre Tournant Rotor -->\n    <rect x=\"70\" y=\"123\" width=\"450\" height=\"14\" fill=\"#475569\" stroke=\"#0F172A\" stroke-width=\"1.5\"/>\n    <!-- Outil Fraise HSK -->\n    <polygon points=\"50,115 70,123 70,137 50,145\" fill=\"#E2001A\"/>\n    <text x=\"60\" y=\"165\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">OUTIL HSK</text>\n\n    <!-- Moteur Synchrone Intégré -->\n    <rect x=\"200\" y=\"105\" width=\"140\" height=\"50\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n    <text x=\"270\" y=\"134\" fill=\"#0F172A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">STATOR 24kW</text>\n\n    <!-- Capteur Accéléromètre Piézoélectrique (Vibrations) -->\n    <g transform=\"translate(140, 65)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"15\" fill=\"#E2001A\" rx=\"2\"/>\n      <line x1=\"0\" y1=\"15\" x2=\"0\" y2=\"30\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-4\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">VIBRATIONS RMS</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(710, 35)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE BROCHE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_rotation:0} RPM</text>\n    </g>\n    \n    <g transform=\"translate(710, 85)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VIBRATION PALIER</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vibration_rms:2} mm/s</text>\n    </g>\n    \n    <g transform=\"translate(710, 135)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. PALIER</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_palier:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(710, 185)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT STATOR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_moteur:1} A</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Broche CNC SCADA : Broche d'Usinage & Moteur\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Bâti Machine Outil -->\n    <rect x=\"50\" y=\"40\" width=\"620\" height=\"180\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#334155\" stroke-width=\"2\"/>\n    <text x=\"70\" y=\"65\" fill=\"#334155\" font-size=\"11\" font-weight=\"bold\">CARTOUCHE DE BROCHE D'USINAGE (HSK-63)</text>\n\n    <!-- Corps de broche & Chemise de refroidissement -->\n    <rect x=\"90\" y=\"80\" width=\"360\" height=\"100\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"90\" y=\"85\" width=\"360\" height=\"15\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <rect x=\"90\" y=\"160\" width=\"360\" height=\"15\" fill=\"#BAE6FD\" opacity=\"0.6\"/>\n    <text x=\"270\" y=\"97\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\">CHEMISE DE REFROIDISSEMENT LIQUIDE</text>\n\n    <!-- Roulements Céramique Avant / Arrière -->\n    <g transform=\"translate(140, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"24\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PALIER AVANT</text>\n    </g>\n    <g transform=\"translate(390, 130)\">\n      <circle cx=\"0\" cy=\"0\" r=\"24\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PALIER ARRIÈRE</text>\n    </g>\n\n    <!-- Arbre Tournant Rotor -->\n    <rect x=\"70\" y=\"123\" width=\"450\" height=\"14\" fill=\"#475569\" stroke=\"#0F172A\" stroke-width=\"1.5\"/>\n    <!-- Outil Fraise HSK -->\n    <polygon points=\"50,115 70,123 70,137 50,145\" fill=\"#E2001A\"/>\n    <text x=\"60\" y=\"165\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">OUTIL HSK</text>\n\n    <!-- Moteur Synchrone Intégré -->\n    <rect x=\"200\" y=\"105\" width=\"140\" height=\"50\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n    <text x=\"270\" y=\"134\" fill=\"#0F172A\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">STATOR 24kW</text>\n\n    <!-- Capteur Accéléromètre Piézoélectrique (Vibrations) -->\n    <g transform=\"translate(140, 65)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"15\" fill=\"#E2001A\" rx=\"2\"/>\n      <line x1=\"0\" y1=\"15\" x2=\"0\" y2=\"30\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-4\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">VIBRATIONS RMS</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(710, 35)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE BROCHE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_rotation:0} RPM</text>\n    </g>\n    \n    <g transform=\"translate(710, 85)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VIBRATION PALIER</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vibration_rms:2} mm/s</text>\n    </g>\n    \n    <g transform=\"translate(710, 135)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. PALIER</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_palier:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(710, 185)\">\n      <rect width=\"155\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT STATOR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_moteur:1} A</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "732809c1-6471-4a1b-9245-af146173cf67"
+        "id": "db98496b-586e-43ee-a270-c148bdb1c0ef"
       },
-      "9037f748-839e-4473-b9c8-e4a963e71d99": {
+      "9561dbf1-57b7-4224-8a58-c295c4a4423d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,13 +135,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f3ff613a-764a-4aa5-98e1-709cbd4823f9",
+              "entityAliasId": "e3e3b1b8-b893-4359-b08c-95d433503858",
               "dataKeys": [
                 {
                   "name": "vitesse_rotation",
                   "type": "timeseries",
                   "label": "Vitesse de Rotation",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "rpm",
                   "decimals": 0,
                   "settings": {}
@@ -161,9 +161,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#E2001A"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "9037f748-839e-4473-b9c8-e4a963e71d99"
+        "id": "9561dbf1-57b7-4224-8a58-c295c4a4423d"
       },
-      "1a40d1bc-4563-44f9-a8d2-06ca3b540c7b": {
+      "bd939e53-668b-4ee9-857b-71b11f992f93": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,13 +195,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f3ff613a-764a-4aa5-98e1-709cbd4823f9",
+              "entityAliasId": "e3e3b1b8-b893-4359-b08c-95d433503858",
               "dataKeys": [
                 {
                   "name": "vibration_rms",
                   "type": "timeseries",
                   "label": "Vibration Globale RMS",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "mm/s",
                   "decimals": 2,
                   "settings": {}
@@ -221,9 +221,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#3B82F6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "1a40d1bc-4563-44f9-a8d2-06ca3b540c7b"
+        "id": "bd939e53-668b-4ee9-857b-71b11f992f93"
       },
-      "b753b589-b516-4eb2-aedb-8f0a2e563bac": {
+      "97359d59-dd4b-4dc5-b66e-d65c8eb390a0": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,13 +255,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f3ff613a-764a-4aa5-98e1-709cbd4823f9",
+              "entityAliasId": "e3e3b1b8-b893-4359-b08c-95d433503858",
               "dataKeys": [
                 {
                   "name": "temp_palier",
                   "type": "timeseries",
                   "label": "Température Palier Roulement",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {}
@@ -281,9 +281,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#10B981"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "b753b589-b516-4eb2-aedb-8f0a2e563bac"
+        "id": "97359d59-dd4b-4dc5-b66e-d65c8eb390a0"
       },
-      "ac86dd90-3e90-4943-a11b-98d32658f67f": {
+      "dd124783-cec7-489c-bdb2-bcf2884188cf": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -315,13 +315,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f3ff613a-764a-4aa5-98e1-709cbd4823f9",
+              "entityAliasId": "e3e3b1b8-b893-4359-b08c-95d433503858",
               "dataKeys": [
                 {
                   "name": "courant_moteur",
                   "type": "timeseries",
                   "label": "Courant Phase Moteur",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "A",
                   "decimals": 2,
                   "settings": {}
@@ -341,9 +341,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#F59E0B"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -360,28 +360,28 @@
         },
         "row": 11,
         "col": 18,
-        "id": "ac86dd90-3e90-4943-a11b-98d32658f67f"
+        "id": "dd124783-cec7-489c-bdb2-bcf2884188cf"
       },
-      "bd305472-4e2a-4a19-bcc9-75cd996e306b": {
+      "5c32a68b-a540-4120-bcc1-392b8d49f776": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "basic_timeseries",
         "type": "timeseries",
-        "title": "Télémétries en Temps Réel - Broche d'Usinage & Moteur",
+        "title": "Real-Time Telemetry - Broche d'Usinage & Moteur",
         "sizeX": 24,
         "sizeY": 8,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "f3ff613a-764a-4aa5-98e1-709cbd4823f9",
+              "entityAliasId": "e3e3b1b8-b893-4359-b08c-95d433503858",
               "dataKeys": [
                 {
                   "name": "vitesse_rotation",
                   "type": "timeseries",
                   "label": "Vitesse de Rotation (rpm)",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "rpm",
                   "decimals": 0,
                   "settings": {
@@ -395,7 +395,7 @@
                   "name": "vibration_rms",
                   "type": "timeseries",
                   "label": "Vibration Globale RMS (mm/s)",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "mm/s",
                   "decimals": 2,
                   "settings": {
@@ -409,7 +409,7 @@
                   "name": "temp_palier",
                   "type": "timeseries",
                   "label": "Température Palier Roulement (°C)",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {
@@ -423,7 +423,7 @@
                   "name": "courant_moteur",
                   "type": "timeseries",
                   "label": "Courant Phase Moteur (A)",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "A",
                   "decimals": 2,
                   "settings": {
@@ -474,7 +474,7 @@
             }
           },
           "showTitle": true,
-          "title": "Évolution Télémétrique (4 grandeurs)",
+          "title": "Telemetry Trends (4 variables)",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -487,7 +487,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "bd305472-4e2a-4a19-bcc9-75cd996e306b"
+        "id": "5c32a68b-a540-4120-bcc1-392b8d49f776"
       }
     },
     "states": {
@@ -497,43 +497,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "a2d2214c-3407-40d8-a527-9e8b928beb0d": {
+              "704fe183-6f27-484d-b1b4-0c1f8bb9a842": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "732809c1-6471-4a1b-9245-af146173cf67": {
+              "db98496b-586e-43ee-a270-c148bdb1c0ef": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "9037f748-839e-4473-b9c8-e4a963e71d99": {
+              "9561dbf1-57b7-4224-8a58-c295c4a4423d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "1a40d1bc-4563-44f9-a8d2-06ca3b540c7b": {
+              "bd939e53-668b-4ee9-857b-71b11f992f93": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "b753b589-b516-4eb2-aedb-8f0a2e563bac": {
+              "97359d59-dd4b-4dc5-b66e-d65c8eb390a0": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "ac86dd90-3e90-4943-a11b-98d32658f67f": {
+              "dd124783-cec7-489c-bdb2-bcf2884188cf": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "bd305472-4e2a-4a19-bcc9-75cd996e306b": {
+              "5c32a68b-a540-4120-bcc1-392b8d49f776": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

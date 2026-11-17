@@ -2,10 +2,10 @@
   "title": "Supervision SCADA - Contrôle d'Accès & Flux Bâtiment",
   "name": "Supervision SCADA - Contrôle d'Accès & Flux Bâtiment",
   "configuration": {
-    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Contrôle d'Accès & Flux Bâtiment' (ID: bldg_access_flow). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Contrôle d'Accès & Flux Bâtiment' (ID: bldg_access_flow). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: HTTP.",
     "entityAliases": {
-      "d3fd4c36-7dbc-4440-9d99-968bff68ac06": {
-        "id": "d3fd4c36-7dbc-4440-9d99-968bff68ac06",
+      "2a815550-86e8-4445-aed6-b980b5f49b68": {
+        "id": "2a815550-86e8-4445-aed6-b980b5f49b68",
         "alias": "Contrôle d'Accès & Flux Bâtiment",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "cf0f46d1-865f-433a-a9b9-d184e323309a": {
+      "c768e53e-e069-417a-9c17-6ef5c3c68d32": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "cf0f46d1-865f-433a-a9b9-d184e323309a"
+        "id": "c768e53e-e069-417a-9c17-6ef5c3c68d32"
       },
-      "0bb069e0-9735-466b-8adb-af7d218c8e25": {
+      "63005899-f7f0-436a-87a9-b00217d023b7": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,13 +59,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d3fd4c36-7dbc-4440-9d99-968bff68ac06",
+              "entityAliasId": "2a815550-86e8-4445-aed6-b980b5f49b68",
               "dataKeys": [
                 {
                   "name": "flux_entrees_min",
                   "type": "timeseries",
                   "label": "flux_entrees_min",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "pers/min",
                   "decimals": 0,
                   "settings": {}
@@ -74,7 +74,7 @@
                   "name": "flux_sorties_min",
                   "type": "timeseries",
                   "label": "flux_sorties_min",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "pers/min",
                   "decimals": 0,
                   "settings": {}
@@ -83,7 +83,7 @@
                   "name": "jauge_occupation_pct",
                   "type": "timeseries",
                   "label": "jauge_occupation_pct",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "%",
                   "decimals": 0,
                   "settings": {}
@@ -92,7 +92,7 @@
                   "name": "tentatives_refusees_h",
                   "type": "timeseries",
                   "label": "tentatives_refusees_h",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "rejets/h",
                   "decimals": 0,
                   "settings": {}
@@ -101,7 +101,7 @@
                   "name": "issues_secours_verrouillees",
                   "type": "attribute",
                   "label": "issues_secours_verrouillees",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "",
                   "decimals": 0,
                   "settings": {}
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Contrôle Accès SCADA : Contrôle d'Accès & Flux Bâtiment\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Hall d'Accueil & Couloir Sécurisé -->\n    <rect x=\"60\" y=\"40\" width=\"560\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">CONTRÔLE D'ACCÈS DU BÂTIMENT & COMPTAGE DES FLUX TEMPS RÉEL</text>\n\n    <!-- Tourniquet / Portillon d'Accès Rapide (Speed Gates) -->\n    <g transform=\"translate(180, 130)\">\n      <rect x=\"-20\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <line x1=\"20\" y1=\"0\" x2=\"60\" y2=\"0\" stroke=\"#059669\" stroke-width=\"4\"/>\n      <rect x=\"60\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"-55\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">VOIE 1 (ENTRÉE)</text>\n    </g>\n\n    <g transform=\"translate(360, 130)\">\n      <rect x=\"-20\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"20\" y1=\"0\" x2=\"60\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n      <rect x=\"60\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"-55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">VOIE 2 (SORTIE)</text>\n    </g>\n\n    <!-- Capteur Vidéo Stéréoscopique 3D de Flux -->\n    <g transform=\"translate(530, 90)\">\n      <rect x=\"-25\" y=\"-15\" width=\"50\" height=\"30\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <circle cx=\"-12\" cy=\"0\" r=\"5\" fill=\"#D97706\"/>\n      <circle cx=\"12\" cy=\"0\" r=\"5\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CAMÉRA 3D FLUX</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FLUX ENTRÉES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${flux_entrees_min:0} pers/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FLUX SORTIES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${flux_sorties_min:0} pers/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">JAUGE OCCUPATION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${jauge_occupation_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">REFUS D'ACCÈS</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tentatives_refusees_h:0} /heure</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Contrôle Accès SCADA : Contrôle d'Accès & Flux Bâtiment\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Hall d'Accueil & Couloir Sécurisé -->\n    <rect x=\"60\" y=\"40\" width=\"560\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">CONTRÔLE D'ACCÈS DU BÂTIMENT & COMPTAGE DES FLUX TEMPS RÉEL</text>\n\n    <!-- Tourniquet / Portillon d'Accès Rapide (Speed Gates) -->\n    <g transform=\"translate(180, 130)\">\n      <rect x=\"-20\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <line x1=\"20\" y1=\"0\" x2=\"60\" y2=\"0\" stroke=\"#059669\" stroke-width=\"4\"/>\n      <rect x=\"60\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"-55\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">VOIE 1 (ENTRÉE)</text>\n    </g>\n\n    <g transform=\"translate(360, 130)\">\n      <rect x=\"-20\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"20\" y1=\"0\" x2=\"60\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n      <rect x=\"60\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"-55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">VOIE 2 (SORTIE)</text>\n    </g>\n\n    <!-- Capteur Vidéo Stéréoscopique 3D de Flux -->\n    <g transform=\"translate(530, 90)\">\n      <rect x=\"-25\" y=\"-15\" width=\"50\" height=\"30\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <circle cx=\"-12\" cy=\"0\" r=\"5\" fill=\"#D97706\"/>\n      <circle cx=\"12\" cy=\"0\" r=\"5\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CAMÉRA 3D FLUX</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FLUX ENTRÉES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${flux_entrees_min:0} pers/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FLUX SORTIES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${flux_sorties_min:0} pers/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">JAUGE OCCUPATION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${jauge_occupation_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">REFUS D'ACCÈS</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tentatives_refusees_h:0} /heure</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Contrôle Accès SCADA : Contrôle d'Accès & Flux Bâtiment\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Hall d'Accueil & Couloir Sécurisé -->\n    <rect x=\"60\" y=\"40\" width=\"560\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">CONTRÔLE D'ACCÈS DU BÂTIMENT & COMPTAGE DES FLUX TEMPS RÉEL</text>\n\n    <!-- Tourniquet / Portillon d'Accès Rapide (Speed Gates) -->\n    <g transform=\"translate(180, 130)\">\n      <rect x=\"-20\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <line x1=\"20\" y1=\"0\" x2=\"60\" y2=\"0\" stroke=\"#059669\" stroke-width=\"4\"/>\n      <rect x=\"60\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"-55\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">VOIE 1 (ENTRÉE)</text>\n    </g>\n\n    <g transform=\"translate(360, 130)\">\n      <rect x=\"-20\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"20\" y1=\"0\" x2=\"60\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n      <rect x=\"60\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"-55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">VOIE 2 (SORTIE)</text>\n    </g>\n\n    <!-- Capteur Vidéo Stéréoscopique 3D de Flux -->\n    <g transform=\"translate(530, 90)\">\n      <rect x=\"-25\" y=\"-15\" width=\"50\" height=\"30\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <circle cx=\"-12\" cy=\"0\" r=\"5\" fill=\"#D97706\"/>\n      <circle cx=\"12\" cy=\"0\" r=\"5\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CAMÉRA 3D FLUX</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FLUX ENTRÉES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${flux_entrees_min:0} pers/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FLUX SORTIES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${flux_sorties_min:0} pers/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">JAUGE OCCUPATION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${jauge_occupation_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">REFUS D'ACCÈS</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tentatives_refusees_h:0} /heure</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Contrôle Accès SCADA : Contrôle d'Accès & Flux Bâtiment\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Hall d'Accueil & Couloir Sécurisé -->\n    <rect x=\"60\" y=\"40\" width=\"560\" height=\"180\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">CONTRÔLE D'ACCÈS DU BÂTIMENT & COMPTAGE DES FLUX TEMPS RÉEL</text>\n\n    <!-- Tourniquet / Portillon d'Accès Rapide (Speed Gates) -->\n    <g transform=\"translate(180, 130)\">\n      <rect x=\"-20\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <line x1=\"20\" y1=\"0\" x2=\"60\" y2=\"0\" stroke=\"#059669\" stroke-width=\"4\"/>\n      <rect x=\"60\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"-55\" fill=\"#059669\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">VOIE 1 (ENTRÉE)</text>\n    </g>\n\n    <g transform=\"translate(360, 130)\">\n      <rect x=\"-20\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"20\" y1=\"0\" x2=\"60\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"4\"/>\n      <rect x=\"60\" y=\"-45\" width=\"40\" height=\"90\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"-55\" fill=\"#0284C7\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">VOIE 2 (SORTIE)</text>\n    </g>\n\n    <!-- Capteur Vidéo Stéréoscopique 3D de Flux -->\n    <g transform=\"translate(530, 90)\">\n      <rect x=\"-25\" y=\"-15\" width=\"50\" height=\"30\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <circle cx=\"-12\" cy=\"0\" r=\"5\" fill=\"#D97706\"/>\n      <circle cx=\"12\" cy=\"0\" r=\"5\" fill=\"#D97706\"/>\n      <text x=\"0\" y=\"32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CAMÉRA 3D FLUX</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FLUX ENTRÉES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${flux_entrees_min:0} pers/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FLUX SORTIES</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${flux_sorties_min:0} pers/min</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">JAUGE OCCUPATION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${jauge_occupation_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#DC2626\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">REFUS D'ACCÈS</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${tentatives_refusees_h:0} /heure</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "0bb069e0-9735-466b-8adb-af7d218c8e25"
+        "id": "63005899-f7f0-436a-87a9-b00217d023b7"
       },
-      "034f551b-4be1-4835-98bf-6628dcba0c0c": {
+      "1961f5d5-61a1-4534-b9fd-ae8fc2d4f541": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,13 +144,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d3fd4c36-7dbc-4440-9d99-968bff68ac06",
+              "entityAliasId": "2a815550-86e8-4445-aed6-b980b5f49b68",
               "dataKeys": [
                 {
                   "name": "flux_entrees_min",
                   "type": "timeseries",
                   "label": "Cadence Entrées Visiteurs/Employés",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "pers/min",
                   "decimals": 0,
                   "settings": {}
@@ -170,9 +170,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#E2001A"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "034f551b-4be1-4835-98bf-6628dcba0c0c"
+        "id": "1961f5d5-61a1-4534-b9fd-ae8fc2d4f541"
       },
-      "1f94e488-ae2b-4cf4-96d5-6a6abc6a0c38": {
+      "2873a57c-a679-4c5c-9eaa-3cf2135cb2c2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,13 +204,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d3fd4c36-7dbc-4440-9d99-968bff68ac06",
+              "entityAliasId": "2a815550-86e8-4445-aed6-b980b5f49b68",
               "dataKeys": [
                 {
                   "name": "flux_sorties_min",
                   "type": "timeseries",
                   "label": "Cadence Sorties Tourniquets",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "pers/min",
                   "decimals": 0,
                   "settings": {}
@@ -230,9 +230,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#3B82F6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "1f94e488-ae2b-4cf4-96d5-6a6abc6a0c38"
+        "id": "2873a57c-a679-4c5c-9eaa-3cf2135cb2c2"
       },
-      "1459e640-5c1a-421c-88aa-11e45fc672a0": {
+      "2bb17cf7-757c-4ebe-8a89-6e92b55d09ef": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,13 +264,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d3fd4c36-7dbc-4440-9d99-968bff68ac06",
+              "entityAliasId": "2a815550-86e8-4445-aed6-b980b5f49b68",
               "dataKeys": [
                 {
                   "name": "jauge_occupation_pct",
                   "type": "timeseries",
                   "label": "Jauge d'Occupation Globale Site",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "%",
                   "decimals": 0,
                   "settings": {}
@@ -290,9 +290,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#10B981"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "1459e640-5c1a-421c-88aa-11e45fc672a0"
+        "id": "2bb17cf7-757c-4ebe-8a89-6e92b55d09ef"
       },
-      "a303ed30-775a-4616-80a5-f378b0447a86": {
+      "37584e6e-6bd2-46d8-924e-6745fe39d340": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,13 +324,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d3fd4c36-7dbc-4440-9d99-968bff68ac06",
+              "entityAliasId": "2a815550-86e8-4445-aed6-b980b5f49b68",
               "dataKeys": [
                 {
                   "name": "tentatives_refusees_h",
                   "type": "timeseries",
                   "label": "Tentatives Accès Refusées",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "rejets/h",
                   "decimals": 0,
                   "settings": {}
@@ -350,9 +350,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#F59E0B"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -369,28 +369,28 @@
         },
         "row": 11,
         "col": 18,
-        "id": "a303ed30-775a-4616-80a5-f378b0447a86"
+        "id": "37584e6e-6bd2-46d8-924e-6745fe39d340"
       },
-      "aeaedb76-a9de-46c5-af9f-76197830adbd": {
+      "dc3e06d4-3f5e-4dca-bee3-89b51e948a6d": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "basic_timeseries",
         "type": "timeseries",
-        "title": "Télémétries en Temps Réel - Contrôle d'Accès & Flux Bâtiment",
+        "title": "Real-Time Telemetry - Contrôle d'Accès & Flux Bâtiment",
         "sizeX": 16,
         "sizeY": 8,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d3fd4c36-7dbc-4440-9d99-968bff68ac06",
+              "entityAliasId": "2a815550-86e8-4445-aed6-b980b5f49b68",
               "dataKeys": [
                 {
                   "name": "flux_entrees_min",
                   "type": "timeseries",
                   "label": "Cadence Entrées Visiteurs/Employés (pers/min)",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "pers/min",
                   "decimals": 0,
                   "settings": {
@@ -404,7 +404,7 @@
                   "name": "flux_sorties_min",
                   "type": "timeseries",
                   "label": "Cadence Sorties Tourniquets (pers/min)",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "pers/min",
                   "decimals": 0,
                   "settings": {
@@ -418,7 +418,7 @@
                   "name": "jauge_occupation_pct",
                   "type": "timeseries",
                   "label": "Jauge d'Occupation Globale Site (%)",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "%",
                   "decimals": 0,
                   "settings": {
@@ -432,7 +432,7 @@
                   "name": "tentatives_refusees_h",
                   "type": "timeseries",
                   "label": "Tentatives Accès Refusées (rejets/h)",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "rejets/h",
                   "decimals": 0,
                   "settings": {
@@ -483,7 +483,7 @@
             }
           },
           "showTitle": true,
-          "title": "Évolution Télémétrique (4 grandeurs)",
+          "title": "Telemetry Trends (4 variables)",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -496,9 +496,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "aeaedb76-a9de-46c5-af9f-76197830adbd"
+        "id": "dc3e06d4-3f5e-4dca-bee3-89b51e948a6d"
       },
-      "686112d6-d991-4bda-abac-11695c321e31": {
+      "72493bef-3463-436a-bbce-77c1bc1b635a": {
         "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -522,7 +522,7 @@
           },
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "d3fd4c36-7dbc-4440-9d99-968bff68ac06"
+            "entityAliasId": "2a815550-86e8-4445-aed6-b980b5f49b68"
           },
           "datasources": [],
           "settings": {
@@ -579,13 +579,13 @@
             },
             "labelColor": "#0F172A",
             "showIcon": false,
-            "switchColorOn": "#10B981",
+            "switchColorOn": "#475569",
             "switchColorOff": "#94A3B8",
             "tumblerColorOn": "#FFFFFF",
             "tumblerColorOff": "#FFFFFF",
             "showOnLabel": true,
             "onLabel": "ON",
-            "onLabelColor": "#10B981",
+            "onLabelColor": "#475569",
             "showOffLabel": true,
             "offLabel": "OFF",
             "offLabelColor": "#64748B",
@@ -600,22 +600,22 @@
         },
         "row": 16,
         "col": 16,
-        "id": "686112d6-d991-4bda-abac-11695c321e31"
+        "id": "72493bef-3463-436a-bbce-77c1bc1b635a"
       },
-      "24dff0e6-489d-4653-a703-0726a3db1aad": {
+      "ee1e2706-94cd-4782-9838-47aad62a6783": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "entities_table",
         "type": "latest",
-        "title": "Attributs & États Opérationnels",
+        "title": "Attributes & Operational States",
         "sizeX": 8,
         "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "d3fd4c36-7dbc-4440-9d99-968bff68ac06",
+              "entityAliasId": "2a815550-86e8-4445-aed6-b980b5f49b68",
               "dataKeys": [
                 {
                   "name": "issues_secours_verrouillees",
@@ -628,13 +628,13 @@
             }
           ],
           "settings": {
-            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "entitiesTableWidgetTitle": "Attributes & Operational States",
             "enableSearch": false,
             "displayPagination": false,
             "defaultPageSize": 10
           },
           "showTitle": true,
-          "title": "Attributs & États Opérationnels",
+          "title": "Attributes & Operational States",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -647,7 +647,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "24dff0e6-489d-4653-a703-0726a3db1aad"
+        "id": "ee1e2706-94cd-4782-9838-47aad62a6783"
       }
     },
     "states": {
@@ -657,55 +657,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "cf0f46d1-865f-433a-a9b9-d184e323309a": {
+              "c768e53e-e069-417a-9c17-6ef5c3c68d32": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "0bb069e0-9735-466b-8adb-af7d218c8e25": {
+              "63005899-f7f0-436a-87a9-b00217d023b7": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "034f551b-4be1-4835-98bf-6628dcba0c0c": {
+              "1961f5d5-61a1-4534-b9fd-ae8fc2d4f541": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "1f94e488-ae2b-4cf4-96d5-6a6abc6a0c38": {
+              "2873a57c-a679-4c5c-9eaa-3cf2135cb2c2": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "1459e640-5c1a-421c-88aa-11e45fc672a0": {
+              "2bb17cf7-757c-4ebe-8a89-6e92b55d09ef": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "a303ed30-775a-4616-80a5-f378b0447a86": {
+              "37584e6e-6bd2-46d8-924e-6745fe39d340": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "aeaedb76-a9de-46c5-af9f-76197830adbd": {
+              "dc3e06d4-3f5e-4dca-bee3-89b51e948a6d": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "686112d6-d991-4bda-abac-11695c321e31": {
+              "72493bef-3463-436a-bbce-77c1bc1b635a": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "24dff0e6-489d-4653-a703-0726a3db1aad": {
+              "ee1e2706-94cd-4782-9838-47aad62a6783": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

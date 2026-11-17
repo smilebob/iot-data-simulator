@@ -73,19 +73,18 @@ def get_scada_synoptic_html(device: DeviceConfig, variables: List[VariableConfig
 SCADA_CSS = """
 <style>
   .scada-container {
-    background: #FFFFFF;
+    background: #E5E7EB;
     border: 1px solid #CBD5E1;
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 16px;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     color: #0F172A;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
   }
   .scada-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #E2E8F0;
+    border-bottom: 1px solid #CBD5E1;
     padding-bottom: 10px;
     margin-bottom: 12px;
   }
@@ -103,24 +102,18 @@ SCADA_CSS = """
     display: inline-block;
     width: 9px;
     height: 9px;
-    background: #059669;
+    background: #475569;
     border-radius: 50%;
-    box-shadow: 0 0 8px #10B981;
-    animation: blink-live 1.5s infinite;
-  }
-  @keyframes blink-live {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.35; }
   }
   .scada-badge {
-    background: #F8FAFC;
-    border: 1px solid #E2E8F0;
+    background: #F1F5F9;
+    border: 1px solid #CBD5E1;
     border-radius: 6px;
     padding: 4px 10px;
     font-size: 11px;
-    color: #475569;
+    color: #334155;
   }
-  .scada-badge strong { color: #0284C7; }
+  .scada-badge strong { color: #0F172A; }
   
   .pipe-flow {
     stroke-dasharray: 8, 4;
@@ -176,23 +169,23 @@ def scada_wrapper(title: str, token: str, proto: str, svg_content: str) -> str:
     </div>
     <div style="display:flex; gap:10px; align-items:center;">
       <div class="scada-badge">Protocole: <strong>{proto}</strong></div>
-      <div class="scada-badge">Supervision: <strong style="color: #059669;">Temps Réel</strong></div>
+      <div class="scada-badge">Supervision: <strong style="color: #334155;">Temps Réel</strong></div>
     </div>
   </div>
   {svg_content}
 </div>
 """
 
-def make_callout(x: int, y: int, label: str, value_expr: str, accent: str = "#0284C7", width: int = 155, height: int = 40) -> str:
+def make_callout(x: int, y: int, label: str, value_expr: str, accent: str = "#475569", width: int = 155, height: int = 40) -> str:
     """
-    Generates a high-contrast SCADA metric callout box in vector SVG.
+    Generates a high-contrast ISA-101 SCADA metric callout box in vector SVG.
 
     Args:
         x: X-coordinate for placement inside the SVG canvas.
         y: Y-coordinate for placement inside the SVG canvas.
         label: Metric title or sensor description.
         value_expr: Real-time placeholder expression (e.g., '${pressure:2} bar').
-        accent: Hex color code for the left indicator bar. Defaults to #0284C7.
+        accent: Hex color code for the left indicator bar. Defaults to #475569.
         width: Box width in SVG user units. Defaults to 155.
         height: Box height in SVG user units. Defaults to 40.
 
@@ -201,7 +194,7 @@ def make_callout(x: int, y: int, label: str, value_expr: str, accent: str = "#02
     """
     return f"""
     <g transform="translate({x}, {y})">
-      <rect width="{width}" height="{height}" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+      <rect width="{width}" height="{height}" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
       <rect width="4" height="{height}" rx="2" fill="{accent}"/>
       <text x="12" y="15" fill="#475569" font-size="9" font-weight="600">{label}</text>
       <text x="12" y="32" fill="#0F172A" font-size="13" font-weight="bold" font-family="monospace">{value_expr}</text>

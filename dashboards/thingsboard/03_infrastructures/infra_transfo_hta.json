@@ -2,10 +2,10 @@
   "title": "Supervision SCADA - Transformateur HTA/BT",
   "name": "Supervision SCADA - Transformateur HTA/BT",
   "configuration": {
-    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Transformateur HTA/BT' (ID: infra_transfo_hta). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: MQTT.",
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Transformateur HTA/BT' (ID: infra_transfo_hta). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: MQTT.",
     "entityAliases": {
-      "85c70803-3131-427d-b014-69e8b173dfcf": {
-        "id": "85c70803-3131-427d-b014-69e8b173dfcf",
+      "fba71074-b6e8-49d9-978f-9bfbc74f468a": {
+        "id": "fba71074-b6e8-49d9-978f-9bfbc74f468a",
         "alias": "Transformateur HTA/BT",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "9bf61437-6d0a-477e-8d6b-68b57ea6dc71": {
+      "62c4e01d-2de4-4ae2-9b1d-24e25c4aa265": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "9bf61437-6d0a-477e-8d6b-68b57ea6dc71"
+        "id": "62c4e01d-2de4-4ae2-9b1d-24e25c4aa265"
       },
-      "8d8ae302-f60b-4a73-978f-19cdf3ea6b2b": {
+      "25c14ee8-a2d5-45f5-a16a-bd740597e7a5": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,13 +59,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "85c70803-3131-427d-b014-69e8b173dfcf",
+              "entityAliasId": "fba71074-b6e8-49d9-978f-9bfbc74f468a",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
                   "type": "timeseries",
                   "label": "temp_huile_transfo",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {}
@@ -74,7 +74,7 @@
                   "name": "charge_transfo_pct",
                   "type": "timeseries",
                   "label": "charge_transfo_pct",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "%",
                   "decimals": 2,
                   "settings": {}
@@ -83,7 +83,7 @@
                   "name": "pression_cuve",
                   "type": "timeseries",
                   "label": "pression_cuve",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "mbar",
                   "decimals": 2,
                   "settings": {}
@@ -92,7 +92,7 @@
                   "name": "taux_thd",
                   "type": "timeseries",
                   "label": "taux_thd",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "%",
                   "decimals": 2,
                   "settings": {}
@@ -101,7 +101,7 @@
                   "name": "alarme_dgpt2",
                   "type": "attribute",
                   "label": "alarme_dgpt2",
-                  "color": "#8B5CF6",
+                  "color": "#1E40AF",
                   "units": "",
                   "decimals": 0,
                   "settings": {}
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Transformateur HTA SCADA : Transformateur HTA/BT\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Cuve du Transformateur à Ailettes -->\n    <rect x=\"80\" y=\"55\" width=\"280\" height=\"150\" rx=\"14\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <text x=\"220\" y=\"80\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TRANSFORMATEUR HTA/BT 1250 kVA</text>\n\n    <!-- Ailettes de Refroidissement -->\n    <line x1=\"80\" y1=\"100\" x2=\"360\" y2=\"100\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"120\" x2=\"360\" y2=\"120\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"140\" x2=\"360\" y2=\"140\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"160\" x2=\"360\" y2=\"160\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n\n    <!-- Traversées HTA Porcelaine (20 kV) -->\n    <g transform=\"translate(130, 30)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">HTA 20kV</text>\n    </g>\n\n    <!-- Traversées BT (400 V) -->\n    <g transform=\"translate(310, 30)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">BT 400V</text>\n    </g>\n\n    <!-- Relais de Protection DGPT2 (Gaz, Pression, Température) -->\n    <g transform=\"translate(420, 100)\">\n      <rect x=\"0\" y=\"0\" width=\"110\" height=\"70\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <text x=\"55\" y=\"25\" fill=\"#D97706\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">RELAIS DGPT2</text>\n      <text x=\"55\" y=\"45\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">Sécurité Huile</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. HUILE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_huile_transfo:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX DE CHARGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${charge_transfo_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION CUVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_cuve:2} bar</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX HARMONIQUES THD</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_thd:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Transformateur HTA SCADA : Transformateur HTA/BT\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Cuve du Transformateur à Ailettes -->\n    <rect x=\"80\" y=\"55\" width=\"280\" height=\"150\" rx=\"14\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <text x=\"220\" y=\"80\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TRANSFORMATEUR HTA/BT 1250 kVA</text>\n\n    <!-- Ailettes de Refroidissement -->\n    <line x1=\"80\" y1=\"100\" x2=\"360\" y2=\"100\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"120\" x2=\"360\" y2=\"120\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"140\" x2=\"360\" y2=\"140\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"160\" x2=\"360\" y2=\"160\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n\n    <!-- Traversées HTA Porcelaine (20 kV) -->\n    <g transform=\"translate(130, 30)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">HTA 20kV</text>\n    </g>\n\n    <!-- Traversées BT (400 V) -->\n    <g transform=\"translate(310, 30)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">BT 400V</text>\n    </g>\n\n    <!-- Relais de Protection DGPT2 (Gaz, Pression, Température) -->\n    <g transform=\"translate(420, 100)\">\n      <rect x=\"0\" y=\"0\" width=\"110\" height=\"70\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <text x=\"55\" y=\"25\" fill=\"#D97706\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">RELAIS DGPT2</text>\n      <text x=\"55\" y=\"45\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">Sécurité Huile</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. HUILE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_huile_transfo:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX DE CHARGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${charge_transfo_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION CUVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_cuve:2} bar</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX HARMONIQUES THD</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_thd:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Transformateur HTA SCADA : Transformateur HTA/BT\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Cuve du Transformateur à Ailettes -->\n    <rect x=\"80\" y=\"55\" width=\"280\" height=\"150\" rx=\"14\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <text x=\"220\" y=\"80\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TRANSFORMATEUR HTA/BT 1250 kVA</text>\n\n    <!-- Ailettes de Refroidissement -->\n    <line x1=\"80\" y1=\"100\" x2=\"360\" y2=\"100\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"120\" x2=\"360\" y2=\"120\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"140\" x2=\"360\" y2=\"140\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"160\" x2=\"360\" y2=\"160\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n\n    <!-- Traversées HTA Porcelaine (20 kV) -->\n    <g transform=\"translate(130, 30)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">HTA 20kV</text>\n    </g>\n\n    <!-- Traversées BT (400 V) -->\n    <g transform=\"translate(310, 30)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">BT 400V</text>\n    </g>\n\n    <!-- Relais de Protection DGPT2 (Gaz, Pression, Température) -->\n    <g transform=\"translate(420, 100)\">\n      <rect x=\"0\" y=\"0\" width=\"110\" height=\"70\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <text x=\"55\" y=\"25\" fill=\"#D97706\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">RELAIS DGPT2</text>\n      <text x=\"55\" y=\"45\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">Sécurité Huile</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. HUILE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_huile_transfo:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX DE CHARGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${charge_transfo_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION CUVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_cuve:2} bar</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX HARMONIQUES THD</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_thd:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Transformateur HTA SCADA : Transformateur HTA/BT\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Cuve du Transformateur à Ailettes -->\n    <rect x=\"80\" y=\"55\" width=\"280\" height=\"150\" rx=\"14\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2.5\"/>\n    <text x=\"220\" y=\"80\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TRANSFORMATEUR HTA/BT 1250 kVA</text>\n\n    <!-- Ailettes de Refroidissement -->\n    <line x1=\"80\" y1=\"100\" x2=\"360\" y2=\"100\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"120\" x2=\"360\" y2=\"120\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"140\" x2=\"360\" y2=\"140\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n    <line x1=\"80\" y1=\"160\" x2=\"360\" y2=\"160\" stroke=\"#CBD5E1\" stroke-width=\"2\"/>\n\n    <!-- Traversées HTA Porcelaine (20 kV) -->\n    <g transform=\"translate(130, 30)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">HTA 20kV</text>\n    </g>\n\n    <!-- Traversées BT (400 V) -->\n    <g transform=\"translate(310, 30)\">\n      <rect x=\"-10\" y=\"0\" width=\"20\" height=\"25\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"-6\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">BT 400V</text>\n    </g>\n\n    <!-- Relais de Protection DGPT2 (Gaz, Pression, Température) -->\n    <g transform=\"translate(420, 100)\">\n      <rect x=\"0\" y=\"0\" width=\"110\" height=\"70\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"2\"/>\n      <text x=\"55\" y=\"25\" fill=\"#D97706\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">RELAIS DGPT2</text>\n      <text x=\"55\" y=\"45\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">Sécurité Huile</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. HUILE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_huile_transfo:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX DE CHARGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${charge_transfo_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PRESSION CUVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${pression_cuve:2} bar</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX HARMONIQUES THD</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_thd:1} %</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "8d8ae302-f60b-4a73-978f-19cdf3ea6b2b"
+        "id": "25c14ee8-a2d5-45f5-a16a-bd740597e7a5"
       },
-      "0f44cda6-7c21-4a8e-b084-4328e5a44c24": {
+      "92361bf3-9284-4eb2-a14c-90e1eff9a0e8": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,13 +144,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "85c70803-3131-427d-b014-69e8b173dfcf",
+              "entityAliasId": "fba71074-b6e8-49d9-978f-9bfbc74f468a",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
                   "type": "timeseries",
                   "label": "Température Huile Diélectrique",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {}
@@ -170,9 +170,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#E2001A"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "0f44cda6-7c21-4a8e-b084-4328e5a44c24"
+        "id": "92361bf3-9284-4eb2-a14c-90e1eff9a0e8"
       },
-      "67307df6-64de-4be9-a7d5-4ad034629e2e": {
+      "92a70d13-41b4-4539-974f-cb5e508820fb": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,13 +204,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "85c70803-3131-427d-b014-69e8b173dfcf",
+              "entityAliasId": "fba71074-b6e8-49d9-978f-9bfbc74f468a",
               "dataKeys": [
                 {
                   "name": "charge_transfo_pct",
                   "type": "timeseries",
                   "label": "Taux de Charge Transformateur",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "%",
                   "decimals": 2,
                   "settings": {}
@@ -230,9 +230,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#3B82F6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "67307df6-64de-4be9-a7d5-4ad034629e2e"
+        "id": "92a70d13-41b4-4539-974f-cb5e508820fb"
       },
-      "e1446f1c-47b9-4140-bdd2-db25291ba7eb": {
+      "7ad14076-23c9-4022-8c5a-08a7c2e0db44": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,13 +264,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "85c70803-3131-427d-b014-69e8b173dfcf",
+              "entityAliasId": "fba71074-b6e8-49d9-978f-9bfbc74f468a",
               "dataKeys": [
                 {
                   "name": "pression_cuve",
                   "type": "timeseries",
                   "label": "Pression Interne Cuve",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "mbar",
                   "decimals": 2,
                   "settings": {}
@@ -290,9 +290,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#10B981"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "e1446f1c-47b9-4140-bdd2-db25291ba7eb"
+        "id": "7ad14076-23c9-4022-8c5a-08a7c2e0db44"
       },
-      "f5a1d914-5f26-4e4d-9e49-257454c38e71": {
+      "b635c147-e78d-4716-993b-69189fb4e7d2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,13 +324,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "85c70803-3131-427d-b014-69e8b173dfcf",
+              "entityAliasId": "fba71074-b6e8-49d9-978f-9bfbc74f468a",
               "dataKeys": [
                 {
                   "name": "taux_thd",
                   "type": "timeseries",
                   "label": "Taux Harmonique THD-I",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "%",
                   "decimals": 2,
                   "settings": {}
@@ -350,9 +350,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#F59E0B"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -369,28 +369,28 @@
         },
         "row": 11,
         "col": 18,
-        "id": "f5a1d914-5f26-4e4d-9e49-257454c38e71"
+        "id": "b635c147-e78d-4716-993b-69189fb4e7d2"
       },
-      "7c70c44e-295d-4129-ac82-884198b985cb": {
+      "b8f47c92-abc6-4fba-9f36-61114dab8d1f": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "basic_timeseries",
         "type": "timeseries",
-        "title": "Télémétries en Temps Réel - Transformateur HTA/BT",
+        "title": "Real-Time Telemetry - Transformateur HTA/BT",
         "sizeX": 16,
         "sizeY": 8,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "85c70803-3131-427d-b014-69e8b173dfcf",
+              "entityAliasId": "fba71074-b6e8-49d9-978f-9bfbc74f468a",
               "dataKeys": [
                 {
                   "name": "temp_huile_transfo",
                   "type": "timeseries",
                   "label": "Température Huile Diélectrique (°C)",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "°C",
                   "decimals": 2,
                   "settings": {
@@ -404,7 +404,7 @@
                   "name": "charge_transfo_pct",
                   "type": "timeseries",
                   "label": "Taux de Charge Transformateur (%)",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "%",
                   "decimals": 2,
                   "settings": {
@@ -418,7 +418,7 @@
                   "name": "pression_cuve",
                   "type": "timeseries",
                   "label": "Pression Interne Cuve (mbar)",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "mbar",
                   "decimals": 2,
                   "settings": {
@@ -432,7 +432,7 @@
                   "name": "taux_thd",
                   "type": "timeseries",
                   "label": "Taux Harmonique THD-I (%)",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "%",
                   "decimals": 2,
                   "settings": {
@@ -483,7 +483,7 @@
             }
           },
           "showTitle": true,
-          "title": "Évolution Télémétrique (4 grandeurs)",
+          "title": "Telemetry Trends (4 variables)",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -496,9 +496,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "7c70c44e-295d-4129-ac82-884198b985cb"
+        "id": "b8f47c92-abc6-4fba-9f36-61114dab8d1f"
       },
-      "f4d39038-fe5a-4c9c-acfe-8d255f73e484": {
+      "4eb4f4d2-e4f3-48b1-8009-e0bf6f64f527": {
         "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -522,7 +522,7 @@
           },
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "85c70803-3131-427d-b014-69e8b173dfcf"
+            "entityAliasId": "fba71074-b6e8-49d9-978f-9bfbc74f468a"
           },
           "datasources": [],
           "settings": {
@@ -579,13 +579,13 @@
             },
             "labelColor": "#0F172A",
             "showIcon": false,
-            "switchColorOn": "#10B981",
+            "switchColorOn": "#475569",
             "switchColorOff": "#94A3B8",
             "tumblerColorOn": "#FFFFFF",
             "tumblerColorOff": "#FFFFFF",
             "showOnLabel": true,
             "onLabel": "ON",
-            "onLabelColor": "#10B981",
+            "onLabelColor": "#475569",
             "showOffLabel": true,
             "offLabel": "OFF",
             "offLabelColor": "#64748B",
@@ -600,22 +600,22 @@
         },
         "row": 16,
         "col": 16,
-        "id": "f4d39038-fe5a-4c9c-acfe-8d255f73e484"
+        "id": "4eb4f4d2-e4f3-48b1-8009-e0bf6f64f527"
       },
-      "5e19af88-a810-4d77-bb38-69604de46029": {
+      "b7b00c74-0da3-48de-852d-ade5b72f49f9": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "entities_table",
         "type": "latest",
-        "title": "Attributs & États Opérationnels",
+        "title": "Attributes & Operational States",
         "sizeX": 8,
         "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "85c70803-3131-427d-b014-69e8b173dfcf",
+              "entityAliasId": "fba71074-b6e8-49d9-978f-9bfbc74f468a",
               "dataKeys": [
                 {
                   "name": "alarme_dgpt2",
@@ -628,13 +628,13 @@
             }
           ],
           "settings": {
-            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "entitiesTableWidgetTitle": "Attributes & Operational States",
             "enableSearch": false,
             "displayPagination": false,
             "defaultPageSize": 10
           },
           "showTitle": true,
-          "title": "Attributs & États Opérationnels",
+          "title": "Attributes & Operational States",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -647,7 +647,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "5e19af88-a810-4d77-bb38-69604de46029"
+        "id": "b7b00c74-0da3-48de-852d-ade5b72f49f9"
       }
     },
     "states": {
@@ -657,55 +657,55 @@
         "layouts": {
           "main": {
             "widgets": {
-              "9bf61437-6d0a-477e-8d6b-68b57ea6dc71": {
+              "62c4e01d-2de4-4ae2-9b1d-24e25c4aa265": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "8d8ae302-f60b-4a73-978f-19cdf3ea6b2b": {
+              "25c14ee8-a2d5-45f5-a16a-bd740597e7a5": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "0f44cda6-7c21-4a8e-b084-4328e5a44c24": {
+              "92361bf3-9284-4eb2-a14c-90e1eff9a0e8": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "67307df6-64de-4be9-a7d5-4ad034629e2e": {
+              "92a70d13-41b4-4539-974f-cb5e508820fb": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "e1446f1c-47b9-4140-bdd2-db25291ba7eb": {
+              "7ad14076-23c9-4022-8c5a-08a7c2e0db44": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "f5a1d914-5f26-4e4d-9e49-257454c38e71": {
+              "b635c147-e78d-4716-993b-69189fb4e7d2": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "7c70c44e-295d-4129-ac82-884198b985cb": {
+              "b8f47c92-abc6-4fba-9f36-61114dab8d1f": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "f4d39038-fe5a-4c9c-acfe-8d255f73e484": {
+              "4eb4f4d2-e4f3-48b1-8009-e0bf6f64f527": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "5e19af88-a810-4d77-bb38-69604de46029": {
+              "b7b00c74-0da3-48de-852d-ade5b72f49f9": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

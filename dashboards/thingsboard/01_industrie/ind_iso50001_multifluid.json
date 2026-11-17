@@ -1,0 +1,1020 @@
+{
+  "title": "Supervision SCADA - Comptage Multi-Fluides ISO 50001",
+  "name": "Supervision SCADA - Comptage Multi-Fluides ISO 50001",
+  "configuration": {
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Comptage Multi-Fluides ISO 50001' (ID: ind_iso50001_multifluid). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: MQTT.",
+    "entityAliases": {
+      "5ec76b3b-9f25-4723-8056-c3c155d420b1": {
+        "id": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+        "alias": "Comptage Multi-Fluides ISO 50001",
+        "filter": {
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    },
+    "widgets": {
+      "8ef82564-4fb2-4a72-bb47-c84ede64c588": {
+        "typeFullFqn": "system.cards.html_card",
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Comptage Multi-Fluides ISO 50001",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Comptage Multi-Fluides ISO 50001</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: ind_iso50001_multifluid</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Authentification:</span>\n          <strong style=\"color: #059669; font-weight: 600; margin-left: 4px;\">Jeton Sécurisé</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Comptage Multi-Fluides ISO 50001</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: ind_iso50001_multifluid</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Authentification:</span>\n          <strong style=\"color: #059669; font-weight: 600; margin-left: 4px;\">Jeton Sécurisé</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF;"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "8ef82564-4fb2-4a72-bb47-c84ede64c588"
+      },
+      "bcb20a4d-98b9-485b-9110-7f5ea9ca35aa": {
+        "typeFullFqn": "system.cards.html_value_card",
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_value_card",
+        "type": "latest",
+        "title": "Synoptique SCADA Process - Comptage Multi-Fluides ISO 50001",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "puissance_elec_kw",
+                  "type": "timeseries",
+                  "label": "puissance_elec_kw",
+                  "color": "#334155",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "debit_gaz_nm3h",
+                  "type": "timeseries",
+                  "label": "debit_gaz_nm3h",
+                  "color": "#0369A1",
+                  "units": "Nm³/h",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "debit_eau_m3h",
+                  "type": "timeseries",
+                  "label": "debit_eau_m3h",
+                  "color": "#475569",
+                  "units": "m³/h",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "cout_horaire_eur",
+                  "type": "timeseries",
+                  "label": "cout_horaire_eur",
+                  "color": "#0F766E",
+                  "units": "€/h",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "ipe_industriel_kwh_t",
+                  "type": "timeseries",
+                  "label": "ipe_industriel_kwh_t",
+                  "color": "#1E40AF",
+                  "units": "kWh/t",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "index_elec_kwh",
+                  "type": "timeseries",
+                  "label": "index_elec_kwh",
+                  "color": "#64748B",
+                  "units": "kWh",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "index_eau_m3",
+                  "type": "timeseries",
+                  "label": "index_eau_m3",
+                  "color": "#374151",
+                  "units": "m³",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "surveillance_talon_active",
+                  "type": "attribute",
+                  "label": "surveillance_talon_active",
+                  "color": "#1D4ED8",
+                  "units": "",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Comptage Multi-Fluides ISO 50001\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Réacteur Process -->\n    <rect x=\"80\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"170\" y=\"70\" fill=\"#0284C7\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"85\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#BAE6FD\" opacity=\"0.4\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 80 100\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"40\" y=\"90\" fill=\"#059669\" font-size=\"9\" font-weight=\"bold\">ALIM.</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 260 150 L 380 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"410\" cy=\"150\" r=\"28\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(410, 150)\">\n      <g>\n        <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 0 0\" to=\"360 0 0\" dur=\"0.8s\" repeatCount=\"indefinite\"/>\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n      </g>\n    </g>\n    <text x=\"410\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 440 150 L 580 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"580\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#D97706\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"640\" y=\"145\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 700 150 L 820 150\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"820,145 835,150 820,155\" fill=\"#059669\"/>\n    <text x=\"780\" y=\"140\" fill=\"#059669\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Puissance Électrique Usine</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_elec_kw:1}</text>\n    </g>\n    \n    <g transform=\"translate(660, 85)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Débit Gaz Naturel</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_gaz_nm3h:1}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Comptage Multi-Fluides ISO 50001\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Réacteur Process -->\n    <rect x=\"80\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"170\" y=\"70\" fill=\"#0284C7\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"85\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#BAE6FD\" opacity=\"0.4\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 80 100\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"40\" y=\"90\" fill=\"#059669\" font-size=\"9\" font-weight=\"bold\">ALIM.</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 260 150 L 380 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"410\" cy=\"150\" r=\"28\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(410, 150)\">\n      <g>\n        <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 0 0\" to=\"360 0 0\" dur=\"0.8s\" repeatCount=\"indefinite\"/>\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n      </g>\n    </g>\n    <text x=\"410\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 440 150 L 580 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"580\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#D97706\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"640\" y=\"145\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 700 150 L 820 150\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"820,145 835,150 820,155\" fill=\"#059669\"/>\n    <text x=\"780\" y=\"140\" fill=\"#059669\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Puissance Électrique Usine</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_elec_kw:1}</text>\n    </g>\n    \n    <g transform=\"translate(660, 85)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Débit Gaz Naturel</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${debit_gaz_nm3h:1}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "bcb20a4d-98b9-485b-9110-7f5ea9ca35aa"
+      },
+      "97165dae-0825-4370-a2f3-caecacf035f2": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Puissance Électrique Usine",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "puissance_elec_kw",
+                  "type": "timeseries",
+                  "label": "Puissance Électrique Usine",
+                  "color": "#334155",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 64.0,
+            "maxValue": 256.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Puissance Électrique Usine",
+            "unitTitle": "kW",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Puissance Électrique Usine",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 11,
+        "col": 0,
+        "id": "97165dae-0825-4370-a2f3-caecacf035f2"
+      },
+      "82155940-718d-4622-9645-dd0b81b2c9de": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Débit Gaz Naturel",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "debit_gaz_nm3h",
+                  "type": "timeseries",
+                  "label": "Débit Gaz Naturel",
+                  "color": "#0369A1",
+                  "units": "Nm³/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 9.4,
+            "maxValue": 40.6,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Débit Gaz Naturel",
+            "unitTitle": "Nm³/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Débit Gaz Naturel",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 11,
+        "col": 6,
+        "id": "82155940-718d-4622-9645-dd0b81b2c9de"
+      },
+      "690582f0-42e0-4dcf-a3aa-62b461da9be4": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Débit Eau Process",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "debit_eau_m3h",
+                  "type": "timeseries",
+                  "label": "Débit Eau Process",
+                  "color": "#475569",
+                  "units": "m³/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 1.2,
+            "maxValue": 10.2,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Débit Eau Process",
+            "unitTitle": "m³/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Débit Eau Process",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 11,
+        "col": 12,
+        "id": "690582f0-42e0-4dcf-a3aa-62b461da9be4"
+      },
+      "871b0bd2-d22d-4527-8aa4-be6c79497073": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Coût Énergétique Instantané",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "cout_horaire_eur",
+                  "type": "timeseries",
+                  "label": "Coût Énergétique Instantané",
+                  "color": "#0F766E",
+                  "units": "€/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Coût Énergétique Instantané",
+            "unitTitle": "€/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Coût Énergétique Instantané",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 11,
+        "col": 18,
+        "id": "871b0bd2-d22d-4527-8aa4-be6c79497073"
+      },
+      "f6a3dbf7-2273-4678-afe9-e8eed5638046": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "IPE Production (kWh/tonne)",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "ipe_industriel_kwh_t",
+                  "type": "timeseries",
+                  "label": "IPE Production (kWh/tonne)",
+                  "color": "#1E40AF",
+                  "units": "kWh/t",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "IPE Production (kWh/tonne)",
+            "unitTitle": "kWh/t",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "IPE Production (kWh/tonne)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 0,
+        "id": "f6a3dbf7-2273-4678-afe9-e8eed5638046"
+      },
+      "ac7c4d46-0113-4323-a63c-167c47a67070": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Compteur Électrique Cumulé",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "index_elec_kwh",
+                  "type": "timeseries",
+                  "label": "Compteur Électrique Cumulé",
+                  "color": "#64748B",
+                  "units": "kWh",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Compteur Électrique Cumulé",
+            "unitTitle": "kWh",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Compteur Électrique Cumulé",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 6,
+        "id": "ac7c4d46-0113-4323-a63c-167c47a67070"
+      },
+      "aed225ae-cd92-4cd4-b0cf-146661793c9b": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Compteur Eau Cumulé",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "index_eau_m3",
+                  "type": "timeseries",
+                  "label": "Compteur Eau Cumulé",
+                  "color": "#374151",
+                  "units": "m³",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Compteur Eau Cumulé",
+            "unitTitle": "m³",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Compteur Eau Cumulé",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 12,
+        "id": "aed225ae-cd92-4cd4-b0cf-146661793c9b"
+      },
+      "418f1971-c070-46a2-894d-f13874f33b1a": {
+        "typeFullFqn": "system.charts.basic_timeseries",
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "basic_timeseries",
+        "type": "timeseries",
+        "title": "Real-Time Telemetry - Comptage Multi-Fluides ISO 50001",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "puissance_elec_kw",
+                  "type": "timeseries",
+                  "label": "Puissance Électrique Usine (kW)",
+                  "color": "#334155",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "debit_gaz_nm3h",
+                  "type": "timeseries",
+                  "label": "Débit Gaz Naturel (Nm³/h)",
+                  "color": "#0369A1",
+                  "units": "Nm³/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "debit_eau_m3h",
+                  "type": "timeseries",
+                  "label": "Débit Eau Process (m³/h)",
+                  "color": "#475569",
+                  "units": "m³/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "cout_horaire_eur",
+                  "type": "timeseries",
+                  "label": "Coût Énergétique Instantané (€/h)",
+                  "color": "#0F766E",
+                  "units": "€/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "ipe_industriel_kwh_t",
+                  "type": "timeseries",
+                  "label": "IPE Production (kWh/tonne) (kWh/t)",
+                  "color": "#1E40AF",
+                  "units": "kWh/t",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "index_elec_kwh",
+                  "type": "timeseries",
+                  "label": "Compteur Électrique Cumulé (kWh)",
+                  "color": "#64748B",
+                  "units": "kWh",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "index_eau_m3",
+                  "type": "timeseries",
+                  "label": "Compteur Eau Cumulé (m³)",
+                  "color": "#374151",
+                  "units": "m³",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#E2E8F0",
+              "tickColor": "#CBD5E1",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#475569"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#475569"
+            }
+          },
+          "showTitle": true,
+          "title": "Telemetry Trends (7 variables)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 21,
+        "col": 0,
+        "id": "418f1971-c070-46a2-894d-f13874f33b1a"
+      },
+      "fd43f76a-fe78-40e4-901e-463c62fb3e57": {
+        "typeFullFqn": "system.single_switch",
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "single_switch",
+        "type": "rpc",
+        "title": "Pilotage - Surveillance Talon Nocturne",
+        "sizeX": 8,
+        "sizeY": 4,
+        "config": {
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": true,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "surveillance_talon_active"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "surveillance_talon_active",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "surveillance_talon_active",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Surveillance Talon Nocturne",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#475569",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#475569",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
+          }
+        },
+        "row": 21,
+        "col": 16,
+        "id": "fd43f76a-fe78-40e4-901e-463c62fb3e57"
+      },
+      "720d9936-4c34-480c-881d-d3c6a9b649fd": {
+        "typeFullFqn": "system.cards.entities_table",
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "entities_table",
+        "type": "latest",
+        "title": "Attributes & Operational States",
+        "sizeX": 8,
+        "sizeY": 4,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "5ec76b3b-9f25-4723-8056-c3c155d420b1",
+              "dataKeys": [
+                {
+                  "name": "surveillance_talon_active",
+                  "type": "attribute",
+                  "label": "Surveillance Talon Nocturne",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "entitiesTableWidgetTitle": "Attributes & Operational States",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
+          },
+          "showTitle": true,
+          "title": "Attributes & Operational States",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 25,
+        "col": 16,
+        "id": "720d9936-4c34-480c-881d-d3c6a9b649fd"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "8ef82564-4fb2-4a72-bb47-c84ede64c588": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "bcb20a4d-98b9-485b-9110-7f5ea9ca35aa": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 3,
+                "col": 0
+              },
+              "97165dae-0825-4370-a2f3-caecacf035f2": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 0
+              },
+              "82155940-718d-4622-9645-dd0b81b2c9de": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 6
+              },
+              "690582f0-42e0-4dcf-a3aa-62b461da9be4": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 12
+              },
+              "871b0bd2-d22d-4527-8aa4-be6c79497073": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 18
+              },
+              "f6a3dbf7-2273-4678-afe9-e8eed5638046": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 16,
+                "col": 0
+              },
+              "ac7c4d46-0113-4323-a63c-167c47a67070": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 16,
+                "col": 6
+              },
+              "aed225ae-cd92-4cd4-b0cf-146661793c9b": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 16,
+                "col": 12
+              },
+              "418f1971-c070-46a2-894d-f13874f33b1a": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 21,
+                "col": 0
+              },
+              "fd43f76a-fe78-40e4-901e-463c62fb3e57": {
+                "sizeX": 8,
+                "sizeY": 4,
+                "row": 21,
+                "col": 16
+              },
+              "720d9936-4c34-480c-881d-d3c6a9b649fd": {
+                "sizeX": 8,
+                "sizeY": 4,
+                "row": 25,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#F1F5F9",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

@@ -1,0 +1,1020 @@
+{
+  "title": "Supervision SCADA - Sous-Station Réseau de Chaleur (RCU)",
+  "name": "Supervision SCADA - Sous-Station Réseau de Chaleur (RCU)",
+  "configuration": {
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Sous-Station Réseau de Chaleur (RCU)' (ID: infra_district_heating). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: MQTT.",
+    "entityAliases": {
+      "53127de7-b8cd-437c-982c-6be054739b20": {
+        "id": "53127de7-b8cd-437c-982c-6be054739b20",
+        "alias": "Sous-Station Réseau de Chaleur (RCU)",
+        "filter": {
+          "type": "singleEntity",
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    },
+    "widgets": {
+      "93090c73-3bfb-4c3f-807c-2ded05f6bd2c": {
+        "typeFullFqn": "system.cards.html_card",
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_card",
+        "type": "static",
+        "title": "Informations Équipement - Sous-Station Réseau de Chaleur (RCU)",
+        "sizeX": 24,
+        "sizeY": 3,
+        "config": {
+          "datasources": [],
+          "settings": {
+            "cardHtml": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Sous-Station Réseau de Chaleur (RCU)</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: infra_district_heating</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Authentification:</span>\n          <strong style=\"color: #059669; font-weight: 600; margin-left: 4px;\">Jeton Sécurisé</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "html": "\n    <div style=\"display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 20px; background: #FFFFFF; border-radius: 12px; border: 1px solid #CBD5E1; color: #0F172A; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05); font-family: system-ui, -apple-system, sans-serif;\">\n      <div style=\"display: flex; align-items: center; gap: 12px;\">\n        <div style=\"background: rgba(226, 0, 26, 0.08); border: 1.5px solid #E2001A; border-radius: 10px; padding: 8px 14px; font-size: 18px; font-weight: 800; color: #E2001A; letter-spacing: 0.5px;\">\n          IoT\n        </div>\n        <div>\n          <div style=\"font-size: 16px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em;\">Sous-Station Réseau de Chaleur (RCU)</div>\n          <div style=\"font-size: 12px; color: #64748B; font-family: monospace;\">ID Technique: infra_district_heating</div>\n        </div>\n      </div>\n\n      <div style=\"display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;\">\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Protocole:</span>\n          <strong style=\"color: #0284C7; margin-left: 4px;\">MQTT</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Authentification:</span>\n          <strong style=\"color: #059669; font-weight: 600; margin-left: 4px;\">Jeton Sécurisé</strong>\n        </div>\n        <div style=\"background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 12px;\">\n          <span style=\"color: #64748B;\">Cadence:</span>\n          <strong style=\"color: #059669; margin-left: 4px;\">Par variable</strong>\n        </div>\n      </div>\n    </div>\n    ",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF;"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF"
+          }
+        },
+        "row": 0,
+        "col": 0,
+        "id": "93090c73-3bfb-4c3f-807c-2ded05f6bd2c"
+      },
+      "e06d3143-43c0-437a-b427-4a0bc7204e54": {
+        "typeFullFqn": "system.cards.html_value_card",
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "html_value_card",
+        "type": "latest",
+        "title": "Synoptique SCADA Process - Sous-Station Réseau de Chaleur (RCU)",
+        "sizeX": 24,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "temp_primaire_aller",
+                  "type": "timeseries",
+                  "label": "temp_primaire_aller",
+                  "color": "#334155",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "temp_primaire_retour",
+                  "type": "timeseries",
+                  "label": "temp_primaire_retour",
+                  "color": "#0369A1",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "delta_t_primaire",
+                  "type": "timeseries",
+                  "label": "delta_t_primaire",
+                  "color": "#475569",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "debit_primaire_m3h",
+                  "type": "timeseries",
+                  "label": "debit_primaire_m3h",
+                  "color": "#0F766E",
+                  "units": "m³/h",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "puissance_thermique_kw",
+                  "type": "timeseries",
+                  "label": "puissance_thermique_kw",
+                  "color": "#1E40AF",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "energie_thermique_mwh",
+                  "type": "timeseries",
+                  "label": "energie_thermique_mwh",
+                  "color": "#64748B",
+                  "units": "MWh",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "emissions_co2_evitees_kg_h",
+                  "type": "timeseries",
+                  "label": "emissions_co2_evitees_kg_h",
+                  "color": "#374151",
+                  "units": "kgCO2/h",
+                  "decimals": 2,
+                  "settings": {}
+                },
+                {
+                  "name": "vanne_regulation_active",
+                  "type": "attribute",
+                  "label": "vanne_regulation_active",
+                  "color": "#1D4ED8",
+                  "units": "",
+                  "decimals": 0,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Sous-Station Réseau de Chaleur (RCU)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Réacteur Process -->\n    <rect x=\"80\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"170\" y=\"70\" fill=\"#0284C7\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"85\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#BAE6FD\" opacity=\"0.4\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 80 100\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"40\" y=\"90\" fill=\"#059669\" font-size=\"9\" font-weight=\"bold\">ALIM.</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 260 150 L 380 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"410\" cy=\"150\" r=\"28\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(410, 150)\">\n      <g>\n        <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 0 0\" to=\"360 0 0\" dur=\"0.8s\" repeatCount=\"indefinite\"/>\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n      </g>\n    </g>\n    <text x=\"410\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 440 150 L 580 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"580\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#D97706\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"640\" y=\"145\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 700 150 L 820 150\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"820,145 835,150 820,155\" fill=\"#059669\"/>\n    <text x=\"780\" y=\"140\" fill=\"#059669\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Température Primaire Aller</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_primaire_aller:1}</text>\n    </g>\n    \n    <g transform=\"translate(660, 85)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Température Primaire Retour</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_primaire_retour:1}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Sous-Station Réseau de Chaleur (RCU)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Réacteur Process -->\n    <rect x=\"80\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"170\" y=\"70\" fill=\"#0284C7\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"85\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#BAE6FD\" opacity=\"0.4\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 80 100\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"40\" y=\"90\" fill=\"#059669\" font-size=\"9\" font-weight=\"bold\">ALIM.</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 260 150 L 380 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"410\" cy=\"150\" r=\"28\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(410, 150)\">\n      <g>\n        <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 0 0\" to=\"360 0 0\" dur=\"0.8s\" repeatCount=\"indefinite\"/>\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n      </g>\n    </g>\n    <text x=\"410\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 440 150 L 580 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"580\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#D97706\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"640\" y=\"145\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 700 150 L 820 150\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"820,145 835,150 820,155\" fill=\"#059669\"/>\n    <text x=\"780\" y=\"140\" fill=\"#059669\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Température Primaire Aller</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_primaire_aller:1}</text>\n    </g>\n    \n    <g transform=\"translate(660, 85)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Température Primaire Retour</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_primaire_retour:1}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
+            "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
+          },
+          "showTitle": false,
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "useDashboardTimewindow": true,
+          "displayTimewindow": false,
+          "showLegend": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF"
+          }
+        },
+        "row": 3,
+        "col": 0,
+        "id": "e06d3143-43c0-437a-b427-4a0bc7204e54"
+      },
+      "6ebcbd01-6a06-472d-9778-81179c009310": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Température Primaire Aller",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "temp_primaire_aller",
+                  "type": "timeseries",
+                  "label": "Température Primaire Aller",
+                  "color": "#334155",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 80.8,
+            "maxValue": 95.2,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Primaire Aller",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Primaire Aller",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 11,
+        "col": 0,
+        "id": "6ebcbd01-6a06-472d-9778-81179c009310"
+      },
+      "3a4aa728-cb54-4cf1-9fd0-b1b1eba6bb32": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Température Primaire Retour",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "temp_primaire_retour",
+                  "type": "timeseries",
+                  "label": "Température Primaire Retour",
+                  "color": "#0369A1",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 53.0,
+            "maxValue": 65.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Température Primaire Retour",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Température Primaire Retour",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 11,
+        "col": 6,
+        "id": "3a4aa728-cb54-4cf1-9fd0-b1b1eba6bb32"
+      },
+      "2032e93b-1884-4778-9a96-26994f9575ca": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Delta T Primaire",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "delta_t_primaire",
+                  "type": "timeseries",
+                  "label": "Delta T Primaire",
+                  "color": "#475569",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Delta T Primaire",
+            "unitTitle": "°C",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Delta T Primaire",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 11,
+        "col": 12,
+        "id": "2032e93b-1884-4778-9a96-26994f9575ca"
+      },
+      "92e7b641-6c18-4b38-bbc3-1d0acaf93b43": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Débit Primaire RCU",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "debit_primaire_m3h",
+                  "type": "timeseries",
+                  "label": "Débit Primaire RCU",
+                  "color": "#0F766E",
+                  "units": "m³/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": 4.8,
+            "maxValue": 19.2,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Débit Primaire RCU",
+            "unitTitle": "m³/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Débit Primaire RCU",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 11,
+        "col": 18,
+        "id": "92e7b641-6c18-4b38-bbc3-1d0acaf93b43"
+      },
+      "d1c3422c-96e6-42b9-9492-021d13216dcd": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Puissance Thermique Livrée",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "puissance_thermique_kw",
+                  "type": "timeseries",
+                  "label": "Puissance Thermique Livrée",
+                  "color": "#1E40AF",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Puissance Thermique Livrée",
+            "unitTitle": "kW",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Puissance Thermique Livrée",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 0,
+        "id": "d1c3422c-96e6-42b9-9492-021d13216dcd"
+      },
+      "2ac8ed47-1e69-4d03-9274-497f2196fcc9": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "Compteur Chaleur Cumulée",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "energie_thermique_mwh",
+                  "type": "timeseries",
+                  "label": "Compteur Chaleur Cumulée",
+                  "color": "#64748B",
+                  "units": "MWh",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "Compteur Chaleur Cumulée",
+            "unitTitle": "MWh",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "Compteur Chaleur Cumulée",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 6,
+        "id": "2ac8ed47-1e69-4d03-9274-497f2196fcc9"
+      },
+      "78fb4dfd-d2d2-4583-9aaf-7622936dd2c5": {
+        "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
+        "isSystemType": true,
+        "bundleAlias": "digital_gauges",
+        "typeAlias": "simple_gauge_justgage",
+        "type": "latest",
+        "title": "CO2 Évité vs Gaz",
+        "sizeX": 6,
+        "sizeY": 5,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "emissions_co2_evitees_kg_h",
+                  "type": "timeseries",
+                  "label": "CO2 Évité vs Gaz",
+                  "color": "#374151",
+                  "units": "kgCO2/h",
+                  "decimals": 2,
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "minValue": -10.0,
+            "maxValue": 110.0,
+            "gaugeType": "arc",
+            "showTitle": true,
+            "title": "CO2 Évité vs Gaz",
+            "unitTitle": "kgCO2/h",
+            "decimals": 2,
+            "gaugeWidthScale": 0.8,
+            "gaugeColor": "#E2E8F0",
+            "colorCounter": "#0F172A",
+            "levelColors": [
+              "#475569",
+              "#D97706",
+              "#DC2626"
+            ]
+          },
+          "showTitle": true,
+          "title": "CO2 Évité vs Gaz",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 16,
+        "col": 12,
+        "id": "78fb4dfd-d2d2-4583-9aaf-7622936dd2c5"
+      },
+      "ec431f01-54e8-4e22-b067-331f9b63e7a4": {
+        "typeFullFqn": "system.charts.basic_timeseries",
+        "isSystemType": true,
+        "bundleAlias": "charts",
+        "typeAlias": "basic_timeseries",
+        "type": "timeseries",
+        "title": "Real-Time Telemetry - Sous-Station Réseau de Chaleur (RCU)",
+        "sizeX": 16,
+        "sizeY": 8,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "temp_primaire_aller",
+                  "type": "timeseries",
+                  "label": "Température Primaire Aller (°C)",
+                  "color": "#334155",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "temp_primaire_retour",
+                  "type": "timeseries",
+                  "label": "Température Primaire Retour (°C)",
+                  "color": "#0369A1",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "delta_t_primaire",
+                  "type": "timeseries",
+                  "label": "Delta T Primaire (°C)",
+                  "color": "#475569",
+                  "units": "°C",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "debit_primaire_m3h",
+                  "type": "timeseries",
+                  "label": "Débit Primaire RCU (m³/h)",
+                  "color": "#0F766E",
+                  "units": "m³/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "puissance_thermique_kw",
+                  "type": "timeseries",
+                  "label": "Puissance Thermique Livrée (kW)",
+                  "color": "#1E40AF",
+                  "units": "kW",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "energie_thermique_mwh",
+                  "type": "timeseries",
+                  "label": "Compteur Chaleur Cumulée (MWh)",
+                  "color": "#64748B",
+                  "units": "MWh",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                },
+                {
+                  "name": "emissions_co2_evitees_kg_h",
+                  "type": "timeseries",
+                  "label": "CO2 Évité vs Gaz (kgCO2/h)",
+                  "color": "#374151",
+                  "units": "kgCO2/h",
+                  "decimals": 2,
+                  "settings": {
+                    "showLines": true,
+                    "fillLines": false,
+                    "showPoints": false,
+                    "lineWidth": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 120000,
+              "quickInterval": "CURRENT_DAY",
+              "interval": 1000
+            },
+            "aggregation": {
+              "type": "NONE",
+              "limit": 500
+            }
+          },
+          "settings": {
+            "showLegend": true,
+            "legendConfig": {
+              "direction": "row",
+              "position": "bottom",
+              "sortDatakeys": false,
+              "showMin": true,
+              "showMax": true,
+              "showAvg": true,
+              "showCurrent": true
+            },
+            "grid": {
+              "color": "#E2E8F0",
+              "tickColor": "#CBD5E1",
+              "verticalLines": true,
+              "horizontalLines": true
+            },
+            "xaxis": {
+              "showLabels": true,
+              "color": "#475569"
+            },
+            "yaxis": {
+              "showLabels": true,
+              "color": "#475569"
+            }
+          },
+          "showTitle": true,
+          "title": "Telemetry Trends (7 variables)",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 21,
+        "col": 0,
+        "id": "ec431f01-54e8-4e22-b067-331f9b63e7a4"
+      },
+      "11bd882d-cef2-4d82-a2ff-407ce43df077": {
+        "typeFullFqn": "system.single_switch",
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "single_switch",
+        "type": "rpc",
+        "title": "Pilotage - Vanne Régulation 2 Voies",
+        "sizeX": 8,
+        "sizeY": 4,
+        "config": {
+          "showTitle": false,
+          "backgroundColor": "#FFFFFF",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          },
+          "targetDevice": {
+            "type": "entity",
+            "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20"
+          },
+          "datasources": [],
+          "settings": {
+            "initialState": {
+              "action": "GET_ATTRIBUTE",
+              "defaultValue": true,
+              "getAttribute": {
+                "scope": "SHARED_SCOPE",
+                "key": "vanne_regulation_active"
+              },
+              "dataToValue": {
+                "type": "NONE",
+                "compareToValue": true,
+                "dataToValueFunction": "return Boolean(data);"
+              }
+            },
+            "onUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "vanne_regulation_active",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": true
+              }
+            },
+            "offUpdateState": {
+              "action": "SET_ATTRIBUTE",
+              "setAttribute": {
+                "key": "vanne_regulation_active",
+                "scope": "SHARED_SCOPE"
+              },
+              "valueToData": {
+                "type": "CONSTANT",
+                "constantValue": false
+              }
+            },
+            "disabledState": {
+              "action": "DO_NOTHING",
+              "defaultValue": false
+            },
+            "layout": "right",
+            "autoScale": true,
+            "showLabel": true,
+            "label": "Vanne Régulation 2 Voies",
+            "labelFont": {
+              "family": "Roboto",
+              "size": 13,
+              "sizeUnit": "px",
+              "style": "normal",
+              "weight": "500",
+              "lineHeight": "18px"
+            },
+            "labelColor": "#0F172A",
+            "showIcon": false,
+            "switchColorOn": "#475569",
+            "switchColorOff": "#94A3B8",
+            "tumblerColorOn": "#FFFFFF",
+            "tumblerColorOff": "#FFFFFF",
+            "showOnLabel": true,
+            "onLabel": "ON",
+            "onLabelColor": "#475569",
+            "showOffLabel": true,
+            "offLabel": "OFF",
+            "offLabelColor": "#64748B",
+            "background": {
+              "type": "color",
+              "color": "#FFFFFF",
+              "overlay": {
+                "enabled": false
+              }
+            }
+          }
+        },
+        "row": 21,
+        "col": 16,
+        "id": "11bd882d-cef2-4d82-a2ff-407ce43df077"
+      },
+      "50ab787c-f443-458b-b292-9d9a486d9877": {
+        "typeFullFqn": "system.cards.entities_table",
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "entities_table",
+        "type": "latest",
+        "title": "Attributes & Operational States",
+        "sizeX": 8,
+        "sizeY": 4,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "dataKeys": [
+                {
+                  "name": "vanne_regulation_active",
+                  "type": "attribute",
+                  "label": "Vanne Régulation 2 Voies",
+                  "color": "#38BDF8",
+                  "settings": {}
+                }
+              ]
+            }
+          ],
+          "settings": {
+            "entitiesTableWidgetTitle": "Attributes & Operational States",
+            "enableSearch": false,
+            "displayPagination": false,
+            "defaultPageSize": 10
+          },
+          "showTitle": true,
+          "title": "Attributes & Operational States",
+          "dropShadow": true,
+          "enableFullscreen": true,
+          "color": "#0F172A",
+          "widgetStyle": {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": "12px",
+            "border": "1px solid #CBD5E1",
+            "color": "#0F172A"
+          }
+        },
+        "row": 25,
+        "col": 16,
+        "id": "50ab787c-f443-458b-b292-9d9a486d9877"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "default",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "93090c73-3bfb-4c3f-807c-2ded05f6bd2c": {
+                "sizeX": 24,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "e06d3143-43c0-437a-b427-4a0bc7204e54": {
+                "sizeX": 24,
+                "sizeY": 8,
+                "row": 3,
+                "col": 0
+              },
+              "6ebcbd01-6a06-472d-9778-81179c009310": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 0
+              },
+              "3a4aa728-cb54-4cf1-9fd0-b1b1eba6bb32": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 6
+              },
+              "2032e93b-1884-4778-9a96-26994f9575ca": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 12
+              },
+              "92e7b641-6c18-4b38-bbc3-1d0acaf93b43": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 11,
+                "col": 18
+              },
+              "d1c3422c-96e6-42b9-9492-021d13216dcd": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 16,
+                "col": 0
+              },
+              "2ac8ed47-1e69-4d03-9274-497f2196fcc9": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 16,
+                "col": 6
+              },
+              "78fb4dfd-d2d2-4583-9aaf-7622936dd2c5": {
+                "sizeX": 6,
+                "sizeY": 5,
+                "row": 16,
+                "col": 12
+              },
+              "ec431f01-54e8-4e22-b067-331f9b63e7a4": {
+                "sizeX": 16,
+                "sizeY": 8,
+                "row": 21,
+                "col": 0
+              },
+              "11bd882d-cef2-4d82-a2ff-407ce43df077": {
+                "sizeX": 8,
+                "sizeY": 4,
+                "row": 21,
+                "col": 16
+              },
+              "50ab787c-f443-458b-b292-9d9a486d9877": {
+                "sizeX": 8,
+                "sizeY": 4,
+                "row": 25,
+                "col": 16
+              }
+            },
+            "gridSettings": {
+              "columns": 24,
+              "margin": 10,
+              "outerMargin": true,
+              "backgroundColor": "#F1F5F9",
+              "backgroundSizeMode": "100%",
+              "autoFillHeight": false
+            }
+          }
+        }
+      }
+    },
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "realtime": {
+        "realtimeType": 0,
+        "timewindowMs": 120000,
+        "quickInterval": "CURRENT_DAY",
+        "interval": 1000
+      },
+      "aggregation": {
+        "type": "NONE",
+        "limit": 500
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": true,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  }
+}

@@ -2,10 +2,10 @@
   "title": "Supervision SCADA - Sonde Acoustique & Nuisances Sonores",
   "name": "Supervision SCADA - Sonde Acoustique & Nuisances Sonores",
   "configuration": {
-    "description": "Tableau de bord SCADA HMI ThingsBoard pour l'équipement 'Sonde Acoustique & Nuisances Sonores' (ID: city_acoustic_sensor). Synoptique P&ID / SLD vectoriel animé, instrumentation process et enregistreur de tendance temps réel. Protocole: HTTP.",
+    "description": "ThingsBoard SCADA HMI dashboard for equipment 'Sonde Acoustique & Nuisances Sonores' (ID: city_acoustic_sensor). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: HTTP.",
     "entityAliases": {
-      "9e74b15f-f3fa-4414-81bc-79572a6c9386": {
-        "id": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
+      "0adadfcd-e0bc-4709-9073-d85ac57eef94": {
+        "id": "0adadfcd-e0bc-4709-9073-d85ac57eef94",
         "alias": "Sonde Acoustique & Nuisances Sonores",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "1d381e4c-feac-4bfa-a796-06e63b3a473a": {
+      "97157ce3-2f63-4a19-9636-038567260180": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "1d381e4c-feac-4bfa-a796-06e63b3a473a"
+        "id": "97157ce3-2f63-4a19-9636-038567260180"
       },
-      "efc65f55-86fa-4767-b57b-41cdc22995a2": {
+      "26ea18f7-da75-4c11-a215-65f5eb6ea621": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,13 +59,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
+              "entityAliasId": "0adadfcd-e0bc-4709-9073-d85ac57eef94",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
                   "type": "timeseries",
                   "label": "niveau_laeq_dba",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "dB(A)",
                   "decimals": 2,
                   "settings": {}
@@ -74,7 +74,7 @@
                   "name": "niveau_lcpeak_dbc",
                   "type": "timeseries",
                   "label": "niveau_lcpeak_dbc",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "dB(C)",
                   "decimals": 2,
                   "settings": {}
@@ -83,7 +83,7 @@
                   "name": "batterie_solaire_v",
                   "type": "timeseries",
                   "label": "batterie_solaire_v",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "V",
                   "decimals": 2,
                   "settings": {}
@@ -92,7 +92,7 @@
                   "name": "depassement_seuil_nocturne",
                   "type": "attribute",
                   "label": "depassement_seuil_nocturne",
-                  "color": "#F59E0B",
+                  "color": "#0F766E",
                   "units": "",
                   "decimals": 0,
                   "settings": {}
@@ -101,8 +101,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Sonde Acoustique SCADA : Sonde Acoustique & Nuisances Sonores\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Mât de Mesure Acoustique Classe 1 -->\n    <line x1=\"260\" y1=\"230\" x2=\"260\" y2=\"60\" stroke=\"#475569\" stroke-width=\"5\"/>\n    \n    <!-- Microphone de Précision avec Boule Anti-Vent -->\n    <g transform=\"translate(260, 50)\">\n      <circle cx=\"0\" cy=\"0\" r=\"18\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"-24\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MICRO CLASSE 1 (IEC 61672)</text>\n    </g>\n\n    <!-- Onde Acoustique Représentée -->\n    <path d=\"M 290 50 Q 320 20 350 50 T 410 50\" fill=\"none\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n    <path d=\"M 230 50 Q 200 20 170 50 T 110 50\" fill=\"none\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n\n    <!-- Panneau Solaire Autonome -->\n    <g transform=\"translate(260, 110)\">\n      <polygon points=\"-30,-15 30,-15 20,5 -20,5\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"20\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PANNEAU SOLAIRE</text>\n    </g>\n\n    <!-- Boîtier DSP Analyse Spectrale en Temps Réel -->\n    <rect x=\"225\" y=\"145\" width=\"70\" height=\"50\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n    <text x=\"260\" y=\"173\" fill=\"#0F172A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DSP 1/3 OCTAVE</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU SONORE (LAeq)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_laeq_dba:1} dBA</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU CRÊTE (LCpeak)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_lcpeak_dbc:1} dBC</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">BATTERIE SOLAIRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${batterie_solaire_v:2} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SEUIL NOCTURNE DÉPASSÉ</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${depassement_seuil_nocturne}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #FFFFFF;\n    border: 1px solid #CBD5E1;\n    border-radius: 12px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #E2E8F0;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #059669;\n    border-radius: 50%;\n    box-shadow: 0 0 8px #10B981;\n    animation: blink-live 1.5s infinite;\n  }\n  @keyframes blink-live {\n    0%, 100% { opacity: 1; }\n    50% { opacity: 0.35; }\n  }\n  .scada-badge {\n    background: #F8FAFC;\n    border: 1px solid #E2E8F0;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #475569;\n  }\n  .scada-badge strong { color: #0284C7; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Sonde Acoustique SCADA : Sonde Acoustique & Nuisances Sonores\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #059669;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Mât de Mesure Acoustique Classe 1 -->\n    <line x1=\"260\" y1=\"230\" x2=\"260\" y2=\"60\" stroke=\"#475569\" stroke-width=\"5\"/>\n    \n    <!-- Microphone de Précision avec Boule Anti-Vent -->\n    <g transform=\"translate(260, 50)\">\n      <circle cx=\"0\" cy=\"0\" r=\"18\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"-24\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MICRO CLASSE 1 (IEC 61672)</text>\n    </g>\n\n    <!-- Onde Acoustique Représentée -->\n    <path d=\"M 290 50 Q 320 20 350 50 T 410 50\" fill=\"none\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n    <path d=\"M 230 50 Q 200 20 170 50 T 110 50\" fill=\"none\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n\n    <!-- Panneau Solaire Autonome -->\n    <g transform=\"translate(260, 110)\">\n      <polygon points=\"-30,-15 30,-15 20,5 -20,5\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"20\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PANNEAU SOLAIRE</text>\n    </g>\n\n    <!-- Boîtier DSP Analyse Spectrale en Temps Réel -->\n    <rect x=\"225\" y=\"145\" width=\"70\" height=\"50\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n    <text x=\"260\" y=\"173\" fill=\"#0F172A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DSP 1/3 OCTAVE</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU SONORE (LAeq)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_laeq_dba:1} dBA</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU CRÊTE (LCpeak)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_lcpeak_dbc:1} dBC</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">BATTERIE SOLAIRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${batterie_solaire_v:2} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#FFFFFF\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SEUIL NOCTURNE DÉPASSÉ</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${depassement_seuil_nocturne}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Sonde Acoustique SCADA : Sonde Acoustique & Nuisances Sonores\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Mât de Mesure Acoustique Classe 1 -->\n    <line x1=\"260\" y1=\"230\" x2=\"260\" y2=\"60\" stroke=\"#475569\" stroke-width=\"5\"/>\n    \n    <!-- Microphone de Précision avec Boule Anti-Vent -->\n    <g transform=\"translate(260, 50)\">\n      <circle cx=\"0\" cy=\"0\" r=\"18\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"-24\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MICRO CLASSE 1 (IEC 61672)</text>\n    </g>\n\n    <!-- Onde Acoustique Représentée -->\n    <path d=\"M 290 50 Q 320 20 350 50 T 410 50\" fill=\"none\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n    <path d=\"M 230 50 Q 200 20 170 50 T 110 50\" fill=\"none\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n\n    <!-- Panneau Solaire Autonome -->\n    <g transform=\"translate(260, 110)\">\n      <polygon points=\"-30,-15 30,-15 20,5 -20,5\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"20\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PANNEAU SOLAIRE</text>\n    </g>\n\n    <!-- Boîtier DSP Analyse Spectrale en Temps Réel -->\n    <rect x=\"225\" y=\"145\" width=\"70\" height=\"50\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n    <text x=\"260\" y=\"173\" fill=\"#0F172A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DSP 1/3 OCTAVE</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU SONORE (LAeq)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_laeq_dba:1} dBA</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU CRÊTE (LCpeak)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_lcpeak_dbc:1} dBC</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">BATTERIE SOLAIRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${batterie_solaire_v:2} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SEUIL NOCTURNE DÉPASSÉ</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${depassement_seuil_nocturne}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Sonde Acoustique SCADA : Sonde Acoustique & Nuisances Sonores\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Mât de Mesure Acoustique Classe 1 -->\n    <line x1=\"260\" y1=\"230\" x2=\"260\" y2=\"60\" stroke=\"#475569\" stroke-width=\"5\"/>\n    \n    <!-- Microphone de Précision avec Boule Anti-Vent -->\n    <g transform=\"translate(260, 50)\">\n      <circle cx=\"0\" cy=\"0\" r=\"18\" fill=\"#F1F5F9\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n      <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"-24\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">MICRO CLASSE 1 (IEC 61672)</text>\n    </g>\n\n    <!-- Onde Acoustique Représentée -->\n    <path d=\"M 290 50 Q 320 20 350 50 T 410 50\" fill=\"none\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n    <path d=\"M 230 50 Q 200 20 170 50 T 110 50\" fill=\"none\" stroke=\"#E2001A\" stroke-width=\"2\" stroke-dasharray=\"4,2\"/>\n\n    <!-- Panneau Solaire Autonome -->\n    <g transform=\"translate(260, 110)\">\n      <polygon points=\"-30,-15 30,-15 20,5 -20,5\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"20\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PANNEAU SOLAIRE</text>\n    </g>\n\n    <!-- Boîtier DSP Analyse Spectrale en Temps Réel -->\n    <rect x=\"225\" y=\"145\" width=\"70\" height=\"50\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n    <text x=\"260\" y=\"173\" fill=\"#0F172A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DSP 1/3 OCTAVE</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU SONORE (LAeq)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_laeq_dba:1} dBA</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU CRÊTE (LCpeak)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_lcpeak_dbc:1} dBC</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">BATTERIE SOLAIRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${batterie_solaire_v:2} V</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">SEUIL NOCTURNE DÉPASSÉ</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${depassement_seuil_nocturne}</text>\n    </g>\n  </svg>\n    \n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "efc65f55-86fa-4767-b57b-41cdc22995a2"
+        "id": "26ea18f7-da75-4c11-a215-65f5eb6ea621"
       },
-      "c5d43db0-857e-426b-8f98-93cfe704e586": {
+      "db21a946-4575-4c96-9a3f-1ef7946269ea": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,13 +135,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
+              "entityAliasId": "0adadfcd-e0bc-4709-9073-d85ac57eef94",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
                   "type": "timeseries",
                   "label": "Pression Acoustique Équivalente LAeq",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "dB(A)",
                   "decimals": 2,
                   "settings": {}
@@ -161,9 +161,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#E2001A"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "c5d43db0-857e-426b-8f98-93cfe704e586"
+        "id": "db21a946-4575-4c96-9a3f-1ef7946269ea"
       },
-      "a45ce4b9-0289-43c3-88ec-8e39d442d9af": {
+      "6ead2e23-1258-4c4d-a773-b28e3fee2178": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,13 +195,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
+              "entityAliasId": "0adadfcd-e0bc-4709-9073-d85ac57eef94",
               "dataKeys": [
                 {
                   "name": "niveau_lcpeak_dbc",
                   "type": "timeseries",
                   "label": "Niveau Crête Instantané LCpeak",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "dB(C)",
                   "decimals": 2,
                   "settings": {}
@@ -221,9 +221,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#3B82F6"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "a45ce4b9-0289-43c3-88ec-8e39d442d9af"
+        "id": "6ead2e23-1258-4c4d-a773-b28e3fee2178"
       },
-      "edcf0519-dcfe-4729-857d-2547765a9aca": {
+      "13d14198-d413-470f-8bd9-c02a1e622f67": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,13 +255,13 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
+              "entityAliasId": "0adadfcd-e0bc-4709-9073-d85ac57eef94",
               "dataKeys": [
                 {
                   "name": "batterie_solaire_v",
                   "type": "timeseries",
                   "label": "Tension Batterie Solaire",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "V",
                   "decimals": 2,
                   "settings": {}
@@ -281,9 +281,9 @@
             "gaugeColor": "#E2E8F0",
             "colorCounter": "#0F172A",
             "levelColors": [
-              "#059669",
+              "#475569",
               "#D97706",
-              "#10B981"
+              "#DC2626"
             ]
           },
           "showTitle": true,
@@ -300,28 +300,28 @@
         },
         "row": 11,
         "col": 16,
-        "id": "edcf0519-dcfe-4729-857d-2547765a9aca"
+        "id": "13d14198-d413-470f-8bd9-c02a1e622f67"
       },
-      "92d6636f-b86e-4377-95b8-d02a6ef87eb8": {
+      "fe7f42a9-0459-4894-b833-8fd9d6f408b1": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
         "typeAlias": "basic_timeseries",
         "type": "timeseries",
-        "title": "Télémétries en Temps Réel - Sonde Acoustique & Nuisances Sonores",
+        "title": "Real-Time Telemetry - Sonde Acoustique & Nuisances Sonores",
         "sizeX": 16,
         "sizeY": 8,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
+              "entityAliasId": "0adadfcd-e0bc-4709-9073-d85ac57eef94",
               "dataKeys": [
                 {
                   "name": "niveau_laeq_dba",
                   "type": "timeseries",
                   "label": "Pression Acoustique Équivalente LAeq (dB(A))",
-                  "color": "#E2001A",
+                  "color": "#334155",
                   "units": "dB(A)",
                   "decimals": 2,
                   "settings": {
@@ -335,7 +335,7 @@
                   "name": "niveau_lcpeak_dbc",
                   "type": "timeseries",
                   "label": "Niveau Crête Instantané LCpeak (dB(C))",
-                  "color": "#3B82F6",
+                  "color": "#0369A1",
                   "units": "dB(C)",
                   "decimals": 2,
                   "settings": {
@@ -349,7 +349,7 @@
                   "name": "batterie_solaire_v",
                   "type": "timeseries",
                   "label": "Tension Batterie Solaire (V)",
-                  "color": "#10B981",
+                  "color": "#475569",
                   "units": "V",
                   "decimals": 2,
                   "settings": {
@@ -400,7 +400,7 @@
             }
           },
           "showTitle": true,
-          "title": "Évolution Télémétrique (3 grandeurs)",
+          "title": "Telemetry Trends (3 variables)",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "92d6636f-b86e-4377-95b8-d02a6ef87eb8"
+        "id": "fe7f42a9-0459-4894-b833-8fd9d6f408b1"
       },
-      "cf0a6b39-fff6-4b7d-9bc0-e8d7fc918c8e": {
+      "36869d0b-ccb7-4917-b110-5afdcd9a2f6a": {
         "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -439,7 +439,7 @@
           },
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386"
+            "entityAliasId": "0adadfcd-e0bc-4709-9073-d85ac57eef94"
           },
           "datasources": [],
           "settings": {
@@ -496,13 +496,13 @@
             },
             "labelColor": "#0F172A",
             "showIcon": false,
-            "switchColorOn": "#10B981",
+            "switchColorOn": "#475569",
             "switchColorOff": "#94A3B8",
             "tumblerColorOn": "#FFFFFF",
             "tumblerColorOff": "#FFFFFF",
             "showOnLabel": true,
             "onLabel": "ON",
-            "onLabelColor": "#10B981",
+            "onLabelColor": "#475569",
             "showOffLabel": true,
             "offLabel": "OFF",
             "offLabelColor": "#64748B",
@@ -517,22 +517,22 @@
         },
         "row": 16,
         "col": 16,
-        "id": "cf0a6b39-fff6-4b7d-9bc0-e8d7fc918c8e"
+        "id": "36869d0b-ccb7-4917-b110-5afdcd9a2f6a"
       },
-      "f97ba356-67e9-4816-8e13-5312db802534": {
+      "ebadbc41-a58e-4f21-9f1d-43f745533ee2": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
         "typeAlias": "entities_table",
         "type": "latest",
-        "title": "Attributs & États Opérationnels",
+        "title": "Attributes & Operational States",
         "sizeX": 8,
         "sizeY": 4,
         "config": {
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "9e74b15f-f3fa-4414-81bc-79572a6c9386",
+              "entityAliasId": "0adadfcd-e0bc-4709-9073-d85ac57eef94",
               "dataKeys": [
                 {
                   "name": "depassement_seuil_nocturne",
@@ -545,13 +545,13 @@
             }
           ],
           "settings": {
-            "entitiesTableWidgetTitle": "Attributs & États Opérationnels",
+            "entitiesTableWidgetTitle": "Attributes & Operational States",
             "enableSearch": false,
             "displayPagination": false,
             "defaultPageSize": 10
           },
           "showTitle": true,
-          "title": "Attributs & États Opérationnels",
+          "title": "Attributes & Operational States",
           "dropShadow": true,
           "enableFullscreen": true,
           "color": "#0F172A",
@@ -564,7 +564,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "f97ba356-67e9-4816-8e13-5312db802534"
+        "id": "ebadbc41-a58e-4f21-9f1d-43f745533ee2"
       }
     },
     "states": {
@@ -574,49 +574,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "1d381e4c-feac-4bfa-a796-06e63b3a473a": {
+              "97157ce3-2f63-4a19-9636-038567260180": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "efc65f55-86fa-4767-b57b-41cdc22995a2": {
+              "26ea18f7-da75-4c11-a215-65f5eb6ea621": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "c5d43db0-857e-426b-8f98-93cfe704e586": {
+              "db21a946-4575-4c96-9a3f-1ef7946269ea": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "a45ce4b9-0289-43c3-88ec-8e39d442d9af": {
+              "6ead2e23-1258-4c4d-a773-b28e3fee2178": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "edcf0519-dcfe-4729-857d-2547765a9aca": {
+              "13d14198-d413-470f-8bd9-c02a1e622f67": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "92d6636f-b86e-4377-95b8-d02a6ef87eb8": {
+              "fe7f42a9-0459-4894-b833-8fd9d6f408b1": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "cf0a6b39-fff6-4b7d-9bc0-e8d7fc918c8e": {
+              "36869d0b-ccb7-4917-b110-5afdcd9a2f6a": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "f97ba356-67e9-4816-8e13-5312db802534": {
+              "ebadbc41-a58e-4f21-9f1d-43f745533ee2": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,
