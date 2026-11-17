@@ -223,8 +223,28 @@ html.light .hover\:bg-\[\#2B3342\]:hover {
 html.light .hover\:bg-\[\#1C222D\]:hover {
   background-color: #F8FAFC !important;
 }
-html.light .hover\:bg-\[\#151922\]:hover {
+html.light .hover\:bg-\[\#151922\]:hover,
+html.light .hover\:bg-\[\#181D26\]:hover {
   background-color: #F1F5F9 !important;
+}
+html.light .hover\:bg-amber-900:hover {
+  background-color: #FDE68A !important;
+  color: #92400E !important;
+}
+html.light .hover\:bg-blue-900:hover {
+  background-color: #BFDBFE !important;
+  color: #1E40AF !important;
+}
+html.light .hover\:bg-orange-900:hover {
+  background-color: #FED7AA !important;
+  color: #9A3412 !important;
+}
+html.light .hover\:bg-rose-900:hover,
+html.light .hover\:bg-rose-950\/40:hover,
+html.light .hover\:bg-rose-950\/50:hover,
+html.light .hover\:bg-rose-950\/60:hover {
+  background-color: #FECDD3 !important;
+  color: #9F1239 !important;
 }
 
 /* Bordures & Séparateurs */
@@ -284,6 +304,38 @@ html.light .text-red-400 {
 html.light .text-emerald-200 {
   color: #065F46 !important;
 }
+html.light .text-blue-400 {
+  color: #1D4ED8 !important;
+}
+html.light .text-rose-400,
+html.light .text-rose-500 {
+  color: #BE123C !important;
+}
+html.light .text-amber-500\/80 {
+  color: #B45309 !important;
+}
+html.light .text-emerald-500\/80 {
+  color: #047857 !important;
+}
+html.light .hover\:text-white:hover,
+html.light .hover\:text-slate-200:hover,
+html.light .hover\:text-slate-300:hover {
+  color: #0F172A !important;
+}
+html.light .hover\:text-sky-300:hover {
+  color: #0369A1 !important;
+}
+html.light .hover\:text-amber-300:hover {
+  color: #92400E !important;
+}
+html.light .hover\:text-rose-200:hover,
+html.light .hover\:text-rose-300:hover,
+html.light .hover\:text-rose-400:hover {
+  color: #9F1239 !important;
+}
+html.light .hover\:text-red-400:hover {
+  color: #991B1B !important;
+}
 
 /* Exceptions obligatoires pour le texte blanc sur boutons colorés */
 html.light .btn-primary-red,
@@ -309,6 +361,7 @@ html.light #log-error-badge {
 /* Badges Plateformes & Protocoles en Thème Clair */
 html.light .bg-red-950\/80,
 html.light .bg-red-950\/70,
+html.light .bg-red-950\/40,
 html.light .bg-red-950 {
   background-color: #FEE2E2 !important;
   border-color: #FCA5A5 !important;
@@ -343,6 +396,7 @@ html.light .text-amber-300 {
 
 html.light .bg-emerald-950\/80,
 html.light .bg-emerald-950\/70,
+html.light .bg-emerald-950\/40,
 html.light .bg-emerald-950\/30,
 html.light .bg-emerald-950\/25,
 html.light .bg-emerald-950 {
@@ -501,4 +555,14 @@ html.light tr.hover\:bg-white\/5:hover {
 }
 html.light tr:hover {
   background-color: #F8FAFC !important;
+}
+
+/* Contrastes explicites des menus déroulants <option> dans les deux thèmes */
+html.dark select option {
+  background-color: #181D26;
+  color: #F8FAFC;
+}
+html.light select option {
+  background-color: #FFFFFF;
+  color: #0F172A;
 }

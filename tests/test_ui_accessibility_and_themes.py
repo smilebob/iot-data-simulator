@@ -62,5 +62,20 @@ def test_wcag_contrast_and_focus_visible_rules_present():
         "html.light .text-purple-400",
         "html.light button.bg-sky-600",
         "html.light button.bg-amber-600",
+        "html.light select option",
     ):
         assert cls in css, f"Missing WCAG contrast override '{cls}' in styles.css"
+
+
+def test_no_unmapped_dark_hex_backgrounds_in_light_theme():
+    """Ensures every dark hex background in index.html/app.js is overridden in html.light."""
+    html = INDEX_HTML.read_text(encoding="utf-8")
+    js = APP_JS.read_text(encoding="utf-8")
+    css = STYLES_CSS.read_text(encoding="utf-8")
+
+    # Exclude #0B0D11 (logs terminal) and #E2001A (brand red accent)
+    ignored = {"#0B0D11", "#E2001A"}
+    used_hex_bgs = set(re.findall(r'bg-\[(#[0-9A-Fa-f]+)\]', html + "\n" + js)) - ignored
+    for hx in used_hex_bgs:
+        escaped = hx.replace("#", r"\#")
+        assert escaped in css, f"Dark hex background bg-[{hx}] is missing an html.light override in styles.css"
