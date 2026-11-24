@@ -17,7 +17,7 @@ import json
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Request
 from fastapi.responses import Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from app.models.broker import BrokerConfig
 from app.models.device import DeviceConfig
 from app.models.variable import VariableConfig, AnomalyType

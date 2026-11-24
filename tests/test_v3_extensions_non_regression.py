@@ -364,3 +364,20 @@ def test_lot_e_bid_pack_zip_and_stress_test():
         assert st["errors"] == 0
 
     asyncio.run(_run_stress())
+
+
+def test_fastapi_routes_and_app_import_cleanly():
+    """Smoke test ensuring app.api.routes imports cleanly in a fresh Python interpreter."""
+    import subprocess
+    import sys
+
+    code = (
+        "from app.api.routes import router as r; "
+        "paths = {getattr(x, 'path', '') for x in r.routes}; "
+        "expected = {'/api/devices/{device_id}/backfill', '/api/modbus/status', "
+        "'/api/devices/{device_id}/synoptic', '/api/deliverables/bid-pack.zip', '/api/stress/status'}; "
+        "missing = expected - paths; "
+        "assert not missing, f'Missing routes: {missing}'"
+    )
+    res = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True)
+    assert res.returncode == 0, f"routes import failed:\n{res.stderr}"
