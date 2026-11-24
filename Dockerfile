@@ -14,15 +14,19 @@ RUN pip install --no-cache-dir --user -r requirements.txt
 # ========================================================
 FROM python:3.11-slim-bookworm AS runner
 
+ARG BUILD_DATE=2026-11-24
+
 # Métadonnées
 LABEL maintainer="IoT Engineering Team" \
       description="IoT Data Simulator for ThingsBoard & Multi-Platform" \
-      version="1.0.0"
+      version="2.4.0" \
+      build_date="${BUILD_DATE}"
 
 # Définition des variables d'environnement
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
+    BUILD_DATE=${BUILD_DATE} \
     PATH=/home/appuser/.local/bin:$PATH
 
 WORKDIR /app

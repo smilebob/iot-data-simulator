@@ -210,7 +210,9 @@ function updateStatusUI() {
   if (state.status.version) {
     const verBadge = document.getElementById("app-version-badge");
     if (verBadge) {
-      verBadge.textContent = state.status.version;
+      verBadge.textContent = state.status.build_date
+        ? `${state.status.version} (build ${state.status.build_date})`
+        : state.status.version;
     }
   }
 

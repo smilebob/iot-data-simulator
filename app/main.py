@@ -13,6 +13,7 @@ enforces CIS/OWASP security headers, and orchestrates background simulation runt
 
 import asyncio
 import logging
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -38,8 +39,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger("iot_sim")
 
-# Official semantic version of the application
-APP_VERSION = "2.2.1"
+# Official semantic version and build date of the application
+APP_VERSION = "2.4.0"
+BUILD_DATE = os.getenv("BUILD_DATE", "2026-11-24")
 
 # Initialize application-wide singletons
 repository = StorageRepository(file_path="data/simulator_state.json")
@@ -65,7 +67,7 @@ async def lifespan(app: FastAPI):
     Starts MQTT background connections and kicks off the 3-pass causal simulation loop.
     On application teardown, stops all background workers and disconnects cleanly.
     """
-    logger.info(f"Starting IoT Data Simulator stack (v{APP_VERSION})...")
+    logger.info(f"Starting IoT Data Simulator stack (v{APP_VERSION} • build {BUILD_DATE})...")
     mqtt_manager.start()
     engine.start(loop=asyncio.get_running_loop())
     yield
@@ -126,6 +128,7 @@ def healthcheck() -> dict:
     return {
         "status": "healthy",
         "version": APP_VERSION,
+        "build_date": BUILD_DATE,
         "engine_running": engine.is_running,
         "mqtt_connected": mqtt_manager.default_client.is_connected if mqtt_manager.default_client else False,
         "devices": devs,
