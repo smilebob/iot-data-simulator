@@ -39,6 +39,7 @@ class InstantiateSiteRequest(BaseModel):
     blueprint_id: str
     site_prefix: str = Field(default="site_demo", description="Prefix used for created device IDs")
     protocol: TransportProtocol = Field(default=TransportProtocol.MQTT)
+    force_http_rest: bool = Field(default=False, description="Force HTTP REST v1 transport for all instantiated site devices")
     platform: PlatformType = Field(default=PlatformType.THINGSBOARD)
     clear_existing: bool = Field(default=False, description="Clear existing simulator devices before instantiating")
 
@@ -107,6 +108,8 @@ def instantiate_site_blueprint(
     created_devices = []
     total_vars = 0
 
+    effective_protocol = TransportProtocol.HTTP if req.force_http_rest else req.protocol
+
     for idx, eq in enumerate(bp.equipments):
         if eq.preset_id not in catalog:
             continue
@@ -115,7 +118,7 @@ def instantiate_site_blueprint(
             preset_id=eq.preset_id,
             device_id=device_id,
             device_name=eq.display_name,
-            protocol=req.protocol,
+            protocol=effective_protocol,
             platform=req.platform,
             token=f"{clean_prefix}_{eq.role_suffix}_tok",
         )

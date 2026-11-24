@@ -166,5 +166,35 @@ def test_tb_provisioner_sysadmin_to_customer_flow():
 
             updated_dev = repo.get_device("dev_pac")
             assert updated_dev.token == "REAL_TB_ACCESS_TOKEN_XYZ"
+            assert updated_dev.protocol == TransportProtocol.HTTP
+            assert updated_dev.custom_host == "tb.example.com"
+            assert updated_dev.custom_port == 443
+            assert updated_dev.use_tls is True
+
+            # Verify force_http_rest=False preserves device protocol & custom host
+            repo.save_device(
+                DeviceConfig(
+                    id="dev_mqtt_keep",
+                    name="PAC Site Alpha",
+                    protocol=TransportProtocol.MQTT,
+                    custom_host="broker.local",
+                    custom_port=1883,
+                    use_tls=False,
+                )
+            )
+            await tb_provision_stack(
+                TbProvisionRequest(
+                    tb_url="http://10.0.0.5:8080",
+                    access_token=t_ctx["tenant_token"],
+                    device_ids=["dev_mqtt_keep"],
+                    push_dashboards=False,
+                    force_http_rest=False,
+                ),
+                repo=repo,
+            )
+            kept_dev = repo.get_device("dev_mqtt_keep")
+            assert kept_dev.protocol == TransportProtocol.MQTT
+            assert kept_dev.custom_host == "broker.local"
+            assert kept_dev.custom_port == 1883
 
     asyncio.run(_run())

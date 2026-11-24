@@ -16,6 +16,7 @@ Cette application a été conçue pour vous permettre de générer très simplem
 6. [Import / Export de Cas d'Usage Métiers & Agent IA Antigravity](preset_import_export_and_agent.md) : Export unitaire et bundles de modèles métiers, importation dans le volume persistant, protection des 35 presets d'usine et utilisation de l'Agent IA Antigravity (*IoT Preset Architect*) pour concevoir de nouveaux équipements sur-mesure.
 7. [Suite Avant-Vente & Porteurs d'Offres Numériques](presales_and_bid_suite.md) : **Calculateur de Dimensionnement IoT**, modèles réglementaires ROI (Décret BACS, RCU, ISO 50001), **Sites Clients Express (1 clic)**, **Storyboards de Soutenance Live**, **Livrables d'Offres** (IO List CSV + Dossier Architecture Markdown) et **Push ThingsBoard Éphémère Multi-Tenant/Client**.
 8. [Guide Débutant : Utiliser les 70 Widgets SCADA ISA-101 dans ThingsBoard 4.3](guide_debutant_widgets_scada.md) *(aussi disponible en [PDF illustré](guide_debutant_widgets_scada.pdf) et complété par le [Catalogue PDF des 70 Composants SVG](catalogue_composants_svg_scada.pdf))* : Tutoriel pas-à-pas (0 prérequis) pour importer les bundles, mapper vos variables et configurer les alarmes ISA-101 (▲ / ■ !).
+9. [Catalogue Commercial PDF des 35 Cas d'Usage IoT & SCADA (ANSI/ISA-101)](catalogue_commercial_cas_usage.pdf) : Book avant-vente prêt à l'emploi pour les commerciaux et porteurs d'offres (pitch client, bénéfices métiers, ROI, cibles, grandeurs supervisées/pilotables, synoptiques vectoriels ISA-101 et Sites Clients Express).
 
 ---
 

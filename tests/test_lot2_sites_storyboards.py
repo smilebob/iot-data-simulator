@@ -12,6 +12,7 @@ from app.core.site_blueprints import (
     generate_site_hypervision_dashboard,
 )
 from app.core.storyboard_engine import get_storyboards, StoryboardManager
+from app.models.device import TransportProtocol
 from app.storage.repository import StorageRepository
 
 
@@ -41,6 +42,21 @@ def test_site_blueprints_and_instantiation():
     devices = repo.get_devices()
     assert len(devices) == 5
     assert any(d.id == "client_alpha_gtb" for d in devices)
+
+    # Verify force_http_rest=True forces HTTP REST transport on all site devices
+    res_http = instantiate_site_blueprint(
+        InstantiateSiteRequest(
+            blueprint_id="site_usine_decarbonee",
+            site_prefix="usine_rest",
+            force_http_rest=True,
+            clear_existing=True,
+        ),
+        repo=repo,
+    )
+    assert res_http["devices_created"] == 4
+    http_devices = repo.get_devices()
+    assert len(http_devices) == 4
+    assert all(d.protocol == TransportProtocol.HTTP for d in http_devices)
 
 
 def test_site_hypervision_dashboard_generation():

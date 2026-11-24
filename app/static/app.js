@@ -3246,14 +3246,31 @@ async function loadSiteBlueprints() {
   }
 }
 
+function forceInstantiateHttpRest() {
+  const protoEl = document.getElementById("instantiate-protocol");
+  const tlsEl = document.getElementById("instantiate-use-tls");
+  if (protoEl) protoEl.value = "http";
+  if (tlsEl) tlsEl.checked = true;
+  if (typeof showToast === "function") {
+    showToast("Protocole basculé sur HTTP REST (HTTPS)", "info");
+  }
+}
+
 async function instantiateSite(blueprintId) {
   const site_prefix = (document.getElementById("site-prefix-input")?.value || "site_client").trim();
   const clear_existing = Boolean(document.getElementById("site-clear-existing")?.checked);
+  const force_http_rest = Boolean(document.getElementById("site-force-http-rest")?.checked);
   try {
     const res = await fetch("/api/sites/instantiate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ blueprint_id: blueprintId, site_prefix, clear_existing })
+      body: JSON.stringify({
+        blueprint_id: blueprintId,
+        site_prefix,
+        protocol: force_http_rest ? "http" : "mqtt",
+        force_http_rest,
+        clear_existing
+      })
     });
     const data = await res.json();
     if (!res.ok) {
@@ -3463,6 +3480,7 @@ async function executeTbProvision() {
   const customer_id = document.getElementById("tb-push-customer-select")?.value || null;
   const new_customer_title = (document.getElementById("tb-push-new-customer")?.value || "").trim() || null;
   const push_dashboards = Boolean(document.getElementById("tb-push-dashboards")?.checked);
+  const force_http_rest = Boolean(document.getElementById("tb-force-http-rest")?.checked);
   const insecure = Boolean(document.getElementById("tb-push-insecure")?.checked);
 
   if (!tbEphemeralToken) {
@@ -3480,6 +3498,7 @@ async function executeTbProvision() {
         customer_id,
         new_customer_title,
         push_dashboards,
+        force_http_rest,
         insecure
       })
     });
@@ -3491,9 +3510,13 @@ async function executeTbProvision() {
 
     const resBox = document.getElementById("tb-push-result");
     resBox.classList.remove("hidden");
+    const httpNote = force_http_rest
+      ? `<div class="text-emerald-300">🌐 Transport basculé en <strong>HTTP REST</strong> vers <code>${tb_url}</code> (prêt à simuler sans ouvrir le port MQTT).</div>`
+      : "";
     resBox.innerHTML = `
       <div class="font-bold text-emerald-300">✅ Provisioning ThingsBoard réussi !</div>
       <div>${data.devices_count} équipement(s) créés/synchronisés avec leur vrai Token d'accès dans le simulateur.</div>
+      ${httpNote}
       ${data.dashboards.map(d => `<div>📊 Dashboard : <a href="${d.url}" target="_blank" class="underline text-sky-300">${d.title}</a></div>`).join("")}
     `;
     if (typeof refreshAll === "function") await refreshAll();

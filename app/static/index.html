@@ -955,7 +955,12 @@
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-medium text-slate-300 mb-1">Protocole de transport</label>
+            <div class="flex items-center justify-between mb-1">
+              <label class="block font-medium text-slate-300">Protocole de transport</label>
+              <button type="button" onclick="forceInstantiateHttpRest()" title="Sélectionner HTTP REST + HTTPS en 1 clic" class="text-[10px] text-emerald-400 hover:text-emerald-300 font-semibold px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 transition">
+                ⚡ Forcer HTTP REST
+              </button>
+            </div>
             <select id="instantiate-protocol" class="w-full bg-[#0F1218] border border-[#2B3342] rounded-lg px-3 py-2 text-slate-100 focus:outline-none focus:border-[#E2001A]">
               <option value="http" selected>HTTP POST (Port 443 HTTPS - Recommandé)</option>
               <option value="mqtt">MQTT (standard ThingsBoard)</option>
@@ -1133,10 +1138,14 @@
         <div>
           <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
             <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider">1. Déployer un Site Complet (Site Blueprints)</h4>
-            <div class="flex items-center gap-2 text-xs">
+            <div class="flex flex-wrap items-center gap-3 text-xs">
               <label class="text-slate-400">Préfixe site :</label>
               <input type="text" id="site-prefix-input" value="site_client" class="bg-[#11151D] border border-[#2B3342] rounded-lg px-2.5 py-1 text-xs text-white w-32 focus:border-amber-500 focus:outline-none">
-              <label class="inline-flex items-center gap-1.5 text-slate-400 ml-2 cursor-pointer">
+              <label class="inline-flex items-center gap-1.5 text-emerald-300 cursor-pointer" title="Force le transport HTTP REST ThingsBoard v1 sur tous les équipements du site">
+                <input type="checkbox" id="site-force-http-rest" checked class="rounded bg-[#11151D] border-[#2B3342]">
+                <span>Forcer HTTP REST</span>
+              </label>
+              <label class="inline-flex items-center gap-1.5 text-slate-400 cursor-pointer">
                 <input type="checkbox" id="site-clear-existing" class="rounded bg-[#11151D] border-[#2B3342]">
                 <span>Remplacer les équipements actuels</span>
               </label>
@@ -1291,12 +1300,18 @@
             </div>
           </div>
 
-          <div class="flex items-center justify-between pt-2">
-            <label class="inline-flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
-              <input type="checkbox" id="tb-push-dashboards" checked class="rounded bg-[#1C222D] border-[#2B3342]">
-              <span>Créer et lier automatiquement les Tableaux de Bord</span>
-            </label>
-            <button onclick="executeTbProvision()" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-5 py-2 rounded-lg transition">Provisionner &amp; Sync Tokens</button>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+            <div class="space-y-1.5">
+              <label class="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+                <input type="checkbox" id="tb-push-dashboards" checked class="rounded bg-[#1C222D] border-[#2B3342]">
+                <span>Créer et lier automatiquement les Tableaux de Bord</span>
+              </label>
+              <label class="flex items-center gap-1.5 text-xs text-emerald-300 cursor-pointer" title="Bascule chaque équipement en HTTP REST et renseigne automatiquement l'hôte, le port et HTTPS depuis l'URL ThingsBoard">
+                <input type="checkbox" id="tb-force-http-rest" checked class="rounded bg-[#1C222D] border-[#2B3342]">
+                <span>Forcer HTTP REST (auto-config URL / HTTPS vers ce ThingsBoard)</span>
+              </label>
+            </div>
+            <button onclick="executeTbProvision()" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-5 py-2 rounded-lg transition whitespace-nowrap">Provisionner &amp; Sync Tokens</button>
           </div>
         </div>
 
@@ -1318,6 +1333,6 @@
     </div>
   </footer>
 
-  <script src="/static/app.js?v=2.3.1"></script>
+  <script src="/static/app.js?v=2.3.2"></script>
 </body>
 </html>

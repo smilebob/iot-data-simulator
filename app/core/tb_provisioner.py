@@ -9,11 +9,13 @@ into the simulator repository, and pushes live-bound Dashboards assigned to the 
 
 from __future__ import annotations
 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
+from urllib.parse import urlparse
 import json
 import httpx
 from pydantic import BaseModel
 from app.core.dashboard_generator import generate_thingsboard_dashboard
+from app.models.device import TransportProtocol
 from app.storage.repository import StorageRepository
 
 
@@ -42,11 +44,24 @@ class TbProvisionRequest(BaseModel):
     new_customer_title: Optional[str] = None
     device_ids: Optional[List[str]] = None
     push_dashboards: bool = True
+    force_http_rest: bool = True
     insecure: bool = False
 
 
 def _clean_url(url: str) -> str:
     return url.strip().rstrip("/")
+
+
+def _parse_tb_url_target(tb_url: str) -> Tuple[str, int, bool]:
+    """Extracts (host, port, use_tls) from a ThingsBoard base URL for HTTP REST auto-configuration."""
+    raw = tb_url.strip()
+    if "://" not in raw:
+        raw = f"https://{raw}"
+    parsed = urlparse(raw)
+    use_tls = parsed.scheme.lower() == "https"
+    host = parsed.hostname or "localhost"
+    port = parsed.port or (443 if use_tls else 80)
+    return host, port, use_tls
 
 
 async def _tb_login(client: httpx.AsyncClient, base_url: str, username: str, password: str) -> str:
@@ -212,11 +227,23 @@ async def tb_provision_stack(
             # Retrieve real Access Token from ThingsBoard
             cred_resp = await client.get(f"{base_url}/api/device/{tb_dev_id}/credentials", headers=headers)
             real_token = None
+            dev_modified = False
             if cred_resp.status_code == 200:
                 real_token = cred_resp.json().get("credentialsId")
                 if real_token:
                     dev.token = real_token
-                    storage.save_device(dev)
+                    dev_modified = True
+
+            if req.force_http_rest:
+                target_host, target_port, target_tls = _parse_tb_url_target(base_url)
+                dev.protocol = TransportProtocol.HTTP
+                dev.custom_host = target_host
+                dev.custom_port = target_port
+                dev.use_tls = target_tls
+                dev_modified = True
+
+            if dev_modified:
+                storage.save_device(dev)
 
             # Assign Device to Customer
             if customer_id:
@@ -227,6 +254,8 @@ async def tb_provision_stack(
                 "name": dev.name,
                 "tb_device_id": tb_dev_id,
                 "token_synced": bool(real_token),
+                "protocol": dev.protocol.value,
+                "http_rest_forced": bool(req.force_http_rest),
             })
 
             # 3. Push Dashboard bound to real ThingsBoard Device UUID
