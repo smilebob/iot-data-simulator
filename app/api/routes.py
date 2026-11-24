@@ -878,6 +878,174 @@ def export_individual_tb_widget(component_id: str):
         raise HTTPException(status_code=404, detail=str(e))
 
 
+# ---------------------------------------------------------------------------
+# Lot B: Historical Time-Series Backfill (7 / 30 / 90 days)
+# ---------------------------------------------------------------------------
+
+from app.core.backfill_engine import BackfillRequest, execute_device_backfill  # noqa: E402
+from app.core.bid_package import build_bid_pack_zip  # noqa: E402
+from app.core.scada_synoptics import render_custom_synoptic_preview  # noqa: E402
+from app.core.stress_test import StressTestManager, StressTestRequest  # noqa: E402
+from app.transports.modbus_server import (  # noqa: E402
+    AsyncModbusTcpServer,
+    generate_tb_gateway_modbus_config,
+)
+
+_modbus_server: Optional[AsyncModbusTcpServer] = None
+_stress_manager = StressTestManager()
+
+
+def _get_modbus_server(repo: StorageRepository) -> AsyncModbusTcpServer:
+    global _modbus_server
+    if _modbus_server is None:
+        _modbus_server = AsyncModbusTcpServer(repo)
+    return _modbus_server
+
+
+@router.post("/devices/{device_id}/backfill", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def backfill_device_history(
+    device_id: str,
+    req: BackfillRequest,
+    repo: StorageRepository = Depends(get_repo),
+):
+    """Génère et injecte un historique réaliste (7j / 30j / 90j) dans ThingsBoard REST v1."""
+    try:
+        return await execute_device_backfill(device_id, req, repo=repo)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Erreur backfill ThingsBoard : {e}")
+
+
+# ---------------------------------------------------------------------------
+# Lot C: Built-in Modbus TCP Slave Server & ThingsBoard IoT Gateway Export
+# ---------------------------------------------------------------------------
+
+class ModbusStartRequest(BaseModel):
+    host: str = "127.0.0.1"
+    port: int = Field(default=5020, ge=1024, le=65535)
+
+
+@router.get("/modbus/status", dependencies=[Depends(require_role(ROLE_ANY))])
+def get_modbus_status(repo: StorageRepository = Depends(get_repo)):
+    """Retourne l'état du serveur Modbus TCP intégré et le nombre de registres mappés."""
+    return _get_modbus_server(repo).status()
+
+
+@router.post("/modbus/start", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def start_modbus_server(
+    req: ModbusStartRequest = ModbusStartRequest(),
+    repo: StorageRepository = Depends(get_repo),
+):
+    """Démarre le serveur Modbus TCP asynchrone sur un port non privilégié."""
+    try:
+        return await _get_modbus_server(repo).start(host=req.host, port=req.port)
+    except OSError as e:
+        raise HTTPException(status_code=400, detail=f"Impossible d'ouvrir le port Modbus {req.port} : {e}")
+
+
+@router.post("/modbus/stop", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def stop_modbus_server(repo: StorageRepository = Depends(get_repo)):
+    """Arrête le serveur Modbus TCP intégré."""
+    return await _get_modbus_server(repo).stop()
+
+
+@router.get("/modbus/gateway-config", dependencies=[Depends(require_role(ROLE_ANY))])
+def download_tb_gateway_modbus_config(
+    host: str = "127.0.0.1",
+    port: int = 5020,
+    repo: StorageRepository = Depends(get_repo),
+):
+    """Télécharge la configuration modbus.json prête à importer dans ThingsBoard IoT Gateway."""
+    cfg = generate_tb_gateway_modbus_config(repo.get_devices(), repo.get_variables(), host=host, port=port)
+    return Response(
+        content=json.dumps(cfg, indent=2, ensure_ascii=False),
+        media_type="application/json",
+        headers={"Content-Disposition": 'attachment; filename="tb_gateway_modbus.json"'},
+    )
+
+
+# ---------------------------------------------------------------------------
+# Lot D: ISA-101 Visual Synoptic Studio (Custom No-Code Layouts)
+# ---------------------------------------------------------------------------
+
+class SynopticNodeSpec(BaseModel):
+    component_id: str
+    var_key: str
+    label: str = ""
+
+
+class SynopticUpdateRequest(BaseModel):
+    nodes: List[SynopticNodeSpec] = Field(default_factory=list)
+
+
+class SynopticPreviewRequest(BaseModel):
+    device_id: str
+    nodes: List[SynopticNodeSpec] = Field(default_factory=list)
+
+
+@router.put("/devices/{device_id}/synoptic", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+def save_device_custom_synoptic(
+    device_id: str,
+    req: SynopticUpdateRequest,
+    repo: StorageRepository = Depends(get_repo),
+):
+    """Enregistre la composition de synoptique ISA-101 sur mesure sur un équipement."""
+    dev = repo.get_device(device_id)
+    if not dev:
+        raise HTTPException(status_code=404, detail=f"Équipement '{device_id}' introuvable.")
+    dev.custom_synoptic_nodes = [n.model_dump() for n in req.nodes] if req.nodes else None
+    repo.save_device(dev)
+    return {"status": "saved", "device_id": device_id, "nodes_count": len(req.nodes)}
+
+
+@router.post("/synoptic/preview", dependencies=[Depends(require_role(ROLE_ANY))])
+def preview_custom_synoptic(
+    req: SynopticPreviewRequest,
+    repo: StorageRepository = Depends(get_repo),
+):
+    """Génère un aperçu HTML/SVG ISA-101 en direct pour le Studio Synoptique."""
+    dev = repo.get_device(req.device_id)
+    title = f"APERÇU STUDIO ISA-101 • {dev.name if dev else req.device_id}"
+    dev_vars = [v for v in repo.get_variables() if v.device_id == req.device_id]
+    html_out = render_custom_synoptic_preview(title, [n.model_dump() for n in req.nodes], dev_vars)
+    return {"html": html_out}
+
+
+# ---------------------------------------------------------------------------
+# Lot E: 1-Click Bid Pack (.ZIP) & Stress-Test (`dp/s`)
+# ---------------------------------------------------------------------------
+
+@router.get("/deliverables/bid-pack.zip", dependencies=[Depends(require_role(ROLE_ANY))])
+def download_bid_pack_zip(repo: StorageRepository = Depends(get_repo)):
+    """Télécharge en 1 clic le Pack Soutenance complet (.ZIP) : IO List, Dossier, Dashboards, Modbus, Widgets & PDF."""
+    zip_bytes = build_bid_pack_zip(repo.get_devices(), repo.get_variables())
+    return Response(
+        content=zip_bytes,
+        media_type="application/zip",
+        headers={"Content-Disposition": 'attachment; filename="pack_soutenance_iot_thingsboard.zip"'},
+    )
+
+
+@router.get("/stress/status", dependencies=[Depends(require_role(ROLE_ANY))])
+def get_stress_test_status():
+    """Retourne les métriques temps réel (msg/s, dp/s, erreurs) du générateur de charge."""
+    return _stress_manager.status()
+
+
+@router.post("/stress/start", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def start_stress_test(req: StressTestRequest):
+    """Démarre un test de charge multi-équipements (mode dry-run ou live HTTP ThingsBoard)."""
+    return await _stress_manager.start(req)
+
+
+@router.post("/stress/stop", dependencies=[Depends(require_role(ROLE_OPERATOR_OR_ADMIN))])
+async def stop_stress_test():
+    """Arrête immédiatement le test de charge en cours."""
+    return await _stress_manager.stop()
+
+
+
 
 
 

@@ -467,6 +467,12 @@ function renderEquipmentGroups() {
             <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 text-sky-400"></i>
             <span>Dashboard TB</span>
           </button>
+          <button onclick="triggerDeviceBackfill('${device.id}')" title="Injecter un historique rétroactif réaliste (7j / 30j / 90j) dans ThingsBoard" class="p-2 text-purple-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
+            <span>📈 Backfill</span>
+          </button>
+          <button onclick="openSynopticStudioModal('${device.id}')" title="Composer un synoptique ISA-101 sur mesure pour cet équipement" class="p-2 text-cyan-300 hover:text-white bg-[#202531] hover:bg-[#2B3342] rounded-lg transition border border-[#2B3342] flex items-center gap-1 text-xs font-medium">
+            <span>🎨 Studio</span>
+          </button>
           <button onclick="openVariableModalForDevice('${device.id}')" class="flex items-center gap-1.5 btn-primary-red text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md shadow-red-900/30">
             <i data-lucide="plus" class="w-3.5 h-3.5"></i>
             <span>Ajouter une Variable</span>
@@ -3381,6 +3387,8 @@ function openDeliverablesModal() {
   if (modal) {
     modal.classList.remove("hidden");
     if (typeof lucide !== "undefined") lucide.createIcons();
+    refreshModbusStatus();
+    refreshStressStatus();
   }
 }
 
@@ -3494,6 +3502,9 @@ async function executeTbProvision() {
   const new_customer_title = (document.getElementById("tb-push-new-customer")?.value || "").trim() || null;
   const push_dashboards = Boolean(document.getElementById("tb-push-dashboards")?.checked);
   const force_http_rest = Boolean(document.getElementById("tb-force-http-rest")?.checked);
+  const create_site_asset = Boolean(document.getElementById("tb-create-site-asset")?.checked);
+  const create_alarm_profiles = Boolean(document.getElementById("tb-create-alarm-profiles")?.checked);
+  const push_isa101_widgets = Boolean(document.getElementById("tb-push-isa101-widgets")?.checked);
   const insecure = Boolean(document.getElementById("tb-push-insecure")?.checked);
 
   if (!tbEphemeralToken) {
@@ -3512,6 +3523,9 @@ async function executeTbProvision() {
         new_customer_title,
         push_dashboards,
         force_http_rest,
+        create_site_asset,
+        create_alarm_profiles,
+        push_isa101_widgets,
         insecure
       })
     });
@@ -3526,9 +3540,15 @@ async function executeTbProvision() {
     const httpNote = force_http_rest
       ? `<div class="text-emerald-300">🌐 Transport basculé en <strong>HTTP REST</strong> vers <code>${tb_url}</code> (prêt à simuler sans ouvrir le port MQTT).</div>`
       : "";
+    const extraNote = [
+      data.site_asset_id ? `🏢 Asset Site créé` : "",
+      data.alarm_profiles_count ? `🚨 ${data.alarm_profiles_count} profil(s) d'alarmes ISA-101` : "",
+      data.widgets_pushed_count ? `🧩 ${data.widgets_pushed_count} widgets ISA-101 importés` : "",
+    ].filter(Boolean).join(" • ");
     resBox.innerHTML = `
       <div class="font-bold text-emerald-300">✅ Provisioning ThingsBoard réussi !</div>
       <div>${data.devices_count} équipement(s) créés/synchronisés avec leur vrai Token d'accès dans le simulateur.</div>
+      ${extraNote ? `<div class="text-sky-300">${extraNote}</div>` : ""}
       ${httpNote}
       ${data.dashboards.map(d => `<div>📊 Dashboard : <a href="${d.url}" target="_blank" class="underline text-sky-300">${d.title}</a></div>`).join("")}
     `;
@@ -3554,3 +3574,254 @@ document.addEventListener("keydown", (e) => {
     storyboardPollTimer = null;
   }
 });
+
+
+// =========================================================================
+// Lots B, C, D, E : Backfill, Modbus TCP, Studio ISA-101 & Stress-Test
+// =========================================================================
+
+async function triggerDeviceBackfill(deviceId) {
+  const daysRaw = prompt("Nombre de jours d'historique à injecter dans ThingsBoard (1 à 90) :", "7");
+  if (!daysRaw) return;
+  const days = Math.max(1, Math.min(90, parseInt(daysRaw, 10) || 7));
+  try {
+    if (typeof showToast === "function") showToast(`Génération et envoi de ${days} jours d'historique...`, "info");
+    const res = await fetch(`/api/devices/${encodeURIComponent(deviceId)}/backfill`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ days, step_minutes: days > 30 ? 60 : 15, include_anomalies: true })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert("Erreur Backfill : " + (data.detail || "Impossible d'injecter l'historique"));
+      return;
+    }
+    if (typeof showToast === "function") {
+      showToast(`Backfill réussi : ${data.points_generated} points (${data.batches_sent} lots) envoyés sur ${data.days}j`, "success");
+    }
+  } catch (err) {
+    alert("Erreur réseau Backfill : " + err.message);
+  }
+}
+
+let _modbusRunning = false;
+async function refreshModbusStatus() {
+  try {
+    const res = await fetch("/api/modbus/status");
+    if (!res.ok) return;
+    const st = await res.json();
+    _modbusRunning = Boolean(st.running);
+    const txt = document.getElementById("modbus-status-text");
+    const btn = document.getElementById("btn-modbus-toggle");
+    if (txt) {
+      txt.textContent = st.running
+        ? `Actif sur ${st.host}:${st.port} • ${st.units_count} unités, ${st.mapped_variables} registres (${st.requests_served} req.)`
+        : `Arrêté • ${st.units_count} unités prêtes (${st.mapped_variables} registres Float32 / Coils)`;
+    }
+    if (btn) {
+      btn.textContent = st.running ? "Arrêter" : "Démarrer";
+      btn.className = st.running
+        ? "bg-red-600 hover:bg-red-500 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition whitespace-nowrap"
+        : "bg-amber-600 hover:bg-amber-500 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition whitespace-nowrap";
+    }
+  } catch (_) {}
+}
+
+async function toggleModbusServer() {
+  const endpoint = _modbusRunning ? "/api/modbus/stop" : "/api/modbus/start";
+  try {
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ host: "127.0.0.1", port: 5020 })
+    });
+    if (!res.ok) {
+      const d = await res.json();
+      alert("Erreur Modbus : " + (d.detail || "Erreur"));
+    }
+    await refreshModbusStatus();
+  } catch (err) {
+    alert("Erreur Modbus : " + err.message);
+  }
+}
+
+let _stressRunning = false;
+let _stressTimer = null;
+async function refreshStressStatus() {
+  try {
+    const res = await fetch("/api/stress/status");
+    if (!res.ok) return;
+    const st = await res.json();
+    _stressRunning = Boolean(st.running);
+    const badge = document.getElementById("stress-status-badge");
+    const metrics = document.getElementById("stress-metrics");
+    const btn = document.getElementById("btn-stress-toggle");
+    if (badge) badge.textContent = st.running ? `EN COURS (${st.elapsed_sec}s)` : (st.total_messages > 0 ? "TERMINÉ" : "Inactif");
+    if (metrics && st.total_messages > 0) {
+      metrics.textContent = `${st.achieved_dp_per_sec} dp/s (${st.achieved_msg_per_sec} msg/s) • ${st.total_data_points.toLocaleString("fr-FR")} pts • ${st.errors} err.`;
+    }
+    if (btn) btn.textContent = st.running ? "Arrêter" : "Lancer Test";
+    if (!st.running && _stressTimer) {
+      clearInterval(_stressTimer);
+      _stressTimer = null;
+    }
+  } catch (_) {}
+}
+
+async function toggleStressTest() {
+  if (_stressRunning) {
+    await fetch("/api/stress/stop", { method: "POST" });
+    await refreshStressStatus();
+    return;
+  }
+  const virtual_devices = parseInt(document.getElementById("stress-devices")?.value || "100", 10);
+  const variables_per_device = parseInt(document.getElementById("stress-vars")?.value || "8", 10);
+  const duration_sec = parseInt(document.getElementById("stress-duration")?.value || "10", 10);
+  await fetch("/api/stress/start", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ virtual_devices, variables_per_device, duration_sec, interval_sec: 1.0, dry_run: true })
+  });
+  await refreshStressStatus();
+  if (!_stressTimer) _stressTimer = setInterval(refreshStressStatus, 1000);
+}
+
+// Lot D: Studio Synoptique ISA-101
+let _studioNodes = [];
+let _studioComponents = [];
+
+async function openSynopticStudioModal(preselectDeviceId = null) {
+  closeDeliverablesModal();
+  const modal = document.getElementById("modal-synoptic-studio");
+  if (!modal) return;
+  modal.classList.remove("hidden");
+
+  if (!_studioComponents.length) {
+    try {
+      const res = await fetch("/api/widgets/thingsboard/components");
+      if (res.ok) _studioComponents = await res.json();
+    } catch (_) {}
+  }
+
+  const compSel = document.getElementById("studio-comp-select");
+  if (compSel) {
+    compSel.innerHTML = _studioComponents
+      .map(c => `<option value="${c.id}">[${c.family_label.slice(0, 14)}] ${c.name}</option>`)
+      .join("");
+  }
+
+  const devSel = document.getElementById("studio-device-select");
+  if (devSel) {
+    devSel.innerHTML = (state.devices || [])
+      .map(d => `<option value="${d.id}">${d.name} (${d.id})</option>`)
+      .join("");
+    if (preselectDeviceId) devSel.value = preselectDeviceId;
+  }
+  await onStudioDeviceChange();
+}
+
+function closeSynopticStudioModal() {
+  document.getElementById("modal-synoptic-studio")?.classList.add("hidden");
+}
+
+async function onStudioDeviceChange() {
+  const devId = document.getElementById("studio-device-select")?.value;
+  const dev = (state.devices || []).find(d => d.id === devId);
+  const devVars = (state.variables || []).filter(v => v.device_id === devId);
+  const varSel = document.getElementById("studio-var-select");
+  if (varSel) {
+    varSel.innerHTML = devVars
+      .map(v => {
+        const clean = v.id.startsWith(`${devId}_`) ? v.id.slice(devId.length + 1) : v.id;
+        return `<option value="${clean}">${v.name} (${clean})</option>`;
+      })
+      .join("");
+  }
+  _studioNodes = Array.isArray(dev?.custom_synoptic_nodes) ? [...dev.custom_synoptic_nodes] : [];
+  renderStudioNodesList();
+  await refreshStudioPreview();
+}
+
+function renderStudioNodesList() {
+  const box = document.getElementById("studio-nodes-list");
+  if (!box) return;
+  if (!_studioNodes.length) {
+    box.innerHTML = `<span class="text-[11px] text-slate-500">Aucun bloc personnalisé (le synoptique métier par défaut sera utilisé). Ajoutez jusqu'à 6 composants ISA-101.</span>`;
+    return;
+  }
+  box.innerHTML = _studioNodes.map((n, idx) => `
+    <span class="inline-flex items-center gap-1.5 bg-[#1C222D] border border-[#2B3342] text-slate-200 px-2.5 py-1 rounded-lg text-[11px]">
+      <strong>${idx + 1}.</strong> ${n.label || n.var_key} <code class="text-sky-400">${n.component_id}</code>
+      <button type="button" onclick="removeStudioNode(${idx})" class="text-red-400 hover:text-red-300 font-bold ml-1">&times;</button>
+    </span>
+  `).join("");
+}
+
+async function addStudioNode() {
+  if (_studioNodes.length >= 6) {
+    alert("Maximum 6 composants par synoptique horizontal ISA-101.");
+    return;
+  }
+  const component_id = document.getElementById("studio-comp-select")?.value;
+  const var_key = document.getElementById("studio-var-select")?.value || "valeur";
+  const label = (document.getElementById("studio-label-input")?.value || "").trim() || var_key;
+  if (!component_id) return;
+  _studioNodes.push({ component_id, var_key, label });
+  const lblEl = document.getElementById("studio-label-input");
+  if (lblEl) lblEl.value = "";
+  renderStudioNodesList();
+  await refreshStudioPreview();
+}
+
+async function removeStudioNode(idx) {
+  _studioNodes.splice(idx, 1);
+  renderStudioNodesList();
+  await refreshStudioPreview();
+}
+
+async function clearStudioNodes() {
+  _studioNodes = [];
+  renderStudioNodesList();
+  await refreshStudioPreview();
+}
+
+async function refreshStudioPreview() {
+  const devId = document.getElementById("studio-device-select")?.value;
+  const preview = document.getElementById("studio-preview-box");
+  if (!devId || !preview) return;
+  try {
+    const res = await fetch("/api/synoptic/preview", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ device_id: devId, nodes: _studioNodes })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      preview.innerHTML = data.html || "";
+    }
+  } catch (_) {}
+}
+
+async function saveStudioSynoptic() {
+  const devId = document.getElementById("studio-device-select")?.value;
+  if (!devId) return;
+  try {
+    const res = await fetch(`/api/devices/${encodeURIComponent(devId)}/synoptic`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nodes: _studioNodes })
+    });
+    if (!res.ok) {
+      const d = await res.json();
+      alert("Erreur sauvegarde Studio : " + (d.detail || "Erreur"));
+      return;
+    }
+    if (typeof showToast === "function") {
+      showToast("Synoptique ISA-101 enregistré ! Le Dashboard ThingsBoard utilisera désormais cette composition.", "success");
+    }
+    closeSynopticStudioModal();
+    if (typeof refreshAll === "function") await refreshAll();
+  } catch (err) {
+    alert("Erreur réseau Studio : " + err.message);
+  }
+}

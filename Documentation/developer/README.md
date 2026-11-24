@@ -11,7 +11,10 @@ Bienvenue dans la documentation technique destinée aux développeurs reprenant 
 3. [Guide d'Extension : Ajouter une Plateforme IoT](extending_platforms.md) : Tutoriel pas-à-pas pour implémenter un nouveau connecteur (ex: AWS IoT, Azure IoT Hub, Kafka, etc.).
 4. [API REST & Protocole WebSockets](api_and_websockets.md) : Spécification des endpoints FastAPI, format des messages de streaming télémétrique en temps réel.
 5. [Moteur de Dépendance Physique & Variables Dérivées](physics_and_dependencies.md) : Résolution causale en 3 passes, analyseur AST sécurisé (sans `eval`), intégrateurs continus d'énergie et couplages physiques.
-6. [Modèles Personnalisés & Plugin Antigravity](custom_presets_and_plugins.md) : Architecture de persistance des modèles personnalisés (`custom_presets.json`), protection des 32 modèles d'usine et intégration du plugin Antigravity `iot-preset-designer`.
+6. [Modèles Personnalisés & Plugin Antigravity](custom_presets_and_plugins.md) : Architecture de persistance des modèles personnalisés (`custom_presets.json`), protection des **35 modèles d'usine** et intégration du plugin Antigravity `iot-preset-designer`.
+
+> **Suite de tests de non-régression (51 tests)** : `uv run --with pytest --with-requirements requirements.txt pytest -o pythonpath=. tests/`
+> **Règle d'ergonomie permanente** : Toute évolution graphique SCADA / Widgets doit respecter la norme **ANSI/ISA-101.01** (vérifiée automatiquement par `tests/test_isa101_compliance.py` et `tests/test_ui_accessibility_and_themes.py`).
 
 ---
 

@@ -7,7 +7,7 @@ and generic MQTT platforms.
 """
 
 from enum import Enum
-from typing import Optional
+from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
 
@@ -68,3 +68,7 @@ class DeviceConfig(BaseModel):
     use_tls: Optional[bool] = Field(default=None, description="Enforce TLS / HTTPS encryption")
     publish_interval: Optional[float] = Field(default=None, description="Global broadcast cadence in seconds (overrides variable intervals)")
     enabled: bool = Field(default=True, description="Whether the device is active in the simulation")
+    custom_synoptic_nodes: Optional[List[Dict[str, str]]] = Field(
+        default=None,
+        description="Optional custom ISA-101 Studio synoptic layout: [{component_id, var_key, label}]",
+    )

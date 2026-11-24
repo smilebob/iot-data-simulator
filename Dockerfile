@@ -19,7 +19,7 @@ ARG BUILD_DATE=2026-11-24
 # Métadonnées
 LABEL maintainer="IoT Engineering Team" \
       description="IoT Data Simulator for ThingsBoard & Multi-Platform" \
-      version="2.4.1" \
+      version="3.0.0" \
       build_date="${BUILD_DATE}"
 
 # Définition des variables d'environnement

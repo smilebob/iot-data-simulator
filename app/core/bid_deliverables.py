@@ -15,6 +15,7 @@ from typing import List
 from app.models.device import DeviceConfig
 from app.models.variable import VariableConfig, VariableType, DataType, SimMode
 from app.core.sizing_calculator import SizingResult
+from app.transports.modbus_server import build_modbus_register_map
 
 
 def _suggest_alarm_threshold(var: VariableConfig) -> str:
@@ -32,8 +33,9 @@ def _suggest_alarm_threshold(var: VariableConfig) -> str:
 
 
 def generate_io_list_csv(devices: List[DeviceConfig], variables: List[VariableConfig]) -> str:
-    """Generates a French Excel-friendly CSV (UTF-8 BOM, ';' delimiter) listing all IO points."""
+    """Generates a French Excel-friendly CSV (UTF-8 BOM, ';' delimiter) listing all IO points + Modbus map."""
     dev_map = {d.id: d for d in devices}
+    modbus_lookup = build_modbus_register_map(devices, variables)["by_variable_id"]
     output = io.StringIO()
     output.write("\ufeff")
     writer = csv.writer(output, delimiter=";", quoting=csv.QUOTE_MINIMAL, lineterminator="\n")
@@ -52,6 +54,7 @@ def generate_io_list_csv(devices: List[DeviceConfig], variables: List[VariableCo
         "Plage Max",
         "Cadence (s)",
         "Seuil / Règle Alarme Recommandée",
+        "Registre Modbus TCP",
     ])
 
     for v in variables:
@@ -64,6 +67,8 @@ def generate_io_list_csv(devices: List[DeviceConfig], variables: List[VariableCo
         if v.sim_mode in (SimMode.DERIVED, SimMode.INTEGRATOR, SimMode.CONSTANT):
             min_val = ""
             max_val = ""
+        mb_entry = modbus_lookup.get(v.id)
+        mb_ref = f"Unit {mb_entry['unit_id']} • {mb_entry['modbus_ref']}" if mb_entry else "-"
 
         writer.writerow([
             dev_name,
@@ -79,6 +84,7 @@ def generate_io_list_csv(devices: List[DeviceConfig], variables: List[VariableCo
             max_val,
             v.publish_interval,
             _suggest_alarm_threshold(v),
+            mb_ref,
         ])
 
     return output.getvalue()

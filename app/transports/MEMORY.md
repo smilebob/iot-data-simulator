@@ -1,12 +1,13 @@
 # 📦 Mémoire du Module : Transports Réseau & Multi-Protocoles (MQTT, HTTP, CoAP)
 
-> **Dossier** : `/home/pierre/Projets/iot-data-simulator/app/transports/` | **Dernière MAJ** : 2026-10-22 | **Version** : 2.0.0
+> **Dossier** : `/home/pierre/Projets/iot-data-simulator/app/transports/` | **Dernière MAJ** : 2026-11-24 | **Version** : 3.0.0
 
 ## 🎯 Rôle & Responsabilité
-Couche d'abstraction et d'aiguillage des protocoles de transport IoT pour ThingsBoard et les autres plateformes :
+Couche d'abstraction et d'aiguillage des protocoles de transport IoT & OT pour ThingsBoard et passerelles industrielles :
 1. **MQTT** (Courtier TCP persistant / WebSockets via `MqttManager`)
-2. **HTTP REST** (API ThingsBoard v1 en HTTPS/HTTP via `ThingsBoardHttpClient`) : Télémétrie, Attributs Clients, Attributs Partagés (`SHARED_SCOPE`) et RPC.
+2. **HTTP REST** (API ThingsBoard v1 en HTTPS/HTTP via `ThingsBoardHttpClient`) : Télémétrie, Attributs Clients, Attributs Partagés (`SHARED_SCOPE`), RPC et Backfill historique par lots.
 3. **CoAP** (Constrained Application Protocol RFC 7252 sur UDP via `ThingsBoardCoapClient`)
+4. **Modbus TCP Slave** (Serveur pur-Python `asyncio` sur port non privilégié `5020` via `AsyncModbusTcpServer` + export `modbus.json` pour ThingsBoard IoT Gateway)
 
 ## 🗂️ Fichiers & Composants Clés
 | Fichier / Export | Rôle | Entrées / Sorties Principales |
@@ -14,6 +15,7 @@ Couche d'abstraction et d'aiguillage des protocoles de transport IoT pour Things
 | [`manager.py:TransportManager`](file:///home/pierre/Projets/iot-data-simulator/app/transports/manager.py) | Aiguilleur centralisé des flux télémétriques selon `device.protocol` | `publish(...)` -> `(success, protocol, channel_info)` |
 | [`http_client.py:ThingsBoardHttpClient`](file:///home/pierre/Projets/iot-data-simulator/app/transports/http_client.py) | Client HTTP/HTTPS asynchrone pour l'API ThingsBoard v1 | `post_payload(...)`, `poll_attribute_updates(...)`, `get_shared_attributes(...)`, `poll_rpc(...)`, `respond_rpc(...)`, `test_connectivity(...)` |
 | [`coap_client.py:ThingsBoardCoapClient`](file:///home/pierre/Projets/iot-data-simulator/app/transports/coap_client.py) | Client UDP RFC 7252 natif avec encodage d'options (Uri-Path, Content-Format) | `send_payload(...)`, `test_connectivity(...)` |
+| [`modbus_server.py:AsyncModbusTcpServer`](file:///home/pierre/Projets/iot-data-simulator/app/transports/modbus_server.py) | Serveur Modbus TCP pur-Python (`0x01`/`0x03`/`0x04`/`0x05`/`0x06`/`0x10`, Float32 Big-Endian) & export ThingsBoard IoT Gateway | `start()`, `stop()`, `status()`, `build_modbus_register_map()`, `generate_tb_gateway_modbus_config()` |
 
 ## 🔄 Dépendances & Flux de Données
 - **Dépend de** : `app/models/`, `app/mqtt/`, `app/platforms/`, `app/storage/`, `httpx` (avec fallback `urllib`), annotations futures Python (`from __future__ import annotations`).

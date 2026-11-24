@@ -128,6 +128,24 @@ Deux types de trames JSON sont diffusées en temps réel :
 * **Provisioning ThingsBoard Éphémère Multi-Tenant / Client** (`operator`, `admin`) :
   * `POST /api/tb/inspect` : Connexion éphémère, auto-détection `SYS_ADMIN` / `TENANT_ADMIN`, liste Tenants ou Customers.
   * `POST /api/tb/tenant-context` : Bascule un compte `SYS_ADMIN` vers un Tenant cible et liste ses Customers.
-  * `POST /api/tb/provision` : Crée les Devices, récupère les Access Tokens dans le simulateur, importe les Dashboards liés aux UUIDs réels et assigne le tout au Customer.
+  * `POST /api/tb/provision` : Crée les Devices, récupère les Access Tokens dans le simulateur, importe les Dashboards liés aux UUIDs réels, assigne au Customer, et supporte `force_http_rest`, `create_site_asset`, `create_alarm_profiles` et `push_isa101_widgets`.
+
+### 7. Extensions v2.4 & v3.0 (Widgets ISA-101, Backfill, Modbus TCP, Studio & Pack ZIP)
+* **Widgets Modulaires ANSI/ISA-101 (70 composants)** :
+  * `GET /api/widgets/thingsboard/components` : Liste les 70 composants SVG ISA-101 avec métadonnées.
+  * `GET /api/widgets/thingsboard/bundle?family=...` : Exporte le bundle ThingsBoard 4.3 complet (70) ou par famille.
+  * `GET /api/widgets/thingsboard/{component_id}` : Exporte un widget individuel JSON ThingsBoard 4.3.
+* **Backfill Historique Accéléré (`operator`, `admin`)** :
+  * `POST /api/devices/{device_id}/backfill` : Génère et pousse `days` (1–90j) de séries temporelles rétroactives en lots HTTP REST v1 (`dry_run` supporté).
+* **Serveur Modbus TCP & ThingsBoard IoT Gateway** :
+  * `GET /api/modbus/status` : État du serveur Modbus TCP, nombre d'unités et registres mappés.
+  * `POST /api/modbus/start` & `POST /api/modbus/stop` : Démarre/arrête le serveur Modbus TCP pur-Python (`127.0.0.1:5020`, `operator`/`admin`).
+  * `GET /api/modbus/gateway-config` : Télécharge `tb_gateway_modbus.json` prêt pour ThingsBoard IoT Gateway.
+* **Studio Visuel de Synoptiques ISA-101** :
+  * `PUT /api/devices/{device_id}/synoptic` : Enregistre `custom_synoptic_nodes` sur un équipement (`operator`/`admin`).
+  * `POST /api/synoptic/preview` : Génère un aperçu HTML/SVG ISA-101 en direct.
+* **Pack Soutenance `.ZIP` & Stress-Test (`dp/s`)** :
+  * `GET /api/deliverables/bid-pack.zip` : Archive ZIP complète (IO List + Dossier + Modbus JSON + 70 Widgets + Dashboards + PDF Commercial).
+  * `GET /api/stress/status`, `POST /api/stress/start`, `POST /api/stress/stop` : Pilote le générateur de charge multi-équipements (`msg/s`, `dp/s`).
 
 Ce flux permet le rafraîchissement sans rechargement de page, l'affichage instantané des alertes d'erreurs et la consultation de la console de logs intégrée sans avoir à ouvrir de terminal Docker.

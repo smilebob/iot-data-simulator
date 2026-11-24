@@ -1209,28 +1209,40 @@
         </div>
         <button aria-label="Fermer" onclick="closeDeliverablesModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div class="p-6 space-y-4">
-        <a href="/api/deliverables/io-list" class="flex items-center justify-between p-4 bg-[#11151D] hover:bg-[#1C222D] border border-[#2B3342] hover:border-purple-500/60 rounded-xl transition">
+      <div class="p-6 space-y-3.5 max-h-[82vh] overflow-y-auto">
+        <a href="/api/deliverables/bid-pack.zip" class="flex items-center justify-between p-4 bg-gradient-to-r from-purple-950/60 to-sky-950/50 hover:from-purple-900/70 hover:to-sky-900/60 border border-purple-500/60 rounded-xl transition">
           <div>
-            <div class="text-xs font-bold text-white">Liste de Points GTB / IoT (IO List CSV)</div>
-            <div class="text-[11px] text-slate-400 mt-0.5">Format Excel FR (UTF-8 BOM, `;`) avec plages, unités, cadences et seuils d'alarmes</div>
+            <div class="text-xs font-bold text-white">📦 Pack Soutenance Client Complet (.ZIP — 1 Clic)</div>
+            <div class="text-[11px] text-slate-300 mt-0.5">IO List CSV + Dossier Architecture + Dashboards JSON + Modbus Gateway + 70 Widgets ISA-101 + Catalogue PDF</div>
           </div>
-          <i data-lucide="download" class="w-4 h-4 text-purple-400"></i>
+          <i data-lucide="archive" class="w-5 h-5 text-purple-300 shrink-0"></i>
         </a>
-        <a href="/api/deliverables/dossier" class="flex items-center justify-between p-4 bg-[#11151D] hover:bg-[#1C222D] border border-[#2B3342] hover:border-sky-500/60 rounded-xl transition">
-          <div>
-            <div class="text-xs font-bold text-white">Dossier Technique d'Architecture (Markdown)</div>
-            <div class="text-[11px] text-slate-400 mt-0.5">Schéma de flux Mermaid, inventaire des équipements, KPIs ROI &amp; dimensionnement</div>
-          </div>
-          <i data-lucide="download" class="w-4 h-4 text-sky-400"></i>
-        </a>
-        <div class="p-4 bg-[#11151D] border border-[#2B3342] rounded-xl space-y-2.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="/api/deliverables/io-list" class="flex items-center justify-between p-3 bg-[#11151D] hover:bg-[#1C222D] border border-[#2B3342] hover:border-purple-500/60 rounded-xl transition">
+            <div>
+              <div class="text-xs font-bold text-white">IO List CSV + Modbus</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Excel FR (`;`), seuils &amp; registres</div>
+            </div>
+            <i data-lucide="download" class="w-4 h-4 text-purple-400"></i>
+          </a>
+          <a href="/api/deliverables/dossier" class="flex items-center justify-between p-3 bg-[#11151D] hover:bg-[#1C222D] border border-[#2B3342] hover:border-sky-500/60 rounded-xl transition">
+            <div>
+              <div class="text-xs font-bold text-white">Dossier Architecture (MD)</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Mermaid, ROI &amp; sources TB</div>
+            </div>
+            <i data-lucide="download" class="w-4 h-4 text-sky-400"></i>
+          </a>
+        </div>
+        <div class="p-3.5 bg-[#11151D] border border-[#2B3342] rounded-xl space-y-2.5">
           <div class="flex items-center justify-between">
             <div>
               <div class="text-xs font-bold text-white">Bundles Widgets SCADA ISA-101 ThingsBoard 4.3 (70 Composants)</div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Import natif dans Widgets Library &bull; Codage Forme+Couleur &bull; Mappage libre</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Import natif Widgets Library &bull; Studio No-Code intégré</div>
             </div>
-            <a href="/api/widgets/thingsboard/bundle" class="bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-semibold px-3 py-1.5 rounded-lg transition whitespace-nowrap">Tout (70)</a>
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="openSynopticStudioModal()" class="bg-sky-600 hover:bg-sky-500 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition whitespace-nowrap">🎨 Studio</button>
+              <a href="/api/widgets/thingsboard/bundle" class="bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition whitespace-nowrap">Tout (70)</a>
+            </div>
           </div>
           <div class="flex flex-wrap gap-1.5 pt-1">
             <a href="/api/widgets/thingsboard/bundle?family=isa101_primitives" class="text-[10px] bg-[#1C222D] hover:bg-[#2B3342] text-slate-300 px-2 py-1 rounded border border-[#2B3342]">Primitives ISA (8)</a>
@@ -1239,6 +1251,44 @@
             <a href="/api/widgets/thingsboard/bundle?family=process" class="text-[10px] bg-[#1C222D] hover:bg-[#2B3342] text-slate-300 px-2 py-1 rounded border border-[#2B3342]">Process &amp; H2 (18)</a>
             <a href="/api/widgets/thingsboard/bundle?family=water_rcu" class="text-[10px] bg-[#1C222D] hover:bg-[#2B3342] text-slate-300 px-2 py-1 rounded border border-[#2B3342]">Eau, STEP &amp; RCU (6)</a>
             <a href="/api/widgets/thingsboard/bundle?family=infrastructure" class="text-[10px] bg-[#1C222D] hover:bg-[#2B3342] text-slate-300 px-2 py-1 rounded border border-[#2B3342]">Infra, Tunnels &amp; City (12)</a>
+          </div>
+        </div>
+        <!-- Lot C: Serveur Modbus TCP & ThingsBoard IoT Gateway -->
+        <div class="p-3.5 bg-[#11151D] border border-[#2B3342] rounded-xl space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <div class="text-xs font-bold text-white">🔌 Serveur Modbus TCP Intégré (Port 5020)</div>
+              <div id="modbus-status-text" class="text-[11px] text-slate-400 mt-0.5">Arrêté • Expose vos équipements en registres Float32 / Coils</div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button type="button" id="btn-modbus-toggle" onclick="toggleModbusServer()" class="bg-amber-600 hover:bg-amber-500 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition whitespace-nowrap">Démarrer</button>
+              <a href="/api/modbus/gateway-config" class="bg-[#1C222D] hover:bg-[#2B3342] text-sky-300 border border-[#2B3342] text-[11px] font-semibold px-2.5 py-1.5 rounded-lg transition whitespace-nowrap">modbus.json</a>
+            </div>
+          </div>
+        </div>
+        <!-- Lot E: Générateur de Charge / Stress-Test dp/s -->
+        <div class="p-3.5 bg-[#11151D] border border-[#2B3342] rounded-xl space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="text-xs font-bold text-white">🚀 Test de Charge / Benchmark (dp/s)</div>
+            <span id="stress-status-badge" class="text-[10px] font-mono bg-[#1C222D] text-slate-300 px-2 py-0.5 rounded border border-[#2B3342]">Inactif</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-[11px]">
+            <div>
+              <label class="block text-[10px] text-slate-400">Devices virtuels</label>
+              <input type="number" id="stress-devices" value="100" min="1" max="2000" class="w-full bg-[#1C222D] border border-[#2B3342] rounded px-2 py-1 text-white">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400">Var / device</label>
+              <input type="number" id="stress-vars" value="8" min="1" max="100" class="w-full bg-[#1C222D] border border-[#2B3342] rounded px-2 py-1 text-white">
+            </div>
+            <div>
+              <label class="block text-[10px] text-slate-400">Durée (s)</label>
+              <input type="number" id="stress-duration" value="10" min="1" max="120" class="w-full bg-[#1C222D] border border-[#2B3342] rounded px-2 py-1 text-white">
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <div id="stress-metrics" class="text-[11px] text-slate-400">Mode benchmark local (dry-run) prêt.</div>
+            <button type="button" id="btn-stress-toggle" onclick="toggleStressTest()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-semibold px-3 py-1.5 rounded-lg transition whitespace-nowrap">Lancer Test</button>
           </div>
         </div>
       </div>
@@ -1328,12 +1378,72 @@
                 <input type="checkbox" id="tb-force-http-rest" checked class="rounded bg-[#1C222D] border-[#2B3342]">
                 <span>Forcer HTTP REST (auto-config URL / HTTPS vers ce ThingsBoard)</span>
               </label>
+              <label class="flex items-center gap-1.5 text-xs text-sky-300 cursor-pointer">
+                <input type="checkbox" id="tb-create-site-asset" checked class="rounded bg-[#1C222D] border-[#2B3342]">
+                <span>Créer Asset Site + Relations <code>Contains</code> vers les équipements</span>
+              </label>
+              <label class="flex items-center gap-1.5 text-xs text-amber-300 cursor-pointer">
+                <input type="checkbox" id="tb-create-alarm-profiles" checked class="rounded bg-[#1C222D] border-[#2B3342]">
+                <span>Créer Profils d'Alarmes ISA-101 natifs (WARNING / CRITICAL)</span>
+              </label>
+              <label class="flex items-center gap-1.5 text-xs text-purple-300 cursor-pointer">
+                <input type="checkbox" id="tb-push-isa101-widgets" class="rounded bg-[#1C222D] border-[#2B3342]">
+                <span>Importer le Bundle des 70 Widgets ISA-101 dans le Tenant</span>
+              </label>
             </div>
             <button onclick="executeTbProvision()" class="bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold px-5 py-2 rounded-lg transition whitespace-nowrap">Provisionner &amp; Sync Tokens</button>
           </div>
         </div>
 
         <div id="tb-push-result" class="hidden bg-emerald-950/25 border border-emerald-500/40 rounded-xl p-4 text-xs text-emerald-200 space-y-1.5"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale Studio Synoptique ISA-101 (No-Code — Lot D) -->
+  <div id="modal-synoptic-studio" class="hidden fixed inset-0 bg-black/80 z-[65] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="bg-[#181D26] border border-[#2B3342] rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden animate-fade-in">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-[#2B3342] bg-[#131720]">
+        <div>
+          <h3 class="text-sm font-bold text-white">🎨 Studio Visuel de Synoptiques ANSI/ISA-101 (No-Code)</h3>
+          <p class="text-[11px] text-slate-400">Composez un synoptique process sur mesure parmi les 70 composants SVG ISA-101 et embarquez-le dans le Dashboard ThingsBoard</p>
+        </div>
+        <button aria-label="Fermer" onclick="closeSynopticStudioModal()" class="text-slate-400 hover:text-white transition"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="p-6 space-y-4 max-h-[82vh] overflow-y-auto text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1">Équipement cible</label>
+            <select id="studio-device-select" onchange="onStudioDeviceChange()" class="w-full bg-[#11151D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-white"></select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1">Composant SVG ISA-101 (70)</label>
+            <select id="studio-comp-select" class="w-full bg-[#11151D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-white"></select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1">Variable liée</label>
+            <select id="studio-var-select" class="w-full bg-[#11151D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-white"></select>
+          </div>
+          <div class="flex items-end gap-1.5">
+            <input type="text" id="studio-label-input" placeholder="Libellé court..." class="flex-1 bg-[#11151D] border border-[#2B3342] rounded-lg px-2.5 py-1.5 text-white">
+            <button type="button" onclick="addStudioNode()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-3 py-1.5 rounded-lg transition">+ Ajouter</button>
+          </div>
+        </div>
+
+        <div id="studio-nodes-list" class="flex flex-wrap gap-2"></div>
+
+        <div class="bg-[#11151D] border border-[#2B3342] rounded-xl p-3">
+          <div class="text-[10px] font-bold text-slate-400 uppercase mb-2">Aperçu Vectoriel ANSI/ISA-101 en direct</div>
+          <div id="studio-preview-box" class="overflow-x-auto"></div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2 border-t border-[#2B3342]">
+          <button type="button" onclick="clearStudioNodes()" class="text-xs text-slate-400 hover:text-red-400">Réinitialiser (synoptique par défaut)</button>
+          <div class="flex gap-2">
+            <button type="button" onclick="closeSynopticStudioModal()" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg font-medium">Fermer</button>
+            <button type="button" onclick="saveStudioSynoptic()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold px-4 py-2 rounded-lg transition">Enregistrer sur l'équipement</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1346,11 +1456,11 @@
         <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
       </div>
       <div class="text-[10px] font-mono text-slate-500 tracking-wider">
-        v<span id="app-version-badge">2.4.1 (build 2026-11-24)</span>
+        v<span id="app-version-badge">3.0.0 (build 2026-11-24)</span>
       </div>
     </div>
   </footer>
 
-  <script src="/static/app.js?v=2.4.1"></script>
+  <script src="/static/app.js?v=3.0.0"></script>
 </body>
 </html>

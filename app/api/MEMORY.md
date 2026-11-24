@@ -1,17 +1,17 @@
 # 📦 Mémoire du Module : API REST & WebSockets
 
-> **Dossier** : `/home/pierre/Projets/iot-data-simulator/app/api/` | **Dernière MAJ** : 2026-11-16 | **Version** : 2.3.0
+> **Dossier** : `/home/pierre/Projets/iot-data-simulator/app/api/` | **Dernière MAJ** : 2026-11-24 | **Version** : 3.0.0
 
 ## 🎯 Rôle & Responsabilité
-Contrôleurs HTTP FastAPI (CRUD, configuration broker, forçage manuel, injection d'anomalies, import CSV, gestion du catalogue de presets, suite Avant-Vente : dimensionnement, sites multi-équipements, storyboards live, livrables d'offres, provisioning ThingsBoard éphémère) et hub WebSockets temps réel.
+Contrôleurs HTTP FastAPI (CRUD, configuration broker, forçage manuel, injection d'anomalies, import CSV, gestion du catalogue de 35 presets, suite Avant-Vente : dimensionnement sourcé, sites multi-équipements, storyboards live, livrables & Pack Soutenance ZIP, provisioning ThingsBoard complet, backfill historique, serveur Modbus TCP, Studio Synoptique ISA-101, stress-test `dp/s`, bundles 70 widgets ISA-101) et hub WebSockets temps réel.
 
 ## 🗂️ Fichiers & Composants Clés
 | Fichier / Export | Rôle | Entrées / Sorties Principales |
 | :--- | :--- | :--- |
-| [`routes.py:router`](file:///home/pierre/Projets/iot-data-simulator/app/api/routes.py) | Router APIRouter FastAPI (préfixe `/api`) | `/devices`, `/variables`, `/broker`, `/logs`, `/status`, `/scenario`, `/presets/*`, `/sizing/*`, `/sites/*`, `/storyboards/*`, `/deliverables/*`, `/tb/*` |
+| [`routes.py:router`](file:///home/pierre/Projets/iot-data-simulator/app/api/routes.py) | Router APIRouter FastAPI (préfixe `/api`) | `/devices/*` (+ `/backfill`, `/synoptic`), `/variables`, `/broker`, `/logs`, `/status`, `/presets/*`, `/sizing/*`, `/sites/*`, `/storyboards/*`, `/deliverables/*` (+ `/bid-pack.zip`), `/tb/*`, `/widgets/thingsboard/*`, `/modbus/*`, `/synoptic/preview`, `/stress/*` |
 | [`websocket.py:WebSocketManager`](file:///home/pierre/Projets/iot-data-simulator/app/api/websocket.py) | Hub de diffusion WebSocket non-bloquant | `connect()`, `disconnect()`, `broadcast_json(message)` (télémétrie & logs) |
 | [`auth.py:auth_router`](file:///home/pierre/Projets/iot-data-simulator/app/api/auth.py) | Routes d'authentification et gestion RBAC | `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me`, `/api/users` |
-| [`main.py:/healthz`](file:///home/pierre/Projets/iot-data-simulator/app/main.py#L86-L110) | Sonde de santé CIS Rule 4.6 enrichie | Retourne version, statut moteur/MQTT, devices, `http_rpc_listeners`, `http_attribute_listeners`, 10 derniers logs |
+| [`main.py:/healthz`](file:///home/pierre/Projets/iot-data-simulator/app/main.py#L106-L138) | Sonde de santé CIS Rule 4.6 enrichie | Retourne `version`, `build_date`, statut moteur/MQTT, devices, `http_rpc_listeners`, `http_attribute_listeners`, 10 derniers logs |
 
 ## 🔄 Dépendances & Flux de Données
 - **Dépend de** : `fastapi`, `app/models/`, `app/storage/repository.py`, `app/core/engine.py`, `app/core/equipment_catalog.py`, `app/mqtt/client.py`, `app/mqtt/diagnostics.py`, `app/core/logger.py`.

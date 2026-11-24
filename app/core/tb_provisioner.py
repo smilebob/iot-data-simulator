@@ -12,10 +12,14 @@ from __future__ import annotations
 from typing import List, Dict, Any, Optional, Tuple
 from urllib.parse import urlparse
 import json
+import uuid
 import httpx
 from pydantic import BaseModel
 from app.core.dashboard_generator import generate_thingsboard_dashboard
-from app.models.device import TransportProtocol
+from app.core.scada_synoptics import get_clean_var_key
+from app.core.svg_components import generate_thingsboard_widget_bundle
+from app.models.device import DeviceConfig, TransportProtocol
+from app.models.variable import DataType, SimMode, VariableConfig, VariableType
 from app.storage.repository import StorageRepository
 
 
@@ -45,7 +49,79 @@ class TbProvisionRequest(BaseModel):
     device_ids: Optional[List[str]] = None
     push_dashboards: bool = True
     force_http_rest: bool = True
+    create_site_asset: bool = True
+    site_asset_name: Optional[str] = None
+    create_alarm_profiles: bool = True
+    push_isa101_widgets: bool = False
     insecure: bool = False
+
+
+def build_isa101_device_profile(device: DeviceConfig, dev_vars: List[VariableConfig]) -> Optional[Dict[str, Any]]:
+    """Builds a ThingsBoard 4.3 DeviceProfile payload with ISA-101 WARNING & CRITICAL alarm rules."""
+    alarms = []
+    for v in dev_vars:
+        if v.var_type != VariableType.TELEMETRY or v.data_type not in (DataType.FLOAT, DataType.INTEGER):
+            continue
+        if v.sim_mode in (SimMode.INTEGRATOR, SimMode.CONSTANT, SimMode.DERIVED):
+            continue
+        if not v.math_config or v.math_config.max_val <= v.math_config.min_val:
+            continue
+
+        clean_key = get_clean_var_key(v)
+        min_v = float(v.math_config.min_val)
+        max_v = float(v.math_config.max_val)
+        span = max_v - min_v
+        warn_high = round(min_v + 0.90 * span, 2)
+        crit_high = round(max_v + 0.05 * span, 2)
+
+        def _pred(op: str, val: float) -> Dict[str, Any]:
+            return {
+                "key": {"type": "TIME_SERIES", "key": clean_key},
+                "valueType": "NUMERIC",
+                "predicate": {
+                    "type": "NUMERIC",
+                    "operation": op,
+                    "value": {"defaultValue": val, "dynamicValue": None},
+                },
+            }
+
+        alarms.append({
+            "id": str(uuid.uuid4()),
+            "alarmType": f"ISA101_{clean_key.upper()}_HORS_PLAGE",
+            "createRules": {
+                "WARNING": {
+                    "condition": {"condition": [_pred("GREATER", warn_high)], "spec": {"type": "SIMPLE"}},
+                    "alarmDetails": f"▲ Avertissement ISA-101 : {v.name} > {warn_high} {v.unit or ''}".strip(),
+                },
+                "CRITICAL": {
+                    "condition": {"condition": [_pred("GREATER", crit_high)], "spec": {"type": "SIMPLE"}},
+                    "alarmDetails": f"■ ! Critique ISA-101 : {v.name} > {crit_high} {v.unit or ''}".strip(),
+                },
+            },
+            "clearRule": {
+                "condition": {"condition": [_pred("LESS_OR_EQUAL", warn_high)], "spec": {"type": "SIMPLE"}},
+                "alarmDetails": f"Retour nominal ISA-101 : {v.name}",
+            },
+            "propagate": True,
+            "propagateToOwner": True,
+        })
+
+    if not alarms:
+        return None
+
+    return {
+        "name": f"ISA101_Profile_{device.id}",
+        "type": "DEFAULT",
+        "transportType": "DEFAULT",
+        "provisionType": "DISABLED",
+        "description": f"Profil d'alarmes ANSI/ISA-101 généré automatiquement pour {device.name}",
+        "profileData": {
+            "configuration": {"type": "DEFAULT"},
+            "transportConfiguration": {"type": "DEFAULT"},
+            "provisionConfiguration": {"type": "DISABLED"},
+            "alarms": alarms[:10],
+        },
+    }
 
 
 def _clean_url(url: str) -> str:
@@ -190,6 +266,9 @@ async def tb_provision_stack(
     all_vars = storage.get_variables()
     provisioned_devices = []
     provisioned_dashboards = []
+    provisioned_profiles = []
+    site_asset_id = None
+    widgets_pushed = 0
 
     async with httpx.AsyncClient(timeout=25.0, verify=not req.insecure) as client:
         # 1. Resolve or create Customer if requested
@@ -204,8 +283,66 @@ async def tb_provision_stack(
                 raise ValueError(f"Erreur création Client ({c_resp.status_code}) : {c_resp.text}")
             customer_id = c_resp.json()["id"]["id"]
 
-        # 2. Provision each Device, sync Access Token, assign to Customer, push Dashboard
+        # 1b. Optionally create Site Asset hierarchy root
+        if req.create_site_asset:
+            asset_name = (req.site_asset_name or req.new_customer_title or "Site_IoT_Demo").strip()
+            a_resp = await client.post(
+                f"{base_url}/api/asset",
+                headers=headers,
+                json={"name": asset_name, "type": "Site", "label": asset_name},
+            )
+            if a_resp.status_code in (200, 201):
+                site_asset_id = a_resp.json().get("id", {}).get("id")
+                if site_asset_id and customer_id:
+                    await client.post(
+                        f"{base_url}/api/customer/{customer_id}/asset/{site_asset_id}",
+                        headers=headers,
+                    )
+
+        # 1c. Optionally push 70 ISA-101 SVG Widgets Bundle into the Tenant
+        if req.push_isa101_widgets:
+            bundle_json = generate_thingsboard_widget_bundle()
+            b_meta = bundle_json.get("widgetsBundle", {})
+            wb_resp = await client.post(
+                f"{base_url}/api/widgetsBundle",
+                headers=headers,
+                json={
+                    "title": b_meta.get("title", "SCADA ISA-101 — Composants Modulaires (70)"),
+                    "description": b_meta.get("description", ""),
+                },
+            )
+            if wb_resp.status_code in (200, 201):
+                bundle_alias = wb_resp.json().get("alias") or b_meta.get("alias", "scada_isa101_modular")
+                for wt in bundle_json.get("widgetTypes", []):
+                    wt_payload = dict(wt)
+                    wt_payload["bundleAlias"] = bundle_alias
+                    wt_resp = await client.post(f"{base_url}/api/widgetType", headers=headers, json=wt_payload)
+                    if wt_resp.status_code in (200, 201):
+                        widgets_pushed += 1
+
+        # 2. Provision each Device, Alarm Profile, Asset Relation, Access Token, Customer & Dashboard
         for dev in target_devices:
+            dev_vars = [v for v in all_vars if v.device_id == dev.id]
+
+            # 2a. Optional ISA-101 Device Profile with native ThingsBoard alarm rules
+            tb_profile_id = None
+            if req.create_alarm_profiles:
+                profile_payload = build_isa101_device_profile(dev, dev_vars)
+                if profile_payload:
+                    p_resp = await client.post(
+                        f"{base_url}/api/deviceProfile",
+                        headers=headers,
+                        json=profile_payload,
+                    )
+                    if p_resp.status_code in (200, 201):
+                        tb_profile_id = p_resp.json().get("id", {}).get("id")
+                        if tb_profile_id:
+                            provisioned_profiles.append({
+                                "name": profile_payload["name"],
+                                "tb_profile_id": tb_profile_id,
+                                "alarm_rules_count": len(profile_payload["profileData"]["alarms"]),
+                            })
+
             tb_dev_id = None
             lookup = await client.get(
                 f"{base_url}/api/tenant/devices",
@@ -215,14 +352,30 @@ async def tb_provision_stack(
             if lookup.status_code == 200:
                 tb_dev_id = lookup.json()["id"]["id"]
             else:
+                dev_body: Dict[str, Any] = {"name": dev.name, "type": "default", "label": dev.id}
+                if tb_profile_id:
+                    dev_body["deviceProfileId"] = {"entityType": "DEVICE_PROFILE", "id": tb_profile_id}
                 create_dev = await client.post(
                     f"{base_url}/api/device",
                     headers=headers,
-                    json={"name": dev.name, "type": "default", "label": dev.id},
+                    json=dev_body,
                 )
                 if create_dev.status_code not in (200, 201):
                     raise ValueError(f"Erreur création device '{dev.name}' : {create_dev.text}")
                 tb_dev_id = create_dev.json()["id"]["id"]
+
+            # 2b. Create Asset -> Device 'Contains' relation if Site Asset exists
+            if site_asset_id and tb_dev_id:
+                await client.post(
+                    f"{base_url}/api/relation",
+                    headers=headers,
+                    json={
+                        "from": {"entityType": "ASSET", "id": site_asset_id},
+                        "to": {"entityType": "DEVICE", "id": tb_dev_id},
+                        "type": "Contains",
+                        "typeGroup": "COMMON",
+                    },
+                )
 
             # Retrieve real Access Token from ThingsBoard
             cred_resp = await client.get(f"{base_url}/api/device/{tb_dev_id}/credentials", headers=headers)
@@ -282,8 +435,12 @@ async def tb_provision_stack(
     return {
         "status": "provisioned",
         "customer_id": customer_id,
+        "site_asset_id": site_asset_id,
         "devices_count": len(provisioned_devices),
         "dashboards_count": len(provisioned_dashboards),
+        "alarm_profiles_count": len(provisioned_profiles),
+        "widgets_pushed_count": widgets_pushed,
         "devices": provisioned_devices,
         "dashboards": provisioned_dashboards,
+        "alarm_profiles": provisioned_profiles,
     }

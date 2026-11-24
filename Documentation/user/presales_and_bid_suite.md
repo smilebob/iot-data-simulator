@@ -69,3 +69,31 @@ Téléchargez en 1 clic deux pièces directement exploitables dans vos dossiers 
    - Crée les *Devices* dans ThingsBoard et les assigne au *Customer*.
    - Récupère leurs **Access Tokens** réels et les injecte automatiquement dans le simulateur.
    - Crée et importe les **Dashboards ThingsBoard** déjà liés aux vrais UUIDs des devices et les assigne au *Customer*.
+   - **Option « Forcer HTTP REST »** *(pré-cochée par défaut)* : bascule automatiquement chaque équipement sur HTTP REST et renseigne `custom_host`, `custom_port` et `use_tls` depuis l'URL ThingsBoard saisie (fonctionne derrière tout pare-feu d'entreprise sur port 443).
+   - **Provisioning Complet (v3.0)** :
+     - **Asset Site + Relations `Contains`** : crée automatiquement un Asset racine (Site Client) relié à tous les équipements provisionnés.
+     - **Profils d'Alarmes ISA-101 natifs** : génère des `DeviceProfile` avec règles `WARNING` (90 % de plage) et `CRITICAL` (hors plage) pour déclencher de vraies alarmes ThingsBoard en soutenance via le *Bouton Chaos*.
+     - **Import 1 clic du Bundle 70 Widgets ISA-101** : déploie directement les 70 widgets modulaires dans la bibliothèque du Tenant cible.
+
+---
+
+## 6. Nouveautés Avant-Vente & Ingénierie v3.0
+
+### 📈 Backfill Historique Accéléré (7j / 30j / 90j)
+Avant un rendez-vous client, cliquez sur **« 📈 Backfill »** sur n'importe quelle carte équipement pour injecter en quelques secondes **7, 30 ou 90 jours de courbes historiques réalistes** (cycles jour/nuit, ralenti week-end, variables dérivées, intégrateurs d'énergie kWh/MWh et pics d'anomalies rétrospectifs) dans ThingsBoard REST v1.
+
+### 📦 Pack Soutenance Client Complet (.ZIP — 1 Clic)
+Dans la modale **Livrables d'Offres**, téléchargez en 1 clic **`pack_soutenance_iot_thingsboard.zip`** regroupant :
+1. `01_IO_List_Points.csv` *(avec colonne **Registre Modbus TCP**)*
+2. `02_Dossier_Architecture_IoT.md` *(avec dimensionnement `dp/s` et **5 sources officielles ThingsBoard**)*
+3. `03_ThingsBoard_IoT_Gateway_modbus.json` *(connecteur Modbus prêt à importer)*
+4. `04_Widgets_ISA101_Bundle_70.json` *(les 70 widgets ANSI/ISA-101)*
+5. `dashboards/*.json` *(tous les tableaux de bord ThingsBoard actifs)*
+6. `Catalogue_Commercial_Cas_Usage.pdf` *(book commercial des 35 cas d'usage)*
+
+### 🎨 Studio Visuel de Synoptiques ANSI/ISA-101 (No-Code)
+Cliquez sur **« 🎨 Studio »** sur un équipement (ou depuis *Livrables d'Offres*) pour assembler visuellement jusqu'à 6 composants parmi les **70 SVG ISA-101**, les relier aux variables de l'équipement avec aperçu temps réel, et enregistrer la composition directement sur le Dashboard ThingsBoard généré.
+
+### 🔌 Serveur Modbus TCP Intégré & 🚀 Stress-Test (`dp/s`)
+- **Serveur Modbus TCP (Port 5020, 0 droit admin)** : expose vos équipements simulés en registres Holding Float32 Big-Endian et Coils R/W pour tester en direct une passerelle **ThingsBoard IoT Gateway** ou un automate, avec téléchargement de `tb_gateway_modbus.json`.
+- **Générateur de Charge (`dp/s`)** : simule `10` à `2 000` équipements virtuels en mode benchmark (`dry-run`) ou live HTTP pour valider empiriquement la charge `dp/s` face aux prévisions du calculateur de dimensionnement.

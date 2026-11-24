@@ -1,14 +1,15 @@
 # ⚡ IoT Data Simulator (ThingsBoard, Home Assistant, Datacake & Multi-Platform)
 
-[![Version](https://img.shields.io/badge/version-2.2.1-blue.svg)](https://github.com/smilebob/iot-data-simulator)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/smilebob/iot-data-simulator)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 [![CIS Docker](https://img.shields.io/badge/security-CIS%20Benchmark%20Passed-success.svg)](Documentation/devops/docker_and_cis.md)
 [![ThingsBoard](https://img.shields.io/badge/ThingsBoard-4.3%20Ready-orange.svg)](Documentation/user/thingsboard_dashboards.md)
+[![ISA-101](https://img.shields.io/badge/SCADA-ANSI%2FISA--101.01-slate.svg)](Documentation/user/guide_debutant_widgets_scada.md)
 [![Antigravity](https://img.shields.io/badge/Antigravity-Plugin%20Ready-purple.svg)](Documentation/user/preset_import_export_and_agent.md)
 
-Simulateur de données IoT industriel développé en Python (FastAPI + Paho-MQTT v2 + WebSockets + HTTP/CoAP), packagé dans une stack Docker durcie (CIS Benchmark non-root) intégrant le broker MQTT Eclipse Mosquitto.
+Simulateur de données IoT industriel développé en Python (FastAPI + Paho-MQTT v2 + WebSockets + HTTP REST / CoAP / Modbus TCP), packagé dans une stack Docker durcie (CIS Benchmark non-root) **et en version portable 0 droit administrateur (Windows & Linux)**.
 
-Conçu spécialement pour réaliser des démonstrations dynamiques et réalistes sur **ThingsBoard 4.3** avec **32 synoptiques SCADA animés**, pilotage bidirectionnel interactif par **Attributs Partagés (`SHARED_SCOPE`)** et **RPC**, génération de cas d'usage via l'**Agent IA Antigravity**, et compatible nativement avec **Home Assistant**, **Datacake** et tout broker MQTT distant.
+Conçu pour réaliser des démonstrations et avant-ventes industrielles percutantes sur **ThingsBoard 4.3** : **35 cas d'usage métiers** (avec [Catalogue Commercial PDF](Documentation/user/catalogue_commercial_cas_usage.pdf)), **70 composants SVG ANSI/ISA-101** (importables dans ThingsBoard + Studio Visuel No-Code), pilotage bidirectionnel (`SHARED_SCOPE` & RPC), **Backfill Historique 7j/30j/90j**, **Provisioning 1 clic** (Assets, Profils d'Alarmes ISA-101, Dashboards & option *Forcer HTTP REST*), **Pack Soutenance `.ZIP`**, **Serveur Modbus TCP intégré** et **Calculateur de dimensionnement sourcé ThingsBoard (`dp/s`)**.
 
 ---
 

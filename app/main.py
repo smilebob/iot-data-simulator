@@ -26,6 +26,7 @@ from app.api.routes import router as api_router
 from app.api.websocket import WebSocketManager
 from app.core.engine import SimulationEngine
 from app.core.logger import log_handler
+from app.core.paths import get_static_dir, resolve_data_dir
 from app.core.security import decode_jwt_token
 from app.mqtt.client import MqttManager
 from app.storage.repository import StorageRepository
@@ -40,12 +41,14 @@ logging.basicConfig(
 logger = logging.getLogger("iot_sim")
 
 # Official semantic version and build date of the application
-APP_VERSION = "2.4.1"
+APP_VERSION = "3.0.0"
 BUILD_DATE = os.getenv("BUILD_DATE", "2026-11-24")
 
-# Initialize application-wide singletons
-repository = StorageRepository(file_path="data/simulator_state.json")
-user_repository = UserRepository(file_path="data/users.json")
+# Initialize application-wide singletons (supports Docker, standard, and portable non-admin paths)
+DATA_DIR = resolve_data_dir()
+STATIC_DIR = get_static_dir()
+repository = StorageRepository(file_path=str(DATA_DIR / "simulator_state.json"))
+user_repository = UserRepository(file_path=str(DATA_DIR / "users.json"))
 mqtt_manager = MqttManager(repository.get_broker())
 transport_manager = TransportManager(repository, mqtt_manager)
 engine = SimulationEngine(repository, mqtt_manager, transport_manager)
@@ -166,10 +169,10 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
         ws_manager.disconnect(websocket)
 
 # Mount frontend web assets
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 @app.get("/")
 def get_index() -> FileResponse:
     """Serves the single-page application index HTML document."""
-    return FileResponse("app/static/index.html")
+    return FileResponse(str(STATIC_DIR / "index.html"))
 

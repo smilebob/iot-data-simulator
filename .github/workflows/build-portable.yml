@@ -1,0 +1,124 @@
+name: Build Portable Binaries (Windows & Linux — Zero Admin)
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-portable:
+    name: Build ${{ matrix.os_label }} Portable ZIP
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-latest
+            os_label: Windows-x64
+            sep: ";"
+            exe_name: IoT-Data-Simulator.exe
+          - runner: ubuntu-latest
+            os_label: Linux-x64
+            sep: ":"
+            exe_name: IoT-Data-Simulator
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install runtime & build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller
+
+      - name: Build portable standalone bundle (PyInstaller --onedir)
+        shell: bash
+        run: |
+          pyinstaller \
+            --noconfirm \
+            --clean \
+            --onedir \
+            --name "IoT-Data-Simulator" \
+            --add-data "app/static${{ matrix.sep }}app/static" \
+            --hidden-import "uvicorn.logging" \
+            --hidden-import "uvicorn.loops" \
+            --hidden-import "uvicorn.loops.auto" \
+            --hidden-import "uvicorn.protocols" \
+            --hidden-import "uvicorn.protocols.http" \
+            --hidden-import "uvicorn.protocols.http.auto" \
+            --hidden-import "uvicorn.protocols.websockets" \
+            --hidden-import "uvicorn.protocols.websockets.auto" \
+            --hidden-import "uvicorn.lifespan" \
+            --hidden-import "uvicorn.lifespan.on" \
+            --hidden-import "paho.mqtt.client" \
+            --hidden-import "httpx" \
+            --hidden-import "aiofiles" \
+            launcher.py
+
+      - name: Add portable quickstart README inside bundle
+        shell: bash
+        run: |
+          cat << 'EOF' > dist/IoT-Data-Simulator/LISEZMOI_PORTABLE.txt
+          ================================================================
+          IoT Data Simulator — Version Portable (0 Droit Administrateur)
+          ================================================================
+
+          1. Decompressez l'integralite de ce dossier dans un emplacement
+             utilisateur (ex: Documents\IoT-Data-Simulator ou cle USB).
+          2. Lancez l'executable :
+             - Windows : double-cliquez sur IoT-Data-Simulator.exe
+             - Linux   : ./IoT-Data-Simulator
+          3. Votre navigateur s'ouvre automatiquement sur http://127.0.0.1:8032
+             (aucune demande administrateur ni alerte Pare-feu Windows).
+          4. Identifiants par defaut : admin / admin123
+          5. Vos donnees (equipements, comptes, presets) sont enregistrees
+             dans le sous-dossier data/ (ou %LOCALAPPDATA% / ~/.local/share
+             si le dossier est en lecture seule).
+          6. Pour communiquer avec ThingsBoard derriere un pare-feu
+             d'entreprise, utilisez l'option 1 clic "Forcer HTTP REST"
+             (port 443 HTTPS).
+          EOF
+
+      - name: Package portable ZIP archive
+        shell: bash
+        run: |
+          ARTIFACT_NAME="IoT-Data-Simulator-${{ matrix.os_label }}.zip"
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            powershell -NoProfile -Command "Compress-Archive -Path 'dist/IoT-Data-Simulator/*' -DestinationPath '${ARTIFACT_NAME}' -Force"
+          else
+            (cd dist/IoT-Data-Simulator && zip -r "../../${ARTIFACT_NAME}" .)
+          fi
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: IoT-Data-Simulator-${{ matrix.os_label }}
+          path: IoT-Data-Simulator-${{ matrix.os_label }}.zip
+
+  publish-release:
+    name: Publish GitHub Release (on tag v*)
+    needs: build-portable
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all portable ZIP artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Create or update GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-assets/*.zip
+          generate_release_notes: true

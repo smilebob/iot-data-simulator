@@ -41,7 +41,9 @@ from app.core.dashboard_generator import generate_thingsboard_dashboard
 
 logger = logging.getLogger("iot_sim.catalog")
 
-CUSTOM_PRESETS_FILE = os.getenv("CUSTOM_PRESETS_FILE", "data/custom_presets.json")
+from app.core.paths import resolve_data_dir
+
+CUSTOM_PRESETS_FILE = os.getenv("CUSTOM_PRESETS_FILE", str(resolve_data_dir() / "custom_presets.json"))
 _custom_presets_lock = threading.RLock()
 
 class EquipmentPreset(BaseModel):

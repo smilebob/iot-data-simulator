@@ -116,7 +116,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
         return False
 
 
-def get_or_create_jwt_secret(secret_file_path: str = "data/.jwt_secret") -> str:
+def get_or_create_jwt_secret(secret_file_path: Optional[str] = None) -> str:
     """Retrieves or provisions the 256-bit cryptographic HMAC signing key.
 
     Priority resolution:
@@ -125,11 +125,15 @@ def get_or_create_jwt_secret(secret_file_path: str = "data/.jwt_secret") -> str:
     3. Freshly generated 256-bit hex token securely persisted to disk.
 
     Args:
-        secret_file_path: Path where the secret file is stored.
+        secret_file_path: Path where the secret file is stored (defaults to `<DATA_DIR>/.jwt_secret`).
 
     Returns:
         str: Hex-encoded 256-bit secret signing key.
     """
+    if secret_file_path is None:
+        from app.core.paths import resolve_data_dir
+        secret_file_path = str(resolve_data_dir() / ".jwt_secret")
+
     # 1. Check environment variable override
     env_secret = os.getenv("JWT_SECRET_KEY")
     if env_secret and len(env_secret.strip()) >= 32:

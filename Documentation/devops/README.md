@@ -12,6 +12,7 @@ Bienvenue dans la documentation opérationnelle du projet **IoT Data Simulator**
 4. [Déploiement Distant & Reverse Proxy](remote_deployment.md) : Mise en production sur serveur dédié/cloud (VPS, EC2), reverse proxy Nginx / Traefik avec HTTPS (Let's Encrypt), variables d'environnement.
 5. [Contrôle d'Accès (RBAC) & Protection des Secrets CIS](rbac_and_secrets.md) : Modèle RBAC à 3 niveaux (Admin, Opérateur, Observateur), hachage Scrypt RFC 7914, sessions JWT HttpOnly, permissions 0600 et initialisation sécurisée.
 6. [Déploiement Portainer & Automatisation CI/CD](portainer_deployment.md) : Déploiement par Portainer Stack (Git Repository & Webhook auto-update), éditeur Web, mode GitOps Polling pour réseau privé (LAN), script CLI d'automatisation (`scripts/portainer_deploy.py`), pipeline GitHub Actions multi-architecture (amd64/arm64) et images GHCR.
+7. [Distribution Portable Sans Droits Administrateur (Windows & Linux)](../user/portable_no_admin.md) : Pipeline GitHub Actions `.github/workflows/build-portable.yml` (compilation PyInstaller `--onedir` sur tag `v*` et `workflow_dispatch` publiée en GitHub Release) + lanceurs scripts `portable/start_windows.bat` et `portable/start_linux.sh`.
 
 ---
 

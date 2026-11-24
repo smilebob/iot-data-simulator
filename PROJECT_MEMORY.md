@@ -1,6 +1,6 @@
 # 🧠 Mémoire Globale du Projet : IoT Data Simulator
 
-> **Dernière MAJ** : 2026-11-16 | **Version** : 2.3.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark, PEP 8, Google Docstrings & JSDoc | **Plateforme Cible** : ThingsBoard 4.3
+> **Dernière MAJ** : 2026-11-24 | **Version** : 3.0.0 | **Statut** : Production / Opérationnel | **Licence** : Apache 2.0 | **Conformité** : CIS Docker Benchmark, ANSI/ISA-101.01, PEP 8, Google Docstrings & JSDoc | **Plateforme Cible** : ThingsBoard 4.3
 
 ---
 
@@ -154,11 +154,21 @@ Pour intervenir sur un sous-module spécifique sans surcharger le contexte en to
   - **Script de Mise à Jour Directe SSH** : [`scripts/remote_update.sh`](file:///home/pierre/Projets/iot-data-simulator/scripts/remote_update.sh) pour synchroniser le code et relancer à chaud le conteneur applicatif en 4 secondes avec validation healthcheck.
   - **Template & Documentation DevOps** : `.env.portainer.example`, section 4.1 dans `Documentation/devops/portainer_deployment.md`.
 - [x] Suite Avant-Vente & Offres Numériques (v2.3.0) :
-  - **Calculateur de Dimensionnement IoT** (`app/core/sizing_calculator.py`, `/api/sizing/*`) : débit msg/s, trafic 4G, stockage TimescaleDB, gabarit serveur ThingsBoard & export Markdown.
-  - **35 Modèles Métiers (+3 Réglementaires ROI)** : Ajout de `bldg_bacs_class_a` (Décret BACS), `infra_district_heating` (RCU) et `ind_iso50001_multifluid` (ISO 50001) avec calculs natifs IPE, CO2 et €/h.
-  - **Site Blueprints & Storyboards Live** (`app/core/site_blueprints.py`, `app/core/storyboard_engine.py`) : instanciation en 1 clic de sites multi-équipements + Dashboard Master Hypervision Site + scénarios minutés 4 phases.
-  - **Livrables Offres & Push ThingsBoard Éphémère** (`app/core/bid_deliverables.py`, `app/core/tb_provisioner.py`) : IO List CSV Excel FR (`;`), Dossier Architecture Markdown (Mermaid), et provisioning 1-clic multi-Tenant/Customer sans persistance des identifiants.
-  - **Guide Avant-Vente** : `Documentation/user/presales_and_bid_suite.md` (31/31 tests unitaires passés).
+  - **Calculateur de Dimensionnement IoT** (`app/core/sizing_calculator.py`, `/api/sizing/*`) : débit `msg/s` & `dp/s`, trafic 4G, stockage PostgreSQL brut (145 o/dp) vs Hybride Cassandra/TimescaleDB (5×), gabarit serveur ThingsBoard & 5 sources officielles vérifiables (`thingsboard.io/docs/*`).
+  - **35 Modèles Métiers (+3 Réglementaires ROI)** : `bldg_bacs_class_a` (Décret BACS), `infra_district_heating` (RCU), `ind_iso50001_multifluid` (ISO 50001) + **Catalogue Commercial PDF** (`Documentation/user/catalogue_commercial_cas_usage.pdf`).
+  - **Site Blueprints & Storyboards Live** (`app/core/site_blueprints.py`, `app/core/storyboard_engine.py`) : instanciation en 1 clic de sites multi-équipements (`force_http_rest`) + Dashboard Master Hypervision Site + scénarios minutés 4 phases.
+  - **Livrables Offres & Push ThingsBoard Éphémère** (`app/core/bid_deliverables.py`, `app/core/tb_provisioner.py`) : IO List CSV Excel FR (`;` + Registres Modbus TCP), Dossier Architecture Markdown (Mermaid), et provisioning 1-clic multi-Tenant/Customer avec option **Forcer HTTP REST** (auto-config `custom_host`/`custom_port`/`use_tls`).
+- [x] Standard ANSI/ISA-101.01, 70 Widgets SCADA & Mode Portable Sans Admin (v2.4.0 – v2.4.1) :
+  - **Bibliothèque de 70 Composants SVG ISA-101** (`app/core/svg_components.py`, 6 familles, codage redondant Forme+Couleur ▲/■ !) + Bundles ThingsBoard 4.3 (`/api/widgets/thingsboard/bundle`) + Catalogue PDF 70 SVG + Guide Débutant PDF/MD.
+  - **35 Synoptiques Modulaires ISA-101** (`app/core/scada_synoptics.py`, `SYNOPTIC_COMPONENT_MAP`) et conformité stricte vérifiée par `tests/test_isa101_compliance.py`.
+  - **Mode Portable 0 Droit Admin (Windows & Linux)** : `app/core/paths.py`, `launcher.py` (`127.0.0.1` strict, port auto `8032+`, ouverture navigateur, `data/` portable USB avec repli `%LOCALAPPDATA%`/`~/.local/share`), `portable/start_windows.bat`, `portable/start_linux.sh`, workflow GitHub Actions `.github/workflows/build-portable.yml` (ZIP Windows `.exe` + Linux sur tags `v*`).
+- [x] Extensions Plateforme Avant-Vente & OT Industrielle (v3.0.0 — Lots A à E) :
+  - **Lot A — Provisioning ThingsBoard Complet** (`app/core/tb_provisioner.py`) : création d'Asset Site + relations `Contains`, Profils d'Alarmes ISA-101 natifs (`WARNING`/`CRITICAL` propagées), import 1 clic des 70 widgets ISA-101 dans le Tenant.
+  - **Lot B — Backfill Historique Accéléré** (`app/core/backfill_engine.py`, `POST /api/devices/{id}/backfill`) : génération rétroactive 7j/30j/90j avec cycles diurnes/week-end, physique 3 passes et injection par lots REST v1.
+  - **Lot C — Serveur Modbus TCP Intégré** (`app/transports/modbus_server.py`, `/api/modbus/*`) : serveur pur-Python `asyncio` sur port non privilégié `5020` (Float32 Big-Endian + Coils R/W) + export `tb_gateway_modbus.json` pour ThingsBoard IoT Gateway + colonne `Registre Modbus TCP` dans l'IO List CSV.
+  - **Lot D — Studio Visuel de Synoptiques ISA-101** (`DeviceConfig.custom_synoptic_nodes`, `PUT /api/devices/{id}/synoptic`, `POST /api/synoptic/preview`, `#modal-synoptic-studio`) : assemblage No-Code parmi les 70 composants SVG avec aperçu live et sauvegarde directe sur le Dashboard ThingsBoard.
+  - **Lot E — Pack Soutenance 1 Clic (`.ZIP`) & Stress-Test (`dp/s`)** (`app/core/bid_package.py`, `GET /api/deliverables/bid-pack.zip`, `app/core/stress_test.py`, `/api/stress/*`) : archive client tout-en-un et générateur de charge multi-équipements.
+  - **Validation Qualité** : **51/51 tests de non-régression passés** (`tests/test_v3_extensions_non_regression.py`, `tests/test_portable_launcher.py`, `tests/test_isa101_compliance.py`, etc.).
 
 ### 🚧 Évolutions Futures Potentielles
 - [ ] Connecteur AWS IoT Core / Azure IoT Hub natif (modèle documenté dans `Documentation/developer/extending_platforms.md`)

@@ -395,6 +395,27 @@ def build_generic_scada_synoptic(name: str, token: str, proto: str, vars_list: l
     return _compose_isa101_process_svg(f"SYNOPTIQUE ISA-101 • {name}", token, proto, nodes, var_map)
 
 
+def render_custom_synoptic_preview(
+    title: str,
+    nodes_spec: List[Dict[str, str]],
+    variables: List[VariableConfig],
+    proto: str = "HTTP",
+) -> str:
+    """Renders a live ISA-101 modular SVG synoptic from Studio node specs."""
+    var_map = {get_clean_var_key(v): v for v in variables}
+    tuples: List[Tuple[str, str, str]] = [
+        (
+            str(n.get("component_id", "isa_analog_bar")),
+            str(n.get("var_key", "valeur")),
+            str(n.get("label") or n.get("var_key") or "Signal"),
+        )
+        for n in nodes_spec[:6]
+    ]
+    if not tuples:
+        tuples = [("isa_analog_bar", "valeur", "Signal Process")]
+    return _compose_isa101_process_svg(title, "STUDIO", proto, tuples, var_map)
+
+
 def get_scada_synoptic_html(device: DeviceConfig, variables: List[VariableConfig], preset_id: Optional[str] = None) -> str:
     """Generates an ISA-101 modular SVG SCADA synoptic for any built-in or custom equipment."""
     dev_id = (preset_id or device.id or "").lower()
@@ -402,6 +423,25 @@ def get_scada_synoptic_html(device: DeviceConfig, variables: List[VariableConfig
     token_str = device.token or "NON_RENSEIGNE"
     proto_str = device.protocol.value.upper() if hasattr(device.protocol, "value") else str(device.protocol).upper()
     var_map = {get_clean_var_key(v): v for v in variables}
+
+    # 0. Explicit Studio custom synoptic layout takes top priority
+    if getattr(device, "custom_synoptic_nodes", None):
+        custom_tuples: List[Tuple[str, str, str]] = [
+            (
+                str(n.get("component_id", "isa_analog_bar")),
+                str(n.get("var_key", "valeur")),
+                str(n.get("label") or n.get("var_key") or "Signal"),
+            )
+            for n in device.custom_synoptic_nodes[:6]
+        ]
+        if custom_tuples:
+            return _compose_isa101_process_svg(
+                f"SYNOPTIQUE STUDIO ISA-101 • {dev_name}",
+                token_str,
+                proto_str,
+                custom_tuples,
+                var_map,
+            )
 
     # 1. Exact preset match
     if dev_id in SYNOPTIC_COMPONENT_MAP:
