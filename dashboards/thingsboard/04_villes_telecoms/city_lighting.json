@@ -4,8 +4,8 @@
   "configuration": {
     "description": "ThingsBoard SCADA HMI dashboard for equipment 'Armoire d'Éclairage Public' (ID: city_lighting). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: COAP.",
     "entityAliases": {
-      "dea1f989-0b52-453a-93eb-da7e77928020": {
-        "id": "dea1f989-0b52-453a-93eb-da7e77928020",
+      "0caea0d8-3488-4511-80a3-a1ab797f8023": {
+        "id": "0caea0d8-3488-4511-80a3-a1ab797f8023",
         "alias": "Armoire d'Éclairage Public",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "8eb4c46b-42d3-4caa-83ac-feb17696d20d": {
+      "5428ff97-8fe8-4ee7-b819-9b9678a90b3c": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "8eb4c46b-42d3-4caa-83ac-feb17696d20d"
+        "id": "5428ff97-8fe8-4ee7-b819-9b9678a90b3c"
       },
-      "7fbdfc6f-e7f5-4265-a034-175fccd61c1d": {
+      "ab185605-3bb1-4071-bf62-eaeb9c98724c": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "dea1f989-0b52-453a-93eb-da7e77928020",
+              "entityAliasId": "0caea0d8-3488-4511-80a3-a1ab797f8023",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -101,8 +101,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Smart Lighting SCADA : Armoire d'Éclairage Public\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Armoire de Commande Rue -->\n    <rect x=\"70\" y=\"60\" width=\"130\" height=\"140\" rx=\"8\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"135\" y=\"90\" fill=\"#B45309\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ARMOIRE ÉCLAIRAGE</text>\n    <text x=\"135\" y=\"110\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Horloge Astro</text>\n\n    <!-- Candélabres LED sur voirie -->\n    <g transform=\"translate(300, 80)\">\n      <line x1=\"0\" y1=\"120\" x2=\"0\" y2=\"0\" stroke=\"#64748B\" stroke-width=\"4\"/>\n      <path d=\"M 0 0 Q 15 -10 30 -5\" fill=\"none\" stroke=\"#64748B\" stroke-width=\"3\"/>\n      <polygon points=\"25,-5 35,-5 30,5\" fill=\"#D97706\"/>\n      <polygon points=\"20,5 40,5 60,80 0,80\" fill=\"#FDE68A\" opacity=\"0.35\"/>\n    </g>\n\n    <g transform=\"translate(480, 80)\">\n      <line x1=\"0\" y1=\"120\" x2=\"0\" y2=\"0\" stroke=\"#64748B\" stroke-width=\"4\"/>\n      <path d=\"M 0 0 Q 15 -10 30 -5\" fill=\"none\" stroke=\"#64748B\" stroke-width=\"3\"/>\n      <polygon points=\"25,-5 35,-5 30,5\" fill=\"#D97706\"/>\n      <polygon points=\"20,5 40,5 60,80 0,80\" fill=\"#FDE68A\" opacity=\"0.35\"/>\n    </g>\n\n    <!-- Ligne d'alimentation souterraine -->\n    <line x1=\"200\" y1=\"180\" x2=\"580\" y2=\"180\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"6,3\"/>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ÉCLAIRAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_eclairage_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU GRADATION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_gradation_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT DE FUITE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_fuite_ma:1} mA</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉTAT PORTE ARMOIRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${alerte_porte_ouverte}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Smart Lighting SCADA : Armoire d'Éclairage Public\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Armoire de Commande Rue -->\n    <rect x=\"70\" y=\"60\" width=\"130\" height=\"140\" rx=\"8\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"135\" y=\"90\" fill=\"#B45309\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">ARMOIRE ÉCLAIRAGE</text>\n    <text x=\"135\" y=\"110\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Horloge Astro</text>\n\n    <!-- Candélabres LED sur voirie -->\n    <g transform=\"translate(300, 80)\">\n      <line x1=\"0\" y1=\"120\" x2=\"0\" y2=\"0\" stroke=\"#64748B\" stroke-width=\"4\"/>\n      <path d=\"M 0 0 Q 15 -10 30 -5\" fill=\"none\" stroke=\"#64748B\" stroke-width=\"3\"/>\n      <polygon points=\"25,-5 35,-5 30,5\" fill=\"#D97706\"/>\n      <polygon points=\"20,5 40,5 60,80 0,80\" fill=\"#FDE68A\" opacity=\"0.35\"/>\n    </g>\n\n    <g transform=\"translate(480, 80)\">\n      <line x1=\"0\" y1=\"120\" x2=\"0\" y2=\"0\" stroke=\"#64748B\" stroke-width=\"4\"/>\n      <path d=\"M 0 0 Q 15 -10 30 -5\" fill=\"none\" stroke=\"#64748B\" stroke-width=\"3\"/>\n      <polygon points=\"25,-5 35,-5 30,5\" fill=\"#D97706\"/>\n      <polygon points=\"20,5 40,5 60,80 0,80\" fill=\"#FDE68A\" opacity=\"0.35\"/>\n    </g>\n\n    <!-- Ligne d'alimentation souterraine -->\n    <line x1=\"200\" y1=\"180\" x2=\"580\" y2=\"180\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"6,3\"/>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ÉCLAIRAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_eclairage_kw:1} kW</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">NIVEAU GRADATION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${niveau_gradation_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">COURANT DE FUITE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${courant_fuite_ma:1} mA</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉTAT PORTE ARMOIRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${alerte_porte_ouverte}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Armoire d'Éclairage Public\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Éclairage LED</text><path d=\"M45,82 L45,24 L95,24\" fill=\"none\" stroke=\"#475569\" stroke-width=\"4\" stroke-linecap=\"round\"/><rect x=\"82\" y=\"20\" width=\"22\" height=\"8\" rx=\"3\" fill=\"#475569\"/><polygon points=\"84,28 102,28 112,56 74,56\" fill=\"#475569\" opacity=\"0.22\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${niveau_gradation_pct:0} %</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Puissance Armoire</text><rect x=\"30\" y=\"18\" width=\"80\" height=\"58\" rx=\"5\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"38\" y=\"25\" width=\"64\" height=\"30\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><path d=\"M42,40 Q50,28 58,40 T74,40 T90,40 T98,40\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2\"/><text x=\"70\" y=\"69\" fill=\"#334155\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">THD / COS φ</text><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${puissance_eclairage_kw:1} kW</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Différentiel</text><line x1=\"70\" y1=\"10\" x2=\"70\" y2=\"30\" stroke=\"#64748B\" stroke-width=\"3\"/><rect x=\"52\" y=\"30\" width=\"36\" height=\"36\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"62\" y1=\"40\" x2=\"78\" y2=\"56\" stroke=\"#475569\" stroke-width=\"3\"/><line x1=\"78\" y1=\"40\" x2=\"62\" y2=\"56\" stroke=\"#475569\" stroke-width=\"3\"/><line x1=\"70\" y1=\"66\" x2=\"70\" y2=\"86\" stroke=\"#64748B\" stroke-width=\"3\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${courant_fuite_ma:1} mA</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Porte Armoire</text><rect x=\"20\" y=\"20\" width=\"100\" height=\"56\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><polygon points=\"44,34 56,58 32,58\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2.5\"/><text x=\"44\" y=\"54\" fill=\"#475569\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">!</text><text x=\"86\" y=\"45\" fill=\"#334155\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">STATUT</text><text x=\"86\" y=\"60\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${alerte_porte_ouverte}</text><text x=\"70\" y=\"100\" fill=\"#475569\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">ISA-18.2 PRIORITÉ</text></g></svg>\n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Armoire d'Éclairage Public\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>COAP</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Éclairage LED</text><path d=\"M45,82 L45,24 L95,24\" fill=\"none\" stroke=\"#475569\" stroke-width=\"4\" stroke-linecap=\"round\"/><rect x=\"82\" y=\"20\" width=\"22\" height=\"8\" rx=\"3\" fill=\"#475569\"/><polygon points=\"84,28 102,28 112,56 74,56\" fill=\"#475569\" opacity=\"0.22\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${niveau_gradation_pct:0} %</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Puissance Armoire</text><rect x=\"30\" y=\"18\" width=\"80\" height=\"58\" rx=\"5\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"38\" y=\"25\" width=\"64\" height=\"30\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><path d=\"M42,40 Q50,28 58,40 T74,40 T90,40 T98,40\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2\"/><text x=\"70\" y=\"69\" fill=\"#334155\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">THD / COS φ</text><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${puissance_eclairage_kw:1} kW</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Différentiel</text><line x1=\"70\" y1=\"10\" x2=\"70\" y2=\"30\" stroke=\"#64748B\" stroke-width=\"3\"/><rect x=\"52\" y=\"30\" width=\"36\" height=\"36\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"62\" y1=\"40\" x2=\"78\" y2=\"56\" stroke=\"#475569\" stroke-width=\"3\"/><line x1=\"78\" y1=\"40\" x2=\"62\" y2=\"56\" stroke=\"#475569\" stroke-width=\"3\"/><line x1=\"70\" y1=\"66\" x2=\"70\" y2=\"86\" stroke=\"#64748B\" stroke-width=\"3\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${courant_fuite_ma:1} mA</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Porte Armoire</text><rect x=\"20\" y=\"20\" width=\"100\" height=\"56\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><polygon points=\"44,34 56,58 32,58\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2.5\"/><text x=\"44\" y=\"54\" fill=\"#475569\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">!</text><text x=\"86\" y=\"45\" fill=\"#334155\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">STATUT</text><text x=\"86\" y=\"60\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${alerte_porte_ouverte}</text><text x=\"70\" y=\"100\" fill=\"#475569\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">ISA-18.2 PRIORITÉ</text></g></svg>\n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "7fbdfc6f-e7f5-4265-a034-175fccd61c1d"
+        "id": "ab185605-3bb1-4071-bf62-eaeb9c98724c"
       },
-      "942f2d93-d687-4dd4-adc9-7f75d95a56b5": {
+      "6977d7c5-5fad-4854-8326-04e31539e8da": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "dea1f989-0b52-453a-93eb-da7e77928020",
+              "entityAliasId": "0caea0d8-3488-4511-80a3-a1ab797f8023",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "942f2d93-d687-4dd4-adc9-7f75d95a56b5"
+        "id": "6977d7c5-5fad-4854-8326-04e31539e8da"
       },
-      "e9c122cc-7a8e-4e21-b411-b20e318b897d": {
+      "2bd48e2a-4e08-4515-91cd-36c40882f444": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "dea1f989-0b52-453a-93eb-da7e77928020",
+              "entityAliasId": "0caea0d8-3488-4511-80a3-a1ab797f8023",
               "dataKeys": [
                 {
                   "name": "niveau_gradation_pct",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "e9c122cc-7a8e-4e21-b411-b20e318b897d"
+        "id": "2bd48e2a-4e08-4515-91cd-36c40882f444"
       },
-      "f6781676-5e24-48a0-b0be-3b1b438121c5": {
+      "df269e65-20b5-4130-9965-da6b8360d2de": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "dea1f989-0b52-453a-93eb-da7e77928020",
+              "entityAliasId": "0caea0d8-3488-4511-80a3-a1ab797f8023",
               "dataKeys": [
                 {
                   "name": "courant_fuite_ma",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "f6781676-5e24-48a0-b0be-3b1b438121c5"
+        "id": "df269e65-20b5-4130-9965-da6b8360d2de"
       },
-      "ff28098f-f154-4b16-878d-48a55aea796a": {
+      "8764c935-1910-4d18-b758-7e5da19612c4": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "dea1f989-0b52-453a-93eb-da7e77928020",
+              "entityAliasId": "0caea0d8-3488-4511-80a3-a1ab797f8023",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_kw",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "ff28098f-f154-4b16-878d-48a55aea796a"
+        "id": "8764c935-1910-4d18-b758-7e5da19612c4"
       },
-      "583d2480-5e72-474b-ae61-bd80e463fafe": {
+      "05ccbe36-00e9-436d-85a1-d57c351d9742": {
         "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -439,7 +439,7 @@
           },
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "dea1f989-0b52-453a-93eb-da7e77928020"
+            "entityAliasId": "0caea0d8-3488-4511-80a3-a1ab797f8023"
           },
           "datasources": [],
           "settings": {
@@ -517,9 +517,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "583d2480-5e72-474b-ae61-bd80e463fafe"
+        "id": "05ccbe36-00e9-436d-85a1-d57c351d9742"
       },
-      "24e8ff00-be04-4523-aae0-fe02a6cf25e2": {
+      "c3e76253-c055-4d7e-9480-86929a7d15ec": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -532,7 +532,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "dea1f989-0b52-453a-93eb-da7e77928020",
+              "entityAliasId": "0caea0d8-3488-4511-80a3-a1ab797f8023",
               "dataKeys": [
                 {
                   "name": "alerte_porte_ouverte",
@@ -564,7 +564,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "24e8ff00-be04-4523-aae0-fe02a6cf25e2"
+        "id": "c3e76253-c055-4d7e-9480-86929a7d15ec"
       }
     },
     "states": {
@@ -574,49 +574,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "8eb4c46b-42d3-4caa-83ac-feb17696d20d": {
+              "5428ff97-8fe8-4ee7-b819-9b9678a90b3c": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "7fbdfc6f-e7f5-4265-a034-175fccd61c1d": {
+              "ab185605-3bb1-4071-bf62-eaeb9c98724c": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "942f2d93-d687-4dd4-adc9-7f75d95a56b5": {
+              "6977d7c5-5fad-4854-8326-04e31539e8da": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "e9c122cc-7a8e-4e21-b411-b20e318b897d": {
+              "2bd48e2a-4e08-4515-91cd-36c40882f444": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "f6781676-5e24-48a0-b0be-3b1b438121c5": {
+              "df269e65-20b5-4130-9965-da6b8360d2de": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "ff28098f-f154-4b16-878d-48a55aea796a": {
+              "8764c935-1910-4d18-b758-7e5da19612c4": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "583d2480-5e72-474b-ae61-bd80e463fafe": {
+              "05ccbe36-00e9-436d-85a1-d57c351d9742": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "24e8ff00-be04-4523-aae0-fe02a6cf25e2": {
+              "c3e76253-c055-4d7e-9480-86929a7d15ec": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

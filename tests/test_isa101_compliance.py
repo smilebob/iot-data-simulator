@@ -64,9 +64,23 @@ def test_dashboard_generator_strict_isa101():
 
 
 def test_scada_synoptics_and_site_hypervision_isa101():
-    """Verifies SCADA_CSS and Hypervision Site dashboards use ISA-101 matte gray #E5E7EB."""
+    """Verifies SCADA_CSS, all 35 built-in synoptics, and Hypervision Site dashboards obey ISA-101."""
+    from app.core.equipment_catalog import get_builtin_catalog
+    from app.core.scada_synoptics import SYNOPTIC_COMPONENT_MAP, get_scada_synoptic_html
+
     assert "background: #E5E7EB;" in SCADA_CSS
     assert "blink-live" not in SCADA_CSS
+
+    valid_comp_ids = {c.id for c in get_svg_components_catalog()}
+    for preset in get_builtin_catalog():
+        assert preset.id in SYNOPTIC_COMPONENT_MAP, f"Preset {preset.id} missing from SYNOPTIC_COMPONENT_MAP"
+        for comp_id, var_key, _ in SYNOPTIC_COMPONENT_MAP[preset.id]:
+            assert comp_id in valid_comp_ids, f"Unknown SVG component {comp_id} in {preset.id}"
+        dev = DeviceConfig(id=preset.id, name=preset.name)
+        html = get_scada_synoptic_html(dev, preset.variables, preset_id=preset.id)
+        assert "background: #E5E7EB;" in html
+        for neon in FORBIDDEN_NEON_COLORS:
+            assert neon not in html, f"Forbidden neon color {neon} in synoptic for {preset.id}"
 
     site_dash = generate_site_hypervision_dashboard("site_tertiaire_bacs")
     widgets = list(site_dash["configuration"]["widgets"].values())

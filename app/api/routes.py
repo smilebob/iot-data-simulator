@@ -849,14 +849,18 @@ def list_svg_scada_components():
 
 
 @router.get("/widgets/thingsboard/bundle", dependencies=[Depends(require_role(ROLE_ANY))])
-def export_thingsboard_widget_bundle():
-    """Exporte le Widget Bundle ThingsBoard 4.3 complet (30 widgets SCADA mappables)."""
-    bundle = generate_thingsboard_widget_bundle()
-    return Response(
-        content=json.dumps(bundle, indent=2, ensure_ascii=False),
-        media_type="application/json",
-        headers={"Content-Disposition": 'attachment; filename="tb43_scada_widgets_bundle.json"'},
-    )
+def export_thingsboard_widget_bundle(family: Optional[str] = None):
+    """Exporte le Widget Bundle ThingsBoard 4.3 complet (70 widgets) ou filtré par famille métier."""
+    try:
+        bundle = generate_thingsboard_widget_bundle(family=family)
+        fname = f"tb43_bundle_{family}.json" if family else "tb43_scada_widgets_bundle.json"
+        return Response(
+            content=json.dumps(bundle, indent=2, ensure_ascii=False),
+            media_type="application/json",
+            headers={"Content-Disposition": f'attachment; filename="{fname}"'},
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 @router.get("/widgets/thingsboard/{component_id}", dependencies=[Depends(require_role(ROLE_ANY))])

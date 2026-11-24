@@ -4,8 +4,8 @@
   "configuration": {
     "description": "ThingsBoard SCADA HMI dashboard for equipment 'Gestion d'Éclairage DALI & Présence' (ID: bldg_dali_lighting). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: HTTP.",
     "entityAliases": {
-      "507054aa-cebe-4ae9-bb91-0e578c3971f9": {
-        "id": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
+      "1b906b88-0e9a-4bec-9d41-1888a91c65bd": {
+        "id": "1b906b88-0e9a-4bec-9d41-1888a91c65bd",
         "alias": "Gestion d'Éclairage DALI & Présence",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "a3e73029-c426-430a-9fa7-853c4b076451": {
+      "89dbd763-c007-4ff2-a815-c9fdcbcfbf69": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "a3e73029-c426-430a-9fa7-853c4b076451"
+        "id": "89dbd763-c007-4ff2-a815-c9fdcbcfbf69"
       },
-      "dd73410a-f381-4d1d-b85c-538fa66392b3": {
+      "2422c602-a416-46aa-87cc-9dd811b06954": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
+              "entityAliasId": "1b906b88-0e9a-4bec-9d41-1888a91c65bd",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Éclairage DALI SCADA : Gestion d'Éclairage DALI & Présence\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Contrôleur DALI Passerelle IP/BACnet -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">GESTION ÉCLAIRAGE ARCHITECTURAL DALI-2 / DÉTECTION PIR MULTI-CAPTEURS</text>\n\n    <!-- Bus 2 Fils DALI -->\n    <line x1=\"90\" y1=\"120\" x2=\"580\" y2=\"120\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"8,4\"/>\n    <text x=\"90\" y=\"110\" fill=\"#D97706\" font-size=\"9\" font-weight=\"bold\">BUS DALI-2 (64 ADRESSES)</text>\n\n    <!-- Luminaires LED DALI Adressables -->\n    <g transform=\"translate(180, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #01</text>\n    </g>\n    <g transform=\"translate(340, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #02</text>\n    </g>\n\n    <!-- Capteur PIR Présence + Luxmètre -->\n    <g transform=\"translate(500, 120)\">\n      <circle cx=\"0\" cy=\"0\" r=\"22\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"4\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PIR + LUX</text>\n      <text x=\"0\" y=\"-28\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DÉTECTEUR</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCLAIREMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${eclairement_lux:0} lux</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX PRÉSENCE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_presence_zone_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">GRADATION DALI</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${gradation_dali_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ÉCLAIRAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_eclairage_w:0} W</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Éclairage DALI SCADA : Gestion d'Éclairage DALI & Présence\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Contrôleur DALI Passerelle IP/BACnet -->\n    <rect x=\"60\" y=\"45\" width=\"560\" height=\"170\" rx=\"12\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2.5\"/>\n    <text x=\"85\" y=\"70\" fill=\"#B45309\" font-size=\"11\" font-weight=\"bold\">GESTION ÉCLAIRAGE ARCHITECTURAL DALI-2 / DÉTECTION PIR MULTI-CAPTEURS</text>\n\n    <!-- Bus 2 Fils DALI -->\n    <line x1=\"90\" y1=\"120\" x2=\"580\" y2=\"120\" stroke=\"#D97706\" stroke-width=\"4\" stroke-dasharray=\"8,4\"/>\n    <text x=\"90\" y=\"110\" fill=\"#D97706\" font-size=\"9\" font-weight=\"bold\">BUS DALI-2 (64 ADRESSES)</text>\n\n    <!-- Luminaires LED DALI Adressables -->\n    <g transform=\"translate(180, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #01</text>\n    </g>\n    <g transform=\"translate(340, 120)\">\n      <polygon points=\"-25,-25 25,-25 15,10 -15,10\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <polygon points=\"-35,25 35,25 15,10 -15,10\" fill=\"#FDE68A\" opacity=\"0.4\"/>\n      <text x=\"0\" y=\"-32\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">LUM. DALI #02</text>\n    </g>\n\n    <!-- Capteur PIR Présence + Luxmètre -->\n    <g transform=\"translate(500, 120)\">\n      <circle cx=\"0\" cy=\"0\" r=\"22\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"4\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PIR + LUX</text>\n      <text x=\"0\" y=\"-28\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">DÉTECTEUR</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCLAIREMENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${eclairement_lux:0} lux</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TAUX PRÉSENCE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${taux_presence_zone_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">GRADATION DALI</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${gradation_dali_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">PUISSANCE ÉCLAIRAGE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${puissance_eclairage_w:0} W</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Gestion d'Éclairage DALI & Présence\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Éclairage DALI</text><path d=\"M45,82 L45,24 L95,24\" fill=\"none\" stroke=\"#475569\" stroke-width=\"4\" stroke-linecap=\"round\"/><rect x=\"82\" y=\"20\" width=\"22\" height=\"8\" rx=\"3\" fill=\"#475569\"/><polygon points=\"84,28 102,28 112,56 74,56\" fill=\"#475569\" opacity=\"0.22\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${gradation_dali_pct:0} %</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Éclairement</text><rect x=\"52\" y=\"18\" width=\"16\" height=\"64\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"18\" width=\"16\" height=\"10\" fill=\"#CBD5E1\"/><rect x=\"52\" y=\"72\" width=\"16\" height=\"10\" fill=\"#CBD5E1\"/><rect x=\"54\" y=\"34\" width=\"12\" height=\"32\" fill=\"#94A3B8\" opacity=\"0.5\"/><line x1=\"48\" y1=\"28\" x2=\"72\" y2=\"28\" stroke=\"#475569\" stroke-width=\"1\"/><line x1=\"48\" y1=\"72\" x2=\"72\" y2=\"72\" stroke=\"#475569\" stroke-width=\"1\"/><polygon points=\"71,46 81,41 81,51\" fill=\"#475569\"/><rect x=\"48\" y=\"46\" y=\"46\" width=\"24\" height=\"4\" fill=\"#475569\"/><text x=\"94\" y=\"25\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">HH</text><text x=\"94\" y=\"79\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">LL</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${eclairement_lux:1} lux</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Puissance W</text><rect x=\"30\" y=\"18\" width=\"80\" height=\"58\" rx=\"5\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"38\" y=\"25\" width=\"64\" height=\"30\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><path d=\"M42,40 Q50,28 58,40 T74,40 T90,40 T98,40\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2\"/><text x=\"70\" y=\"69\" fill=\"#334155\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">THD / COS φ</text><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${puissance_eclairage_w:1} W</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Présence Zone</text><rect x=\"18\" y=\"38\" width=\"104\" height=\"22\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"40\" width=\"36\" height=\"18\" fill=\"#CBD5E1\"/><line x1=\"70\" y1=\"32\" x2=\"70\" y2=\"66\" stroke=\"#0F172A\" stroke-width=\"2\"/><rect x=\"68\" x=\"68\" y=\"35\" width=\"6\" height=\"28\" rx=\"1\" fill=\"#475569\"/><text x=\"22\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">-DEV</text><text x=\"70\" y=\"76\" fill=\"#0F172A\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">SP</text><text x=\"118\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\" text-anchor=\"end\">+DEV</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${taux_presence_zone_pct:0} %</text></g></svg>\n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Gestion d'Éclairage DALI & Présence\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Éclairage DALI</text><path d=\"M45,82 L45,24 L95,24\" fill=\"none\" stroke=\"#475569\" stroke-width=\"4\" stroke-linecap=\"round\"/><rect x=\"82\" y=\"20\" width=\"22\" height=\"8\" rx=\"3\" fill=\"#475569\"/><polygon points=\"84,28 102,28 112,56 74,56\" fill=\"#475569\" opacity=\"0.22\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${gradation_dali_pct:0} %</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Éclairement</text><rect x=\"52\" y=\"18\" width=\"16\" height=\"64\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"18\" width=\"16\" height=\"10\" fill=\"#CBD5E1\"/><rect x=\"52\" y=\"72\" width=\"16\" height=\"10\" fill=\"#CBD5E1\"/><rect x=\"54\" y=\"34\" width=\"12\" height=\"32\" fill=\"#94A3B8\" opacity=\"0.5\"/><line x1=\"48\" y1=\"28\" x2=\"72\" y2=\"28\" stroke=\"#475569\" stroke-width=\"1\"/><line x1=\"48\" y1=\"72\" x2=\"72\" y2=\"72\" stroke=\"#475569\" stroke-width=\"1\"/><polygon points=\"71,46 81,41 81,51\" fill=\"#475569\"/><rect x=\"48\" y=\"46\" y=\"46\" width=\"24\" height=\"4\" fill=\"#475569\"/><text x=\"94\" y=\"25\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">HH</text><text x=\"94\" y=\"79\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">LL</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${eclairement_lux:1} lux</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Puissance W</text><rect x=\"30\" y=\"18\" width=\"80\" height=\"58\" rx=\"5\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"38\" y=\"25\" width=\"64\" height=\"30\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><path d=\"M42,40 Q50,28 58,40 T74,40 T90,40 T98,40\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2\"/><text x=\"70\" y=\"69\" fill=\"#334155\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">THD / COS φ</text><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${puissance_eclairage_w:1} W</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Présence Zone</text><rect x=\"18\" y=\"38\" width=\"104\" height=\"22\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"40\" width=\"36\" height=\"18\" fill=\"#CBD5E1\"/><line x1=\"70\" y1=\"32\" x2=\"70\" y2=\"66\" stroke=\"#0F172A\" stroke-width=\"2\"/><rect x=\"68\" x=\"68\" y=\"35\" width=\"6\" height=\"28\" rx=\"1\" fill=\"#475569\"/><text x=\"22\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">-DEV</text><text x=\"70\" y=\"76\" fill=\"#0F172A\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">SP</text><text x=\"118\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\" text-anchor=\"end\">+DEV</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${taux_presence_zone_pct:0} %</text></g></svg>\n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "dd73410a-f381-4d1d-b85c-538fa66392b3"
+        "id": "2422c602-a416-46aa-87cc-9dd811b06954"
       },
-      "fc48e9aa-dc1e-468c-a354-b67af541f9ba": {
+      "97ddf01d-d6fc-4900-9938-5bbea21ad1b3": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
+              "entityAliasId": "1b906b88-0e9a-4bec-9d41-1888a91c65bd",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "fc48e9aa-dc1e-468c-a354-b67af541f9ba"
+        "id": "97ddf01d-d6fc-4900-9938-5bbea21ad1b3"
       },
-      "41ddb28f-6a2f-406d-957a-17e9ab514e22": {
+      "cdb4f865-2c4e-4e3f-8003-9101e3aea21e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
+              "entityAliasId": "1b906b88-0e9a-4bec-9d41-1888a91c65bd",
               "dataKeys": [
                 {
                   "name": "taux_presence_zone_pct",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "41ddb28f-6a2f-406d-957a-17e9ab514e22"
+        "id": "cdb4f865-2c4e-4e3f-8003-9101e3aea21e"
       },
-      "037a27c5-76b3-40e8-be57-2d5d35713751": {
+      "85ee4779-43a7-4552-b274-b56d83f4ddb1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
+              "entityAliasId": "1b906b88-0e9a-4bec-9d41-1888a91c65bd",
               "dataKeys": [
                 {
                   "name": "gradation_dali_pct",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "037a27c5-76b3-40e8-be57-2d5d35713751"
+        "id": "85ee4779-43a7-4552-b274-b56d83f4ddb1"
       },
-      "4e541083-b464-4dc7-84e1-84121863722b": {
+      "e3af03cf-7415-4c82-97fb-8a239ba46473": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
+              "entityAliasId": "1b906b88-0e9a-4bec-9d41-1888a91c65bd",
               "dataKeys": [
                 {
                   "name": "puissance_eclairage_w",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "4e541083-b464-4dc7-84e1-84121863722b"
+        "id": "e3af03cf-7415-4c82-97fb-8a239ba46473"
       },
-      "83233548-259e-49ee-8f7d-b494d43e39a3": {
+      "f329218e-d22f-469b-a3c4-b65c97b8ca1d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
+              "entityAliasId": "1b906b88-0e9a-4bec-9d41-1888a91c65bd",
               "dataKeys": [
                 {
                   "name": "heures_fonctionnement_h",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "83233548-259e-49ee-8f7d-b494d43e39a3"
+        "id": "f329218e-d22f-469b-a3c4-b65c97b8ca1d"
       },
-      "ff63f2ba-9dac-4710-8fa0-2737a57ffa84": {
+      "e658fc90-6230-4a7f-be60-7584c3c6ceee": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "507054aa-cebe-4ae9-bb91-0e578c3971f9",
+              "entityAliasId": "1b906b88-0e9a-4bec-9d41-1888a91c65bd",
               "dataKeys": [
                 {
                   "name": "eclairement_lux",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "ff63f2ba-9dac-4710-8fa0-2737a57ffa84"
+        "id": "e658fc90-6230-4a7f-be60-7584c3c6ceee"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "a3e73029-c426-430a-9fa7-853c4b076451": {
+              "89dbd763-c007-4ff2-a815-c9fdcbcfbf69": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "dd73410a-f381-4d1d-b85c-538fa66392b3": {
+              "2422c602-a416-46aa-87cc-9dd811b06954": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "fc48e9aa-dc1e-468c-a354-b67af541f9ba": {
+              "97ddf01d-d6fc-4900-9938-5bbea21ad1b3": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "41ddb28f-6a2f-406d-957a-17e9ab514e22": {
+              "cdb4f865-2c4e-4e3f-8003-9101e3aea21e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "037a27c5-76b3-40e8-be57-2d5d35713751": {
+              "85ee4779-43a7-4552-b274-b56d83f4ddb1": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "4e541083-b464-4dc7-84e1-84121863722b": {
+              "e3af03cf-7415-4c82-97fb-8a239ba46473": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "83233548-259e-49ee-8f7d-b494d43e39a3": {
+              "f329218e-d22f-469b-a3c4-b65c97b8ca1d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "ff63f2ba-9dac-4710-8fa0-2737a57ffa84": {
+              "e658fc90-6230-4a7f-be60-7584c3c6ceee": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

@@ -4,8 +4,8 @@
   "configuration": {
     "description": "ThingsBoard SCADA HMI dashboard for equipment 'Station Météo & Climat Urbain' (ID: city_weather). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: HTTP.",
     "entityAliases": {
-      "6696a7d0-f17d-4e21-b2c9-ce5403c7a581": {
-        "id": "6696a7d0-f17d-4e21-b2c9-ce5403c7a581",
+      "c7924990-091f-46ee-8303-d6b5e630058d": {
+        "id": "c7924990-091f-46ee-8303-d6b5e630058d",
         "alias": "Station Météo & Climat Urbain",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "771f0c9f-4a2c-4805-af9c-f895ff192d6d": {
+      "37489722-6849-454c-a26f-7d0d4086f900": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "771f0c9f-4a2c-4805-af9c-f895ff192d6d"
+        "id": "37489722-6849-454c-a26f-7d0d4086f900"
       },
-      "ab3f0c07-13d2-4c42-975b-6363a29ef45d": {
+      "2c7be0bc-1c80-4929-a6b9-399808a98c73": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "6696a7d0-f17d-4e21-b2c9-ce5403c7a581",
+              "entityAliasId": "c7924990-091f-46ee-8303-d6b5e630058d",
               "dataKeys": [
                 {
                   "name": "temp_ext",
@@ -101,8 +101,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Station Météo SCADA : Station Météo & Climat Urbain\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Mât Météo Urbain -->\n    <line x1=\"280\" y1=\"230\" x2=\"280\" y2=\"60\" stroke=\"#475569\" stroke-width=\"5\"/>\n    \n    <!-- Anémomètre Girouette Ultrasonique -->\n    <g transform=\"translate(280, 50)\">\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-12\" y1=\"0\" x2=\"12\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"0\" y1=\"-12\" x2=\"0\" y2=\"12\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-20\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">ANÉMOMÈTRE ULTRASON</text>\n    </g>\n\n    <!-- Pyranomètre / Indice UV -->\n    <g transform=\"translate(220, 100)\">\n      <rect x=\"-15\" y=\"-10\" width=\"30\" height=\"20\" rx=\"3\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"24\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CAPTEUR UV</text>\n    </g>\n\n    <!-- Abri Météo Ventilé (Température & Humidité) -->\n    <g transform=\"translate(340, 110)\">\n      <rect x=\"-20\" y=\"-25\" width=\"40\" height=\"50\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"1.5\"/>\n      <line x1=\"-15\" y1=\"-10\" x2=\"15\" y2=\"-10\" stroke=\"#059669\" stroke-width=\"1.5\"/>\n      <line x1=\"-15\" y1=\"0\" x2=\"15\" y2=\"0\" stroke=\"#059669\" stroke-width=\"1.5\"/>\n      <line x1=\"-15\" y1=\"10\" x2=\"15\" y2=\"10\" stroke=\"#059669\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">ABRI TEMP/HR</text>\n    </g>\n\n    <!-- Pluviomètre à Augets Basculants -->\n    <g transform=\"translate(180, 160)\">\n      <polygon points=\"-15,0 15,0 10,25 -10,25\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PLUVIOMÈTRE</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. EXTÉRIEURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_ext:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE DU VENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_vent_kmh:1} km/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">HUMIDITÉ RELATIVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${humidite_ext:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INDICE RAYONNEMENT UV</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${indice_uv:1}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique Station Météo SCADA : Station Météo & Climat Urbain\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Mât Météo Urbain -->\n    <line x1=\"280\" y1=\"230\" x2=\"280\" y2=\"60\" stroke=\"#475569\" stroke-width=\"5\"/>\n    \n    <!-- Anémomètre Girouette Ultrasonique -->\n    <g transform=\"translate(280, 50)\">\n      <circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-12\" y1=\"0\" x2=\"12\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"0\" y1=\"-12\" x2=\"0\" y2=\"12\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-20\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">ANÉMOMÈTRE ULTRASON</text>\n    </g>\n\n    <!-- Pyranomètre / Indice UV -->\n    <g transform=\"translate(220, 100)\">\n      <rect x=\"-15\" y=\"-10\" width=\"30\" height=\"20\" rx=\"3\" fill=\"#FEF3C7\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"24\" fill=\"#B45309\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CAPTEUR UV</text>\n    </g>\n\n    <!-- Abri Météo Ventilé (Température & Humidité) -->\n    <g transform=\"translate(340, 110)\">\n      <rect x=\"-20\" y=\"-25\" width=\"40\" height=\"50\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#059669\" stroke-width=\"1.5\"/>\n      <line x1=\"-15\" y1=\"-10\" x2=\"15\" y2=\"-10\" stroke=\"#059669\" stroke-width=\"1.5\"/>\n      <line x1=\"-15\" y1=\"0\" x2=\"15\" y2=\"0\" stroke=\"#059669\" stroke-width=\"1.5\"/>\n      <line x1=\"-15\" y1=\"10\" x2=\"15\" y2=\"10\" stroke=\"#059669\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">ABRI TEMP/HR</text>\n    </g>\n\n    <!-- Pluviomètre à Augets Basculants -->\n    <g transform=\"translate(180, 160)\">\n      <polygon points=\"-15,0 15,0 10,25 -10,25\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n      <text x=\"0\" y=\"38\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">PLUVIOMÈTRE</text>\n    </g>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. EXTÉRIEURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_ext:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">VITESSE DU VENT</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${vitesse_vent_kmh:1} km/h</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">HUMIDITÉ RELATIVE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${humidite_ext:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INDICE RAYONNEMENT UV</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${indice_uv:1}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Station Météo & Climat Urbain\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Anémomètre</text><line x1=\"70\" y1=\"22\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"3\"/><line x1=\"42\" y1=\"36\" x2=\"98\" y2=\"36\" stroke=\"#475569\" stroke-width=\"2.5\"/><circle cx=\"42\" cy=\"36\" r=\"6\" fill=\"#475569\"/><circle cx=\"98\" cy=\"36\" r=\"6\" fill=\"#475569\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${vitesse_vent_kmh:1} km/h</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Temp. Extérieure</text><circle cx=\"70\" cy=\"46\" r=\"24\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"46\" y1=\"46\" x2=\"94\" y2=\"46\" stroke=\"#64748B\" stroke-width=\"1.5\"/><text x=\"70\" y=\"41\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">TT</text><text x=\"70\" y=\"61\" fill=\"#475569\" font-size=\"8.5\" font-family=\"monospace\" text-anchor=\"middle\">201</text><line x1=\"70\" y1=\"70\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"2\"/><text x=\"70\" y=\"101\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${temp_ext:1} °C</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Hygrométrie</text><rect x=\"52\" y=\"18\" width=\"16\" height=\"64\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"18\" width=\"16\" height=\"10\" fill=\"#CBD5E1\"/><rect x=\"52\" y=\"72\" width=\"16\" height=\"10\" fill=\"#CBD5E1\"/><rect x=\"54\" y=\"34\" width=\"12\" height=\"32\" fill=\"#94A3B8\" opacity=\"0.5\"/><line x1=\"48\" y1=\"28\" x2=\"72\" y2=\"28\" stroke=\"#475569\" stroke-width=\"1\"/><line x1=\"48\" y1=\"72\" x2=\"72\" y2=\"72\" stroke=\"#475569\" stroke-width=\"1\"/><polygon points=\"71,46 81,41 81,51\" fill=\"#475569\"/><rect x=\"48\" y=\"46\" y=\"46\" width=\"24\" height=\"4\" fill=\"#475569\"/><text x=\"94\" y=\"25\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">HH</text><text x=\"94\" y=\"79\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">LL</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${humidite_ext:1} %</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Indice UV</text><rect x=\"18\" y=\"38\" width=\"104\" height=\"22\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"40\" width=\"36\" height=\"18\" fill=\"#CBD5E1\"/><line x1=\"70\" y1=\"32\" x2=\"70\" y2=\"66\" stroke=\"#0F172A\" stroke-width=\"2\"/><rect x=\"68\" x=\"68\" y=\"35\" width=\"6\" height=\"28\" rx=\"1\" fill=\"#475569\"/><text x=\"22\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">-DEV</text><text x=\"70\" y=\"76\" fill=\"#0F172A\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">SP</text><text x=\"118\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\" text-anchor=\"end\">+DEV</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${indice_uv:1} %</text></g></svg>\n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Station Météo & Climat Urbain\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>HTTP</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Anémomètre</text><line x1=\"70\" y1=\"22\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"3\"/><line x1=\"42\" y1=\"36\" x2=\"98\" y2=\"36\" stroke=\"#475569\" stroke-width=\"2.5\"/><circle cx=\"42\" cy=\"36\" r=\"6\" fill=\"#475569\"/><circle cx=\"98\" cy=\"36\" r=\"6\" fill=\"#475569\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${vitesse_vent_kmh:1} km/h</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Temp. Extérieure</text><circle cx=\"70\" cy=\"46\" r=\"24\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"46\" y1=\"46\" x2=\"94\" y2=\"46\" stroke=\"#64748B\" stroke-width=\"1.5\"/><text x=\"70\" y=\"41\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">TT</text><text x=\"70\" y=\"61\" fill=\"#475569\" font-size=\"8.5\" font-family=\"monospace\" text-anchor=\"middle\">201</text><line x1=\"70\" y1=\"70\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"2\"/><text x=\"70\" y=\"101\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${temp_ext:1} °C</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Hygrométrie</text><rect x=\"52\" y=\"18\" width=\"16\" height=\"64\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"18\" width=\"16\" height=\"10\" fill=\"#CBD5E1\"/><rect x=\"52\" y=\"72\" width=\"16\" height=\"10\" fill=\"#CBD5E1\"/><rect x=\"54\" y=\"34\" width=\"12\" height=\"32\" fill=\"#94A3B8\" opacity=\"0.5\"/><line x1=\"48\" y1=\"28\" x2=\"72\" y2=\"28\" stroke=\"#475569\" stroke-width=\"1\"/><line x1=\"48\" y1=\"72\" x2=\"72\" y2=\"72\" stroke=\"#475569\" stroke-width=\"1\"/><polygon points=\"71,46 81,41 81,51\" fill=\"#475569\"/><rect x=\"48\" y=\"46\" y=\"46\" width=\"24\" height=\"4\" fill=\"#475569\"/><text x=\"94\" y=\"25\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">HH</text><text x=\"94\" y=\"79\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">LL</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${humidite_ext:1} %</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Indice UV</text><rect x=\"18\" y=\"38\" width=\"104\" height=\"22\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"40\" width=\"36\" height=\"18\" fill=\"#CBD5E1\"/><line x1=\"70\" y1=\"32\" x2=\"70\" y2=\"66\" stroke=\"#0F172A\" stroke-width=\"2\"/><rect x=\"68\" x=\"68\" y=\"35\" width=\"6\" height=\"28\" rx=\"1\" fill=\"#475569\"/><text x=\"22\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">-DEV</text><text x=\"70\" y=\"76\" fill=\"#0F172A\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">SP</text><text x=\"118\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\" text-anchor=\"end\">+DEV</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${indice_uv:1} %</text></g></svg>\n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "ab3f0c07-13d2-4c42-975b-6363a29ef45d"
+        "id": "2c7be0bc-1c80-4929-a6b9-399808a98c73"
       },
-      "b26856bc-9f8a-4f66-8495-da9ba338810e": {
+      "9cad9422-6eb0-4891-8b18-54965ea35490": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "6696a7d0-f17d-4e21-b2c9-ce5403c7a581",
+              "entityAliasId": "c7924990-091f-46ee-8303-d6b5e630058d",
               "dataKeys": [
                 {
                   "name": "temp_ext",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "b26856bc-9f8a-4f66-8495-da9ba338810e"
+        "id": "9cad9422-6eb0-4891-8b18-54965ea35490"
       },
-      "07c69526-0286-4c0a-96dc-b09e2ea55faa": {
+      "06f72561-8db0-4ce6-bcbc-5ebf02df9017": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "6696a7d0-f17d-4e21-b2c9-ce5403c7a581",
+              "entityAliasId": "c7924990-091f-46ee-8303-d6b5e630058d",
               "dataKeys": [
                 {
                   "name": "vitesse_vent_kmh",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "07c69526-0286-4c0a-96dc-b09e2ea55faa"
+        "id": "06f72561-8db0-4ce6-bcbc-5ebf02df9017"
       },
-      "4fa2c8a7-2b67-40ed-a6eb-cc221a036b04": {
+      "8730837d-912f-4ae4-a88c-bd9609ad4f08": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "6696a7d0-f17d-4e21-b2c9-ce5403c7a581",
+              "entityAliasId": "c7924990-091f-46ee-8303-d6b5e630058d",
               "dataKeys": [
                 {
                   "name": "humidite_ext",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "4fa2c8a7-2b67-40ed-a6eb-cc221a036b04"
+        "id": "8730837d-912f-4ae4-a88c-bd9609ad4f08"
       },
-      "497f7bdb-76bc-4545-ab54-3468de9fd08e": {
+      "cf6937d2-ed04-487c-a19a-4685aa2b7c0f": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "6696a7d0-f17d-4e21-b2c9-ce5403c7a581",
+              "entityAliasId": "c7924990-091f-46ee-8303-d6b5e630058d",
               "dataKeys": [
                 {
                   "name": "indice_uv",
@@ -360,9 +360,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "497f7bdb-76bc-4545-ab54-3468de9fd08e"
+        "id": "cf6937d2-ed04-487c-a19a-4685aa2b7c0f"
       },
-      "3c4a2408-5555-4a77-9239-83abd8dcaf05": {
+      "aa80c41e-ceea-40cf-9aa3-b1f2b87a34b3": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -375,7 +375,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "6696a7d0-f17d-4e21-b2c9-ce5403c7a581",
+              "entityAliasId": "c7924990-091f-46ee-8303-d6b5e630058d",
               "dataKeys": [
                 {
                   "name": "temp_ext",
@@ -487,7 +487,7 @@
         },
         "row": 16,
         "col": 0,
-        "id": "3c4a2408-5555-4a77-9239-83abd8dcaf05"
+        "id": "aa80c41e-ceea-40cf-9aa3-b1f2b87a34b3"
       }
     },
     "states": {
@@ -497,43 +497,43 @@
         "layouts": {
           "main": {
             "widgets": {
-              "771f0c9f-4a2c-4805-af9c-f895ff192d6d": {
+              "37489722-6849-454c-a26f-7d0d4086f900": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "ab3f0c07-13d2-4c42-975b-6363a29ef45d": {
+              "2c7be0bc-1c80-4929-a6b9-399808a98c73": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "b26856bc-9f8a-4f66-8495-da9ba338810e": {
+              "9cad9422-6eb0-4891-8b18-54965ea35490": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "07c69526-0286-4c0a-96dc-b09e2ea55faa": {
+              "06f72561-8db0-4ce6-bcbc-5ebf02df9017": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "4fa2c8a7-2b67-40ed-a6eb-cc221a036b04": {
+              "8730837d-912f-4ae4-a88c-bd9609ad4f08": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "497f7bdb-76bc-4545-ab54-3468de9fd08e": {
+              "cf6937d2-ed04-487c-a19a-4685aa2b7c0f": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "3c4a2408-5555-4a77-9239-83abd8dcaf05": {
+              "aa80c41e-ceea-40cf-9aa3-b1f2b87a34b3": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 16,

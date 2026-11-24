@@ -139,7 +139,7 @@ def test_thingsboard_dashboard_generation():
     assert synoptic_w["config"]["settings"]["cardHtml"] == synoptic_w["config"]["settings"]["html"]
     assert synoptic_w["config"]["settings"]["cardCss"] == synoptic_w["config"]["settings"]["css"]
     assert synoptic_w["config"].get("useDashboardTimewindow") is True
-    assert "pipe-flow" in synoptic_w["config"]["settings"]["cardHtml"]
+    assert "ANSI/ISA-101" in synoptic_w["config"]["settings"]["cardHtml"]
     assert "${" in synoptic_w["config"]["settings"]["cardHtml"]
     assert "TB_TOKEN_SECRET_9876" not in synoptic_w["config"]["settings"]["cardHtml"]
 

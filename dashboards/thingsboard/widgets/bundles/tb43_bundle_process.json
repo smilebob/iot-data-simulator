@@ -1,0 +1,1415 @@
+{
+  "widgetsBundle": {
+    "alias": "scada_isa101_process",
+    "title": "SCADA ISA-101 • Process Industriel, Froid, Pharma & Hydrogène (18 Composants)",
+    "image": null,
+    "description": "Bibliothèque conforme ANSI/ISA-101.01 (fond gris mat #E5E7EB, gris acier au nominal, codage redondant Forme+Couleur sur alarme).",
+    "order": 1
+  },
+  "widgetTypes": [
+    {
+      "fqn": "scada_isa101_process.proc_valve_2way",
+      "name": "Vanne Motorisée 2 Voies",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Vanne de sectionnement ou régulation ISO 10628.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <line x1=\"15\" y1=\"58\" x2=\"125\" y2=\"58\" stroke=\"#64748B\" stroke-width=\"5\"/><polygon points=\"48,44 70,58 48,72\" [attr.fill]=\"statusColor\"/><polygon points=\"92,44 70,58 92,72\" [attr.fill]=\"statusColor\"/><line x1=\"70\" y1=\"58\" x2=\"70\" y2=\"34\" stroke=\"#475569\" stroke-width=\"2\"/><rect x=\"58\" y=\"20\" width=\"24\" height=\"14\" rx=\"3\" fill=\"#64748B\"/><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Vanne Motorisée 2 Voies\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Vanne Motorisée 2 Voies"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "%"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Vanne Motoris\\u00e9e 2 Voies\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Vanne Motoris\\u00e9e 2 Voies\", \"unit\": \"%\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_valve_3way",
+      "name": "Vanne 3 Voies Mélangeuse",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Vanne de régulation 3 voies pour boucles hydrauliques et échangeurs.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <line x1=\"15\" y1=\"50\" x2=\"125\" y2=\"50\" stroke=\"#64748B\" stroke-width=\"4\"/><line x1=\"70\" y1=\"50\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"4\"/><polygon points=\"50,38 70,50 50,62\" [attr.fill]=\"statusColor\"/><polygon points=\"90,38 70,50 90,62\" [attr.fill]=\"statusColor\"/><polygon points=\"58,70 70,50 82,70\" [attr.fill]=\"statusColor\"/><rect x=\"58\" y=\"16\" width=\"24\" height=\"14\" rx=\"3\" fill=\"#64748B\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Vanne 3 Voies Mélangeuse\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Vanne 3 Voies Mélangeuse"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "%"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Vanne 3 Voies M\\u00e9langeuse\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Vanne 3 Voies M\\u00e9langeuse\", \"unit\": \"%\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_pump",
+      "name": "Pompe Centrifuge",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Pompe centrifuge ISO 10628 en gris acier ISA-101.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <line x1=\"15\" y1=\"48\" x2=\"125\" y2=\"48\" stroke=\"#64748B\" stroke-width=\"5\"/><circle cx=\"70\" cy=\"48\" r=\"24\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><polygon points=\"58,34 88,48 58,62\" [attr.fill]=\"statusColor\"/><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Pompe Centrifuge\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Pompe Centrifuge"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "m³/h"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Pompe Centrifuge\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Pompe Centrifuge\", \"unit\": \"m\\u00b3/h\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_tank",
+      "name": "Cuve / Réservoir Niveau",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Cuve verticale avec niveau de liquide proportionnel à la télémétrie.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"38\" y=\"14\" width=\"64\" height=\"70\" rx=\"10\" fill=\"#F1F5F9\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><rect x=\"42\" y=\"40\" [attr.y]=\"80 - (fillPct * 0.62)\" width=\"56\" height=\"40\" [attr.height]=\"fillPct * 0.62\" rx=\"6\" [attr.fill]=\"statusColor\" opacity=\"0.45\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Cuve / Réservoir Niveau\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Cuve / Réservoir Niveau"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "%"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Cuve / R\\u00e9servoir Niveau\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Cuve / R\\u00e9servoir Niveau\", \"unit\": \"%\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_flowmeter",
+      "name": "Débitmètre Électromagnétique",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Capteur de débit en ligne avec transmetteur déporté.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <line x1=\"15\" y1=\"58\" x2=\"125\" y2=\"58\" stroke=\"#64748B\" stroke-width=\"5\"/><circle cx=\"70\" cy=\"58\" r=\"16\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><text x=\"70\" y=\"62\" fill=\"#0F172A\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">FT</text><line x1=\"70\" y1=\"42\" x2=\"70\" y2=\"28\" stroke=\"#475569\" stroke-width=\"2\"/><rect x=\"52\" y=\"14\" width=\"36\" height=\"16\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#475569\"/><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Débitmètre Électromagnétique\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Débitmètre Électromagnétique"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "m³/h"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"D\\u00e9bitm\\u00e8tre \\u00c9lectromagn\\u00e9tique\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"D\\u00e9bitm\\u00e8tre \\u00c9lectromagn\\u00e9tique\", \"unit\": \"m\\u00b3/h\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_electrolyzer",
+      "name": "Électrolyseur PEM Hydrogène",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Stack d'électrolyse multi-cellules avec production H2.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"30\" y=\"18\" width=\"80\" height=\"58\" rx=\"6\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><line x1=\"50\" y1=\"24\" x2=\"50\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"63\" y1=\"24\" x2=\"63\" y2=\"70\" stroke=\"#64748B\" stroke-width=\"2\"/><line x1=\"77\" y1=\"24\" x2=\"77\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"90\" y1=\"24\" x2=\"90\" y2=\"70\" stroke=\"#64748B\" stroke-width=\"2\"/><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Électrolyseur PEM Hydrogène\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Électrolyseur PEM Hydrogène"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "Nm³/h"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"\\u00c9lectrolyseur PEM Hydrog\\u00e8ne\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"\\u00c9lectrolyseur PEM Hydrog\\u00e8ne\", \"unit\": \"Nm\\u00b3/h\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_motor_cnc",
+      "name": "Moteur / Broche CNC",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Moteur asynchrone ou broche d'usinage instrumentée (RPM / Vibration).",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <circle cx=\"70\" cy=\"46\" r=\"24\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><text x=\"70\" y=\"51\" fill=\"#0F172A\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">M</text><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Moteur / Broche CNC\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Moteur / Broche CNC"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "rpm"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Moteur / Broche CNC\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Moteur / Broche CNC\", \"unit\": \"rpm\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_conveyor",
+      "name": "Convoyeur / Ligne Process",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Convoyeur à bande industriel avec rouleaux d'entraînement.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"20\" y=\"38\" width=\"100\" height=\"22\" rx=\"11\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><circle cx=\"34\" cy=\"49\" r=\"5\" fill=\"#475569\"/><circle cx=\"70\" cy=\"49\" r=\"5\" fill=\"#475569\"/><circle cx=\"106\" cy=\"49\" r=\"5\" fill=\"#475569\"/><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Convoyeur / Ligne Process\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Convoyeur / Ligne Process"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "pcs/min"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Convoyeur / Ligne Process\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Convoyeur / Ligne Process\", \"unit\": \"pcs/min\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_screw_compressor",
+      "name": "Compresseur à Vis Air",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Symbole ISO 10628 de compresseur industriel avec pression de refoulement.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <line x1=\"14\" y1=\"48\" x2=\"126\" y2=\"48\" stroke=\"#64748B\" stroke-width=\"4\"/><circle cx=\"70\" cy=\"48\" r=\"24\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><line x1=\"54\" y1=\"32\" x2=\"89\" y2=\"40\" [attr.stroke]=\"statusColor\" stroke-width=\"2\"/><line x1=\"54\" y1=\"64\" x2=\"89\" y2=\"56\" [attr.stroke]=\"statusColor\" stroke-width=\"2\"/><text x=\"70\" y=\"99\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Compresseur à Vis Air\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Compresseur à Vis Air"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "bar"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Compresseur \\u00e0 Vis Air\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Compresseur \\u00e0 Vis Air\", \"unit\": \"bar\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_chiller",
+      "name": "Groupe Froid / Chiller",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Production d'eau glacée industrielle / Data Center avec température départ.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"20\" y=\"20\" width=\"100\" height=\"56\" rx=\"5\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><line x1=\"48\" y1=\"30\" x2=\"48\" y2=\"66\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"34\" y1=\"48\" x2=\"62\" y2=\"48\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"38\" y1=\"38\" x2=\"58\" y2=\"58\" stroke=\"#475569\" stroke-width=\"1.5\"/><line x1=\"58\" y1=\"38\" x2=\"38\" y2=\"58\" stroke=\"#475569\" stroke-width=\"1.5\"/><text x=\"92\" y=\"52\" fill=\"#0F172A\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">CHILLER</text><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Groupe Froid / Chiller\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Groupe Froid / Chiller"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "°C"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Groupe Froid / Chiller\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Groupe Froid / Chiller\", \"unit\": \"\\u00b0C\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_cold_room_evap",
+      "name": "Évaporateur Chambre Froide",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Aérofrigorifère de chambre froide positive/négative agroalimentaire.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"22\" y=\"24\" width=\"96\" height=\"44\" rx=\"5\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><circle cx=\"48\" cy=\"46\" r=\"12\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2\"/><circle cx=\"92\" cy=\"46\" r=\"12\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2\"/><text x=\"70\" y=\"99\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Évaporateur Chambre Froide\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Évaporateur Chambre Froide"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "°C"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"\\u00c9vaporateur Chambre Froide\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"\\u00c9vaporateur Chambre Froide\", \"unit\": \"\\u00b0C\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_autoclave",
+      "name": "Autoclave / Pasteurisateur",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Enceinte de stérilisation batch pharma / agroalimentaire sous pression.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"24\" y=\"24\" width=\"92\" height=\"50\" rx=\"18\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><line x1=\"42\" y1=\"24\" x2=\"42\" y2=\"74\" stroke=\"#64748B\" stroke-width=\"2\"/><line x1=\"98\" y1=\"24\" x2=\"98\" y2=\"74\" stroke=\"#64748B\" stroke-width=\"2\"/><text x=\"70\" y=\"53\" fill=\"#0F172A\" font-size=\"9.5\" font-weight=\"bold\" text-anchor=\"middle\">BATCH</text><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Autoclave / Pasteurisateur\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Autoclave / Pasteurisateur"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "°C"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Autoclave / Pasteurisateur\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Autoclave / Pasteurisateur\", \"unit\": \"\\u00b0C\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_robot_6axis",
+      "name": "Robot Industriel 6 Axes",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Bras robotisé d'atelier d'assemblage ou palettisation (cadence / couple).",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"44\" y=\"70\" width=\"52\" height=\"10\" rx=\"2\" fill=\"#64748B\"/><polyline points=\"70,70 50,46 84,26 102,38\" fill=\"none\" [attr.stroke]=\"statusColor\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"70\" cy=\"70\" r=\"5\" fill=\"#0F172A\"/><circle cx=\"50\" cy=\"46\" r=\"5\" fill=\"#0F172A\"/><circle cx=\"84\" cy=\"26\" r=\"5\" fill=\"#0F172A\"/><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Robot Industriel 6 Axes\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Robot Industriel 6 Axes"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "cyc/h"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Robot Industriel 6 Axes\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Robot Industriel 6 Axes\", \"unit\": \"cyc/h\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_silo_hopper",
+      "name": "Silo / Trémie Stockage",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Silo de stockage vrac / pulvérulents avec niveau proportionnel.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <polygon points=\"40,16 100,16 100,56 78,82 62,82 40,56\" fill=\"#F1F5F9\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><rect x=\"43\" y=\"40\" [attr.y]=\"80 - (fillPct * 0.62)\" width=\"54\" height=\"40\" [attr.height]=\"fillPct * 0.62\" [attr.fill]=\"statusColor\" opacity=\"0.35\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Silo / Trémie Stockage\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Silo / Trémie Stockage"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "%"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Silo / Tr\\u00e9mie Stockage\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Silo / Tr\\u00e9mie Stockage\", \"unit\": \"%\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_check_valve",
+      "name": "Clapet Anti-Retour",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Clapet anti-retour ISO 10628 protégeant les pompes contre le retour de flux.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <line x1=\"15\" y1=\"48\" x2=\"125\" y2=\"48\" stroke=\"#64748B\" stroke-width=\"5\"/><polygon points=\"50,34 86,48 50,62\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><line x1=\"86\" y1=\"32\" x2=\"86\" y2=\"64\" [attr.stroke]=\"statusColor\" stroke-width=\"3.5\"/><text x=\"70\" y=\"99\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Clapet Anti-Retour\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Clapet Anti-Retour"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "bar"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Clapet Anti-Retour\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Clapet Anti-Retour\", \"unit\": \"bar\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_air_dryer_filter",
+      "name": "Sécheur / Filtre Air",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Traitement d'air comprimé (point de rosée ou perte de charge filtre ΔP).",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"44\" y=\"16\" width=\"52\" height=\"64\" rx=\"6\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><line x1=\"44\" y1=\"48\" x2=\"96\" y2=\"48\" stroke=\"#475569\" stroke-width=\"2\" stroke-dasharray=\"4 3\"/><text x=\"70\" y=\"38\" fill=\"#0F172A\" font-size=\"9\" font-weight=\"bold\" text-anchor=\"middle\">FILTRE</text><text x=\"70\" y=\"101\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Sécheur / Filtre Air\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Sécheur / Filtre Air"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "°C"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"S\\u00e9cheur / Filtre Air\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"S\\u00e9cheur / Filtre Air\", \"unit\": \"\\u00b0C\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_h2_storage_hp",
+      "name": "Stockage Hydrogène HP",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Rack de bouteilles H2 haute pression (350 / 700 bar) pour mobilité verte.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"28\" y=\"20\" width=\"22\" height=\"58\" rx=\"10\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2\"/><rect x=\"59\" y=\"20\" width=\"22\" height=\"58\" rx=\"10\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2\"/><rect x=\"90\" y=\"20\" width=\"22\" height=\"58\" rx=\"10\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2\"/><text x=\"70\" y=\"54\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">H2</text><text x=\"70\" y=\"101\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Stockage Hydrogène HP\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Stockage Hydrogène HP"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "bar"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Stockage Hydrog\\u00e8ne HP\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Stockage Hydrog\\u00e8ne HP\", \"unit\": \"bar\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_process.proc_h2_dispenser",
+      "name": "Station Avitaillement H2",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Distributeur hydrogène (Hydrogen Refueling Station) avec masse délivrée.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "process",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"42\" y=\"14\" width=\"56\" height=\"68\" rx=\"6\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><rect x=\"50\" y=\"24\" width=\"40\" height=\"20\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><text x=\"70\" y=\"38\" fill=\"#0F172A\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">H2 HRS</text><text x=\"70\" y=\"66\" fill=\"#334155\" font-size=\"9\" font-weight=\"bold\" text-anchor=\"middle\">700 bar</text><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Station Avitaillement H2\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Station Avitaillement H2"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "kg"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Station Avitaillement H2\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Station Avitaillement H2\", \"unit\": \"kg\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    }
+  ]
+}

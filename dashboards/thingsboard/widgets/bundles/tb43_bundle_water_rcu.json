@@ -1,0 +1,479 @@
+{
+  "widgetsBundle": {
+    "alias": "scada_isa101_water_rcu",
+    "title": "SCADA ISA-101 • Eau, Assainissement STEP & Réseaux de Chaleur (6 Composants)",
+    "image": null,
+    "description": "Bibliothèque conforme ANSI/ISA-101.01 (fond gris mat #E5E7EB, gris acier au nominal, codage redondant Forme+Couleur sur alarme).",
+    "order": 1
+  },
+  "widgetTypes": [
+    {
+      "fqn": "scada_isa101_water_rcu.water_bar_screen",
+      "name": "Dégrilleur Automatique STEP",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Prétraitement eaux usées avec surveillance perte de charge amont/aval.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "water_rcu",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"20\" y=\"42\" width=\"100\" height=\"36\" fill=\"#CBD5E1\" stroke=\"#64748B\" stroke-width=\"2\"/><line x1=\"56\" y1=\"20\" x2=\"76\" y2=\"78\" [attr.stroke]=\"statusColor\" stroke-width=\"3\"/><line x1=\"66\" y1=\"20\" x2=\"86\" y2=\"78\" [attr.stroke]=\"statusColor\" stroke-width=\"3\"/><line x1=\"76\" y1=\"20\" x2=\"96\" y2=\"78\" [attr.stroke]=\"statusColor\" stroke-width=\"3\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Dégrilleur Automatique STEP\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Dégrilleur Automatique STEP"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "cm"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"D\\u00e9grilleur Automatique STEP\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"D\\u00e9grilleur Automatique STEP\", \"unit\": \"cm\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_water_rcu.water_aeration_basin",
+      "name": "Bassin d'Aération STEP",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Traitement biologique boues activées avec suivi oxygène dissous (mg/L).",
+      "tags": [
+        "isa-101",
+        "scada",
+        "water_rcu",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"18\" y=\"34\" width=\"104\" height=\"44\" rx=\"4\" fill=\"#F1F5F9\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><rect x=\"20\" y=\"48\" width=\"100\" height=\"28\" fill=\"#CBD5E1\"/><circle cx=\"44\" cy=\"60\" r=\"3\" fill=\"#475569\"/><circle cx=\"58\" cy=\"54\" r=\"2.5\" fill=\"#475569\"/><circle cx=\"74\" cy=\"62\" r=\"3.5\" fill=\"#475569\"/><circle cx=\"94\" cy=\"56\" r=\"3\" fill=\"#475569\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Bassin d'Aération STEP\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Bassin d'Aération STEP"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "mg/L"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Bassin d'A\\u00e9ration STEP\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Bassin d'A\\u00e9ration STEP\", \"unit\": \"mg/L\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_water_rcu.water_clarifier",
+      "name": "Clarificateur / Décanteur",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Ouvrage circulaire de décantation secondaire avec pont racleur (turbidité NTU).",
+      "tags": [
+        "isa-101",
+        "scada",
+        "water_rcu",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <circle cx=\"70\" cy=\"48\" r=\"30\" fill=\"#F1F5F9\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><circle cx=\"70\" cy=\"48\" r=\"22\" fill=\"#CBD5E1\" opacity=\"0.6\"/><line x1=\"70\" y1=\"48\" x2=\"98\" y2=\"48\" stroke=\"#0F172A\" stroke-width=\"3\"/><circle cx=\"70\" cy=\"48\" r=\"5\" fill=\"#475569\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Clarificateur / Décanteur\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Clarificateur / Décanteur"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "NTU"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Clarificateur / D\\u00e9canteur\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Clarificateur / D\\u00e9canteur\", \"unit\": \"NTU\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_water_rcu.water_dosing_pump",
+      "name": "Pompe Doseuse Réactif",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Injection de chlorure ferrique / polymère / chlore en station de traitement.",
+      "tags": [
+        "isa-101",
+        "scada",
+        "water_rcu",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"36\" y=\"28\" width=\"44\" height=\"44\" rx=\"4\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><polygon points=\"80,38 106,50 80,62\" [attr.fill]=\"statusColor\"/><text x=\"58\" y=\"54\" fill=\"#0F172A\" font-size=\"9\" font-weight=\"bold\" text-anchor=\"middle\">DOS</text><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Pompe Doseuse Réactif\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Pompe Doseuse Réactif"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "L/h"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Pompe Doseuse R\\u00e9actif\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Pompe Doseuse R\\u00e9actif\", \"unit\": \"L/h\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_water_rcu.water_penstock_gate",
+      "name": "Vanne Murale / Batardeau",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Vanne de régulation de canal ou bassin d'orage (% d'ouverture).",
+      "tags": [
+        "isa-101",
+        "scada",
+        "water_rcu",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"44\" y=\"24\" width=\"52\" height=\"56\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"2.5\"/><rect x=\"48\" y=\"40\" [attr.y]=\"80 - (fillPct * 0.62)\" width=\"44\" height=\"40\" [attr.height]=\"fillPct * 0.62\" [attr.fill]=\"statusColor\" opacity=\"0.55\"/><line x1=\"70\" y1=\"10\" x2=\"70\" y2=\"40\" stroke=\"#0F172A\" stroke-width=\"3\"/><rect x=\"56\" y=\"10\" width=\"28\" height=\"8\" rx=\"2\" fill=\"#475569\"/><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Vanne Murale / Batardeau\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Vanne Murale / Batardeau"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "%"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Vanne Murale / Batardeau\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Vanne Murale / Batardeau\", \"unit\": \"%\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    },
+    {
+      "fqn": "scada_isa101_water_rcu.water_rcu_substation",
+      "name": "Sous-Station Chaleur (RCU)",
+      "deprecated": false,
+      "scada": true,
+      "version": 1,
+      "image": null,
+      "description": "Sous-station d'échange Réseau de Chaleur Urbain (puissance thermique livrée).",
+      "tags": [
+        "isa-101",
+        "scada",
+        "water_rcu",
+        "svg"
+      ],
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 4,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div class=\"isa101-widget-card\" [class.isa-alarm-pulse]=\"alarmLevel === 'CRIT'\">  <div class=\"isa101-header-row\">    <span class=\"isa101-widget-title\">{{title}}</span>    <span class=\"isa101-alarm-shape isa-warn\" *ngIf=\"alarmLevel === 'WARN'\" title=\"Avertissement\">▲</span>    <span class=\"isa101-alarm-shape isa-crit\" *ngIf=\"alarmLevel === 'CRIT'\" title=\"Alarme Critique\">■ !</span>  </div>  <svg viewBox=\"0 0 140 110\" width=\"100%\" height=\"100%\" preserveAspectRatio=\"xMidYMid meet\" xmlns=\"http://www.w3.org/2000/svg\">    <rect x=\"24\" y=\"20\" width=\"92\" height=\"56\" rx=\"5\" fill=\"#CBD5E1\" [attr.stroke]=\"statusColor\" stroke-width=\"2.5\"/><polyline points=\"36,34 52,34 52,62 68,62\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2.5\"/><polyline points=\"104,34 88,34 88,62 72,62\" fill=\"none\" stroke=\"#0F172A\" stroke-width=\"2.5\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">{{valDisplay}}</text>  </svg></div>",
+        "templateCss": ".isa101-widget-card { width:100%; height:100%; background:#E5E7EB; border-radius:8px; border:1px solid #CBD5E1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:6px 8px; box-sizing:border-box; font-family:sans-serif; }\n.isa101-header-row { display:flex; align-items:center; justify-content:space-between; width:100%; gap:4px; }\n.isa101-widget-title { font-size:11px; font-weight:700; color:#334155; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }\n.isa101-alarm-shape { font-size:10px; font-weight:800; padding:1px 5px; border-radius:3px; color:#FFFFFF; }\n.isa-warn { background:#D97706; }\n.isa-crit { background:#DC2626; }\n@keyframes isaAlarmPulse { 0%, 100% { border-color: #CBD5E1; } 50% { border-color: #DC2626; } }\n.isa-alarm-pulse { animation: isaAlarmPulse 1.2s ease-in-out infinite; border-width: 2px; }\n",
+        "controllerScript": "self.onInit = function() {\n    var s = self.ctx.settings || {};\n    self.ctx.$scope.title = s.title || (self.ctx.widget && self.ctx.widget.config && self.ctx.widget.config.title) || \"Sous-Station Chaleur (RCU)\";\n    self.ctx.$scope.unit = s.unit || \"\";\n    self.ctx.$scope.decimals = s.decimals !== undefined ? Number(s.decimals) : 1;\n    self.ctx.$scope.accentColor = s.accentColor || \"#475569\";\n    self.ctx.$scope.valDisplay = \"--\";\n    self.ctx.$scope.alarmLevel = \"NORMAL\";\n    self.ctx.$scope.isAlarm = false;\n    self.ctx.$scope.fillPct = 50;\n    self.ctx.$scope.statusColor = self.ctx.$scope.accentColor;\n    self.onDataUpdated();\n};\n\nself.onDataUpdated = function() {\n    var s = self.ctx.settings || {};\n    var val = null;\n    var unit = s.unit || \"\";\n    if (self.ctx.data && self.ctx.data.length > 0) {\n        var ds = self.ctx.data[0];\n        if (!unit && ds.dataKey && ds.dataKey.units) {\n            unit = ds.dataKey.units;\n        }\n        if (ds.data && ds.data.length > 0) {\n            val = ds.data[ds.data.length - 1][1];\n        }\n    }\n    if (val !== null && val !== undefined) {\n        var num = Number(val);\n        if (!isNaN(num)) {\n            var dec = s.decimals !== undefined ? Number(s.decimals) : 1;\n            self.ctx.$scope.valDisplay = num.toFixed(dec) + (unit ? \" \" + unit : \"\");\n            self.ctx.$scope.fillPct = Math.max(0, Math.min(100, num));\n            var c = s.accentColor || \"#475569\";\n            var lvl = \"NORMAL\";\n            if (s.critThreshold !== undefined && s.critThreshold !== null && s.critThreshold !== \"\" && num >= Number(s.critThreshold)) {\n                c = \"#DC2626\";\n                lvl = \"CRIT\";\n            } else if (s.warnThreshold !== undefined && s.warnThreshold !== null && s.warnThreshold !== \"\" && num >= Number(s.warnThreshold)) {\n                c = \"#D97706\";\n                lvl = \"WARN\";\n            }\n            self.ctx.$scope.statusColor = c;\n            self.ctx.$scope.alarmLevel = lvl;\n            self.ctx.$scope.isAlarm = (lvl === \"CRIT\");\n        } else {\n            self.ctx.$scope.valDisplay = String(val);\n            var isFault = (val === true || val === \"true\" || val === \"ALARM\" || val === \"FAULT\");\n            self.ctx.$scope.statusColor = isFault ? \"#DC2626\" : \"#475569\";\n            self.ctx.$scope.alarmLevel = isFault ? \"CRIT\" : \"NORMAL\";\n            self.ctx.$scope.isAlarm = isFault;\n        }\n    }\n    self.ctx.detectChanges();\n};",
+        "settingsSchema": {
+          "schema": {
+            "type": "object",
+            "title": "Paramètres ISA-101 SCADA",
+            "properties": {
+              "title": {
+                "title": "Libellé affiché",
+                "type": "string",
+                "default": "Sous-Station Chaleur (RCU)"
+              },
+              "unit": {
+                "title": "Unité (optionnel, sinon lu depuis DataKey)",
+                "type": "string",
+                "default": "kW"
+              },
+              "decimals": {
+                "title": "Décimales",
+                "type": "integer",
+                "default": 1
+              },
+              "accentColor": {
+                "title": "Couleur nominale ISA-101 (Gris Acier)",
+                "type": "string",
+                "default": "#475569"
+              },
+              "warnThreshold": {
+                "title": "Seuil Avertissement ▲ Ambre (>=)",
+                "type": "number"
+              },
+              "critThreshold": {
+                "title": "Seuil Critique ■ ! Rouge (>=)",
+                "type": "number"
+              }
+            }
+          },
+          "form": [
+            "title",
+            "unit",
+            "decimals",
+            "accentColor",
+            "warnThreshold",
+            "critThreshold"
+          ]
+        },
+        "dataKeySettingsSchema": {
+          "schema": {
+            "type": "object",
+            "properties": {}
+          },
+          "form": [
+            "*"
+          ]
+        },
+        "defaultConfig": "{\"datasources\": [{\"type\": \"function\", \"name\": \"function\", \"dataKeys\": [{\"name\": \"f(x)\", \"type\": \"function\", \"label\": \"Sous-Station Chaleur (RCU)\", \"color\": \"#475569\", \"settings\": {}, \"funcBody\": \"return 42;\"}]}], \"timewindow\": {\"realtime\": {\"timewindowMs\": 60000}}, \"showTitle\": false, \"dropShadow\": false, \"backgroundColor\": \"#E5E7EB\", \"color\": \"#0F172A\", \"settings\": {\"title\": \"Sous-Station Chaleur (RCU)\", \"unit\": \"kW\", \"decimals\": 1, \"accentColor\": \"#475569\"}}"
+      }
+    }
+  ]
+}

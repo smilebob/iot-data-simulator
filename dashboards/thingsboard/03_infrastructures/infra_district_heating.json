@@ -4,8 +4,8 @@
   "configuration": {
     "description": "ThingsBoard SCADA HMI dashboard for equipment 'Sous-Station Réseau de Chaleur (RCU)' (ID: infra_district_heating). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: MQTT.",
     "entityAliases": {
-      "53127de7-b8cd-437c-982c-6be054739b20": {
-        "id": "53127de7-b8cd-437c-982c-6be054739b20",
+      "66395f39-aa2e-49d4-baff-c865103aa018": {
+        "id": "66395f39-aa2e-49d4-baff-c865103aa018",
         "alias": "Sous-Station Réseau de Chaleur (RCU)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "93090c73-3bfb-4c3f-807c-2ded05f6bd2c": {
+      "2657bc76-eed0-479a-8812-728d6be34310": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "93090c73-3bfb-4c3f-807c-2ded05f6bd2c"
+        "id": "2657bc76-eed0-479a-8812-728d6be34310"
       },
-      "e06d3143-43c0-437a-b427-4a0bc7204e54": {
+      "81881b9d-b2b7-4e75-8f68-42d44f231e30": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "temp_primaire_aller",
@@ -137,8 +137,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Sous-Station Réseau de Chaleur (RCU)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Réacteur Process -->\n    <rect x=\"80\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"170\" y=\"70\" fill=\"#0284C7\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"85\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#BAE6FD\" opacity=\"0.4\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 80 100\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"40\" y=\"90\" fill=\"#059669\" font-size=\"9\" font-weight=\"bold\">ALIM.</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 260 150 L 380 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"410\" cy=\"150\" r=\"28\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(410, 150)\">\n      <g>\n        <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 0 0\" to=\"360 0 0\" dur=\"0.8s\" repeatCount=\"indefinite\"/>\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n      </g>\n    </g>\n    <text x=\"410\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 440 150 L 580 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"580\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#D97706\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"640\" y=\"145\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 700 150 L 820 150\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"820,145 835,150 820,155\" fill=\"#059669\"/>\n    <text x=\"780\" y=\"140\" fill=\"#059669\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Température Primaire Aller</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_primaire_aller:1}</text>\n    </g>\n    \n    <g transform=\"translate(660, 85)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Température Primaire Retour</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_primaire_retour:1}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SCADA Process : Sous-Station Réseau de Chaleur (RCU)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 250\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Réacteur Process -->\n    <rect x=\"80\" y=\"40\" width=\"180\" height=\"160\" rx=\"16\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"170\" y=\"70\" fill=\"#0284C7\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">UNITÉ DE PROCESS</text>\n    <rect x=\"85\" y=\"110\" width=\"170\" height=\"85\" rx=\"8\" fill=\"#BAE6FD\" opacity=\"0.4\"/>\n\n    <!-- Alimentation -->\n    <path d=\"M 20 100 L 80 100\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <text x=\"40\" y=\"90\" fill=\"#059669\" font-size=\"9\" font-weight=\"bold\">ALIM.</text>\n\n    <!-- Pompe centrifuge -->\n    <path d=\"M 260 150 L 380 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <circle cx=\"410\" cy=\"150\" r=\"28\" fill=\"#FFFFFF\" stroke=\"#E2001A\" stroke-width=\"2\"/>\n    <g transform=\"translate(410, 150)\">\n      <g>\n        <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 0 0\" to=\"360 0 0\" dur=\"0.8s\" repeatCount=\"indefinite\"/>\n        <path d=\"M -18 -5 C -8 -15 8 -15 18 -5 C 8 15 -8 15 -18 -5 Z\" fill=\"#E2001A\"/>\n      </g>\n    </g>\n    <text x=\"410\" y=\"195\" fill=\"#E2001A\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">POMPE PROCESS</text>\n\n    <!-- Échangeur / Refroidisseur -->\n    <path d=\"M 440 150 L 580 150\" fill=\"none\" stroke=\"#0284C7\" stroke-width=\"6\" class=\"pipe-flow-fast\"/>\n    <rect x=\"580\" y=\"90\" width=\"120\" height=\"110\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#D97706\" stroke-width=\"2\"/>\n    <text x=\"640\" y=\"125\" fill=\"#D97706\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">ÉCHANGEUR</text>\n    <text x=\"640\" y=\"145\" fill=\"#64748B\" font-size=\"9\" text-anchor=\"middle\">Régulation PID</text>\n\n    <!-- Distribution Usine -->\n    <path d=\"M 700 150 L 820 150\" fill=\"none\" stroke=\"#059669\" stroke-width=\"6\" class=\"pipe-flow\"/>\n    <polygon points=\"820,145 835,150 820,155\" fill=\"#059669\"/>\n    <text x=\"780\" y=\"140\" fill=\"#059669\" font-size=\"10\" font-weight=\"bold\">DISTRIBUTION</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Température Primaire Aller</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_primaire_aller:1}</text>\n    </g>\n    \n    <g transform=\"translate(660, 85)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">Température Primaire Retour</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_primaire_retour:1}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Sous-Station Réseau de Chaleur (RCU)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Sous-Station RCU</text><rect x=\"24\" y=\"20\" width=\"92\" height=\"56\" rx=\"5\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><polyline points=\"36,34 52,34 52,62 68,62\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2.5\"/><polyline points=\"104,34 88,34 88,62 72,62\" fill=\"none\" stroke=\"#0F172A\" stroke-width=\"2.5\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${puissance_thermique_kw:1} kW</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Delta T Primaire</text><rect x=\"34\" y=\"18\" width=\"72\" height=\"58\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"48\" y1=\"24\" x2=\"48\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"60\" y1=\"24\" x2=\"60\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"72\" y1=\"24\" x2=\"72\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"84\" y1=\"24\" x2=\"84\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"96\" y1=\"24\" x2=\"96\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${delta_t_primaire:1} °C</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Débit Primaire</text><line x1=\"15\" y1=\"58\" x2=\"125\" y2=\"58\" stroke=\"#64748B\" stroke-width=\"5\"/><circle cx=\"70\" cy=\"58\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><text x=\"70\" y=\"62\" fill=\"#0F172A\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">FT</text><line x1=\"70\" y1=\"42\" x2=\"70\" y2=\"28\" stroke=\"#475569\" stroke-width=\"2\"/><rect x=\"52\" y=\"14\" width=\"36\" height=\"16\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#475569\"/><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${debit_primaire_m3h:1} m³/h</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Énergie MWh</text><rect x=\"34\" y=\"20\" width=\"72\" height=\"52\" rx=\"6\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"44\" y=\"30\" width=\"52\" height=\"18\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><text x=\"70\" y=\"43\" fill=\"#0F172A\" font-size=\"9\" font-family=\"monospace\" text-anchor=\"middle\">MID kWh</text><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${energie_thermique_mwh:1} MWh</text></g></svg>\n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Sous-Station Réseau de Chaleur (RCU)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Sous-Station RCU</text><rect x=\"24\" y=\"20\" width=\"92\" height=\"56\" rx=\"5\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><polyline points=\"36,34 52,34 52,62 68,62\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2.5\"/><polyline points=\"104,34 88,34 88,62 72,62\" fill=\"none\" stroke=\"#0F172A\" stroke-width=\"2.5\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${puissance_thermique_kw:1} kW</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Delta T Primaire</text><rect x=\"34\" y=\"18\" width=\"72\" height=\"58\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"48\" y1=\"24\" x2=\"48\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"60\" y1=\"24\" x2=\"60\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"72\" y1=\"24\" x2=\"72\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"84\" y1=\"24\" x2=\"84\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><line x1=\"96\" y1=\"24\" x2=\"96\" y2=\"70\" stroke=\"#475569\" stroke-width=\"2\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${delta_t_primaire:1} °C</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Débit Primaire</text><line x1=\"15\" y1=\"58\" x2=\"125\" y2=\"58\" stroke=\"#64748B\" stroke-width=\"5\"/><circle cx=\"70\" cy=\"58\" r=\"16\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><text x=\"70\" y=\"62\" fill=\"#0F172A\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">FT</text><line x1=\"70\" y1=\"42\" x2=\"70\" y2=\"28\" stroke=\"#475569\" stroke-width=\"2\"/><rect x=\"52\" y=\"14\" width=\"36\" height=\"16\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#475569\"/><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${debit_primaire_m3h:1} m³/h</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Énergie MWh</text><rect x=\"34\" y=\"20\" width=\"72\" height=\"52\" rx=\"6\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"44\" y=\"30\" width=\"52\" height=\"18\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><text x=\"70\" y=\"43\" fill=\"#0F172A\" font-size=\"9\" font-family=\"monospace\" text-anchor=\"middle\">MID kWh</text><text x=\"70\" y=\"98\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${energie_thermique_mwh:1} MWh</text></g></svg>\n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -156,9 +156,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "e06d3143-43c0-437a-b427-4a0bc7204e54"
+        "id": "81881b9d-b2b7-4e75-8f68-42d44f231e30"
       },
-      "6ebcbd01-6a06-472d-9778-81179c009310": {
+      "99d2439d-e604-4e5c-80e5-1860315a9d66": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -171,7 +171,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "temp_primaire_aller",
@@ -216,9 +216,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "6ebcbd01-6a06-472d-9778-81179c009310"
+        "id": "99d2439d-e604-4e5c-80e5-1860315a9d66"
       },
-      "3a4aa728-cb54-4cf1-9fd0-b1b1eba6bb32": {
+      "e04b2f3c-e783-4424-b307-b0176995e2a0": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -231,7 +231,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "temp_primaire_retour",
@@ -276,9 +276,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "3a4aa728-cb54-4cf1-9fd0-b1b1eba6bb32"
+        "id": "e04b2f3c-e783-4424-b307-b0176995e2a0"
       },
-      "2032e93b-1884-4778-9a96-26994f9575ca": {
+      "dda9f197-c18a-4c28-aad7-4a6c789d3c6c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -291,7 +291,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "delta_t_primaire",
@@ -336,9 +336,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "2032e93b-1884-4778-9a96-26994f9575ca"
+        "id": "dda9f197-c18a-4c28-aad7-4a6c789d3c6c"
       },
-      "92e7b641-6c18-4b38-bbc3-1d0acaf93b43": {
+      "8c20134c-5fdc-4599-900f-b9d9779e038d": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -351,7 +351,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "debit_primaire_m3h",
@@ -396,9 +396,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "92e7b641-6c18-4b38-bbc3-1d0acaf93b43"
+        "id": "8c20134c-5fdc-4599-900f-b9d9779e038d"
       },
-      "d1c3422c-96e6-42b9-9492-021d13216dcd": {
+      "e94c89d1-435a-4473-a06f-c9b959e870ba": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -411,7 +411,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "puissance_thermique_kw",
@@ -456,9 +456,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "d1c3422c-96e6-42b9-9492-021d13216dcd"
+        "id": "e94c89d1-435a-4473-a06f-c9b959e870ba"
       },
-      "2ac8ed47-1e69-4d03-9274-497f2196fcc9": {
+      "27734f5d-6127-42b7-a2a0-042f77a7e6c2": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -471,7 +471,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "energie_thermique_mwh",
@@ -516,9 +516,9 @@
         },
         "row": 16,
         "col": 6,
-        "id": "2ac8ed47-1e69-4d03-9274-497f2196fcc9"
+        "id": "27734f5d-6127-42b7-a2a0-042f77a7e6c2"
       },
-      "78fb4dfd-d2d2-4583-9aaf-7622936dd2c5": {
+      "ebcae160-84a2-44ae-baef-c6d86953da65": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -531,7 +531,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "emissions_co2_evitees_kg_h",
@@ -576,9 +576,9 @@
         },
         "row": 16,
         "col": 12,
-        "id": "78fb4dfd-d2d2-4583-9aaf-7622936dd2c5"
+        "id": "ebcae160-84a2-44ae-baef-c6d86953da65"
       },
-      "ec431f01-54e8-4e22-b067-331f9b63e7a4": {
+      "a2091c9e-2e01-4117-aa88-316f1394df03": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -591,7 +591,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "temp_primaire_aller",
@@ -745,9 +745,9 @@
         },
         "row": 21,
         "col": 0,
-        "id": "ec431f01-54e8-4e22-b067-331f9b63e7a4"
+        "id": "a2091c9e-2e01-4117-aa88-316f1394df03"
       },
-      "11bd882d-cef2-4d82-a2ff-407ce43df077": {
+      "7959f100-4381-4732-9b9b-cf38aede13e7": {
         "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -771,7 +771,7 @@
           },
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20"
+            "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018"
           },
           "datasources": [],
           "settings": {
@@ -849,9 +849,9 @@
         },
         "row": 21,
         "col": 16,
-        "id": "11bd882d-cef2-4d82-a2ff-407ce43df077"
+        "id": "7959f100-4381-4732-9b9b-cf38aede13e7"
       },
-      "50ab787c-f443-458b-b292-9d9a486d9877": {
+      "a7a1faaa-3d81-4400-9d0c-1d4e11377439": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -864,7 +864,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "53127de7-b8cd-437c-982c-6be054739b20",
+              "entityAliasId": "66395f39-aa2e-49d4-baff-c865103aa018",
               "dataKeys": [
                 {
                   "name": "vanne_regulation_active",
@@ -896,7 +896,7 @@
         },
         "row": 25,
         "col": 16,
-        "id": "50ab787c-f443-458b-b292-9d9a486d9877"
+        "id": "a7a1faaa-3d81-4400-9d0c-1d4e11377439"
       }
     },
     "states": {
@@ -906,73 +906,73 @@
         "layouts": {
           "main": {
             "widgets": {
-              "93090c73-3bfb-4c3f-807c-2ded05f6bd2c": {
+              "2657bc76-eed0-479a-8812-728d6be34310": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "e06d3143-43c0-437a-b427-4a0bc7204e54": {
+              "81881b9d-b2b7-4e75-8f68-42d44f231e30": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "6ebcbd01-6a06-472d-9778-81179c009310": {
+              "99d2439d-e604-4e5c-80e5-1860315a9d66": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "3a4aa728-cb54-4cf1-9fd0-b1b1eba6bb32": {
+              "e04b2f3c-e783-4424-b307-b0176995e2a0": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "2032e93b-1884-4778-9a96-26994f9575ca": {
+              "dda9f197-c18a-4c28-aad7-4a6c789d3c6c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "92e7b641-6c18-4b38-bbc3-1d0acaf93b43": {
+              "8c20134c-5fdc-4599-900f-b9d9779e038d": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "d1c3422c-96e6-42b9-9492-021d13216dcd": {
+              "e94c89d1-435a-4473-a06f-c9b959e870ba": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "2ac8ed47-1e69-4d03-9274-497f2196fcc9": {
+              "27734f5d-6127-42b7-a2a0-042f77a7e6c2": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 6
               },
-              "78fb4dfd-d2d2-4583-9aaf-7622936dd2c5": {
+              "ebcae160-84a2-44ae-baef-c6d86953da65": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 12
               },
-              "ec431f01-54e8-4e22-b067-331f9b63e7a4": {
+              "a2091c9e-2e01-4117-aa88-316f1394df03": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 21,
                 "col": 0
               },
-              "11bd882d-cef2-4d82-a2ff-407ce43df077": {
+              "7959f100-4381-4732-9b9b-cf38aede13e7": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 21,
                 "col": 16
               },
-              "50ab787c-f443-458b-b292-9d9a486d9877": {
+              "a7a1faaa-3d81-4400-9d0c-1d4e11377439": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 25,

@@ -4,8 +4,8 @@
   "configuration": {
     "description": "ThingsBoard SCADA HMI dashboard for equipment 'Surveillance Ouvrage d'Art (SHM)' (ID: city_structure_shm). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: MQTT.",
     "entityAliases": {
-      "0e65665f-aecf-4416-b20c-aa0b584f85c2": {
-        "id": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
+      "135d02fd-6e4d-4312-871f-f9edb2b4e4cc": {
+        "id": "135d02fd-6e4d-4312-871f-f9edb2b4e4cc",
         "alias": "Surveillance Ouvrage d'Art (SHM)",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "1f4cf473-61fa-424e-875b-989f0a8209ac": {
+      "6ea8e203-60c0-4b3d-ac80-df8d01a39113": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "1f4cf473-61fa-424e-875b-989f0a8209ac"
+        "id": "6ea8e203-60c0-4b3d-ac80-df8d01a39113"
       },
-      "05014cb9-dc06-4943-a41c-7990a2b74f9a": {
+      "b74c6099-cdaa-4f42-88ae-cff7e013fb7b": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
+              "entityAliasId": "135d02fd-6e4d-4312-871f-f9edb2b4e4cc",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -110,8 +110,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SHM Ouvrage d'Art SCADA : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Tablier de Pont en Béton Précontraint / Ouvrage d'Art -->\n    <rect x=\"60\" y=\"75\" width=\"560\" height=\"45\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <text x=\"340\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TABLIER OUVRAGE D'ART / PILE BÉTON PRÉCONTRAINT (SHM)</text>\n\n    <!-- Piles de Pont -->\n    <rect x=\"140\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"490\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n\n    <!-- Inclinomètre MEMS Biaxial Haute Précision -->\n    <g transform=\"translate(165, 60)\">\n      <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-8\" y1=\"0\" x2=\"8\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-16\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">INCLINOMÈTRE</text>\n    </g>\n\n    <!-- Fissuromètre Électronique Corde Vibrante -->\n    <g transform=\"translate(340, 130)\">\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#E2001A\" stroke-width=\"3\"/>\n      <circle cx=\"-25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <circle cx=\"25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"18\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">FISSUROMÈTRE (mm)</text>\n    </g>\n\n    <!-- Jauges de Déformation (Extensométrie Fibre Optique) -->\n    <line x1=\"240\" y1=\"115\" x2=\"440\" y2=\"115\" stroke=\"#059669\" stroke-width=\"3\" stroke-dasharray=\"6,3\"/>\n    <text x=\"340\" y=\"70\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CORDE VIBRANTE / FIBRE BRAGG</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INCLINOMÉTRIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${inclinometrie_mrad:2} mrad</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCARTEMENT FISSURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ecartement_fissure_mm:3} mm</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉFORMATION (STRAIN)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${deformation_microstrain:1} µε</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FRÉQUENCE PROPRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${frequence_propre_hz:2} Hz</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Synoptique SHM Ouvrage d'Art SCADA : Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Tablier de Pont en Béton Précontraint / Ouvrage d'Art -->\n    <rect x=\"60\" y=\"75\" width=\"560\" height=\"45\" rx=\"6\" fill=\"#E2E8F0\" stroke=\"#334155\" stroke-width=\"2.5\"/>\n    <text x=\"340\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">TABLIER OUVRAGE D'ART / PILE BÉTON PRÉCONTRAINT (SHM)</text>\n\n    <!-- Piles de Pont -->\n    <rect x=\"140\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <rect x=\"490\" y=\"120\" width=\"50\" height=\"90\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2\"/>\n\n    <!-- Inclinomètre MEMS Biaxial Haute Précision -->\n    <g transform=\"translate(165, 60)\">\n      <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#FFFFFF\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <line x1=\"-8\" y1=\"0\" x2=\"8\" y2=\"0\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n      <text x=\"0\" y=\"-16\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">INCLINOMÈTRE</text>\n    </g>\n\n    <!-- Fissuromètre Électronique Corde Vibrante -->\n    <g transform=\"translate(340, 130)\">\n      <line x1=\"-25\" y1=\"0\" x2=\"25\" y2=\"0\" stroke=\"#E2001A\" stroke-width=\"3\"/>\n      <circle cx=\"-25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <circle cx=\"25\" cy=\"0\" r=\"4\" fill=\"#E2001A\"/>\n      <text x=\"0\" y=\"18\" fill=\"#E2001A\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">FISSUROMÈTRE (mm)</text>\n    </g>\n\n    <!-- Jauges de Déformation (Extensométrie Fibre Optique) -->\n    <line x1=\"240\" y1=\"115\" x2=\"440\" y2=\"115\" stroke=\"#059669\" stroke-width=\"3\" stroke-dasharray=\"6,3\"/>\n    <text x=\"340\" y=\"70\" fill=\"#059669\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">CORDE VIBRANTE / FIBRE BRAGG</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">INCLINOMÉTRIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${inclinometrie_mrad:2} mrad</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">ÉCARTEMENT FISSURE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${ecartement_fissure_mm:3} mm</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉFORMATION (STRAIN)</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${deformation_microstrain:1} µε</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">FRÉQUENCE PROPRE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${frequence_propre_hz:2} Hz</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Ouvrage d'Art</text><line x1=\"15\" y1=\"46\" x2=\"125\" y2=\"46\" stroke=\"#475569\" stroke-width=\"5\"/><rect x=\"35\" y=\"46\" width=\"10\" height=\"34\" fill=\"#64748B\"/><rect x=\"95\" y=\"46\" width=\"10\" height=\"34\" fill=\"#64748B\"/><circle cx=\"70\" cy=\"46\" r=\"5\" fill=\"#0F172A\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${ecartement_fissure_mm:1} mm</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Fréq. Propre</text><circle cx=\"70\" cy=\"46\" r=\"24\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"46\" y1=\"46\" x2=\"94\" y2=\"46\" stroke=\"#64748B\" stroke-width=\"1.5\"/><text x=\"70\" y=\"41\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">VT</text><polyline points=\"56,57 62,52 67,62 73,50 78,60 84,56\" fill=\"none\" stroke=\"#475569\" stroke-width=\"1.8\"/><line x1=\"70\" y1=\"70\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"2\"/><text x=\"70\" y=\"101\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${frequence_propre_hz:1} Hz</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Inclinométrie</text><rect x=\"18\" y=\"38\" width=\"104\" height=\"22\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"40\" width=\"36\" height=\"18\" fill=\"#CBD5E1\"/><line x1=\"70\" y1=\"32\" x2=\"70\" y2=\"66\" stroke=\"#0F172A\" stroke-width=\"2\"/><rect x=\"68\" x=\"68\" y=\"35\" width=\"6\" height=\"28\" rx=\"1\" fill=\"#475569\"/><text x=\"22\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">-DEV</text><text x=\"70\" y=\"76\" fill=\"#0F172A\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">SP</text><text x=\"118\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\" text-anchor=\"end\">+DEV</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${inclinometrie_mrad:1} mrad</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Temp. Structure</text><circle cx=\"70\" cy=\"46\" r=\"24\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"46\" y1=\"46\" x2=\"94\" y2=\"46\" stroke=\"#64748B\" stroke-width=\"1.5\"/><text x=\"70\" y=\"41\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">TT</text><text x=\"70\" y=\"61\" fill=\"#475569\" font-size=\"8.5\" font-family=\"monospace\" text-anchor=\"middle\">201</text><line x1=\"70\" y1=\"70\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"2\"/><text x=\"70\" y=\"101\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${temp_acier_beton:1} °C</text></g></svg>\n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Surveillance Ouvrage d'Art (SHM)\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Ouvrage d'Art</text><line x1=\"15\" y1=\"46\" x2=\"125\" y2=\"46\" stroke=\"#475569\" stroke-width=\"5\"/><rect x=\"35\" y=\"46\" width=\"10\" height=\"34\" fill=\"#64748B\"/><rect x=\"95\" y=\"46\" width=\"10\" height=\"34\" fill=\"#64748B\"/><circle cx=\"70\" cy=\"46\" r=\"5\" fill=\"#0F172A\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${ecartement_fissure_mm:1} mm</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Fréq. Propre</text><circle cx=\"70\" cy=\"46\" r=\"24\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"46\" y1=\"46\" x2=\"94\" y2=\"46\" stroke=\"#64748B\" stroke-width=\"1.5\"/><text x=\"70\" y=\"41\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">VT</text><polyline points=\"56,57 62,52 67,62 73,50 78,60 84,56\" fill=\"none\" stroke=\"#475569\" stroke-width=\"1.8\"/><line x1=\"70\" y1=\"70\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"2\"/><text x=\"70\" y=\"101\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${frequence_propre_hz:1} Hz</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Inclinométrie</text><rect x=\"18\" y=\"38\" width=\"104\" height=\"22\" rx=\"3\" fill=\"#F1F5F9\" stroke=\"#64748B\" stroke-width=\"1.5\"/><rect x=\"52\" y=\"40\" width=\"36\" height=\"18\" fill=\"#CBD5E1\"/><line x1=\"70\" y1=\"32\" x2=\"70\" y2=\"66\" stroke=\"#0F172A\" stroke-width=\"2\"/><rect x=\"68\" x=\"68\" y=\"35\" width=\"6\" height=\"28\" rx=\"1\" fill=\"#475569\"/><text x=\"22\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\">-DEV</text><text x=\"70\" y=\"76\" fill=\"#0F172A\" font-size=\"8\" font-weight=\"bold\" text-anchor=\"middle\">SP</text><text x=\"118\" y=\"76\" fill=\"#475569\" font-size=\"8\" font-family=\"monospace\" text-anchor=\"end\">+DEV</text><text x=\"70\" y=\"102\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${inclinometrie_mrad:1} mrad</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Temp. Structure</text><circle cx=\"70\" cy=\"46\" r=\"24\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><line x1=\"46\" y1=\"46\" x2=\"94\" y2=\"46\" stroke=\"#64748B\" stroke-width=\"1.5\"/><text x=\"70\" y=\"41\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">TT</text><text x=\"70\" y=\"61\" fill=\"#475569\" font-size=\"8.5\" font-family=\"monospace\" text-anchor=\"middle\">201</text><line x1=\"70\" y1=\"70\" x2=\"70\" y2=\"82\" stroke=\"#64748B\" stroke-width=\"2\"/><text x=\"70\" y=\"101\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${temp_acier_beton:1} °C</text></g></svg>\n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -129,9 +129,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "05014cb9-dc06-4943-a41c-7990a2b74f9a"
+        "id": "b74c6099-cdaa-4f42-88ae-cff7e013fb7b"
       },
-      "532c0f15-6c5a-4165-83e3-4d2173ea6635": {
+      "891c0bc8-f1c1-49be-9c70-005c5dab1486": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -144,7 +144,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
+              "entityAliasId": "135d02fd-6e4d-4312-871f-f9edb2b4e4cc",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -189,9 +189,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "532c0f15-6c5a-4165-83e3-4d2173ea6635"
+        "id": "891c0bc8-f1c1-49be-9c70-005c5dab1486"
       },
-      "4b2a0dc5-587e-4a09-9fbd-92771186a037": {
+      "27c8058c-58da-4a89-bfde-0fb8f4ea9bcc": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -204,7 +204,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
+              "entityAliasId": "135d02fd-6e4d-4312-871f-f9edb2b4e4cc",
               "dataKeys": [
                 {
                   "name": "ecartement_fissure_mm",
@@ -249,9 +249,9 @@
         },
         "row": 11,
         "col": 6,
-        "id": "4b2a0dc5-587e-4a09-9fbd-92771186a037"
+        "id": "27c8058c-58da-4a89-bfde-0fb8f4ea9bcc"
       },
-      "c570d41b-24de-47a3-b543-38b1cf38c9c2": {
+      "7701cc2a-62e5-47a1-80fd-d4c66a36ca8c": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -264,7 +264,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
+              "entityAliasId": "135d02fd-6e4d-4312-871f-f9edb2b4e4cc",
               "dataKeys": [
                 {
                   "name": "deformation_microstrain",
@@ -309,9 +309,9 @@
         },
         "row": 11,
         "col": 12,
-        "id": "c570d41b-24de-47a3-b543-38b1cf38c9c2"
+        "id": "7701cc2a-62e5-47a1-80fd-d4c66a36ca8c"
       },
-      "89fa0175-7d0f-421b-9035-c41eed1f57d1": {
+      "90162925-63b2-4a87-b3d2-0f199b91931e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -324,7 +324,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
+              "entityAliasId": "135d02fd-6e4d-4312-871f-f9edb2b4e4cc",
               "dataKeys": [
                 {
                   "name": "frequence_propre_hz",
@@ -369,9 +369,9 @@
         },
         "row": 11,
         "col": 18,
-        "id": "89fa0175-7d0f-421b-9035-c41eed1f57d1"
+        "id": "90162925-63b2-4a87-b3d2-0f199b91931e"
       },
-      "f770dd1a-5d89-466b-b9d0-db50f48ab834": {
+      "adb8520c-e899-4a4c-b27c-985ca56cba8e": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -384,7 +384,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
+              "entityAliasId": "135d02fd-6e4d-4312-871f-f9edb2b4e4cc",
               "dataKeys": [
                 {
                   "name": "temp_acier_beton",
@@ -429,9 +429,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "f770dd1a-5d89-466b-b9d0-db50f48ab834"
+        "id": "adb8520c-e899-4a4c-b27c-985ca56cba8e"
       },
-      "0d1e069c-ecdb-4850-b700-2c1504cedcee": {
+      "5aa4765f-9fb0-427f-a408-9e1a0f747d86": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -444,7 +444,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "0e65665f-aecf-4416-b20c-aa0b584f85c2",
+              "entityAliasId": "135d02fd-6e4d-4312-871f-f9edb2b4e4cc",
               "dataKeys": [
                 {
                   "name": "inclinometrie_mrad",
@@ -570,7 +570,7 @@
         },
         "row": 21,
         "col": 0,
-        "id": "0d1e069c-ecdb-4850-b700-2c1504cedcee"
+        "id": "5aa4765f-9fb0-427f-a408-9e1a0f747d86"
       }
     },
     "states": {
@@ -580,49 +580,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "1f4cf473-61fa-424e-875b-989f0a8209ac": {
+              "6ea8e203-60c0-4b3d-ac80-df8d01a39113": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "05014cb9-dc06-4943-a41c-7990a2b74f9a": {
+              "b74c6099-cdaa-4f42-88ae-cff7e013fb7b": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "532c0f15-6c5a-4165-83e3-4d2173ea6635": {
+              "891c0bc8-f1c1-49be-9c70-005c5dab1486": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "4b2a0dc5-587e-4a09-9fbd-92771186a037": {
+              "27c8058c-58da-4a89-bfde-0fb8f4ea9bcc": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 6
               },
-              "c570d41b-24de-47a3-b543-38b1cf38c9c2": {
+              "7701cc2a-62e5-47a1-80fd-d4c66a36ca8c": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 12
               },
-              "89fa0175-7d0f-421b-9035-c41eed1f57d1": {
+              "90162925-63b2-4a87-b3d2-0f199b91931e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 11,
                 "col": 18
               },
-              "f770dd1a-5d89-466b-b9d0-db50f48ab834": {
+              "adb8520c-e899-4a4c-b27c-985ca56cba8e": {
                 "sizeX": 6,
                 "sizeY": 5,
                 "row": 16,
                 "col": 0
               },
-              "0d1e069c-ecdb-4850-b700-2c1504cedcee": {
+              "5aa4765f-9fb0-427f-a408-9e1a0f747d86": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 21,

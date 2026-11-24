@@ -4,8 +4,8 @@
   "configuration": {
     "description": "ThingsBoard SCADA HMI dashboard for equipment 'Shelter Télécoms / Nœud Fibre' (ID: telecom_shelter). Animated vector SVG synoptic mimic (P&ID / SLD), process instrumentation, and real-time trend recorder. Protocol: MQTT.",
     "entityAliases": {
-      "b9081cdc-fa7a-44d6-85e7-550e3bc73313": {
-        "id": "b9081cdc-fa7a-44d6-85e7-550e3bc73313",
+      "44b808ff-fac0-4599-b168-855c0f5f6878": {
+        "id": "44b808ff-fac0-4599-b168-855c0f5f6878",
         "alias": "Shelter Télécoms / Nœud Fibre",
         "filter": {
           "type": "singleEntity",
@@ -17,7 +17,7 @@
       }
     },
     "widgets": {
-      "4a89c5b6-1528-4867-bb17-45d48f2ef8e3": {
+      "10bbe406-0a70-44a5-965f-9167a3885d20": {
         "typeFullFqn": "system.cards.html_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -44,9 +44,9 @@
         },
         "row": 0,
         "col": 0,
-        "id": "4a89c5b6-1528-4867-bb17-45d48f2ef8e3"
+        "id": "10bbe406-0a70-44a5-965f-9167a3885d20"
       },
-      "af4864a6-4580-4851-97d1-5443812b1303": {
+      "be7cdd98-92f1-42f9-88a6-a9e779a163c0": {
         "typeFullFqn": "system.cards.html_value_card",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -59,7 +59,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b9081cdc-fa7a-44d6-85e7-550e3bc73313",
+              "entityAliasId": "44b808ff-fac0-4599-b168-855c0f5f6878",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -101,8 +101,8 @@
             }
           ],
           "settings": {
-            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Shelter Télécoms SCADA : Shelter Télécoms / Nœud Fibre\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Shelter Sécurisé -->\n    <rect x=\"70\" y=\"40\" width=\"550\" height=\"180\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"180\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">SHELTER TÉLÉCOMS / POP FIBRE OPTIQUE</text>\n\n    <!-- Baies Serveurs / Switchs 19 pouces -->\n    <rect x=\"110\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n    <line x1=\"115\" y1=\"100\" x2=\"170\" y2=\"100\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <line x1=\"115\" y1=\"120\" x2=\"170\" y2=\"120\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"142\" y=\"190\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">BAIE IP</text>\n\n    <rect x=\"200\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n    <line x1=\"205\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"232\" y=\"190\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">OLT FIBRE</text>\n\n    <!-- Onduleur UPS Double Conversion -->\n    <rect x=\"290\" y=\"80\" width=\"70\" height=\"120\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n    <text x=\"325\" y=\"130\" fill=\"#B45309\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">UPS 40kVA</text>\n    <text x=\"325\" y=\"145\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">BATTERIES</text>\n\n    <!-- Climatisation Redondante N+1 -->\n    <rect x=\"400\" y=\"80\" width=\"80\" height=\"120\" rx=\"4\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <text x=\"440\" y=\"130\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">CLIM PRECISION</text>\n    <text x=\"440\" y=\"145\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\">N+1 REDONDANT</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CHARGE ONDULEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${charge_onduleur_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">AUTONOMIE BATTERIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${autonomie_batterie_min:0} min</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. BAIE SERVEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_baie_serveur:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉTECTION INONDATION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${detection_inondation}</text>\n    </g>\n  </svg>\n    \n</div>\n",
-            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 10px;\n    margin-bottom: 12px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.8px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 4px 10px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n  \n  .pipe-flow {\n    stroke-dasharray: 8, 4;\n    animation: pipe-anim 1.2s linear infinite;\n  }\n  .pipe-flow-fast {\n    stroke-dasharray: 6, 3;\n    animation: pipe-anim 0.6s linear infinite;\n  }\n  @keyframes pipe-anim {\n    from { stroke-dashoffset: 24; }\n    to { stroke-dashoffset: 0; }\n  }\n  \n  .scada-rotor {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 2s linear infinite;\n  }\n  .scada-rotor-fast {\n    transform-box: fill-box;\n    transform-origin: center;\n    animation: rotate-blade 0.8s linear infinite;\n  }\n  @keyframes rotate-blade {\n    100% { transform: rotate(360deg); }\n  }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      Supervision Shelter Télécoms SCADA : Shelter Télécoms / Nœud Fibre\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Supervision: <strong style=\"color: #334155;\">Temps Réel</strong></div>\n    </div>\n  </div>\n  \n  <svg viewBox=\"0 0 950 260\" style=\"width:100%; height:auto; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1;\">\n    <!-- Enceinte Shelter Sécurisé -->\n    <rect x=\"70\" y=\"40\" width=\"550\" height=\"180\" rx=\"10\" fill=\"#F1F5F9\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n    <text x=\"180\" y=\"65\" fill=\"#0369A1\" font-size=\"11\" font-weight=\"bold\">SHELTER TÉLÉCOMS / POP FIBRE OPTIQUE</text>\n\n    <!-- Baies Serveurs / Switchs 19 pouces -->\n    <rect x=\"110\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n    <line x1=\"115\" y1=\"100\" x2=\"170\" y2=\"100\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <line x1=\"115\" y1=\"120\" x2=\"170\" y2=\"120\" stroke=\"#0284C7\" stroke-width=\"2\"/>\n    <text x=\"142\" y=\"190\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">BAIE IP</text>\n\n    <rect x=\"200\" y=\"80\" width=\"65\" height=\"120\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n    <line x1=\"205\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#059669\" stroke-width=\"2\"/>\n    <text x=\"232\" y=\"190\" fill=\"#334155\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"bold\">OLT FIBRE</text>\n\n    <!-- Onduleur UPS Double Conversion -->\n    <rect x=\"290\" y=\"80\" width=\"70\" height=\"120\" rx=\"4\" fill=\"#FFFFFF\" stroke=\"#D97706\" stroke-width=\"1.5\"/>\n    <text x=\"325\" y=\"130\" fill=\"#B45309\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">UPS 40kVA</text>\n    <text x=\"325\" y=\"145\" fill=\"#64748B\" font-size=\"8\" text-anchor=\"middle\">BATTERIES</text>\n\n    <!-- Climatisation Redondante N+1 -->\n    <rect x=\"400\" y=\"80\" width=\"80\" height=\"120\" rx=\"4\" fill=\"#E0F2FE\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n    <text x=\"440\" y=\"130\" fill=\"#0369A1\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">CLIM PRECISION</text>\n    <text x=\"440\" y=\"145\" fill=\"#0284C7\" font-size=\"8\" text-anchor=\"middle\">N+1 REDONDANT</text>\n\n    <!-- Callouts SCADA Light -->\n    \n    <g transform=\"translate(660, 25)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#059669\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">CHARGE ONDULEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${charge_onduleur_pct:0} %</text>\n    </g>\n    \n    <g transform=\"translate(660, 75)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#0284C7\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">AUTONOMIE BATTERIE</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${autonomie_batterie_min:0} min</text>\n    </g>\n    \n    <g transform=\"translate(660, 125)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#D97706\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">TEMP. BAIE SERVEUR</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${temp_baie_serveur:1} °C</text>\n    </g>\n    \n    <g transform=\"translate(660, 175)\">\n      <rect width=\"230\" height=\"40\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.5\"/>\n      <rect width=\"4\" height=\"40\" rx=\"2\" fill=\"#E2001A\"/>\n      <text x=\"12\" y=\"15\" fill=\"#475569\" font-size=\"9\" font-weight=\"600\">DÉTECTION INONDATION</text>\n      <text x=\"12\" y=\"32\" fill=\"#0F172A\" font-size=\"13\" font-weight=\"bold\" font-family=\"monospace\">${detection_inondation}</text>\n    </g>\n  </svg>\n    \n</div>\n",
+            "cardHtml": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Shelter Télécoms / Nœud Fibre\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Shelter Télécoms</text><rect x=\"36\" y=\"16\" width=\"68\" height=\"66\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"44\" y=\"24\" width=\"52\" height=\"12\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><rect x=\"44\" y=\"42\" width=\"52\" height=\"12\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><circle cx=\"52\" cy=\"30\" r=\"2.5\" fill=\"#475569\"/><circle cx=\"52\" cy=\"48\" r=\"2.5\" fill=\"#475569\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${temp_baie_serveur:1} °C</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Onduleur 48V</text><rect x=\"30\" y=\"16\" width=\"80\" height=\"62\" rx=\"5\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"38\" y=\"24\" width=\"64\" height=\"20\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><text x=\"70\" y=\"38\" fill=\"#0F172A\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">UPS / ASI</text><line x1=\"42\" y1=\"60\" x2=\"98\" y2=\"60\" stroke=\"#64748B\" stroke-width=\"3\"/><circle cx=\"48\" cy=\"60\" r=\"3\" fill=\"#475569\"/><circle cx=\"92\" cy=\"60\" r=\"3\" fill=\"#475569\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${charge_onduleur_pct:1} %</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Autonomie Batt.</text><rect x=\"56\" y=\"10\" width=\"28\" height=\"8\" rx=\"2\" fill=\"#64748B\"/><rect x=\"40\" y=\"18\" width=\"60\" height=\"66\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"44\" y=\"40\" y=\"40\" width=\"52\" height=\"40\" height=\"40\" rx=\"3\" fill=\"#475569\" opacity=\"0.45\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${autonomie_batterie_min:0} min</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Inondation</text><rect x=\"20\" y=\"20\" width=\"100\" height=\"56\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><polygon points=\"44,34 56,58 32,58\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2.5\"/><text x=\"44\" y=\"54\" fill=\"#475569\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">!</text><text x=\"86\" y=\"45\" fill=\"#334155\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">STATUT</text><text x=\"86\" y=\"60\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${detection_inondation}</text><text x=\"70\" y=\"100\" fill=\"#475569\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">ISA-18.2 PRIORITÉ</text></g></svg>\n</div>\n",
+            "html": "\n<style>\n  .scada-container {\n    background: #E5E7EB;\n    border: 1px solid #CBD5E1;\n    border-radius: 10px;\n    padding: 14px 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    color: #0F172A;\n  }\n  .scada-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    border-bottom: 1px solid #CBD5E1;\n    padding-bottom: 8px;\n    margin-bottom: 10px;\n  }\n  .scada-title {\n    font-size: 13px;\n    font-weight: 700;\n    color: #0F172A;\n    letter-spacing: 0.6px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\n    gap: 8px;\n  }\n  .scada-live-indicator {\n    display: inline-block;\n    width: 9px;\n    height: 9px;\n    background: #475569;\n    border-radius: 50%;\n  }\n  .scada-badge {\n    background: #F1F5F9;\n    border: 1px solid #CBD5E1;\n    border-radius: 6px;\n    padding: 3px 9px;\n    font-size: 11px;\n    color: #334155;\n  }\n  .scada-badge strong { color: #0F172A; }\n</style>\n\n<div class=\"scada-container\">\n  <div class=\"scada-header\">\n    <div class=\"scada-title\">\n      <span class=\"scada-live-indicator\"></span>\n      SYNOPTIQUE PROCESS • Shelter Télécoms / Nœud Fibre\n    </div>\n    <div style=\"display:flex; gap:10px; align-items:center;\">\n      <div class=\"scada-badge\">Protocole: <strong>MQTT</strong></div>\n      <div class=\"scada-badge\">Norme: <strong>ANSI/ISA-101</strong></div>\n    </div>\n  </div>\n  <svg viewBox=\"0 0 722 170\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"94\" y1=\"85\" x2=\"628\" y2=\"85\" stroke=\"#64748B\" stroke-width=\"5\" stroke-linecap=\"round\"/><polygon points=\"177,79 189,85 177,91\" fill=\"#475569\"/><polygon points=\"355,79 367,85 355,91\" fill=\"#475569\"/><polygon points=\"533,79 545,85 533,91\" fill=\"#475569\"/><g transform=\"translate(24, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Shelter Télécoms</text><rect x=\"36\" y=\"16\" width=\"68\" height=\"66\" rx=\"4\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"44\" y=\"24\" width=\"52\" height=\"12\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><rect x=\"44\" y=\"42\" width=\"52\" height=\"12\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><circle cx=\"52\" cy=\"30\" r=\"2.5\" fill=\"#475569\"/><circle cx=\"52\" cy=\"48\" r=\"2.5\" fill=\"#475569\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${temp_baie_serveur:1} °C</text></g><g transform=\"translate(202, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Onduleur 48V</text><rect x=\"30\" y=\"16\" width=\"80\" height=\"62\" rx=\"5\" fill=\"#CBD5E1\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"38\" y=\"24\" width=\"64\" height=\"20\" rx=\"2\" fill=\"#F1F5F9\" stroke=\"#64748B\"/><text x=\"70\" y=\"38\" fill=\"#0F172A\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">UPS / ASI</text><line x1=\"42\" y1=\"60\" x2=\"98\" y2=\"60\" stroke=\"#64748B\" stroke-width=\"3\"/><circle cx=\"48\" cy=\"60\" r=\"3\" fill=\"#475569\"/><circle cx=\"92\" cy=\"60\" r=\"3\" fill=\"#475569\"/><text x=\"70\" y=\"100\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${charge_onduleur_pct:1} %</text></g><g transform=\"translate(380, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Autonomie Batt.</text><rect x=\"56\" y=\"10\" width=\"28\" height=\"8\" rx=\"2\" fill=\"#64748B\"/><rect x=\"40\" y=\"18\" width=\"60\" height=\"66\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><rect x=\"44\" y=\"40\" y=\"40\" width=\"52\" height=\"40\" height=\"40\" rx=\"3\" fill=\"#475569\" opacity=\"0.45\"/><text x=\"70\" y=\"103\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${autonomie_batterie_min:0} min</text></g><g transform=\"translate(558, 30)\"><rect width=\"140\" height=\"110\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#CBD5E1\" stroke-width=\"1.2\"/><text x=\"70\" y=\"11\" fill=\"#334155\" font-size=\"8\" font-weight=\"700\" font-family=\"sans-serif\" text-anchor=\"middle\">Inondation</text><rect x=\"20\" y=\"20\" width=\"100\" height=\"56\" rx=\"6\" fill=\"#F1F5F9\" stroke=\"#475569\" stroke-width=\"2.5\"/><polygon points=\"44,34 56,58 32,58\" fill=\"none\" stroke=\"#475569\" stroke-width=\"2.5\"/><text x=\"44\" y=\"54\" fill=\"#475569\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">!</text><text x=\"86\" y=\"45\" fill=\"#334155\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">STATUT</text><text x=\"86\" y=\"60\" fill=\"#0F172A\" font-size=\"11\" font-weight=\"bold\" font-family=\"monospace\" text-anchor=\"middle\">${detection_inondation}</text><text x=\"70\" y=\"100\" fill=\"#475569\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">ISA-18.2 PRIORITÉ</text></g></svg>\n</div>\n",
             "cardCss": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;",
             "css": "border-radius: 12px; border: 1px solid #CBD5E1; background: #FFFFFF; padding: 0;"
           },
@@ -120,9 +120,9 @@
         },
         "row": 3,
         "col": 0,
-        "id": "af4864a6-4580-4851-97d1-5443812b1303"
+        "id": "be7cdd98-92f1-42f9-88a6-a9e779a163c0"
       },
-      "8be01d6d-5c52-4b2e-888d-d608d3951fda": {
+      "28f49a86-5987-4f09-8071-dcb5ec6ede46": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -135,7 +135,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b9081cdc-fa7a-44d6-85e7-550e3bc73313",
+              "entityAliasId": "44b808ff-fac0-4599-b168-855c0f5f6878",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -180,9 +180,9 @@
         },
         "row": 11,
         "col": 0,
-        "id": "8be01d6d-5c52-4b2e-888d-d608d3951fda"
+        "id": "28f49a86-5987-4f09-8071-dcb5ec6ede46"
       },
-      "5af6a08c-2f91-404a-9b90-03ebaedbeca4": {
+      "54aef24f-184b-466e-937d-4e38dede68d1": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -195,7 +195,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b9081cdc-fa7a-44d6-85e7-550e3bc73313",
+              "entityAliasId": "44b808ff-fac0-4599-b168-855c0f5f6878",
               "dataKeys": [
                 {
                   "name": "autonomie_batterie_min",
@@ -240,9 +240,9 @@
         },
         "row": 11,
         "col": 8,
-        "id": "5af6a08c-2f91-404a-9b90-03ebaedbeca4"
+        "id": "54aef24f-184b-466e-937d-4e38dede68d1"
       },
-      "5bbff9c6-ced3-493d-8c1e-dac1c9ab47c7": {
+      "5370f727-c79f-45b1-a583-e71657704945": {
         "typeFullFqn": "system.digital_gauges.simple_gauge_justgage",
         "isSystemType": true,
         "bundleAlias": "digital_gauges",
@@ -255,7 +255,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b9081cdc-fa7a-44d6-85e7-550e3bc73313",
+              "entityAliasId": "44b808ff-fac0-4599-b168-855c0f5f6878",
               "dataKeys": [
                 {
                   "name": "temp_baie_serveur",
@@ -300,9 +300,9 @@
         },
         "row": 11,
         "col": 16,
-        "id": "5bbff9c6-ced3-493d-8c1e-dac1c9ab47c7"
+        "id": "5370f727-c79f-45b1-a583-e71657704945"
       },
-      "7f9151db-0c8b-4c23-bde8-8a2df2ab4970": {
+      "74412caa-e907-42e0-9751-2b04f9babecd": {
         "typeFullFqn": "system.charts.basic_timeseries",
         "isSystemType": true,
         "bundleAlias": "charts",
@@ -315,7 +315,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b9081cdc-fa7a-44d6-85e7-550e3bc73313",
+              "entityAliasId": "44b808ff-fac0-4599-b168-855c0f5f6878",
               "dataKeys": [
                 {
                   "name": "charge_onduleur_pct",
@@ -413,9 +413,9 @@
         },
         "row": 16,
         "col": 0,
-        "id": "7f9151db-0c8b-4c23-bde8-8a2df2ab4970"
+        "id": "74412caa-e907-42e0-9751-2b04f9babecd"
       },
-      "35aee803-8310-48c8-a805-0896f41896a8": {
+      "12731b14-9b80-4676-8530-88db743062b6": {
         "typeFullFqn": "system.single_switch",
         "isSystemType": true,
         "bundleAlias": "control_widgets",
@@ -439,7 +439,7 @@
           },
           "targetDevice": {
             "type": "entity",
-            "entityAliasId": "b9081cdc-fa7a-44d6-85e7-550e3bc73313"
+            "entityAliasId": "44b808ff-fac0-4599-b168-855c0f5f6878"
           },
           "datasources": [],
           "settings": {
@@ -517,9 +517,9 @@
         },
         "row": 16,
         "col": 16,
-        "id": "35aee803-8310-48c8-a805-0896f41896a8"
+        "id": "12731b14-9b80-4676-8530-88db743062b6"
       },
-      "f5e63690-6fa5-489d-b1da-b2ac243063a8": {
+      "76f16a39-bcbb-4926-b152-f4b6ea871733": {
         "typeFullFqn": "system.cards.entities_table",
         "isSystemType": true,
         "bundleAlias": "cards",
@@ -532,7 +532,7 @@
           "datasources": [
             {
               "type": "entity",
-              "entityAliasId": "b9081cdc-fa7a-44d6-85e7-550e3bc73313",
+              "entityAliasId": "44b808ff-fac0-4599-b168-855c0f5f6878",
               "dataKeys": [
                 {
                   "name": "detection_inondation",
@@ -564,7 +564,7 @@
         },
         "row": 20,
         "col": 16,
-        "id": "f5e63690-6fa5-489d-b1da-b2ac243063a8"
+        "id": "76f16a39-bcbb-4926-b152-f4b6ea871733"
       }
     },
     "states": {
@@ -574,49 +574,49 @@
         "layouts": {
           "main": {
             "widgets": {
-              "4a89c5b6-1528-4867-bb17-45d48f2ef8e3": {
+              "10bbe406-0a70-44a5-965f-9167a3885d20": {
                 "sizeX": 24,
                 "sizeY": 3,
                 "row": 0,
                 "col": 0
               },
-              "af4864a6-4580-4851-97d1-5443812b1303": {
+              "be7cdd98-92f1-42f9-88a6-a9e779a163c0": {
                 "sizeX": 24,
                 "sizeY": 8,
                 "row": 3,
                 "col": 0
               },
-              "8be01d6d-5c52-4b2e-888d-d608d3951fda": {
+              "28f49a86-5987-4f09-8071-dcb5ec6ede46": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 0
               },
-              "5af6a08c-2f91-404a-9b90-03ebaedbeca4": {
+              "54aef24f-184b-466e-937d-4e38dede68d1": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 8
               },
-              "5bbff9c6-ced3-493d-8c1e-dac1c9ab47c7": {
+              "5370f727-c79f-45b1-a583-e71657704945": {
                 "sizeX": 8,
                 "sizeY": 5,
                 "row": 11,
                 "col": 16
               },
-              "7f9151db-0c8b-4c23-bde8-8a2df2ab4970": {
+              "74412caa-e907-42e0-9751-2b04f9babecd": {
                 "sizeX": 16,
                 "sizeY": 8,
                 "row": 16,
                 "col": 0
               },
-              "35aee803-8310-48c8-a805-0896f41896a8": {
+              "12731b14-9b80-4676-8530-88db743062b6": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 16,
                 "col": 16
               },
-              "f5e63690-6fa5-489d-b1da-b2ac243063a8": {
+              "76f16a39-bcbb-4926-b152-f4b6ea871733": {
                 "sizeX": 8,
                 "sizeY": 4,
                 "row": 20,

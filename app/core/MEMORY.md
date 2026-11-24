@@ -20,6 +20,7 @@ Moteur d'exécution asynchrone non-bloquant responsable du calcul périodique (t
 | [`storyboard_engine.py:storyboard_manager`](file:///home/pierre/Projets/iot-data-simulator/app/core/storyboard_engine.py) | Orchestrateur `asyncio` de démos minutées en 4 phases | `get_storyboards()`, `start()`, `stop()`, `status()` |
 | [`bid_deliverables.py`](file:///home/pierre/Projets/iot-data-simulator/app/core/bid_deliverables.py) | Export de l'IO List CSV (UTF-8 BOM `;` Excel FR) et Dossier Markdown | `generate_io_list_csv()`, `generate_architecture_dossier_md()` |
 | [`tb_provisioner.py`](file:///home/pierre/Projets/iot-data-simulator/app/core/tb_provisioner.py) | Provisioning ThingsBoard 4.3 éphémère multi-Tenant & Customer | `tb_inspect_context()`, `tb_switch_tenant_context()`, `tb_provision_stack()` |
+| [`svg_components.py`](file:///home/pierre/Projets/iot-data-simulator/app/core/svg_components.py) | Bibliothèque des 70 composants SVG modulaires ISA-101 (6 familles), Bundles TB 4.3 & codage Forme+Couleur | `get_svg_components_catalog()`, `generate_thingsboard_widget_bundle(family)`, `render_synoptic_component()` |
 
 ## 🔄 Dépendances & Flux de Données
 - **Dépend de** : `app/models/variable.py`, `app/platforms/`, `app/storage/repository.py`, `app/mqtt/client.py`, `app/transports/manager.py`.
