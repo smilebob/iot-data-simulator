@@ -3130,11 +3130,22 @@ function renderSizingResult(data) {
   document.getElementById("sz-res-traffic").textContent = `${data.monthly_traffic_gb} Go/mois`;
   document.getElementById("sz-res-bw").textContent = `${data.bandwidth_kbps} kbps`;
   document.getElementById("sz-res-storage").textContent = `${data.storage_compressed_gb_total} Go`;
-  document.getElementById("sz-res-storage-raw").textContent = `${data.storage_raw_gb_total} Go bruts (${data.retention_years} ans)`;
-  document.getElementById("sz-res-dps").textContent = Number(data.data_points_per_day).toLocaleString("fr-FR");
-  document.getElementById("sz-res-total-vars").textContent = `${data.total_variables} points totaux`;
+  document.getElementById("sz-res-storage-raw").textContent = `${data.storage_raw_gb_total} Go bruts PG (${data.retention_years} ans)`;
+  document.getElementById("sz-res-dps").textContent = `${data.data_points_per_second ?? 0} dp/s`;
+  document.getElementById("sz-res-total-vars").textContent = `${Number(data.data_points_per_day).toLocaleString("fr-FR")} pts/jour (${data.total_variables} var)`;
   document.getElementById("sz-res-tier").textContent = data.recommended_tb_tier;
   document.getElementById("sz-res-specs").textContent = data.recommended_specs;
+
+  const hypEl = document.getElementById("sz-res-hypotheses");
+  if (hypEl && Array.isArray(data.hypotheses)) {
+    hypEl.innerHTML = data.hypotheses.map(h => `<li>${h}</li>`).join("");
+  }
+  const srcEl = document.getElementById("sz-res-sources");
+  if (srcEl && Array.isArray(data.sources)) {
+    srcEl.innerHTML = data.sources
+      .map(s => `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline font-semibold">${s.title}</a> <span class="text-slate-400">— ${s.scope}</span></li>`)
+      .join("");
+  }
 }
 
 async function computeSizing() {

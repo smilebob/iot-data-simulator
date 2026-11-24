@@ -40,7 +40,7 @@ logging.basicConfig(
 logger = logging.getLogger("iot_sim")
 
 # Official semantic version and build date of the application
-APP_VERSION = "2.4.0"
+APP_VERSION = "2.4.1"
 BUILD_DATE = os.getenv("BUILD_DATE", "2026-11-24")
 
 # Initialize application-wide singletons

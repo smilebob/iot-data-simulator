@@ -1074,7 +1074,7 @@
             <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
             <span>Importer depuis mes équipements actifs</span>
           </button>
-          <span class="text-[11px] text-slate-500">Compression TimescaleDB estimée : 5:1</span>
+          <span class="text-[11px] text-slate-500">PostgreSQL brut : 145 o/dp &bull; Hybride Cassandra/TimescaleDB : 5×</span>
         </div>
 
         <!-- Résultats KPI -->
@@ -1095,7 +1095,7 @@
             <div id="sz-res-storage-raw" class="text-[10px] text-slate-500">-</div>
           </div>
           <div class="bg-[#131720] border border-[#2B3342] rounded-xl p-3">
-            <div class="text-[10px] text-slate-400 uppercase">Points / Jour</div>
+            <div class="text-[10px] text-slate-400 uppercase">Débit Points (TB)</div>
             <div id="sz-res-dps" class="text-lg font-bold text-amber-400 mt-0.5">-</div>
             <div id="sz-res-total-vars" class="text-[10px] text-slate-500">-</div>
           </div>
@@ -1107,6 +1107,24 @@
           <div id="sz-res-tier" class="text-sm font-bold text-white">-</div>
           <div id="sz-res-specs" class="text-xs text-slate-300 mt-0.5">-</div>
         </div>
+
+        <!-- Hypothèses & Sources Officielles ThingsBoard -->
+        <details class="bg-[#131720] border border-[#2B3342] rounded-xl p-3.5 text-xs">
+          <summary class="cursor-pointer font-semibold text-slate-200 select-none flex items-center justify-between">
+            <span>📚 Hypothèses de Calcul &amp; Sources Officielles ThingsBoard (Vérifiables)</span>
+            <span class="text-[10px] text-sky-400">Afficher / Masquer</span>
+          </summary>
+          <div class="mt-3 space-y-2.5 border-t border-[#2B3342] pt-2.5">
+            <div>
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Hypothèses appliquées</div>
+              <ul id="sz-res-hypotheses" class="list-disc pl-4 space-y-1 text-[11px] text-slate-300"></ul>
+            </div>
+            <div>
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Documentation Officielle ThingsBoard</div>
+              <ul id="sz-res-sources" class="space-y-1 text-[11px] text-slate-300"></ul>
+            </div>
+          </div>
+        </details>
 
         <div class="flex justify-end gap-3 pt-2 border-t border-[#2B3342]">
           <button onclick="closeSizingModal()" class="bg-[#202531] hover:bg-[#2B3342] text-slate-300 px-4 py-2 rounded-lg text-xs font-medium">Fermer</button>
@@ -1328,11 +1346,11 @@
         <span>IoT Data Simulator &bull; Stack Docker Sécurisée Conforme CIS &bull; Licence Apache 2.0</span>
       </div>
       <div class="text-[10px] font-mono text-slate-500 tracking-wider">
-        v<span id="app-version-badge">2.4.0 (build 2026-11-24)</span>
+        v<span id="app-version-badge">2.4.1 (build 2026-11-24)</span>
       </div>
     </div>
   </footer>
 
-  <script src="/static/app.js?v=2.4.0"></script>
+  <script src="/static/app.js?v=2.4.1"></script>
 </body>
 </html>

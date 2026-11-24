@@ -26,10 +26,14 @@ def test_sizing_calculator_compact_and_cluster():
     )
     assert small.messages_per_second == 1.0
     assert small.messages_per_day == 86400
+    assert small.data_points_per_second == 8.0
     assert small.data_points_per_day == 86400 * 8
     assert small.storage_compressed_gb_total < small.storage_raw_gb_total
     assert "Compact" in small.recommended_tb_tier
     assert "Dimensionnement Architecture IoT" in small.markdown_report
+    assert "https://thingsboard.io/docs/reference/architecture/" in small.markdown_report
+    assert len(small.hypotheses) >= 4
+    assert len(small.sources) >= 4
 
     large = calculate_sizing(
         SizingRequest(
