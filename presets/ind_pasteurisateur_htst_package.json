@@ -1,0 +1,592 @@
+{
+  "schema_version": "2.1.0",
+  "export_type": "single_preset",
+  "export_date": "2026-11-16T17:53:32.277714+00:00",
+  "generator": "IoT Data Simulator v2.2.0 (IoT Preset Architect)",
+  "preset": {
+    "id": "ind_pasteurisateur_htst",
+    "name": "Ligne de Pasteurisation Flash HTST",
+    "category": "industry",
+    "category_label": "Industrie & Agroalimentaire",
+    "description": "Ligne continue de pasteurisation thermique HTST (High Temperature Short Time) pour liquides alimentaires (laiterie, jus, boissons). Intègre régulation de chambrage, récupération thermique, contrôle de surpression hygiénique différentielle HACCP, puissance calorifique dérivée et volume traité cumulé.",
+    "icon": "shield-check",
+    "default_protocol": "mqtt",
+    "default_platform": "thingsboard",
+    "is_custom": true,
+    "variables": [
+      {
+        "id": "debit_produit",
+        "name": "Débit Liquide Alimentaire",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "m³/h",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 6.8,
+          "max_val": 8.2,
+          "step": 0.05,
+          "noise_percent": 0.4
+        }
+      },
+      {
+        "id": "temp_entree",
+        "name": "Température Entrée Produit Cru",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "°C",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 3.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 3.8,
+          "max_val": 4.8,
+          "step": 0.02,
+          "noise_percent": 0.2
+        }
+      },
+      {
+        "id": "temp_prechauffage",
+        "name": "Température Régénération Échangeur",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "°C",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "sine",
+        "math_config": {
+          "min_val": 63.5,
+          "max_val": 66.5,
+          "period": 180.0,
+          "noise_percent": 0.3
+        }
+      },
+      {
+        "id": "temp_chambrage",
+        "name": "Température Chambrage Pasteurisation",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "°C",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 1.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 73.8,
+          "max_val": 75.8,
+          "step": 0.04,
+          "noise_percent": 0.3
+        }
+      },
+      {
+        "id": "temp_sortie",
+        "name": "Température Sortie Conditionnement",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "°C",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 3.0,
+        "enabled": true,
+        "sim_mode": "sine",
+        "math_config": {
+          "min_val": 3.6,
+          "max_val": 4.4,
+          "period": 200.0,
+          "noise_percent": 0.2
+        }
+      },
+      {
+        "id": "pression_pasteurise",
+        "name": "Pression Côté Pasteurisé",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "bar",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 3.9,
+          "max_val": 4.4,
+          "step": 0.02,
+          "noise_percent": 0.3
+        }
+      },
+      {
+        "id": "pression_brut",
+        "name": "Pression Côté Brut Non-Pasteurisé",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "bar",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "random_walk",
+        "math_config": {
+          "min_val": 2.4,
+          "max_val": 2.8,
+          "step": 0.02,
+          "noise_percent": 0.3
+        }
+      },
+      {
+        "id": "delta_pression_haccp",
+        "name": "Différentiel Pression Sécurité HACCP",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "bar",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "derived",
+        "derived_config": {
+          "formula": "pression_pasteurise - pression_brut",
+          "dependencies": [
+            "pression_pasteurise",
+            "pression_brut"
+          ]
+        }
+      },
+      {
+        "id": "puissance_thermique",
+        "name": "Puissance Calorifique Appoint",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kW",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 2.0,
+        "enabled": true,
+        "sim_mode": "derived",
+        "derived_config": {
+          "formula": "debit_produit * (temp_chambrage - temp_prechauffage) * 1.124",
+          "dependencies": [
+            "debit_produit",
+            "temp_chambrage",
+            "temp_prechauffage"
+          ]
+        }
+      },
+      {
+        "id": "volume_traite_cumule",
+        "name": "Volume Pasteurisé Cumulé",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "m³",
+        "topic": "v1/devices/me/telemetry",
+        "publish_interval": 5.0,
+        "enabled": true,
+        "sim_mode": "integrator",
+        "integrator_config": {
+          "source_variable": "debit_produit",
+          "time_unit": "hours",
+          "initial_val": 128.5
+        }
+      },
+      {
+        "id": "energie_thermique_cumulee",
+        "name": "Énergie Thermique Cumulée",
+        "device_id": "",
+        "var_type": "telemetry",
+        "data_type": "float",
+        "unit": "kWh",
+        "publish_interval": 5.0,
+        "enabled": true,
+        "sim_mode": "integrator",
+        "integrator_config": {
+          "source_variable": "puissance_thermique",
+          "time_unit": "hours",
+          "initial_val": 10420.0
+        }
+      },
+      {
+        "id": "vanne_derivation_active",
+        "name": "Vanne Dérivation Sécurité (FDV)",
+        "device_id": "",
+        "var_type": "attribute",
+        "data_type": "boolean",
+        "topic": "v1/devices/me/attributes",
+        "publish_interval": 10.0,
+        "enabled": true,
+        "sim_mode": "constant",
+        "math_config": {
+          "constant_val": false
+        }
+      },
+      {
+        "id": "statut_ligne",
+        "name": "Mode de Fonctionnement Ligne",
+        "device_id": "",
+        "var_type": "attribute",
+        "data_type": "string",
+        "topic": "v1/devices/me/attributes",
+        "publish_interval": 15.0,
+        "enabled": true,
+        "sim_mode": "constant",
+        "math_config": {
+          "constant_val": "PRODUCTION"
+        }
+      }
+    ]
+  },
+  "dashboard_template": {
+    "title": "Supervision SCADA - Ligne de Pasteurisation Flash HTST",
+    "configuration": {
+      "description": "Tableau de bord de supervision généré pour le cas d'usage Ligne de Pasteurisation Flash HTST",
+      "entityAliases": {
+        "20bb487b-558e-43aa-a8ec-477d3b1dab86": {
+          "id": "20bb487b-558e-43aa-a8ec-477d3b1dab86",
+          "alias": "Ligne de Pasteurisation Flash HTST",
+          "filter": {
+            "type": "singleEntity",
+            "resolveMultiple": false,
+            "singleEntity": {
+              "entityType": "DEVICE",
+              "id": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        }
+      },
+      "widgets": {
+        "5c7a7eb8-5df0-4553-a0c7-16e5749584fb": {
+          "typeFullFqn": "system.cards.html_card",
+          "isSystemType": true,
+          "bundleAlias": "cards",
+          "typeAlias": "html_card",
+          "type": "static",
+          "title": "Informations - Ligne de Pasteurisation Flash HTST",
+          "sizeX": 24,
+          "sizeY": 2,
+          "config": {
+            "datasources": [],
+            "settings": {
+              "cardHtml": "<div style='padding:12px 18px; font-size:16px; font-weight:700; color:#0F172A; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:10px;'>IoT Data Simulator • Ligne de Pasteurisation Flash HTST <span style='font-size:12px; color:#64748B; font-weight:normal; margin-left:12px;'>ID: ind_pasteurisateur_htst | Authentification: Jeton Sécurisé</span></div>",
+              "html": "<div style='padding:12px 18px; font-size:16px; font-weight:700; color:#0F172A; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:10px;'>IoT Data Simulator • Ligne de Pasteurisation Flash HTST <span style='font-size:12px; color:#64748B; font-weight:normal; margin-left:12px;'>ID: ind_pasteurisateur_htst | Authentification: Jeton Sécurisé</span></div>"
+            }
+          }
+        },
+        "2e8fef66-d06d-4a14-a9f4-1cb6bace2052": {
+          "typeFullFqn": "system.cards.html_value_card",
+          "isSystemType": true,
+          "bundleAlias": "cards",
+          "typeAlias": "html_value_card",
+          "type": "latest",
+          "title": "Synoptique SCADA - Ligne de Pasteurisation Flash HTST",
+          "sizeX": 16,
+          "sizeY": 8,
+          "config": {
+            "useDashboardTimewindow": true,
+            "datasources": [
+              {
+                "type": "entity",
+                "entityAliasId": "20bb487b-558e-43aa-a8ec-477d3b1dab86",
+                "dataKeys": [
+                  {
+                    "name": "debit_produit",
+                    "label": "debit_produit",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temp_entree",
+                    "label": "temp_entree",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temp_prechauffage",
+                    "label": "temp_prechauffage",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temp_chambrage",
+                    "label": "temp_chambrage",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temp_sortie",
+                    "label": "temp_sortie",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "pression_pasteurise",
+                    "label": "pression_pasteurise",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "pression_brut",
+                    "label": "pression_brut",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "delta_pression_haccp",
+                    "label": "delta_pression_haccp",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "puissance_thermique",
+                    "label": "puissance_thermique",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "volume_traite_cumule",
+                    "label": "volume_traite_cumule",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "energie_thermique_cumulee",
+                    "label": "energie_thermique_cumulee",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  }
+                ]
+              }
+            ],
+            "settings": {
+              "cardHtml": "\n    <div style=\"background:#0F172A; border-radius:12px; padding:18px; color:#F8FAFC; font-family:sans-serif; position:relative; overflow:hidden; border:1px solid #1E293B;\">\n      <div style=\"display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #334155; pb:8px;\">\n        <div style=\"font-size:14px; font-weight:700; color:#38BDF8; letter-spacing:0.5px;\">SYNOPTIQUE INDUSTRIEL SCADA</div>\n        <div style=\"font-size:11px; color:#94A3B8;\">Équipement : <strong style=\"color:#FFF;\">Ligne de Pasteurisation Flash HTST</strong></div>\n      </div>\n      <svg viewBox=\"0 0 720 380\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\">\n        <defs>\n          <style>\n            @keyframes pipeFlow {\n              0% { stroke-dashoffset: 40; }\n              100% { stroke-dashoffset: 0; }\n            }\n            .scada-flow {\n              stroke-dasharray: 8, 4;\n              animation: pipeFlow 1.2s linear infinite;\n            }\n          </style>\n          <linearGradient id=\"eqGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n            <stop offset=\"0%\" stop-color=\"#1E293B\"/>\n            <stop offset=\"100%\" stop-color=\"#0F172A\"/>\n          </linearGradient>\n        </defs>\n\n        <!-- Tuyauteries de process avec animation de fluide -->\n        <path d=\"M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190\" fill=\"none\" stroke=\"#475569\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n        <path d=\"M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"3\" class=\"scada-flow\"/>\n\n        <!-- Bâtie Machine / Process Tank -->\n        <rect x=\"180\" y=\"90\" width=\"220\" height=\"200\" rx=\"14\" fill=\"url(#eqGrad)\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n        <text x=\"290\" y=\"125\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"800\" text-anchor=\"middle\" letter-spacing=\"1\">UNITÉ DE PROCESS</text>\n        <circle cx=\"290\" cy=\"195\" r=\"45\" fill=\"#182234\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n        <text x=\"290\" y=\"200\" fill=\"#94A3B8\" font-size=\"10\" font-family=\"monospace\" text-anchor=\"middle\">ACTIVE</text>\n\n        <!-- Étiquettes de mesures dynamiques ThingsBoard -->\n        \n        <g transform=\"translate(480, 120)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Débit Liquide Alimenta</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${debit_produit:1} m³/h</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 164)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Entrée Pro</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temp_entree:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 208)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Régénérati</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temp_prechauffage:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 252)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Chambrage </text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temp_chambrage:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 296)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Sortie Con</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temp_sortie:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 340)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Pression Côté Pasteuri</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${pression_pasteurise:1} bar</text>\n        </g>\n        \n      </svg>\n    </div>\n    ",
+              "html": "\n    <div style=\"background:#0F172A; border-radius:12px; padding:18px; color:#F8FAFC; font-family:sans-serif; position:relative; overflow:hidden; border:1px solid #1E293B;\">\n      <div style=\"display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #334155; pb:8px;\">\n        <div style=\"font-size:14px; font-weight:700; color:#38BDF8; letter-spacing:0.5px;\">SYNOPTIQUE INDUSTRIEL SCADA</div>\n        <div style=\"font-size:11px; color:#94A3B8;\">Équipement : <strong style=\"color:#FFF;\">Ligne de Pasteurisation Flash HTST</strong></div>\n      </div>\n      <svg viewBox=\"0 0 720 380\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\">\n        <defs>\n          <style>\n            @keyframes pipeFlow {\n              0% { stroke-dashoffset: 40; }\n              100% { stroke-dashoffset: 0; }\n            }\n            .scada-flow {\n              stroke-dasharray: 8, 4;\n              animation: pipeFlow 1.2s linear infinite;\n            }\n          </style>\n          <linearGradient id=\"eqGrad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n            <stop offset=\"0%\" stop-color=\"#1E293B\"/>\n            <stop offset=\"100%\" stop-color=\"#0F172A\"/>\n          </linearGradient>\n        </defs>\n\n        <!-- Tuyauteries de process avec animation de fluide -->\n        <path d=\"M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190\" fill=\"none\" stroke=\"#475569\" stroke-width=\"8\" stroke-linecap=\"round\"/>\n        <path d=\"M 60 190 L 220 190 L 220 280 L 450 280 L 450 190 L 470 190\" fill=\"none\" stroke=\"#38BDF8\" stroke-width=\"3\" class=\"scada-flow\"/>\n\n        <!-- Bâtie Machine / Process Tank -->\n        <rect x=\"180\" y=\"90\" width=\"220\" height=\"200\" rx=\"14\" fill=\"url(#eqGrad)\" stroke=\"#0284C7\" stroke-width=\"2.5\"/>\n        <text x=\"290\" y=\"125\" fill=\"#38BDF8\" font-size=\"13\" font-weight=\"800\" text-anchor=\"middle\" letter-spacing=\"1\">UNITÉ DE PROCESS</text>\n        <circle cx=\"290\" cy=\"195\" r=\"45\" fill=\"#182234\" stroke=\"#0284C7\" stroke-width=\"1.5\"/>\n        <text x=\"290\" y=\"200\" fill=\"#94A3B8\" font-size=\"10\" font-family=\"monospace\" text-anchor=\"middle\">ACTIVE</text>\n\n        <!-- Étiquettes de mesures dynamiques ThingsBoard -->\n        \n        <g transform=\"translate(480, 120)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Débit Liquide Alimenta</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${debit_produit:1} m³/h</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 164)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Entrée Pro</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temp_entree:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 208)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Régénérati</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temp_prechauffage:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 252)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Chambrage </text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temp_chambrage:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 296)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Température Sortie Con</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${temp_sortie:1} °C</text>\n        </g>\n        \n\n        <g transform=\"translate(480, 340)\">\n          <rect width=\"180\" height=\"36\" rx=\"6\" fill=\"#0B132B\" stroke=\"#38BDF8\" stroke-width=\"1.2\"/>\n          <circle cx=\"16\" cy=\"18\" r=\"4\" fill=\"#38BDF8\"/>\n          <text x=\"28\" y=\"16\" fill=\"#94A3B8\" font-size=\"9\" font-family=\"sans-serif\">Pression Côté Pasteuri</text>\n          <text x=\"28\" y=\"29\" fill=\"#38BDF8\" font-size=\"12\" font-weight=\"bold\" font-family=\"monospace\">${pression_pasteurise:1} bar</text>\n        </g>\n        \n      </svg>\n    </div>\n    ",
+              "cardCss": "",
+              "css": ""
+            }
+          }
+        },
+        "d7a77f49-0501-4b1d-ac95-9c63c6ba309e": {
+          "typeFullFqn": "system.single_switch",
+          "isSystemType": true,
+          "bundleAlias": "control_widgets",
+          "typeAlias": "single_switch",
+          "type": "rpc",
+          "title": "Pilotage - Vanne Dérivation Sécurité (FDV)",
+          "sizeX": 8,
+          "sizeY": 2,
+          "config": {
+            "showTitle": true,
+            "targetDevice": {
+              "type": "entity",
+              "entityAliasId": "20bb487b-558e-43aa-a8ec-477d3b1dab86"
+            },
+            "settings": {
+              "initialState": {
+                "action": "GET_ATTRIBUTE",
+                "getAttribute": {
+                  "scope": "SHARED_SCOPE",
+                  "key": "vanne_derivation_active"
+                }
+              },
+              "onUpdateState": {
+                "action": "SET_ATTRIBUTE",
+                "setAttribute": {
+                  "scope": "SHARED_SCOPE",
+                  "key": "vanne_derivation_active"
+                }
+              }
+            }
+          }
+        },
+        "5a7f127b-dbf7-4056-98cf-84ba42f27cc2": {
+          "typeFullFqn": "system.single_switch",
+          "isSystemType": true,
+          "bundleAlias": "control_widgets",
+          "typeAlias": "single_switch",
+          "type": "rpc",
+          "title": "Pilotage - Mode de Fonctionnement Ligne",
+          "sizeX": 8,
+          "sizeY": 2,
+          "config": {
+            "showTitle": true,
+            "targetDevice": {
+              "type": "entity",
+              "entityAliasId": "20bb487b-558e-43aa-a8ec-477d3b1dab86"
+            },
+            "settings": {
+              "initialState": {
+                "action": "GET_ATTRIBUTE",
+                "getAttribute": {
+                  "scope": "SHARED_SCOPE",
+                  "key": "statut_ligne"
+                }
+              },
+              "onUpdateState": {
+                "action": "SET_ATTRIBUTE",
+                "setAttribute": {
+                  "scope": "SHARED_SCOPE",
+                  "key": "statut_ligne"
+                }
+              }
+            }
+          }
+        },
+        "1d39b7f7-1572-448c-ab9f-6168c5c82471": {
+          "typeFullFqn": "system.charts.basic_timeseries",
+          "isSystemType": true,
+          "bundleAlias": "charts",
+          "typeAlias": "basic_timeseries",
+          "type": "timeseries",
+          "title": "Télémétries Temps Réel - Ligne de Pasteurisation Flash HTST",
+          "sizeX": 24,
+          "sizeY": 6,
+          "config": {
+            "datasources": [
+              {
+                "type": "entity",
+                "entityAliasId": "20bb487b-558e-43aa-a8ec-477d3b1dab86",
+                "dataKeys": [
+                  {
+                    "name": "debit_produit",
+                    "label": "debit_produit",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temp_entree",
+                    "label": "temp_entree",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temp_prechauffage",
+                    "label": "temp_prechauffage",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temp_chambrage",
+                    "label": "temp_chambrage",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "temp_sortie",
+                    "label": "temp_sortie",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "pression_pasteurise",
+                    "label": "pression_pasteurise",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "pression_brut",
+                    "label": "pression_brut",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  },
+                  {
+                    "name": "delta_pression_haccp",
+                    "label": "delta_pression_haccp",
+                    "type": "timeseries",
+                    "color": "#38BDF8",
+                    "settings": {}
+                  }
+                ]
+              }
+            ],
+            "settings": {}
+          }
+        }
+      },
+      "states": {
+        "default": {
+          "name": "Supervision SCADA - Ligne de Pasteurisation Flash HTST",
+          "root": true,
+          "layouts": {
+            "main": {
+              "gridAppearance": {
+                "layoutDimension": {
+                  "type": "percentage",
+                  "percentage": 100
+                }
+              },
+              "widgets": {
+                "5c7a7eb8-5df0-4553-a0c7-16e5749584fb": {
+                  "sizeX": 24,
+                  "sizeY": 2,
+                  "row": 0,
+                  "col": 0
+                },
+                "2e8fef66-d06d-4a14-a9f4-1cb6bace2052": {
+                  "sizeX": 16,
+                  "sizeY": 8,
+                  "row": 2,
+                  "col": 0
+                },
+                "d7a77f49-0501-4b1d-ac95-9c63c6ba309e": {
+                  "sizeX": 8,
+                  "sizeY": 2,
+                  "row": 2,
+                  "col": 16
+                },
+                "5a7f127b-dbf7-4056-98cf-84ba42f27cc2": {
+                  "sizeX": 8,
+                  "sizeY": 2,
+                  "row": 4,
+                  "col": 16
+                },
+                "1d39b7f7-1572-448c-ab9f-6168c5c82471": {
+                  "sizeX": 24,
+                  "sizeY": 6,
+                  "row": 10,
+                  "col": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "csv_template": {
+    "headers": "name,type,label,access_token",
+    "sample_row": "Ligne de Pasteurisation Flash HTST,default,Ligne de Pasteurisation Flash HTST,${AUTO_GENERATED_TOKEN}",
+    "notes": "Fichier compatible avec l'outil d'import CSV d'appareils de ThingsBoard"
+  },
+  "instantiation_spec": {
+    "suggested_device_id_prefix": "ind_pasteurisateur_htst",
+    "default_name": "Ligne de Pasteurisation Flash HTST",
+    "default_protocol": "mqtt",
+    "default_platform": "thingsboard",
+    "variables_count": 13,
+    "recommended_publish_interval": 2.0
+  }
+}

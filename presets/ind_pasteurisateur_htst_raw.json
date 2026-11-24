@@ -1,0 +1,232 @@
+{
+  "id": "ind_pasteurisateur_htst",
+  "name": "Ligne de Pasteurisation Flash HTST",
+  "category": "industry",
+  "category_label": "Industrie & Agroalimentaire",
+  "description": "Ligne continue de pasteurisation thermique HTST (High Temperature Short Time) pour liquides alimentaires (laiterie, jus, boissons). Intègre régulation de chambrage, récupération thermique, contrôle de surpression hygiénique différentielle HACCP, puissance calorifique dérivée et volume traité cumulé.",
+  "icon": "shield-check",
+  "default_protocol": "mqtt",
+  "default_platform": "thingsboard",
+  "is_custom": true,
+  "variables": [
+    {
+      "id": "debit_produit",
+      "name": "Débit Liquide Alimentaire",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "m³/h",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 6.8,
+        "max_val": 8.2,
+        "step": 0.05,
+        "noise_percent": 0.4
+      }
+    },
+    {
+      "id": "temp_entree",
+      "name": "Température Entrée Produit Cru",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 3.0,
+      "enabled": true,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 3.8,
+        "max_val": 4.8,
+        "step": 0.02,
+        "noise_percent": 0.2
+      }
+    },
+    {
+      "id": "temp_prechauffage",
+      "name": "Température Régénération Échangeur",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 63.5,
+        "max_val": 66.5,
+        "period": 180.0,
+        "noise_percent": 0.3
+      }
+    },
+    {
+      "id": "temp_chambrage",
+      "name": "Température Chambrage Pasteurisation",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 1.0,
+      "enabled": true,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 73.8,
+        "max_val": 75.8,
+        "step": 0.04,
+        "noise_percent": 0.3
+      }
+    },
+    {
+      "id": "temp_sortie",
+      "name": "Température Sortie Conditionnement",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "°C",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 3.0,
+      "enabled": true,
+      "sim_mode": "sine",
+      "math_config": {
+        "min_val": 3.6,
+        "max_val": 4.4,
+        "period": 200.0,
+        "noise_percent": 0.2
+      }
+    },
+    {
+      "id": "pression_pasteurise",
+      "name": "Pression Côté Pasteurisé",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "bar",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 3.9,
+        "max_val": 4.4,
+        "step": 0.02,
+        "noise_percent": 0.3
+      }
+    },
+    {
+      "id": "pression_brut",
+      "name": "Pression Côté Brut Non-Pasteurisé",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "bar",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "random_walk",
+      "math_config": {
+        "min_val": 2.4,
+        "max_val": 2.8,
+        "step": 0.02,
+        "noise_percent": 0.3
+      }
+    },
+    {
+      "id": "delta_pression_haccp",
+      "name": "Différentiel Pression Sécurité HACCP",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "bar",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "derived",
+      "derived_config": {
+        "formula": "pression_pasteurise - pression_brut",
+        "dependencies": ["pression_pasteurise", "pression_brut"]
+      }
+    },
+    {
+      "id": "puissance_thermique",
+      "name": "Puissance Calorifique Appoint",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "kW",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 2.0,
+      "enabled": true,
+      "sim_mode": "derived",
+      "derived_config": {
+        "formula": "debit_produit * (temp_chambrage - temp_prechauffage) * 1.124",
+        "dependencies": ["debit_produit", "temp_chambrage", "temp_prechauffage"]
+      }
+    },
+    {
+      "id": "volume_traite_cumule",
+      "name": "Volume Pasteurisé Cumulé",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "m³",
+      "topic": "v1/devices/me/telemetry",
+      "publish_interval": 5.0,
+      "enabled": true,
+      "sim_mode": "integrator",
+      "integrator_config": {
+        "source_variable": "debit_produit",
+        "time_unit": "hours",
+        "initial_val": 128.5
+      }
+    },
+    {
+      "id": "energie_thermique_cumulee",
+      "name": "Énergie Thermique Cumulée",
+      "device_id": "",
+      "var_type": "telemetry",
+      "data_type": "float",
+      "unit": "kWh",
+      "publish_interval": 5.0,
+      "enabled": true,
+      "sim_mode": "integrator",
+      "integrator_config": {
+        "source_variable": "puissance_thermique",
+        "time_unit": "hours",
+        "initial_val": 10420.0
+      }
+    },
+    {
+      "id": "vanne_derivation_active",
+      "name": "Vanne Dérivation Sécurité (FDV)",
+      "device_id": "",
+      "var_type": "attribute",
+      "data_type": "boolean",
+      "topic": "v1/devices/me/attributes",
+      "publish_interval": 10.0,
+      "enabled": true,
+      "sim_mode": "constant",
+      "math_config": {
+        "constant_val": false
+      }
+    },
+    {
+      "id": "statut_ligne",
+      "name": "Mode de Fonctionnement Ligne",
+      "device_id": "",
+      "var_type": "attribute",
+      "data_type": "string",
+      "topic": "v1/devices/me/attributes",
+      "publish_interval": 15.0,
+      "enabled": true,
+      "sim_mode": "constant",
+      "math_config": {
+        "constant_val": "PRODUCTION"
+      }
+    }
+  ]
+}
